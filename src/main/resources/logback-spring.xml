@@ -1,0 +1,46 @@
+    <configuration scan="true" scanperiod="1 minutes">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" /> 
+    <!-- 변수 지정 : 로그저장 경로는 자신의 환경에 맞게 수정해야 함. -->
+    <property value="C:/spring-tool-suite-3.8.4/workspace/spring.boot/logs/schedule-log" name="LOG_FILE_PREFIX" />
+    <!-- <property value="/temp/log/log" name="LOG_FILE_PREFIX" /> -->
+
+    <!-- FILE Appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_FILE_PREFIX}.log</file>
+    <!-- 일자별로 로그파일 적용하기 -->
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+    <fileNamePattern>${LOG_FILE_PREFIX}_%d{yyyyMMdd}.log</fileNamePattern>
+    <maxHistory>60</maxHistory> <!-- 일자별 백업파일의 보관기간 -->
+    </rollingPolicy>
+    <encoder>
+    <charset>UTF-8</charset>
+    <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p}\(${PID:- }\)[%t] [%logger{30}:%line] %msg%n</pattern>
+    </encoder>
+    </appender>
+
+    <!-- CONSOLE Appender -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+    <charset>UTF-8</charset>
+    <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p}\(${PID:- }\)[%t] [%logger{30}:%line] %msg%n</pattern>
+    </encoder>
+    <!-- <layout class="ch.qos.logback.classic.PatternLayout">
+    <pattern>%d{yyyy-MM-dd HH:mm:ss} [%-5p] [%F]%M\(%L\) : %m%n</pattern>
+    </layout> -->
+    </appender>
+
+    <!-- TRACE > DEBUG > INFO > WARN > ERROR, 대소문자 구분 안함 -->
+    <!-- profile 을 읽어서 appender 을 설정할수 있다.(phase별 파일을 안만들어도 되는 좋은 기능) -->
+    <springProfile name="local">
+    <root level="INFO">
+    <appender-ref ref="CONSOLE" />
+    </root>
+    </springProfile>
+    <springProfile name="!local">
+    <root level="INFO">
+    <appender-ref ref="FILE" />
+    <appender-ref ref="CONSOLE" />
+    </root>
+    </springProfile>
+    </configuration>
