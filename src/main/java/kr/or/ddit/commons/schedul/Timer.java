@@ -45,7 +45,7 @@ public class Timer {
 	 * @Scheduled의 cron속성으로 크론탭처럼(* * * * *) 설정도 가능하다.
 	 * 출처: http://www.donnert.net/73?category=412866 [donnert.net]
 	 * */
-	@Scheduled(fixedDelayString = "30000")
+	//@Scheduled(fixedDelayString = "30000")
 	public void tick() throws InterruptedException {
 		watch.stop();
 		//logger.info(watch.prettyPrint());
