@@ -37,7 +37,7 @@
   <term name="직무수행능력회원번호" description="직무수행능력회원번호" physicalName="JPA_MEMBER" physicalDescription="직무수행능력회원번호" tag="//@tag.7"/>
   <term name="직무수행능력점수" description="직무수행능력점수" physicalName="JPA_AVERAGE" physicalDescription="직무수행능력점수" tag="//@tag.7"/>
   <term name="프로젝트직무수행평가번호" description="프로젝트직무수행평가번호" physicalName="PJPA_ID" physicalDescription="프로젝트직무수행평가번호" tag="//@tag.8"/>
-  <term name="회원이메일" description="회원이메일" physicalName="PJPA_MEMBER" physicalDescription="회원이메일" tag="//@tag.8"/>
+  <term name="프로젝트직무수행평가회원번호" description="프로젝트직무수행평가회원번호" physicalName="PJPA_MEMBER" physicalDescription="프로젝트직무수행평가회원번호" tag="//@tag.8"/>
   <term name="프로젝트직무수행점수" description="프로젝트직무수행점수" physicalName="PJPA_SCORE" physicalDescription="프로젝트직무수행점수" tag="//@tag.8"/>
   <term name="프로젝트직무수행내용" description="프로젝트직무수행내용" physicalName="PJPA_CONTENT" physicalDescription="프로젝트직무수행내용" tag="//@tag.8"/>
   <term name="프로젝트번호" description="프로젝트번호" physicalName="PROJECT_ID" physicalDescription="프로젝트번호" tag="//@tag.9"/>
