@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tm:TermDictionary xmlns:tm="http://exerd.com/term-model" version="1.1">
+  <term name="알림번호" description="알림번호" physicalName="NOT_ID" physicalDescription="알림번호" tag="//@tag.0"/>
+  <term name="알림구분" description="알람구분" physicalName="NOT_CLASSIFICATION" physicalDescription="알람구분" tag="//@tag.0"/>
+  <term name="알림내용" description="알람내용" physicalName="NOT_CONTENT" physicalDescription="알람내용" tag="//@tag.0"/>
+  <term name="알림시간" description="알람시간" physicalName="NOT_TIME" physicalDescription="알람시간" tag="//@tag.0"/>
+  <term name="회원이메일" description="회원이메일" physicalName="MEMBER_MAIL" physicalDescription="회원이메일" tag="//@tag.1"/>
+  <term name="회원비밀번호" description="회원비밀번호" physicalName="MEMBER_PASS" physicalDescription="회원비밀번호" tag="//@tag.1"/>
+  <term name="회원핸드폰번호" description="회원핸드폰번호" physicalName="MEMBER_TEL" physicalDescription="회원핸드폰번호" tag="//@tag.1"/>
+  <term name="회원이름" description="회원이름" physicalName="MEMBER_NAME" physicalDescription="회원이름" tag="//@tag.1"/>
+  <term name="팀장이메일" description="팀장이메일" physicalName="MEMBER_LEADER" physicalDescription="팀장이메일" tag="//@tag.1"/>
+  <term name="회원프로필" description="회원프로필" physicalName="MEMBER_PROFILE" physicalDescription="회원프로필" tag="//@tag.1"/>
+  <term name="알림리스트번호" description="알림리스트번호" physicalName="NOTED_ID" physicalDescription="알림리스트번호" tag="//@tag.2"/>
+  <term name="알림번호" description="알림번호" physicalName="NOTED_NOT" physicalDescription="알림번호" tag="//@tag.2"/>
+  <term name="알림받는회원" description="알림받는회원" physicalName="NOTED_MEMBER" physicalDescription="알림받는회원" tag="//@tag.2"/>
+  <term name="게시판번호" description="게시판번호" physicalName="BOARD_ID" physicalDescription="게시판번호" tag="//@tag.3"/>
+  <term name="게시판명" description="게시판명" physicalName="BOARD_NAME" physicalDescription="게시판명" tag="//@tag.3"/>
+  <term name="게시물번호" description="게시물번호" physicalName="POST_ID" physicalDescription="게시물번호" tag="//@tag.4"/>
+  <term name="게시판번호" description="소속된게시판번호" physicalName="POST_BARD" physicalDescription="소속된게시판번호" tag="//@tag.4"/>
+  <term name="게시물작성자" description="게시물작성자" physicalName="POST_WRITER" physicalDescription="게시물작성자" tag="//@tag.4"/>
+  <term name="게시물작성일자" description="게시물작성일자" physicalName="POST_CDATE" physicalDescription="게시물작성일자" tag="//@tag.4"/>
+  <term name="게시물제목" description="게시물제목" physicalName="POST_TITLE" physicalDescription="게시물제목" tag="//@tag.4"/>
+  <term name="게시물내용" description="게시물내용" physicalName="POST_CONTENT" physicalDescription="게시물내용" tag="//@tag.4"/>
+  <term name="QnA게시물번호" description="QnA게시물번호" physicalName="QNAPOST_ID" physicalDescription="QnA게시물번호" tag="//@tag.5"/>
+  <term name="게시판번호" description="게시판번호" physicalName="QNAPOST_BOARD" physicalDescription="게시판번호" tag="//@tag.5"/>
+  <term name="QnA게시물작성자" description="QnA게시물작성자" physicalName="QNAPOST_WRITER" physicalDescription="QnA게시물작성자" tag="//@tag.5"/>
+  <term name="QnA게시물비밀번호" description="QnA게시물비밀번호" physicalName="QNAPOST_PASS" physicalDescription="QnA게시물비밀번호" tag="//@tag.5"/>
+  <term name="QnA게시물제목" description="QnA게시물제목" physicalName="QNAPOST_TITLE" physicalDescription="QnA게시물제목" tag="//@tag.5"/>
+  <term name="QnA게시물내용" description="QnA게시물내용" physicalName="QNAPOST_CONTENT" physicalDescription="QnA게시물내용" tag="//@tag.5"/>
+  <term name="QnA게시물공개여부" description="QnA게시물공개여부" physicalName="QNAPOST_PUBLIC" physicalDescription="QnA게시물공개여부" tag="//@tag.5"/>
+  <term name="QnA게시물계층" description="QnA게시물계층" physicalName="QNAPOST_HIERARCHY" physicalDescription="QnA게시물계층" tag="//@tag.5"/>
+  <term name="QnA게시물정렬그룹" description="QnA게시물정렬그룹" physicalName="QNAPOST_GROUP" physicalDescription="QnA게시물정렬그룹" tag="//@tag.5"/>
+  <term name="프로젝트관계자" description="프로젝트관계자" physicalName="PMEMBER_MEMBER" physicalDescription="프로젝트관계자" tag="//@tag.6"/>
+  <term name="프로젝트번호" description="프로젝트번호" physicalName="PMEMBER_PROEJCT" physicalDescription="프로젝트번호" tag="//@tag.6"/>
+  <term name="프로젝트직급" description="프로젝트직급" physicalName="PMEMBER_POSITION" physicalDescription="프로젝트직급" tag="//@tag.6"/>
+  <term name="직무수행능력번호" description="직무수행능력번호" physicalName="JPA_ID" physicalDescription="직무수행능력번호" tag="//@tag.7"/>
+  <term name="직무수행능력회원번호" description="직무수행능력회원번호" physicalName="JPA_MEMBER" physicalDescription="직무수행능력회원번호" tag="//@tag.7"/>
+  <term name="직무수행능력점수" description="직무수행능력점수" physicalName="JPA_AVERAGE" physicalDescription="직무수행능력점수" tag="//@tag.7"/>
+  <term name="프로젝트직무수행평가번호" description="프로젝트직무수행평가번호" physicalName="PJPA_ID" physicalDescription="프로젝트직무수행평가번호" tag="//@tag.8"/>
+  <term name="회원이메일" description="회원이메일" physicalName="PJPA_MEMBER" physicalDescription="회원이메일" tag="//@tag.8"/>
+  <term name="프로젝트직무수행점수" description="프로젝트직무수행점수" physicalName="PJPA_SCORE" physicalDescription="프로젝트직무수행점수" tag="//@tag.8"/>
+  <term name="프로젝트직무수행내용" description="프로젝트직무수행내용" physicalName="PJPA_CONTENT" physicalDescription="프로젝트직무수행내용" tag="//@tag.8"/>
+  <term name="프로젝트번호" description="프로젝트번호" physicalName="PROJECT_ID" physicalDescription="프로젝트번호" tag="//@tag.9"/>
+  <term name="프로젝트명" description="프로젝트명" physicalName="PROJECT_TITLE" physicalDescription="프로젝트명" tag="//@tag.9"/>
+  <term name="프로젝트개요" description="프로젝트개요" physicalName="PROJECT_OVERVIEW" physicalDescription="프로젝트개요" tag="//@tag.9"/>
+  <term name="프로젝트즐겨찾기" description="프로젝트즐겨찾기" physicalName="PROJECT_BOOKMARK" physicalDescription="프로젝트즐겨찾기" tag="//@tag.9"/>
+  <term name="회의참여자리스트번호" description="회의참여자리스트번호" physicalName="MMEMBER_ID" physicalDescription="회의참여자리스트번호" tag="//@tag.10"/>
+  <term name="회의참여자번호" description="참여자번호" physicalName="MMBER_MEMBER" physicalDescription="참여자번호" tag="//@tag.10"/>
+  <term name="회의번호" description="회의번호" physicalName="MMBER_MEETING" physicalDescription="회의번호" tag="//@tag.10"/>
+  <term name="회의번호" description="회의번호" physicalName="MEETING_ID" physicalDescription="회의번호" tag="//@tag.11"/>
+  <term name="회의프로젝트번호" description="회의프로젝트번호" physicalName="MEETING_PROEJCT" physicalDescription="회의프로젝트번호" tag="//@tag.11"/>
+  <term name="회의제목" description="회의제목" physicalName="MEETING_TITLE" physicalDescription="회의제목" tag="//@tag.11"/>
+  <term name="회의개요" description="회의개요" physicalName="MEETING_OVERVIEW" physicalDescription="회의개요" tag="//@tag.11"/>
+  <term name="회의내용" description="회의내용" physicalName="MEETING_CONTENT" physicalDescription="회의내용" tag="//@tag.11"/>
+  <term name="회의개설자" description="회의개설자" physicalName="MEETING_FOUNDER" physicalDescription="회의개설자" tag="//@tag.11"/>
+  <term name="회의시작일시" description="회의사작일시" physicalName="MEETING_SDATE" physicalDescription="회의사작일시" tag="//@tag.11"/>
+  <term name="회의예상종료일시" description="회의예상종료일시" physicalName="MEETING_EEDATE" physicalDescription="회의예상종료일시" tag="//@tag.11"/>
+  <term name="회의실제종료일시" description="회의실제종료일시" physicalName="MEETING_EDATE" physicalDescription="회의실제종료일시" tag="//@tag.11"/>
+  <term name="회의이슈" description="회의이슈" physicalName="MEETING_ISSUE" physicalDescription="회의이슈" tag="//@tag.11"/>
+  <term name="회의유형" description="회의유형" physicalName="MEETING_TYPE" physicalDescription="회의유형" tag="//@tag.11"/>
+  <term name="회의진행이슈발생번호" description="회의진행이슈번호" physicalName="MTISSUE_ID" physicalDescription="회의진행이슈번호" tag="//@tag.12"/>
+  <term name="회의진행이슈번호" description="회의진행이슈번호" physicalName="MTISSUE_ISSUE" physicalDescription="회의진행이슈번호" tag="//@tag.12"/>
+  <term name="회의진행회의번호" description="회의진행회의번호" physicalName="MTISSUE_MEETING" physicalDescription="회의진행회의번호" tag="//@tag.12"/>
+  <term name="회의진행이슈구분" description="회의진행이슈구분" physicalName="MTISSUE_CLASS" physicalDescription="회의진행이슈구분" tag="//@tag.12"/>
+  <term name="이슈번호" description="이슈번호" physicalName="ISSUE_ID" physicalDescription="이슈번호" tag="//@tag.13"/>
+  <term name="이슈업무번호" description="이슈업무번호" physicalName="ISSUE_WORK" physicalDescription="이슈업무번호" tag="//@tag.13"/>
+  <term name="이슈담당자" description="이슈담당자" physicalName="ISSUE_MEMBER" physicalDescription="이슈담당자" tag="//@tag.13"/>
+  <term name="이슈도우미" description="이슈도우미" physicalName="ISSUE_HELPER" physicalDescription="이슈도우미" tag="//@tag.13"/>
+  <term name="간트카드번호" description="간트카드번호" physicalName="ISSUE_GC" physicalDescription="간트카드번호" tag="//@tag.13"/>
+  <term name="이슈레벨" description="이슈레벨" physicalName="ISSUE_LEVEL" physicalDescription="이슈레벨" tag="//@tag.13"/>
+  <term name="이슈제목" description="이슈제목" physicalName="ISSUE_TITLE" physicalDescription="이슈제목" tag="//@tag.13"/>
+  <term name="이슈내용" description="이슈내용" physicalName="ISSUE_CONTENT" physicalDescription="이슈내용" tag="//@tag.13"/>
+  <term name="이슈발행일시" description="이슈발행일시" physicalName="ISSUE_SDATE" physicalDescription="이슈발행일시" tag="//@tag.13"/>
+  <term name="이슈해결일시" description="이슈해결일시" physicalName="ISSUE_EDATE" physicalDescription="이슈해결일시" tag="//@tag.13"/>
+  <term name="이슈해결방법" description="이슈해결방법" physicalName="ISSUE_SOLUTION" physicalDescription="이슈해결방법" tag="//@tag.13"/>
+  <term name="이슈조회수" description="이슈조회수" physicalName="ISSUE_NOVIEWS" physicalDescription="이슈조회수" tag="//@tag.13"/>
+  <term name="업무번호" description="업무번호" physicalName="WORK_ID" physicalDescription="업무번호" tag="//@tag.14"/>
+  <term name="업무프로젝트번호" description="업무프로젝트번호" physicalName="WORK_PROJECT" physicalDescription="업무프로젝트번호" tag="//@tag.14"/>
+  <term name="업무제목" description="업무제목" physicalName="WORK_TITLE" physicalDescription="업무제목" tag="//@tag.14"/>
+  <term name="업무내용" description="업무내용" physicalName="WORK_CONTENT" physicalDescription="업무내용" tag="//@tag.14"/>
+  <term name="업무유형" description="업무유형" physicalName="WORK_TYPE" physicalDescription="업무유형" tag="//@tag.14"/>
+  <term name="업무중요도" description="업무중요도" physicalName="WORK_IMPORTANCE" physicalDescription="업무중요도" tag="//@tag.14"/>
+  <term name="업무시작일자" description="업무시작일자" physicalName="WORK_SDATE" physicalDescription="업무시작일자" tag="//@tag.14"/>
+  <term name="업무예상마감일자" description="업무예상마감일자" physicalName="WORK_EEDATE" physicalDescription="업무예상마감일자" tag="//@tag.14"/>
+  <term name="업무진척도" description="업무진척도" physicalName="WORK_PROGRESS" physicalDescription="업무진척도" tag="//@tag.14"/>
+  <term name="업무마감승인여부" description="업무마감승인여부" physicalName="WORK_APPROVAL" physicalDescription="업무마감승인여부" tag="//@tag.14"/>
+  <term name="업무공개여부" description="업무공개여부" physicalName="WORK_PUBLIC" physicalDescription="업무공개여부" tag="//@tag.14"/>
+  <term name="업무마감일자" description="업무마감일자" physicalName="WORK_EDATE" physicalDescription="업무마감일자" tag="//@tag.14"/>
+  <term name="댓글번호" description="댓글번호" physicalName="CMT_ID" physicalDescription="댓글번호" tag="//@tag.15"/>
+  <term name="댓글업무번호" description="댓글업무번호" physicalName="CMT_WORK" physicalDescription="댓글업무번호" tag="//@tag.15"/>
+  <term name="댓글작성자" description="댓글작성자" physicalName="CMT_MEMBER" physicalDescription="댓글작성자" tag="//@tag.15"/>
+  <term name="댓글내용" description="댓글내용" physicalName="CMT_CONTENT" physicalDescription="댓글내용" tag="//@tag.15"/>
+  <term name="댓글작성시간" description="댓글작성시간" physicalName="CMT_DATE" physicalDescription="댓글작성시간" tag="//@tag.15"/>
+  <term name="첨부파일번호" description="첨부파일번호" physicalName="ATT_ID" physicalDescription="첨부파일번호" tag="//@tag.16"/>
+  <term name="첨부파일업무번호" description="첨부파일업무번호" physicalName="ATT_WORK" physicalDescription="첨부파일업무번호" tag="//@tag.16"/>
+  <term name="첨부파일파일명" description="첨부파일파일명" physicalName="ATT_NAME" physicalDescription="첨부파일파일명" tag="//@tag.16"/>
+  <term name="첨부파일확장명" description="첨부파일확장명" physicalName="ATT_EXTENSION" physicalDescription="첨부파일확장명" tag="//@tag.16"/>
+  <term name="첨부파일경로" description="첨부파일경로" physicalName="ATT_PATH" physicalDescription="첨부파일경로" tag="//@tag.16"/>
+  <term name="첨부파일비고" description="첨부파일비고" physicalName="ATT_REMINDERS" physicalDescription="첨부파일비고" tag="//@tag.16"/>
+  <term name="할일번호" description="할일번호" physicalName="TODO_ID" physicalDescription="할일번호" tag="//@tag.17"/>
+  <term name="할일업무번호" description="할일업무번호" physicalName="TODO_WORK" physicalDescription="할일업무번호" tag="//@tag.17"/>
+  <term name="할일내용" description="할일내용" physicalName="TODO_CONTENT" physicalDescription="할일내용" tag="//@tag.17"/>
+  <term name="할일시작일시" description="할일시작일시" physicalName="TODO_SDATE" physicalDescription="할일시작일시" tag="//@tag.17"/>
+  <term name="할일마감일시" description="할일마감일시" physicalName="TODO_EDATE" physicalDescription="할일마감일시" tag="//@tag.17"/>
+  <term name="할일완료여부" description="할일완료여부" physicalName="TODO_COMPLET" physicalDescription="할일완료여부" tag="//@tag.17"/>
+  <term name="할일예상마감일시" description="할일예상마감일시" physicalName="TODO_EEDATE" physicalDescription="할일예상마감일시" tag="//@tag.17"/>
+  <term name="간트카드번호" description="간트카드번호" physicalName="GC_ID" physicalDescription="간트카드번호" tag="//@tag.18"/>
+  <term name="간트카드업무번호" description="간트카드업무번호" physicalName="GC_WORK" physicalDescription="간트카드업무번호" tag="//@tag.18"/>
+  <term name="간트카드정렬순서" description="간트카드순서" physicalName="GC_INDEX" physicalDescription="간트카드순서" tag="//@tag.18"/>
+  <term name="간트카드그룹" description="간트카드그룹" physicalName="GC_GROUP" physicalDescription="간트카드그룹" tag="//@tag.18"/>
+  <tag name="알림"/>
+  <tag name="회원"/>
+  <tag name="알림받는회원"/>
+  <tag name="게시판"/>
+  <tag name="게시물"/>
+  <tag name="QnA게시물"/>
+  <tag name="프로젝트관계자"/>
+  <tag name="직무수행능력"/>
+  <tag name="프로젝트별직무수행평가"/>
+  <tag name="프로젝트"/>
+  <tag name="회의참여자"/>
+  <tag name="회의"/>
+  <tag name="회의진행이슈"/>
+  <tag name="이슈"/>
+  <tag name="업무"/>
+  <tag name="댓글"/>
+  <tag name="첨부파일"/>
+  <tag name="할일"/>
+  <tag name="간트카드"/>
+</tm:TermDictionary>
