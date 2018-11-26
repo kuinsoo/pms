@@ -30,6 +30,7 @@ public class CardController {
 		CardVo cardVo = cardService.selectCard(card_no);
 
 		System.out.println(card_index);
+		System.out.println("test입니다.");
 
 		cardVo.setCard_group(card_group);
 		cardVo.setCard_index(card_index);
