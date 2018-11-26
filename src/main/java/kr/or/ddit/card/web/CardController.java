@@ -29,10 +29,6 @@ public class CardController {
 							 @RequestParam("card_index")float card_index) {
 		CardVo cardVo = cardService.selectCard(card_no);
 
-		System.out.println(card_index);
-		System.out.println("어디입니까?");
-		System.out.println("test입니다.");
-
 		cardVo.setCard_group(card_group);
 		cardVo.setCard_index(card_index);
 
