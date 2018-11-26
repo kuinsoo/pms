@@ -31,6 +31,7 @@ public class CardController {
 
 		System.out.println(card_index);
 		System.out.println("어디입니까?");
+		System.out.println("test입니다.");
 
 		cardVo.setCard_group(card_group);
 		cardVo.setCard_index(card_index);
