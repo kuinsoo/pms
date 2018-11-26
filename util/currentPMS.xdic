@@ -16,7 +16,7 @@
   <term name="게시판번호" description="게시판번호" physicalName="BOARD_ID" physicalDescription="게시판번호" tag="//@tag.3"/>
   <term name="게시판명" description="게시판명" physicalName="BOARD_NAME" physicalDescription="게시판명" tag="//@tag.3"/>
   <term name="게시물번호" description="게시물번호" physicalName="POST_ID" physicalDescription="게시물번호" tag="//@tag.4"/>
-  <term name="게시판번호" description="소속된게시판번호" physicalName="POST_BARD" physicalDescription="소속된게시판번호" tag="//@tag.4"/>
+  <term name="게시판번호" description="소속된게시판번호" physicalName="POST_BOARD" physicalDescription="소속된게시판번호" tag="//@tag.4"/>
   <term name="게시물작성자" description="게시물작성자" physicalName="POST_WRITER" physicalDescription="게시물작성자" tag="//@tag.4"/>
   <term name="게시물작성일자" description="게시물작성일자" physicalName="POST_CDATE" physicalDescription="게시물작성일자" tag="//@tag.4"/>
   <term name="게시물제목" description="게시물제목" physicalName="POST_TITLE" physicalDescription="게시물제목" tag="//@tag.4"/>
@@ -30,7 +30,7 @@
   <term name="QnA게시물공개여부" description="QnA게시물공개여부" physicalName="QNAPOST_PUBLIC" physicalDescription="QnA게시물공개여부" tag="//@tag.5"/>
   <term name="QnA게시물계층" description="QnA게시물계층" physicalName="QNAPOST_HIERARCHY" physicalDescription="QnA게시물계층" tag="//@tag.5"/>
   <term name="QnA게시물정렬그룹" description="QnA게시물정렬그룹" physicalName="QNAPOST_GROUP" physicalDescription="QnA게시물정렬그룹" tag="//@tag.5"/>
-  <term name="프로젝트관계자" description="프로젝트관계자" physicalName="PMEMBER_MEMBER" physicalDescription="프로젝트관계자" tag="//@tag.6"/>
+  <term name="프로젝트참여자" description="프로젝트참여자" physicalName="PMEMBER_MEMBER" physicalDescription="프로젝트참여자" tag="//@tag.6"/>
   <term name="프로젝트번호" description="프로젝트번호" physicalName="PMEMBER_PROEJCT" physicalDescription="프로젝트번호" tag="//@tag.6"/>
   <term name="프로젝트직급" description="프로젝트직급" physicalName="PMEMBER_POSITION" physicalDescription="프로젝트직급" tag="//@tag.6"/>
   <term name="직무수행능력번호" description="직무수행능력번호" physicalName="JPA_ID" physicalDescription="직무수행능력번호" tag="//@tag.7"/>
@@ -44,9 +44,9 @@
   <term name="프로젝트명" description="프로젝트명" physicalName="PROJECT_TITLE" physicalDescription="프로젝트명" tag="//@tag.9"/>
   <term name="프로젝트개요" description="프로젝트개요" physicalName="PROJECT_OVERVIEW" physicalDescription="프로젝트개요" tag="//@tag.9"/>
   <term name="프로젝트즐겨찾기" description="프로젝트즐겨찾기" physicalName="PROJECT_BOOKMARK" physicalDescription="프로젝트즐겨찾기" tag="//@tag.9"/>
-  <term name="회의참여자리스트번호" description="회의참여자리스트번호" physicalName="MMEMBER_ID" physicalDescription="회의참여자리스트번호" tag="//@tag.10"/>
-  <term name="회의참여자번호" description="참여자번호" physicalName="MMBER_MEMBER" physicalDescription="참여자번호" tag="//@tag.10"/>
-  <term name="회의번호" description="회의번호" physicalName="MMBER_MEETING" physicalDescription="회의번호" tag="//@tag.10"/>
+  <term name="회의참여자리스트번호" description="회의참여자리스트번호" physicalName="MTMEMBER_ID" physicalDescription="회의참여자리스트번호" tag="//@tag.10"/>
+  <term name="회의참여자번호" description="참여자번호" physicalName="MTMBER_MEMBER" physicalDescription="참여자번호" tag="//@tag.10"/>
+  <term name="회의번호" description="회의번호" physicalName="MTMBER_MEETING" physicalDescription="회의번호" tag="//@tag.10"/>
   <term name="회의번호" description="회의번호" physicalName="MEETING_ID" physicalDescription="회의번호" tag="//@tag.11"/>
   <term name="회의프로젝트번호" description="회의프로젝트번호" physicalName="MEETING_PROEJCT" physicalDescription="회의프로젝트번호" tag="//@tag.11"/>
   <term name="회의제목" description="회의제목" physicalName="MEETING_TITLE" physicalDescription="회의제목" tag="//@tag.11"/>
@@ -108,13 +108,18 @@
   <term name="간트카드업무번호" description="간트카드업무번호" physicalName="GC_WORK" physicalDescription="간트카드업무번호" tag="//@tag.18"/>
   <term name="간트카드정렬순서" description="간트카드순서" physicalName="GC_INDEX" physicalDescription="간트카드순서" tag="//@tag.18"/>
   <term name="간트카드그룹" description="간트카드그룹" physicalName="GC_GROUP" physicalDescription="간트카드그룹" tag="//@tag.18"/>
+  <term name="친구코드" description="친구코드" physicalName="FRIEND_CODE" physicalDescription="친구코드" tag="//@tag.19"/>
+  <term name="본인이메일" description="본인이메일" physicalName="FRIEND_MYEMAIL" physicalDescription="본인이메일" tag="//@tag.19"/>
+  <term name="친구이메일" description="친구이메일" physicalName="FRIEND_MEMBER" physicalDescription="친구이메일" tag="//@tag.19"/>
+  <term name="친구요청여부" description="친구요청여부" physicalName="FRIEND_ACCEPT" physicalDescription="친구요청여부" tag="//@tag.19"/>
+  <term name="회원탈퇴여부" description="회원탈퇴여부" physicalName="MEMBER_WITHDRAWAL" physicalDescription="회원탈퇴여부" tag="//@tag.1"/>
   <tag name="알림"/>
   <tag name="회원"/>
   <tag name="알림받는회원"/>
   <tag name="게시판"/>
   <tag name="게시물"/>
   <tag name="QnA게시물"/>
-  <tag name="프로젝트관계자"/>
+  <tag name="프로젝트참여목록"/>
   <tag name="직무수행능력"/>
   <tag name="프로젝트별직무수행평가"/>
   <tag name="프로젝트"/>
@@ -127,4 +132,5 @@
   <tag name="첨부파일"/>
   <tag name="할일"/>
   <tag name="간트카드"/>
+  <tag name="친구목록"/>
 </tm:TermDictionary>
