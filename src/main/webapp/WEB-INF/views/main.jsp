@@ -54,6 +54,26 @@
         margin: 0 1em 1em 0;
         height: 50px;
     }
+
+    #planList {
+        width: 875px;
+        height: 500px;
+        margin: 0 auto;
+        padding-left: 25px;
+    }
+
+    #titleList {
+        list-style: none;
+        width: 875px;
+        height: 20px;
+        margin: 0 auto;
+    }
+
+    .titleBox {
+        width: 175px;
+        float: left;
+    }
+
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -107,14 +127,14 @@
 		location.href = "/updateCard?card_no="+no+"&card_group="+group+"&card_index="+index;
 	};
 </script>
-<ul style="list-style: none; width: 1000px; height: 10px;">
-    <li style="width: 170px; float: left">아이디어</li>
-    <li style="width: 170px; float: left">검색중</li>
-    <li style="width: 170px; float: left">진행중</li>
-    <li style="width: 170px; float: left">완료</li>
-    <li style="width: 170px; float: left">적용중</li>
+<ul id="titleList" >
+    <li class="titleBox">요청</li>
+    <li class="titleBox">진행</li>
+    <li class="titleBox">이슈발생</li>
+    <li class="titleBox">처리대기</li>
+    <li class="titleBox">완료</li>
 </ul>
-<div class="kku-boarder kku-mainPage" id="planList" style="width: 1000px; height: 500px;">
+<div class="kku-boarder kku-mainPage" id="planList">
 
     <div class="column">
         <div class="portlet" >
@@ -123,7 +143,7 @@
         <c:forEach items="${cardList}" var="cardVo" >
             <c:if test="${cardVo.card_group eq '1'}">
                 <div class="portlet">
-                    <div class="portlet-header">${cardVo.card_title}</div>
+                    <div class="portlet-header" >${cardVo.card_title}</div>
                     <div class="portlet-content">
                             ${cardVo.card_content}
                     </div>
