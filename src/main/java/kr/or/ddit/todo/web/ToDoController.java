@@ -1,6 +1,6 @@
 package kr.or.ddit.todo.web;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 
 /**
  * kr.or.ddit.todo.web
@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date : 2018-11-27 / 오후 3:31
  * @Version :
  */
-@RestController
+@Controller
 public class ToDoController {
 }

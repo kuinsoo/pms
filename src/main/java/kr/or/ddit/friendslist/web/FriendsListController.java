@@ -1,6 +1,6 @@
 package kr.or.ddit.friendslist.web;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 
 /**
  * kr.or.ddit.friendslist.web
@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date : 2018-11-27 / 오후 2:51
  * @Version :
  */
-@RestController
+@Controller
 public class FriendsListController {
 }

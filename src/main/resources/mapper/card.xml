@@ -5,7 +5,7 @@
 
 <mapper namespace="kr.or.ddit.card.mapper.CardMapper">
 
-    <select id="selectAllCard" resultType="cardVo">
+    <select id="selectAllCard" resultType="cardVo" >
         select * from CARD order by CARD_INDEX desc
     </select>
 
@@ -13,7 +13,7 @@
         select * from CARD where CARd_GROUP = #{CARd_GROUP}
     </select>-->
 
-    <select id="selectCard" resultType="cardVo" parameterType="int">
+        <select id="selectCard" resultType="cardVo" parameterType="int">
         select * from card where CARD_NO = #{card_no}
     </select>
 

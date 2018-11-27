@@ -1,6 +1,6 @@
 package kr.or.ddit.post.web;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 
 /**
  * kr.or.ddit.post.web
@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date : 2018-11-27 / 오후 3:21
  * @Version :
  */
-@RestController
+@Controller
 public class PostController {
 }

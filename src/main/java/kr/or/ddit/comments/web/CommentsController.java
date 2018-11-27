@@ -1,6 +1,6 @@
 package kr.or.ddit.comments.web;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 
 /**
  * kr.or.ddit.comments.web
@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date : 2018-11-27 / 오후 2:45
  * @Version :
  */
-@RestController
+@Controller
 public class CommentsController {
 }
