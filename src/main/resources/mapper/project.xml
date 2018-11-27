@@ -6,7 +6,7 @@
 <mapper namespace="kr.or.ddit.project.mapper.ProjectMapper">
 
     <select id="selectAllProject" resultType="projectVo">
-        select * from PROJECT
+        select * from PROJECT order by PROJECT_ID desc
     </select>
 
     <select id="selectBookMarkProject" resultType="projectVo">

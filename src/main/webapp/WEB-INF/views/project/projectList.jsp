@@ -14,18 +14,19 @@
 </head>
 <body>
 <p>${test}</p>
-    <table>
-        <tr>
-            <c:forEach items="${projectList}" var="projectVo">
-                <td> ${projectVo.project_title}</td>
-                <td> ${projectVo.project_overview}</td>
-                <td> ${projectVo.project_bookmark}</td>
-                <td> <fmt:formatDate value="${projectVo.project_sdate}" pattern="yyyy-MM-dd" /></td>
-                <td> <fmt:formatDate value="${projectVo.project_edate}" pattern="yyyy-MM-dd" /></td>
-                <td> <fmt:formatDate value="${projectVo.project_eedate}" pattern="yyyy-MM-dd" /></td>
-            </c:forEach>
+<table>
 
+    <c:forEach items="${projectList}" var="projectVo">
+        <tr>
+            <td> ${projectVo.project_title}</td>
+            <td> ${projectVo.project_overview}</td>
+            <td> ${projectVo.project_bookmark}</td>
+            <td> <fmt:formatDate value="${projectVo.project_sdate}" pattern="yyyy-MM-dd" /></td>
+            <td> <fmt:formatDate value="${projectVo.project_edate}" pattern="yyyy-MM-dd" /></td>
+            <td> <fmt:formatDate value="${projectVo.project_eedate}" pattern="yyyy-MM-dd" /></td>
         </tr>
-    </table>
+    </c:forEach>
+
+</table>
 </body>
 </html>

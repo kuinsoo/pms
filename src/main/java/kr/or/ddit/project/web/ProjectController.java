@@ -26,7 +26,7 @@ public class ProjectController {
 	@Autowired
 	private ProjectServiceInf projectService;
 
-	@RequestMapping(name = "/create",method = RequestMethod.GET)
+	@RequestMapping(name = "/projectCreate",method = RequestMethod.GET)
 	public String projectCreateView() {
 		return "project/projectCreate";
 	}
@@ -37,6 +37,15 @@ public class ProjectController {
 			projectService.createProject(projectVo);
 		}
 
-		return "redirect:project/projectList";
+		String url = "redirect:/projectList";
+
+		return "redirect:/projectList";
+	}
+
+	@RequestMapping("/projectList")
+	public String projectList(Model model) {
+		model.addAttribute("projectList",projectService.selectAllProject());
+
+		return "project/projectList";
 	}
 }
