@@ -3,6 +3,27 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.or.ddit.card.mapper.ProjectMapper">
+<mapper namespace="kr.or.ddit.project.mapper.ProjectMapper">
 
+    <select id="selectAllProject" resultType="projectVo">
+        select * from PROJECT
+    </select>
+
+    <select id="selectBookMarkProject" resultType="projectVo">
+        select * from PROJECT where PROJECT_BOOKMARK = #{project_bookmark}
+    </select>
+
+    <insert id="createProject" parameterType="projectVo">
+        insert into PROJECT values (SEQ_PROJECT.nextval, #{project_title},#{project_overview}, 'N',#{project_sdate}, #{project_edate},''  )
+    </insert>
+
+    <delete id="deleteProject" parameterType="String">
+        delete from PROJECT where PROJECT_ID
+    </delete>
+
+    <update id="updateProject" parameterType="projectVo">
+        update PROJECT
+        set #{project_title},#{project_overview},#{project_bookmark}, #{project_edate},#{project_eedate}
+        where PROJECT_ID = #{project_id}
+    </update>
 </mapper>

@@ -12,5 +12,5 @@ import org.springframework.stereotype.Controller;
  * @Version :
  */
 @Controller
-public class AttachmentContoriller {
+public class AttachmentController {
 }

@@ -1,7 +1,7 @@
-package kr.or.ddit.card.web;
+package kr.or.ddit.zcardaa.web;
 
-import kr.or.ddit.card.model.CardVo;
-import kr.or.ddit.card.service.CardServiceInf;
+import kr.or.ddit.zcardaa.model.CardVo;
+import kr.or.ddit.zcardaa.service.CardServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CardController {
 
-	@Autowired
+	/*@Autowired
 	private CardServiceInf cardService;
 
 	@RequestMapping("/updateCard")
@@ -42,5 +42,5 @@ public class CardController {
 		model.addAttribute("cardList",cardService.selectAllCard());
 
 		return "main";
-	}
+	}*/
 }

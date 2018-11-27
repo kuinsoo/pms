@@ -5,7 +5,7 @@
   
 <mapper namespace="kr.or.ddit.member.mapper.MemberMapper">
 
-	<select id="selectAllMember" resultType="memberVo" >
+<!--	<select id="selectAllMember" resultType="memberVo" >
 		select * from member
-	</select>
+	</select>-->
 </mapper>

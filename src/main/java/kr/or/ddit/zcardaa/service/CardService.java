@@ -1,7 +1,7 @@
-package kr.or.ddit.card.service;
+package kr.or.ddit.zcardaa.service;
 
-import kr.or.ddit.card.mapper.CardMapper;
-import kr.or.ddit.card.model.CardVo;
+import kr.or.ddit.zcardaa.mapper.CardMapper;
+import kr.or.ddit.zcardaa.model.CardVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

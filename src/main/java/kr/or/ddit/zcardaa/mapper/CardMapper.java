@@ -1,6 +1,6 @@
-package kr.or.ddit.card.mapper;
+package kr.or.ddit.zcardaa.mapper;
 
-import kr.or.ddit.card.model.CardVo;
+import kr.or.ddit.zcardaa.model.CardVo;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package kr.or.ddit.card.model;
+package kr.or.ddit.zcardaa.model;
 
 import org.apache.ibatis.type.Alias;
 

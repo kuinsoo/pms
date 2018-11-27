@@ -1,5 +1,9 @@
 package kr.or.ddit.project.mapper;
 
+import kr.or.ddit.project.model.ProjectVo;
+
+import java.util.List;
+
 /**
  * kr.or.ddit.project.mapper
  * null.java
@@ -10,4 +14,14 @@ package kr.or.ddit.project.mapper;
  * @Version :
  */
 public interface ProjectMapper {
+
+	List<ProjectVo> selectAllProject();
+
+	List<ProjectVo> selectBookMarkProject(String bookmark);
+
+	int createProject(ProjectVo projectVo);
+
+	int deleteProject(String project_id);
+
+	int updateProject(ProjectVo projectVo);
 }
