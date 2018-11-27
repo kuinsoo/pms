@@ -4,6 +4,7 @@ import kr.or.ddit.card.mapper.CardMapper;
 import kr.or.ddit.card.model.CardVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
  * @Version :
  */
 @Service
+@Transactional
 public class CardService implements CardServiceInf {
 
 	@Autowired
