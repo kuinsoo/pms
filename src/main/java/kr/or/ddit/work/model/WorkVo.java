@@ -18,8 +18,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Alias("workVo")
 public class WorkVo {
 	
-	private String work_id;				//	업무번호(N.N)
-	private String work_project;		//	업무프로젝트번호
+	private String work_id;				//	업무번호(pk)
+	private String work_project;		//	업무프로젝트번호(fk)
 	private String work_title;			//	업무제목
 	private String work_content;		//	업무내용
 	private String work_type;			//	업무유형
