@@ -30,7 +30,6 @@ import kr.or.ddit.member.service.MemberServiceInf;
  *
  * </pre>
  */
-@RequestMapping("/user")
 @Controller
 public class LoginController {
 	

@@ -37,7 +37,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 <div class="wraps">
 	<div class="container">
 		<div class="well box">
-			<form action="/user/loginProcess" method="post">
+			<form action="/loginProcess" method="post">
 				<h1>CURRENT 로그인</h1>
 				<br>
 				<div class="form-group label-floating">
