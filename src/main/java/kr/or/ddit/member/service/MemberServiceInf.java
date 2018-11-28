@@ -12,7 +12,7 @@ public interface MemberServiceInf {
 	 * @return
 	 * Method 설명 : 로그인
 	 */
-	MemberVo seletUser(String member_mail);
+	MemberVo selectUser(String member_mail);
 	
 	/**
 	 * Method : insertUser

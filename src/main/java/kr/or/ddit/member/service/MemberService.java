@@ -33,7 +33,7 @@ public class MemberService implements MemberServiceInf {
 	 * Method 설명 : 로그인
 	 */
 	@Override
-	public MemberVo seletUser(String member_mail) {
+	public MemberVo selectUser(String member_mail) {
 		return memberMapper.selectUser(member_mail);
 	}
 

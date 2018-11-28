@@ -61,7 +61,7 @@ public class LoginController {
 		String member_mail = request.getParameter("member_mail");
 		String member_pass = request.getParameter("member_pass");
 		
-		MemberVo memberVo = memberservice.seletUser(member_mail);
+		MemberVo memberVo = memberservice.selectUser(member_mail);
 		
 		if(memberVo==null || !member_mail.equals(memberVo.getMember_mail())||
 							 !member_pass.equals(memberVo.getMember_pass())) {
@@ -73,9 +73,40 @@ public class LoginController {
 		return "main";
 	}
 	
-	@RequestMapping(value="")
-	public String signProcess() {
-		return"";
+	/**
+	 * Method : signView
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 회원가입 화면단 
+	 */
+	@RequestMapping(value="/signView")
+	public String signView() {
+		return"/sign/sign";
+	}
+	
+	/**
+	 * Method : signProcess
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : sign.jsp에서 회원가입 버튼을 눌렀을때  
+	 */
+	@RequestMapping(value="/signProcess",method=RequestMethod.POST)
+	public String signProcess(HttpServletRequest request , Model model, MemberVo memberVo) {
+		
+		String member_mail = memberVo.getMember_mail();
+		memberVo.setMember_mail(member_mail);
+		
+		String member_pass = memberVo.getMember_pass();
+		memberVo.setMember_pass(member_pass);
+		
+		String member_tel = memberVo.getMember_tel();
+		memberVo.setMember_tel(member_tel);
+		
+		int insertUser = memberservice.insertUser(memberVo);
+		
+		return"/sign/sign";
 	}
 	
 }

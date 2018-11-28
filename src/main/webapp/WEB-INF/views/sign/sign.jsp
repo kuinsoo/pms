@@ -46,15 +46,15 @@ div.well input[type="submit"]{width:100%;height:50px}
 				<br>
 				<div class="form-group label-floating">
 					<label class="control-label">이메일</label>
-					<input type="email"	name="" value="" class="form-control" autofocus="autofocus" required />
+					<input type="email"	name="member_mail" value="" class="form-control" autofocus="autofocus" required />
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">이름</label>
-					<input type="text" name="" value="" class="form-control" autofocus="autofocus" required />
+					<input type="text" name="member_name" value="" class="form-control" autofocus="autofocus" required />
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호</label>
-					<input type="password" name="" class="form-control" required />
+					<input type="password" name="member_pass" class="form-control" required />
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호 확인</label>
