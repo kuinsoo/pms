@@ -1,4 +1,4 @@
-package kr.or.ddit;
+ package kr.or.ddit;
 
 		import org.mybatis.spring.annotation.MapperScan;
 		import org.springframework.boot.SpringApplication;
@@ -7,7 +7,7 @@ package kr.or.ddit;
 
 @SpringBootApplication
 @EnableScheduling
-@MapperScan(value = {"kr/or/ddit/"})
+@MapperScan(value = {"kr/or/ddit/**/mapper"})
 public class Application {
 
 	public static void main(String[] args) throws Exception {

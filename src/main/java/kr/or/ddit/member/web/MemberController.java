@@ -1,6 +1,6 @@
 package kr.or.ddit.member.web;
 
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Controller;
 
 /**
  * kr.or.ddit.member.web
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Date : 2018-11-27 / 오후 3:08
  * @Version :
  */
-@RestController
+@Controller
 public class MemberController {
 	
 }
