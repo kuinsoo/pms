@@ -31,8 +31,8 @@ div.well input[type="submit"]{width:100%;height:50px}
 .status-danger span{color:#F44336}
 .well.box.info{background-color:#F44336;color:white;font-size:15px;text-align:center}
 </style>
-
 </head>
+
 <body>
 <div class="wraps">
 	<div class="container">
@@ -42,19 +42,23 @@ div.well input[type="submit"]{width:100%;height:50px}
 				<br>
 				<div class="form-group label-floating">
 					<label class="control-label">이메일</label>
-					<input type="email"	name="member_mail" value="" class="form-control" autofocus="autofocus" required />
+					<input type="email"	name="member_mail" id="email" value="" class="form-control" autofocus="autofocus" required />
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호</label>
 					<input type="password" name="member_pass" class="form-control" required />
 				</div>
 				<br> <input type="submit" value="로그인" class="btn btn-primary btn-raised" /><br>
+					<div id="naver_id_login" align="center"></div>
+					<div id="naver_id_login" style="text-align:center"><a href="${url}">
+					<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
 				<a href="#">이메일 찾기</a> 　　 <a href="#">비밀번호 찾기</a>
 			</form>
+			
 		</div>
 	</div>
-</div>
 
+</div>
 <script src="../js/material.min.js"></script>
 <script>
 	$.material.init()

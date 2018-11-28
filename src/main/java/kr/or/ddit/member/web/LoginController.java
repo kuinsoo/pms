@@ -36,21 +36,15 @@ public class LoginController {
 	@Autowired
 	private MemberServiceInf memberservice;
 	
-	@RequestMapping(value="/")
-	public String index() {
-		return "/login/login";
-	}
-	
-	
 	/**
-	 * Method : loginView
-	 * 작성자 : 나진실
+	 * Method : index
+	 * 작성자 : pc07
 	 * 변경이력 :
 	 * @return
-	 * Method 설명 : 로그인 화면단 보여주기 
+	 * Method 설명 : index 로그인 화면으로 
 	 */
-	@RequestMapping(value="/loginView")
-	public String loginView() {
+	@RequestMapping(value="/")
+	public String index() {
 		return "/login/login";
 	}
 	
