@@ -1,0 +1,13 @@
+html, body {
+	width: 100%;
+	height: 100%;
+	background: #000000;
+	overflow: hidden;
+}
+
+.wraps {
+	background: url(http://placehold.it/1920x1200);
+	background-size: cover;
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+}

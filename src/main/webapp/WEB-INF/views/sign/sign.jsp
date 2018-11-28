@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인 - CURRENT</title>
+<title>회원가입 - CURRENT</title>
 <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="css/ripples.min.css" />
 <link rel="stylesheet" href="css/style.css" />
 <script src="js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/sign.css">
 <style>
 .wraps{width:100%;height:100%;display:flex;justify-content:center;align-items:center;}
 body{margin:0;background:#ddd}
@@ -30,6 +30,9 @@ div.well input[type="submit"]{width:100%;height:50px}
 .status-warning span{color:#FFC107}
 .status-danger span{color:#F44336}
 .well.box.info{background-color:#F44336;color:white;font-size:15px;text-align:center}
+.phoneInput{float:left;width:340px;margin-bottom:30px;}
+.phoneInputBtn{float:left;margin-top:10px;}
+.certification{clear:both;}
 </style>
 
 </head>
@@ -38,7 +41,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 	<div class="container">
 		<div class="well box">
 			<form action="#" method="post">
-				<h1>CURRENT 로그인</h1>
+				<h1>CURRENT 회원가입</h1>
 				<br>
 				<div class="form-group label-floating">
 					<label class="control-label">이메일</label>
@@ -48,8 +51,25 @@ div.well input[type="submit"]{width:100%;height:50px}
 					<label class="control-label">비밀번호</label>
 					<input type="password" name="" class="form-control" required />
 				</div>
-				<br> <input type="submit" value="로그인" class="btn btn-primary btn-raised" /><br>
-				<a href="#">비밀번호 찾기</a>
+				<div class="form-group label-floating">
+					<label class="control-label">비밀번호 확인</label>
+					<input type="password" name="" class="form-control" required />
+				</div>
+				<div class="phoneSignDiv">
+					<div class="form-group label-floating phoneInput">
+						<label class="control-label">휴대폰 번호</label>
+						<input type="text" name="" class="form-control" required />
+					</div>
+					<div class="phoneInputBtn">
+						<input type="button" class="btn btn-primary btn-raised" value="인증" />
+					</div>
+				</div>
+				<div class="form-group label-floating certification">
+					<label class="control-label">인증번호</label>
+					<input type="text" class="form-control" required />
+				</div>
+				<br>
+				<input type="submit" value="회원가입" class="btn btn-primary btn-raised" /><br>
 			</form>
 		</div>
 	</div>
