@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 /**
@@ -42,27 +44,21 @@ public class LoginController {
 	 * 작성자 : 나진실
 	 * 변경이력 :
 	 * @return
-	 * Method 설명 : 처음의 
+	 * Method 설명 : 로그인 화면단 보여주기 
 	 */
-	@RequestMapping("/loginView")
+	@RequestMapping(value="/loginView")
 	public String loginView(Model model) {
-		MemberVo memberVo = memberservice.seletUser("sally1334@naver.com");
-		model.addAttribute("memberVo", memberVo);
 		return "/login/login";
 	}
 	
-	
-	
-	
-	
 	/**
 	 * Method : loginProcess
-	 * 작성자 : pc07
+	 * 작성자 : 나진실
 	 * 변경이력 :
 	 * @return
-	 * Method 설명 :
+	 * Method 설명 : 로그인 기능 
 	 */
-	@RequestMapping(name="/loginProcess",method=RequestMethod.POST)
+	@RequestMapping(value="/loginProcess",method=RequestMethod.POST)
 	public String loginProcess(HttpServletRequest request , Model model, HttpSession session) {
 		
 		String member_mail = request.getParameter("membermail");
@@ -70,7 +66,8 @@ public class LoginController {
 		
 		MemberVo memberVo = memberservice.seletUser(member_mail);
 		
-		if(memberVo==null || member_mail.equals(memberVo.getMember_mail())||!member_pass.equals(memberVo.getMember_pass())) {
+		if(memberVo==null || !member_mail.equals(memberVo.getMember_mail())||
+							 !member_pass.equals(memberVo.getMember_pass())) {
 			return "login/login";
 		
 		}else {
@@ -78,4 +75,11 @@ public class LoginController {
 		}
 		return "main";
 	}
+	
+	
+	@RequestMapping(value="")
+	public String signProcess() {
+		return"";
+	}
+	
 }

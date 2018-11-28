@@ -1,4 +1,4 @@
- package kr.or.ddit;
+package kr.or.ddit;
 
 		import org.mybatis.spring.annotation.MapperScan;
 		import org.springframework.boot.SpringApplication;

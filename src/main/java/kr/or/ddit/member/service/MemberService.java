@@ -36,5 +36,16 @@ public class MemberService implements MemberServiceInf {
 	public MemberVo seletUser(String member_mail) {
 		return memberMapper.selectUser(member_mail);
 	}
+
+	@Override
+	public int insertUser(MemberVo memberVo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+/*	@Override
+	public int insertUser(MemberVo memberVo) {
+		return memberMapper.
+	}*/
 	
 }

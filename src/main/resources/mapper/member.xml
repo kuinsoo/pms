@@ -3,11 +3,20 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<!--  로그인  -->  
 <mapper namespace="kr.or.ddit.member.mapper.MemberMapper">
+
+	<!--  로그인  -->  
 	<select id="selectUser" resultType="memberVo" parameterType="String">
 		select *
 		from member 
 		where member_mail = #{member_mail}
 	</select>
+	
+	<!-- 회원가입  -->
+	<insert id="insertUser" parameterType="memberVo">
+		insert into 
+		member
+		values (#{member_mail},#{member_name},#{member_pass},#{member_tel},'','N')
+	</insert>
+		
 </mapper>

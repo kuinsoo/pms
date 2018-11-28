@@ -13,4 +13,14 @@ public interface MemberServiceInf {
 	 * Method 설명 : 로그인 - 회원 아이디 가져오는 
 	 */
 	MemberVo seletUser(String member_mail);
+	
+	/**
+	 * Method : insertUser
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param memberVo
+	 * @return
+	 * Method 설명 : 회원가입 insert
+	 */
+	public int insertUser(MemberVo memberVo);
 }
