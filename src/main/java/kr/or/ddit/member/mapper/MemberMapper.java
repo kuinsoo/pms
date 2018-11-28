@@ -29,7 +29,7 @@ public interface MemberMapper {
 	 * 변경이력 :
 	 * @param memberVo
 	 * @return
-	 * Method 설명 : 회원가입 insert
+	 * Method 설명 : 회원가입
 	 */
 	public int insertUser(MemberVo memberVo);
 }

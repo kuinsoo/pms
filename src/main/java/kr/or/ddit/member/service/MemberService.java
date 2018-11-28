@@ -30,22 +30,23 @@ public class MemberService implements MemberServiceInf {
 	 * 변경이력 :
 	 * @param member_mail
 	 * @return
-	 * Method 설명 : 로그인 - 회원 아이디 가져오는 
+	 * Method 설명 : 로그인
 	 */
 	@Override
 	public MemberVo seletUser(String member_mail) {
 		return memberMapper.selectUser(member_mail);
 	}
 
+	/**
+	 * Method : insertUser
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @param memberVo
+	 * @return
+	 * Method 설명 : 회원가입
+	 */
 	@Override
 	public int insertUser(MemberVo memberVo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-/*	@Override
-	public int insertUser(MemberVo memberVo) {
-		return memberMapper.
-	}*/
-	
+		return memberMapper.insertUser(memberVo);
+	}	
 }
