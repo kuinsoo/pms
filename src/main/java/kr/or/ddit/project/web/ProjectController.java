@@ -26,12 +26,12 @@ public class ProjectController {
 	@Autowired
 	private ProjectServiceInf projectService;
 
-	@RequestMapping(name = "/projectCreate",method = RequestMethod.GET)
+	@RequestMapping(value = "/projectCreate",method = RequestMethod.GET)
 	public String projectCreateView() {
 		return "project/projectCreate";
 	}
 
-	@RequestMapping(name = "/projectCreate",method = RequestMethod.POST)
+	@RequestMapping(value = "/projectCreate",method = RequestMethod.POST)
 	public String projectCreate(ModelAndView modelAndView, ProjectVo projectVo) {
 		if(projectVo.getProject_title() != null){
 			projectService.createProject(projectVo);
