@@ -81,62 +81,62 @@ div.well input[type="submit"]{width:100%;height:50px}
 					<input type="password" name="member_pass" class="form-control" required />
 				</div>
 				<br> <input type="submit" value="로그인" class="btn btn-primary btn-raised" /><br>
-				<a href="/signView" class="btn btn-primary btn-raised signBtn">회원가입</a>
+				<a href="/signView" class="btn btn-primary btn-raised signBtn">회원가입</a>				
+			</form>		
 				
-				<!--  네이버 아이디 로그인  -->
-				<div id="naver_id_login">
-					<a href="${url}">
-						<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
-					</a>
-				</div>
-				
-				<div class="findDiv">
-					<a href="#layerEmail" class="findEmail">이메일 찾기</a>
-					<a href="#layerPassword" class="findPassword">비밀번호 찾기</a>
-				</div>
-				<div class="dim-layer">
-					<div class="dimBg"></div>
-					<div id="layerEmail" class="pop-layer">
-						<div class="pop-container">
-							<div class="pop-conts">
-								<div class="form-group label-floating">
-									<label class="control-label">이름</label>
-									<input type="text"	name="" value="" class="form-control" autofocus="autofocus" required />
-								</div>
-								<div class="form-group label-floating">
-									<label class="control-label">이메일</label>
-									<input type="email"	name="" value="" class="form-control" autofocus="autofocus" required />
-								</div>
-								<a href="#" class="btn btn-primary btn-raised findEmailBtn">이메일 찾기</a>								
-								<a href="#" class="btn btn-primary btn-raised btn-layerClose">취소</a>
+			<!--  네이버 아이디 로그인  -->
+			<div id="naver_id_login">
+				<a href="${url}">
+					<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
+				</a>
+			</div>
+			
+			<div class="findDiv">
+				<a href="#layerEmail" class="findEmail">이메일 찾기</a>
+				<a href="#layerPassword" class="findPassword">비밀번호 찾기</a>
+			</div>
+			<div class="dim-layer">
+				<div class="dimBg"></div>
+				<div id="layerEmail" class="pop-layer">
+					<div class="pop-container">
+						<div class="pop-conts">
+							<div class="form-group label-floating">
+								<label class="control-label">이름</label>
+								<input type="text"	name="" value="" class="form-control" autofocus="autofocus" required />
 							</div>
+							<div class="form-group label-floating">
+								<label class="control-label">이메일</label>
+								<input type="email"	name="" value="" class="form-control" autofocus="autofocus" required />
+							</div>
+							<a href="#" class="btn btn-primary btn-raised findEmailBtn">이메일 찾기</a>								
+							<a href="#" class="btn btn-primary btn-raised btn-layerClose">취소</a>
 						</div>
 					</div>
 				</div>
-				<div class="dim-layers">
-					<div class="dimBgs"></div>
-					<div id="layerPassword" class="pop-layers">
-						<div class="pop-containers">
-							<div class="pop-contss">
-								<div class="form-group label-floating">
-									<label class="control-label">이름</label>
-									<input type="text"	name="" value="" class="form-control" autofocus="autofocus" required />
-								</div>
-								<div class="form-group label-floating">
-									<label class="control-label">이메일(ID)</label>
-									<input type="email"	name="" value="" class="form-control" autofocus="autofocus" required />
-								</div>
-								<div class="form-group label-floating">
-									<label class="control-label">비밀번호 받으실 이메일</label>
-									<input type="email"	name="" value="" class="form-control" autofocus="autofocus" required />
-								</div>
-								<a href="#" class="btn btn-primary btn-raised findEmailBtn">비밀번호 찾기</a>								
-								<a href="#" class="btn btn-primary btn-raised btn-layerClose">취소</a>
+			</div>
+			<div class="dim-layers">
+				<div class="dimBgs"></div>
+				<div id="layerPassword" class="pop-layers">
+					<div class="pop-containers">
+						<div class="pop-contss">
+							<div class="form-group label-floating">
+								<label class="control-label">이름</label>
+								<input type="text"	name="" value="" class="form-control" autofocus="autofocus" required />
 							</div>
+							<div class="form-group label-floating">
+								<label class="control-label">이메일(ID)</label>
+								<input type="email"	name="" value="" class="form-control" autofocus="autofocus" required />
+							</div>
+							<div class="form-group label-floating">
+								<label class="control-label">비밀번호 받으실 이메일</label>
+								<input type="email"	name="" value="" class="form-control" autofocus="autofocus" required />
+							</div>
+							<a href="#" class="btn btn-primary btn-raised findEmailBtn">비밀번호 찾기</a>								
+							<a href="#" class="btn btn-primary btn-raised btn-layerClose">취소</a>
 						</div>
 					</div>
-				</div>				
-			</form>			
+				</div>
+			</div>	
 		</div>
 	</div>
 
