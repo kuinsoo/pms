@@ -33,6 +33,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 .phoneInput{float:left;width:340px;margin-bottom:30px;}
 .phoneInputBtn{float:left;margin-top:10px;}
 .certification{clear:both;}
+.signCloseBtns{width:100%;}
 </style>
 
 </head>
@@ -46,6 +47,10 @@ div.well input[type="submit"]{width:100%;height:50px}
 				<div class="form-group label-floating">
 					<label class="control-label">이메일</label>
 					<input type="email"	name="" value="" class="form-control" autofocus="autofocus" required />
+				</div>
+				<div class="form-group label-floating">
+					<label class="control-label">이름</label>
+					<input type="text" name="" value="" class="form-control" autofocus="autofocus" required />
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호</label>
@@ -70,6 +75,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 				</div>
 				<br>
 				<input type="submit" value="회원가입" class="btn btn-primary btn-raised" /><br>
+				<a href="#" class="btn btn-primary btn-raised signCloseBtns">취소</a>
 			</form>
 		</div>
 	</div>
