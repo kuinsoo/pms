@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 
-
-
 /**
  * LoginController.java
  *
@@ -32,7 +30,6 @@ import kr.or.ddit.member.service.MemberServiceInf;
  */
 @Controller
 public class LoginController {
-	
 	@Autowired
 	private MemberServiceInf memberservice;
 	
@@ -57,7 +54,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value="/loginProcess",method=RequestMethod.POST)
 	public String loginProcess(HttpServletRequest request , Model model, HttpSession session) {
-		
+		System.out.println("들어ㅏ옴");
 		String member_mail = request.getParameter("member_mail");
 		String member_pass = request.getParameter("member_pass");
 		
@@ -106,7 +103,7 @@ public class LoginController {
 		
 		int insertUser = memberservice.insertUser(memberVo);
 		
-		return"/sign/sign";
+		return"/login/login";
 	}
 	
 }

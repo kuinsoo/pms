@@ -41,7 +41,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 <div class="wraps">
 	<div class="container">
 		<div class="well box">
-			<form action="#" method="post">
+			<form action="/signProcess" method="post">
 				<h1>CURRENT 회원가입</h1>
 				<br>
 				<div class="form-group label-floating">
@@ -63,7 +63,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 				<div class="phoneSignDiv">
 					<div class="form-group label-floating phoneInput">
 						<label class="control-label">휴대폰 번호</label>
-						<input type="text" name="" class="form-control" required />
+						<input type="text" name="member_tel" class="form-control" required />
 					</div>
 					<div class="phoneInputBtn">
 						<input type="button" class="btn btn-primary btn-raised" value="인증" />
@@ -75,7 +75,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 				</div>
 				<br>
 				<input type="submit" value="회원가입" class="btn btn-primary btn-raised" /><br>
-				<a href="#" class="btn btn-primary btn-raised signCloseBtns">취소</a>
+				<a href="/" class="btn btn-primary btn-raised signCloseBtns">취소</a>
 			</form>
 		</div>
 	</div>
