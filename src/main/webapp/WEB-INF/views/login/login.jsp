@@ -81,8 +81,9 @@ div.well input[type="submit"]{width:100%;height:50px}
 					<input type="password" name="member_pass" class="form-control" required />
 				</div>
 				<br> <input type="submit" value="로그인" class="btn btn-primary btn-raised" /><br>
-				<a href="#" class="btn btn-primary btn-raised signBtn">회원가입</a>
+				<a href="/signView" class="btn btn-primary btn-raised signBtn">회원가입</a>
 				
+				<!--  네이버 아이디 로그인  -->
 				<div id="naver_id_login">
 					<a href="${url}">
 						<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>

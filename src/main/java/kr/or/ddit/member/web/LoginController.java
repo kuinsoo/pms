@@ -12,8 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 
-
-
 /**
  * LoginController.java
  *
@@ -32,7 +30,6 @@ import kr.or.ddit.member.service.MemberServiceInf;
  */
 @Controller
 public class LoginController {
-	
 	@Autowired
 	private MemberServiceInf memberservice;
 	
@@ -106,7 +103,7 @@ public class LoginController {
 		
 		int insertUser = memberservice.insertUser(memberVo);
 		
-		return"/sign/sign";
+		return"/login/login";
 	}
 	
 }
