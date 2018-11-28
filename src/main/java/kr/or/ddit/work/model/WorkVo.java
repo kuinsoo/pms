@@ -18,25 +18,25 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Alias("workVo")
 public class WorkVo {
 	
-	private String work_id;			//	업무번호(N.N)
-	private String work_project;	//	업무프로젝트번호
-	private String work_title;		//	업무제목
-	private String work_content;	//	업무내용
-	private String work_type;		//	업무유형
-	private String work_importance;	//	업무중요도
+	private String work_id;				//	업무번호(N.N)
+	private String work_project;		//	업무프로젝트번호
+	private String work_title;			//	업무제목
+	private String work_content;		//	업무내용
+	private String work_type;			//	업무유형
+	private String work_importance;		//	업무중요도
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date   work_sdate;		//	업무시작일자
-	private String format_work_sdate; //업무시작일자(String)
+	private Date   work_sdate;			//	업무시작일자
+	private String format_work_sdate;	//	업무시작일자(String)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date   work_eedate;		//	업무예상마감일자
-	private String format_work_eedate;//업무예상마감일자(String)
+	private Date   work_eedate;			//	업무예상마감일자
+	private String format_work_eedate;	//	업무예상마감일자(String)
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	private Date   work_edate;		//	업무마감일자
-	private String format_work_edate; //업무마감일자(String)
-	private int    work_progress;	//	업무진척도
-	private String work_approval;	//	업무마감승인여부(ex: Y or N)
-	private String work_public;		//	업무공개여부      (ex: Y or N)
-	private String work_color;		//	일정 색깔
+	private Date   work_edate;			//	업무마감일자
+	private String format_work_edate;	//	업무마감일자(String)
+	private int    work_progress;		//	업무진척도
+	private String work_approval;		//	업무마감승인여부(ex: Y or N)
+	private String work_public;			//	업무공개여부      (ex: Y or N)
+	private String work_color;			//	일정 색깔
 	
 	/* 기본생성자 */
 	public WorkVo() {}
