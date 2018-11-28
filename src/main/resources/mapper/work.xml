@@ -3,6 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.or.ddit.zcardaa.mapper.WorkMapper">
+<mapper namespace="kr.or.ddit.work.mapper.WorkMapper">
+
+	<!-- 업무 전체 일정 -->
+	<select id="workAllSchedule" resultType="workVo">
+		SELECT	*
+		FROM	work
+	</select>
 
 </mapper>

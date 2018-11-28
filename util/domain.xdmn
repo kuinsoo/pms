@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<e:DomainDefinition xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:e="http://exerd.tomato.com/model" UUID="DDefinition_HEnfUPGTEeiS4N6TTLh9qw" productId="com.tomato.db.oracle_10g" version="2.5.3.20181113-1637">
+  <domain UUID="Domain_HEnfUfGTEeiS4N6TTLh9qw" name="문자" suggestedDataType="VARCHAR2(255)">
+    <domain UUID="Domain_HEnfUvGTEeiS4N6TTLh9qw" name="주민등록번호" suggestedDataType="VARCHAR2(13)"/>
+    <domain UUID="Domain_HEnfU_GTEeiS4N6TTLh9qw" name="주소"/>
+    <domain UUID="Domain_HEnfVPGTEeiS4N6TTLh9qw" name="웹주소"/>
+    <domain UUID="Domain_HEnfVfGTEeiS4N6TTLh9qw" name="전화번호" suggestedDataType="VARCHAR2(30)"/>
+    <domain UUID="Domain_HEnfVvGTEeiS4N6TTLh9qw" name="이메일" suggestedDataType="VARCHAR2(40)"/>
+    <domain UUID="Domain_HEnfV_GTEeiS4N6TTLh9qw" name="이름" suggestedDataType="VARCHAR2(50)"/>
+  </domain>
+  <domain UUID="Domain_HEnfWPGTEeiS4N6TTLh9qw" name="숫자" suggestedDataType="INTEGER">
+    <domain UUID="Domain_HEnfWfGTEeiS4N6TTLh9qw" name="금액"/>
+  </domain>
+  <domain UUID="Domain_HEnfWvGTEeiS4N6TTLh9qw" name="일시" suggestedDataType="DATE"/>
+  <domain UUID="Domain_HEnfW_GTEeiS4N6TTLh9qw" name="객체" suggestedDataType="BLOB">
+    <domain UUID="Domain_HEnfXPGTEeiS4N6TTLh9qw" name="이미지" suggestedDataType="ORDImage"/>
+    <domain UUID="Domain_HEnfXfGTEeiS4N6TTLh9qw" name="오디오" suggestedDataType="ORDAudio"/>
+  </domain>
+  <domain UUID="Domain_HEnfXvGTEeiS4N6TTLh9qw" name="번호" suggestedDataType="VARCHAR2(30)"/>
+  <domain UUID="Domain_HEnfX_GTEeiS4N6TTLh9qw" name="구분" suggestedDataType="VARCHAR2(1)"/>
+  <domain UUID="Domain_HEnfYPGTEeiS4N6TTLh9qw" name="내용" suggestedDataType="CLOB"/>
+  <domain UUID="Domain_HEnfYfGTEeiS4N6TTLh9qw" name="제목" suggestedDataType="VARCHAR2(100)"/>
+  <domain UUID="Domain_HEnfYvGTEeiS4N6TTLh9qw" name="직급" suggestedDataType="VARCHAR2(51)"/>
+  <domain UUID="Domain_HEnfY_GTEeiS4N6TTLh9qw" name="비밀번호" suggestedDataType="VARCHAR2(300)"/>
+  <domain UUID="Domain_HEnfZPGTEeiS4N6TTLh9qw" name="프로필" suggestedDataType="VARCHAR2(200)"/>
+  <domain UUID="Domain_HEnfZfGTEeiS4N6TTLh9qw" name="여부" suggestedDataType="VARCHAR2(3)"/>
+  <domain UUID="Domain_HEnfZvGTEeiS4N6TTLh9qw" name="점수" suggestedDataType="NUMBER"/>
+  <domain UUID="Domain_HEnfZ_GTEeiS4N6TTLh9qw" name="등급" suggestedDataType="VARCHAR2(3)"/>
+  <domain UUID="Domain_HEnfaPGTEeiS4N6TTLh9qw" name="개요" suggestedDataType="VARCHAR2(500)"/>
+  <domain UUID="Domain_HEnfafGTEeiS4N6TTLh9qw" name="유형" suggestedDataType="VARCHAR2(15)"/>
+  <domain UUID="Domain_HEnfavGTEeiS4N6TTLh9qw" name="레벨" suggestedDataType="VARCHAR2(15)"/>
+  <domain UUID="Domain_HEnfa_GTEeiS4N6TTLh9qw" name="조회수" suggestedDataType="NUMBER"/>
+  <domain UUID="Domain_HEnfbPGTEeiS4N6TTLh9qw" name="진척도" suggestedDataType="NUMBER"/>
+  <domain UUID="Domain_HEnfbfGTEeiS4N6TTLh9qw" name="파일명" suggestedDataType="VARCHAR2(100)"/>
+  <domain UUID="Domain_HEnfbvGTEeiS4N6TTLh9qw" name="확장명" suggestedDataType="VARCHAR2(30)"/>
+</e:DomainDefinition>
