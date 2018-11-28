@@ -37,19 +37,19 @@ div.well input[type="submit"]{width:100%;height:50px}
 <div class="wraps">
 	<div class="container">
 		<div class="well box">
-			<form action="#" method="post">
+			<form action="/user/loginProcess" method="post">
 				<h1>CURRENT 로그인</h1>
 				<br>
 				<div class="form-group label-floating">
 					<label class="control-label">이메일</label>
-					<input type="email"	name="" value="" class="form-control" autofocus="autofocus" required />
+					<input type="email"	name="member_mail" value="" class="form-control" autofocus="autofocus" required />
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호</label>
-					<input type="password" name="" class="form-control" required />
+					<input type="password" name="member_pass" class="form-control" required />
 				</div>
 				<br> <input type="submit" value="로그인" class="btn btn-primary btn-raised" /><br>
-				<a href="#">비밀번호 찾기</a>
+				<a href="#">이메일 찾기</a> 　　 <a href="#">비밀번호 찾기</a>
 			</form>
 		</div>
 	</div>

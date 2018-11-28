@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -39,6 +37,12 @@ public class LoginController {
 	@Autowired
 	private MemberServiceInf memberservice;
 	
+	@RequestMapping(value="/")
+	public String index() {
+		return "/login/login";
+	}
+	
+	
 	/**
 	 * Method : loginView
 	 * 작성자 : 나진실
@@ -47,7 +51,7 @@ public class LoginController {
 	 * Method 설명 : 로그인 화면단 보여주기 
 	 */
 	@RequestMapping(value="/loginView")
-	public String loginView(Model model) {
+	public String loginView() {
 		return "/login/login";
 	}
 	
@@ -61,8 +65,8 @@ public class LoginController {
 	@RequestMapping(value="/loginProcess",method=RequestMethod.POST)
 	public String loginProcess(HttpServletRequest request , Model model, HttpSession session) {
 		
-		String member_mail = request.getParameter("membermail");
-		String member_pass = request.getParameter("memberpass");
+		String member_mail = request.getParameter("member_mail");
+		String member_pass = request.getParameter("member_pass");
 		
 		MemberVo memberVo = memberservice.seletUser(member_mail);
 		
@@ -75,7 +79,6 @@ public class LoginController {
 		}
 		return "main";
 	}
-	
 	
 	@RequestMapping(value="")
 	public String signProcess() {
