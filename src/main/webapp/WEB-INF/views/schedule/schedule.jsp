@@ -21,7 +21,14 @@
 			var json = new Object();
 			json.title = '${workSche.work_title}';
 			json.start = "${workSche.format_work_sdate}";
-			json.end = "${workSche.format_work_edate}";
+			<c:choose>
+				<c:when test="${workSche.format_work_eedate != null}">
+					json.end = "${workSche.format_work_eedate}";
+				</c:when>
+				<c:otherwise>
+					json.end = "${workSche.format_work_edate}";
+				</c:otherwise>
+			</c:choose>
 			json.color = "${workSche.work_color}";
 			result.push(json);
 		</c:forEach>
