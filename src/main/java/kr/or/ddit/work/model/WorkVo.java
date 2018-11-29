@@ -164,7 +164,7 @@ public class WorkVo {
 				+ ", work_sdate=" + work_sdate + ", format_work_sdate=" + format_work_sdate + ", work_eedate="
 				+ work_eedate + ", format_work_eedate=" + format_work_eedate + ", work_edate=" + work_edate
 				+ ", format_work_edate=" + format_work_edate + ", work_progress=" + work_progress + ", work_approval="
-				+ work_approval + ", work_public=" + work_public + ", work_color=" + work_color + ", sdf=" + sdf + "]";
+				+ work_approval + ", work_public=" + work_public + ", work_color=" + work_color + "]";
 	}
 
 }

@@ -7,8 +7,16 @@
 
 	<!-- 업무 전체 일정 -->
 	<select id="workAllSchedule" resultType="workVo">
-		SELECT	*
-		FROM	work
+	<!-- 일정에 필요한 컬럼 정리: 일정명, 일정시작일시, 일정예상종료일시, 일정종료일시, 일정색깔 -->
+		SELECT	w.work_title,
+				w.work_sdate,
+				w.work_eedate,
+				w.work_edate,
+				w.work_color
+		FROM	work w
+		<!-- FROM	project_member pm INNER JOIN work w -->
+		<!-- ON		pm.pmember_project = w.work_project -->
+		<!-- WHERE  pm.pmember_member = #{session_email} -->
 	</select>
 
 </mapper>

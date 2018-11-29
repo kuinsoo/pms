@@ -132,7 +132,7 @@ public class ToDoVo {
 				+ ", todo_content=" + todo_content + ", todo_sdate=" + todo_sdate + ", format_todo_sdate="
 				+ format_todo_sdate + ", todo_edate=" + todo_edate + ", format_todo_edate=" + format_todo_edate
 				+ ", todo_eedate=" + todo_eedate + ", format_todo_eedate=" + format_todo_eedate + ", todo_complet="
-				+ todo_complet + ", todo_color=" + todo_color + ", sdf=" + sdf + "]";
+				+ todo_complet + ", todo_color=" + todo_color + "]";
 	}
 	
 }
