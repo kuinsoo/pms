@@ -38,7 +38,10 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools
 	compile group: 'org.springframework.boot', name: 'spring-boot-devtools', version: '2.1.0.RELEASE'
 
-
+	// https://mvnrepository.com/artifact/javax.mail/mail
+	compile group: 'javax.mail', name: 'mail', version: '1.4.7'
+	
+	
 /* JSP Servlet */
     compile('javax.servlet:jstl')
     compile('org.apache.tomcat.embed:tomcat-embed-jasper')

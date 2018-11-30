@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
@@ -54,21 +55,48 @@ public class LoginController {
 	 */
 	@RequestMapping(value="/loginProcess",method=RequestMethod.POST)
 	public String loginProcess(HttpServletRequest request , Model model, HttpSession session) {
-		System.out.println("들어ㅏ옴");
+		
 		String member_mail = request.getParameter("member_mail");
 		String member_pass = request.getParameter("member_pass");
-		
 		MemberVo memberVo = memberservice.selectUser(member_mail);
 		
 		if(memberVo==null || !member_mail.equals(memberVo.getMember_mail())||
 							 !member_pass.equals(memberVo.getMember_pass())) {
 			return "login/login";
-		
 		}else {
 			session.setAttribute("memberVo",memberVo);
 		}
 		return "main";
 	}
+	
+	/**
+	 * Method : idFind
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 아이디 찾기 
+	 */
+	@RequestMapping(value="/idFind",method=RequestMethod.POST)
+	public String idFind() {
+		
+		return "/login/login";
+	}
+	
+	
+	
+	/**
+	 * Method : passFind
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 비밀번호 찾기 
+	 */
+	@RequestMapping(value="/passFind",method=RequestMethod.POST)
+	public String passFind() {
+		
+		return "/login/login";
+	}
+	
 	
 	/**
 	 * Method : signView
@@ -80,7 +108,7 @@ public class LoginController {
 	@RequestMapping(value="/signView")
 	public String signView() {
 		return"/sign/sign";
-	}
+	}	
 	
 	/**
 	 * Method : signProcess
@@ -90,20 +118,18 @@ public class LoginController {
 	 * Method 설명 : sign.jsp에서 회원가입 버튼을 눌렀을때  
 	 */
 	@RequestMapping(value="/signProcess",method=RequestMethod.POST)
-	public String signProcess(HttpServletRequest request , Model model, MemberVo memberVo) {
+	public String signProcess(@RequestParam("member_mail") String member_mail ,MemberVo member) {
 		
-		String member_mail = memberVo.getMember_mail();
-		memberVo.setMember_mail(member_mail);
+		// 값이 다르면..
+		if(memberservice.selectUser(member_mail)==null) {
+			int insertUser = memberservice.insertUser(member);		
+			return"/login/login";
 		
-		String member_pass = memberVo.getMember_pass();
-		memberVo.setMember_pass(member_pass);
-		
-		String member_tel = memberVo.getMember_tel();
-		memberVo.setMember_tel(member_tel);
-		
-		int insertUser = memberservice.insertUser(memberVo);
-		
-		return"/login/login";
+		// 값이 같으면 
+		}else {
+			return "/sign/sign";
+		}
 	}
+	
 	
 }

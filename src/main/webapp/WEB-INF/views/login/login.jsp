@@ -95,6 +95,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 				<a href="#layerEmail" class="findEmail">이메일 찾기</a>
 				<a href="#layerPassword" class="findPassword">비밀번호 찾기</a>
 			</div>
+			<form action="" method="post">
 			<div class="dim-layer">
 				<div class="dimBg"></div>
 				<div id="layerEmail" class="pop-layer">
@@ -108,12 +109,15 @@ div.well input[type="submit"]{width:100%;height:50px}
 								<label class="control-label">이메일</label>
 								<input type="email"	name="" value="" class="form-control" autofocus="autofocus" required />
 							</div>
-							<a href="#" class="btn btn-primary btn-raised findEmailBtn">이메일 찾기</a>								
+							<button type="submit" class="btn btn-primary btn-raised findEmailBtn">이메일 찾기</button>							
 							<a href="#" class="btn btn-primary btn-raised btn-layerClose">취소</a>
 						</div>
 					</div>
 				</div>
 			</div>
+			</form>
+			
+			<form action="" method="post">
 			<div class="dim-layers">
 				<div class="dimBgs"></div>
 				<div id="layerPassword" class="pop-layers">
@@ -131,13 +135,14 @@ div.well input[type="submit"]{width:100%;height:50px}
 								<label class="control-label">비밀번호 받으실 이메일</label>
 								<input type="email"	name="" value="" class="form-control" autofocus="autofocus" required />
 							</div>
-							<a href="#" class="btn btn-primary btn-raised findEmailBtn">비밀번호 찾기</a>								
+							<button type="submit" class="btn btn-primary btn-raised findEmailBtn">비밀번호 찾기</button>								
 							<a href="#" class="btn btn-primary btn-raised btn-layerClose">취소</a>
 						</div>
 					</div>
 				</div>
-			</div>	
-		</div>
+			</div>
+		</form>	
+		</div>			
 	</div>
 
 </div>

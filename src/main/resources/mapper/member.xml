@@ -13,7 +13,7 @@
 	</select>
 	
 	<!-- 회원가입  -->
-	<insert id="insertUser" parameterType="memberVo">
+	<insert id="insertUser" parameterType="memberVo">    
 		insert into 
 		member
 		values (#{member_mail},#{member_name},#{member_pass},#{member_tel},'','N')

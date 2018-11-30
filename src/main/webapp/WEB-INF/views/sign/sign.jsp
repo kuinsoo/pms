@@ -34,6 +34,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 .phoneInputBtn{float:left;margin-top:10px;}
 .certification{clear:both;}
 .signCloseBtns{width:100%;}
+.error{color: red; }
 </style>
 
 </head>
@@ -46,24 +47,25 @@ div.well input[type="submit"]{width:100%;height:50px}
 				<br>
 				<div class="form-group label-floating">
 					<label class="control-label">이메일</label>
-					<input type="email"	name="member_mail" value="" class="form-control" autofocus="autofocus" required />
+					<input type="email"	id ="email" name="member_mail" value="" class="form-control" autofocus="autofocus" required />
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">이름</label>
-					<input type="text" name="member_name" value="" class="form-control" autofocus="autofocus" required />
+					<input type="text" id = "name" name="member_name" value="" class="form-control" autofocus="autofocus" required />
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호</label>
-					<input type="password" name="member_pass" class="form-control" required />
+					<input type="password" name="member_pass" id ="password" class="form-control" required />
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호 확인</label>
-					<input type="password" name="" class="form-control" required />
+					<input type="password" name="" class="form-control" id ="passCheck" required />
+					<span class="error"> 비밀번호가 일치하지 않습니다.</span>
 				</div>
 				<div class="phoneSignDiv">
 					<div class="form-group label-floating phoneInput">
 						<label class="control-label">휴대폰 번호</label>
-						<input type="text" name="member_tel" class="form-control" required />
+						<input type="text" id = "tel" name="member_tel" class="form-control" required />
 					</div>
 					<div class="phoneInputBtn">
 						<input type="button" class="btn btn-primary btn-raised" value="인증" />
@@ -80,7 +82,21 @@ div.well input[type="submit"]{width:100%;height:50px}
 		</div>
 	</div>
 </div>
-
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".error").hide();
+	//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
+	//blur()이벤트 사용
+	$("#passCheck").blur(function() {
+		if($("#passCheck").val() != $("#password").val()){
+			$("#passCheck").next().show();
+		} else{
+			$("#passCheck").next().hide();
+		}
+	});
+});
+</script>
 <script src="../js/material.min.js"></script>
 <script>
 	$.material.init()
