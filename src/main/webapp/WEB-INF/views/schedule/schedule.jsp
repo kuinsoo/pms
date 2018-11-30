@@ -22,65 +22,82 @@
 		담고 json객체를 result라는 배열 변수에 다시 담는다.
 		(json이란 객체 ==> result란 배열 변수)
 		--%>
-		<%-- 일정 조회 함수 --%>
 		function resultFunc(){
 			
-			<%-- 프로젝트 일정 --%>
-			<c:forEach items="${allScheduleList.projectScheduleList}" var="schedule">
-				var json = new Object();
-				json.title = '${schedule.project_title}';
-				json.start = "${schedule.format_project_sdate}";
-				<c:choose>
-					<c:when test="${schedule.project_eedate != null}">
-						json.end = "${schedule.format_project_eedate}";
-					</c:when>
-					<c:otherwise>
-						json.end = "${schedule.format_project_edate}";
-					</c:otherwise>
-				</c:choose>
-				json.color = "${schedule.project_color}";
-				result.push(json);
-			</c:forEach>
+			result = []; // result 초기화
+			var size = document.getElementsByName("check").length;
 			
-			<%-- 업무 일정 --%>
-			<c:forEach items="${allScheduleList.workScheduleList}" var="schedule">
-				var json = new Object();
-				json.title = '${schedule.work_title}';
-				json.start = "${schedule.format_work_sdate}";
-				<c:choose>
-					<c:when test="${schedule.work_eedate != null}">
-						json.end = "${schedule.format_work_eedate}";
-					</c:when>
-					<c:otherwise>
-						json.end = "${schedule.format_work_edate}";
-					</c:otherwise>
-				</c:choose>
-				json.color = "${schedule.work_color}";
-				result.push(json);
-			</c:forEach>
-			
-			<%-- 할일 일정 --%>
-			<c:forEach items="${allScheduleList.todoScheduleList}" var="schedule">
-				var json = new Object();
-				json.title = '${schedule.todo_content}';
-				json.start = "${schedule.format_todo_sdate}";
-				<c:choose>
-					<c:when test="${schedule.todo_eedate != null}">
-						json.end = "${schedule.format_todo_eedate}";
-					</c:when>
-					<c:otherwise>
-						json.end = "${schedule.format_todo_edate}";
-					</c:otherwise>
-				</c:choose>
-				json.color = "${schedule.todo_color}";
-				result.push(json);
-			</c:forEach>
-			
-			// JSON형식이 담긴 배열을 console에 log남기는 함수
-			// console.log(JSON.stringify(result));
-			
+			for(var i = 0; i < size; i++){
+				
+				if(document.getElementsByName("check")[i].checked == true){
+					console.log(document.getElementsByName("check")[i].checked);
+					
+					if(document.getElementsByName("check")[i].value == "projectSchedule"){
+						
+						<%-- 프로젝트(project) 일정 --%>
+						<c:forEach items="${allScheduleList.projectScheduleList}" var="schedule">
+							var json = new Object();
+							json.title = '${schedule.project_title}';
+							json.start = "${schedule.format_project_sdate}";
+							<c:choose>
+								<c:when test="${schedule.project_eedate != null}">
+									json.end = "${schedule.format_project_eedate}";
+								</c:when>
+								<c:otherwise>
+									json.end = "${schedule.format_project_edate}";
+								</c:otherwise>
+							</c:choose>
+							json.color = "${schedule.project_color}";
+							result.push(json);
+						</c:forEach>
+					}
+				
+					if(document.getElementsByName("check")[i].value == "workSchedule"){
+						
+						<%-- 업무(work) 일정 --%>
+						<c:forEach items="${allScheduleList.workScheduleList}" var="schedule">
+							var json = new Object();
+							json.title = '${schedule.work_title}';
+							json.start = "${schedule.format_work_sdate}";
+							<c:choose>
+								<c:when test="${schedule.work_eedate != null}">
+									json.end = "${schedule.format_work_eedate}";
+								</c:when>
+								<c:otherwise>
+									json.end = "${schedule.format_work_edate}";
+								</c:otherwise>
+							</c:choose>
+							json.color = "${schedule.work_color}";
+							result.push(json);
+						</c:forEach>
+					}
+						
+					if(document.getElementsByName("check")[i].value == "todoSchedule"){
+						
+						<%-- 할일(todo) 일정 --%>
+						<c:forEach items="${allScheduleList.todoScheduleList}" var="schedule">
+							var json = new Object();
+							json.title = '${schedule.todo_content}';
+							json.start = "${schedule.format_todo_sdate}";
+							<c:choose>
+								<c:when test="${schedule.todo_eedate != null}">
+									json.end = "${schedule.format_todo_eedate}";
+								</c:when>
+								<c:otherwise>
+									json.end = "${schedule.format_todo_edate}";
+								</c:otherwise>
+							</c:choose>
+							json.color = "${schedule.todo_color}";
+							result.push(json);
+						</c:forEach>
+					}
+				}
+			} //for문
 			return result;
 		}
+		
+		// JSON형식이 담긴 배열을 console에 log남기는 함수
+		// console.log(JSON.stringify(result));
 		
 		// fullcalendar 한글화, 사이즈, 일정 출력
 		$('#calendar').fullCalendar({
@@ -88,46 +105,46 @@
 			//height : 650,	// 사이즈
 			// events : JSON형식이 담긴 배열
 			events : resultFunc()
-			
 		});
-		// 함수호출시 제대로 값이 넘어오는지 확인
-		// console.log('workResultFunc() : ' + workResultFunc());
-		
-		// fullcalendar를 출력할 수 있는 jQuery
-		$('#calendar').fullCalendar({
-			events : function(start, end, timezone, callback) {
-				$.ajax({
-					url : 'myxmlfeed.php',
-					dataType : 'xml',
-					data : {
-						// our hypothetical feed requires UNIX timestamps
-						start : start.unix(),
-						end : end.unix()
-					},
-					success : function(doc) {
-						var events = [];
-						$(doc).find('event').each(function() {
-							events.push({
-								title : $(this).attr('title'),
-								start : $(this).attr('start')
-							// will be parsed
-							});
+
+		// checkbox 클릭시 fullcalendar reload되는 함수
+		$(document).on('click', "input[name=check]", function(){
+			$('#calendar').fullCalendar('removeEvents');
+			$('#calendar').fullCalendar('refetchEvents');
+			$('#calendar').fullCalendar('addEventSource', resultFunc());
+		});
+	}); // ready
+	
+	
+	// fullcalendar를 출력할 수 있는 jQuery
+	<%--
+	$('#calendar').fullCalendar({
+		locale: 'ko',
+		events : function(start, end, timezone, callback) {
+			$.ajax({
+				url : 'myxmlfeed.php',
+				dataType : 'xml',
+				data : {
+					// our hypothetical feed requires UNIX timestamps
+					start : start.unix(),
+					end : end.unix()
+				},
+				success : function(doc) {
+					var events = [];
+					$(doc).find('event').each(function() {
+						events.push({
+							title : $(this).attr('title'),
+							start : $(this).attr('start')
+						// will be parsed
 						});
-						callback(events);
-					}
-				});
-			}
-		});
+					});
+					callback(events);
+				}
+			});
+		}
 	});
+	--%>
 </script>
-<%-- 
-	규승이형에게
-	규승이형 안녕하세요. 저 지태에요.
-	이 스타일이 굉장히 마음에 안드실꺼에요.
-	형이 하시고 싶은대로 꾸미시면 돼요 :)
-	화이팅이십니다요!
-	- current의 재간둥이 지태가 -
- --%>
 <style type="text/css">
 	.container{
 		margin: 0 auto;
@@ -138,9 +155,9 @@
 <!-- body영역 -->
 <body>
 	<div class="container">
-		<label><input type="checkbox" name="projectSchedule" id="projectSchedule" value=""/>project</label>
-		<label><input type="checkbox" checked="checked" name="workSchedule" id="workSchedule" value=""/>work</label>
-		<label><input type="checkbox" checked="checked" name="todoSchedule" id="todoSchedule" value=""/>todo</label>
+		<label><input type="checkbox" name="check" value="projectSchedule"/>project</label>
+		<label><input type="checkbox" checked name="check" value="workSchedule"/>work</label>
+		<label><input type="checkbox" checked name="check" value="todoSchedule"/>todo</label>
 		<div id='calendar'></div>
 	</div>
 </body>
