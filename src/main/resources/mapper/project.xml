@@ -26,4 +26,18 @@
         set #{project_title},#{project_overview},#{project_bookmark}, #{project_edate},#{project_eedate}
         where PROJECT_ID = #{project_id}
     </update>
+    
+    <!-- 프로젝트 전체 일정(20181129 지태 추가) -->
+    <select id="projectAllSchedule" resultType="projectVo">
+    <!-- 일정에 필요한 컬럼 정리: 프로젝트명, 프로젝트시작일자, 프로젝트종료일자, 프로젝트실제마감일자, 프로젝트일정색깔 -->
+    	SELECT	p.project_title,
+    			p.project_sdate,
+    			p.project_eedate,
+    			p.project_edate,
+    			p.project_color
+    	FROM	project p
+    	<!-- FROM	project_member pm INNER JOIN project p -->
+    	<!-- ON		pm.pmember_project = p.project_id -->
+    	<!-- WHERE	pm.pmember_member = #{session_mail} -->
+    </select>
 </mapper>

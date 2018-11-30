@@ -1,5 +1,9 @@
 package kr.or.ddit.work.service;
 
+import java.util.List;
+
+import kr.or.ddit.work.model.WorkVo;
+
 /**
  * kr.or.ddit.work.service
  * null.java
@@ -10,4 +14,14 @@ package kr.or.ddit.work.service;
  * @Version :
  */
 public interface WorkServiceInf {
+	
+	/**
+	* Method : workAllSchedule
+	* 작성자 : jerry
+	* 변경이력 :
+	* @return
+	* Method 설명 : 업무 전체 일정
+	*/
+	List<WorkVo> workAllSchedule();
+	
 }

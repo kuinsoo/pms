@@ -2,6 +2,9 @@ package kr.or.ddit.project.web;
 
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +25,8 @@ import java.util.List;
  */
 @Controller
 public class ProjectController {
-
+	Logger logger = LoggerFactory.getLogger(ProjectController.class);
+	
 	@Autowired
 	private ProjectServiceInf projectService;
 
@@ -48,4 +52,5 @@ public class ProjectController {
 
 		return "project/projectList";
 	}
+	
 }

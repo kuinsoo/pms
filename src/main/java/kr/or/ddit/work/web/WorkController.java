@@ -1,6 +1,11 @@
 package kr.or.ddit.work.web;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import kr.or.ddit.work.service.WorkServiceInf;
 
 /**
  * kr.or.ddit.work.web
@@ -13,4 +18,9 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class WorkController {
+	Logger logger = LoggerFactory.getLogger(WorkController.class);
+	
+	@Autowired
+	private WorkServiceInf workService;
+	
 }
