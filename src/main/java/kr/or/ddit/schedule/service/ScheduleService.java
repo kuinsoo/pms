@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.ddit.project.mapper.ProjectMapper;
+import kr.or.ddit.todo.mapper.ToDoMapper;
 import kr.or.ddit.work.mapper.WorkMapper;
 
 @Service
@@ -18,6 +19,8 @@ public class ScheduleService implements ScheduleServiceInf{
 	private WorkMapper workMapper;
 	@Autowired
 	private ProjectMapper projectMapper;
+	@Autowired
+	private ToDoMapper todoMapper;
 	
 	/**
 	* Method : scheduleList
@@ -32,6 +35,7 @@ public class ScheduleService implements ScheduleServiceInf{
 		
 		allScheduleList.put("workScheduleList", workMapper.workAllSchedule());
 		allScheduleList.put("projectScheduleList", projectMapper.projectAllSchedule());
+		allScheduleList.put("todoScheduleList", todoMapper.todoAllSchedule());
 		
 		return allScheduleList;
 	}

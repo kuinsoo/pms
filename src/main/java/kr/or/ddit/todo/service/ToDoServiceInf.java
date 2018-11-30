@@ -1,5 +1,9 @@
 package kr.or.ddit.todo.service;
 
+import java.util.List;
+
+import kr.or.ddit.todo.model.ToDoVo;
+
 /**
  * kr.or.ddit.todo.service
  * null.java
@@ -10,4 +14,14 @@ package kr.or.ddit.todo.service;
  * @Version :
  */
 public interface ToDoServiceInf {
+	
+	/**
+	* Method : todoAllSchedule
+	* 작성자 : jerry
+	* 변경이력 : 2018-11-30 09:59
+	* @return
+	* Method 설명 : 할일 전체 일정
+	*/
+	List<ToDoVo> todoAllSchedule();
+	
 }

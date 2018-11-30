@@ -3,6 +3,18 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.or.ddit.zcardaa.mapper.ToDoMapper">
-
+<mapper namespace="kr.or.ddit.todo.mapper.ToDoMapper">
+	
+	<!-- 할일 전체 일정 -->
+	<select id="todoAllSchedule" resultType="todoVo">
+	<!-- 일정에 필요한 컬럼 정리: 할일내용, 할일시작일시, 할일마감일시, 할일예상마감일시, 할일일정색깔 -->
+		SELECT	t.todo_content,
+				t.todo_sdate,
+				t.todo_edate,
+				t.todo_eedate,
+				t.todo_color
+		FROM	todo t
+		<!-- WHERE	todo_pmember = #{session_mail} -->
+	</select>
+	
 </mapper>

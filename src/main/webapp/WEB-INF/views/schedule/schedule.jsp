@@ -59,6 +59,23 @@
 				result.push(json);
 			</c:forEach>
 			
+			<%-- 할일 일정 --%>
+			<c:forEach items="${allScheduleList.todoScheduleList}" var="schedule">
+				var json = new Object();
+				json.title = '${schedule.todo_content}';
+				json.start = "${schedule.format_todo_sdate}";
+				<c:choose>
+					<c:when test="${schedule.todo_eedate != null}">
+						json.end = "${schedule.format_todo_eedate}";
+					</c:when>
+					<c:otherwise>
+						json.end = "${schedule.format_todo_edate}";
+					</c:otherwise>
+				</c:choose>
+				json.color = "${schedule.todo_color}";
+				result.push(json);
+			</c:forEach>
+			
 			// JSON형식이 담긴 배열을 console에 log남기는 함수
 			// console.log(JSON.stringify(result));
 			
@@ -103,11 +120,27 @@
 		});
 	});
 </script>
-
+<%-- 
+	규승이형에게
+	규승이형 안녕하세요. 저 지태에요.
+	이 스타일이 굉장히 마음에 안드실꺼에요.
+	형이 하시고 싶은대로 꾸미시면 돼요 :)
+	화이팅이십니다요!
+	- current의 재간둥이 지태가 -
+ --%>
+<style type="text/css">
+	.container{
+		margin: 0 auto;
+		width: 60em;
+	}
+</style>
 </head>
 <!-- body영역 -->
 <body>
 	<div class="container">
+		<label><input type="checkbox" name="projectSchedule" id="projectSchedule" value=""/>project</label>
+		<label><input type="checkbox" checked="checked" name="workSchedule" id="workSchedule" value=""/>work</label>
+		<label><input type="checkbox" checked="checked" name="todoSchedule" id="todoSchedule" value=""/>todo</label>
 		<div id='calendar'></div>
 	</div>
 </body>
