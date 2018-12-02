@@ -40,9 +40,7 @@ public class ProjectController {
 		if(projectVo.getProject_title() != null){
 			projectService.createProject(projectVo);
 		}
-
 		String url = "redirect:/projectList";
-
 		return "redirect:/projectList";
 	}
 

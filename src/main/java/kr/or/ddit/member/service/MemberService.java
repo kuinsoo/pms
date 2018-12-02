@@ -48,5 +48,5 @@ public class MemberService implements MemberServiceInf {
 	@Override
 	public int insertUser(MemberVo memberVo) {
 		return memberMapper.insertUser(memberVo);
-	}	
+	}
 }

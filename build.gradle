@@ -40,13 +40,13 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/javax.mail/mail
 	compile group: 'javax.mail', name: 'mail', version: '1.4.7'
-	
-	
+
+
 /* JSP Servlet */
     compile('javax.servlet:jstl')
     compile('org.apache.tomcat.embed:tomcat-embed-jasper')
 
-/* oracle */
-	// https://mvnrepository.com/artifact/com.oracle/ojdbc6
-    compile ('com.oracle:ojdbc6:12.1.0.2')
+	/* oracle */
+		// https://mvnrepository.com/artifact/com.oracle/ojdbc6
+		compile ('com.oracle:ojdbc6:12.1.0.2')
 }
