@@ -70,7 +70,7 @@ public class LoginController {
 		}else {
 			session.setAttribute("memberVo",memberVo);
 		}
-		return "main";
+		return "main/main";
 	}
 	
 	/**
