@@ -285,7 +285,7 @@
 							<div class="projectCardTitle">
 								<i class="icon-star icons"></i>
 								샘플 프로젝트 명
-								<i class="icon-setting icons"></i>
+								<i class="icon-settings icons"></i>
 							</div>
 							<div class="projectCardUserName">
 								<img src="http://placehold.it/30x30">
