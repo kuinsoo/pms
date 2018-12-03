@@ -39,9 +39,9 @@ public class ProjectController {
 
 	@RequestMapping(value = "/createProject",method = RequestMethod.POST)
 	public String createProject(ModelAndView modelAndView, ProjectVo projectVo) {
-//		if(projectVo.getProject_title() != null){
-//			projectService.createProject(projectVo);
-//		}
+		if(projectVo.getProject_title() != null){
+			projectService.createProject(projectVo);
+		}
 
 		return "redirect:/projectList";
 	}
