@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,7 +60,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 	filter: alpha(opacity=50);
 }
 .dim-layers .pop-layers{display:block;width:500px;}
-
+.error{color: red; }
 .signBtn{width:100%;}
 #naver_id_login > a > img{display:block;margin:0 auto;}
 </style>
@@ -74,11 +75,19 @@ div.well input[type="submit"]{width:100%;height:50px}
 				<br>
 				<div class="form-group label-floating">
 					<label class="control-label">이메일</label>
-					<input type="email"	name="member_mail" id="email" value="" class="form-control" autofocus="autofocus" required />
+					<c:choose>
+						<c:when test="${member_mail!=email}">
+							<input type="email"	name="member_mail" id="email" value="${member_mail}" class="form-control" autofocus="autofocus" required />
+						</c:when>
+						<c:when test="${member_mail==email}">
+							<input type="email"	name="member_mail" id="email" value="" class="form-control" autofocus="autofocus" required />
+						</c:when>
+					</c:choose>
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호</label>
-					<input type="password" name="member_pass" class="form-control" required />
+					<input type="password" name="member_pass" id ="pass" class="form-control" required />
+					<span class="error"> 일치하는 회원이 없습니다..다시 로그인 해주세요.</span>
 				</div>
 				<br> <input type="submit" value="로그인" class="btn btn-primary btn-raised" /><br>
 				<a href="/signView" class="btn btn-primary btn-raised signBtn">회원가입</a>				
@@ -95,7 +104,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 				<a href="#layerEmail" class="findEmail">이메일 찾기</a>
 				<a href="#layerPassword" class="findPassword">비밀번호 찾기</a>
 			</div>
-			<form action="" method="post">
+			<form action="findEmail" method="post">
 			<div class="dim-layer">
 				<div class="dimBg"></div>
 				<div id="layerEmail" class="pop-layer">
@@ -141,14 +150,30 @@ div.well input[type="submit"]{width:100%;height:50px}
 					</div>
 				</div>
 			</div>
-		</form>	
+		</form>
 		</div>			
 	</div>
 
 </div>
 <script src="../js/material.min.js"></script>
+
 <script>
 	$.material.init()
+</script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".error").hide();
+	//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
+	//blur()이벤트 사용
+	$("#pass").blur(function() {
+		if($("#pass").val() != $(${member_pass}).val() && $("#email").val()!=$(${member_mail}).val()){
+			$("#pass").next().show();
+			$("email").val();
+		} else{
+			$("#pass").next().hide();
+		}
+	});
+});
 </script>
 <script type="text/javascript">
 // 이메일 찾기 DIM POPUP
