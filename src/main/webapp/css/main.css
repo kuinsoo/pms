@@ -211,8 +211,10 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 .currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle {
     background-color:#746fcc;width:300px;height:180px;line-height:180px;color:#fff;font-size:22px;position:relative;cursor:pointer;
 }
-.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > i{position:absolute;top:20px;left:20px;cursor:pointer;}
-.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > i:hover{color:yellow;font-weight:bold;}
+.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > i.icon-star{position:absolute;top:20px;left:20px;cursor:pointer;}
+.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > i.icon-star:hover{color:yellow;font-weight:bold;}
+.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > i.icon-settings{position:absolute;top:20px;right:20px;cursor:pointer;}
+.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > i.icon-settings:hover{color:white;font-weight:bold;}
 .currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardUserName{font-size:22px;line-height:30px;}
 .currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardUserName > img {
     margin-top:25px;border-radius:100%;width:30px;height:30px;
@@ -237,10 +239,10 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 .currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li > .projectCard > .projectCardTitle {
     background-color:#746fcc;width:300px;height:180px;line-height:180px;color:#fff;font-size:22px;position:relative;cursor:pointer;
 }
-.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > i.icon-star{position:absolute;top:20px;left:20px;cursor:pointer;}
-.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > i.icon-star:hover{color:yellow;font-weight:bold;}
-.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > i.icon-settings{position:absolute;top:20px;right:20px;cursor:pointer;}
-.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > i.icon-settings:hover{color:white;font-weight:bold;}
+.currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li > .projectCard > .projectCardTitle > i.icon-star{position:absolute;top:20px;left:20px;cursor:pointer;}
+.currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li > .projectCard > .projectCardTitle > i.icon-star:hover{color:yellow;font-weight:bold;}
+.currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li > .projectCard > .projectCardTitle > i.icon-settings{position:absolute;top:20px;right:20px;cursor:pointer;}
+.currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li > .projectCard > .projectCardTitle > i.icon-settings:hover{color:white;font-weight:bold;}
 .currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li > .projectCard > .projectCardUserName{font-size:22px;line-height:30px;}
 .currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li > .projectCard > .projectCardUserName > img {
     margin-top:25px;border-radius:100%;width:30px;height:30px;
