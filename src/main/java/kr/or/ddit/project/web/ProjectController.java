@@ -30,23 +30,24 @@ public class ProjectController {
 	@Autowired
 	private ProjectServiceInf projectService;
 
-	@RequestMapping(value = "/projectCreate",method = RequestMethod.GET)
+	@RequestMapping(value = "/createProject",method = RequestMethod.GET)
 	public String projectCreateView() {
-		return "project/projectCreate";
+		return "project/createProject";
 	}
 
-	@RequestMapping(value = "/projectCreate",method = RequestMethod.POST)
-	public String projectCreate(ModelAndView modelAndView, ProjectVo projectVo) {
-		if(projectVo.getProject_title() != null){
-			projectService.createProject(projectVo);
-		}
-		String url = "redirect:/projectList";
-		return "redirect:/projectList";
+	@RequestMapping(value = "/createProject",method = RequestMethod.POST)
+	public ModelAndView projectCreate(ModelAndView modelAndView, ProjectVo projectVo) {
+//		if(projectVo.getProject_title() != null){
+//			projectService.createProject(projectVo);
+//		}
+		modelAndView.setViewName("redirect:/projectList");
+		modelAndView.addObject("projectList",projectService.selectAllProject());
+		return modelAndView;
 	}
 
 	@RequestMapping("/projectList")
 	public String projectList(Model model) {
-		model.addAttribute("projectList",projectService.selectAllProject());
+//		model.addAttribute("projectList",projectService.selectAllProject());
 
 		return "project/projectList";
 	}

@@ -7,25 +7,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <title>MAIN - CURRENT</title>
 <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
-<!-- NANUM SQUARE FONT -->
+<%-- NANUM SQUARE FONT --%>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
 <link rel="stylesheet" href="../css/swiper.min.css">
 <link rel="stylesheet" href="../css/jquery-ui.css">
 <style type="text/css">
-/* COMMON */
+<%-- COMMON --%>
 *{margin:0px;padding:0px;font-family:'NanumSquare', sans-serif;box-sizing:border-box;}
 a{text-decoration:none;color:#000;}
 html, body{height:100%;overflow-x:hidden;}
 ul{list-style-type:none;}
 #wrap{width:100%;height:100%;}
 
-/* HEADER */
+<%-- HEADER --%>
 header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255,0.8);border-bottom:1px solid #ccc;position:fixed;z-index:3;}
 .headerContainer{width:1400px;height:60px;margin:0 auto;}
 .headerContainer > .currentMenu{width:45px;height:45px;float:left;margin-top:7px;}
 
-/* LEFT MENU BUTTON */
+<%-- LEFT MENU BUTTON --%>
 .menu-trigger, .menu-trigger span{display:inline-block;transition:all .4s;box-sizing:border-box;}
 .menu-trigger{display:block;position:relative;top:10px;left:5px;width:50px;height:30px;float:left;}
 .menu-trigger span{position:absolute;left:0;width:70%;height:4px;background-color:#000;border-radius:4px;}
@@ -63,7 +63,7 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 .headerContainer > .headerRightContent > a > .teamInvite > i{font-size:18px;}
 .headerContainer > .headerRightContent > a > .teamInvite > p{padding-left:10px;font-size:18px;}
 
-/* DIM LAYER POPUP */
+<%-- DIM LAYER POPUP --%>
 .pop-layers .pop-containers{background-color:#fff;border-radius:10px;}
 .pop-layers{display:none;position:absolute;top:50%;left:50%;width:600px;height:auto;z-index:10;}
 .dim-layers{display:none;position:fixed; _position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;}
@@ -142,7 +142,7 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 .dialogs > ul > li{margin:10px 0px 10px 0px;}
 .dialogs > ul > li > a{font-size:20px;padding-left:10px;}
 
-/* LEFT MENU */
+<%-- LEFT MENU --%>
 .leftMenuUserInterface {
 	width:100%;text-align:center;padding:40px 0px 40px 0px;position:relative;
 	background-image:url("images/leftMenuUserInterfaceImg.gif");background-repeat:no-repeat;background-position:50% 50%;background-size:cover;
@@ -174,11 +174,11 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 .cbp-spmenu-vertical > .currentMainLeftMenu > ul > li > i{vertical-align:middle;float:left;}
 .cbp-spmenu-vertical > .currentMainLeftMenu > ul > li > p{float:left;}
 
-/* SECTION */
+<%-- SECTION --%>
 .currentMain{width:100%;min-height:100%;height:auto;background-color:#f2f4f7;padding-top:60px;float:left;}
 .currentMain > .currentMainContainer{width:1400px;margin:0 auto;}
 
-/* MAIN SLIDE */
+<%-- MAIN SLIDE --%>
 .currentMain > .currentMainContainer > .currentMainSlide {margin-top:20px;width:1400px;height:500px;background-color:#fff;border:1px solid #dee3eb;}
 .swiper-container{width:100%;height:100%;}
 .swiper-slide {
@@ -198,7 +198,7 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 	font-size:25px;background-color:#fff;border:1px solid #dee3eb;width:300px;height:300px;text-align:center;
 }
 
-/* DIM LAYER POPUP */
+<%-- DIM LAYER POPUP --%>
 .pop-layer .pop-container{background-color:#fff;border-radius:10px;}
 .pop-layer{display:none;position:absolute;top:50%;left:50%;width:600px;height:auto;z-index:10;}
 .dim-layer{display:none;position:fixed; _position:absolute;top:0;left:0;width:100%;height:100%;z-index:100;}
@@ -258,7 +258,7 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 }
 
 
-/* FOOTER */
+<%-- FOOTER --%>
 .currentFooter{width:100%;height:100px;background-color:#fff;border-top:1px solid #dee3eb;clear:left;}
 .footerContent{width:1400px;margin:0 auto;}
 .footerContent > p{font-size:18px;text-align:left;padding:20px;line-height:30px;}
@@ -325,11 +325,11 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 </nav>
 
 <div id="wrap">
-	<!-- CURRENT HEADER -->
+	<%-- CURRENT HEADER --%>
 	<header>
 		<div class="headerContainer">
 		
-			<!-- LEFT MENU -->
+			<%-- LEFT MENU --%>
 			<div class="currentMenu">
 				<a class="menu-trigger" href="#" id="showLeftPush" onclick="return false;">
 					<span></span>
@@ -338,12 +338,12 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 				</a>
 			</div>
 		
-			<!-- CURRENT LOGO -->
+			<%-- CURRENT LOGO --%>
 			<div class="currentLogo">
 				<img src="http://placehold.it/200x45">
 			</div>
 			
-			<!-- CURRENT ALL SEARCH -->
+			<%-- CURRENT ALL SEARCH --%>
 			<div class="currentAllSearch">
 				<select>
 					<option>ALL</option>
@@ -355,7 +355,7 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 			</div>
 			
 			<div class="headerRightContent">
-				<!-- 팀원 초대 -->
+				<%-- 팀원 초대 --%>
 				<a href="#projectCreatePopUps" class="projectCreatePopUps">
 					<div class="teamInvite">
 						<i class="icon-plus icons"></i>
@@ -373,32 +373,34 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 										<i class="icon-close icons"></i>
 									</a>
 								</div>
-								<div class="pop-conts-sections">
-									<div class="pop-conts-section-titles">
-										<span>이메일을 통해 팀원을 초대할 수 있습니다</span>
-										<br>
-										<input type="email" placeholder="이메일 입력" class="projectTitleInputs" />
-										<br>
-										<input type="email" placeholder="example@gmail.com" class="projectTitleInputs" />
-										<br>
-										<input type="email" placeholder="example@gmail.com" class="projectTitleInputs" />
-										<br>
-										<input type="email" placeholder="example@gmail.com" class="projectTitleInputs" />
-										<br>
-										<input type="email" placeholder="example@gmail.com" class="projectTitleInputs" />
-										<br>
-										<div class="layerPopUpBtnsss">
-											<input type="submit" value="초대하기" class="createProjectSubmits">
-											<a href="#" class="btn-layerCloses layerPopupCloses">취소</a>
+								<form action="#" method="post">
+									<div class="pop-conts-sections">
+										<div class="pop-conts-section-titles">
+											<span>이메일을 통해 팀원을 초대할 수 있습니다</span>
+											<br>
+											<input type="email" name="" placeholder="이메일 입력" class="projectTitleInputs" />
+											<br>
+											<input type="email" name="" placeholder="example@gmail.com" class="projectTitleInputs" />
+											<br>
+											<input type="email" name="" placeholder="example@gmail.com" class="projectTitleInputs" />
+											<br>
+											<input type="email" name="" placeholder="example@gmail.com" class="projectTitleInputs" />
+											<br>
+											<input type="email" name="" placeholder="example@gmail.com" class="projectTitleInputs" />
+											<br>
+											<div class="layerPopUpBtnsss">
+												<input type="submit" value="초대하기" class="createProjectSubmits">
+												<a href="#" class="btn-layerCloses layerPopupCloses">취소</a>
+											</div>
 										</div>
 									</div>
-								</div>
+								</form>
 							</div>
 						</div>
 					</div>
 				</div>
 				
-				<!-- 알림 기능 -->
+				<%-- 알림 기능 --%>
 				<div class="alarm dialog__triggers">
 					<i class="icon-bell icons"></i>
 					<div class="dialogs">
@@ -435,7 +437,7 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 					</div>
 				</div>
 				
-				<!-- CURRENT USER -->
+				<%-- CURRENT USER --%>
 				<div class="currentUser dialog__trigger">
 					<img src="http://placehold.it/40x40" />
 					<i class="icon-arrow-down icons"></i>
@@ -461,11 +463,11 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 		</div>
 	</header>
 	
-	<!-- CURRENT SECTION(MAIN) -->
+	<%-- CURRENT SECTION(MAIN) --%>
 	<section class="currentMain">
 		<div class="currentMainContainer">
 			<div class="currentMainSlide">
-				<!-- Swiper -->
+				<%-- Swiper --%>
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide">
@@ -479,10 +481,10 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 						</div>
 					</div>
 					
-					<!-- Add Pagination -->
+					<%-- Add Pagination --%>
 					<div class="swiper-pagination"></div>
 					
-					<!-- Add Arrows -->
+					<%-- Add Arrows --%>
 					<div class="swiper-button-next"></div>
 					<div class="swiper-button-prev"></div>
 				</div>
@@ -499,89 +501,40 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 								</div>
 							</div>
 						</a>
-						<div class="dim-layer">
-							<div class="dimBg"></div>
-							<div id="projectCreatePopUp" class="pop-layer">
-								<div class="pop-container">
-									<div class="pop-conts">
-										<div class="pop-conts-header">
-											<p>프로젝트 만들기</p>
-											<a href="#" class="btn-layerClose">
-												<i class="icon-close icons"></i>
-											</a>
-										</div>
-										<div class="pop-conts-section">
-											<div class="pop-conts-section-title">
-												<span>프로젝트명</span>
-												<br>
-												<input type="text" placeholder="프로젝트명 입력(최대 50자)" class="projectTitleInput" />
-												<br><br>
-												<span>프로젝트 개요</span>
-												<br>
-												<textarea class="projectContentInput" placeholder="프로젝트 개요 입력"></textarea>
-												<div class="layerPopUpBtnss">
-													<input type="submit" value="만들기" class="createProjectSubmit">
-													<a href="#" class="btn-layerClose layerPopupClose">취소</a>
+						<form action="#" method="post">
+							<div class="dim-layer">
+								<div class="dimBg"></div>
+								<div id="projectCreatePopUp" class="pop-layer">
+									<div class="pop-container">
+										<div class="pop-conts">
+											<div class="pop-conts-header">
+												<p>프로젝트 만들기</p>
+												<a href="#" class="btn-layerClose">
+													<i class="icon-close icons"></i>
+												</a>
+											</div>
+											<div class="pop-conts-section">
+												<div class="pop-conts-section-title">
+													<span>프로젝트명</span>
+													<br>
+													<input name="" type="text" placeholder="프로젝트명 입력(최대 50자)" class="projectTitleInput" />
+													<br><br>
+													<span>프로젝트 개요</span>
+													<br>
+													<textarea name="" class="projectContentInput" placeholder="프로젝트 개요 입력"></textarea>
+													<div class="layerPopUpBtnss">
+														<input type="submit" value="만들기" class="createProjectSubmit">
+														<a href="#" class="btn-layerClose layerPopupClose">취소</a>
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
+						</form>
 					</li>
-					<li>
-						<div class="projectCard">
-							<div class="projectCardTitle">
-								<i class="icon-star icons"></i>
-								샘플 프로젝트 명
-							</div>
-							<div class="projectCardUserName">
-								<img src="http://placehold.it/30x30">
-								<br>
-								user님 참여중
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="projectCard">
-							<div class="projectCardTitle">
-								<i class="icon-star icons"></i>
-								샘플 프로젝트 명
-							</div>
-							<div class="projectCardUserName">
-								<img src="http://placehold.it/30x30">
-								<br>
-								user님 참여중
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="projectCard">
-							<div class="projectCardTitle">
-								<i class="icon-star icons"></i>
-								샘플 프로젝트 명
-							</div>
-							<div class="projectCardUserName">
-								<img src="http://placehold.it/30x30">
-								<br>
-								user님 참여중
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="projectCard">
-							<div class="projectCardTitle">
-								<i class="icon-star icons"></i>
-								샘플 프로젝트 명
-							</div>
-							<div class="projectCardUserName">
-								<img src="http://placehold.it/30x30">
-								<br>
-								user님 참여중
-							</div>
-						</div>
-					</li>
+					<%-- 진행중인 프로젝트 리스트 --%>
 					<li>
 						<div class="projectCard">
 							<div class="projectCardTitle">
@@ -599,58 +552,7 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 			</div>
 			<div class="currentMainProjectCreates">
 				<ul>
-					<li>
-						<div class="projectCard">
-							<div class="projectCardTitle">
-								<i class="icon-star icons"></i>
-								샘플 프로젝트 명
-							</div>
-							<div class="projectCardUserName">
-								<img src="http://placehold.it/30x30">
-								<br>
-								user님 참여중
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="projectCard">
-							<div class="projectCardTitle">
-								<i class="icon-star icons"></i>
-								샘플 프로젝트 명
-							</div>
-							<div class="projectCardUserName">
-								<img src="http://placehold.it/30x30">
-								<br>
-								user님 참여중
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="projectCard">
-							<div class="projectCardTitle">
-								<i class="icon-star icons"></i>
-								샘플 프로젝트 명
-							</div>
-							<div class="projectCardUserName">
-								<img src="http://placehold.it/30x30">
-								<br>
-								user님 참여중
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="projectCard">
-							<div class="projectCardTitle">
-								<i class="icon-star icons"></i>
-								샘플 프로젝트 명
-							</div>
-							<div class="projectCardUserName">
-								<img src="http://placehold.it/30x30">
-								<br>
-								user님 참여중
-							</div>
-						</div>
-					</li>
+					<%-- 초대받은 프로젝트 리스트 --%>
 					<li>
 						<div class="projectCard">
 							<div class="projectCardTitle">
@@ -695,20 +597,20 @@ var swiper = new Swiper('.swiper-container', {
 		nextEl: '.swiper-button-next',
 		prevEl: '.swiper-button-prev',
 	},
-/* 	autoplay: {
+<%-- 	autoplay: {
 		delay: 1500,
 		disableOnInteraction: false,
-	}, */
+	}, --%>
 });
 
-// DIM POPUP
+<%-- DIM POPUP  --%>
 $('.projectCreatePopUp').click(function(){
     var $href = $(this).attr('href');
     layer_popup($href);
 });
 function layer_popup(el){
-    var $el = $(el);        //레이어의 id를 $el 변수에 저장
-    var isDim = $el.prev().hasClass('dimBg');   //dimmed 레이어를 감지하기 위한 boolean 변수
+    var $el = $(el);        <%--레이어의 id를 $el 변수에 저장  --%>
+    var isDim = $el.prev().hasClass('dimBg');   <%--dimmed 레이어를 감지하기 위한 boolean 변수  --%>
 
     isDim ? $('.dim-layer').fadeIn() : $el.fadeIn();
 
@@ -717,7 +619,7 @@ function layer_popup(el){
         docWidth = $(document).width(),
         docHeight = $(document).height();
 
-    // 화면의 중앙에 레이어를 띄운다.
+    <%-- 화면의 중앙에 레이어를 띄운다.  --%>
     if ($elHeight < docHeight || $elWidth < docWidth) {
         $el.css({
             marginTop: -$elHeight /2,
@@ -728,7 +630,7 @@ function layer_popup(el){
     }
 
     $el.find('a.btn-layerClose').click(function(){
-        isDim ? $('.dim-layer').fadeOut() : $el.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+        isDim ? $('.dim-layer').fadeOut() : $el.fadeOut(); <%-- 닫기 버튼을 클릭하면 레이어가 닫힌다. --%>
         return false;
     });
 
@@ -738,14 +640,14 @@ function layer_popup(el){
     });
 }
 
-// DIM POPUP - 팀원초대
+<%-- DIM POPUP - 팀원초대  --%>
 $('.projectCreatePopUps').click(function(){
     var $hrefs = $(this).attr('href');
     layer_popups($hrefs);
 });
 function layer_popups(els){
-    var $els = $(els);        //레이어의 id를 $el 변수에 저장
-    var isDims = $els.prev().hasClass('dimBgs');   //dimmed 레이어를 감지하기 위한 boolean 변수
+    var $els = $(els);        <%--레이어의 id를 $el 변수에 저장  --%>
+    var isDims = $els.prev().hasClass('dimBgs');   <%--dimmed 레이어를 감지하기 위한 boolean 변수  --%>
 
     isDims ? $('.dim-layers').fadeIn() : $els.fadeIn();
 
@@ -754,7 +656,7 @@ function layer_popups(els){
         docWidths = $(document).width(),
         docHeights = $(document).height();
 
-    // 화면의 중앙에 레이어를 띄운다.
+    <%-- 화면의 중앙에 레이어를 띄운다.  --%>
     if ($elHeights < docHeights || $elWidths < docWidths) {
         $els.css({
             marginTop: -$elHeights /2,
@@ -765,7 +667,7 @@ function layer_popups(els){
     }
 
     $els.find('a.btn-layerCloses').click(function(){
-        isDims ? $('.dim-layers').fadeOut() : $els.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+        isDims ? $('.dim-layers').fadeOut() : $els.fadeOut(); <%-- 닫기 버튼을 클릭하면 레이어가 닫힌다.  --%>
         return false;
     });
 
@@ -790,7 +692,7 @@ function dialog(){
 		 dialogTrigger = $('.dialog__trigger'),
 		 dialogAction = $('.dialog__action');
 		 
-		 // Open the dialog
+		 <%-- Open the dialog  --%>
 		 dialogTrigger.on('click', function(e){
 			 dialogBox.toggleClass('dialog--active');
 			 e.stopPropagation()
@@ -804,7 +706,7 @@ function dialog(){
 			 dialogBox.removeClass('dialog--active');
 		 });
 
-		 // Close the dialog - press escape key // key#27
+		 <%-- Close the dialog - press escape key  key#27  --%>
 		 $(document).keyup(function(e){
 			 if(e.keyCode === 27){
 				 dialogBox.removeClass('dialog--active');
@@ -812,7 +714,7 @@ function dialog(){
 		 });
 };
 
-// Run function when the document has loaded
+<%-- Run function when the document has loaded  --%>
 $(function(){
 	dialog();
 });
@@ -822,7 +724,7 @@ function dialogs(){
 		 dialogTriggers = $('.dialog__triggers'),
 		 dialogActions = $('.dialog__actions');
 		 
-		 // Open the dialog
+		 <%-- Open the dialog  --%>
 		 dialogTriggers.on('click', function(e){
 			 dialogBoxs.toggleClass('dialog--actives');
 			 e.stopPropagation()
@@ -836,7 +738,7 @@ function dialogs(){
 			 dialogBoxs.removeClass('dialog--actives');
 		 });
 
-		 // Close the dialog - press escape key // key#27
+		 <%-- Close the dialog - press escape key  key#27  --%>
 		 $(document).keyup(function(e){
 			 if(e.keyCode === 27){
 				 dialogBoxs.removeClass('dialog--actives');
@@ -844,13 +746,15 @@ function dialogs(){
 		 });
 };
 
-// Run function when the document has loaded
+<%-- Run function when the document has loaded --%>
 $(function(){
 	dialogs();
 });
 
-// 알람 탭 메뉴
+<%-- 알람 탭 메뉴 --%>
 $("#tabs").tabs();
+
+
 </script>
 </body>
 </html>
