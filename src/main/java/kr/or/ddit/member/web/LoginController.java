@@ -62,6 +62,10 @@ public class LoginController {
 		
 		if(memberVo==null || !member_mail.equals(memberVo.getMember_mail())||
 							 !member_pass.equals(memberVo.getMember_pass())) {
+			
+			model.addAttribute("member_mail",member_mail);
+			model.addAttribute("member_pass",member_pass);
+			
 			return "login/login";
 		}else {
 			session.setAttribute("memberVo",memberVo);
@@ -76,8 +80,8 @@ public class LoginController {
 	 * @return
 	 * Method 설명 : 아이디 찾기 
 	 */
-	@RequestMapping(value="/idFind",method=RequestMethod.POST)
-	public String idFind() {
+	@RequestMapping(value="/findEmail",method=RequestMethod.POST)
+	public String findEmail() {
 		
 		return "/login/login";
 	}
