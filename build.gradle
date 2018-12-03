@@ -49,4 +49,9 @@ dependencies {
 	/* oracle */
 		// https://mvnrepository.com/artifact/com.oracle/ojdbc6
 		compile ('com.oracle:ojdbc6:12.1.0.2')
+
+	/* mail */
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.1.1.RELEASE'
+
 }
