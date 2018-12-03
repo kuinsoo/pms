@@ -237,6 +237,7 @@
 				</div>
 			</div>
 			<div class="currentMainProjectCreate">
+				<h1>진행중인 프로젝트</h1>
 				<ul>
 					<li>
 						<a href="#projectCreatePopUp" class="projectCreatePopUp">
@@ -284,6 +285,7 @@
 							<div class="projectCardTitle">
 								<i class="icon-star icons"></i>
 								샘플 프로젝트 명
+								<i class="icon-setting icons"></i>
 							</div>
 							<div class="projectCardUserName">
 								<img src="http://placehold.it/30x30">
@@ -295,6 +297,7 @@
 				</ul>
 			</div>
 			<div class="currentMainProjectCreates">
+				<h1>초대받은 프로젝트</h1>
 				<ul>
 					<li>
 						<div class="projectCard">
