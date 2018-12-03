@@ -17,5 +17,5 @@ public interface EmailSserviceInf {
 	 * @param subject the 제목
 	 * @param text    the 내용
 	 */
-	void sendMail(String to, String subject, String text);
+	void sendMail(String to, String subject, String content);
 }

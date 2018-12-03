@@ -24,9 +24,9 @@ public class EmailController {
 	public void sendMail() {
 		String to = "sally1334@naver.com";
 		String subject = " 안녕하세요 current PMS 입니다. ";
-		String text = "임시 password";
+		String content = "임시 password";
 
-		emailSservice.sendMail(to,subject,text);
+		emailSservice.sendMail(to,subject,content);
 
 	}
 

@@ -23,16 +23,16 @@ public class EmailService implements EmailSserviceInf{
 
 	/**
 	 * Send mail.
-	 * 이메일을 전송해준다.
+	 * 이메일을 전송해준다.s
 	 * @param to      the 상대방 Email
 	 * @param subject the 제목
-	 * @param text    the 내용
+	 * @param content    the 내용
 	 */
-	public void sendMail (String to, String subject, String text) {
+	public void sendMail (String to, String subject, String content) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(to);
 		message.setSubject(subject);
-		message.setText(text);
+		message.setText(content);
 		emailSender.send(message);
 	}
 }
