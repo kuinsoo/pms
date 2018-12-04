@@ -39,9 +39,9 @@
 				<i class="icon-check icons"></i>
 				<p>전체 업무</p>
 			</li>
-			<li>
-				<i class="icon-calendar icons"></i>
-				<p>전체 일정</p>
+			<li><a href="/allSchedule">
+					<i class="icon-calendar icons"></i>
+					전체 일정</a>
 			</li>
 			<li>
 				<i class="icon-bubbles icons"></i>
