@@ -2,6 +2,8 @@ package kr.or.ddit.member.mapper;
 
 import kr.or.ddit.member.model.MemberVo;
 
+import java.util.List;
+
 /**
  * kr.or.ddit.member.service
  * null.java
@@ -64,4 +66,13 @@ public interface MemberMapper {
 	 * Method 설명 : 비밀번호 찾기 - 임시번호 업데이트 
 	 */
 	int updatePass(MemberVo memberVo);
+
+	/**
+	 * Select main view list.
+	 * 작성자 : Mr.KKu
+	 * 메인 페이지 프로젝트 리스트
+	 * @param member_mail the member mail
+	 * @return the list
+	 */
+	List<MemberVo> selectMainView(String member_mail);
 }

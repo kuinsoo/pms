@@ -3,7 +3,31 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.or.ddit.project.mapper.ProjectMapper">
+<mapper namespace="kr.or.ddit.member.mapper.MemberMapper">
+    <resultMap id="pmemberResultMap" type="memberVo">
+        <id property="member_name" column="member_name" />
+        <id property="member_profile" column="member_profile" />
+        <id property="pmemberCount" column="pmemberCount" />
+        <collection property="projectList" ofType="projectVo">
+            <id property="project_title" column="project_title" />
+            <id property="project_overview" column="project_overview" />
+            <id property="project_bookmark" column="project_bookmark" />
+        </collection>
+    </resultMap>
 
+    <select id="selectMainView" parameterType="String" resultMap="pmemberResultMap">
+        select PROJECT_TITLE, PROJECT_OVERVIEW, PROJECT_BOOKMARK,MEMBER_NAME,MEMBER_PROFILE, (select count(*) from PROJECT_MEMBER, PROJECT, MEMBER
+                                                                                      where PROJECT_ID = PMEMBER_PROJECT
+                                                                                        and  MEMBER_MAIL = PMEMBER_MEMBER
+                                                                                        and project_id = pid) as pmemberCount
+        from MEMBER, PROJECT, PROJECT_MEMBER, (select project_id as pid
+                                               from MEMBER, PROJECT, PROJECT_MEMBER
+                                               where PMEMBER_MEMBER = MEMBER_MAIL
+                                                 and PMEMBER_PROJECT = PROJECT_ID
+                                                 and MEMBER_MAIL = #{member_mail})
+        where PMEMBER_MEMBER = MEMBER_MAIL
+          and PMEMBER_PROJECT = PROJECT_ID
+          and MEMBER_MAIL = #{member_mail}
+    </select>
 
 </mapper>

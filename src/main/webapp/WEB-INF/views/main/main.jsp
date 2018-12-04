@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -264,7 +265,7 @@
 											<div class="pop-conts-section-title">
 												<%-- 프로젝트 생성 시작 --%>
 												<form action="/createProject" method="post">
-													<span>프로젝트명${memberVo.member_mail}</span>
+													<span>프로젝트명</span>
 													<br>
 													<input type="text" placeholder="프로젝트명 입력(최대 50자)" class="projectTitleInput" />
 													<br><br>
@@ -284,20 +285,24 @@
 							</div>
 						</div>
 					</li>
+					<c:forEach items="${memberProjectList}" var="pmember" varStatus="i">
+						<c:forEach items="${pmember.projectList}" var="project">
 					<li>
 						<div class="projectCard">
 							<div class="projectCardTitle">
 								<i class="icon-star icons"></i>
-								샘플 프로젝트 명
+								${project.project_title}
 								<i class="icon-settings icons"></i>
 							</div>
 							<div class="projectCardUserName">
 								<img src="http://placehold.it/30x30">
 								<br>
-								user님 참여중
+								${pmember.member_name} 외 ${pmember.pmemberCount - 1}
 							</div>
 						</div>
 					</li>
+						</c:forEach>
+					</c:forEach>
 				</ul>
 			</div>
 			<div class="currentMainProjectCreates">

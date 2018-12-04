@@ -7,10 +7,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
@@ -74,7 +71,7 @@ public class LoginController {
 							 !member_pass.equals(memberVo.getMember_pass())){
 			model.addAttribute("member_mail",member_mail);
 			model.addAttribute("member_pass",member_pass);
-			return "/login/login";
+			return "login/login";
 		}else {
 			model.addAttribute("memberVo",memberVo);
 			return "redirect:/main";
@@ -82,8 +79,9 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value="/main",method=RequestMethod.GET)
-	public String main() {
-		return "/main/main";
+	public String main(Model model, @ModelAttribute("memberVo")MemberVo memberVo) {
+		model.addAttribute("memberProjectList",memberservice.selectMainView(memberVo.getMember_mail()));
+		return "main/main";
 	}
 	
 	/**

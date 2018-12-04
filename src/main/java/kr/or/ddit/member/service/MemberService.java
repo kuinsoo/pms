@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.ddit.member.mapper.MemberMapper;
 import kr.or.ddit.member.model.MemberVo;
 
+import java.util.List;
+
 /**
  * kr.or.ddit.member.service
  * null.java
@@ -16,7 +18,6 @@ import kr.or.ddit.member.model.MemberVo;
  * @Date : 2018-11-27 / 오후 3:08
  * @Version :
  */
-
 @Service
 @Transactional
 public class MemberService implements MemberServiceInf {
@@ -87,5 +88,17 @@ public class MemberService implements MemberServiceInf {
 	@Override
 	public int updatePass(MemberVo memberVo) {
 		return memberMapper.updatePass(memberVo);
+	}
+
+	/**
+	 * Select main view list.
+	 * 작성자 : Mr.KKu
+	 * 메인 페이지 프로젝트 리스트
+	 * @param member_mail the member mail
+	 * @return the list
+	 */
+	@Override
+	public List<MemberVo> selectMainView(String member_mail) {
+		return memberMapper.selectMainView(member_mail);
 	}
 }

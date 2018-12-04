@@ -1,7 +1,9 @@
 package kr.or.ddit.member.model;
 
+import kr.or.ddit.project.model.ProjectVo;
 import org.apache.ibatis.type.Alias;
-import org.springframework.web.bind.annotation.ModelAttribute;
+
+import java.util.List;
 
 @Alias("memberVo")
 public class MemberVo {
@@ -11,6 +13,8 @@ public class MemberVo {
 	private String member_tel;
 	private String member_profile;
 	private String member_withdrawal;
+	private List<ProjectVo> projectList;
+	private int pmemberCount;
 	
 	@Override
 	public String toString() {
@@ -68,5 +72,21 @@ public class MemberVo {
 	}
 
 	public MemberVo() {
+	}
+
+	public int getPmemberCount() {
+		return pmemberCount;
+	}
+
+	public void setPmemberCount(int pmemberCount) {
+		this.pmemberCount = pmemberCount;
+	}
+
+	public List<ProjectVo> getProjectList() {
+		return projectList;
+	}
+
+	public void setProjectList(List<ProjectVo> projectList) {
+		this.projectList = projectList;
 	}
 }
