@@ -262,17 +262,21 @@
 										</div>
 										<div class="pop-conts-section">
 											<div class="pop-conts-section-title">
-												<span>프로젝트명</span>
-												<br>
-												<input type="text" placeholder="프로젝트명 입력(최대 50자)" class="projectTitleInput" />
-												<br><br>
-												<span>프로젝트 개요</span>
-												<br>
-												<textarea class="projectContentInput" placeholder="프로젝트 개요 입력"></textarea>
-												<div class="layerPopUpBtnss">
-													<input type="submit" value="만들기" class="createProjectSubmit">
-													<a href="#" class="btn-layerClose layerPopupClose">취소</a>
-												</div>
+												<%-- 프로젝트 생성 시작 --%>
+												<form action="/createProject" method="post">
+													<span>프로젝트명${memberVo.member_mail}</span>
+													<br>
+													<input type="text" placeholder="프로젝트명 입력(최대 50자)" class="projectTitleInput" />
+													<br><br>
+													<span>프로젝트 개요</span>
+													<br>
+													<textarea class="projectContentInput" placeholder="프로젝트 개요 입력"></textarea>
+													<div class="layerPopUpBtnss">
+														<input type="submit" value="만들기" class="createProjectSubmit">
+														<a href="#" class="btn-layerClose layerPopupClose">취소</a>
+													</div>
+												</form>
+												<%-- 프로젝트 생성 끝 --%>
 											</div>
 										</div>
 									</div>

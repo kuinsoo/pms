@@ -1,6 +1,7 @@
 package kr.or.ddit.member.model;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 @Alias("memberVo")
 public class MemberVo {

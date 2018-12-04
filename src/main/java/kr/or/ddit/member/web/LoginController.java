@@ -1,9 +1,7 @@
 package kr.or.ddit.member.web;
-import java.io.UnsupportedEncodingException;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
+import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.member.service.MemberServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import kr.or.ddit.commons.mail.service.EmailSserviceInf;
-import kr.or.ddit.member.model.MemberVo;
-import kr.or.ddit.member.service.MemberServiceInf;
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 
 /**
  * LoginController.java
@@ -34,7 +31,7 @@ import kr.or.ddit.member.service.MemberServiceInf;
  *
  * </pre>
  */
-@SessionAttributes("memberVo")
+@SessionAttributes("memberVo")  // 	model.addAttribute("memberVo",memberVo); 할때 세션에 없으면 세션영역을 할당해준다.
 @Controller
 public class LoginController {
 	@Autowired
@@ -42,37 +39,37 @@ public class LoginController {
 	
 	@Autowired
 	public JavaMailSender emailSender;
-	
+
 	/**
 	 * Method : index
 	 * 작성자 : pc07
 	 * 변경이력 :
 	 * @return
-	 * Method 설명 : index 로그인 화면으로 
+	 * Method 설명 : index 로그인 화면으로
 	 */
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String index() {
 		return "/login/login";
 	}
-	
+
 	/**
 	 * Method : loginProcess
 	 * 작성자 : 나진실
 	 * 변경이력 :
 	 * @return
-	 * Method 설명 : 로그인 기능 
-	 * @throws UnsupportedEncodingException 
+	 * Method 설명 : 로그인 기능
+	 * @throws UnsupportedEncodingException
 	 */
 
 	@RequestMapping(value="/loginProcess",method=RequestMethod.POST)
-	public String loginProcess(HttpServletRequest request, Model model, MemberVo memberVo, HttpSession session ) throws UnsupportedEncodingException {
+	public String loginProcess(HttpServletRequest request, Model model, MemberVo memberVo) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
-		
-		String member_mail = request.getParameter("member_mail").toLowerCase(); 
-		String member_pass = request.getParameter("member_pass").toLowerCase(); // 대소문자를 안가린다.		
-		
+
+		String member_mail = request.getParameter("member_mail").toLowerCase();
+		String member_pass = request.getParameter("member_pass").toLowerCase(); // 대소문자를 안가린다.
+
 		memberVo = memberservice.selectUser(member_mail);
-		
+
 		if(memberVo==null || !member_mail.equals(memberVo.getMember_mail())||
 							 !member_pass.equals(memberVo.getMember_pass())){
 			model.addAttribute("member_mail",member_mail);

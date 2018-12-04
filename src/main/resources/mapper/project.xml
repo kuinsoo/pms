@@ -9,6 +9,10 @@
         select * from PROJECT order by PROJECT_ID desc
     </select>
 
+    <select id="selectProjectList" resultType="projectVo" parameterType="String">
+        select * from PROJECT where project_ order by PROJECT_ID desc
+    </select>
+
     <select id="selectBookMarkProject" resultType="projectVo">
         select * from PROJECT where PROJECT_BOOKMARK = #{project_bookmark}
     </select>
