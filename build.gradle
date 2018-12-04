@@ -47,9 +47,16 @@ dependencies {
     compile('org.apache.tomcat.embed:tomcat-embed-jasper')
 
 	/* oracle */
-		// https://mvnrepository.com/artifact/com.oracle/ojdbc6
-		compile ('com.oracle:ojdbc6:12.1.0.2')
+	// https://mvnrepository.com/artifact/com.oracle/ojdbc6
+	compile ('com.oracle:ojdbc6:12.1.0.2')
 
+	// 핸드폰 인증 : 나진실 
+	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
+	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
+	// 핸드폰 인증 : 나진실 
+	// https://mvnrepository.com/artifact/net.nurigo/javaSDK
+	compile group: 'net.nurigo', name: 'javaSDK', version: '2.2'
+	
 	/* mail */
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.1.1.RELEASE'

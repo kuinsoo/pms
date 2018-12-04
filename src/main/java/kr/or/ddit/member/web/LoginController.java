@@ -1,9 +1,13 @@
 package kr.or.ddit.member.web;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
+
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -79,7 +83,7 @@ public class LoginController {
 			model.addAttribute("member_pass",member_pass);
 			return "/login/login";
 		}else {
-			model.addAttribute("memberVo",memberVo);
+			session.setAttribute("memberVo",memberVo);
 			return "redirect:/main";
 		}
 	}
@@ -175,23 +179,51 @@ public class LoginController {
 	}	
 	
 	/**
-	 * Method : signProcess
+	 * Method : signProcess(POST)
 	 * 작성자 : 나진실
 	 * 변경이력 :
 	 * @return
 	 * Method 설명 : sign.jsp에서 회원가입 버튼을 눌렀을때  
 	 */
 	@RequestMapping(value="/signProcess",method=RequestMethod.POST)
-	public String signProcess(@RequestParam("member_mail") String member_mail ,MemberVo member) {
+	public String signProcess(@RequestParam("member_mail") String member_mail ,MemberVo member, HttpServletRequest request) {
 		
 		// 값이 다르면..
 		if(memberservice.selectUser(member_mail)==null) {
 			int insertUser = memberservice.insertUser(member);		
 			return"/login/login";
-		
 		// 값이 같으면 
 		}else {
 			return "/sign/sign";
 		}
+	}
+	/**
+	 * Method : signProcess(GET)
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : sign.jsp에서 휴대전화 인증 버튼을 눌렀을때 
+	 */
+	@RequestMapping(value="/signProcessAjax",method=RequestMethod.GET)
+	public String signProcessAjax(HttpServletRequest request) {
+		
+		String member_tel = request.getParameter("member_tel");
+		String telnum = request.getParameter("telnum");
+		System.out.println( "syso"+ member_tel);
+		System.out.println( "syso"+ telnum);
+		
+		String api_key = "NCSJQVBNAKBRXLTC";
+		String api_secret ="ZNJ2OS1W0F1A4N9FPRUKO8YXWT1RBXKR";
+		Coolsms coolsms = new Coolsms(api_key, api_secret);
+	
+		HashMap<String, String> set = new HashMap<String, String>();
+		set.put("to", "010-9901-1334"); // 내번호 
+		set.put("from",(String)request.getParameter("010-9947-0728")); // 발신번호
+		set.put("text",(String)request.getParameter("CURRENT 인증번호는   [  " +  " ]  입니다. "));
+		set.put("type", "sms"); // 문자타입
+
+		JSONObject result = coolsms.send(set); // 보내기 & 전송결과받기
+		 
+		return "";
 	}
 }

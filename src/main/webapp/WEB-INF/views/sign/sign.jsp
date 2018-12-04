@@ -36,7 +36,30 @@ div.well input[type="submit"]{width:100%;height:50px}
 .signCloseBtns{width:100%;}
 .error{color: red; }
 </style>
-
+<script type="text/javascript">
+function telAjax(){
+	var member_tel = $("#tel").val();
+	$.ajax({
+		type :"GET",
+		url :"/signProcessAjax",
+		data : "member_tel="+member_tel,
+		sucess : function(data){	
+		}
+	});
+}
+</script>
+<script type="text/javascript">
+function telSaveAjax(){
+	var telnum = $("#telnum").val();
+	$.ajax({
+		type :"GET",
+		url :"/signProcessAjax",
+		data : "telnum="+telnum,
+		sucess : function(data){	
+		}
+	});
+}
+</script>
 </head>
 <body>
 <div class="wraps">
@@ -65,16 +88,21 @@ div.well input[type="submit"]{width:100%;height:50px}
 				<div class="phoneSignDiv">
 					<div class="form-group label-floating phoneInput">
 						<label class="control-label">휴대폰 번호</label>
-						<input type="text" id = "tel" name="member_tel" class="form-control" required />
+						<input type="text" id ="tel" name="member_tel" class="form-control" required />
 					</div>
 					<div class="phoneInputBtn">
-						<input type="button" class="btn btn-primary btn-raised" value="인증" />
+						<button onclick="telAjax();" class="btn btn-primary btn-raised" >인증</button>
 					</div>
 				</div>
-				<div class="form-group label-floating certification">
-					<label class="control-label">인증번호</label>
-					<input type="text" class="form-control" required />
-				</div>
+				<div class="phoneSignDiv">
+					<div class="form-group label-floating phoneInput">
+						<label class="control-label">인증번호</label>
+						<input type="text" class="form-control" id ="telnum" name="telSendNumber" required />
+					</div>
+					<div class="phoneInputBtn">
+						<button onclick="telSaveAjax();" class="btn btn-primary btn-raised" >확인</button>
+					</div>
+				</div>		
 				<br>
 				<input type="submit" value="회원가입" class="btn btn-primary btn-raised" /><br>
 				<a href="/" class="btn btn-primary btn-raised signCloseBtns">취소</a>
@@ -97,9 +125,26 @@ $(document).ready(function() {
 	});
 });
 </script>
+
 <script src="../js/material.min.js"></script>
 <script>
 	$.material.init()
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
