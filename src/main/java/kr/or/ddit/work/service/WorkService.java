@@ -33,8 +33,8 @@ public class WorkService implements WorkServiceInf{
 	* Method 설명 : 업무 전체 일정
 	*/
 	@Override
-	public List<WorkVo> workAllSchedule() {
-		return workMapper.workAllSchedule();
+	public List<WorkVo> workAllSchedule(String sid) {
+		return workMapper.workAllSchedule(sid);
 	}
 	
 }

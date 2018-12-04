@@ -22,6 +22,6 @@ public interface ToDoMapper {
 	* @return
 	* Method 설명 : 할일 전체 일정
 	*/
-	List<ToDoVo> todoAllSchedule();
+	List<ToDoVo> todoAllSchedule(String sid);
 	
 }

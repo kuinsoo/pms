@@ -6,17 +6,19 @@
 <mapper namespace="kr.or.ddit.work.mapper.WorkMapper">
 
 	<!-- 업무 전체 일정 -->
-	<select id="workAllSchedule" resultType="workVo">
+	<select id="workAllSchedule" resultType="workVo" parameterType="String">
 	<!-- 일정에 필요한 컬럼 정리: 업무제목, 업무시작일자, 업무예상마감일자, 업무마감일자, 업무일정색깔 -->
 		SELECT	w.work_title,
 				w.work_sdate,
 				w.work_eedate,
 				w.work_edate,
 				w.work_color
-		FROM	work w
-		<!-- FROM	project_member pm INNER JOIN work w -->
-		<!-- ON		pm.pmember_project = w.work_project -->
-		<!-- WHERE  pm.pmember_member = #{session_email} -->
+		<if test="value != null">
+			FROM    work_member wm INNER JOIN project_member pm
+			ON      wm.pmember_id = pm.pmember_id INNER JOIN work w
+			ON      wm.work_id = w.work_id
+			WHERE   pm.pmember_member = #{value}
+		</if>
 	</select>
 
 </mapper>

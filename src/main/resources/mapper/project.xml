@@ -28,16 +28,18 @@
     </update>
     
     <!-- 프로젝트 전체 일정(20181129 지태 추가) -->
-    <select id="projectAllSchedule" resultType="projectVo">
+    <select id="projectAllSchedule" resultType="projectVo" parameterType="String">
     <!-- 일정에 필요한 컬럼 정리: 프로젝트명, 프로젝트시작일자, 프로젝트종료일자, 프로젝트실제마감일자, 프로젝트일정색깔 -->
+    <!-- sid : SESSION ID -->
     	SELECT	p.project_title,
     			p.project_sdate,
     			p.project_eedate,
     			p.project_edate,
     			p.project_color
-    	FROM	project p
-    	<!-- FROM	project_member pm INNER JOIN project p -->
-    	<!-- ON		pm.pmember_project = p.project_id -->
-    	<!-- WHERE	pm.pmember_member = #{session_mail} -->
+   		<if test="value != null">
+	    	FROM	project_member pm INNER JOIN project p
+	    	ON		pm.pmember_project = p.project_id
+	    	WHERE	pm.pmember_member = #{value}
+   		</if>
     </select>
 </mapper>

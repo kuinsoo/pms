@@ -3,6 +3,19 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.or.ddit.zcardaa.mapper.IssueMapper">
+<mapper namespace="kr.or.ddit.issue.mapper.IssueMapper">
+
+	<!-- 이슈 전체 일정 -->
+	<select id="issueAllSchedule" resultType="issueVo" parameterType="String">
+	<!-- 일정에 필요한 컬럼 정리 : 이슈제목, 이슈발행일시, 이슈해결일시, 이슈일시색깔 -->
+		SELECT	sue.issue_title,
+				sue.issue_sdate,
+				sue.issue_edate,
+				sue.issue_color
+		FROM	issue sue
+		<if test="value != null">
+			WHERE	sue.issue_member = #{value}
+		</if>
+	</select>
 
 </mapper>

@@ -22,6 +22,6 @@ public interface WorkMapper {
 	* @return
 	* Method 설명 : 업무 전체 일정
 	*/
-	List<WorkVo> workAllSchedule();
+	List<WorkVo> workAllSchedule(String sid);
 	
 }

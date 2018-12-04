@@ -29,9 +29,10 @@ public interface ProjectServiceInf {
 	* Method : projectAllSchedule
 	* 작성자 : jerry
 	* 변경이력 : 2018-11-29 19:04
+	* @param sid
 	* @return
 	* Method 설명 : 프로젝트 전체 일정
 	*/
-	List<ProjectVo> projectAllSchedule();
+	List<ProjectVo> projectAllSchedule(String sid);
 	
 }

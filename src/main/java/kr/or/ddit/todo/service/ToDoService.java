@@ -33,8 +33,8 @@ public class ToDoService implements ToDoServiceInf{
 	* Method 설명 : 할일 전체 일정
 	*/
 	@Override
-	public List<ToDoVo> todoAllSchedule() {
-		return todoMapper.todoAllSchedule();
+	public List<ToDoVo> todoAllSchedule(String sid) {
+		return todoMapper.todoAllSchedule(sid);
 	}
 	
 }

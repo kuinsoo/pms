@@ -91,8 +91,25 @@
 							result.push(json);
 						</c:forEach>
 					}
+					
+					if(document.getElementsByName("check")[i].value == "issueSchedule"){
+						
+						<%-- 이슈(issue) 일정 --%>
+						<c:forEach items="${allScheduleList.issueScheduleList}" var="schedule">
+							var json = new Object();
+							json.title = '${schedule.issue_title}';
+							json.start = "${schedule.format_issue_sdate}";
+							<c:if test="${schedule.issue_edate != null}">
+								json.end = "${schedule.format_issue_edate}";
+							</c:if>
+							json.color = "${schedule.issue_color}";
+							result.push(json);
+						</c:forEach>
+					}
+					
 				}
 			} //for문
+			
 			return result;
 		}
 		
@@ -113,6 +130,46 @@
 			$('#calendar').fullCalendar('refetchEvents');
 			$('#calendar').fullCalendar('addEventSource', resultFunc());
 		});
+		
+		// main select box(sel_schedule) 선택시 sub select box(sel_list) 생성
+		$(document).on("change", "select[name='sel_schedule']", function(){
+			// var f = document.fwrite;
+			
+			// sub select box(sel_list)를 삭제
+			var subSelectBox = $("select[name='sel_list']");
+			subSelectBox.children().remove(); // 기존 리스트 삭제
+			
+			// 선택한 main select box(sel_schedule)의 값을 가져와
+			// 일치하는 값을 sub select box(sel_list)에 삽입
+			$("option:selected", this).each(function(){
+				
+				// main select box(sel_schedule)에서 선택한 값
+				var selectValue = $(this).val();
+				
+				// 선택한 값이 mySchedule이면 option은 하나
+				if(selectValue == "mySchedule"){
+					subSelectBox.append("<option value=''>:::선택해주세요:::</option>");
+				
+				// 선택한 값이 myProject면 forEach구문
+				}else if(selectValue == "myProject"){
+					<%-- <c:forEach items="${myProjectList}" var="projectList"> --%>
+						<%-- <option value="${projectList.project_id}">${projectList.project_title}(${projectList.project_id})</option> --%>
+					<%-- </c:forEach> --%>
+					subSelectBox.append("<c:forEach items='${myProjectList}' var='projectList'>");
+					subSelectBox.append("	<option value='${projectList.project_id}'>${projectList.project_title}(${projectList.project_id})</option>");
+					subSelectBox.append("</c:forEach>");
+				}
+				
+			});
+			
+		});
+		
+		//하위 select box 클릭시 클릭한 값 console.log로 확인
+		$(".sel_list").change(function(){
+			console.log(this.options[this.selectedIndex].value);
+			
+		})
+		
 	}); // ready
 	
 	
@@ -150,14 +207,27 @@
 		margin: 0 auto;
 		width: 60em;
 	}
+	#selectDiv{
+		float: right;
+	}
 </style>
 </head>
 <!-- body영역 -->
 <body>
 	<div class="container">
-		<label><input type="checkbox" name="check" value="projectSchedule"/>project</label>
-		<label><input type="checkbox" checked name="check" value="workSchedule"/>work</label>
-		<label><input type="checkbox" checked name="check" value="todoSchedule"/>todo</label>
+		<div id="selectDiv">
+			<select class="sel_schedule" name="sel_schedule">
+				<option value="mySchedule" selected >나의 일정</option>
+				<option value="myProject">프로젝트 일정</option>
+			</select>
+			<select class="sel_list" name="sel_list">
+				<option selected>::선택하세요::</option>
+			</select>
+		</div>
+		<label><input type="checkbox" class="checkSchedule" name="check" value="projectSchedule"/>project</label>
+		<label><input type="checkbox" class="checkSchedule" checked name="check" value="workSchedule"/>work</label>
+		<label><input type="checkbox" class="checkSchedule" checked name="check" value="todoSchedule"/>todo</label>
+		<label><input type="checkbox" class="checkSchedule" checked name="check" value="issueSchedule"/>issue</label>
 		<div id='calendar'></div>
 	</div>
 </body>

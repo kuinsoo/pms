@@ -6,7 +6,7 @@
 <mapper namespace="kr.or.ddit.todo.mapper.ToDoMapper">
 	
 	<!-- 할일 전체 일정 -->
-	<select id="todoAllSchedule" resultType="todoVo">
+	<select id="todoAllSchedule" resultType="todoVo" parameterType="String">
 	<!-- 일정에 필요한 컬럼 정리: 할일내용, 할일시작일시, 할일마감일시, 할일예상마감일시, 할일일정색깔 -->
 		SELECT	t.todo_content,
 				t.todo_sdate,
@@ -14,7 +14,9 @@
 				t.todo_eedate,
 				t.todo_color
 		FROM	todo t
-		<!-- WHERE	todo_pmember = #{session_mail} -->
+		<if test="value != null">
+			WHERE	todo_pmember = #{value}
+		</if>
 	</select>
 	
 </mapper>
