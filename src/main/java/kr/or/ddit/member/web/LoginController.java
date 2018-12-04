@@ -17,23 +17,17 @@ import java.io.UnsupportedEncodingException;
  *
  * @author 나진실
  * @version 1.0
- * @see
- *
- * <pre>
- * << 개정이력(Modification Information) >>
- *
- * 수정자 수정내용
- * ------ ------------------------
- * pc07 최초 생성
- *
- * </pre>
+ * @see <pre> << 개정이력(Modification Information) >> 수정자 수정내용 ------ ------------------------ pc07 최초 생성 </pre>
  */
 @SessionAttributes("memberVo")  // 	model.addAttribute("memberVo",memberVo); 할때 세션에 없으면 세션영역을 할당해준다.
 @Controller
 public class LoginController {
 	@Autowired
 	private MemberServiceInf memberservice;
-	
+
+	/**
+	 * The Email sender.
+	 */
 	@Autowired
 	public JavaMailSender emailSender;
 
@@ -41,8 +35,8 @@ public class LoginController {
 	 * Method : index
 	 * 작성자 : pc07
 	 * 변경이력 :
-	 * @return
-	 * Method 설명 : index 로그인 화면으로
+	 *
+	 * @return Method  설명 : index 로그인 화면으로
 	 */
 	@RequestMapping(value="/",method=RequestMethod.GET)
 	public String index() {
@@ -53,11 +47,14 @@ public class LoginController {
 	 * Method : loginProcess
 	 * 작성자 : 나진실
 	 * 변경이력 :
-	 * @return
-	 * Method 설명 : 로그인 기능
-	 * @throws UnsupportedEncodingException
+	 *
+	 * @param request  the request
+	 * @param model    the model
+	 * @param memberVo the member vo
+	 * @return Method  설명 : 로그인 기능
+	 *
+	 * @throws UnsupportedEncodingException the unsupported encoding exception
 	 */
-
 	@RequestMapping(value="/loginProcess",method=RequestMethod.POST)
 	public String loginProcess(HttpServletRequest request, Model model, MemberVo memberVo) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
@@ -77,19 +74,33 @@ public class LoginController {
 			return "redirect:/main";
 		}
 	}
-	
+
+	/**
+	 * Main string.
+	 * 작성자: Mr.KKu
+	 * 변경이력:
+	 * @param model    the model
+	 * @param memberVo the member vo
+	 * @return the string
+	 * 설명: 메인화면에 프로젝트리스트를 출력해준다. (Member / Project / project_member  Join)
+	 */
 	@RequestMapping(value="/main",method=RequestMethod.GET)
 	public String main(Model model, @ModelAttribute("memberVo")MemberVo memberVo) {
 		model.addAttribute("memberProjectList",memberservice.selectMainView(memberVo.getMember_mail()));
 		return "main/main";
 	}
-	
+
 	/**
 	 * Method : idFind
 	 * 작성자 : 나진실
 	 * 변경이력 :
-	 * @return
-	 * Method 설명 : 아이디 찾기 
+	 *
+	 * @param request  the request
+	 * @param memberVo the member vo
+	 * @param to       the to
+	 * @param subject  the subject
+	 * @param content  the content
+	 * @return Method  설명 : 아이디 찾기
 	 */
 	@RequestMapping(value="/findEmail",method=RequestMethod.POST)
 	public String findEmail(HttpServletRequest request, MemberVo memberVo,String to, String subject, String content){
@@ -115,13 +126,19 @@ public class LoginController {
 			return "/login/login";
 		}
 	}
-	
+
 	/**
 	 * Method : passFind
 	 * 작성자 : 나진실
 	 * 변경이력 :
-	 * @return
-	 * Method 설명 : 비밀번호 찾기 
+	 *
+	 * @param request  the request
+	 * @param memberVo the member vo
+	 * @param model    the model
+	 * @param to       the to
+	 * @param subject  the subject
+	 * @param content  the content
+	 * @return Method  설명 : 비밀번호 찾기
 	 */
 	@RequestMapping(value="/findPass",method=RequestMethod.POST)
 	public String findPass(HttpServletRequest request, MemberVo memberVo,Model model ,String to, String subject, String content) {
@@ -156,25 +173,27 @@ public class LoginController {
 			return "/login/login";
 		}
 	}
-	
+
 	/**
 	 * Method : signView
 	 * 작성자 : 나진실
 	 * 변경이력 :
-	 * @return
-	 * Method 설명 : 회원가입 화면단 
+	 *
+	 * @return Method  설명 : 회원가입 화면단
 	 */
 	@RequestMapping(value="/signView")
 	public String signView() {
 		return"/sign/sign";
-	}	
-	
+	}
+
 	/**
 	 * Method : signProcess
 	 * 작성자 : 나진실
 	 * 변경이력 :
-	 * @return
-	 * Method 설명 : sign.jsp에서 회원가입 버튼을 눌렀을때  
+	 *
+	 * @param member_mail the member mail
+	 * @param member      the member
+	 * @return Method  설명 : sign.jsp에서 회원가입 버튼을 눌렀을때
 	 */
 	@RequestMapping(value="/signProcess",method=RequestMethod.POST)
 	public String signProcess(@RequestParam("member_mail") String member_mail ,MemberVo member) {
