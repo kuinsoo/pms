@@ -49,4 +49,43 @@ public class MemberService implements MemberServiceInf {
 	public int insertUser(MemberVo memberVo) {
 		return memberMapper.insertUser(memberVo);
 	}
+	
+	/**
+	 * Method : selectfindId
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @param memberVo
+	 * @return
+	 * Method 설명 : 아이디 찾기
+	 */
+	@Override
+	public MemberVo selectfindId(MemberVo memberVo) {
+		return memberMapper.selectfindId(memberVo);
+	}
+	
+	/**
+	 * Method : selectfindPass
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @param memberVo
+	 * @return
+	 * Method 설명 : 비밀번호 찾기
+	 */
+	@Override
+	public MemberVo selectfindPass(MemberVo memberVo) {
+		return memberMapper.selectfindPass(memberVo);
+	}
+	
+	/**
+	 * Method : selectfindPass
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @param memberVo
+	 * @return
+	 * Method 설명 : 비밀번호 찾기 - 임시 비밀번호 업데이트 
+	 */
+	@Override
+	public int updatePass(String member_pass) {
+		return memberMapper.updatePass(member_pass);
+	}
 }

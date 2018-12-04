@@ -80,7 +80,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 							<input type="email"	name="member_mail" id="email" value="${member_mail}" class="form-control" autofocus="autofocus" required />
 						</c:when>
 						<c:when test="${member_mail==email}">
-							<input type="email"	name="member_mail" id="email" value="" class="form-control" autofocus="autofocus" required />
+							<input type="email"	name="member_mail" id="email" value="" class="form-control" autofocus="autofocus" required />	
 						</c:when>
 					</c:choose>
 				</div>
@@ -104,7 +104,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 				<a href="#layerEmail" class="findEmail">이메일 찾기</a>
 				<a href="#layerPassword" class="findPassword">비밀번호 찾기</a>
 			</div>
-			<form action="findEmail" method="post">
+			<form action="/findEmail" method="post">
 			<div class="dim-layer">
 				<div class="dimBg"></div>
 				<div id="layerEmail" class="pop-layer">
@@ -112,11 +112,15 @@ div.well input[type="submit"]{width:100%;height:50px}
 						<div class="pop-conts">
 							<div class="form-group label-floating">
 								<label class="control-label">이름</label>
-								<input type="text"	name="" value="" class="form-control" autofocus="autofocus" required />
+								<input type="text"	name="member_name" class="form-control" autofocus="autofocus" required />
+							</div>
+							<div class="form-group label-floating">
+								<label class="control-label">휴대번호</label>
+								<input type="tel" name="member_tel" class="form-control" autofocus="autofocus" required />
 							</div>
 							<div class="form-group label-floating">
 								<label class="control-label">이메일</label>
-								<input type="email"	name="" value="" class="form-control" autofocus="autofocus" required />
+								<input type="email"	name="member_email" class="form-control" autofocus="autofocus" required />
 							</div>
 							<button type="submit" class="btn btn-primary btn-raised findEmailBtn">이메일 찾기</button>							
 							<a href="#" class="btn btn-primary btn-raised btn-layerClose">취소</a>
@@ -126,7 +130,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 			</div>
 			</form>
 			
-			<form action="" method="post">
+			<form action="/findPass" method="post">
 			<div class="dim-layers">
 				<div class="dimBgs"></div>
 				<div id="layerPassword" class="pop-layers">
@@ -134,15 +138,11 @@ div.well input[type="submit"]{width:100%;height:50px}
 						<div class="pop-contss">
 							<div class="form-group label-floating">
 								<label class="control-label">이름</label>
-								<input type="text"	name="" value="" class="form-control" autofocus="autofocus" required />
+								<input type="text"	name="member_name" class="form-control" autofocus="autofocus" required />
 							</div>
 							<div class="form-group label-floating">
 								<label class="control-label">이메일(ID)</label>
-								<input type="email"	name="" value="" class="form-control" autofocus="autofocus" required />
-							</div>
-							<div class="form-group label-floating">
-								<label class="control-label">비밀번호 받으실 이메일</label>
-								<input type="email"	name="" value="" class="form-control" autofocus="autofocus" required />
+								<input type="email"	name="member_mail" class="form-control" autofocus="autofocus" required />
 							</div>
 							<button type="submit" class="btn btn-primary btn-raised findEmailBtn">비밀번호 찾기</button>								
 							<a href="#" class="btn btn-primary btn-raised btn-layerClose">취소</a>
@@ -165,12 +165,12 @@ $(document).ready(function() {
 	$(".error").hide();
 	//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
 	//blur()이벤트 사용
+	// 아 왜안돼
 	$("#pass").blur(function() {
 		if($("#pass").val() != $(${member_pass}).val() && $("#email").val()!=$(${member_mail}).val()){
-			$("#pass").next().show();
-			$("email").val();
-		} else{
-			$("#pass").next().hide();
+			$(".error").show();
+		}else{
+			$(".error").hide();
 		}
 	});
 });

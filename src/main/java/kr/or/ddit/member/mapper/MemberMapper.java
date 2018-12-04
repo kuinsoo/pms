@@ -25,11 +25,43 @@ public interface MemberMapper {
 	
 	/**
 	 * Method : insertUser
-	 * 작성자 : pc07
+	 * 작성자 : 나진실
 	 * 변경이력 :
 	 * @param memberVo
 	 * @return
 	 * Method 설명 : 회원가입
 	 */
 	public int insertUser(MemberVo memberVo);
+	
+	
+	/**
+	 * Method : selectfindId
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @param memberVo
+	 * @return
+	 * Method 설명 : 아이디(이메일 찾기)
+	 */
+	MemberVo selectfindId(MemberVo memberVo);
+	
+	
+	/**
+	 * Method : selectfindPass
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @param memberVo
+	 * @return
+	 * Method 설명 : 비밀번호 찾기 
+	 */
+	MemberVo selectfindPass(MemberVo memberVo);
+	
+	/**
+	 * Method : updatePass
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @param memberVo
+	 * @return
+	 * Method 설명 : 비밀번호 찾기 - 임시번호 업데이트 
+	 */
+	public int updatePass(String member_pass);
 }

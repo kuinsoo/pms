@@ -19,4 +19,25 @@
 		values (#{member_mail},#{member_name},#{member_pass},#{member_tel},'','N')
 	</insert>
 		
+	<!-- 아이디 찾기 -->
+	<select id="selectfindId" resultType="memberVo" parameterType="String">
+		select *
+		from member 
+		where member_tel = #{member_tel}
+		and member_name = #{member_name}
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="selectfindPass" resultType="memberVo" parameterType="String">
+		select *
+		from member 
+		where member_name = #{member_name}
+		and member_mail =  #{member_mail}
+	</select>
+	
+	<update id="updatePass" parameterType="memberVo">
+		update member
+		set member_pass = #{member_pass}
+		where member_mail = #{member_mail}
+	</update>
 </mapper>
