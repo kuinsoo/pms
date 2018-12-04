@@ -72,8 +72,8 @@ public class MemberService implements MemberServiceInf {
 	 * Method 설명 : 비밀번호 찾기
 	 */
 	@Override
-	public MemberVo selectfindPass(MemberVo memberVo) {
-		return memberMapper.selectfindPass(memberVo);
+	public MemberVo selectfindPass(String member_mail) {
+		return memberMapper.selectfindPass(member_mail);
 	}
 	
 	/**
@@ -85,7 +85,7 @@ public class MemberService implements MemberServiceInf {
 	 * Method 설명 : 비밀번호 찾기 - 임시 비밀번호 업데이트 
 	 */
 	@Override
-	public int updatePass(String member_pass) {
-		return memberMapper.updatePass(member_pass);
+	public int updatePass(MemberVo memberVo) {
+		return memberMapper.updatePass(memberVo);
 	}
 }

@@ -28,11 +28,10 @@
 	</select>
 	
 	<!-- 비밀번호 찾기 -->
-	<select id="selectfindPass" resultType="memberVo" parameterType="String">
+	<select id="selectfindPass" parameterType="String" resultType="memberVo">
 		select *
 		from member 
-		where member_name = #{member_name}
-		and member_mail =  #{member_mail}
+		where member_mail=#{member_mail}
 	</select>
 	
 	<update id="updatePass" parameterType="memberVo">

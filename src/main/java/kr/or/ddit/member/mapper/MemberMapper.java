@@ -49,11 +49,11 @@ public interface MemberMapper {
 	 * Method : selectfindPass
 	 * 작성자 : 나진실
 	 * 변경이력 :
-	 * @param memberVo
+	 * @param member_mail
 	 * @return
 	 * Method 설명 : 비밀번호 찾기 
 	 */
-	MemberVo selectfindPass(MemberVo memberVo);
+	MemberVo selectfindPass(String member_mail);
 	
 	/**
 	 * Method : updatePass
@@ -63,5 +63,5 @@ public interface MemberMapper {
 	 * @return
 	 * Method 설명 : 비밀번호 찾기 - 임시번호 업데이트 
 	 */
-	public int updatePass(String member_pass);
+	int updatePass(MemberVo memberVo);
 }

@@ -41,9 +41,6 @@ public class LoginController {
 	private MemberServiceInf memberservice;
 	
 	@Autowired
-	private EmailSserviceInf emailService;
-	
-	@Autowired
 	public JavaMailSender emailSender;
 	
 	/**
@@ -75,22 +72,16 @@ public class LoginController {
 		String member_pass = request.getParameter("member_pass").toLowerCase(); // 대소문자를 안가린다.		
 		
 		memberVo = memberservice.selectUser(member_mail);
-		int update_pass = memberservice.updatePass(member_pass);
 		
 		if(memberVo==null || !member_mail.equals(memberVo.getMember_mail())||
 							 !member_pass.equals(memberVo.getMember_pass())){
-			
 			model.addAttribute("member_mail",member_mail);
 			model.addAttribute("member_pass",member_pass);
-			
 			return "/login/login";
-		
 		}else {
-			
 			model.addAttribute("memberVo",memberVo);
 			return "redirect:/main";
 		}
-		
 	}
 	
 	@RequestMapping(value="/main",method=RequestMethod.GET)
@@ -111,7 +102,6 @@ public class LoginController {
 		String member_name = request.getParameter("member_name");
 		// 자신의 진짜 메일 
 		String member_email = request.getParameter("member_email");
-		
 		SimpleMailMessage message = new SimpleMailMessage();
 		
 		// 보낼사람 이메일
@@ -130,8 +120,6 @@ public class LoginController {
 			return "/login/login";
 		}
 	}
-	
-	
 	
 	/**
 	 * Method : passFind
@@ -154,22 +142,20 @@ public class LoginController {
 		// 제목
 		message.setSubject(member_name + "님 안녕하세요 :) < CURRENT 비밀번호 찾기 >");
 		
-		// 임시 번호로 
+		// memberVo에 member_pass를 담아준다. 
 		// null이 아니면 비밀번호가 전송 
-		if(memberservice.selectfindPass(memberVo)!=null) {
+		if(memberservice.selectfindPass(member_mail)!=null) {		
 			// random 로직 
 			String possible ="abcdefghijklmnopqrstuvwxyz0123456789";
 			for(int i = 0; i<8; i++) {
 				member_pass += possible.charAt((int) Math.floor(Math.random()* possible.length()));
-			}	
-				message.setText(member_name+" 님의 임시 비밀번호는  [  " + member_pass + "  ]  입니다. 로그인 후 꼭! 비밀번호를 수정해 주세요. ");
-				// memberVo에 member_pass를 담아준다. 
+			}
+				// 임시 비밀번호로 수정
 				memberVo.setMember_pass(member_pass);
-				
-				//
+				int update_pass = memberservice.updatePass(memberVo);
+				message.setText(member_name +" 님의 임시 비밀번호는  [  " + member_pass + "  ]  입니다. 로그인 후 꼭! 비밀번호를 수정해 주세요. ");				
+				memberVo.setMember_pass(member_pass);
 				emailSender.send(message);
-				
-				
 				return "/login/login";
 		}else {
 			return "/login/login";
