@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.ddit.issue.mapper.IssueMapper;
-import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.project.mapper.ProjectMapper;
-import kr.or.ddit.schedule.mapper.ScheduleMapper;
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.todo.mapper.ToDoMapper;
 import kr.or.ddit.work.mapper.WorkMapper;
@@ -20,8 +18,6 @@ import kr.or.ddit.work.mapper.WorkMapper;
 @Transactional
 public class ScheduleService implements ScheduleServiceInf{
 
-	@Autowired
-	private ScheduleMapper scheduleMapper;
 	@Autowired
 	private WorkMapper workMapper;
 	@Autowired
