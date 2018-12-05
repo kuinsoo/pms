@@ -23,7 +23,7 @@ public interface ScheduleServiceInf {
 	* @return
 	* Method 설명 : 프로젝트, 업무, 회의, 이슈 등 전체 일정
 	*/
-	Map<String, Object> scheduleList(String sid);
+	Map<String, Object> scheduleList(ScheduleVo scheduleVo, String sid);
 	
 	/**
 	* Method : myProjectList
@@ -33,6 +33,6 @@ public interface ScheduleServiceInf {
 	* Method 설명 : 일정의 select 프로젝트명 list
 	*/
 	List<ScheduleVo> myProjectList(String sid);
-	
+
 }
 

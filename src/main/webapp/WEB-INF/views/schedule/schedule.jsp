@@ -135,6 +135,9 @@
 		$(document).on("change", "select[name='sel_schedule']", function(){
 			// var f = document.fwrite;
 			
+			// main select box(sel_schedule)에서 선택한 값
+			var mainSelectBox = $(this).val();
+			
 			// sub select box(sel_list)를 삭제
 			var subSelectBox = $("select[name='sel_list']");
 			subSelectBox.children().remove(); // 기존 리스트 삭제
@@ -143,32 +146,30 @@
 			// 일치하는 값을 sub select box(sel_list)에 삽입
 			$("option:selected", this).each(function(){
 				
-				// main select box(sel_schedule)에서 선택한 값
-				var selectValue = $(this).val();
-				
 				// 선택한 값이 mySchedule이면 option은 하나
-				if(selectValue == "mySchedule"){
+				if(mainSelectBox == "mySchedule"){
 					subSelectBox.append("<option value=''>:::선택해주세요:::</option>");
-				
+					$('#hiddenSid').submit();
+					
 				// 선택한 값이 myProject면 forEach구문
-				}else if(selectValue == "myProject"){
+				}else if(mainSelectBox == "myProject"){
 					<%-- <c:forEach items="${myProjectList}" var="projectList"> --%>
 						<%-- <option value="${projectList.project_id}">${projectList.project_title}(${projectList.project_id})</option> --%>
 					<%-- </c:forEach> --%>
+					subSelectBox.append("<option value=''>:::선택해주세요:::</option>");
 					subSelectBox.append("<c:forEach items='${myProjectList}' var='projectList'>");
 					subSelectBox.append("	<option value='${projectList.project_id}'>${projectList.project_title}(${projectList.project_id})</option>");
 					subSelectBox.append("</c:forEach>");
 				}
-				
 			});
-			
 		});
 		
-		//하위 select box 클릭시 클릭한 값 console.log로 확인
-		$(".sel_list").change(function(){
-			console.log(this.options[this.selectedIndex].value);
+		// sub select box(sel_list) 선택시 선택한 값 Controller에 전송
+		$(document).on("change", "select[name='sel_list']", function(){
+			console.log("value : " + $(this).val());
 			
-		})
+			$("#selectForm").submit();
+		});
 		
 	}); // ready
 	
@@ -207,7 +208,7 @@
 		margin: 0 auto;
 		width: 60em;
 	}
-	#selectDiv{
+	#selectForm{
 		float: right;
 	}
 </style>
@@ -215,15 +216,19 @@
 <!-- body영역 -->
 <body>
 	<div class="container">
-		<div id="selectDiv">
+		<form id="hiddenSid" name="sid" method="POST" action="/allSchedule" value="${memberVo.member_mail }">
+			<input type="hidden" value="${memberVo.member_mail}">
+		</form>
+		<form id="selectForm" name="selectForm" method="POST" action="/allSchedule">
 			<select class="sel_schedule" name="sel_schedule">
-				<option value="mySchedule" selected >나의 일정</option>
+				<option value="">:::선택해주세요:::</option>
+				<option value="mySchedule">나의 일정</option>
 				<option value="myProject">프로젝트 일정</option>
 			</select>
 			<select class="sel_list" name="sel_list">
-				<option selected>::선택하세요::</option>
+				<option value=''>:::선택해주세요:::</option>
 			</select>
-		</div>
+		</form>
 		<label><input type="checkbox" class="checkSchedule" name="check" value="projectSchedule"/>project</label>
 		<label><input type="checkbox" class="checkSchedule" checked name="check" value="workSchedule"/>work</label>
 		<label><input type="checkbox" class="checkSchedule" checked name="check" value="todoSchedule"/>todo</label>

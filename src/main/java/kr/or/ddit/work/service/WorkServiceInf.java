@@ -2,6 +2,7 @@ package kr.or.ddit.work.service;
 
 import java.util.List;
 
+import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.work.model.WorkVo;
 
 /**
@@ -22,6 +23,6 @@ public interface WorkServiceInf {
 	* @return
 	* Method 설명 : 업무 전체 일정
 	*/
-	List<WorkVo> workAllSchedule(String sid);
+	List<WorkVo> workAllSchedule(ScheduleVo scheduleVo);
 	
 }

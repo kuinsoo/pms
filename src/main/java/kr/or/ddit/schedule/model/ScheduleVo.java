@@ -14,16 +14,23 @@ import org.apache.ibatis.type.Alias;
 @Alias("scheduleVo")
 public class ScheduleVo {
 	private String sid;				//	session id
-	private String project_id;		//	프로젝트아이디
+	private String pid;				//	프로젝트아이디
 	private String project_title;	//	프로젝트명
+	
 
 	/* 기본생성자 */
 	public ScheduleVo() {}
 
-	/* 생성자 */
-	public ScheduleVo(String sid, String project_id, String project_title) {
+	/* 생성자1 */
+	public ScheduleVo(String sid, String pid) {
 		this.sid = sid;
-		this.project_id = project_id;
+		this.pid = pid;
+	}
+	
+	/* 생성자2 */
+	public ScheduleVo(String sid, String pid, String project_title) {
+		this.sid = sid;
+		this.pid = pid;
 		this.project_title = project_title;
 	}
 
@@ -40,17 +47,17 @@ public class ScheduleVo {
 	public void setProject_title(String project_title) {
 		this.project_title = project_title;
 	}
-	public String getProject_id() {
-		return project_id;
+	public String getpid() {
+		return pid;
 	}
-	public void setProject_id(String project_id) {
-		this.project_id = project_id;
+	public void setpid(String pid) {
+		this.pid = pid;
 	}
 
 	/* toString */
 	@Override
 	public String toString() {
-		return "ScheduleVo [sid=" + sid + ", project_id=" + project_id + ", project_title=" + project_title + "]";
+		return "ScheduleVo [sid=" + sid + ", pid=" + pid + ", project_title=" + project_title + "]";
 	}
 
 }

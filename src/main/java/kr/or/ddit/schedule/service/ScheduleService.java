@@ -39,11 +39,11 @@ public class ScheduleService implements ScheduleServiceInf{
 	* Method 설명 : 프로젝트, 업무, 회의, 이슈 등 전체 일정
 	*/
 	@Override
-	public Map<String, Object> scheduleList(String sid) {
+	public Map<String, Object> scheduleList(ScheduleVo scheduleVo, String sid) {
 		Map<String, Object> allScheduleList = new HashMap<String, Object>();
 		
 		allScheduleList.put("projectScheduleList", projectMapper.projectAllSchedule(sid));
-		allScheduleList.put("workScheduleList", workMapper.workAllSchedule(sid));
+		allScheduleList.put("workScheduleList", workMapper.workAllSchedule(scheduleVo));
 		allScheduleList.put("todoScheduleList", todoMapper.todoAllSchedule(sid));
 		allScheduleList.put("issueScheduleList", issueMapper.issueAllSchedule(sid));
 		
@@ -59,7 +59,7 @@ public class ScheduleService implements ScheduleServiceInf{
 	*/
 	@Override
 	public List<ScheduleVo> myProjectList(String sid) {
-		return scheduleMapper.myProjectList(sid);
+		return projectMapper.myProjectList(sid);
 	}
 
 }

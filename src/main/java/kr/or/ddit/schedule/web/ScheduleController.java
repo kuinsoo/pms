@@ -4,16 +4,16 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
@@ -36,15 +36,16 @@ public class ScheduleController {
 	@Autowired
 	private ScheduleServiceInf scheduleService;
 	
-	@RequestMapping(value="/allSchedule")
-	public String allSchedule(HttpServletRequest request, Model model) {
-		MemberVo memberVo = (MemberVo) request.getSession().getAttribute("memberVo");
+	@RequestMapping(value="/allSchedule", method={RequestMethod.POST, RequestMethod.GET})
+	public String allSchedule(@SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request, Model model) {
 		String sid = memberVo.getMember_mail();
+		String pid = request.getParameter("sel_list");
 		
-		Map<String, Object> allScheduleList = scheduleService.scheduleList(sid);
+		ScheduleVo scheduleVo = new ScheduleVo(sid, pid);
+		
+		Map<String, Object> allScheduleList = scheduleService.scheduleList(scheduleVo, sid);
 		List<ScheduleVo> myProjectList = scheduleService.myProjectList(sid);
 		
-		logger.debug("allScheduleList : {}", allScheduleList);
 		model.addAttribute("allScheduleList", allScheduleList);
 		model.addAttribute("myProjectList", myProjectList);
 		

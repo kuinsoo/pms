@@ -1,8 +1,8 @@
 package kr.or.ddit.project.service;
 
-import kr.or.ddit.project.model.ProjectVo;
-
 import java.util.List;
+
+import kr.or.ddit.project.model.ProjectVo;
 
 /**
  * kr.or.ddit.project.service
