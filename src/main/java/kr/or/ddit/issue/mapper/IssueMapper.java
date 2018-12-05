@@ -3,6 +3,7 @@ package kr.or.ddit.issue.mapper;
 import java.util.List;
 
 import kr.or.ddit.issue.model.IssueVo;
+import kr.or.ddit.schedule.model.ScheduleVo;
 
 /**
  * kr.or.ddit.issue.mapper
@@ -19,9 +20,10 @@ public interface IssueMapper {
 	* Method : issueAllSchedule
 	* 작성자 : jerry
 	* 변경이력 :
+	* @param scheduleVo
 	* @return
 	* Method 설명 : 이슈 전체 일정
 	*/
-	List<IssueVo> issueAllSchedule(String sid);
+	List<IssueVo> issueAllSchedule(ScheduleVo scheduleVo);
 	
 }

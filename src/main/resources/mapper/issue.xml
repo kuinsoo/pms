@@ -6,16 +6,24 @@
 <mapper namespace="kr.or.ddit.issue.mapper.IssueMapper">
 
 	<!-- 이슈 전체 일정 -->
-	<select id="issueAllSchedule" resultType="issueVo" parameterType="String">
+	<select id="issueAllSchedule" resultType="issueVo" parameterType="scheduleVo">
 	<!-- 일정에 필요한 컬럼 정리 : 이슈제목, 이슈발행일시, 이슈해결일시, 이슈일시색깔 -->
 		SELECT	sue.issue_title,
 				sue.issue_sdate,
 				sue.issue_edate,
 				sue.issue_color
-		FROM	issue sue
-		<if test="value != null">
-			WHERE	sue.issue_member = #{value}
-		</if>
+		<choose>
+			<when test="pid != null">
+				FROM    project p INNER JOIN work w
+				ON      p.project_id = w.work_project INNER JOIN issue sue
+				ON      w.work_id = sue.issue_work
+				where   p.project_id = #{pid}
+			</when>
+			<otherwise>
+				FROM	issue sue
+				WHERE	sue.issue_member = #{sid}
+			</otherwise>
+		</choose>
 	</select>
 
 </mapper>

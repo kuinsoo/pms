@@ -106,10 +106,9 @@
 							result.push(json);
 						</c:forEach>
 					}
-					
 				}
+				
 			} //for문
-			
 			return result;
 		}
 		

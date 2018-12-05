@@ -43,8 +43,8 @@ public class ScheduleController {
 		
 		ScheduleVo scheduleVo = new ScheduleVo(sid, pid);
 		
-		Map<String, Object> allScheduleList = scheduleService.scheduleList(scheduleVo, sid);
-		List<ScheduleVo> myProjectList = scheduleService.myProjectList(sid);
+		Map<String, Object> allScheduleList = scheduleService.scheduleList(scheduleVo);
+		List<ScheduleVo> myProjectList = scheduleService.myProjectList(scheduleVo);
 		
 		model.addAttribute("allScheduleList", allScheduleList);
 		model.addAttribute("myProjectList", myProjectList);
