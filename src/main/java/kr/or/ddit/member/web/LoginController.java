@@ -1,23 +1,18 @@
 package kr.or.ddit.member.web;
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 
 /**
  * LoginController.java
@@ -26,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
  * @version 1.0
  * @see <pre> << 개정이력(Modification Information) >> 수정자 수정내용 ------ ------------------------ pc07 최초 생성 </pre>
  */
-@SessionAttributes("memberVo")  // 	model.addAttribute("memberVo",memberVo); 할때 세션에 없으면 세션영역을 할당해준다.
+@SessionAttributes(value = {"memberVo", "certificationNumber"})  // 	model.addAttribute("memberVo",memberVo); 할때 세션에 없으면 세션영역을 할당해준다.
 @Controller
 public class LoginController {
 	@Autowired
@@ -223,7 +218,7 @@ public class LoginController {
 	 */
 	@ResponseBody
 	@RequestMapping(value="/signProcessAjax",method=RequestMethod.GET)
-	public void signProcessAjax(HttpServletRequest request, Model model, HttpSession session ) {
+	public String signProcessAjax(HttpServletRequest request, Model model) {
 		
 		// 핸드폰 번호 입력란 
 		String member_tel = request.getParameter("member_tel");
@@ -254,24 +249,26 @@ public class LoginController {
 		JSONObject result = coolsms.send(set);// 보내기&전송결과받기
 		
 		// session에 랜덤값을 담아준다.
-		session.setAttribute("certificationNumber", certificationNumber);
-		
+//		model.addAttribute("certificationNumber", certificationNumber);
+//
 		System.out.println("certificationNumber값 확인하기 : " + certificationNumber);
 		
-		// 메시지 보내기 성공 및 전송결과 출력
-		if ((boolean)result.get("status") == true) {
-	      System.out.println("성공");
-	      System.out.println(result.get("group_id")); // 그룹아이디
-	      System.out.println(result.get("result_code")); // 결과코드
-	      System.out.println(result.get("result_message")); // 결과 메시지
-	      System.out.println(result.get("success_count")); // 메시지아이디
-	      System.out.println(result.get("error_count")); // 여러개 보낼시 오류난 메시지 수
-	    
-	    // 메시지 보내기 실패
-	    } else {
-	      System.out.println("실패");
-	      System.out.println(result.get("code")); // REST API 에러코드
-	      System.out.println(result.get("message")); // 에러메시지
-	    }
+//		// 메시지 보내기 성공 및 전송결과 출력
+//		if ((boolean)result.get("status") == true) {
+//	      System.out.println("성공");
+//	      System.out.println(result.get("group_id")); // 그룹아이디
+//	      System.out.println(result.get("result_code")); // 결과코드
+//	      System.out.println(result.get("result_message")); // 결과 메시지
+//	      System.out.println(result.get("success_count")); // 메시지아이디
+//	      System.out.println(result.get("error_count")); // 여러개 보낼시 오류난 메시지 수
+//
+//	    // 메시지 보내기 실패
+//	    } else {
+//	      System.out.println("실패");
+//	      System.out.println(result.get("code")); // REST API 에러코드
+//	      System.out.println(result.get("message")); // 에러메시지
+//	    }
+
+	    return certificationNumber;
 	}
 }
