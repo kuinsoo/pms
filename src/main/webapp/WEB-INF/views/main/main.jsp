@@ -239,13 +239,13 @@
 			</div>
 			<div class="currentMainProjectCreate">
 				<h1>진행중인 프로젝트</h1>
+				<%-- ajax 처리 --%>
 				<ul class="bookmarkProject">
 					<c:forEach items="${memberProjectList}" var="pmember" varStatus="i">
 						<c:forEach items="${pmember.projectList}" var="project" varStatus="j">
-							<%--<c:if test="${i.index eq j.index}">--%>
 					<li class="bookmarkProject">
-						<div class="projectCard">
-							<div class="projectCardTitle">
+						<div class="projectCard" >
+							<div class="projectCardTitle goSubMain" >
 								<c:choose >
 									<c:when test="${project.project_bookmark eq 'N'}">
 								<i class="icon-star icons" onclick="bookmark('${project.project_id}');"></i>
@@ -264,7 +264,6 @@
 							</div>
 						</div>
 					</li>
-							<%--</c:if>--%>
 						</c:forEach>
 					</c:forEach>
 				</ul>
@@ -539,6 +538,10 @@
 			}
 		});
 	}
+
+	$('.goSubMain').on("click", function () {
+		location.href = "main/subMain";
+	});
 </script>
 </body>
 </html>

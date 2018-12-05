@@ -54,7 +54,8 @@ public class ProjectController {
 	/**
 	 * Create project string.
 	 *
-	 * @param projectVo    the project vo
+	 * @param projectVo the project vo
+	 * @param memberVo  the member vo
 	 * @return the string
 	 */
 	@RequestMapping(value = "/createProject",method = RequestMethod.POST)
@@ -71,6 +72,7 @@ public class ProjectController {
 	/**
 	 * Project list string.
 	 * 접속한 회원의 참여중인 프로젝트 리스트
+	 *
 	 * @param model the model
 	 * @return the string
 	 */
@@ -81,6 +83,14 @@ public class ProjectController {
 		return "project/projectList";
 	}
 
+	/**
+	 * Project bookmark ajax string.
+	 *
+	 * @param project_id the project id
+	 * @param memberVo   the member vo
+	 * @param model      the model
+	 * @return the string
+	 */
 	@RequestMapping(value = "/projectBookmarkAjax", method = RequestMethod.POST)
 	public String projectBookmarkAjax(@RequestParam("project_id")String project_id,
 									  @SessionAttribute("memberVo")MemberVo memberVo,
@@ -99,6 +109,12 @@ public class ProjectController {
 		return "project/ajaxProjectList";
 	}
 
+
+	@RequestMapping(value = "/subMain", method = RequestMethod.GET)
+	public String subMain() {
+
+		return "main/subMain";
+	}
 
 
 
