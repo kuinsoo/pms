@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,8 +35,26 @@ div.well input[type="submit"]{width:100%;height:50px}
 .phoneInputBtn{float:left;margin-top:10px;}
 .certification{clear:both;}
 .signCloseBtns{width:100%;}
-.error{color: red; }
+.error{color: red;}
+#telerror{color: red;}
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".error").hide();
+	$("#telerror").hide();
+	//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
+	//blur()이벤트 사용
+	$("#passCheck").blur(function() {
+		if($("#passCheck").val() != $("#password").val()){
+			$("#passCheck").next().show();
+		} else{
+			$("#passCheck").next().hide();
+		}
+	});
+});
+</script>
+<!-- 핸드폰 번호 입력 후 인증 버튼 -->
 <script type="text/javascript">
 function telAjax(){
 	var member_tel = $("#tel").val();
@@ -49,16 +68,15 @@ function telAjax(){
 }
 </script>
 <script type="text/javascript">
-function telSaveAjax(){
+function onkeypress_event(){
 	var telnum = $("#telnum").val();
-	$.ajax({
-		type :"GET",
-		url :"/signProcessAjax",
-		data : "telnum="+telnum,
-		sucess : function(data){	
+	var certificationNumber = "${certificationNumber}";
+		if(certificationNumber == telnum){
+			$("#telerror").hide();
+		}else{			
+			$("#telerror").show();
 		}
-	});
-}
+	}
 </script>
 </head>
 <body>
@@ -94,15 +112,11 @@ function telSaveAjax(){
 						<button onclick="telAjax();" class="btn btn-primary btn-raised" >인증</button>
 					</div>
 				</div>
-				<div class="phoneSignDiv">
-					<div class="form-group label-floating phoneInput">
-						<label class="control-label">인증번호</label>
-						<input type="text" class="form-control" id ="telnum" name="telSendNumber" required />
-					</div>
-					<div class="phoneInputBtn">
-						<button onclick="telSaveAjax();" class="btn btn-primary btn-raised" >확인</button>
-					</div>
-				</div>		
+				<div class="form-group label-floating certification">
+					<label class="control-label">인증번호</label>
+					<input type="text" class="form-control" onkeypress="onkeypress_event();" id ="telnum" name="telSendNumber"  required />
+					<span id="telerror"> 인증번호가 일치하지 않습니다.</span>
+				</div>
 				<br>
 				<input type="submit" value="회원가입" class="btn btn-primary btn-raised" /><br>
 				<a href="/" class="btn btn-primary btn-raised signCloseBtns">취소</a>
@@ -110,21 +124,6 @@ function telSaveAjax(){
 		</div>
 	</div>
 </div>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.js"></script>
-<script type="text/javascript">
-$(document).ready(function() {
-	$(".error").hide();
-	//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
-	//blur()이벤트 사용
-	$("#passCheck").blur(function() {
-		if($("#passCheck").val() != $("#password").val()){
-			$("#passCheck").next().show();
-		} else{
-			$("#passCheck").next().hide();
-		}
-	});
-});
-</script>
 
 <script src="../js/material.min.js"></script>
 <script>
@@ -132,19 +131,3 @@ $(document).ready(function() {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

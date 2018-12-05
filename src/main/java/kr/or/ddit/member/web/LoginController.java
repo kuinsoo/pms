@@ -1,6 +1,4 @@
 package kr.or.ddit.member.web;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
-
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
@@ -16,9 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import kr.or.ddit.commons.mail.service.EmailSserviceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 
@@ -187,7 +185,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value="/signProcess",method=RequestMethod.POST)
 	public String signProcess(@RequestParam("member_mail") String member_mail ,MemberVo member, HttpServletRequest request) {
-		
+	
 		// 값이 다르면..
 		if(memberservice.selectUser(member_mail)==null) {
 			int insertUser = memberservice.insertUser(member);		
@@ -204,26 +202,57 @@ public class LoginController {
 	 * @return
 	 * Method 설명 : sign.jsp에서 휴대전화 인증 버튼을 눌렀을때 
 	 */
+	@ResponseBody
 	@RequestMapping(value="/signProcessAjax",method=RequestMethod.GET)
-	public String signProcessAjax(HttpServletRequest request) {
+	public void signProcessAjax(HttpServletRequest request, Model model, HttpSession session ) {
 		
+		// 핸드폰 번호 입력란 
 		String member_tel = request.getParameter("member_tel");
-		String telnum = request.getParameter("telnum");
-		System.out.println( "syso"+ member_tel);
-		System.out.println( "syso"+ telnum);
+		
+		// ajax로 값이 넘어왔는지 확인하는 
+		System.out.println( "ajax " + member_tel);
 		
 		String api_key = "NCSJQVBNAKBRXLTC";
 		String api_secret ="ZNJ2OS1W0F1A4N9FPRUKO8YXWT1RBXKR";
 		Coolsms coolsms = new Coolsms(api_key, api_secret);
 	
 		HashMap<String, String> set = new HashMap<String, String>();
-		set.put("to", "010-9901-1334"); // 내번호 
-		set.put("from",(String)request.getParameter("010-9947-0728")); // 발신번호
-		set.put("text",(String)request.getParameter("CURRENT 인증번호는   [  " +  " ]  입니다. "));
+		set.put("to", member_tel); // 수신
+		set.put("from", "01099011334"); // 발신
+		
+		// random 로직 
+		String number ="0123456789";	
+		
+		// 인증번호 담아주는 변수 
+		String certificationNumber = "";
+		for(int i = 0; i < 4; i++) {
+			certificationNumber += number.charAt((int) Math.floor(Math.random()* number.length()));
+		}
+		set.put("text", "CURRENT 인증번호는   [  " + certificationNumber + " ]  입니다. ");
+		System.out.println( " 인증번호 4자리 숫자  " + certificationNumber);
 		set.put("type", "sms"); // 문자타입
-
-		JSONObject result = coolsms.send(set); // 보내기 & 전송결과받기
-		 
-		return "";
+		
+		JSONObject result = coolsms.send(set);// 보내기&전송결과받기
+		
+		// session에 랜덤값을 담아준다.
+		session.setAttribute("certificationNumber", certificationNumber);
+		
+		System.out.println("certificationNumber값 확인하기 : " + certificationNumber);
+		
+		// 메시지 보내기 성공 및 전송결과 출력
+		if ((boolean)result.get("status") == true) {
+	      System.out.println("성공");
+	      System.out.println(result.get("group_id")); // 그룹아이디
+	      System.out.println(result.get("result_code")); // 결과코드
+	      System.out.println(result.get("result_message")); // 결과 메시지
+	      System.out.println(result.get("success_count")); // 메시지아이디
+	      System.out.println(result.get("error_count")); // 여러개 보낼시 오류난 메시지 수
+	    
+	    // 메시지 보내기 실패
+	    } else {
+	      System.out.println("실패");
+	      System.out.println(result.get("code")); // REST API 에러코드
+	      System.out.println(result.get("message")); // 에러메시지
+	    }
 	}
 }
