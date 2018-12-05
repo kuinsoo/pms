@@ -216,7 +216,7 @@
 <!-- body영역 -->
 <body>
 	<div class="container">
-		<form id="hiddenSid" name="sid" method="POST" action="/allSchedule" value="${memberVo.member_mail }">
+		<form id="hiddenSid" name="sid" method="POST" action="/allSchedule">
 			<input type="hidden" value="${memberVo.member_mail}">
 		</form>
 		<form id="selectForm" name="selectForm" method="POST" action="/allSchedule">
