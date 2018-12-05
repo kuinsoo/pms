@@ -239,6 +239,39 @@
 			</div>
 			<div class="currentMainProjectCreate">
 				<h1>진행중인 프로젝트</h1>
+				<ul class="bookmarkProject">
+					<c:forEach items="${memberProjectList}" var="pmember" varStatus="i">
+						<c:forEach items="${pmember.projectList}" var="project" varStatus="j">
+							<%--<c:if test="${i.index eq j.index}">--%>
+					<li class="bookmarkProject">
+						<div class="projectCard">
+							<div class="projectCardTitle">
+								<c:choose >
+									<c:when test="${project.project_bookmark eq 'N'}">
+								<i class="icon-star icons" onclick="bookmark('${project.project_id}');"></i>
+									</c:when>
+									<c:when test="${project.project_bookmark eq 'Y'}">
+								<i class="icon-star icons"  style="color:yellow;font-weight:bold;" onclick="bookmark('${project.project_id}');"></i>
+									</c:when>
+								</c:choose>
+								${project.project_title}
+								<i class="icon-settings icons"></i>
+							</div>
+							<div class="projectCardUserName">
+								<img src="http://placehold.it/30x30">
+								<br>
+								${pmember.member_name} 외 ${pmember.pmemberCount - 1}
+							</div>
+						</div>
+					</li>
+							<%--</c:if>--%>
+						</c:forEach>
+					</c:forEach>
+				</ul>
+			</div>
+			<div class="currentMainProjectCreates">
+				<h1>초대받은 프로젝트</h1>
+
 				<ul>
 					<li>
 						<a href="#projectCreatePopUp" class="projectCreatePopUp">
@@ -267,11 +300,18 @@
 												<form action="/createProject" method="post">
 													<span>프로젝트명</span>
 													<br>
-													<input type="text" placeholder="프로젝트명 입력(최대 50자)" class="projectTitleInput" />
+													<input type="text" name="project_title" placeholder="프로젝트명 입력(최대 50자)" class="projectTitleInput" />
 													<br><br>
 													<span>프로젝트 개요</span>
 													<br>
-													<textarea class="projectContentInput" placeholder="프로젝트 개요 입력"></textarea>
+													<textarea class="projectContentInput" name="project_overview" placeholder="프로젝트 개요 입력"></textarea>
+													<span>프로젝트 시작일</span>
+													<br>
+													<input type="date" name="project_sdate" />
+													<span>프로젝트 마감일</span>
+													<br>
+													<input type="date" name="project_edate" />
+
 													<div class="layerPopUpBtnss">
 														<input type="submit" value="만들기" class="createProjectSubmit">
 														<a href="#" class="btn-layerClose layerPopupClose">취소</a>
@@ -285,29 +325,6 @@
 							</div>
 						</div>
 					</li>
-					<c:forEach items="${memberProjectList}" var="pmember" varStatus="i">
-						<c:forEach items="${pmember.projectList}" var="project">
-					<li>
-						<div class="projectCard">
-							<div class="projectCardTitle">
-								<i class="icon-star icons"></i>
-								${project.project_title}
-								<i class="icon-settings icons"></i>
-							</div>
-							<div class="projectCardUserName">
-								<img src="http://placehold.it/30x30">
-								<br>
-								${pmember.member_name} 외 ${pmember.pmemberCount - 1}
-							</div>
-						</div>
-					</li>
-						</c:forEach>
-					</c:forEach>
-				</ul>
-			</div>
-			<div class="currentMainProjectCreates">
-				<h1>초대받은 프로젝트</h1>
-				<ul>
 					<li>
 						<div class="projectCard">
 							<div class="projectCardTitle">
@@ -509,6 +526,19 @@
 
 	// 알람 탭 메뉴
 	$("#tabs").tabs();
+	
+	// book mark 
+	function bookmark(project_id) {
+		$.ajax({
+			type: "POST",
+			url: "/projectBookmarkAjax",
+			data : {"project_id" : project_id},
+			success: function (data) {
+				$('.bookmarkProject').html("");
+				$('.bookmarkProject').html(data);
+			}
+		});
+	}
 </script>
 </body>
 </html>

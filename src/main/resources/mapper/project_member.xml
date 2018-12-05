@@ -12,24 +12,33 @@
             <id property="project_title" column="project_title" />
             <id property="project_overview" column="project_overview" />
             <id property="project_bookmark" column="project_bookmark" />
+            <id property="project_id" column="project_id" />
         </collection>
     </resultMap>
 
     <select id="selectMainView" parameterType="String" resultMap="pmemberResultMap">
-        select PROJECT_TITLE, PROJECT_OVERVIEW, PROJECT_BOOKMARK,MEMBER_NAME,MEMBER_PROFILE, (select count(*) from PROJECT_MEMBER, PROJECT, MEMBER
-                                                                                      where PROJECT_ID = PMEMBER_PROJECT
-                                                                                        and  MEMBER_MAIL = PMEMBER_MEMBER
-                                                                                        and project_id = pid) as pmemberCount
-        from MEMBER, PROJECT, PROJECT_MEMBER, (select project_id as pid
-                                               from MEMBER, PROJECT, PROJECT_MEMBER
-                                               where PMEMBER_MEMBER = MEMBER_MAIL
-                                                 and PMEMBER_PROJECT = PROJECT_ID
-                                                 and MEMBER_MAIL = #{member_mail})
-        where PMEMBER_MEMBER = MEMBER_MAIL
-          and PMEMBER_PROJECT = PROJECT_ID
-          and MEMBER_MAIL = #{member_mail}
+        SELECT  DISTINCT
+		        p.project_title,
+		        p.project_overview,
+		        p.project_bookmark,
+		        p.project_id,
+		        m.member_name,
+		        m.member_profile,
+		        pmemberCount.*
+		FROM    project p INNER JOIN project_member pm
+		ON      p.project_id = pm.pmember_project INNER JOIN member m
+		ON      pm.pmember_member = m.member_mail INNER JOIN (SELECT  pmember_project,
+		                                                              COUNT(*) as pmemberCount
+		                                                      FROM    project_member
+		                                                      WHERE   pmember_project IN (SELECT  pmember_project
+		                                                                                  FROM    project_member
+		                                                                                  WHERE   pmember_member = #{member_mail})
+		                                                      GROUP BY pmember_project) pmemberCount
+		ON      pm.pmember_project = pmemberCount.pmember_project
+		WHERE   m.member_mail = #{member_mail}
+		order by p.PROJECT_TITLE
     </select>
-	<!-- 
+	<!--
 		SELECT  DISTINCT
 		        p.project_title,
 		        p.project_overview,

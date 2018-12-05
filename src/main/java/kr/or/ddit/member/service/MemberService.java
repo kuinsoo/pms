@@ -1,5 +1,7 @@
 package kr.or.ddit.member.service;
 
+import kr.or.ddit.project.model.ProjectVo;
+import kr.or.ddit.project.service.ProjectServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,6 +10,7 @@ import kr.or.ddit.member.mapper.MemberMapper;
 import kr.or.ddit.member.model.MemberVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * kr.or.ddit.member.service
@@ -24,6 +27,9 @@ public class MemberService implements MemberServiceInf {
 
 	@Autowired
 	private MemberMapper memberMapper;
+
+	@Autowired
+	private ProjectServiceInf projectService;
 
 	/**
 	 * Method : seletUser
@@ -68,7 +74,7 @@ public class MemberService implements MemberServiceInf {
 	 * Method : selectfindPass
 	 * 작성자 : 나진실
 	 * 변경이력 :
-	 * @param memberVo
+	 * @param member_mail
 	 * @return
 	 * Method 설명 : 비밀번호 찾기
 	 */
@@ -100,5 +106,18 @@ public class MemberService implements MemberServiceInf {
 	@Override
 	public List<MemberVo> selectMainView(String member_mail) {
 		return memberMapper.selectMainView(member_mail);
+	}
+
+	/**
+	 * Sets team leader.
+	 * 작성자 : Mr.KKu
+	 * 프로젝트 참여자 권한 설정
+	 * @param mapPMember the map p member
+	 * @return the team leader
+	 */
+	@Override
+	public int setTeamLeader(Map<String, String> mapPMember, ProjectVo projectVo) {
+		projectService.createProject(projectVo);
+		return memberMapper.setTeamLeader(mapPMember);
 	}
 }

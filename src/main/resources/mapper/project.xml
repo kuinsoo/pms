@@ -10,7 +10,7 @@
     </select>
 
     <select id="selectProjectList" resultType="projectVo" parameterType="String">
-
+        select * from PROJECT where PROJECT_ID = #{project_id}
     </select>
 
     <select id="selectBookMarkProject" resultType="projectVo">
@@ -18,7 +18,7 @@
     </select>
 
     <insert id="createProject" parameterType="projectVo">
-        insert into PROJECT values (SEQ_PROJECT.nextval, #{project_title},#{project_overview}, 'N',#{project_sdate}, #{project_edate},''  )
+        insert into PROJECT values (SEQ_PROJECT.nextval, #{project_title},#{project_overview}, 'N',#{project_sdate}, #{project_edate},'','' )
     </insert>
 
     <delete id="deleteProject" parameterType="String">
@@ -27,7 +27,8 @@
 
     <update id="updateProject" parameterType="projectVo">
         update PROJECT
-        set #{project_title},#{project_overview},#{project_bookmark}, #{project_edate},#{project_eedate}
+        set PROJECT_TITLE = #{project_title}, PROJECT_OVERVIEW = #{project_overview},
+         PROJECT_BOOKMARK = #{project_bookmark}, PROJECT_EDATE = #{project_edate}
         where PROJECT_ID = #{project_id}
     </update>
     
