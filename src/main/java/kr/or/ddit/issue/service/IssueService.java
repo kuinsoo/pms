@@ -1,7 +1,14 @@
 package kr.or.ddit.issue.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import kr.or.ddit.issue.mapper.IssueMapper;
+import kr.or.ddit.issue.model.IssueVo;
+import kr.or.ddit.schedule.model.ScheduleVo;
 
 /**
  * kr.or.ddit.issue.service
@@ -14,5 +21,22 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class IssueService {
+public class IssueService implements IssueServiceInf{
+	
+	@Autowired
+	private IssueMapper issueMapper;
+
+	/**
+	* Method : issueAllSchedule
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param scheduleVo
+	* @return
+	* Method 설명 : 이슈 전체 일정
+	*/
+	@Override
+	public List<IssueVo> issueAllSchedule(ScheduleVo scheduleVo) {
+		return issueMapper.issueAllSchedule(scheduleVo);
+	}
+	
 }

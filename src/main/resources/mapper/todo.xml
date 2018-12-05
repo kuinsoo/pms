@@ -6,15 +6,25 @@
 <mapper namespace="kr.or.ddit.todo.mapper.ToDoMapper">
 	
 	<!-- 할일 전체 일정 -->
-	<select id="todoAllSchedule" resultType="todoVo">
+	<select id="todoAllSchedule" resultType="todoVo" parameterType="scheduleVo">
 	<!-- 일정에 필요한 컬럼 정리: 할일내용, 할일시작일시, 할일마감일시, 할일예상마감일시, 할일일정색깔 -->
-		SELECT	t.todo_content,
-				t.todo_sdate,
-				t.todo_edate,
-				t.todo_eedate,
-				t.todo_color
-		FROM	todo t
-		<!-- WHERE	todo_pmember = #{session_mail} -->
+		SELECT	td.todo_content,
+				td.todo_sdate,
+				td.todo_edate,
+				td.todo_eedate,
+				td.todo_color
+		<choose>
+			<when test="pid != null">
+				FROM    project p INNER JOIN work w
+				ON      p.project_id = w.work_project INNER JOIN todo td
+				ON      w.work_id = td.todo_work
+				WHERE   p.project_id = #{pid}
+			</when>
+			<otherwise>
+				FROM	todo td
+				WHERE	todo_pmember = #{sid}
+			</otherwise>
+		</choose>
 	</select>
 	
 </mapper>

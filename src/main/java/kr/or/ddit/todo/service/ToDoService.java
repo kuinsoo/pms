@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.todo.mapper.ToDoMapper;
 import kr.or.ddit.todo.model.ToDoVo;
 
@@ -29,12 +30,13 @@ public class ToDoService implements ToDoServiceInf{
 	* Method : todoAllSchedule
 	* 작성자 : jerry
 	* 변경이력 : 2018-11-30 10:01
+	* @param scheduleVo
 	* @return
 	* Method 설명 : 할일 전체 일정
 	*/
 	@Override
-	public List<ToDoVo> todoAllSchedule() {
-		return todoMapper.todoAllSchedule();
+	public List<ToDoVo> todoAllSchedule(ScheduleVo scheduleVo) {
+		return todoMapper.todoAllSchedule(scheduleVo);
 	}
 	
 }

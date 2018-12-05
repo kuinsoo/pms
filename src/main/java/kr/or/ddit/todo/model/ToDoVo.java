@@ -22,13 +22,13 @@ public class ToDoVo {
 	private String todo_work;			//	할일업무번호(fk)
 	private String todo_pmember;		//	할일담당자
 	private String todo_content;		//	할일내용
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date todo_sdate;			//	할일시작일시
 	private String format_todo_sdate;	//	할일시작일시(String)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date todo_edate;			//	할일마감일시
 	private String format_todo_edate;	//	할일마감일시(String)
-	@DateTimeFormat(pattern="yyyy-MM-dd")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date todo_eedate;			//	할일예상마감일시
 	private String format_todo_eedate;	//	할일예상감일시(String)
 	private String todo_complet;		//	할일완료여부
@@ -114,7 +114,7 @@ public class ToDoVo {
 	}
 	
 	/* 형변환 getter */
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public String getFormat_todo_sdate() {
 		return sdf.format(todo_sdate);
 	}

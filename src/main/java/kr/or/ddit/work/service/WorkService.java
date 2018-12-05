@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.work.mapper.WorkMapper;
 import kr.or.ddit.work.model.WorkVo;
 
@@ -29,12 +30,13 @@ public class WorkService implements WorkServiceInf{
 	* Method : workAllSchedule
 	* 작성자 : jerry
 	* 변경이력 :
+	* @param scheduleVo
 	* @return
 	* Method 설명 : 업무 전체 일정
 	*/
 	@Override
-	public List<WorkVo> workAllSchedule() {
-		return workMapper.workAllSchedule();
+	public List<WorkVo> workAllSchedule(ScheduleVo scheduleVo) {
+		return workMapper.workAllSchedule(scheduleVo);
 	}
 	
 }

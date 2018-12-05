@@ -1,13 +1,16 @@
 package kr.or.ddit.schedule.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.ddit.issue.mapper.IssueMapper;
 import kr.or.ddit.project.mapper.ProjectMapper;
+import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.todo.mapper.ToDoMapper;
 import kr.or.ddit.work.mapper.WorkMapper;
 
@@ -21,6 +24,8 @@ public class ScheduleService implements ScheduleServiceInf{
 	private ProjectMapper projectMapper;
 	@Autowired
 	private ToDoMapper todoMapper;
+	@Autowired
+	private IssueMapper issueMapper;
 	
 	/**
 	* Method : scheduleList
@@ -30,14 +35,28 @@ public class ScheduleService implements ScheduleServiceInf{
 	* Method 설명 : 프로젝트, 업무, 회의, 이슈 등 전체 일정
 	*/
 	@Override
-	public Map<String, Object> scheduleList() {
+	public Map<String, Object> scheduleList(ScheduleVo scheduleVo) {
 		Map<String, Object> allScheduleList = new HashMap<String, Object>();
 		
-		allScheduleList.put("workScheduleList", workMapper.workAllSchedule());
-		allScheduleList.put("projectScheduleList", projectMapper.projectAllSchedule());
-		allScheduleList.put("todoScheduleList", todoMapper.todoAllSchedule());
+		allScheduleList.put("projectScheduleList", projectMapper.projectAllSchedule(scheduleVo));
+		allScheduleList.put("workScheduleList", workMapper.workAllSchedule(scheduleVo));
+		allScheduleList.put("todoScheduleList", todoMapper.todoAllSchedule(scheduleVo));
+		allScheduleList.put("issueScheduleList", issueMapper.issueAllSchedule(scheduleVo));
 		
 		return allScheduleList;
+	}
+
+	/**
+	* Method : myProjectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param scheduleVo
+	* @return
+	* Method 설명 : 일정의 select 프로젝트명 list
+	*/
+	@Override
+	public List<ScheduleVo> myProjectList(ScheduleVo scheduleVo) {
+		return projectMapper.myProjectList(scheduleVo);
 	}
 
 }

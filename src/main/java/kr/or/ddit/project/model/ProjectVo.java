@@ -116,7 +116,7 @@ public class ProjectVo {
 	public void setProject_color(String project_color) {
 		this.project_color = project_color;
 	}
-
+	
 	/* 형변환 getter (20181129 지태 추가) */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	public String getFormat_project_sdate() {
