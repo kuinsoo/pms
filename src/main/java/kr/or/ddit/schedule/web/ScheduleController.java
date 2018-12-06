@@ -1,6 +1,5 @@
 package kr.or.ddit.schedule.web;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.ddit.member.model.MemberVo;
@@ -44,10 +42,8 @@ public class ScheduleController {
 		ScheduleVo scheduleVo = new ScheduleVo(sid, pid);
 		
 		Map<String, Object> allScheduleList = scheduleService.scheduleList(scheduleVo);
-		List<ScheduleVo> myProjectList = scheduleService.myProjectList(scheduleVo);
 		
 		model.addAttribute("allScheduleList", allScheduleList);
-		model.addAttribute("myProjectList", myProjectList);
 		
 		return "schedule/schedule";
 	}

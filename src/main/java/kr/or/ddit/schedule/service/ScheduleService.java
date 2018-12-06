@@ -46,17 +46,4 @@ public class ScheduleService implements ScheduleServiceInf{
 		return allScheduleList;
 	}
 
-	/**
-	* Method : myProjectList
-	* 작성자 : jerry
-	* 변경이력 :
-	* @param scheduleVo
-	* @return
-	* Method 설명 : 일정의 select 프로젝트명 list
-	*/
-	@Override
-	public List<ScheduleVo> myProjectList(ScheduleVo scheduleVo) {
-		return projectMapper.myProjectList(scheduleVo);
-	}
-
 }

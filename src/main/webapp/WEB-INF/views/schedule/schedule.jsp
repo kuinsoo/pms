@@ -153,7 +153,7 @@
 						<%-- <option value="${projectList.project_id}">${projectList.project_title}(${projectList.project_id})</option> --%>
 					<%-- </c:forEach> --%>
 					subSelectBox.append("<option value=''>:::선택해주세요:::</option>");
-					subSelectBox.append("<c:forEach items='${myProjectList}' var='projectList'>");
+					subSelectBox.append("<c:forEach items='${allScheduleList.projectScheduleList}' var='projectList'>");
 					subSelectBox.append("	<option value='${projectList.project_id}'>${projectList.project_title}(${projectList.project_id})</option>");
 					subSelectBox.append("</c:forEach>");
 				}

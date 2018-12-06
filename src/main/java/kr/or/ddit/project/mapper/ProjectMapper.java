@@ -72,15 +72,5 @@ public interface ProjectMapper {
 	 * @return Method  설명 : 프로젝트 전체 일정
 	 */
 	List<ProjectVo> projectAllSchedule(ScheduleVo scheduleVo);
-
-	/**
-	 * Method : myProjectList
-	 * 작성자 : jerry
-	 * 변경이력 :
-	 *
-	 * @param scheduleVo the schedule vo
-	 * @return Method  설명 : 일정의 select 프로젝트명 list
-	 */
-	List<ScheduleVo> myProjectList(ScheduleVo scheduleVo);
 	
 }
