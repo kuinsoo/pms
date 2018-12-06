@@ -1,13 +1,13 @@
 package kr.or.ddit.member.service;
 
+import kr.or.ddit.member.mapper.MemberMapper;
+import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.member.model.PMemberListVo;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import kr.or.ddit.member.mapper.MemberMapper;
-import kr.or.ddit.member.model.MemberVo;
 
 import java.util.List;
 import java.util.Map;
@@ -104,7 +104,7 @@ public class MemberService implements MemberServiceInf {
 	 * @return the list
 	 */
 	@Override
-	public List<MemberVo> selectMainView(String member_mail) {
+	public List<PMemberListVo> selectMainView(String member_mail) {
 		return memberMapper.selectMainView(member_mail);
 	}
 

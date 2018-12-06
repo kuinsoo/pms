@@ -1,5 +1,6 @@
 package kr.or.ddit.member.model;
 
+import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
@@ -11,6 +12,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @Date : 2018-12-03 / 오후 7:41
  * @Version :
  */
+@Alias("pMemberVo")
 public class PMemberVo {
 
 	private String pmember_id;

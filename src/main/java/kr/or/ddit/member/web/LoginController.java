@@ -73,6 +73,7 @@ public class LoginController {
 			return "login/login";
 		}else {
 			model.addAttribute("memberVo",memberVo);
+
 			return "redirect:/main";
 		}
 	}
@@ -88,7 +89,8 @@ public class LoginController {
 	 */
 	@RequestMapping(value="/main",method=RequestMethod.GET)
 	public String main(Model model, @ModelAttribute("memberVo")MemberVo memberVo) {
-		model.addAttribute("memberProjectList",memberservice.selectMainView(memberVo.getMember_mail()));
+
+		model.addAttribute("pMemberList",memberservice.selectMainView(memberVo.getMember_mail()));
 		return "main/main";
 	}
 

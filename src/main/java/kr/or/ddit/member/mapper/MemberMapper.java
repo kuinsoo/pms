@@ -1,7 +1,7 @@
 package kr.or.ddit.member.mapper;
 
 import kr.or.ddit.member.model.MemberVo;
-import kr.or.ddit.project.model.ProjectVo;
+import kr.or.ddit.member.model.PMemberListVo;
 
 import java.util.List;
 import java.util.Map;
@@ -77,7 +77,7 @@ public interface MemberMapper {
 	 * @param member_mail the member mail
 	 * @return the list
 	 */
-	List<MemberVo> selectMainView(String member_mail);
+	List<PMemberListVo> selectMainView(String member_mail);
 
 	/**
 	 * Sets team leader.
