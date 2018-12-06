@@ -1,215 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>MAIN - CURRENT</title>
-	<link rel="shortcut icon" type="image/x-icon" href="../images/favicon.png" />
-<!-- NANUM SQUARE FONT -->
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
-<link rel="stylesheet" href="../css/swiper.min.css">
-<link rel="stylesheet" href="../css/jquery-ui.css">
-<link rel="stylesheet" href="../css/main.css">
-</head>
 
-<body class="cbp-spmenu-push">
-
-<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-	<div class="currentMainLeftMenu">
-		<div class="leftMenuUserInterface">
-			<div class="dimLeftMenuUserInterface"></div>
-			<img src="http://placehold.it/100x100">
-			<p>userName</p>
-		</div>
-		<ul class="firstMenu">
-			<li>
-				<i class="icon-grid icons"></i>
-				<p>ÀüÃ¼</p>
-			</li>
-			<li>
-				<i class="icon-star icons"></i>
-				<p>Áñ°ÜÃ£±â</p>
-			</li>
-		</ul>
-		<ul class="menuList">
-			<li>
-				<i class="icon-check icons"></i>
-				<p>ÀüÃ¼ ¾÷¹«</p>
-			</li>
-			<li><a href="/allSchedule">
-					<i class="icon-calendar icons"></i>
-					ÀüÃ¼ ÀÏÁ¤</a>
-			</li>
-			<li>
-				<i class="icon-bubbles icons"></i>
-				<p>È¸ÀÇ</p>
-			</li>
-			<li>
-				<i class="icon-bulb icons"></i>
-				<p>ÀÌ½´ È÷½ºÅä¸®</p>
-			</li>
-			<li>
-				<i class="icon-list"></i>
-				<p>ÅõÇ¥</p>
-			</li>
-		</ul>
-		<ul class="boardMenu">
-			<li>
-				<i class="icon-note icons"></i>
-				<p>°øÁö»çÇ×</p>
-			</li>
-			<li>
-				<i class="icon-diamond icons"></i>
-				<p>°¡ÀÌµå</p>
-			</li>
-			<li>
-				<i class="icon-question icons"></i>
-				<p>Q & A</p>
-			</li>
-		</ul>
-	</div>
-</nav>
-
-<div id="wrap">
-	<!-- CURRENT HEADER -->
-	<header>
-		<div class="headerContainer">
-
-			<!-- LEFT MENU -->
-			<div class="currentMenu">
-				<a class="menu-trigger" href="#" id="showLeftPush" onclick="return false;">
-					<span></span>
-					<span></span>
-					<span></span>
-				</a>
-			</div>
-
-			<!-- CURRENT LOGO -->
-			<div class="currentLogo">
-				<img src="http://placehold.it/200x45">
-			</div>
-
-			<!-- CURRENT ALL SEARCH -->
-			<div class="currentAllSearch">
-				<select>
-					<option>ALL</option>
-					<option>±Û</option>
-					<option>Âü¿©ÀÚ</option>
-				</select>
-				<input type="text" placeholder="ÀüÃ¼¿¡¼­ °Ë»ö" class="headerSearchInputText" />
-				<i class="icon-magnifier icons"></i>
-			</div>
-
-			<div class="headerRightContent">
-				<!-- ÆÀ¿ø ÃÊ´ë -->
-				<a href="#projectCreatePopUps" class="projectCreatePopUps">
-					<div class="teamInvite">
-						<i class="icon-plus icons"></i>
-						<p>ÆÀ¿øÃÊ´ë</p>
-					</div>
-				</a>
-				<div class="dim-layers">
-					<div class="dimBgs"></div>
-					<div id="projectCreatePopUps" class="pop-layers">
-						<div class="pop-containers">
-							<div class="pop-contss">
-								<div class="pop-conts-headers">
-									<p>ÆÀ¿ø ÃÊ´ë</p>
-									<a href="#" class="btn-layerCloses">
-										<i class="icon-close icons"></i>
-									</a>
-								</div>
-								<div class="pop-conts-sections">
-									<div class="pop-conts-section-titles">
-										<span>ÀÌ¸ŞÀÏÀ» ÅëÇØ ÆÀ¿øÀ» ÃÊ´ëÇÒ ¼ö ÀÖ½À´Ï´Ù</span>
-										<br>
-										<input type="email" placeholder="ÀÌ¸ŞÀÏ ÀÔ·Â" class="projectTitleInputs" />
-										<br>
-										<input type="email" placeholder="example@gmail.com" class="projectTitleInputs" />
-										<br>
-										<input type="email" placeholder="example@gmail.com" class="projectTitleInputs" />
-										<br>
-										<input type="email" placeholder="example@gmail.com" class="projectTitleInputs" />
-										<br>
-										<input type="email" placeholder="example@gmail.com" class="projectTitleInputs" />
-										<br>
-										<div class="layerPopUpBtnsss">
-											<input type="submit" value="ÃÊ´ëÇÏ±â" class="createProjectSubmits">
-											<a href="#" class="btn-layerCloses layerPopupCloses">Ãë¼Ò</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- ¾Ë¸² ±â´É -->
-				<div class="alarm dialog__triggers">
-					<i class="icon-bell icons"></i>
-					<div class="dialogs">
-						<div id="tabs">
-							<ul>
-								<li><a href="#tabs-1">¹ÌÈ®ÀÎ ¾Ë¸²</a></li>
-								<li><a href="#tabs-2">ÀüÃ¼ ¾Ë¸²</a></li>
-							</ul>
-							<div id="tabs-1">
-								<i class="icon-bell icons"></i>
-								<p>»õ ÇÁ·ÎÁ§Æ® ¹× »õ ±ÛÀÌ µî·ÏµÇ¾úÀ» ¶§,<br>Push ¸Ş½ÃÁö·Î ¾Ë·Áµå·Á¿ä!</p>
-							</div>
-							<div id="tabs-2">
-								<ul>
-									<li>
-										<i class="icon-star icons"></i>
-										<span>»õ ÇÁ·ÎÁ§Æ®°¡ µî·Ï µÇ¾ú½À´Ï´Ù!</span>
-									</li>
-									<li>
-										<i class="icon-star icons"></i>
-										<span>ÀÏ°¨ÀÌ Ãß°¡ µÇ¾ú½À´Ï´Ù!</span>
-									</li>
-									<li>
-										<i class="icon-star icons"></i>
-										<span>¾÷¹«°¡ µî·Ï µÇ¾ú½À´Ï´Ù!</span>
-									</li>
-									<li>
-										<i class="icon-star icons"></i>
-										<span>ÀÏÁ¤ÀÌ Ãß°¡ µÇ¾ú½À´Ï´Ù!</span>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- CURRENT USER -->
-				<div class="currentUser dialog__trigger">
-					<img src="http://placehold.it/40x40" />
-					<i class="icon-arrow-down icons"></i>
-					<div class="dialog">
-						<div class="dialogUserImg">
-							<img src="http://placehold.it/100x100">
-							<p>userName</p>
-						</div>
-						<ul>
-							<li>
-								<i class="icon-settings icons"></i>
-								<a href="#">¸¶ÀÌÆäÀÌÁö</a>
-							</li>
-							<li>
-								<i class="icon-power icons"></i>
-								<a href="#">·Î±×¾Æ¿ô</a>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-
-		</div>
-	</header>
+<%-- left & header--%>
+<%@ include file="/WEB-INF/views/header.jsp" %>
 
 	<!-- CURRENT SECTION(MAIN) -->
 	<section class="currentMain">
@@ -238,14 +31,15 @@
 				</div>
 			</div>
 			<div class="currentMainProjectCreate">
-				<h1>ÁøÇàÁßÀÎ ÇÁ·ÎÁ§Æ®</h1>
-				<%-- ajax Ã³¸® --%>
+				<h1>ì§„í–‰ì¤‘ì¸ í”„ë¡œì íŠ¸</h1>
+				<%-- ajax ì²˜ë¦¬ --%>
 				<ul class="bookmarkProject">
-					<c:forEach items="${memberProjectList}" var="pmember" varStatus="i">
-						<c:forEach items="${pmember.projectList}" var="project" varStatus="j">
+					<c:forEach items="${memberProjectList}" var="member" varStatus="i">
+						<c:forEach items="${member.projectList}" var="project" varStatus="j">
+
 					<li class="bookmarkProject">
 						<div class="projectCard" >
-							<div class="projectCardTitle goSubMain" >
+							<div class="projectCardTitle" >
 								<c:choose >
 									<c:when test="${project.project_bookmark eq 'N'}">
 								<i class="icon-star icons" onclick="bookmark('${project.project_id}');"></i>
@@ -254,22 +48,27 @@
 								<i class="icon-star icons"  style="color:yellow;font-weight:bold;" onclick="bookmark('${project.project_id}');"></i>
 									</c:when>
 								</c:choose>
-								${project.project_title}
+                                <a href="/subMain"> ${project.project_title}</a>
+							<c:forEach items="${member.pmemberList}" var="pmember" varStatus="k">
+								<c:if test="${pmember.pmember_position eq '1'}">
 								<i class="icon-settings icons"></i>
+								</c:if>
+							</c:forEach>
 							</div>
 							<div class="projectCardUserName">
 								<img src="http://placehold.it/30x30">
 								<br>
-								${pmember.member_name} ¿Ü ${pmember.pmemberCount - 1}
+								${member.member_name} ì™¸ ${member.pmemberCount - 1}
 							</div>
 						</div>
 					</li>
+
 						</c:forEach>
 					</c:forEach>
 				</ul>
 			</div>
 			<div class="currentMainProjectCreates">
-				<h1>ÃÊ´ë¹ŞÀº ÇÁ·ÎÁ§Æ®</h1>
+				<h1>ì´ˆëŒ€ë°›ì€ í”„ë¡œì íŠ¸</h1>
 
 				<ul>
 					<li>
@@ -278,7 +77,7 @@
 								<div class="projectCardContent">
 									<i class="icon-folder-alt icons"></i>
 									<br>
-									<p>ÇÁ·ÎÁ§Æ® ¸¸µé±â</p>
+									<p>í”„ë¡œì íŠ¸ ë§Œë“¤ê¸°</p>
 								</div>
 							</div>
 						</a>
@@ -288,35 +87,35 @@
 								<div class="pop-container">
 									<div class="pop-conts">
 										<div class="pop-conts-header">
-											<p>ÇÁ·ÎÁ§Æ® ¸¸µé±â</p>
+											<p>í”„ë¡œì íŠ¸ ë§Œë“¤ê¸°</p>
 											<a href="#" class="btn-layerClose">
 												<i class="icon-close icons"></i>
 											</a>
 										</div>
 										<div class="pop-conts-section">
 											<div class="pop-conts-section-title">
-												<%-- ÇÁ·ÎÁ§Æ® »ı¼º ½ÃÀÛ --%>
+												<%-- í”„ë¡œì íŠ¸ ìƒì„± ì‹œì‘ --%>
 												<form action="/createProject" method="post">
-													<span>ÇÁ·ÎÁ§Æ®¸í</span>
+													<span>í”„ë¡œì íŠ¸ëª…</span>
 													<br>
-													<input type="text" name="project_title" placeholder="ÇÁ·ÎÁ§Æ®¸í ÀÔ·Â(ÃÖ´ë 50ÀÚ)" class="projectTitleInput" />
+													<input type="text" name="project_title" placeholder="í”„ë¡œì íŠ¸ëª… ì…ë ¥(ìµœëŒ€ 50ì)" class="projectTitleInput" />
 													<br><br>
-													<span>ÇÁ·ÎÁ§Æ® °³¿ä</span>
+													<span>í”„ë¡œì íŠ¸ ê°œìš”</span>
 													<br>
-													<textarea class="projectContentInput" name="project_overview" placeholder="ÇÁ·ÎÁ§Æ® °³¿ä ÀÔ·Â"></textarea>
-													<span>ÇÁ·ÎÁ§Æ® ½ÃÀÛÀÏ</span>
+													<textarea class="projectContentInput" name="project_overview" placeholder="í”„ë¡œì íŠ¸ ê°œìš” ì…ë ¥"></textarea>
+													<span>í”„ë¡œì íŠ¸ ì‹œì‘ì¼</span>
 													<br>
 													<input type="date" name="project_sdate" />
-													<span>ÇÁ·ÎÁ§Æ® ¸¶°¨ÀÏ</span>
+													<span>í”„ë¡œì íŠ¸ ë§ˆê°ì¼</span>
 													<br>
 													<input type="date" name="project_edate" />
 
 													<div class="layerPopUpBtnss">
-														<input type="submit" value="¸¸µé±â" class="createProjectSubmit">
-														<a href="#" class="btn-layerClose layerPopupClose">Ãë¼Ò</a>
+														<input type="submit" value="ë§Œë“¤ê¸°" class="createProjectSubmit">
+														<a href="#" class="btn-layerClose layerPopupClose">ì·¨ì†Œ</a>
 													</div>
 												</form>
-												<%-- ÇÁ·ÎÁ§Æ® »ı¼º ³¡ --%>
+												<%-- í”„ë¡œì íŠ¸ ìƒì„± ë --%>
 											</div>
 										</div>
 									</div>
@@ -328,13 +127,13 @@
 						<div class="projectCard">
 							<div class="projectCardTitle">
 								<i class="icon-star icons"></i>
-								»ùÇÃ ÇÁ·ÎÁ§Æ® ¸í
+								ìƒ˜í”Œ í”„ë¡œì íŠ¸ ëª…
 								<i class="icon-settings icons"></i>
 							</div>
 							<div class="projectCardUserName">
 								<img src="http://placehold.it/30x30">
 								<br>
-								user´Ô Âü¿©Áß
+								userë‹˜ ì°¸ì—¬ì¤‘
 							</div>
 						</div>
 					</li>
@@ -346,15 +145,15 @@
 	<footer class="currentFooter">
 		<div class="footerContent">
 			<p>
-				´ëÀü±¤¿ª½Ã Áß±¸ Áß¾Ó·Î 76 ¿µ¹Îºôµù 2Ãş 203È£<br>
-				±â°ü¸í: (Àç)´ë´öÀÎÀç°³¹ß¿ø, ÃÖÁ¾ÇÁ·ÎÁ§Æ® PMS(Project Management System)<br>
+				ëŒ€ì „ê´‘ì—­ì‹œ ì¤‘êµ¬ ì¤‘ì•™ë¡œ 76 ì˜ë¯¼ë¹Œë”© 2ì¸µ 203í˜¸<br>
+				ê¸°ê´€ëª…: (ì¬)ëŒ€ë•ì¸ì¬ê°œë°œì›, ìµœì¢…í”„ë¡œì íŠ¸ PMS(Project Management System)<br>
 				Copyright 2018 <span>DDIT 203 Class, CURRENT</span> All rights reserved.
 			</p>
 		</div>
 	</footer>
 </div>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>
 <script type="text/javascript" src="../js/classie.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.js"></script>
@@ -381,8 +180,8 @@
 		layer_popup($href);
 	});
 	function layer_popup(el){
-		var $el = $(el);        //·¹ÀÌ¾îÀÇ id¸¦ $el º¯¼ö¿¡ ÀúÀå
-		var isDim = $el.prev().hasClass('dimBg');   //dimmed ·¹ÀÌ¾î¸¦ °¨ÁöÇÏ±â À§ÇÑ boolean º¯¼ö
+		var $el = $(el);        //ë ˆì´ì–´ì˜ idë¥¼ $el ë³€ìˆ˜ì— ì €ì¥
+		var isDim = $el.prev().hasClass('dimBg');   //dimmed ë ˆì´ì–´ë¥¼ ê°ì§€í•˜ê¸° ìœ„í•œ boolean ë³€ìˆ˜
 
 		isDim ? $('.dim-layer').fadeIn() : $el.fadeIn();
 
@@ -391,7 +190,7 @@
 			docWidth = $(document).width(),
 			docHeight = $(document).height();
 
-		// È­¸éÀÇ Áß¾Ó¿¡ ·¹ÀÌ¾î¸¦ ¶ç¿î´Ù.
+		// í™”ë©´ì˜ ì¤‘ì•™ì— ë ˆì´ì–´ë¥¼ ë„ìš´ë‹¤.
 		if ($elHeight < docHeight || $elWidth < docWidth) {
 			$el.css({
 				marginTop: -$elHeight /2,
@@ -402,7 +201,7 @@
 		}
 
 		$el.find('a.btn-layerClose').click(function(){
-			isDim ? $('.dim-layer').fadeOut() : $el.fadeOut(); // ´İ±â ¹öÆ°À» Å¬¸¯ÇÏ¸é ·¹ÀÌ¾î°¡ ´İÈù´Ù.
+			isDim ? $('.dim-layer').fadeOut() : $el.fadeOut(); // ë‹«ê¸° ë²„íŠ¼ì„ í´ë¦­í•˜ë©´ ë ˆì´ì–´ê°€ ë‹«íŒë‹¤.
 			return false;
 		});
 
@@ -412,14 +211,14 @@
 		});
 	}
 
-	// DIM POPUP - ÆÀ¿øÃÊ´ë
+	// DIM POPUP - íŒ€ì›ì´ˆëŒ€
 	$('.projectCreatePopUps').click(function(){
 		var $hrefs = $(this).attr('href');
 		layer_popups($hrefs);
 	});
 	function layer_popups(els){
-		var $els = $(els);        //·¹ÀÌ¾îÀÇ id¸¦ $el º¯¼ö¿¡ ÀúÀå
-		var isDims = $els.prev().hasClass('dimBgs');   //dimmed ·¹ÀÌ¾î¸¦ °¨ÁöÇÏ±â À§ÇÑ boolean º¯¼ö
+		var $els = $(els);        //ë ˆì´ì–´ì˜ idë¥¼ $el ë³€ìˆ˜ì— ì €ì¥
+		var isDims = $els.prev().hasClass('dimBgs');   //dimmed ë ˆì´ì–´ë¥¼ ê°ì§€í•˜ê¸° ìœ„í•œ boolean ë³€ìˆ˜
 
 		isDims ? $('.dim-layers').fadeIn() : $els.fadeIn();
 
@@ -428,7 +227,7 @@
 			docWidths = $(document).width(),
 			docHeights = $(document).height();
 
-		// È­¸éÀÇ Áß¾Ó¿¡ ·¹ÀÌ¾î¸¦ ¶ç¿î´Ù.
+		// í™”ë©´ì˜ ì¤‘ì•™ì— ë ˆì´ì–´ë¥¼ ë„ìš´ë‹¤.
 		if ($elHeights < docHeights || $elWidths < docWidths) {
 			$els.css({
 				marginTop: -$elHeights /2,
@@ -439,7 +238,7 @@
 		}
 
 		$els.find('a.btn-layerCloses').click(function(){
-			isDims ? $('.dim-layers').fadeOut() : $els.fadeOut(); // ´İ±â ¹öÆ°À» Å¬¸¯ÇÏ¸é ·¹ÀÌ¾î°¡ ´İÈù´Ù.
+			isDims ? $('.dim-layers').fadeOut() : $els.fadeOut(); // ë‹«ê¸° ë²„íŠ¼ì„ í´ë¦­í•˜ë©´ ë ˆì´ì–´ê°€ ë‹«íŒë‹¤.
 			return false;
 		});
 
@@ -523,7 +322,7 @@
 		dialogs();
 	});
 
-	// ¾Ë¶÷ ÅÇ ¸Ş´º
+	// ì•ŒëŒ íƒ­ ë©”ë‰´
 	$("#tabs").tabs();
 	
 	// book mark 
@@ -542,6 +341,8 @@
 	$('.goSubMain').on("click", function () {
 		location.href = "main/subMain";
 	});
+
+
 </script>
 </body>
 </html>

@@ -14,6 +14,9 @@
             <id property="project_bookmark" column="project_bookmark" />
             <id property="project_id" column="project_id" />
         </collection>
+        <collection property="pmemberList" ofType="pmemberVo">
+            <id property="pmember_position" column="pmember_position" />
+        </collection>
     </resultMap>
 
     <select id="selectMainView" parameterType="String" resultMap="pmemberResultMap">
@@ -24,6 +27,7 @@
 		        p.project_id,
 		        m.member_name,
 		        m.member_profile,
+		        pmember_position,
 		        pmemberCount.*
 		FROM    project p INNER JOIN project_member pm
 		ON      p.project_id = pm.pmember_project INNER JOIN member m
