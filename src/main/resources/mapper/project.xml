@@ -35,7 +35,8 @@
     <select id="projectAllSchedule" resultType="projectVo" parameterType="scheduleVo">
     <!-- 일정에 필요한 컬럼 정리: 프로젝트명, 프로젝트시작일자, 프로젝트종료일자, 프로젝트실제마감일자, 프로젝트일정색깔 -->
     <!-- sid : SESSION ID -->
-    	SELECT	p.project_title,
+    	SELECT	p.project_id,
+    			p.project_title,
     			p.project_sdate,
     			p.project_eedate,
     			p.project_edate,
@@ -46,16 +47,5 @@
 	    	WHERE	pm.pmember_member = #{sid}
    		</if>
     </select>
-    
-    <!-- 프로젝트 일정 select box의 values -->
-    <select id="myProjectList" resultType="projectVo" parameterType="scheduleVo">
-		SELECT	p.project_id,
-				p.project_title
-		<if test="sid != null">		
-			FROM    project_member pm INNER JOIN project p
-			ON      pm.pmember_project = p.project_id
-			WHERE   pm.pmember_member = #{sid}
-		</if>
-	</select>
 	
 </mapper>
