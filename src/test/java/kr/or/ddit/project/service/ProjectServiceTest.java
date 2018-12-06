@@ -46,7 +46,7 @@ public class ProjectServiceTest {
 	public void selectAllProject() {
 		/*** Given ***/
 
-		/*** When ***/memgbger_project
+		/*** When ***/
 		List<ProjectVo> projectList =  projectService.selectAllProject();
 		/*** Then ***/
 		Assert.assertEquals(21, projectList.size());
