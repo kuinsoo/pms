@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <%-- header & left --%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
@@ -9,7 +10,7 @@
 			<div class="currentMainContainerLeft">
 				<div class="currentSubMainTitle">
 					<i class="icon-star icons"></i>
-					<span>샘플 프로젝트 (7)</span>
+					<span>${project.project_title}</span>
 					<i class="icon-share icons dialog__triggerss"></i>
 					<div class="dialogss">
 						<ul>
@@ -72,6 +73,24 @@
 						<div class="kku-boarder kku-mainPage" id="planList">
 							<div class="column">
 								<div class="portlet">
+				                    <div class="portlet-header">TITLE</div>
+				                    <div class="portlet-content">
+				                    	CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT
+				                    </div>
+				                    <label class="kku-hide kku-no">1</label>
+				                    <label class="kku-hide kku-group">1</label>
+				                    <label class="kku-hide kku-index">1</label>
+				                </div>
+				                <div class="portlet">
+				                    <div class="portlet-header">TITLE</div>
+				                    <div class="portlet-content">
+				                    	CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT
+				                    </div>
+				                    <label class="kku-hide kku-no">1</label>
+				                    <label class="kku-hide kku-group">1</label>
+				                    <label class="kku-hide kku-index">1</label>
+				                </div>
+				                <div class="portlet">
 				                    <div class="portlet-header">TITLE</div>
 				                    <div class="portlet-content">
 				                    	CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT
@@ -498,10 +517,6 @@ function dialogss(){
 		 dialogTriggerss.on('click', function(e){
 			 dialogBoxss.toggleClass('dialog--activess');
 			 e.stopPropagation()
-		 });
-
-		 $(".dialogss").click(function(){
-			 dialogBoxss.toggleClass('dialog--activess');
 		 });
 
 		 $(".dialog__trigger").click(function(){
