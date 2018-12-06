@@ -63,6 +63,8 @@
 		WHERE   m.member_mail = 'kkuinsoo@gmail.com';
 	 -->
 
-
+<insert id="setTeamLeader" parameterType="Map">
+	insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,SEQ_PROJECT.currval,#{member_email}, #{pmember_position}, sysdate )
+</insert>
 
 </mapper>
