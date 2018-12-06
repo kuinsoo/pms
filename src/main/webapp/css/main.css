@@ -43,7 +43,7 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 .headerContainer > .headerRightContent{width:280px;height:45px;margin-top:5px;float:right;}
 .headerContainer > .headerRightContent > a > .teamInvite {
     width:130px;height:40px;border:1px solid #333;border-radius:20px;margin-top:5px;
-    display:flex;justify-content:center;align-items:center;float:left;cursor:pointer;
+    display:flex;justify-content:center;align-items:center;float:left;cursor:pointer;color:#000;
 }
 .headerContainer > .headerRightContent > a > .teamInvite > i{font-size:18px;}
 .headerContainer > .headerRightContent > a > .teamInvite > p{padding-left:10px;font-size:18px;}
@@ -175,7 +175,7 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
     display:flex;flex-flow:row wrap;align-content:space-between;justify-content:space-between;
     width:1400px;height:auto;border:1px solid #dee3eb;float:left;margin:20px 0px 0px 0px;background-color:#fff;padding:20px;
 }
-.currentMain > .currentMainContainer > .currentMainProjectCreate > h1{font-weight:normal;font-size:30px;padding:30px 0px 0px 50px;}
+.currentMain > .currentMainContainer > .currentMainProjectCreate > h1{font-weight:normal;font-size:30px;padding:20px 0px 0px 50px;}
 .currentMain > .currentMainContainer > .currentMainProjectCreate > ul{display:block;width:1300px;margin:auto;}
 .currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li:first-child{cursor:pointer;}
 .currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li{float:left;margin-left:20px;margin-top:20px;}
@@ -192,17 +192,22 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 .dim-layer .pop-layer{display:block;width:600px;}
 .pop-layer .pop-container > .pop-conts > .pop-conts-header{width:100%;height:50px;background-color:#eee;font-size:20px;border-radius:10px 10px 0px 0px;}
 .pop-layer .pop-container > .pop-conts > .pop-conts-header > p{float:left;padding:15px;}
-.pop-layer .pop-container > .pop-conts > .pop-conts-header > a{float:right;padding:15px;}
-.pop-layer .pop-container > .pop-conts > .pop-conts-section{width:100%;height:300px;font-size:20px;clear:both;}
+.pop-layer .pop-container > .pop-conts > .pop-conts-header > a{float:right;padding:15px;color:#000;}
+.pop-layer .pop-container > .pop-conts > .pop-conts-section{width:100%;font-size:20px;clear:both;}
 .pop-layer .pop-container > .pop-conts > .pop-conts-section > .pop-conts-section-title{width:100%;padding:20px;}
 .pop-layer .pop-container > .pop-conts > .pop-conts-section > .pop-conts-section-title > span{margin-left:7px;}
-.pop-layer .pop-container > .pop-conts > .pop-conts-section > .pop-conts-section-title > .projectTitleInput{margin-top:7px;font-size:20px;width:100%;outline:none;padding:5px;}
+.pop-layer .pop-container > .pop-conts > .pop-conts-section > .pop-conts-section-title > form > .projectTitleInput{margin-top:7px;font-size:20px;width:100%;outline:none;padding:5px;}
 .projectContentInput{margin-top:7px;font-size:20px;width:100%;outline:none;padding:5px;}
-.layerPopUpBtnss{width:100%;margin-top:20px;display:flex;justify-content:center;}
+.projectStartEndDiv{margin-top:20px;}
+.projectStart{float:left;padding-top:3px;}
+.projectStartInput{float:left;font-size:20px;margin-left:15px;}
+.projectEnd{clear:left;float:left;padding-top:3px;margin-top:15px;}
+.projectEndInput{float:left;font-size:20px;margin-left:15px;margin-top:15px;}
+.layerPopUpBtnss{width:100%;margin-top:20px;display:flex;justify-content:center;padding-top:20px;}
 .createProjectSubmit {
     font-size:20px;background-color:#746fcc;color:#fff;width:100px;height:50px;border-radius:5px;border:none;outline:none;cursor:pointer;float:left;
 }
-.layerPopupClose{display:block;border:1px solid #ccc;width:100px;height:50px;border-radius:5px;float:left;text-align:center;line-height:50px;margin-left:20px;}
+.layerPopupClose{display:block;border:1px solid #ccc;width:100px;height:50px;border-radius:5px;float:left;text-align:center;line-height:50px;margin-left:20px;color:#000;}
 
 .currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard {
     display:flex;line-height:40px;flex-direction:column;
@@ -225,13 +230,13 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
     display:flex;flex-flow:row wrap;align-content:space-between;justify-content:space-between;
     width:1400px;height:auto;border:1px solid #dee3eb;float:left;margin:20px 0px 20px 0px;background-color:#fff;padding:20px;
 }
-.currentMain > .currentMainContainer > .currentMainProjectCreates > h1{font-weight:normal;padding:30px 0px 0px 50px;font-size:30px;}
+.currentMain > .currentMainContainer > .currentMainProjectCreates > h1{font-weight:normal;padding:20px 0px 0px 50px;font-size:30px;}
 .currentMain > .currentMainContainer > .currentMainProjectCreates > ul{display:block;width:1300px;margin:auto;}
 .currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li:first-child{cursor:pointer;}
 .currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li{float:left;margin-left:20px;margin-top:20px;}
 .currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li:first-child > a > .projectCard {
     display:flex;justify-content:center;align-items:center;line-height:40px;flex-direction:column;
-    font-size:25px;background-color:#fff;border:1px solid #dee3eb;width:300px;height:300px;text-align:center;
+    font-size:25px;background-color:#fff;border:1px solid #dee3eb;width:300px;height:300px;text-align:center;color:#000;
 }
 .currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li > .projectCard {
     display:flex;line-height:40px;flex-direction:column;

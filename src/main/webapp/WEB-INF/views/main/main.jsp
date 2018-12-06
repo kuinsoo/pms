@@ -98,17 +98,18 @@
 												<form action="/createProject" method="post">
 													<span>프로젝트명</span>
 													<br>
-													<input type="text" name="project_title" placeholder="프로젝트명 입력(최대 50자)" class="projectTitleInput" />
+													<input type="text"  class="projectTitleInput" name="project_title" placeholder="프로젝트명 입력(최대 50자)" />
 													<br><br>
 													<span>프로젝트 개요</span>
 													<br>
 													<textarea class="projectContentInput" name="project_overview" placeholder="프로젝트 개요 입력"></textarea>
-													<span>프로젝트 시작일</span>
-													<br>
-													<input type="date" name="project_sdate" />
-													<span>프로젝트 마감일</span>
-													<br>
-													<input type="date" name="project_edate" />
+													
+													<div class="projectStartEndDiv">
+														<span class="projectStart">프로젝트 시작일</span>
+														<input type="date" name="project_sdate" class="projectStartInput" />
+														<span class="projectEnd">프로젝트 마감일</span>
+														<input type="date" name="project_edate" class="projectEndInput" />
+													</div>
 
 													<div class="layerPopUpBtnss">
 														<input type="submit" value="만들기" class="createProjectSubmit">
