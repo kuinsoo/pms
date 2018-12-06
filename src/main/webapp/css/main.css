@@ -58,7 +58,7 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
     width:100%;height:50px;background-color:#eee;font-size:20px;border-radius:10px 10px 0px 0px;
 }
 .pop-layers .pop-containers > .pop-contss > .pop-conts-headers > p{float:left;padding:15px;}
-.pop-layers .pop-containers > .pop-contss > .pop-conts-headers > a{float:right;padding:15px;}
+.pop-layers .pop-containers > .pop-contss > .pop-conts-headers > a{float:right;padding:15px;color:#000;}
 .pop-layers .pop-containers > .pop-contss > .pop-conts-sections{width:100%;height:350px;font-size:20px;clear:both;}
 .pop-layers .pop-containers > .pop-contss > .pop-conts-sections > .pop-conts-section-titles{width:100%;padding:20px;}
 .pop-layers .pop-containers > .pop-contss > .pop-conts-sections > .pop-conts-section-titles > span{margin-left:7px;}
@@ -70,7 +70,7 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 .createProjectSubmits {
     font-size:20px;background-color:#746fcc;color:#fff;width:100px;height:50px;border-radius:5px;border:none;outline:none;cursor:pointer;float:left;
 }
-.layerPopupCloses{display:block;border:1px solid #ccc;width:100px;height:50px;border-radius:5px;float:left;text-align:center;line-height:50px;margin-left:20px;}
+.layerPopupCloses{display:block;border:1px solid #ccc;width:100px;height:50px;border-radius:5px;float:left;text-align:center;line-height:50px;margin-left:20px;color:#000;}
 
 .headerContainer > .headerRightContent > .alarm{width:50px;height:50px;float:left;margin-left:10px;display:flex;justify-content:center;align-items:center;}
 .headerContainer > .headerRightContent > .alarm > i{font-size:25px;cursor:pointer;}
@@ -108,7 +108,7 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 .dialogUserImg > p{font-size:25px;margin-top:10px;padding-bottom:20px;}
 .dialog > ul{margin-top:20px;}
 .dialog > ul > li{margin:10px 0px 10px 0px;}
-.dialog > ul > li > a{font-size:20px;padding-left:10px;}
+.dialog > ul > li > a{font-size:20px;padding-left:10px;color:#000;}
 
 .dialog__triggers, .dialog__actions {
     display:block;-webkit-transition:all 150ms ease-out;transition:all 150ms ease-out;-webkit-transform:translateY(0px);
@@ -158,6 +158,7 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
 .cbp-spmenu-vertical > .currentMainLeftMenu > ul > li:hover{background-color:#eee;}
 .cbp-spmenu-vertical > .currentMainLeftMenu > ul > li > i{vertical-align:middle;float:left;}
 .cbp-spmenu-vertical > .currentMainLeftMenu > ul > li > p{float:left;}
+.cbp-spmenu-vertical > .currentMainLeftMenu > ul > li > p > a{color:#000;}
 
 /* SECTION */
 .currentMain{width:100%;min-height:100%;height:auto;background-color:#f2f4f7;padding-top:60px;float:left;}
@@ -172,16 +173,20 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
     -ms-flex-align:center;-webkit-align-items:center;align-items:center;overflow:hidden;
 }
 .currentMain > .currentMainContainer > .currentMainProjectCreate {
-    display:flex;flex-flow:row wrap;align-content:space-between;justify-content:space-between;
+    display:flex;flex-flow:row wrap;align-content:space-between;justify-content:space-between;position:relative;
     width:1400px;height:auto;border:1px solid #dee3eb;float:left;margin:20px 0px 0px 0px;background-color:#fff;padding:20px;
 }
-.currentMain > .currentMainContainer > .currentMainProjectCreate > h1{font-weight:normal;font-size:30px;padding:20px 0px 0px 50px;}
+.currentMain > .currentMainContainer > .currentMainProjectCreate > .projectCreateULS{float:left;}
+.currentMain > .currentMainContainer > .currentMainProjectCreate > .bookmarkProject{float:left;}
+.currentMain > .currentMainContainer > .currentMainProjectCreate > h1{font-weight:normal;font-size:30px;padding:20px 0px 0px 50px;height:60px;}
+.currentMain > .currentMainContainer > .currentMainProjectCreate > h2{font-size:40px;padding:20px 42px 0px 0px;}
+.currentMain > .currentMainContainer > .currentMainProjectCreate > h2 > i{font-weight:normal;cursor:pointer;}
 .currentMain > .currentMainContainer > .currentMainProjectCreate > ul{display:block;width:1300px;margin:auto;}
 .currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li:first-child{cursor:pointer;}
 .currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li{float:left;margin-left:20px;margin-top:20px;}
 .currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li:first-child > a > .projectCard {
-    display:flex;justify-content:center;align-items:center;line-height:40px;flex-direction:column;
-    font-size:25px;background-color:#fff;border:1px solid #dee3eb;width:300px;height:300px;text-align:center;
+    display:flex;justify-content:center;align-items:center;flex-direction:column;position:absolute;top:30px;right:70px;
+    font-size:20px;border:1px solid #dee3eb;width:200px;height:70px;text-align:center;color:#000;z-index:1;letter-spacing:-1px;
 }
 
 /* DIM LAYER POPUP */
