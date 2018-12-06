@@ -9,7 +9,7 @@
 			<div class="currentMainContainerLeft">
 				<div class="currentSubMainTitle">
 					<i class="icon-star icons"></i>
-					<span>샘플 프로젝트</span>
+					<span>샘플 프로젝트 (7)</span>
 					<i class="icon-share icons dialog__triggerss"></i>
 					<div class="dialogss">
 						<ul>
