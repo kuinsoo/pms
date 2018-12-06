@@ -120,12 +120,20 @@ header{width:100%;min-width:1200px;height:60px;background-color:rgba(255,255,255
     transition:all 180ms ease-in;margin-top:20px;box-shadow:0px 0px 5px #000;padding:20px;
 }
 .dialogs.dialog--actives{top:40px;visibility:visible;opacity:1;-webkit-transition:all 250ms ease-out;transition:all 250ms ease-out;}
-.dialogUserImg{width:100%;text-align:center;border-bottom:1px solid #dee3eb;}
-.dialogUserImg > img{border-radius:100%;}
-.dialogUserImg > p{font-size:25px;margin-top:10px;padding-bottom:20px;}
 .dialogs > ul{margin-top:20px;}
 .dialogs > ul > li{margin:10px 0px 10px 0px;}
 .dialogs > ul > li > a{font-size:20px;padding-left:10px;}
+
+.dialog__triggerss, .dialog__actionss {
+    display:block;-webkit-transition:all 150ms ease-out;transition:all 150ms ease-out;-webkit-transform:translateY(0px);
+    transform:translateY(0px);
+}
+.dialogss {
+    width:500px;background-color:#fff;border:1px solid #dee3eb;border-radius:10px;
+    position:absolute;top:0px;right:0px;visibility:hidden;opacity:0;-webkit-transition:all 180ms ease-in;
+    transition:all 180ms ease-in;margin-top:20px;box-shadow:0px 0px 5px #000;padding:20px;
+}
+.dialogss.dialog--activess{top:40px;visibility:visible;opacity:1;-webkit-transition:all 250ms ease-out;transition:all 250ms ease-out;}
 
 /* LEFT MENU */
 .leftMenuUserInterface {
