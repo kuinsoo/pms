@@ -13,9 +13,10 @@ public interface EmailSserviceInf {
 	/**
 	 * Send mail.
 	 * 이메일을 전송해준다.
+	 *
 	 * @param to      the 상대방 Email
 	 * @param subject the 제목
-	 * @param text    the 내용
+	 * @param content the content
 	 */
 	void sendMail(String to, String subject, String content);
 }
