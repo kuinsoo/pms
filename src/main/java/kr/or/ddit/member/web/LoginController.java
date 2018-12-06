@@ -1,18 +1,32 @@
 package kr.or.ddit.member.web;
 
-import kr.or.ddit.member.model.MemberVo;
-import kr.or.ddit.member.service.MemberServiceInf;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
+import com.github.scribejava.core.model.OAuth2AccessToken;
+
+import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.oauth.bo.JsonParser;
+import kr.or.ddit.oauth.bo.NaverLoginBO;
 
 /**
  * LoginController.java
@@ -21,12 +35,26 @@ import java.util.HashMap;
  * @version 1.0
  * @see <pre> << 개정이력(Modification Information) >> 수정자 수정내용 ------ ------------------------ pc07 최초 생성 </pre>
  */
-@SessionAttributes(value = {"memberVo", "certificationNumber"})  // 	model.addAttribute("memberVo",memberVo); 할때 세션에 없으면 세션영역을 할당해준다.
+
+@SessionAttributes(value = {"memberVo"})  // 	model.addAttribute("memberVo",memberVo); 할때 세션에 없으면 세션영역을 할당해준다.
 @Controller
+
 public class LoginController {
+	
 	@Autowired
 	private MemberServiceInf memberservice;
-
+	
+	//NaverLoginBO 
+	@Autowired
+    private NaverLoginBO naverLoginBO;
+    
+	private String apiResult = null;
+    
+    @Autowired
+    private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+        this.naverLoginBO = naverLoginBO;
+    }
+	
 	/**
 	 * The Email sender.
 	 */
@@ -41,8 +69,12 @@ public class LoginController {
 	 * @return Method  설명 : index 로그인 화면으로
 	 */
 	@RequestMapping(value="/",method=RequestMethod.GET)
-	public String index() {
-		return "/login/login";
+	public String index(HttpServletRequest request , Model model, HttpSession session) {
+		
+		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
+		
+		session.setAttribute("url", naverAuthUrl);
+		return "login/login";
 	}
 
 	/**
@@ -76,7 +108,30 @@ public class LoginController {
 			return "redirect:/main";
 		}
 	}
+	
+	@RequestMapping(value = "/callback", method = RequestMethod.GET)
+	public String callback(@RequestParam String code, @RequestParam String state, HttpSession session, Model model, MemberVo memberVo) throws Exception {
+		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
+		
+		JsonParser json = new JsonParser();
+		
+		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
+		String apiResult = naverLoginBO.getUserProfile(oauthToken);
+		memberVo = json.changeJson(apiResult); // vo에 userEmail, userGender, userNaver 저장
+		String member_mail = memberVo.getMember_mail();
+		
+		// 값이 다르면..
+		if(memberservice.selectUser(member_mail)==null) {
+			int insertUser = memberservice.insertUser(memberVo);		
+			return"/login/login";
+		// 값이 같으면 
+		}else {
+			model.addAttribute("member",memberVo);
+			return "main/main";
+		}
+	}
 
+	
 	/**
 	 * Main string.
 	 * 작성자: Mr.KKu
@@ -88,7 +143,8 @@ public class LoginController {
 	 */
 	@RequestMapping(value="/main",method=RequestMethod.GET)
 	public String main(Model model, @ModelAttribute("memberVo")MemberVo memberVo) {
-		model.addAttribute("memberProjectList",memberservice.selectMainView(memberVo.getMember_mail()));
+
+		model.addAttribute("pMemberList",memberservice.selectMainView(memberVo.getMember_mail()));
 		return "main/main";
 	}
 
@@ -188,6 +244,7 @@ public class LoginController {
 		return"/sign/sign";
 	}
 
+	 
 	/**
 	 * Method : signProcess(POST)
 	 * 작성자 : 나진실
@@ -209,6 +266,8 @@ public class LoginController {
 			return "/sign/sign";
 		}
 	}
+	
+	
 	/**
 	 * Method : signProcess(GET)
 	 * 작성자 : 나진실
@@ -222,10 +281,7 @@ public class LoginController {
 		
 		// 핸드폰 번호 입력란 
 		String member_tel = request.getParameter("member_tel");
-		
-		// ajax로 값이 넘어왔는지 확인하는 
-		System.out.println( "ajax " + member_tel);
-		
+	
 		String api_key = "NCSJQVBNAKBRXLTC";
 		String api_secret ="ZNJ2OS1W0F1A4N9FPRUKO8YXWT1RBXKR";
 		Coolsms coolsms = new Coolsms(api_key, api_secret);
@@ -243,32 +299,11 @@ public class LoginController {
 			certificationNumber += number.charAt((int) Math.floor(Math.random()* number.length()));
 		}
 		set.put("text", "CURRENT 인증번호는   [  " + certificationNumber + " ]  입니다. ");
-		System.out.println( " 인증번호 4자리 숫자  " + certificationNumber);
 		set.put("type", "sms"); // 문자타입
 		
 		JSONObject result = coolsms.send(set);// 보내기&전송결과받기
 		
-		// session에 랜덤값을 담아준다.
-//		model.addAttribute("certificationNumber", certificationNumber);
-//
-		System.out.println("certificationNumber값 확인하기 : " + certificationNumber);
-		
-//		// 메시지 보내기 성공 및 전송결과 출력
-//		if ((boolean)result.get("status") == true) {
-//	      System.out.println("성공");
-//	      System.out.println(result.get("group_id")); // 그룹아이디
-//	      System.out.println(result.get("result_code")); // 결과코드
-//	      System.out.println(result.get("result_message")); // 결과 메시지
-//	      System.out.println(result.get("success_count")); // 메시지아이디
-//	      System.out.println(result.get("error_count")); // 여러개 보낼시 오류난 메시지 수
-//
-//	    // 메시지 보내기 실패
-//	    } else {
-//	      System.out.println("실패");
-//	      System.out.println(result.get("code")); // REST API 에러코드
-//	      System.out.println(result.get("message")); // 에러메시지
-//	    }
-
+		// sign.jsp ajax로 보내준다.
 	    return certificationNumber;
 	}
 }

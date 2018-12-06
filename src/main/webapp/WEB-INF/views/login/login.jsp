@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="../css/ripples.min.css" />
 <link rel="stylesheet" href="../css/style.css" />
 <script src="../js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
 <link rel="stylesheet" href="../css/login.css">
 <style>
 .wraps{width:100%;height:100%;display:flex;justify-content:center;align-items:center;}
@@ -91,14 +92,10 @@ div.well input[type="submit"]{width:100%;height:50px}
 				</div>
 				<br> <input type="submit" value="로그인" class="btn btn-primary btn-raised" /><br>
 				<a href="/signView" class="btn btn-primary btn-raised signBtn">회원가입</a>				
-			</form>		
-				
-			<!--  네이버 아이디 로그인  -->
-			<div id="naver_id_login">
-				<a href="${url}">
-					<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
-				</a>
-			</div>
+			</form>			
+			
+			<div id="naver_id_login" style="text-align:center"><a href="${url}">
+			<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
 			
 			<div class="findDiv">
 				<a href="#layerEmail" class="findEmail">이메일 찾기</a>
@@ -165,7 +162,6 @@ $(document).ready(function() {
 	$(".error").hide();
 	//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
 	//blur()이벤트 사용
-	// 아 왜안돼
 	$("#pass").blur(function() {
 		if($("#pass").val() != $(${member_pass}).val() && $("#email").val()!=$(${member_mail}).val()){
 			$(".error").show();
@@ -174,6 +170,7 @@ $(document).ready(function() {
 		}
 	});
 });
+
 </script>
 <script type="text/javascript">
 // 이메일 찾기 DIM POPUP
