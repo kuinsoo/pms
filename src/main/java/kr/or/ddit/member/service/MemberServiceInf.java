@@ -1,6 +1,7 @@
 package kr.or.ddit.member.service;
 
 import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.project.model.ProjectVo;
 
 import java.util.List;
 import java.util.Map;
@@ -69,4 +70,13 @@ public interface MemberServiceInf {
 	 * @return the list
 	 */
 	List<MemberVo> selectMainView(String member_mail);
+
+	/**
+	 * Sets team leader.
+	 * 작성자 : Mr.KKu
+	 * 프로젝트 참여자 권한 설정
+	 * @param mapPMember the map p member
+	 * @return the team leader
+	 */
+	int setTeamLeader(Map<String,String> mapPMember, ProjectVo projectVo);
 }

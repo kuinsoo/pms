@@ -2,6 +2,7 @@ package kr.or.ddit.member.web;
 
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 
 /**
  * LoginController.java
@@ -19,7 +21,7 @@ import java.io.UnsupportedEncodingException;
  * @version 1.0
  * @see <pre> << 개정이력(Modification Information) >> 수정자 수정내용 ------ ------------------------ pc07 최초 생성 </pre>
  */
-@SessionAttributes("memberVo")  // 	model.addAttribute("memberVo",memberVo); 할때 세션에 없으면 세션영역을 할당해준다.
+@SessionAttributes(value = {"memberVo", "certificationNumber"})  // 	model.addAttribute("memberVo",memberVo); 할때 세션에 없으면 세션영역을 할당해준다.
 @Controller
 public class LoginController {
 	@Autowired
@@ -187,7 +189,7 @@ public class LoginController {
 	}
 
 	/**
-	 * Method : signProcess
+	 * Method : signProcess(POST)
 	 * 작성자 : 나진실
 	 * 변경이력 :
 	 *
@@ -196,16 +198,77 @@ public class LoginController {
 	 * @return Method  설명 : sign.jsp에서 회원가입 버튼을 눌렀을때
 	 */
 	@RequestMapping(value="/signProcess",method=RequestMethod.POST)
-	public String signProcess(@RequestParam("member_mail") String member_mail ,MemberVo member) {
-		
+	public String signProcess(@RequestParam("member_mail") String member_mail ,MemberVo member, HttpServletRequest request) {
+	
 		// 값이 다르면..
 		if(memberservice.selectUser(member_mail)==null) {
 			int insertUser = memberservice.insertUser(member);		
 			return"/login/login";
-		
 		// 값이 같으면 
 		}else {
 			return "/sign/sign";
 		}
+	}
+	/**
+	 * Method : signProcess(GET)
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : sign.jsp에서 휴대전화 인증 버튼을 눌렀을때 
+	 */
+	@ResponseBody
+	@RequestMapping(value="/signProcessAjax",method=RequestMethod.GET)
+	public String signProcessAjax(HttpServletRequest request, Model model) {
+		
+		// 핸드폰 번호 입력란 
+		String member_tel = request.getParameter("member_tel");
+		
+		// ajax로 값이 넘어왔는지 확인하는 
+		System.out.println( "ajax " + member_tel);
+		
+		String api_key = "NCSJQVBNAKBRXLTC";
+		String api_secret ="ZNJ2OS1W0F1A4N9FPRUKO8YXWT1RBXKR";
+		Coolsms coolsms = new Coolsms(api_key, api_secret);
+	
+		HashMap<String, String> set = new HashMap<String, String>();
+		set.put("to", member_tel); // 수신
+		set.put("from", "01099011334"); // 발신
+		
+		// random 로직 
+		String number ="0123456789";	
+		
+		// 인증번호 담아주는 변수 
+		String certificationNumber = "";
+		for(int i = 0; i < 4; i++) {
+			certificationNumber += number.charAt((int) Math.floor(Math.random()* number.length()));
+		}
+		set.put("text", "CURRENT 인증번호는   [  " + certificationNumber + " ]  입니다. ");
+		System.out.println( " 인증번호 4자리 숫자  " + certificationNumber);
+		set.put("type", "sms"); // 문자타입
+		
+		JSONObject result = coolsms.send(set);// 보내기&전송결과받기
+		
+		// session에 랜덤값을 담아준다.
+//		model.addAttribute("certificationNumber", certificationNumber);
+//
+		System.out.println("certificationNumber값 확인하기 : " + certificationNumber);
+		
+//		// 메시지 보내기 성공 및 전송결과 출력
+//		if ((boolean)result.get("status") == true) {
+//	      System.out.println("성공");
+//	      System.out.println(result.get("group_id")); // 그룹아이디
+//	      System.out.println(result.get("result_code")); // 결과코드
+//	      System.out.println(result.get("result_message")); // 결과 메시지
+//	      System.out.println(result.get("success_count")); // 메시지아이디
+//	      System.out.println(result.get("error_count")); // 여러개 보낼시 오류난 메시지 수
+//
+//	    // 메시지 보내기 실패
+//	    } else {
+//	      System.out.println("실패");
+//	      System.out.println(result.get("code")); // REST API 에러코드
+//	      System.out.println(result.get("message")); // 에러메시지
+//	    }
+
+	    return certificationNumber;
 	}
 }

@@ -14,6 +14,8 @@ public class MemberVo {
 	private String member_profile;
 	private String member_withdrawal;
 	private List<ProjectVo> projectList;
+	private List<PMemberVo> pmemberList;
+
 	private int pmemberCount;
 	
 	@Override
@@ -88,5 +90,13 @@ public class MemberVo {
 
 	public void setProjectList(List<ProjectVo> projectList) {
 		this.projectList = projectList;
+	}
+
+	public List<PMemberVo> getPmemberList() {
+		return pmemberList;
+	}
+
+	public void setPmemberList(List<PMemberVo> pmemberList) {
+		this.pmemberList = pmemberList;
 	}
 }

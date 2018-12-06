@@ -32,6 +32,11 @@ public class ProjectService implements ProjectServiceInf {
 	}
 
 	@Override
+	public ProjectVo selectProjectList(String project_id) {
+		return projectMapper.selectProjectList(project_id);
+	}
+
+	@Override
 	public List<ProjectVo> selectBookMarkProject(String bookmark) {
 		return projectMapper.selectBookMarkProject(bookmark);
 	}

@@ -1,5 +1,7 @@
 package kr.or.ddit.project.web;
 
+import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
 
@@ -8,11 +10,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * kr.or.ddit.project.web
@@ -33,6 +36,9 @@ public class ProjectController {
 	@Autowired
 	private ProjectServiceInf projectService;
 
+	@Autowired
+	private MemberServiceInf memberService;
+
 
 	/**
 	 * Create project view string.
@@ -48,21 +54,25 @@ public class ProjectController {
 	/**
 	 * Create project string.
 	 *
-	 * @param modelAndView the model and view
-	 * @param projectVo    the project vo
+	 * @param projectVo the project vo
+	 * @param memberVo  the member vo
 	 * @return the string
 	 */
 	@RequestMapping(value = "/createProject",method = RequestMethod.POST)
-	public String createProject(ModelAndView modelAndView, ProjectVo projectVo) {
+	public String createProject(ProjectVo projectVo, @SessionAttribute("memberVo")MemberVo memberVo) {
 		if(projectVo.getProject_title() != null){
-			projectService.createProject(projectVo);
+				Map<String,String> mapPMember = new HashMap<>();
+				mapPMember.put("member_email", memberVo.getMember_mail());
+				mapPMember.put("pmember_position", "1");
+				memberService.setTeamLeader(mapPMember, projectVo);
 		}
-		return "redirect:/projectList";
+		return "redirect:/main";
 	}
 
 	/**
 	 * Project list string.
 	 * 접속한 회원의 참여중인 프로젝트 리스트
+	 *
 	 * @param model the model
 	 * @return the string
 	 */
@@ -72,6 +82,40 @@ public class ProjectController {
 
 		return "project/projectList";
 	}
+
+	/**
+	 * Project bookmark ajax string.
+	 *
+	 * @param project_id the project id
+	 * @param memberVo   the member vo
+	 * @param model      the model
+	 * @return the string
+	 */
+	@RequestMapping(value = "/projectBookmarkAjax", method = RequestMethod.POST)
+	public String projectBookmarkAjax(@RequestParam("project_id")String project_id,
+									  @SessionAttribute("memberVo")MemberVo memberVo,
+									  Model model) {
+
+		ProjectVo projectVo = (ProjectVo) projectService.selectProjectList(project_id);
+		if(projectVo.getProject_bookmark().equals("Y")) {
+			projectVo.setProject_bookmark("N");
+			projectService.updateProject(projectVo);
+		} else {
+			projectVo.setProject_bookmark("Y");
+			projectService.updateProject(projectVo);
+		}
+
+			model.addAttribute("memberProjectList",memberService.selectMainView(memberVo.getMember_mail()));
+		return "project/ajaxProjectList";
+	}
+
+
+	@RequestMapping(value = "/subMain", method = RequestMethod.GET)
+	public String subMain() {
+
+		return "main/subMain";
+	}
+
 
 
 
