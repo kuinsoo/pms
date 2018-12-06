@@ -32,7 +32,7 @@
                 <div class="projectCardUserName">
                     <img src="http://placehold.it/30x30">
                     <br>
-                        ${member.member_name} 외 ${member.pmemberCount - 1}
+                        ${member.member_name} 외 ${member.pmemberCount - 1}명
                 </div>
             </div>
         </li>
