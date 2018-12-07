@@ -87,8 +87,10 @@ div.well input[type="submit"]{width:100%;height:50px}
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호</label>
-					<input type="password" name="member_pass" id ="pass" class="form-control" value="4444" required />
-					<span class="error"> 일치하는 회원이 없습니다..다시 로그인 해주세요.</span>
+					<input type="password" name="member_pass"  id ="pass" class="form-control" value="4444" required />
+					<c:if test="${loginResult == 'false'}">
+						<span class="error"> 일치하는 회원이 없습니다..다시 로그인 해주세요.</span>
+					</c:if>
 				</div>
 				<br> <input type="submit" value="로그인" class="btn btn-primary btn-raised" /><br>
 				<a href="/signView" class="btn btn-primary btn-raised signBtn">회원가입</a>				
@@ -158,16 +160,10 @@ div.well input[type="submit"]{width:100%;height:50px}
 	$.material.init()
 </script>
 <script type="text/javascript">
-$(document).ready(function() {
-	$(".error").hide();
-	//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
-	//blur()이벤트 사용
-	$("#pass").blur(function() {
-		if($("#pass").val() != $(${member_pass}).val() && $("#email").val()!=$(${member_mail}).val()){
-			$(".error").show();
-		}else{
-			$(".error").hide();
-		}
+$(document).ready(function(){
+
+	$(document).keydown(function(event){
+		$(".error").hide();			
 	});
 });
 

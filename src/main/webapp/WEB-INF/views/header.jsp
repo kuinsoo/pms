@@ -211,16 +211,22 @@
                             </li>
                             <li>
                                 <i class="icon-power icons"></i>
-                                <a href="#">로그아웃</a>
+                                <a href="/logout">로그아웃</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-
         </div>
     </header>
-
+    <script type="text/javascript">
+    	
+   	HttpSession session = request.getSession(false);
+    if(session == null) {
+      response.sendRedirect("main.jsp");
+      return;
+    }
+    </script>
     <script>
 		$('#currentMain').on('click', function () {
 			location.href="/main";

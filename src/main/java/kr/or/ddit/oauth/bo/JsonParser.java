@@ -22,8 +22,8 @@ public class JsonParser {
 
 		map.put("member_mail", jsonObject.get("id"));
 		map.put("member_name", jsonObject.get("name"));
-		map.put("member_pass", null);
-		map.put("member_tel", null);
+		map.put("member_pass", "java");
+		map.put("member_tel", "010-0000-0000");
 
 		memberVo.setMember_name(map.get("member_name").toString());
 		memberVo.setMember_mail(map.get("member_mail").toString()); 

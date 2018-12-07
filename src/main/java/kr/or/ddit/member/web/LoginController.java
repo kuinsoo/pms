@@ -1,6 +1,5 @@
 package kr.or.ddit.member.web;
 
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
@@ -8,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
@@ -39,6 +39,8 @@ import kr.or.ddit.oauth.bo.NaverLoginBO;
 @SessionAttributes(value = {"memberVo"})  // 	model.addAttribute("memberVo",memberVo); 할때 세션에 없으면 세션영역을 할당해준다.
 @Controller
 public class LoginController {
+	
+	Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
 	private MemberServiceInf memberservice;
@@ -99,9 +101,12 @@ public class LoginController {
 
 		if(memberVo==null || !member_mail.equals(memberVo.getMember_mail())||
 							 !member_pass.equals(memberVo.getMember_pass())){
-			model.addAttribute("member_mail",member_mail);
-			model.addAttribute("member_pass",member_pass);
-			return "/";
+			
+			//model.addAttribute("member_mail",member_mail);
+			//model.addAttribute("member_pass",member_pass);
+			model.addAttribute("memberVo",memberVo);
+			model.addAttribute("loginResult","false");
+			return "/login/login";
 		}else {
 			model.addAttribute("memberVo",memberVo);
 
@@ -116,6 +121,10 @@ public class LoginController {
 		JsonParser json = new JsonParser();
 		
 		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
+		
+		logger.debug("naverLoginBO : {}", oauthToken.getAccessToken());
+		
+		
 		String apiResult = naverLoginBO.getUserProfile(oauthToken);
 		memberVo = json.changeJson(apiResult); // vo에 userEmail, userGender, userNaver 저장
 		String member_mail = memberVo.getMember_mail();
@@ -147,6 +156,12 @@ public class LoginController {
 		model.addAttribute("pMemberList",memberservice.selectMainView(memberVo.getMember_mail()));
 		return "main/main";
 	}
+	
+	@RequestMapping(value ="/logout")
+	public String logout() {
+		return "/login/login";
+	}
+
 
 	/**
 	 * Method : idFind

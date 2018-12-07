@@ -68,6 +68,7 @@
 				}
 			});
 		}
+		
 		function onkeyup_event(){
 			if(certificationNumber ==  $("#telnum").val()){
 				$("#telerror").hide();
