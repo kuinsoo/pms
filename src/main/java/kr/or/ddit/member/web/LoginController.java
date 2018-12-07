@@ -38,7 +38,6 @@ import kr.or.ddit.oauth.bo.NaverLoginBO;
 
 @SessionAttributes(value = {"memberVo"})  // 	model.addAttribute("memberVo",memberVo); 할때 세션에 없으면 세션영역을 할당해준다.
 @Controller
-
 public class LoginController {
 	
 	@Autowired
@@ -102,7 +101,7 @@ public class LoginController {
 							 !member_pass.equals(memberVo.getMember_pass())){
 			model.addAttribute("member_mail",member_mail);
 			model.addAttribute("member_pass",member_pass);
-			return "login/login";
+			return "/";
 		}else {
 			model.addAttribute("memberVo",memberVo);
 			return "redirect:/main";
@@ -123,10 +122,10 @@ public class LoginController {
 		// 값이 다르면..
 		if(memberservice.selectUser(member_mail)==null) {
 			int insertUser = memberservice.insertUser(memberVo);		
-			return"/login/login";
+			return"/";
 		// 값이 같으면 
 		}else {
-			model.addAttribute("member",memberVo);
+			model.addAttribute("memberVo",memberVo);
 			return "main/main";
 		}
 	}

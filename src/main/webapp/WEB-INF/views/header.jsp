@@ -31,7 +31,7 @@
         <div class="leftMenuUserInterface">
             <div class="dimLeftMenuUserInterface"></div>
             <img src="http://placehold.it/100x100">
-            <p>${member.member_name}</p>
+            <p>${memberVo.member_name}</p>
         </div>
         <ul class="firstMenu">
             <li>
@@ -200,7 +200,7 @@
                     <div class="dialog">
                         <div class="dialogUserImg">
                             <img src="http://placehold.it/100x100">
-                            <p>${member.member_name}</p>
+                            <p>${memberVo.member_name}</p>
                         </div>
                         <ul>
                             <li>
