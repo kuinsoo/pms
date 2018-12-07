@@ -14,7 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
-import kr.or.ddit.member.dao.MemberMapper;
+import kr.or.ddit.member.mapper.MemberMapper;
 
 @Component
 public class Timer {
@@ -45,17 +45,17 @@ public class Timer {
 	 * @Scheduled의 cron속성으로 크론탭처럼(* * * * *) 설정도 가능하다.
 	 * 출처: http://www.donnert.net/73?category=412866 [donnert.net]
 	 * */
-	//@Scheduled(fixedDelayString = "30000")
+//	@Scheduled(fixedDelayString = "30000")
 	public void tick() throws InterruptedException {
 		watch.stop();
 		//logger.info(watch.prettyPrint());
-			logger.info("{} memberMapper", memberMapper.selectAllMember());
+//			logger.info("{} memberMapper", memberMapper.selectAllMember());
 		
 		String taskName = taskNamePrefix + "-" + String.valueOf(loopCounter.getAndIncrement());
 		watch.start(taskName);
 	}
 	
-	//@Scheduled(cron = "0 10 10 10 * ?")
+//	@Scheduled(cron = "0 10 10 10 * ?")
 	public void run() {
 	    logger.info("Current time is :: " + Calendar.getInstance().getTime());
 	}

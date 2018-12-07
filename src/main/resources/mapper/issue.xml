@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.ddit.issue.mapper.IssueMapper">
+
+	<!-- 이슈 전체 일정 -->
+	<select id="issueAllSchedule" resultType="issueVo" parameterType="scheduleVo">
+	<!-- 일정에 필요한 컬럼 정리 : 이슈제목, 이슈발행일시, 이슈해결일시, 이슈일시색깔 -->
+		SELECT	sue.issue_title,
+				sue.issue_sdate,
+				sue.issue_edate,
+				sue.issue_color
+		<choose>
+			<when test="pid != null">
+				FROM    project p INNER JOIN work w
+				ON      p.project_id = w.work_project INNER JOIN issue sue
+				ON      w.work_id = sue.issue_work
+				where   p.project_id = #{pid}
+			</when>
+			<otherwise>
+				FROM	issue sue
+				WHERE	sue.issue_member = #{sid}
+			</otherwise>
+		</choose>
+	</select>
+
+</mapper>

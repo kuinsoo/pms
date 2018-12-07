@@ -3,52 +3,70 @@ package kr.or.ddit.member.model;
 import org.apache.ibatis.type.Alias;
 
 @Alias("memberVo")
-public class MemberVo {
-
-	private String mem_id;
-	private String mem_pass;
-	private String mem_name;
-	
-	public MemberVo() {
-		super();
-	}
-
-	public MemberVo(String mem_id, String mem_pass, String mem_name) {
-		super();
-		this.mem_id = mem_id;
-		this.mem_pass = mem_pass;
-		this.mem_name = mem_name;
-	}
+public class MemberVo extends PMemberListVo{
+	private String member_mail;
+	private String member_name;
+	private String member_pass;
+	private String member_tel;
+	private String member_profile;
+	private String member_withdrawal;
 
 	@Override
 	public String toString() {
-		return "MemberVo [mem_id=" + mem_id + ", mem_pass=" + mem_pass + ", mem_name=" + mem_name + "]";
+		return "MemberVo [member_mail=" + member_mail + ", member_name=" + member_name + ", member_pass=" + member_pass
+				+ ", member_tel=" + member_tel + ", member_profile=" + member_profile + ", member_withdrawal="
+				+ member_withdrawal + "]";
 	}
 
-	public String getMem_id() {
-		return mem_id;
+	public String getMember_mail() {
+		return member_mail;
 	}
 
-	public void setMem_id(String mem_id) {
-		this.mem_id = mem_id;
+	public void setMember_mail(String member_mail) {
+		this.member_mail = member_mail;
 	}
 
-	public String getMem_pass() {
-		return mem_pass;
+	public String getMember_name() {
+		return member_name;
 	}
 
-	public void setMem_pass(String mem_pass) {
-		this.mem_pass = mem_pass;
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
 	}
 
-	public String getMem_name() {
-		return mem_name;
+	public String getMember_pass() {
+		return member_pass;
 	}
 
-	public void setMem_name(String mem_name) {
-		this.mem_name = mem_name;
+	public void setMember_pass(String member_pass) {
+		this.member_pass = member_pass;
 	}
 
-	
+	public String getMember_tel() {
+		return member_tel;
+	}
+
+	public void setMember_tel(String member_tel) {
+		this.member_tel = member_tel;
+	}
+
+	public String getMember_profile() {
+		return member_profile;
+	}
+
+	public void setMember_profile(String member_profile) {
+		this.member_profile = member_profile;
+	}
+
+	public String getMember_withdrawal() {
+		return member_withdrawal;
+	}
+
+	public void setMember_withdrawal(String member_withdrawal) {
+		this.member_withdrawal = member_withdrawal;
+	}
+
+	public MemberVo() {
+	}
 
 }

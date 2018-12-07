@@ -1,0 +1,110 @@
+/* SECTION */
+.currentMain > .currentMainContainer > .currentMainContainerLeft{width:1000px;float:left;margin-top:10px;margin-bottom:10px;}
+.currentMain > .currentMainContainer > .currentMainContainerRight{margin-left:10px;width:380px;float:left;margin-top:10px;}
+.currentSubMainTitle{width:1000px;height:70px;background-color:#fff;border:1px solid #dee3eb;font-size:25px;line-height:70px;position:relative;float:left;}
+.currentSubMainTitle > i.icon-star{vertical-align:middle;margin-left:30px;}
+.currentSubMainTitle > span{vertical-align:middle;margin-left:15px;}
+.currentSubMainTitle > i.icon-share{vertical-align:middle;margin-left:30px;position:absolute;top:22px;right:30px;cursor:pointer;}
+.projectTeams{position:fixed;width:387px;height:782px;overflow-y:scroll;background-color:#fff;border:1px solid #dee3eb;}
+.projectTeams > h2{font-weight:normal;line-height:70px;margin-left:20px;}
+.projectTeams > ul > li{padding:10px 0px 10px 0px;}
+.projectTeams > ul > li:first-child{border-bottom:1px solid #dee3eb;padding-bottom:10px;}
+.projectTeams > ul > li > .projectPositionName{margin-left:20px;font-size:18px;}
+.projectTeams > ul > li > .chatList{width:100%;height:50px;padding-left:20px;margin-top:10px;}
+.projectTeams > ul > li > .chatList > img{border-radius:100%;vertical-align:middle;}
+.projectTeams > ul > li > .chatList > .projectUserNameList{vertical-align:middle;padding-left:15px;font-size:18px;}
+.projectList{width:1000px;background-color:#fff;border:1px solid #dee3eb;float:left;margin-top:10px;}
+.projectList > .projectListTitles{margin:20px 0px 0px 20px;font-size:20px;}
+.projectList > .projectListTitles > i{vertical-align:middle;}
+.projectList > .projectListTitles > span{vertical-align:middle;}
+.projectList > .charts{padding:20px;width:100%;}
+.projectList > .charts > .chartsContent{float:left;}
+.projectList > .charts > .chartsNumber{float:left;font-size:20px;margin-bottom:20px;margin-left:90px;}
+.projectList > .charts > .chartsNumber > ul{margin-top:25px;}
+.projectList > .charts > .chartsNumber > ul > li{padding:20px;margin-left:10px;float:left;cursor:pointer;}
+.projectList > .charts > .chartsNumber > ul > li > i{vertical-align:middle;}
+.projectList > .charts > .chartsNumber > ul > li > span{vertical-align:middle;}
+.projectList > .charts > .chartsNumber > ul > li:first-child{color:rgba(255, 99, 132, 1);}
+.projectList > .charts > .chartsNumber > ul > li:nth-child(2){color:rgba(54, 162, 235, 1);}
+.projectList > .charts > .chartsNumber > ul > li:nth-child(3){color:rgba(255, 206, 86, 1);}
+.projectList > .charts > .chartsNumber > ul > li:nth-child(4){color:rgba(75, 192, 192, 1);}
+.projectList > .charts > .chartsNumber > ul > li:last-child{color:rgba(153, 102, 255, 1);margin-bottom:30px;}
+
+.projectTaskContainer{width:1000px;background-color:#fff;border:1px solid #dee3eb;float:left;margin-top:10px;height:70px;}
+.projectTaskContainer > .projectTaskContainerTitle{margin:20px 0px 0px 20px;font-weight:normal;font-size:20px;}
+.projectTaskContainer > .projectTaskContainerTitle > i{vertical-align:middle;display:block;float:left;}
+.projectTaskContainer > .projectTaskContainerTitle > span{display:block;margin-left:10px;vertical-align:middle;float:left;}
+
+.projectTaskContainerDragDrop{width:1000px;background-color:transparent;float:left;margin-top:10px;}
+.projectTaskDragDrop{clear:left;}
+#titleList{width:998px;height:45px;line-height:45px;font-size:20px;}
+#titleList > li{float:left;}
+.titleBox{width:199.5px;float:left;text-align:center;}
+#planList{width:998px;height:100px;background-color:transparent;}
+#planList > .column{width:190px;float:left;border:1px solid #dee3eb;background-color:#fff;margin-top:5px;padding:0px 0px 5px 0px;}
+#planList > .column:first-child{margin-left:1px;}
+#planList > .column:nth-child(2){margin-left:10px;}
+#planList > .column:nth-child(3){margin-left:10px;}
+#planList > .column:nth-child(4){margin-left:10px;}
+#planList > .column:last-child{margin-left:10px;}
+.portlet-placeholder{border:1px dotted black;height:150px;}
+.portlet-header{width:100%;height:50px;font-size:20px;text-indent:10px;line-height:50px;cursor:pointer;margin-top:5px;}
+.portlet-content{width:100%;height:100px;font-size:18px;padding:10px;background-color:#f2f2f2;overflow-y:scroll;}
+
+.projectWriter{width:1000px;background-color:#fff;border:1px solid #dee3eb;float:left;margin-top:10px;}
+.tabssTextArea{width:100%;height:100%;outline:none;text-indent:10px;font-size:20px;border:none;}
+.tabssTextAreaSubmit {
+    float:right;width:100px;height:40px;font-size:18px;background-color:#fff;border:1px solid #dee3eb;outline:none;cursor:pointer;
+    margin:10px 0px 10px 0px;border-radius:5px;transition:0.5s;font-weight:normal;line-height:40px;
+}
+.tabssTextAreaSubmit:hover{background-color:#007fff;color:#fff;line-height:40px;border:1px solid #003eff;}
+.calendarTitle{width:100%;outline:none;font-size:20px;text-indent:10px;padding:5px 0px 5px 0px;margin-top:5px;}
+.calendarMemo{width:100%;outline:none;font-size:20px;text-indent:10px;padding:5px 0px 5px 0px;margin-top:5px;}
+.calendarContainerInput{width:530px;padding:0px 0px 5px 0px;}
+.calendarInputDiv{margin-top:5px;float:left;}
+.calendarInputDiv > i{vertical-align:middle;font-size:20px;}
+.calendarInputDiv > input[type=date]{vertical-align:middle;font-size:20px;}
+.calendarInputDivSpan{float:left;font-size:30px;padding-top:5px;margin-left:20px;}
+.calendarInputDivs{margin-top:5px;float:left;}
+.calendarInputDivs > i{vertical-align:middle;font-size:20px;margin-left:20px;}
+.calendarInputDivs > input[type=date]{vertical-align:middle;font-size:20px;}
+.todoInput{width:100%;outline:none;font-size:20px;text-indent:10px;padding:5px 0px 5px 0px;margin-top:5px;}
+.todoInputContent{width:100%;outline:none;font-size:20px;text-indent:10px;padding:5px 0px 5px 0px;margin-top:5px;}
+.todoPlus{margin:10px 0px 0px 0px;height:25px;}
+.todoPlus > i{font-size:20px;vertical-align:middle;float:left;cursor:pointer;}
+.todoPlus > span{display:block;font-size:20px;vertical-align:middle;margin-left:5px;float:left;cursor:pointer;}
+
+.currentCardList{width:1000px;background-color:#fff;border:1px solid #dee3eb;float:left;margin-top:10px;}
+.cardUserInfo{padding:10px;width:100%;height:70px;margin-top:20px;}
+.cardUserInfoImg{float:left;height:50px;padding-top:5px;padding-left:20px;}
+.cardUserInfoImg > img{border-radius:100%;}
+.cardUserInfoName{height:50px;float:left;padding-left:15px;padding-top:3px;}
+.cardUserInfoName > b{font-size:20px;}
+.cardUserInfoName > span{font-size:18px;color:#333;}
+.updateDeleteIcon{float:right;width:50px;height:50px;margin-right:20px;text-align:center;padding-top:10px;}
+.updateDeleteIcon > i{font-size:25px;cursor:pointer;}
+.cardContent{width:100%;height:250px;padding:20px 30px 20px 30px;}
+.cardContent > textarea{border:none;width:100%;height:100%;outline:none;font-size:18px;}
+.cardContentBottom{width:100%;height:60px;padding:20px;border-top:1px solid #dee3eb;font-size:20px;}
+.cardContentBottom > i{cursor:pointer;}
+.cardContentBottom > span{cursor:pointer;vertical-align:middle;}
+.cardContentBottom > i.icon-bubble{margin-left:20px;vertical-align:middle;}
+.cardContentBottom > i.icon-bulb{margin-left:25px;vertical-align:middle;}
+.cardContentComment{width:100%;min-height:150px;background-color:#f6f7f8;border-top:1px solid #dee3eb;}
+.cardContentComment > ul > li:last-child{padding-bottom:20px;}
+.cardContentCommentUser{width:100%;height:70px;padding:20px;}
+.cardContentCommentUser > .cardContentCommentUserImg{float:left;margin-left:20px;}
+.cardContentCommentUser > .cardContentCommentUserImg > img {border-radius:100%;}
+.cardContentCommentUser > .cardContentCommentUserName{float:left;padding-top:1px;margin-left:15px;font-size:20px;}
+.cardContentCommentUser > .cardContentCommentUserName > .times{margin-left:15px;color:#333;font-size:18px;}
+.commentInput {
+    width:850px;outline:none;font-size:20px;text-indent:10px;padding:5px 0px 5px 0px;margin-top:2px;
+    border:1px solid #dee3eb;
+}
+
+
+/* FOOTER */
+.currentFooter{width:100%;height:100px;background-color:#fff;border-top:1px solid #dee3eb;clear:left;}
+.footerContent{width:1400px;margin:0 auto;}
+.footerContent > p{font-size:18px;text-align:left;padding:20px;line-height:30px;}
+.footerContent > p > span{font-weight:bold;}

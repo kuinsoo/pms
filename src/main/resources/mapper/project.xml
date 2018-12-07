@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.ddit.project.mapper.ProjectMapper">
+
+    <select id="selectAllProject" resultType="projectVo">
+        select * from PROJECT order by PROJECT_ID desc
+    </select>
+
+    <select id="selectProjectList" resultType="projectVo" parameterType="String">
+        select * from PROJECT where PROJECT_ID = #{project_id}
+    </select>
+
+    <select id="selectBookMarkProject" resultType="projectVo">
+        select * from PROJECT where PROJECT_BOOKMARK = #{project_bookmark}
+    </select>
+
+    <insert id="createProject" parameterType="projectVo">
+        insert into PROJECT values (SEQ_PROJECT.nextval, #{project_title},#{project_overview}, 'N',#{project_sdate}, #{project_edate},'','' )
+    </insert>
+
+    <delete id="deleteProject" parameterType="String">
+        delete from PROJECT where PROJECT_ID
+    </delete>
+
+    <update id="updateProject" parameterType="projectVo">
+        update PROJECT
+        set PROJECT_TITLE = #{project_title}, PROJECT_OVERVIEW = #{project_overview},
+         PROJECT_BOOKMARK = #{project_bookmark}, PROJECT_EDATE = #{project_edate}
+        where PROJECT_ID = #{project_id}
+    </update>
+    
+    <!-- 프로젝트 전체 일정(20181129 지태 추가) -->
+    <select id="projectAllSchedule" resultType="projectVo" parameterType="scheduleVo">
+    <!-- 일정에 필요한 컬럼 정리: 프로젝트명, 프로젝트시작일자, 프로젝트종료일자, 프로젝트실제마감일자, 프로젝트일정색깔 -->
+    <!-- sid : SESSION ID -->
+    	SELECT	p.project_id,
+    			p.project_title,
+    			p.project_sdate,
+    			p.project_eedate,
+    			p.project_edate,
+    			p.project_color
+   		<if test="sid != null">
+	    	FROM	project_member pm INNER JOIN project p
+	    	ON		pm.pmember_project = p.project_id
+	    	WHERE	pm.pmember_member = #{sid}
+   		</if>
+    </select>
+	
+</mapper>

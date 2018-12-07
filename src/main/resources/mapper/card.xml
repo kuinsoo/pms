@@ -3,24 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.or.ddit.card.mapper.CardMapper">
+<mapper namespace="kr.or.ddit.zcardaa.mapper.CardMapper">
+<!--        <select id="selectAllCard" resultType="cardVo" >
+            select * from CARD order by CARD_INDEX desc
+        </select>
 
-    <select id="selectAllCard" resultType="cardVo">
-        select * from CARD order by CARD_INDEX desc
-    </select>
+        <select id="selectGroupCard" resultType="cardVo" parameterType="String">
+            select * from CARD where CARd_GROUP = #{CARd_GROUP}
+        </select>
 
-   <!-- <select id="selectGroupCard" resultType="cardVo" parameterType="String">
-        select * from CARD where CARd_GROUP = #{CARd_GROUP}
-    </select>-->
-
-    <select id="selectCard" resultType="cardVo" parameterType="int">
+        <select id="selectCard" resultType="cardVo" parameterType="int">
         select * from card where CARD_NO = #{card_no}
     </select>
 
-    <!--<insert id="createCard" parameterType="cardVo">
+    <insert id="createCard" parameterType="cardVo">
         insert into card values (CARD_TITLE= #{card_title}, CARD_CONTENT=#{card_content},
          CARD_GROUP=#{card_group})
-    </insert>-->
+    </insert>
 
     <update id="updateCard" parameterType="cardVo">
         update card
@@ -28,7 +27,7 @@
         where CARD_NO = #{card_no}
     </update>
 
-    <!--<delete id="deleteCard" parameterType="Float">
+    <delete id="deleteCard" parameterType="Float">
         delete from card where CARD_INDEX = #{card_index}
     </delete>-->
 </mapper>

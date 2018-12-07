@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-@MapperScan(value = {"kr/or/ddit/member", "kr/or/ddit/card"})
+@MapperScan(value = {"kr/or/ddit/**/mapper"})
 public class Application {
 
 	public static void main(String[] args) throws Exception {
