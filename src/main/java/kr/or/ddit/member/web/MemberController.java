@@ -69,9 +69,4 @@ public class MemberController {
 		return "redirect:/subMain?id=" + project_id ;
 	}
 
-	@RequestMapping(value = "/invitedProjects")
-	public String invitedProjects() {
-
-		return "";
-	}
 }

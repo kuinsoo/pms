@@ -122,8 +122,28 @@ public interface MemberServiceInf {
 	 * 작성자 : Mr.KKu
 	 * 초대받은 프로젝트 리스트
 	 *
-	 * @param member_email the member email
+	 * @param member_mail the member mail
 	 * @return the list
 	 */
-	List<InviteProjectVo> selectInviteProject(String member_email);
+	List<InviteProjectVo> selectInviteProject(String member_mail);
+
+	/**
+	 * Delete invite project int.
+	 * 작성자 : Mr.KKu
+	 * 초대받은 프로젝트 리스트에서 삭제
+	 *
+	 * @param member_mail the member mail
+	 * @return the int
+	 */
+	int  deleteInviteProject(String member_mail, PMemberVo pMemberVo);
+
+	/**
+	 * Delete invite project int.
+	 * 작성자 : Mr.KKu
+	 * 초대받은 프로젝트 리스트에서 삭제
+	 *
+	 * @param member_mail the member mail
+	 * @return the int
+	 */
+	int  deleteInviteProject(String member_mail);
 }

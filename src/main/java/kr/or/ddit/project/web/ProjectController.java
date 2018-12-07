@@ -1,6 +1,7 @@
 package kr.or.ddit.project.web;
 
 import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
@@ -116,10 +117,37 @@ public class ProjectController {
 		return "main/subMain";
 	}
 
-	@RequestMapping(value = "/acceptInvitation", method = RequestMethod.GET)
-	public String acceptInvitation(@RequestParam("accept")String accept, @RequestParam("id")String id) {
+//	@RequestMapping(value = "/acceptInvitation", method = RequestMethod.GET)
+//	public String acceptInvitation(@RequestParam("accept")String accept, @RequestParam("id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo) {
+//		try {
+//			PMemberVo pMemberVo = new PMemberVo();
+//			pMemberVo.setPmember_member(memberVo.getMember_mail());
+//			pMemberVo.setPmember_project(project_id);
+//			if(accept.equals("Y")) {
+//				memberService.deleteInviteProject(memberVo.getMember_mail(), pMemberVo);
+//			}
+//			memberService.deleteInviteProject(memberVo.getMember_mail());
+//		}catch (Exception e){
+//			e.printStackTrace();
+//		}
+//		return "redirect:/main";
+//	}
 
-		return "/main";
+
+	@RequestMapping(value = "/inviteProjectAjax", method = RequestMethod.GET)
+	public String inviteProjectAjax(@RequestParam("accept")String accept, @RequestParam("id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo) {
+		try {
+			PMemberVo pMemberVo = new PMemberVo();
+			pMemberVo.setPmember_member(memberVo.getMember_mail());
+			pMemberVo.setPmember_project(project_id);
+			if(accept.equals("Y")) {
+				memberService.deleteInviteProject(memberVo.getMember_mail(), pMemberVo);
+			}
+			memberService.deleteInviteProject(memberVo.getMember_mail());
+		}catch (Exception e){
+			e.printStackTrace();
+		}
+		return "project/ajaxinviteProject";
 	}
 
 

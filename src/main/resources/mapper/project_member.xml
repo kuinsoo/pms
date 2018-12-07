@@ -68,8 +68,9 @@
 
 	<!-- 팀 원으로 등록 -->
     <insert id="inviteTeam" parameterType="pMemberVo">
-      insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,#{project_id},#{member_email},'2', sysdate )
+      insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,#{pmember_project},#{pmember_member},'2', sysdate )
     </insert>
+
 	<!-- 초대받은 프로젝트들 -->
 	<insert id="invitedProjects" parameterType="inviteProjectVo">
 		insert into INVITE_PROJECT values (#{member_mail}, #{project_id}, #{project_invite})
@@ -86,9 +87,14 @@
 		select C.MEMBER_NAME,
        B.PROJECT_TITLE,
        B.PROJECT_OVERVIEW,
-       A.PROJECT_INVITE
+       A.PROJECT_INVITE,
+       B.PROJECT_ID
 		from INVITE_PROJECT A, PROJECT B, MEMBER C where C.MEMBER_MAIL = A.MEMBER_MAIL
                                                   and B.PROJECT_ID = A.PROJECT_ID
                                                   and A.MEMBER_MAIL = #{pmember_member}
 	</select>
+
+	<delete id="deleteInviteProject" parameterType="String">
+		delete from INVITE_PROJECT where MEMBER_MAIL = #{member_mail}
+	</delete>
 </mapper>

@@ -172,4 +172,23 @@ public class MemberService implements MemberServiceInf {
 	public List<InviteProjectVo> selectInviteProject(String member_email) {
 		return memberMapper.selectInviteProject(member_email);
 	}
+
+	/**
+	 * Delete invite project int.
+	 * 작성자 : Mr.KKu
+	 * 초대받은 프로젝트 리스트에서 삭제
+	 *
+	 * @param member_mail the member mail
+	 * @return the int
+	 */
+	@Override
+	public int deleteInviteProject(String member_mail, PMemberVo pMemberVo) {
+						memberMapper.inviteTeam(pMemberVo);
+		return memberMapper.deleteInviteProject(member_mail);
+	}
+
+	@Override
+	public int deleteInviteProject(String member_mail) {
+		return memberMapper.deleteInviteProject(member_mail);
+	}
 }

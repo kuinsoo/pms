@@ -119,7 +119,7 @@
 			</div>
 			<div class="currentMainProjectCreates">
 				<h1>초대받은 프로젝트</h1>
-				<ul>
+				<ul class="inviteProject">
 					<c:forEach items="${inviteProjectList}" var="inviteProject">
 					<li>
 						<div class="projectCard">
@@ -150,8 +150,8 @@
 															<p>${inviteProject.member_name}님이 초대 하셨습니다 수락 하시겠습니까?</p>
 														</div>
 														<div class="layerPopUpBtna">
-															<a href="/acceptInvitation?accept=Y&id=${inviteProject.project_id}"><button class="createProjectSubmita">수락</button></a>
-															<a href="/acceptInvitation?accept=Y&id=${inviteProject.project_id}" class="btn-layerClosea layerPopupClosea">취소</a>
+															<button class="btn-layerClosea createProjectSubmita" onclick="inviteProject('Y','${inviteProject.project_id}')">수락</button></a>
+															<button class="btn-layerClosea layerPopupClosea " onclick="inviteProject('N','${inviteProject.project_id}')">취소</button>
 														</div>
 													<%-- 프로젝트 생성 끝 --%>
 												</div>
@@ -195,6 +195,18 @@
 								$('.layer .dimBga').click(function(){
 									$('.dim-layera').fadeOut();
 									return false;
+								});
+							}
+
+							function inviteProject(accept, project_id) {
+								$.ajax({
+									type: "GET",
+									url: "/inviteProjectAjax",
+									data: {"accept": accept, "id": project_id},
+									success : function (data) {
+										$('.inviteProject').html("");
+										$('.inviteProject').html(data);
+									}
 								});
 							}
 							</script>
@@ -410,7 +422,7 @@
 	$('.goSubMain').on("click", function () {
 		location.href = "main/subMain";
 	});
-	
+
 
 
 </script>

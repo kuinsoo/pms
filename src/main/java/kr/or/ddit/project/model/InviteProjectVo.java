@@ -77,4 +77,6 @@ public class InviteProjectVo {
 	public void setProject_overview(String project_overview) {
 		this.project_overview = project_overview;
 	}
+
+
 }
