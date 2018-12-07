@@ -65,7 +65,7 @@
 													<span>프로젝트 개요</span>
 													<br>
 													<textarea class="projectContentInput" name="project_overview" placeholder="프로젝트 개요 입력"></textarea>
-													
+
 													<div class="projectStartEndDiv">
 														<span class="projectStart">프로젝트 시작일</span>
 														<input type="date" name="project_sdate" class="projectStartInput" />
@@ -87,38 +87,33 @@
 						</div>
 					</li>
 				</ul>
-				<%-- ajax 처리 --%>
-				<ul class="bookmarkProject">
-					<c:forEach items="${memberProjectList}" var="member" varStatus="i">
-						<c:forEach items="${member.projectList}" var="project" varStatus="j">
 
+				<ul class="bookmarkProject">
+                    <%-- ajax 처리 --%>
+					<c:forEach items="${pMemberList}" var="pMemberListVo" varStatus="i">
 					<li class="bookmarkProject">
 						<div class="projectCard" >
 							<div class="projectCardTitle" >
 								<c:choose >
-									<c:when test="${project.project_bookmark eq 'N'}">
-								<i class="icon-star icons" onclick="bookmark('${project.project_id}');"></i>
+									<c:when test="${pMemberListVo.project_bookmark eq 'N'}">
+								<i class="icon-star icons" onclick="bookmark('${pMemberListVo.project_id}');"></i>
 									</c:when>
-									<c:when test="${project.project_bookmark eq 'Y'}">
-								<i class="icon-star icons"  style="color:yellow;font-weight:bold;" onclick="bookmark('${project.project_id}');"></i>
+									<c:when test="${pMemberListVo.project_bookmark eq 'Y'}">
+								<i class="icon-star icons"  style="color:yellow;font-weight:bold;" onclick="bookmark('${pMemberListVo.project_id}');"></i>
 									</c:when>
 								</c:choose>
-                                <a href="/subMain"> ${project.project_title}</a>
-							<c:forEach items="${member.pmemberList}" var="pmember" varStatus="k">
-								<c:if test="${pmember.pmember_position eq '1'}">
+                                <a href="/subMain"> ${pMemberListVo.project_title}</a>
+								<c:if test="${pMemberListVo.pmember_position eq '1'}">
 								<i class="icon-settings icons"></i>
-								</c:if>
-							</c:forEach>
+                                </c:if>
 							</div>
 							<div class="projectCardUserName">
 								<img src="http://placehold.it/30x30">
 								<br>
-								${member.member_name} 외 ${member.pmemberCount - 1}명
+								${pMemberListVo.member_name} 외 ${pMemberListVo.pmemberCount - 1}명
 							</div>
 						</div>
 					</li>
-
-						</c:forEach>
 					</c:forEach>
 				</ul>
 			</div>
@@ -129,9 +124,84 @@
 						<div class="projectCard">
 							<div class="projectCardTitle">
 								<i class="icon-star icons"></i>
-								샘플 프로젝트 명
+								<a href="#projectCreatePopUpInvite" class="projectCreatePopUpInvite">샘플 프로젝트 명</a>
 								<i class="icon-settings icons"></i>
 							</div>
+							<div class="dim-layera">
+								<div class="dimBga"></div>
+								<div id="projectCreatePopUpInvite" class="pop-layera">
+									<div class="pop-containera">
+										<div class="pop-contsa">
+											<div class="pop-conts-headera">
+												<p>프로젝트 초대</p>
+												<a href="#" class="btn-layerClosea">
+													<i class="icon-close icons"></i>
+												</a>
+											</div>
+											<div class="pop-conts-sectiona">
+												<div class="pop-conts-section-titlea">
+													<%-- 프로젝트 생성 시작 --%>
+													<form action="" method="post">
+														<span>프로젝트명</span>
+														<input type="text"  class="projectTitleInputa" name="" value="" readonly />
+														<br>
+														<span>프로젝트 개요</span>														
+														<textarea class="projectContentInputa" name="" readonly></textarea>
+														
+														<div class="projectInvite">
+															<p>userName님이 초대 하셨습니다 수락 하시겠습니까?</p>
+														</div>
+	
+														<div class="layerPopUpBtna">
+															<input type="submit" value="수락" class="createProjectSubmita">
+															<a href="#" class="btn-layerClosea layerPopupClosea">취소</a>
+														</div>
+													</form>
+													<%-- 프로젝트 생성 끝 --%>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<script>
+							// DIM POPUP
+							$('.projectCreatePopUpInvite').click(function(){
+								var $hrefa = $(this).attr('href');
+								layer_popupa($hrefa);
+							});
+							function layer_popupa(ela){
+								var $ela = $(ela);        //레이어의 id를 $el 변수에 저장
+								var isDima = $ela.prev().hasClass('dimBga');   //dimmed 레이어를 감지하기 위한 boolean 변수
+
+								isDima ? $('.dim-layera').fadeIn() : $ela.fadeIn();
+
+								var $elWidtha = ~~($ela.outerWidth()),
+									$elHeighta = ~~($ela.outerHeight()),
+									docWidtha = $(document).width(),
+									docHeighta = $(document).height();
+
+								// 화면의 중앙에 레이어를 띄운다.
+								if ($elHeighta < docHeighta || $elWidtha < docWidtha) {
+									$ela.css({
+										marginTop: -$elHeighta /2,
+										marginLeft: -$elWidtha/2
+									})
+								} else {
+									$ela.css({top: 0, left: 0});
+								}
+
+								$ela.find('a.btn-layerClosea').click(function(){
+									isDima ? $('.dim-layera').fadeOut() : $ela.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+									return false;
+								});
+
+								$('.layer .dimBga').click(function(){
+									$('.dim-layera').fadeOut();
+									return false;
+								});
+							}
+							</script>
 							<div class="projectCardUserName">
 								<img src="http://placehold.it/30x30">
 								<br>

@@ -1,6 +1,6 @@
 package kr.or.ddit.commons.mail.web;
 
-import kr.or.ddit.commons.mail.service.EmailSserviceInf;
+import kr.or.ddit.commons.mail.service.EmailServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class EmailController {
 
 	@Autowired
-	private EmailSserviceInf emailSservice;
+	private EmailServiceInf emailSservice;
 
 	@RequestMapping(value = "/sendMail")
 	public void sendMail() {

@@ -1,7 +1,8 @@
 package kr.or.ddit.member.mapper;
 
 import kr.or.ddit.member.model.MemberVo;
-import kr.or.ddit.project.model.ProjectVo;
+import kr.or.ddit.member.model.PMemberListVo;
+import kr.or.ddit.member.model.PMemberVo;
 
 import java.util.List;
 import java.util.Map;
@@ -77,7 +78,7 @@ public interface MemberMapper {
 	 * @param member_mail the member mail
 	 * @return the list
 	 */
-	List<MemberVo> selectMainView(String member_mail);
+	List<PMemberListVo> selectMainView(String member_mail);
 
 	/**
 	 * Sets team leader.
@@ -88,4 +89,14 @@ public interface MemberMapper {
 	 * @return the team leader
 	 */
 	int setTeamLeader(Map<String,String> mapPMember);
+
+	/**
+	 * Invite team int.
+	 * 작성자 : Mr. KKu
+	 * 프로젝트 초대 수락시 팀에 포함시킨다.
+	 *
+	 * @param pMemberVo the p member vo
+	 * @return the int
+	 */
+	int inviteTeam(PMemberVo pMemberVo);
 }

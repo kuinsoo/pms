@@ -1,13 +1,14 @@
 package kr.or.ddit.member.service;
 
+import kr.or.ddit.member.mapper.MemberMapper;
+import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.member.model.PMemberListVo;
+import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import kr.or.ddit.member.mapper.MemberMapper;
-import kr.or.ddit.member.model.MemberVo;
 
 import java.util.List;
 import java.util.Map;
@@ -104,7 +105,7 @@ public class MemberService implements MemberServiceInf {
 	 * @return the list
 	 */
 	@Override
-	public List<MemberVo> selectMainView(String member_mail) {
+	public List<PMemberListVo> selectMainView(String member_mail) {
 		return memberMapper.selectMainView(member_mail);
 	}
 
@@ -119,5 +120,18 @@ public class MemberService implements MemberServiceInf {
 	public int setTeamLeader(Map<String, String> mapPMember, ProjectVo projectVo) {
 		projectService.createProject(projectVo);
 		return memberMapper.setTeamLeader(mapPMember);
+	}
+
+	/**
+	 * Invite team int.
+	 * 작성자 : Mr. KKu
+	 * 프로젝트 초대 수락시 팀에 포함시킨다.
+	 *
+	 * @param pMemberVo the p member vo
+	 * @return the int
+	 */
+	@Override
+	public int inviteTeam(PMemberVo pMemberVo) {
+		return memberMapper.inviteTeam(pMemberVo);
 	}
 }

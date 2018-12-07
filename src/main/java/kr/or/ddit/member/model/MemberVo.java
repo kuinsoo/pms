@@ -1,23 +1,16 @@
 package kr.or.ddit.member.model;
 
-import kr.or.ddit.project.model.ProjectVo;
 import org.apache.ibatis.type.Alias;
 
-import java.util.List;
-
 @Alias("memberVo")
-public class MemberVo {
+public class MemberVo extends PMemberListVo{
 	private String member_mail;
 	private String member_name;
 	private String member_pass;
 	private String member_tel;
 	private String member_profile;
 	private String member_withdrawal;
-	private List<ProjectVo> projectList;
-	private List<PMemberVo> pmemberList;
 
-	private int pmemberCount;
-	
 	@Override
 	public String toString() {
 		return "MemberVo [member_mail=" + member_mail + ", member_name=" + member_name + ", member_pass=" + member_pass
@@ -76,27 +69,4 @@ public class MemberVo {
 	public MemberVo() {
 	}
 
-	public int getPmemberCount() {
-		return pmemberCount;
-	}
-
-	public void setPmemberCount(int pmemberCount) {
-		this.pmemberCount = pmemberCount;
-	}
-
-	public List<ProjectVo> getProjectList() {
-		return projectList;
-	}
-
-	public void setProjectList(List<ProjectVo> projectList) {
-		this.projectList = projectList;
-	}
-
-	public List<PMemberVo> getPmemberList() {
-		return pmemberList;
-	}
-
-	public void setPmemberList(List<PMemberVo> pmemberList) {
-		this.pmemberList = pmemberList;
-	}
 }

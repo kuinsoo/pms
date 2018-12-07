@@ -105,7 +105,7 @@ public class ProjectController {
 			projectService.updateProject(projectVo);
 		}
 
-			model.addAttribute("memberProjectList",memberService.selectMainView(memberVo.getMember_mail()));
+			model.addAttribute("pMemberList",memberService.selectMainView(memberVo.getMember_mail()));
 		return "project/ajaxProjectList";
 	}
 

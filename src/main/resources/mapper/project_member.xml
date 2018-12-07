@@ -4,22 +4,18 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.ddit.member.mapper.MemberMapper">
-    <resultMap id="pmemberResultMap" type="memberVo">
+    <resultMap id="pMemberResultMap" type="pMemberListVo">
         <id property="member_name" column="member_name" />
         <id property="member_profile" column="member_profile" />
         <id property="pmemberCount" column="pmemberCount" />
-        <collection property="projectList" ofType="projectVo">
-            <id property="project_title" column="project_title" />
-            <id property="project_overview" column="project_overview" />
-            <id property="project_bookmark" column="project_bookmark" />
-            <id property="project_id" column="project_id" />
-        </collection>
-        <collection property="pmemberList" ofType="pmemberVo">
-            <id property="pmember_position" column="pmember_position" />
-        </collection>
+        <id property="pmember_position" column="pmember_position" />
+        <id property="project_title" column="project_title" />
+        <id property="project_overview" column="project_overview" />
+        <id property="project_bookmark" column="project_bookmark" />
+        <id property="project_id" column="project_id" />
     </resultMap>
 
-    <select id="selectMainView" parameterType="String" resultMap="pmemberResultMap">
+    <select id="selectMainView" parameterType="String" resultMap="pMemberResultMap">
         SELECT  DISTINCT
 		        p.project_title,
 		        p.project_overview,
@@ -40,31 +36,34 @@
 		                                                      GROUP BY pmember_project) pmemberCount
 		ON      pm.pmember_project = pmemberCount.pmember_project
 		WHERE   m.member_mail = #{member_mail}
-		order by p.PROJECT_TITLE
+		order by to_number(p.PROJECT_id)
     </select>
-	<!--
-		SELECT  DISTINCT
-		        p.project_title,
-		        p.project_overview,
-		        p.project_bookmark,
-		        m.member_name,
-		        m.member_profile,
-		        pmcount.*
-		FROM    project p INNER JOIN project_member pm
-		ON      p.project_id = pm.pmember_project INNER JOIN member m
-		ON      pm.pmember_member = m.member_mail INNER JOIN (SELECT  pmember_project,
-		                                                              COUNT(*)
-		                                                      FROM    project_member
-		                                                      WHERE   pmember_project IN (SELECT  pmember_id
-		                                                                                  FROM    project_member
-		                                                                                  WHERE   pmember_member = 'kkuinsoo@gmail.com')
-		                                                      GROUP BY pmember_project) pmcount
-		ON      pm.pmember_project = pmcount.pmember_project
-		WHERE   m.member_mail = 'kkuinsoo@gmail.com';
-	 -->
+    <!--
+        SELECT  DISTINCT
+                p.project_title,
+                p.project_overview,
+                p.project_bookmark,
+                m.member_name,
+                m.member_profile,
+                pmcount.*
+        FROM    project p INNER JOIN project_member pm
+        ON      p.project_id = pm.pmember_project INNER JOIN member m
+        ON      pm.pmember_member = m.member_mail INNER JOIN (SELECT  pmember_project,
+                                                                      COUNT(*)
+                                                              FROM    project_member
+                                                              WHERE   pmember_project IN (SELECT  pmember_id
+                                                                                          FROM    project_member
+                                                                                          WHERE   pmember_member = 'kkuinsoo@gmail.com')
+                                                              GROUP BY pmember_project) pmcount
+        ON      pm.pmember_project = pmcount.pmember_project
+        WHERE   m.member_mail = 'kkuinsoo@gmail.com';
+     -->
 
-<insert id="setTeamLeader" parameterType="Map">
-	insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,SEQ_PROJECT.currval,#{member_email}, #{pmember_position}, sysdate )
-</insert>
+    <insert id="setTeamLeader" parameterType="Map">
+	  insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,SEQ_PROJECT.currval,#{member_email}, #{pmember_position}, sysdate )
+    </insert>
 
+    <insert id="inviteTeam" parameterType="pMemberVo">
+      insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,#{project_id},#{member_email},'2', sysdate );
+    </insert>
 </mapper>

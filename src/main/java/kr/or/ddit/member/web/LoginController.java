@@ -104,6 +104,7 @@ public class LoginController {
 			return "/";
 		}else {
 			model.addAttribute("memberVo",memberVo);
+
 			return "redirect:/main";
 		}
 	}
