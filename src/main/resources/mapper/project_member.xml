@@ -63,7 +63,11 @@
 	  insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,SEQ_PROJECT.currval,#{member_email}, #{pmember_position}, sysdate )
     </insert>
 
+
+
     <insert id="inviteTeam" parameterType="pMemberVo">
       insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,#{project_id},#{member_email},'2', sysdate );
     </insert>
+
+
 </mapper>
