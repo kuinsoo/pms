@@ -2,6 +2,7 @@ package kr.or.ddit.member.web;
 
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.project.model.InviteProjectVo;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -21,11 +22,12 @@ import java.util.HashMap;
  * @version 1.0
  * @see <pre> << 개정이력(Modification Information) >> 수정자 수정내용 ------ ------------------------ pc07 최초 생성 </pre>
  */
-@SessionAttributes(value = {"memberVo", "certificationNumber"})  // 	model.addAttribute("memberVo",memberVo); 할때 세션에 없으면 세션영역을 할당해준다.
+@SessionAttributes(value = {"memberVo"})  // 	model.addAttribute("memberVo",memberVo); 할때 세션에 없으면 세션영역을 할당해준다.
 @Controller
 public class LoginController {
 	@Autowired
 	private MemberServiceInf memberservice;
+
 
 	/**
 	 * The Email sender.
@@ -91,6 +93,7 @@ public class LoginController {
 	public String main(Model model, @ModelAttribute("memberVo")MemberVo memberVo) {
 
 		model.addAttribute("pMemberList",memberservice.selectMainView(memberVo.getMember_mail()));
+		model.addAttribute("inviteProjectList", memberservice.selectInviteProject(memberVo.getMember_mail()));
 		return "main/main";
 	}
 

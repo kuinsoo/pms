@@ -15,6 +15,7 @@
         <id property="project_id" column="project_id" />
     </resultMap>
 
+	<!-- mina Project list -->
     <select id="selectMainView" parameterType="String" resultMap="pMemberResultMap">
         SELECT  DISTINCT
 		        p.project_title,
@@ -59,15 +60,35 @@
         WHERE   m.member_mail = 'kkuinsoo@gmail.com';
      -->
 
+	<!-- 팀리더로 업데이트 등록 -->
     <insert id="setTeamLeader" parameterType="Map">
 	  insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,SEQ_PROJECT.currval,#{member_email}, #{pmember_position}, sysdate )
     </insert>
 
 
-
+	<!-- 팀 원으로 등록 -->
     <insert id="inviteTeam" parameterType="pMemberVo">
-      insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,#{project_id},#{member_email},'2', sysdate );
+      insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,#{project_id},#{member_email},'2', sysdate )
     </insert>
+	<!-- 초대받은 프로젝트들 -->
+	<insert id="invitedProjects" parameterType="inviteProjectVo">
+		insert into INVITE_PROJECT values (#{member_mail}, #{project_id}, #{project_invite})
+	</insert>
 
+	<!-- 초대받은 프로젝트에 포함된 이메일인지 검색 -->
+	<select id="searchTeamMember" parameterType="pMemberVo" resultType="pMemberVo">
+		select * from PROJECT_MEMBER
+		where PMEMBER_MEMBER = #{pmember_member}
+		and PMEMBER_PROJECT = #{pmember_project}
+	</select>
 
+	<select id="selectInviteProject" parameterType="String" resultType="inviteProjectVo">
+		select C.MEMBER_NAME,
+       B.PROJECT_TITLE,
+       B.PROJECT_OVERVIEW,
+       A.PROJECT_INVITE
+		from INVITE_PROJECT A, PROJECT B, MEMBER C where C.MEMBER_MAIL = A.MEMBER_MAIL
+                                                  and B.PROJECT_ID = A.PROJECT_ID
+                                                  and A.MEMBER_MAIL = #{pmember_member}
+	</select>
 </mapper>

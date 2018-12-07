@@ -133,12 +133,12 @@
                                 </div>
                                 <div class="pop-conts-sections">
                                     <div class="pop-conts-section-titles">
-                                        <form action="/inviteTeam" method="POST" id="inviteForm">
+                                        <form action="/inviteTeam?id=${project_id}" method="POST" id="inviteForm">
                                         <span>이메일을 통해 팀원을 초대할 수 있습니다</span>
                                         <br>
-                                        <input type="email" name="inviteTeam" placeholder="이메일 입력" class="projectTitleInputs" />
+                                        <input type="email" name="inviteTeam" value="kkuinsoo@gmail.com" placeholder="이메일 입력" class="projectTitleInputs" />
                                         <br>
-                                        <input type="email" name="inviteTeam" placeholder="example@gmail.com" class="projectTitleInputs" />
+                                        <input type="email" name="inviteTeam" value="sally1334@naver.com" placeholder="example@gmail.com" class="projectTitleInputs" />
                                         <br>
                                         <input type="email" name="inviteTeam" placeholder="example@gmail.com" class="projectTitleInputs" />
                                         <br>

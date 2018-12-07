@@ -111,11 +111,16 @@ public class ProjectController {
 
 
 	@RequestMapping(value = "/subMain", method = RequestMethod.GET)
-	public String subMain() {
-
+	public String subMain(Model model, @RequestParam("id")String proejct_id) {
+		model.addAttribute("project_id", proejct_id);
 		return "main/subMain";
 	}
 
+	@RequestMapping(value = "/acceptInvitation", method = RequestMethod.GET)
+	public String acceptInvitation(@RequestParam("accept")String accept, @RequestParam("id")String id) {
+
+		return "/main";
+	}
 
 
 

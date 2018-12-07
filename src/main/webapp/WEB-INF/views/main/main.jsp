@@ -102,7 +102,7 @@
 								<i class="icon-star icons"  style="color:yellow;font-weight:bold;" onclick="bookmark('${pMemberListVo.project_id}');"></i>
 									</c:when>
 								</c:choose>
-                                <a href="/subMain"> ${pMemberListVo.project_title}</a>
+                                <a href="/subMain?id=${pMemberListVo.project_id}"> ${pMemberListVo.project_title}</a>
 								<c:if test="${pMemberListVo.pmember_position eq '1'}">
 								<i class="icon-settings icons"></i>
                                 </c:if>
@@ -120,12 +120,11 @@
 			<div class="currentMainProjectCreates">
 				<h1>초대받은 프로젝트</h1>
 				<ul>
+					<c:forEach items="${inviteProjectList}" var="inviteProject">
 					<li>
 						<div class="projectCard">
 							<div class="projectCardTitle">
-								<i class="icon-star icons"></i>
-								<a href="#projectCreatePopUpInvite" class="projectCreatePopUpInvite">샘플 프로젝트 명</a>
-								<i class="icon-settings icons"></i>
+								<a href="#projectCreatePopUpInvite" class="projectCreatePopUpInvite">${inviteProject.project_title}</a>
 							</div>
 							<div class="dim-layera">
 								<div class="dimBga"></div>
@@ -141,22 +140,19 @@
 											<div class="pop-conts-sectiona">
 												<div class="pop-conts-section-titlea">
 													<%-- 프로젝트 생성 시작 --%>
-													<form action="" method="post">
 														<span>프로젝트명</span>
-														<input type="text"  class="projectTitleInputa" name="" value="" readonly />
+														<input type="text"  class="projectTitleInputa" name="" value="${inviteProject.project_title}" readonly />
 														<br>
-														<span>프로젝트 개요</span>														
-														<textarea class="projectContentInputa" name="" readonly></textarea>
+														<span>프로젝트개요</span>
+														<textarea class="projectContentInputa" name="" readonly>${inviteProject.project_overview}</textarea>
 														
 														<div class="projectInvite">
-															<p>userName님이 초대 하셨습니다 수락 하시겠습니까?</p>
+															<p>${inviteProject.member_name}님이 초대 하셨습니다 수락 하시겠습니까?</p>
 														</div>
-	
 														<div class="layerPopUpBtna">
-															<input type="submit" value="수락" class="createProjectSubmita">
-															<a href="#" class="btn-layerClosea layerPopupClosea">취소</a>
+															<a href="/acceptInvitation?accept=Y&id=${inviteProject.project_id}"><button class="createProjectSubmita">수락</button></a>
+															<a href="/acceptInvitation?accept=Y&id=${inviteProject.project_id}" class="btn-layerClosea layerPopupClosea">취소</a>
 														</div>
-													</form>
 													<%-- 프로젝트 생성 끝 --%>
 												</div>
 											</div>
@@ -205,10 +201,11 @@
 							<div class="projectCardUserName">
 								<img src="http://placehold.it/30x30">
 								<br>
-								user님 참여중
+								${inviteProject.member_name}님 참여중
 							</div>
 						</div>
 					</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
