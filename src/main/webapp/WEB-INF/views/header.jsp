@@ -14,14 +14,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAIN - CURRENT</title>
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png" />
     <!-- NANUM SQUARE FONT -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.css">
-    <link rel="stylesheet" href="css/swiper.min.css">
-    <link rel="stylesheet" href="css/jquery-ui.css">
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" type="text/css" href="css/submain.css">
+    <link rel="stylesheet" href="/css/swiper.min.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/css/submain.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 </head>
 
@@ -133,22 +133,24 @@
                                 </div>
                                 <div class="pop-conts-sections">
                                     <div class="pop-conts-section-titles">
+                                        <form action="/inviteTeam" method="POST" id="inviteForm">
                                         <span>이메일을 통해 팀원을 초대할 수 있습니다</span>
                                         <br>
-                                        <input type="email" placeholder="이메일 입력" class="projectTitleInputs" />
+                                        <input type="email" name="inviteTeam" placeholder="이메일 입력" class="projectTitleInputs" />
                                         <br>
-                                        <input type="email" placeholder="example@gmail.com" class="projectTitleInputs" />
+                                        <input type="email" name="inviteTeam" placeholder="example@gmail.com" class="projectTitleInputs" />
                                         <br>
-                                        <input type="email" placeholder="example@gmail.com" class="projectTitleInputs" />
+                                        <input type="email" name="inviteTeam" placeholder="example@gmail.com" class="projectTitleInputs" />
                                         <br>
-                                        <input type="email" placeholder="example@gmail.com" class="projectTitleInputs" />
+                                        <input type="email" name="inviteTeam" placeholder="example@gmail.com" class="projectTitleInputs" />
                                         <br>
-                                        <input type="email" placeholder="example@gmail.com" class="projectTitleInputs" />
+                                        <input type="email" name="inviteTeam" placeholder="example@gmail.com" class="projectTitleInputs" />
                                         <br>
                                         <div class="layerPopUpBtnsss">
                                             <input type="submit" value="초대하기" class="createProjectSubmits">
                                             <a href="#" class="btn-layerCloses layerPopupCloses">취소</a>
                                         </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>

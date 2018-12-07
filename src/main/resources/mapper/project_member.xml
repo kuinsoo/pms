@@ -38,29 +38,32 @@
 		WHERE   m.member_mail = #{member_mail}
 		order by to_number(p.PROJECT_id)
     </select>
-	<!--
-		SELECT  DISTINCT
-		        p.project_title,
-		        p.project_overview,
-		        p.project_bookmark,
-		        m.member_name,
-		        m.member_profile,
-		        pmcount.*
-		FROM    project p INNER JOIN project_member pm
-		ON      p.project_id = pm.pmember_project INNER JOIN member m
-		ON      pm.pmember_member = m.member_mail INNER JOIN (SELECT  pmember_project,
-		                                                              COUNT(*)
-		                                                      FROM    project_member
-		                                                      WHERE   pmember_project IN (SELECT  pmember_id
-		                                                                                  FROM    project_member
-		                                                                                  WHERE   pmember_member = 'kkuinsoo@gmail.com')
-		                                                      GROUP BY pmember_project) pmcount
-		ON      pm.pmember_project = pmcount.pmember_project
-		WHERE   m.member_mail = 'kkuinsoo@gmail.com';
-	 -->
+    <!--
+        SELECT  DISTINCT
+                p.project_title,
+                p.project_overview,
+                p.project_bookmark,
+                m.member_name,
+                m.member_profile,
+                pmcount.*
+        FROM    project p INNER JOIN project_member pm
+        ON      p.project_id = pm.pmember_project INNER JOIN member m
+        ON      pm.pmember_member = m.member_mail INNER JOIN (SELECT  pmember_project,
+                                                                      COUNT(*)
+                                                              FROM    project_member
+                                                              WHERE   pmember_project IN (SELECT  pmember_id
+                                                                                          FROM    project_member
+                                                                                          WHERE   pmember_member = 'kkuinsoo@gmail.com')
+                                                              GROUP BY pmember_project) pmcount
+        ON      pm.pmember_project = pmcount.pmember_project
+        WHERE   m.member_mail = 'kkuinsoo@gmail.com';
+     -->
 
-<insert id="setTeamLeader" parameterType="Map">
-	insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,SEQ_PROJECT.currval,#{member_email}, #{pmember_position}, sysdate )
-</insert>
+    <insert id="setTeamLeader" parameterType="Map">
+	  insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,SEQ_PROJECT.currval,#{member_email}, #{pmember_position}, sysdate )
+    </insert>
 
+    <insert id="inviteTeam" parameterType="pMemberVo">
+      insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,#{project_id},#{member_email},'2', sysdate );
+    </insert>
 </mapper>

@@ -2,6 +2,7 @@ package kr.or.ddit.member.service;
 
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberListVo;
+import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.project.model.ProjectVo;
 
 import java.util.List;
@@ -83,4 +84,15 @@ public interface MemberServiceInf {
 	 * @return the team leader
 	 */
 	int setTeamLeader(Map<String,String> mapPMember, ProjectVo projectVo);
+
+
+	/**
+	 * Invite team int.
+	 * 작성자 : Mr. KKu
+	 * 프로젝트 초대 수락시 팀에 포함시킨다.
+	 *
+	 * @param pMemberVo the p member vo
+	 * @return the int
+	 */
+	int inviteTeam(PMemberVo pMemberVo);
 }

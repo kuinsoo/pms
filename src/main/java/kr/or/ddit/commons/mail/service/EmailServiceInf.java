@@ -9,7 +9,7 @@ package kr.or.ddit.commons.mail.service;
  * @Date : 2018-12-03 / 오후 3:55
  * @Version :
  */
-public interface EmailSserviceInf {
+public interface EmailServiceInf {
 	/**
 	 * Send mail.
 	 * 이메일을 전송해준다.
