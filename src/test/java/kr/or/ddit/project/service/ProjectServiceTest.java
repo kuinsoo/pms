@@ -11,8 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * kr.or.ddit.project.service
  * JUnit4 Test Class.java.java

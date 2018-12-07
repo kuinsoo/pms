@@ -28,7 +28,6 @@ public class MemberController {
 		String content = "프로젝트 주소 : http://127.0.0.1:8081/?teamId=8";
 		for (String inviteMail :
 				inviteMails) {
-			System.out.println(inviteMail);
 			String to = inviteMail;
 			emailService.sendMail(to,subject,content);
 		}
