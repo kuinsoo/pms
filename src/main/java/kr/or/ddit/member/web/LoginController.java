@@ -2,7 +2,6 @@ package kr.or.ddit.member.web;
 
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
-import kr.or.ddit.project.model.InviteProjectVo;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;

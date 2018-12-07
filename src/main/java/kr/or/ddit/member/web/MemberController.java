@@ -1,18 +1,14 @@
 package kr.or.ddit.member.web;
 
 import kr.or.ddit.commons.mail.service.EmailServiceInf;
-import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.project.model.InviteProjectVo;
-import kr.or.ddit.project.model.ProjectVo;
-import kr.or.ddit.project.service.ProjectServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 
 /**
  * kr.or.ddit.member.web

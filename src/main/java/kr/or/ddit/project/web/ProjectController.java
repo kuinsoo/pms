@@ -147,7 +147,7 @@ public class ProjectController {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return "project/ajaxinviteProject";
+		return "project/ajaxInviteProject";
 	}
 
 
