@@ -5,17 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인 - CURRENT</title>
-<link rel="shortcut icon" type="image/x-icon" href="images/favicon.png" />
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png" />
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
-<link rel="stylesheet" href="../css/bootstrap.min.css" />
-<link rel="stylesheet" href="../css/bootstrap-material-design.min.css" />
-<link rel="stylesheet" href="../css/ripples.min.css" />
-<link rel="stylesheet" href="../css/style.css" />
-<script src="../js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/css/bootstrap.min.css" />
+<link rel="stylesheet" href="/css/bootstrap-material-design.min.css" />
+<link rel="stylesheet" href="/css/ripples.min.css" />
+<link rel="stylesheet" href="/css/style.css" />
+<script src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-<link rel="stylesheet" href="../css/login.css">
+<link rel="stylesheet" href="/css/login.css">
 <style>
 .wraps{width:100%;height:100%;display:flex;justify-content:center;align-items:center;}
 body{margin:0;background:#ddd}
@@ -154,7 +154,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 	</div>
 
 </div>
-<script src="../js/material.min.js"></script>
+<script src="/js/material.min.js"></script>
 
 <script>
 	$.material.init()
