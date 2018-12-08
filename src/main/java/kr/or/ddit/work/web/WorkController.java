@@ -1,10 +1,13 @@
 package kr.or.ddit.work.web;
 
+import org.apache.maven.model.Model;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.or.ddit.work.model.WorkVo;
 import kr.or.ddit.work.service.WorkServiceInf;
 
 /**
@@ -14,7 +17,7 @@ import kr.or.ddit.work.service.WorkServiceInf;
  *
  * @Author : Mr.KKu
  * @Date : 2018-11-27 / 오후 3:34
- * @Version :
+ * @Version : 
  */
 @Controller
 public class WorkController {
@@ -23,4 +26,10 @@ public class WorkController {
 	@Autowired
 	private WorkServiceInf workService;
 	
+	
+	@RequestMapping(value="/ajaxCreateWork")
+	public String createWork(Model model, WorkVo workVo) {
+		logger.debug("work {}", workVo);
+		return "";
+	}
 }

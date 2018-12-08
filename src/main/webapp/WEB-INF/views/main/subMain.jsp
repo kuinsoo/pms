@@ -126,15 +126,53 @@
 				<div class="projectWriter">
 					<div id="tabss">
 						<ul>
-							<li><a href="#tabss-1">글</a></li>
-							<li><a href="#tabss-2">일정</a></li>
-							<li><a href="#tabss-3">할일</a></li>
+							<li><a href="#tabss-1">업무</a></li>
+							<li><a href="#tabss-2">글</a></li>
+							<li><a href="#tabss-3">일정</a></li>
+							<li><a href="#tabss-4">할일</a></li>
 						</ul>
+						<!-- tap1 업무 -->
 						<div id="tabss-1">
+							<form action="/ajaxCreateWork" method="get">
+								<div class="calendarContainerInput">
+									<div class="calendarInputDiv">
+										<i class="icon-clock icons"></i>
+										<input type="date" name="work_sdate"> <!-- 업무시작일 -->
+									</div>
+									<span class="calendarInputDivSpan">~</span>
+									<div class="calendarInputDivs">
+										<i class="icon-clock icons"></i>
+										<input type="date" name="work_eedate"> <!-- 마감예상일 -->
+									</div>
+								</div>
+								<label>업무</label>
+								<input type="text" name="work_title" placeholder="업무" class="calendarTitle" />
+								<label>업무 내용</label>
+								<textarea class="tabssTextArea" name="work_content" placeholder="업무내용"></textarea><br/>
+								<label>업무 유형</label><br/>
+								<input type="radio" name="work_type" value="type1"/> 
+								<input type="radio" name="work_type" value="type2"/> 
+								<input type="radio" name="work_type" value="type3"/><br/>
+								<label>업무 중요도</label><br/>
+								<select name="work_importance">
+									<option value="1">Level 1</option>
+									<option value="2">Level 2</option>
+									<option value="3">Level 3</option>
+									<option value="4">Level 4</option>
+									<option value="5">Level 5</option>
+								</select> <br/>
+								<label>업무 공개여부</label><br/>
+								<input type="checkbox" name="work_public" value="Y"/>WORK_PUBLIC<br/>
+								<input type="submit" class="tabssTextAreaSubmit" value="올리기" />
+							</form>
+						</div>
+						<!-- tap1 업무 끝 -->
+						<!--  -->					
+						<div id="tabss-2">
 							<textarea class="tabssTextArea" placeholder="글을 작성하세요"></textarea>
 							<input type="submit" class="tabssTextAreaSubmit" value="올리기" />
 						</div>
-						<div id="tabss-2">
+						<div id="tabss-3">
 							<input type="text" placeholder="일정 제목을 입력하세요" class="calendarTitle" />
 							<div class="calendarContainerInput">
 								<div class="calendarInputDiv">
@@ -151,7 +189,7 @@
 							<input type="text" placeholder="메모를 입력하세요" class="calendarMemo" />
 							<input type="submit" class="tabssTextAreaSubmit" value="올리기" />
 						</div>
-						<div id="tabss-3">
+						<div id="tabss-4">
 							<input type="text" placeholder="할일제목을 입력하세요(선택)" class="todoInput" />
 							<ul>
 								<li><input type="text" placeholder="할일 입력" class="todoInputContent" /></li>
@@ -166,6 +204,7 @@
 						</div>
 					</div>
 				</div>
+				<!-- 카드 리스트  -->
 				<div class="currentCardList">
 					<div class="cardUserInfo">
 						<div class="cardUserInfoImg">
@@ -182,6 +221,7 @@
 					<div class="cardContent">
 						<textarea readonly>test content test content test content test content test content test content test content test content test content test content</textarea>
 					</div>
+					<!-- 댓글  -->
 					<div class="cardContentBottom">
 						<i class="icon-bubble icons"></i>
 						<span>댓글 작성</span>
@@ -314,6 +354,7 @@
 						</ul>
 					</div>
 				</div>
+				<!-- 카드 (글)끝  -->
 			</div>
 			
 			<div class="currentMainContainerRight">
