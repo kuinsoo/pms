@@ -219,14 +219,6 @@
             </div>
         </div>
     </header>
-    <script type="text/javascript">
-    	
-   	HttpSession session = request.getSession(false);
-    if(session == null) {
-      response.sendRedirect("main.jsp");
-      return;
-    }
-    </script>
     <script>
 		$('#currentMain').on('click', function () {
 			location.href="/main";

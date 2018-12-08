@@ -40,6 +40,7 @@ import kr.or.ddit.oauth.bo.NaverLoginBO;
 @Controller
 public class LoginController {
 	
+	// syso 대신 
 	Logger logger = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
