@@ -112,7 +112,7 @@ public class ProjectController {
 
 
 	@RequestMapping(value = "/subMain", method = RequestMethod.GET)
-	public String subMain(Model model, @RequestParam("id")String proejct_id) {
+	public String subMain(Model model, @RequestParam("project_id")String proejct_id) {
 		model.addAttribute("project_id", proejct_id);
 		return "main/subMain";
 	}
@@ -135,7 +135,7 @@ public class ProjectController {
 
 
 	@RequestMapping(value = "/inviteProjectAjax", method = RequestMethod.GET)
-	public String inviteProjectAjax(@RequestParam("accept")String accept, @RequestParam("id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo) {
+	public String inviteProjectAjax(@RequestParam("accept")String accept, @RequestParam("project_id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo) {
 		try {
 			PMemberVo pMemberVo = new PMemberVo();
 			pMemberVo.setPmember_member(memberVo.getMember_mail());

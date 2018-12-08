@@ -5,11 +5,13 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionEvent;
 
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
@@ -160,9 +163,10 @@ public class LoginController {
 		return "main/main";
 	}
 	
-	@RequestMapping(value ="/logout")
-	public String logout() {
-		return "/login/login";
+	@RequestMapping(value ="/logout", method=RequestMethod.GET)
+	public String logout(SessionStatus status) {
+		status.setComplete();
+		return "redirect:/";
 	}
 
 

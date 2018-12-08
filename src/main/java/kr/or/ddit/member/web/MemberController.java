@@ -29,7 +29,7 @@ public class MemberController {
 	private MemberServiceInf memberService;
 
 	@RequestMapping(value = "/inviteTeam" ,method = RequestMethod.POST)
-	public String inviteTeam(@RequestParam("inviteTeam")String[] inviteMails, @RequestParam("id")String project_id) {
+	public String inviteTeam(@RequestParam("inviteTeam")String[] inviteMails, @RequestParam("project_id")String project_id) {
 		String subject = "Current Project 초대 알람 입니다.";
 		String content = "프로젝트 주소 : http://127.0.0.1:8081/?teamId="+ project_id;
 		InviteProjectVo inviteProjectVo = new InviteProjectVo();
@@ -62,7 +62,7 @@ public class MemberController {
 			e.printStackTrace();
 		}
 
-		return "redirect:/subMain?id=" + project_id ;
+		return "redirect:/subMain?project_id=" + project_id ;
 	}
 
 }
