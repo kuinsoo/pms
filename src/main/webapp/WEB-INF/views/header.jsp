@@ -194,7 +194,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- CURRENT USER -->
                 <div class="currentUser dialog__trigger">
                     <img src="http://placehold.it/40x40" />

@@ -18,6 +18,13 @@
 		member
 		values (#{member_mail},#{member_name},#{member_pass},#{member_tel},'','N')
 	</insert>
+	
+	<update id="updateUser" parameterType="memberVo">    
+		update member
+		set member_pass = #{member_pass}, member_tel = #{member_tel}
+		where member_mail = #{member_mail}
+	</update>
+	
 		
 	<!-- 아이디 찾기 -->
 	<select id="selectfindId" resultType="memberVo" parameterType="String">

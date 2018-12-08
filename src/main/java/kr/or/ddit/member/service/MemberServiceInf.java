@@ -35,6 +35,17 @@ public interface MemberServiceInf {
 	public int insertUser(MemberVo memberVo);
 
 	/**
+	 * Method : updateUser
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 *
+	 * @param 
+	 * @return Method 설명 : 마이페이지에서 정보 수정 
+	 */
+	public int updateUser(MemberVo memberVo);
+	
+	
+	/**
 	 * Method : selectfindId
 	 * 작성자 : pc07
 	 * 변경이력 :
@@ -146,4 +157,6 @@ public interface MemberServiceInf {
 	 * @return the int
 	 */
 	int  deleteInviteProject(String member_mail);
+
+
 }
