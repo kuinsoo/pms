@@ -2,6 +2,7 @@ package kr.or.ddit.project.service;
 
 import java.util.List;
 
+import kr.or.ddit.project.model.InviteProjectVo;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
 

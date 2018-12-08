@@ -57,6 +57,7 @@ public class LoginController {
         this.naverLoginBO = naverLoginBO;
     }
 	
+
 	/**
 	 * The Email sender.
 	 */
@@ -155,6 +156,7 @@ public class LoginController {
 	public String main(Model model, @ModelAttribute("memberVo")MemberVo memberVo) {
 
 		model.addAttribute("pMemberList",memberservice.selectMainView(memberVo.getMember_mail()));
+		model.addAttribute("inviteProjectList", memberservice.selectInviteProject(memberVo.getMember_mail()));
 		return "main/main";
 	}
 	

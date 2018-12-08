@@ -1172,11 +1172,11 @@ header {
     padding: 20px;
     text-align:left;
 }
-.pop-layera .pop-containera > .pop-contsa > .pop-conts-sectiona > .pop-conts-section-titlea  > form > .projectInvite {
+.pop-layera .pop-containera > .pop-contsa > .pop-conts-sectiona > .pop-conts-section-titlea  > .projectInvite {
 	width:100%;
 	height:30px;
 }
-.pop-layera .pop-containera > .pop-contsa > .pop-conts-sectiona > .pop-conts-section-titlea  > form > .projectInvite > p{text-align:center;}
+.pop-layera .pop-containera > .pop-contsa > .pop-conts-sectiona > .pop-conts-section-titlea  > .projectInvite > p{text-align:center;}
 
 .pop-layera .pop-containera > .pop-contsa > .pop-conts-sectiona > .pop-conts-section-titlea > span {
     margin-left: 7px;

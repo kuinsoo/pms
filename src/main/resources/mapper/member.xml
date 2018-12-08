@@ -33,7 +33,8 @@
 		from member 
 		where member_mail=#{member_mail}
 	</select>
-	
+
+	<!-- 비밀번호 변경 -->
 	<update id="updatePass" parameterType="memberVo">
 		update member
 		set member_pass = #{member_pass}
