@@ -5,13 +5,11 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionEvent;
 
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
@@ -53,7 +51,7 @@ public class LoginController {
 	@Autowired
     private NaverLoginBO naverLoginBO;
     
-	private String apiResult = null;
+	//private String apiResult = "";
     
     @Autowired
     private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
@@ -136,7 +134,7 @@ public class LoginController {
 		
 		// 값이 다르면..
 		if(memberservice.selectUser(member_mail)==null) {
-			int insertUser = memberservice.insertUser(memberVo);		
+			memberservice.insertUser(memberVo);		
 			return"/";
 		// 값이 같으면 
 		}else {
@@ -244,7 +242,7 @@ public class LoginController {
 			}
 				// 임시 비밀번호로 수정
 				memberVo.setMember_pass(member_pass);
-				int update_pass = memberservice.updatePass(memberVo);
+				memberservice.updatePass(memberVo);
 				message.setText(member_name +" 님의 임시 비밀번호는  [  " + member_pass + "  ]  입니다. 로그인 후 꼭! 비밀번호를 수정해 주세요. ");				
 				memberVo.setMember_pass(member_pass);
 				emailSender.send(message);
@@ -281,7 +279,7 @@ public class LoginController {
 	
 		// 값이 다르면..
 		if(memberservice.selectUser(member_mail)==null) {
-			int insertUser = memberservice.insertUser(member);		
+			memberservice.insertUser(member);		
 			return"/login/login";
 		// 값이 같으면 
 		}else {
@@ -323,7 +321,8 @@ public class LoginController {
 		set.put("text", "CURRENT 인증번호는   [  " + certificationNumber + " ]  입니다. ");
 		set.put("type", "sms"); // 문자타입
 		
-		JSONObject result = coolsms.send(set);// 보내기&전송결과받기
+		//JSONObject result = coolsms.send(set);// 보내기&전송결과받기
+		coolsms.send(set);
 		
 		// sign.jsp ajax로 보내준다.
 	    return certificationNumber;

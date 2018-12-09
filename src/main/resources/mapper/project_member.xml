@@ -73,7 +73,7 @@
 
 	<!-- 초대받은 프로젝트들 -->
 	<insert id="invitedProjects" parameterType="inviteProjectVo">
-		insert into INVITE_PROJECT values (#{member_mail}, #{project_id}, #{project_invite})
+		insert into INVITE_PROJECT values (#{member_mail}, #{project_id}, #{project_invite}, #{invite_mail})
 	</insert>
 
 	<!-- 초대받은 프로젝트에 포함된 이메일인지 검색 -->

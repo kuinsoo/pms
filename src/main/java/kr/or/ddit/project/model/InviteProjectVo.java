@@ -20,6 +20,8 @@ public class InviteProjectVo {
 	private String project_invite;
 	private String project_title;
 	private String project_overview;
+	private String invite_mail;
+	private String invite_name;
 
 	public InviteProjectVo() {
 	}
@@ -76,6 +78,22 @@ public class InviteProjectVo {
 
 	public void setProject_overview(String project_overview) {
 		this.project_overview = project_overview;
+	}
+
+	public String getInvite_mail() {
+		return invite_mail;
+	}
+
+	public void setInvite_mail(String invite_mail) {
+		this.invite_mail = invite_mail;
+	}
+
+	public String getInvite_name() {
+		return invite_name;
+	}
+
+	public void setInvite_name(String invite_name) {
+		this.invite_name = invite_name;
 	}
 
 

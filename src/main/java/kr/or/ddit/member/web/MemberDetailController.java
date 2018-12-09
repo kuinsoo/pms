@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.ddit.member.model.MemberVo;
@@ -49,8 +48,8 @@ public class MemberDetailController {
 	@RequestMapping(value="/memberDetailUpdate",method = RequestMethod.GET)
 	public String memberDetailUpdate(Model model, @SessionAttribute("memberVo")MemberVo memberVo , HttpServletRequest request) {
 		
-		String member_tel = request.getParameter("member_tel");
-		String member_pass = request.getParameter("member_pass");
+		//String member_tel = request.getParameter("member_tel");
+		//String member_pass = request.getParameter("member_pass");
 		
 		memberservice.updateUser(memberVo);
 		

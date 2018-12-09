@@ -133,7 +133,7 @@
 										<div class="pop-contsa">
 											<div class="pop-conts-headera">
 												<p>프로젝트 초대</p>
-												<a href="#" class="btn-layerClosea">
+												<a href="/main" class="btn-layerClosea">
 													<i class="icon-close icons"></i>
 												</a>
 											</div>

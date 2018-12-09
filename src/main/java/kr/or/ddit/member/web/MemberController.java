@@ -1,14 +1,17 @@
 package kr.or.ddit.member.web;
 
-import kr.or.ddit.commons.mail.service.EmailServiceInf;
-import kr.or.ddit.member.model.PMemberVo;
-import kr.or.ddit.member.service.MemberServiceInf;
-import kr.or.ddit.project.model.InviteProjectVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import kr.or.ddit.commons.mail.service.EmailServiceInf;
+import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.member.model.PMemberVo;
+import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.project.model.InviteProjectVo;
 
 /**
  * kr.or.ddit.member.web
@@ -29,7 +32,7 @@ public class MemberController {
 	private MemberServiceInf memberService;
 
 	@RequestMapping(value = "/inviteTeam" ,method = RequestMethod.POST)
-	public String inviteTeam(@RequestParam("inviteTeam")String[] inviteMails, @RequestParam("project_id")String project_id) {
+	public String inviteTeam(@RequestParam("inviteTeam")String[] inviteMails, @RequestParam("project_id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo) {
 		String subject = "Current Project 초대 알람 입니다.";
 		String content = "프로젝트 주소 : http://127.0.0.1:8081/?teamId="+ project_id;
 		InviteProjectVo inviteProjectVo = new InviteProjectVo();
@@ -47,6 +50,8 @@ public class MemberController {
 						String to = inviteMail;
 
 						inviteProjectVo.setMember_mail(inviteMail);
+						inviteProjectVo.setInvite_mail(memberVo.getMember_mail());
+						inviteProjectVo.setInvite_name(memberVo.getMember_name());
 						inviteProjectVo.setProject_id(project_id);
 						inviteProjectVo.setProject_invite("x");
 						memberService.invitedProjects(inviteProjectVo);
