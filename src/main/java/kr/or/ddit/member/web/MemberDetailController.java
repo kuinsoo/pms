@@ -42,47 +42,54 @@ public class MemberDetailController {
 	 * Method 설명 : 마이페이지 
 	 * @return
 	 */
-	@RequestMapping(value="/memberDetail",method = RequestMethod.GET)
-	public String memberDetail(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
+	@RequestMapping(value="/myPage",method = RequestMethod.GET)
+	public String myPage(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		
 		memberservice.selectUser(memberVo.getMember_mail());
-		return "/member/detail";
-	}
-	
-	@RequestMapping(value="/memberUpdate",method = RequestMethod.GET)
-	public String memberUpdate(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
-				memberservice.selectUser(memberVo.getMember_mail());
+		
 		model.addAttribute("memberVo",memberVo);
-		return "/member/update";
+		
+		return "/myPage/myPage";
 	}
-	
 	
 	 
-	@RequestMapping(value="/memberDetailUpdate", method=RequestMethod.POST)
-	public String memberDetailUpdate(Model model, @SessionAttribute("memberVo")MemberVo memberVo,
+	@RequestMapping(value="/myPageUpdate", method=RequestMethod.POST)
+	public String memberDetailUpdate(Model model, @SessionAttribute("memberVo") MemberVo memberVo,
 		@RequestPart("member_profile") MultipartFile part, HttpServletRequest request) {
 		
-		try {
-			if(part.getSize()>0) {
-				String path = request.getServletContext().getRealPath("/profile");
+			String member_name = request.getParameter("member_name");
+			String member_tel = request.getParameter("member_tel");
+			String member_pass = request.getParameter("member_pass");
+			String member_profile = request.getParameter("member_profile");
+			
+			memberVo.setMember_name(member_name);
+			memberVo.setMember_tel(member_tel);
+			memberVo.setMember_pass(member_pass);
+			
+			try {
+				if(part.getSize()>0) {
+					String path = request.getServletContext().getRealPath("/profile");
+					
+					
+					String fileName = part.getOriginalFilename();
 				
-				String fileName = part.getOriginalFilename();
-				
-				part.transferTo(new File(path + File.separator + fileName));
-							
-				// profile
-				memberVo.setMember_profile("/member_profile/"+fileName);
+					part.transferTo(new File(path + File.separator + fileName));
+								
+					// profile
+					memberVo.setMember_profile("/member_profile/"+fileName);
+				}
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
+				
+			int updateUser = memberservice.updateUser(memberVo);
+			System.out.println(" 수정  : " + memberservice.updateUser(memberVo));
+			model.addAttribute("memberVo",memberVo);
+			
+			System.out.println("수정 성공 ! ! ! ! ");
+			return "redirect:/myPage?member_mail=" + memberVo.getMember_mail();
 		}
-		int updateUser = memberservice.updateUser(memberVo);
-		
-		model.addAttribute("memberVo",memberVo);
-		
-		return "redirect:/memberDetail?member_mail="+memberVo.getMember_mail();
 	}
-}
 

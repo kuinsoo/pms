@@ -207,7 +207,7 @@
                         <ul>
                             <li>
                                 <i class="icon-settings icons"></i>
-                                <a href="/memberDetail">마이페이지</a>
+                                <a href="/myPage">마이페이지</a>
                             </li>
                             <li>
                                 <i class="icon-power icons"></i>
