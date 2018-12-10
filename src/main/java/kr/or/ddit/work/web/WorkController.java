@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.ddit.work.model.WorkVo;
+import kr.or.ddit.work.service.WorkServiceInf;
 
 /**
  * kr.or.ddit.work.web
@@ -24,7 +25,7 @@ public class WorkController {
 	Logger logger = LoggerFactory.getLogger(WorkController.class);
 	
 	@Autowired
-	//private WorkServiceInf workService;
+	private WorkServiceInf workService;
 	
 	
 	@RequestMapping(value="/ajaxCreateWork",method=RequestMethod.POST)
