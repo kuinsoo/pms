@@ -66,33 +66,318 @@
 							<li><a href="#tabs2-5">회원탈퇴</a></li>
 						</ul>
 						<div id="tabs2-1">
-							<table border="1" cellpadding="0" cellspacing="">
-								<tr>
-									<th>번호</th>
-									<th>프로젝트 명</th>
-									<th>프로젝트 팀장</th>
-								</tr>
-								<tr>
-									<td>1</td>
-									<td>테스트 프로젝트</td>
-									<td>Legend of Mr. Kku</td>
-								</tr>
-							</table>
+							<div class="projectTable">
+								<div class="projectSearchDiv">
+									<select>
+										<option>전체</option>
+										<option>프로젝트 명</option>
+									</select>
+									<input type="text" placeholder="검색어를 입력해주세요"/>
+									<i class="icon-magnifier icons"></i>
+								</div>
+								<table border="1" cellpadding="0" cellspacing="">
+									<colgroup width="10%" />
+									<colgroup width="60%" />
+									<colgroup width="30%" />
+									<tr>
+										<th><span>번호</span></th>
+										<th><span>참여중인 프로젝트 명</span></th>
+										<th><span>프로젝트 팀장</span></th>
+									</tr>
+									<tr>
+										<td>10</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>9</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>8</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>7</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>6</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>5</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+								</table>
+								<p>
+									<i class="icon-arrow-left icons"></i>
+									<span>1</span>
+									<i class="icon-arrow-right icons"></i>
+								</p>
+							</div>
 						</div>
 						<div id="tabs2-2">
-							<p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
-							
+							<div class="projectTable">
+								<div class="projectSearchDiv">
+									<select>
+										<option>전체</option>
+										<option>프로젝트 명</option>
+									</select>
+									<input type="text" placeholder="검색어를 입력해주세요"/>
+									<i class="icon-magnifier icons"></i>
+								</div>
+								<table border="1" cellpadding="0" cellspacing="0">
+									<colgroup width="10%" />
+									<colgroup width="60%" />
+									<colgroup width="30%" />
+									<tr>
+										<th><span>번호</span></th>
+										<th><span>즐겨찾기 한 프로젝트 명</span></th>
+										<th><span>프로젝트 팀장</span></th>
+									</tr>
+									<tr>
+										<td>10</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>9</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>8</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>7</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>6</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>5</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+								</table>
+								<p>
+									<i class="icon-arrow-left icons"></i>
+									<span>1</span>
+									<i class="icon-arrow-right icons"></i>
+								</p>
+							</div>
 						</div>
 						<div id="tabs2-3">
-							<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-							<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+							<div class="projectTable">
+								<div class="projectSearchDiv">
+									<select>
+										<option>전체</option>
+										<option>프로젝트 명</option>
+									</select>
+									<input type="text" placeholder="검색어를 입력해주세요"/>
+									<i class="icon-magnifier icons"></i>
+								</div>
+								<table border="1" cellpadding="0" cellspacing="">
+									<colgroup width="10%" />
+									<colgroup width="60%" />
+									<colgroup width="30%" />
+									<tr>
+										<th><span>번호</span></th>
+										<th><span>일감 리스트</span></th>
+										<th><span>프로젝트 팀장</span></th>
+									</tr>
+									<tr>
+										<td>10</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>9</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>8</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>7</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>6</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>5</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+								</table>
+								<p>
+									<i class="icon-arrow-left icons"></i>
+									<span>1</span>
+									<i class="icon-arrow-right icons"></i>
+								</p>
+							</div>
 						</div>
 						<div id="tabs2-4">
-							<p>Mauris eleifend est et turpis. Duis id erat. Suspendisse potenti. Aliquam vulputate, pede vel vehicula accumsan, mi neque rutrum erat, eu congue orci lorem eget lorem. Vestibulum non ante. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Fusce sodales. Quisque eu urna vel enim commodo pellentesque. Praesent eu risus hendrerit ligula tempus pretium. Curabitur lorem enim, pretium nec, feugiat nec, luctus a, lacus.</p>
-							<p>Duis cursus. Maecenas ligula eros, blandit nec, pharetra at, semper at, magna. Nullam ac lacus. Nulla facilisi. Praesent viverra justo vitae neque. Praesent blandit adipiscing velit. Suspendisse potenti. Donec mattis, pede vel pharetra blandit, magna ligula faucibus eros, id euismod lacus dolor eget odio. Nam scelerisque. Donec non libero sed nulla mattis commodo. Ut sagittis. Donec nisi lectus, feugiat porttitor, tempor ac, tempor vitae, pede. Aenean vehicula velit eu tellus interdum rutrum. Maecenas commodo. Pellentesque nec elit. Fusce in lacus. Vivamus a libero vitae lectus hendrerit hendrerit.</p>
+							<div class="projectTable">
+								<div class="projectSearchDiv">
+									<select>
+										<option>전체</option>
+										<option>프로젝트 명</option>
+									</select>
+									<input type="text" placeholder="검색어를 입력해주세요"/>
+									<i class="icon-magnifier icons"></i>
+								</div>
+								<table border="1" cellpadding="0" cellspacing="">
+									<colgroup width="10%" />
+									<colgroup width="60%" />
+									<colgroup width="30%" />
+									<tr>
+										<th><span>번호</span></th>
+										<th><span>보관함</span></th>
+										<th><span>보관 날짜(?)</span></th>
+									</tr>
+									<tr>
+										<td>10</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>9</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>8</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>7</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>6</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>5</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>4</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>3</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>2</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>테스트 프로젝트</td>
+										<td>Legend of Mr. Kku</td>
+									</tr>
+								</table>
+								<p>
+									<i class="icon-arrow-left icons"></i>
+									<span>1</span>
+									<i class="icon-arrow-right icons"></i>
+								</p>
+							</div>
 						</div>
 						<div id="tabs2-5">
-							<p>탈퇴ㅠㅠ</p>
+							<div class="tabs2-5center">
+								<p>정말로 탈퇴 하실건가요?ㅜㅜ</p>
+								<input type="button" value="응 탈퇴ㅂㅂ" class="goodbyeBtn" />
+							</div>
 						</div>
 					</div>
 				</div>
@@ -337,6 +622,10 @@ var myChart2 = new Chart(ctx2, {
             }]
         }
     }
+});
+
+$(".goodbyeBtn").click(function(){
+	confirm("진짜 탈퇴하는건가유?!");
 });
 </script>
 </body>
