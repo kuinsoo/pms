@@ -10,8 +10,8 @@
 			$(".error").hide();
 			//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
 			//blur()이벤트 사용
-			$("#pass1").blur(function() {
-				if($("#pass1").val() != $("#pass2").val()){
+			$("#pass2").blur(function() {
+				if($("#pass2").val() != $("#pass1").val()){
 					$(".error").show();
 				} else{
 					$(".error").hide();

@@ -1141,7 +1141,7 @@ header {
 /* 첫번째 Tab */
 .myPageBottomContainer > #tabs2 > #tabs2-1{display:flex;justify-content:center;align-items:center;}
 .myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable{width:1000px;margin-top:70px;}
-.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv{width:469px;float:right;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv{width:470px;float:right;}
 .myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv > select{width:150px;height:30px;vertical-align:middle;outline:none;border:1px solid #333;float:left;font-size:17px;}
 .myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv > input[type="text"] {
 	width:300px;height:30px;vertical-align:middle;margin-left:-5px;text-indent:10px;outline:none;border-top:1px solid #333;border-bottom:1px solid #333;float:left;font-size:17px;
