@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -45,9 +46,29 @@ public class MemberDetailController {
 	 * @return
 	 */
 	@RequestMapping(value="/myPage",method = RequestMethod.GET)
-	public String myPage(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
+	public String myPage(Model model, @SessionAttribute("memberVo")MemberVo memberVo,
+									@RequestPart("member_profile") MultipartFile part, HttpServletRequest request) {
 		
 		memberservice.selectUser(memberVo.getMember_mail());
+		
+		try {
+			if(part.getSize()>0) {
+				String path = request.getServletContext().getRealPath("/images");
+				
+				String fileName = part.getOriginalFilename();
+				
+				part.transferTo(new File(path + File.separator + fileName));
+				
+				// profile
+				memberVo.setMember_profile("/images/"+fileName);
+			}else {
+				memberVo.setMember_profile("");
+			}
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		model.addAttribute("memberVo",memberVo);
 		
