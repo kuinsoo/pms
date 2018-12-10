@@ -73,7 +73,7 @@
 
 	<!-- 초대받은 프로젝트들 -->
 	<insert id="invitedProjects" parameterType="inviteProjectVo">
-		insert into INVITE_PROJECT values (#{member_mail}, #{project_id}, #{project_invite}, #{invite_mail})
+		insert into INVITE_PROJECT values (#{member_mail}, #{project_id}, #{project_invite}, #{invite_mail}, #{invite_name})
 	</insert>
 
 	<!-- 초대받은 프로젝트에 포함된 이메일인지 검색 -->
@@ -85,13 +85,13 @@
 
 	<select id="selectInviteProject" parameterType="String" resultType="inviteProjectVo">
 		select C.MEMBER_NAME,
-       B.PROJECT_TITLE,
-       B.PROJECT_OVERVIEW,
-       A.PROJECT_INVITE,
-       B.PROJECT_ID
-		from INVITE_PROJECT A, PROJECT B, MEMBER C where C.MEMBER_MAIL = A.MEMBER_MAIL
-                                                  and B.PROJECT_ID = A.PROJECT_ID
-                                                  and A.MEMBER_MAIL = #{pmember_member}
+	       B.PROJECT_TITLE,
+	       B.PROJECT_OVERVIEW,
+	       A.PROJECT_INVITE,
+	       B.PROJECT_ID
+			from INVITE_PROJECT A, PROJECT B, MEMBER C where C.MEMBER_MAIL = A.MEMBER_MAIL
+	                                                  and B.PROJECT_ID = A.PROJECT_ID
+	                                                  and A.MEMBER_MAIL = #{pmember_member}
 	</select>
 
 	<delete id="deleteInviteProject" parameterType="String">
