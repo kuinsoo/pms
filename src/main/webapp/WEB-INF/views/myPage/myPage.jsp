@@ -63,10 +63,13 @@
 								<c:choose>
 									<c:when test="${memberVo.member_profile != null}">
 										<input type="file" id="fileElem" class="fileInputCSS"
-										name="member_profile" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">									
+										name="member_profile" accept="image/*" style="display:none">									
 									</c:when>
 									<c:otherwise>
-										<div></div>
+										<div>
+										<input type="file" id="fileElem" class="fileInputCSS"
+										name="member_profile"/>
+										</div>
 									</c:otherwise>
 								</c:choose>
 							</div>

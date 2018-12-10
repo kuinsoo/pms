@@ -1,4 +1,4 @@
-package kr.or.ddit.member.web;
+ package kr.or.ddit.member.web;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,31 +46,15 @@ public class MemberDetailController {
 	 * @return
 	 */
 	@RequestMapping(value="/myPage",method = RequestMethod.GET)
-	public String myPage(Model model, @SessionAttribute("memberVo")MemberVo memberVo,
-									@RequestPart("member_profile") MultipartFile part, HttpServletRequest request) {
+	public String myPage(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		
 		memberservice.selectUser(memberVo.getMember_mail());
 		
-		try {
-			if(part.getSize()>0) {
-				String path = request.getServletContext().getRealPath("/images");
-				
-				String fileName = part.getOriginalFilename();
-				
-				part.transferTo(new File(path + File.separator + fileName));
-				
-				// profile
-				memberVo.setMember_profile("/images/"+fileName);
-			}else {
-				memberVo.setMember_profile("");
-			}
-		} catch (IllegalStateException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		
 		model.addAttribute("memberVo",memberVo);
+		
+		
+		
 		
 		return "/myPage/myPage";
 	}
@@ -89,12 +73,11 @@ public class MemberDetailController {
 	 */
 	@RequestMapping(value="/myPageUpdate", method=RequestMethod.POST)
 	public String memberDetailUpdate(Model model, @SessionAttribute("memberVo") MemberVo memberVo,
-		@RequestPart("member_profile") MultipartFile part, HttpServletRequest request) {
+		@RequestPart("member_profile")MultipartFile part, HttpServletRequest request) {
 		
 			String member_name = request.getParameter("member_name");
 			String member_tel = request.getParameter("member_tel");
 			String member_pass = request.getParameter("member_pass");
-			String member_profile = request.getParameter("member_profile");
 			
 			memberVo.setMember_name(member_name);
 			memberVo.setMember_tel(member_tel);
