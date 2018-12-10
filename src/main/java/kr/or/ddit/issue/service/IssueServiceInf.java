@@ -3,6 +3,7 @@ package kr.or.ddit.issue.service;
 import java.util.List;
 
 import kr.or.ddit.issue.model.IssueVo;
+import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
 
 /**
@@ -25,5 +26,15 @@ public interface IssueServiceInf {
 	* Method 설명 : 이슈 전체 일정
 	*/
 	List<IssueVo> issueAllSchedule(ScheduleVo scheduleVo);
+	
+	/**
+	* Method : myProjectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param scheduleVo
+	* @return
+	* Method 설명 : 일정의 select 프로젝트명 list
+	*/
+	List<ProjectVo> myProjectList(ScheduleVo scheduleVo);
 	
 }

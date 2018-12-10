@@ -1,5 +1,6 @@
 package kr.or.ddit.schedule.service;
 
+import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.schedule.model.ScheduleVo;
@@ -24,6 +25,16 @@ public interface ScheduleServiceInf {
 	* Method 설명 : 프로젝트, 업무, 회의, 이슈 등 전체 일정
 	*/
 	Map<String, Object> scheduleList(ScheduleVo scheduleVo);
+	
+	/**
+	* Method : myProjectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param scheduleVo
+	* @return List<ProjectVo>
+	* Method 설명 : 
+	*/
+	List<ScheduleVo> myProjectList(String sid);
 
 }
 

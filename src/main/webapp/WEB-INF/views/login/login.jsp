@@ -81,13 +81,13 @@ div.well input[type="submit"]{width:100%;height:50px}
 							<input type="email"	name="member_mail" id="email" value="${member_mail}" class="form-control" autofocus="autofocus" required />
 						</c:when>
 						<c:when test="${member_mail==email}">
-							<input type="email"	name="member_mail" id="email" value="kkuinsoo@gmail.com" class="form-control" autofocus="autofocus" required />
+							<input type="email"	name="member_mail" id="email" value="mi@ni.ons" class="form-control" autofocus="autofocus" required />
 						</c:when>
 					</c:choose>
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호</label>
-					<input type="password" name="member_pass"  id ="pass" class="form-control" value="4444" required />
+					<input type="password" name="member_pass"  id ="pass" class="form-control" value="minions" required />
 					<c:if test="${loginResult == 'false'}">
 						<span class="error"> 일치하는 회원이 없습니다..다시 로그인 해주세요.</span>
 					</c:if>

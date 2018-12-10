@@ -14,16 +14,23 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
-		//일정data를 JSON형식으로 변환 후 담을 배열 변수
+		//fullcalendar 한글화, 사이즈, 일정 출력
+		
+		$('#calendar').fullCalendar({
+			locale : 'ko',	// 한글화
+			//height : 650,	// 사이즈
+			events : resultFunc()
+		});
+		
+		//(일정data를 JSON형식으로 변환 후 담을) 배열 변수
 		var result = new Array();
 		
 		<%--
 		일정data를 <c:forEach>태그로 반복을 돌며 json이란 객체(var json = new Object())에
 		담고 json객체를 result라는 배열 변수에 다시 담는다.
-		(json이란 객체 ==> result란 배열 변수)
+		(json 객체 ==> result 배열 변수)
 		--%>
 		function resultFunc(){
-			
 			result = []; // result 초기화
 			var size = document.getElementsByName("check").length;
 			
@@ -110,17 +117,11 @@
 				
 			} //for문
 			return result;
-		}
+		} //
+		
 		// JSON형식이 담긴 배열을 console에 log남기는 함수
 		// console.log(JSON.stringify(result));
 		
-		// fullcalendar 한글화, 사이즈, 일정 출력
-		$('#calendar').fullCalendar({
-			locale : 'ko',	// 한글화
-			//height : 650,	// 사이즈
-			events : resultFunc()
-		});
-
 		// checkbox 클릭시 fullcalendar reload되는 함수
 		$(document).on('click', "input[name=check]", function(){
 			$('#calendar').fullCalendar('removeEvents');
@@ -145,6 +146,7 @@
 				// 선택한 값이 mySchedule이면 option은 하나
 				if(mainSelectBox == "mySchedule"){
 					subSelectBox.append("<option value=''>:::선택해주세요:::</option>");
+					
 					$('#hiddenSid').submit();
 					
 				// 선택한 값이 myProject면 forEach구문
@@ -153,51 +155,23 @@
 						<%-- <option value="${projectList.project_id}">${projectList.project_title}(${projectList.project_id})</option> --%>
 					<%-- </c:forEach> --%>
 					subSelectBox.append("<option value=''>:::선택해주세요:::</option>");
-					subSelectBox.append("<c:forEach items='${allScheduleList.projectScheduleList}' var='projectList'>");
+					subSelectBox.append("<c:forEach items='${myProjectList}' var='projectList'>");
 					subSelectBox.append("	<option value='${projectList.project_id}'>${projectList.project_title}(${projectList.project_id})</option>");
 					subSelectBox.append("</c:forEach>");
 				}
 			});
+			
 		});
 		
 		// sub select box(sel_list) 선택시 선택한 값 Controller에 전송
 		$(document).on("change", "select[name='sel_list']", function(){
 			console.log("value : " + $(this).val());
+			var value = $(this).val();
 			
 			$("#selectForm").submit();
 		});
-		
 	}); // ready
 	
-	
-	// fullcalendar를 출력할 수 있는 jQuery
-	<%--
-	$('#calendar').fullCalendar({
-		locale: 'ko',
-		events : function(start, end, timezone, callback) {
-			$.ajax({
-				url : 'myxmlfeed.php',
-				dataType : 'xml',
-				data : {
-					// our hypothetical feed requires UNIX timestamps
-					start : start.unix(),
-					end : end.unix()
-				},
-				success : function(doc) {
-					var events = [];
-					$(doc).find('event').each(function() {
-						events.push({
-							title : $(this).attr('title'),
-							start : $(this).attr('start')
-						// will be parsed
-						});
-					});
-					callback(events);
-				}
-			});
-		}
-	});
-	--%>
 </script>
 <style type="text/css">
 	.container{
@@ -243,7 +217,6 @@
 					<td>Issue</td>
 				</tr>
 			</table>
-			<label>이것 좀 이쁘게 꾸며주세요 규승이형! 컬러표가 가운데로 가면 좋을 것 같아요 :)</label>
 		</div>
 
 		<!-- select box(right) -->
@@ -260,10 +233,9 @@
 				<option value=''>:::선택해주세요:::</option>
 			</select>
 		</form>
-
+		
 		<!-- FullCalendar -->
 		<div id='calendar'></div>
 	</div>
 </body>
-
 </html>
