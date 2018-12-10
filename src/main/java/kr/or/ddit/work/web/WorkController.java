@@ -30,6 +30,7 @@ public class WorkController {
 	
 	@RequestMapping(value="/ajaxCreateWork",method=RequestMethod.POST)
 	public String createWork(Model model, WorkVo workVo) {
+		
 		logger.debug("work {}", workVo);
 		return "";
 	}

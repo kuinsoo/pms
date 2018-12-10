@@ -20,7 +20,7 @@
                         <i class="icon-star icons"  style="color:yellow;font-weight:bold;" onclick="bookmark('${pMemberListVo.project_id}');"></i>
                     </c:when>
                 </c:choose>
-                <a href="/subMain"> ${pMemberListVo.project_title}</a>
+                <a href="/subMain?project_id=${pMemberListVo.project_id}"> ${pMemberListVo.project_title}</a>
                 <c:if test="${pMemberListVo.pmember_position eq '1'}">
                     <i class="icon-settings icons"></i>
                 </c:if>

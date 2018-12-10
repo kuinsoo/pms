@@ -27,7 +27,7 @@
 		</choose>
 	</select>
 
-	<select id="selectWorks" resultType="workVo" parameterType="String">
+	<select id="selectWorks" resultType="workVo" parameterType="Map">
 		select  W.WORK_TITLE, 
         W.WORK_CONTENT,
         W.WORK_TYPE,

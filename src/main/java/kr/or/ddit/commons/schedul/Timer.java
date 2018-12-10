@@ -10,11 +10,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
-
-import kr.or.ddit.member.mapper.MemberMapper;
 
 @Component
 public class Timer {
@@ -27,7 +24,7 @@ public class Timer {
 	private String timerName =  "exampleTimer";
 	
 	@Autowired
-	private MemberMapper memberMapper;
+	//private MemberMapper memberMapper;
 	
 	@Value("${spring.task.scheduling.thread-name-prefix}")
 	private String taskNamePrefix;

@@ -51,8 +51,7 @@ public class MemberDetailController {
 	
 	@RequestMapping(value="/memberUpdate",method = RequestMethod.GET)
 	public String memberUpdate(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
-		
-		memberservice.selectUser(memberVo.getMember_mail());
+				memberservice.selectUser(memberVo.getMember_mail());
 		model.addAttribute("memberVo",memberVo);
 		return "/member/update";
 	}
