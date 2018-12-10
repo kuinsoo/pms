@@ -10,7 +10,7 @@
 			<div class="currentMainContainerLeft">
 				<div class="currentSubMainTitle">
 					<i class="icon-star icons"></i>
-					<span>${project.project_title}</span>
+					<span>${project_title}</span>
 					<i class="icon-share icons dialog__triggerss"></i>
 					<div class="dialogss">
 						<ul>

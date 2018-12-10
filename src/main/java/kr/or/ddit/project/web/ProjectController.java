@@ -113,8 +113,9 @@ public class ProjectController {
 
 
 	@RequestMapping(value = "/subMain", method = RequestMethod.GET)
-	public String subMain(Model model, @RequestParam("project_id")String proejct_id) {
+	public String subMain(Model model, @RequestParam("project_id")String proejct_id, @RequestParam("project_title")String project_title) {
 		model.addAttribute("project_id", proejct_id);
+		model.addAttribute("project_title", project_title);
 		return "main/subMain";
 	}
 
