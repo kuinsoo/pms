@@ -62,17 +62,17 @@
 							</ul>
 						</div>
 						<div class="userContentsInfoRight_2">
-								<ul>
-									<li><input type="text" value= "${memberVo.member_name}" name ="member_name"/></li>
-									<li><input type="text" value= "${memberVo.member_mail}" disabled="disabled"/></li>
-									<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"/></li>
-									<li><input type="password" id = "pass1" value= "${memberVo.member_pass}" name ="member_pass"/></li>
-									<li><input type="password" id = "pass2" value= "${memberVo.member_pass}" /></li>
-										<span class="error"> 입력하신 비밀번호가 일치하지 않습니다.</span>
-									<li>
-										<input type="submit" value="변경" />
-									</li>
-								</ul>
+							<ul>
+								<li><input type="text" value= "${memberVo.member_name}" name ="member_name"/></li>
+								<li><input type="text" value= "${memberVo.member_mail}" disabled="disabled"/></li>
+								<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"/><input type="button" value="인증" class="phoneBtns" /></li>
+								<li><input type="password" id = "pass1" value= "${memberVo.member_pass}" name ="member_pass"/></li>
+								<li><input type="password" id = "pass2" value= "${memberVo.member_pass}" /></li>
+									<span class="error"> 입력하신 비밀번호가 일치하지 않습니다.</span>
+								<li>
+									<input type="submit" value="변경" />
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>

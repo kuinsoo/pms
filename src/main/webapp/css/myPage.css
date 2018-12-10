@@ -47,3 +47,115 @@
 .myPageBottomContainer{width:1400px;height:500px;clear:both;padding-top:20px;}
 .myPageBottomContainerLeft{float:left;border:1px solid #f00;width:700px;height:500px;}
 .myPageBottomContainerRight{float:left;border:1px solid #f00;width:700px;height:500px;}
+
+.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 > ul > li:nth-child(3){display:flex;justify-content:center;align-items:center;}
+.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 > ul > li:nth-child(3) > .phoneBtns {
+	width:100px;height:30px;font-size:17px;margin-top:-9px;border:none;background-color:#746fcc;color:#fff;outline:none;cursor:pointer;
+}
+
+/* MY PAGE BOTTOM */
+.myPageBottomContainer{width:1400px;height:500px;clear:both;padding-top:20px;}
+.myPageBottomContainer > #tabs2{width:1398px;}
+/* 첫번째 Tab */
+.myPageBottomContainer > #tabs2 > #tabs2-1{display:flex;justify-content:center;align-items:center;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable{width:1000px;margin-top:70px;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv{width:469px;float:right;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv > select{width:150px;height:30px;vertical-align:middle;outline:none;border:1px solid #333;float:left;font-size:17px;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv > input[type="text"] {
+	width:300px;height:30px;vertical-align:middle;margin-left:-5px;text-indent:10px;outline:none;border-top:1px solid #333;border-bottom:1px solid #333;float:left;font-size:17px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv > i {
+	display:block;width:30px;height:30px;vertical-align:middle;background-color:#fff;font-size:16px;outline:none;line-height:30px;
+	border-top:1px solid #333;border-right:1px solid #333;border-bottom:1px solid #333;margin-left:-6px;cursor:pointer;color:#000;float:left;font-size:17px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table{width:100%;margin:0 auto;margin-top:40px;border-collapse:collapse;clear:both;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > tbody > tr > th{padding:10px 0px 10px 0px;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > tbody > tr > td{padding:5px 0px 5px 0px;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > tbody > tr > th > span{font-weight:bold;font-size:20px;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > tbody > tr > td:nth-child(odd){text-align:center;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > tbody > tr > td:nth-child(even){text-align:left;text-indent:10px;cursor:pointer;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > p {
+	display:flex;justify-content:center;align-items:center;text-align:center;font-size:20px;margin-top:20px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > p > i{vertical-align:middle;font-size:15px;font-weight:bold;cursor:pointer;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > p > span{vertical-align:middle;font-size:20px;padding:3px 20px 0px 20px;font-weight:bold;cursor:pointer;}
+
+/* 두번째 Tab */
+.myPageBottomContainer > #tabs2 > #tabs2-2{display:flex;justify-content:center;align-items:center;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable{width:1000px;margin-top:70px;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > .projectSearchDiv{width:469px;float:right;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > .projectSearchDiv > select{width:150px;height:30px;vertical-align:middle;outline:none;border:1px solid #333;float:left;font-size:17px;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > .projectSearchDiv > input[type="text"] {
+	width:300px;height:30px;vertical-align:middle;margin-left:-5px;text-indent:10px;outline:none;border-top:1px solid #333;border-bottom:1px solid #333;float:left;font-size:17px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > .projectSearchDiv > i {
+	display:block;width:30px;height:30px;vertical-align:middle;background-color:#fff;font-size:16px;outline:none;line-height:30px;
+	border-top:1px solid #333;border-right:1px solid #333;border-bottom:1px solid #333;margin-left:-6px;cursor:pointer;color:#000;float:left;font-size:17px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table{width:100%;margin:0 auto;margin-top:40px;border-collapse:collapse;clear:both;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > tbody > tr > th{padding:10px 0px 10px 0px;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > tbody > tr > td{padding:5px 0px 5px 0px;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > tbody > tr > th > span{font-weight:bold;font-size:20px;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > tbody > tr > td:nth-child(odd){text-align:center;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > tbody > tr > td:nth-child(even){text-align:left;text-indent:10px;cursor:pointer;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > p {
+	display:flex;justify-content:center;align-items:center;text-align:center;font-size:20px;margin-top:20px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > p > i{vertical-align:middle;font-size:15px;font-weight:bold;cursor:pointer;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > p > span{vertical-align:middle;font-size:20px;padding:3px 20px 0px 20px;font-weight:bold;cursor:pointer;}
+
+/* 세번째 Tab */
+.myPageBottomContainer > #tabs2 > #tabs2-3{display:flex;justify-content:center;align-items:center;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable{width:1000px;margin-top:70px;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > .projectSearchDiv{width:469px;float:right;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > .projectSearchDiv > select{width:150px;height:30px;vertical-align:middle;outline:none;border:1px solid #333;float:left;font-size:17px;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > .projectSearchDiv > input[type="text"] {
+	width:300px;height:30px;vertical-align:middle;margin-left:-5px;text-indent:10px;outline:none;border-top:1px solid #333;border-bottom:1px solid #333;float:left;font-size:17px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > .projectSearchDiv > i {
+	display:block;width:30px;height:30px;vertical-align:middle;background-color:#fff;font-size:16px;outline:none;line-height:30px;
+	border-top:1px solid #333;border-right:1px solid #333;border-bottom:1px solid #333;margin-left:-6px;cursor:pointer;color:#000;float:left;font-size:17px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table{width:100%;margin:0 auto;margin-top:40px;border-collapse:collapse;clear:both;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table > tbody > tr > th{padding:10px 0px 10px 0px;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table > tbody > tr > td{padding:5px 0px 5px 0px;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table > tbody > tr > th > span{font-weight:bold;font-size:20px;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table > tbody > tr > td:nth-child(odd){text-align:center;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table > tbody > tr > td:nth-child(even){text-align:left;text-indent:10px;cursor:pointer;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > p {
+	display:flex;justify-content:center;align-items:center;text-align:center;font-size:20px;margin-top:20px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > p > i{vertical-align:middle;font-size:15px;font-weight:bold;cursor:pointer;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > p > span{vertical-align:middle;font-size:20px;padding:3px 20px 0px 20px;font-weight:bold;cursor:pointer;}
+
+/* 네번째 Tab */
+.myPageBottomContainer > #tabs2 > #tabs2-4{display:flex;justify-content:center;align-items:center;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable{width:1000px;margin-top:70px;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > .projectSearchDiv{width:469px;float:right;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > .projectSearchDiv > select{width:150px;height:30px;vertical-align:middle;outline:none;border:1px solid #333;float:left;font-size:17px;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > .projectSearchDiv > input[type="text"] {
+	width:300px;height:30px;vertical-align:middle;margin-left:-5px;text-indent:10px;outline:none;border-top:1px solid #333;border-bottom:1px solid #333;float:left;font-size:17px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > .projectSearchDiv > i {
+	display:block;width:30px;height:30px;vertical-align:middle;background-color:#fff;font-size:16px;outline:none;line-height:30px;
+	border-top:1px solid #333;border-right:1px solid #333;border-bottom:1px solid #333;margin-left:-6px;cursor:pointer;color:#000;float:left;font-size:17px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table{width:100%;margin:0 auto;margin-top:40px;border-collapse:collapse;clear:both;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table > tbody > tr > th{padding:10px 0px 10px 0px;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table > tbody > tr > td{padding:5px 0px 5px 0px;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table > tbody > tr > th > span{font-weight:bold;font-size:20px;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table > tbody > tr > td:nth-child(odd){text-align:center;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table > tbody > tr > td:nth-child(even){text-align:left;text-indent:10px;cursor:pointer;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > p {
+	display:flex;justify-content:center;align-items:center;text-align:center;font-size:20px;margin-top:20px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > p > i{vertical-align:middle;font-size:15px;font-weight:bold;cursor:pointer;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > p > span{vertical-align:middle;font-size:20px;padding:3px 20px 0px 20px;font-weight:bold;cursor:pointer;}
+
+/* 다섯번째 Tab */
+.myPageBottomContainer > #tabs2 > #tabs2-5{display:flex;justify-content:center;align-items:center;}
+.tabs2-5center{width:300px;height:300px;margin-top:200px;}
+.myPageBottomContainer > #tabs2 > #tabs2-5 > .tabs2-5center > p{font-size:20px;display:block;text-align:center;margin-top:20px;}
+.myPageBottomContainer > #tabs2 > #tabs2-5 > .tabs2-5center > .goodbyeBtn {
+	width:120px;height:50px;background-color:#746fcc;color:#fff;border:none;outline:none;font-size:17px;margin:0 auto;margin-top:20px;display:block;cursor:pointer;
+}
