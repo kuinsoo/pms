@@ -21,7 +21,7 @@
 	
 	<update id="updateUser" parameterType="memberVo">    
 		update member
-		set member_pass = #{member_pass}, member_tel = #{member_tel}
+		set member_pass = #{member_pass}, member_tel = #{member_tel} , member_name = #{member_name}
 		<if test="member_profile != null">, member_profile = #{member_profile, jdbcType=VARCHAR} </if>
 		where member_mail = #{member_mail}
 	</update>

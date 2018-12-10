@@ -1,5 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
+	<style>
+		.error{
+			color: red;
+		}
+	</style>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$(".error").hide();
+			//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
+			//blur()이벤트 사용
+			$("#pass1").blur(function() {
+				if($("#pass1").val() != $("#pass2").val()){
+					$(".error").show();
+				} else{
+					$(".error").hide();
+				}
+			});
+
+		});
+	</script>
 	
 	<!-- CURRENT SECTION(MAIN) -->
 	<section class="currentMain">
@@ -9,15 +29,24 @@
 					<h2>사용자 기본 정보</h2>
 				</div>
 				<!-- 사용자 정보 -->
+				<form action="/myPageUpdate" method="post" enctype="multipart/form-data">
 				<div class="myPageContainerLeft">
 					<div class="myPageContainerLeftUser">
 						<h2>내 프로필</h2>
 						<div class="profileImg">
 							<div id="fileList">
-								<div></div>
+								<c:choose>
+									<c:when test="${memberVo.member_profile != null}">
+										<input type="file" id="fileElem" class="fileInputCSS" value="${memberVo.member_profile}"
+										name="member_profile" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">									
+									</c:when>
+									<c:otherwise>
+										<img src='/profile/noimage.png' />
+									</c:otherwise>
+								</c:choose>
+							  	<div></div>
 							</div>
 							<div class="profileUploadImg">
-								<input type="file" id="fileElem" class="fileInputCSS" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
 								<a href="#" id="fileSelect"></a>
 							</div>
 						</div>
@@ -25,29 +54,29 @@
 					<div class="myPageContainerRightUser">
 						<div class="userContentsInfoRight_1">
 							<ul>
-								<li>사용자 이름</li>
+								<li>사용자 이름 </li>
 								<li>사용자 이메일</li>
 								<li>휴대폰 번호</li>
 								<li>비밀번호</li>
-								<li>비밀번호 확인</li>
+								<li>비밀번호 확인</li> 
 							</ul>
 						</div>
 						<div class="userContentsInfoRight_2">
-							<form action="" method="post">
 								<ul>
-									<li><input type="text" /></li>
-									<li><input type="text" /></li>
-									<li><input type="text" /></li>
-									<li><input type="password" /></li>
-									<li><input type="password" /></li>
+									<li><input type="text" value= "${memberVo.member_name}" name ="member_name"/></li>
+									<li><input type="text" value= "${memberVo.member_mail}" disabled="disabled"/></li>
+									<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"/></li>
+									<li><input type="password" id = "pass1" value= "${memberVo.member_pass}" name ="member_pass"/></li>
+									<li><input type="password" id = "pass2" value= "${memberVo.member_pass}" /></li>
+										<span class="error"> 입력하신 비밀번호가 일치하지 않습니다.</span>
 									<li>
 										<input type="submit" value="변경" />
 									</li>
 								</ul>
-							</form>
 						</div>
 					</div>
 				</div>
+			</form>				
 				<div class="myPageContainerRight">
 					<div class="myPageContainerRightLeftChart">
 						<canvas id="myChart" width="349" height="500"></canvas>
