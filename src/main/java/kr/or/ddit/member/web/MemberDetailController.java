@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -53,6 +54,17 @@ public class MemberDetailController {
 	}
 	
 	 
+	/**
+	 * Method : memberDetailUpdate
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @param model
+	 * @param memberVo
+	 * @param part
+	 * @param request
+	 * @return
+	 * Method 설명 : 마이페이지 수정부분
+	 */
 	@RequestMapping(value="/myPageUpdate", method=RequestMethod.POST)
 	public String memberDetailUpdate(Model model, @SessionAttribute("memberVo") MemberVo memberVo,
 		@RequestPart("member_profile") MultipartFile part, HttpServletRequest request) {
@@ -90,6 +102,14 @@ public class MemberDetailController {
 			
 			System.out.println("수정 성공 ! ! ! ! ");
 			return "redirect:/myPage?member_mail=" + memberVo.getMember_mail();
+		}
+	
+	
+		@ResponseBody
+		@RequestMapping(value="/myPageAjax", method=RequestMethod.GET)
+		public String myPageAjax() {
+			return null;
+			
 		}
 	}
 
