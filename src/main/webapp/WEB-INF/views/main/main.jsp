@@ -102,7 +102,7 @@
 								<i class="icon-star icons"  style="color:yellow;font-weight:bold;" onclick="bookmark('${pMemberListVo.project_id}');"></i>
 									</c:when>
 								</c:choose>
-                                <a href="/subMain?id=${pMemberListVo.project_id}"> ${pMemberListVo.project_title}</a>
+                                <a href="/subMain?project_id=${pMemberListVo.project_id}"> ${pMemberListVo.project_title}</a>
 								<c:if test="${pMemberListVo.pmember_position eq '1'}">
 								<i class="icon-settings icons"></i>
                                 </c:if>
@@ -133,7 +133,7 @@
 										<div class="pop-contsa">
 											<div class="pop-conts-headera">
 												<p>프로젝트 초대</p>
-												<a href="#" class="btn-layerClosea">
+												<a href="/main" class="btn-layerClosea">
 													<i class="icon-close icons"></i>
 												</a>
 											</div>
@@ -202,7 +202,7 @@
 								$.ajax({
 									type: "GET",
 									url: "/inviteProjectAjax",
-									data: {"accept": accept, "id": project_id},
+									data: {"accept": accept, "project_id": project_id},
 									success : function (data) {
 										$('.inviteProject').html("");
 										$('.inviteProject').html(data);

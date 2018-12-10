@@ -133,7 +133,7 @@
                                 </div>
                                 <div class="pop-conts-sections">
                                     <div class="pop-conts-section-titles">
-                                        <form action="/inviteTeam?id=${project_id}" method="POST" id="inviteForm">
+                                        <form action="/inviteTeam?project_id=${project_id}" method="POST" id="inviteForm">
                                         <span>이메일을 통해 팀원을 초대할 수 있습니다</span>
                                         <br>
                                         <input type="email" name="inviteTeam" value="kkuinsoo@gmail.com" placeholder="이메일 입력" class="projectTitleInputs" />
@@ -194,7 +194,6 @@
                         </div>
                     </div>
                 </div>
-
                 <!-- CURRENT USER -->
                 <div class="currentUser dialog__trigger">
                     <img src="http://placehold.it/40x40" />
@@ -211,7 +210,7 @@
                             </li>
                             <li>
                                 <i class="icon-power icons"></i>
-                                <a href="/logout">로그아웃</a>
+                                <label onclick="logout();">로그아웃</label>
                             </li>
                         </ul>
                     </div>
@@ -223,4 +222,10 @@
 		$('#currentMain').on('click', function () {
 			location.href="/main";
 		});
+		
+		function logout(){
+			if(window.confirm("로그아웃 하시겠습니까?")) {
+				location.href="/logout";
+			}
+		};
     </script>

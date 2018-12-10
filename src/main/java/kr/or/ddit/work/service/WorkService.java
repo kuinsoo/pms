@@ -1,6 +1,7 @@
 package kr.or.ddit.work.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,60 @@ public class WorkService implements WorkServiceInf{
 	public List<WorkVo> workAllSchedule(ScheduleVo scheduleVo) {
 		return workMapper.workAllSchedule(scheduleVo);
 	}
+
+	/**
+	* Method : selectWorks
+	* 작성자 : Mr.kku
+	* 변경이력 :
+	* @param mapWork
+	* @return
+	* Method 설명 : 업무 리스트를 이메일과 프로젝트 ID 로 검색한다.
+	*/
+	@Override
+	public List<WorkVo> selectWorks(Map<String, String> mapWork) {
+		return workMapper.selectWorks(mapWork);
+	}
+	
+	/**
+	* Method : createWork
+	* 작성자 : Mr.kku
+	* 변경이력 :
+	* @param workVo
+	* @return
+	* Method 설명 : 업무를 생성한다
+	*/
+	@Override
+	public int createWork(WorkVo workVo) {
+		return workMapper.createWork(workVo);
+	}
+
+	/**
+	* Method : deleteWork
+	* 작성자 : Mr.kku
+	* 변경이력 :
+	* @param work_id
+	* @return
+	* Method 설명 : 업무 삭제
+	*/
+	@Override
+	public int deleteWork(String work_id) {
+		return workMapper.deleteWork(work_id);
+	}
+
+	/**
+	* Method : updateWork
+	* 작성자 : Mr.kku
+	* 변경이력 :
+	* @param workVo
+	* @return
+	* Method 설명 : 업무 수정
+	*/
+	@Override
+	public int updateWork(WorkVo workVo) {
+		return workMapper.updateWork(workVo);
+	}
+	
+	
 	
 }
 

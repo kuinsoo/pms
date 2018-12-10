@@ -60,6 +60,20 @@ public class MemberService implements MemberServiceInf {
 	}
 	
 	/**
+	 * Method : updateUser
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @param memberVo
+	 * @return
+	 * Method 설명 : 마이페이지에서 정보 수정
+	 */
+	@Override
+	public int updateUser(MemberVo memberVo) {
+		return memberMapper.updateUser(memberVo);
+	}
+	
+	
+	/**
 	 * Method : selectfindId
 	 * 작성자 : 나진실
 	 * 변경이력 :
@@ -191,4 +205,6 @@ public class MemberService implements MemberServiceInf {
 	public int deleteInviteProject(String member_mail) {
 		return memberMapper.deleteInviteProject(member_mail);
 	}
+
+	
 }

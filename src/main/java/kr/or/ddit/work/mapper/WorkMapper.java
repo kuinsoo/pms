@@ -1,6 +1,7 @@
 package kr.or.ddit.work.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.work.model.WorkVo;
@@ -26,4 +27,44 @@ public interface WorkMapper {
 	*/
 	List<WorkVo> workAllSchedule(ScheduleVo scheduleVo);
 	
+	
+	/**
+	* Method : selectWorks
+	* 작성자 : Mr.kku
+	* 변경이력 :
+	* @param mapWork
+	* @return
+	* Method 설명 : 업무 리스트를 이메일과 프로젝트 ID 로 검색한다.
+	*/
+	List<WorkVo> selectWorks(Map<String,String> mapWork);
+	
+	/**
+	* Method : createWork
+	* 작성자 : Mr.kku
+	* 변경이력 :
+	* @param workVo
+	* @return
+	* Method 설명 : 업무를 생성한다
+	*/
+	int createWork(WorkVo workVo);
+	
+	/**
+	* Method : deleteWork
+	* 작성자 : Mr.kku
+	* 변경이력 :
+	* @param work_id
+	* @return
+	* Method 설명 : 업무 삭제
+	*/
+	int deleteWork(String work_id);
+	
+	/**
+	* Method : updateWork
+	* 작성자 : Mr.kku
+	* 변경이력 :
+	* @param workVo
+	* @return
+	* Method 설명 : 업무 수정
+	*/
+	int updateWork(WorkVo workVo);
 }

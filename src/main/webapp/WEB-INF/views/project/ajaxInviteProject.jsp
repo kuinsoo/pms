@@ -37,8 +37,8 @@
                                         <p>${inviteProject.member_name}님이 초대 하셨습니다 수락 하시겠습니까?</p>
                                     </div>
                                     <div class="layerPopUpBtna">
-                                        <a href="/acceptInvitation?accept=Y&id=${inviteProject.project_id}"><button class="createProjectSubmita">수락</button></a>
-                                        <a href="/acceptInvitation?accept=N&id=${inviteProject.project_id}" class="btn-layerClosea layerPopupClosea">취소</a>
+                                        <a href="/acceptInvitation?accept=Y&project_id=${inviteProject.project_id}"><button class="createProjectSubmita">수락</button></a>
+                                        <a href="/acceptInvitation?accept=N&project_id=${inviteProject.project_id}" class="btn-layerClosea layerPopupClosea">취소</a>
                                     </div>
                                         <%-- 프로젝트 생성 끝 --%>
                                 </div>

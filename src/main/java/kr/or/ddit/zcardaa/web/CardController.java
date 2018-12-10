@@ -1,12 +1,6 @@
 package kr.or.ddit.zcardaa.web;
 
-import kr.or.ddit.zcardaa.model.CardVo;
-import kr.or.ddit.zcardaa.service.CardServiceInf;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * kr.or.ddit.card.web
