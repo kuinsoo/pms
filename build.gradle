@@ -42,7 +42,7 @@ dependencies {
 	compile group: 'javax.mail', name: 'mail', version: '1.4.7'
 
 
-/* JSP Servlet */
+    /* JSP Servlet */
     compile('javax.servlet:jstl')
     compile('org.apache.tomcat.embed:tomcat-embed-jasper')
 

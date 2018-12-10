@@ -22,10 +22,10 @@
 	<update id="updateUser" parameterType="memberVo">    
 		update member
 		set member_pass = #{member_pass}, member_tel = #{member_tel}
+		<if test="member_profile != null">, member_profile = #{member_profile, jdbcType=VARCHAR} </if>
 		where member_mail = #{member_mail}
 	</update>
 	
-		
 	<!-- 아이디 찾기 -->
 	<select id="selectfindId" resultType="memberVo" parameterType="String">
 		select *
