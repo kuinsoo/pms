@@ -136,15 +136,20 @@ public class ProjectController {
 
 
 	@RequestMapping(value = "/inviteProjectAjax", method = RequestMethod.GET)
-	public String inviteProjectAjax(@RequestParam("accept")String accept, @RequestParam("project_id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo) {
+	public String inviteProjectAjax(Model model,@RequestParam("accept")String accept, @RequestParam("project_id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo) {
 		try {
+			Map<String, String> delMap = new HashMap<>();
 			PMemberVo pMemberVo = new PMemberVo();
 			pMemberVo.setPmember_member(memberVo.getMember_mail());
 			pMemberVo.setPmember_project(project_id);
+			delMap.put("member_mail",memberVo.getMember_mail());
+			delMap.put("project_id",project_id);
 			if(accept.equals("Y")) {
-				memberService.deleteInviteProject(memberVo.getMember_mail(), pMemberVo);
+				memberService.deleteInviteProject(delMap, pMemberVo);
 			}
-			memberService.deleteInviteProject(memberVo.getMember_mail());
+			memberService.deleteInviteProject(delMap);
+			model.addAttribute("pMemberList",memberService.selectMainView(memberVo.getMember_mail()));
+			model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
 		}catch (Exception e){
 			e.printStackTrace();
 		}

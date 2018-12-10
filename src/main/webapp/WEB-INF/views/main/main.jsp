@@ -124,7 +124,7 @@
 					<li>
 						<div class="projectCard">
 							<div class="projectCardTitle">
-								<a href="javascript:popUp(500, 500);">${inviteProject.project_title}</a>
+								<a href="javascript:popUp(500, 500, '${inviteProject.project_id }');">${inviteProject.project_title}</a>
 							</div>
 							<div class="projectCardUserName">
 								<img src="http://placehold.it/30x30">
@@ -339,12 +339,25 @@
 		location.href = "main/subMain";
 	});
 
-function popUp(w, h){
+	var openWin;
+function popUp(w, h, project_id){
 	x = (screen.availWidth - w) / 2;
 	y = (screen.availHeight - h) / 2;
-	window.open('inviteProject.jsp', '초대받은 프로젝트','width='+w+', height='+h+', left='+x+', top='+y, 'location=no, directories=no, resizable=no, status=no, toolbar=no, menubar=no');
+	openWin = window.open('/inviteProject?project_id='+project_id, '초대받은 프로젝트','width='+w+', height='+h+', left='+x+', top='+y, 'location=no, directories=no, resizable=no, status=no, toolbar=no, menubar=no');
 }
 
+function invitePrject(accept, project_id){
+	$.ajax({
+		type: "GET",
+		url:"/inviteProjectAjax",
+		data : {'accept':accept, 'project_id':project_id},
+		success: function(data) {
+			$('.inviteProject').html();
+			$('.inviteProject').html(data);
+			bookmark(project_id);
+		}
+	});
+}
 </script>
 </body>
 </html>

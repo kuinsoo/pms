@@ -115,6 +115,7 @@
 
             <div class="headerRightContent">
                 <!-- 팀원 초대 -->
+               <c:if test="${project_id >= 0 }">
                 <a href="#projectCreatePopUps" class="projectCreatePopUps">
                     <div class="teamInvite">
                         <i class="icon-plus icons"></i>
@@ -158,7 +159,7 @@
                         </div>
                     </div>
                 </div>
-
+			</c:if>
                 <!-- 알림 기능 -->
                 <div class="alarm dialog__triggers">
                     <i class="icon-bell icons"></i>
