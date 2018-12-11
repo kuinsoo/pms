@@ -3,6 +3,7 @@ package kr.or.ddit.project.web;
 import java.util.HashMap;
 import java.util.Map;
 
+import kr.or.ddit.work.service.WorkServiceInf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,8 @@ public class ProjectController {
 	@Autowired
 	private MemberServiceInf memberService;
 
+	@Autowired
+	private WorkServiceInf workService;
 
 	/**
 	 * Create project view string.
@@ -113,9 +116,16 @@ public class ProjectController {
 
 
 	@RequestMapping(value = "/subMain", method = RequestMethod.GET)
-	public String subMain(Model model, @RequestParam("project_id")String proejct_id, @RequestParam("project_title")String project_title) {
-		model.addAttribute("project_id", proejct_id);
+	public String subMain(Model model, @RequestParam("project_id")String project_id, @RequestParam("project_title")String project_title,
+						  @SessionAttribute("memberVo")MemberVo memberVo) {
+		model.addAttribute("project_id", project_id);
 		model.addAttribute("project_title", project_title);
+
+		Map<String, String> mapWork = new HashMap<>();
+		mapWork.put("member_mail", memberVo.getMember_mail());
+		mapWork.put("project_id", project_id);
+		model.addAttribute("workList",workService.selectWorks(mapWork));
+
 		return "main/subMain";
 	}
 
