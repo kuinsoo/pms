@@ -133,16 +133,16 @@
 						</ul>
 						<!-- tap1 업무 -->
 						<div id="tabss-1">
-							<form action="/ajaxCreateWork" method="get">
+							<form action="/ajaxCreateWork" method="POST">
 								<div class="calendarContainerInput">
 									<div class="calendarInputDiv">
 										<i class="icon-clock icons"></i>
-										<input type="date" name="work_sdate"> <!-- 업무시작일 -->
+										<input type="datetime-local" name="work_sdate"> <!-- 업무시작일 -->
 									</div>
 									<span class="calendarInputDivSpan">~</span>
 									<div class="calendarInputDivs">
 										<i class="icon-clock icons"></i>
-										<input type="date" name="work_eedate"> <!-- 마감예상일 -->
+										<input type="datetime-local"  name="work_eedate"> <!-- 마감예상일 -->
 									</div>
 								</div>
 								<label>업무</label>
@@ -150,9 +150,9 @@
 								<label>업무 내용</label>
 								<textarea class="tabssTextArea" name="work_content" placeholder="업무내용"></textarea><br/>
 								<label>업무 유형</label><br/>
-								<input type="radio" name="work_type" value="type1"/> 
-								<input type="radio" name="work_type" value="type2"/> 
-								<input type="radio" name="work_type" value="type3"/><br/>
+								<input type="radio" name="work_type" value="1"/>설계
+								<input type="radio" name="work_type" value="2"/>개발
+								<input type="radio" name="work_type" value="3"/>유지보수<br/>
 								<label>업무 중요도</label><br/>
 								<select name="work_importance">
 									<option value="1">Level 1</option>
