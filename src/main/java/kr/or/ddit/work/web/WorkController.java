@@ -47,4 +47,9 @@ public class WorkController {
 		model.addAttribute("workList",workService.selectWorks(mapWork));
 		return "work/ajaxCreateWork";
 	}
+
+	@RequestMapping(value = "/testGantt", method=RequestMethod.GET)
+	public String tsetPage() {
+		return "work/testChart";
+	}
 }
