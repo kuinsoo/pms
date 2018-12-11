@@ -16,6 +16,7 @@ public class PMemberListVo {
 
 	private String member_name;
 	private String member_profile;
+	private String pmember_member;
 	private String pmemberCount;
 	private String pmember_position;
 	private String project_title;
@@ -26,9 +27,10 @@ public class PMemberListVo {
 	public PMemberListVo() {
 	}
 
-	public PMemberListVo(String member_name, String member_profile, String pmemberCount, String pmember_position, String project_title, String project_overview, String project_bookmark, String project_id) {
+	public PMemberListVo(String member_name, String member_profile, String pmember_member, String pmemberCount, String pmember_position, String project_title, String project_overview, String project_bookmark, String project_id) {
 		this.member_name = member_name;
 		this.member_profile = member_profile;
+		this.pmember_member = pmember_member;
 		this.pmemberCount = pmemberCount;
 		this.pmember_position = pmember_position;
 		this.project_title = project_title;
@@ -99,5 +101,13 @@ public class PMemberListVo {
 
 	public void setProject_id(String project_id) {
 		this.project_id = project_id;
+	}
+
+	public String getPmember_member() {
+		return pmember_member;
+	}
+
+	public void setPmember_member(String pmember_member) {
+		this.pmember_member = pmember_member;
 	}
 }

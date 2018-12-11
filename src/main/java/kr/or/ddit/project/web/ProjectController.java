@@ -121,6 +121,10 @@ public class ProjectController {
 		model.addAttribute("project_id", project_id);
 		model.addAttribute("project_title", project_title);
 
+
+
+
+		model.addAttribute("projectMemberList", memberService.projectMemberList(project_id));
 		Map<String, String> mapWork = new HashMap<>();
 		mapWork.put("member_mail", memberVo.getMember_mail());
 		mapWork.put("project_id", project_id);

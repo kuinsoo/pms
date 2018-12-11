@@ -21,15 +21,15 @@ import java.util.Map;
  *
  * @Author : Mr.KKu
  * @Date : 2018-11-27 / 오후 3:34
- * @Version : 
+ * @Version :
  */
 @Controller
 public class WorkController {
 
 	@Autowired
 	private WorkServiceInf workService;
-	
-	
+
+
 	@RequestMapping(value="/ajaxCreateWork",method=RequestMethod.POST)
 	public String createWork(Model model, WorkVo workVo, @RequestParam("project_id")String project_id,
 							 @SessionAttribute("memberVo")MemberVo memberVo) {

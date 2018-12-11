@@ -266,60 +266,32 @@
 
 			<div class="currentMainContainerRight">
 				<div class="projectTeams">
-					<h2>전체 참여자 7명</h2>
+					<h2>전체 참여자 ${projectMemberList.size()}명</h2>
 					<ul>
+						<c:forEach items="${projectMemberList}" var="projectMember" varStatus="i" >
+						<c:if test="${projectMember.pmember_position eq '1'}">
 						<li>
 							<span class="projectPositionName">프로젝트 관리자</span>
 							<div class="chatList">
-								<img src="http://placehold.it/50x50">
-								<span class="projectUserNameList">관리자</span>
+								<img src="${projectMember.member_profile}">
+								<span class="projectUserNameList">${projectMember.member_name}</span>
 							</div>
 						</li>
+						</c:if>
+						<c:if test="${projectMember.pmember_position eq '2'}">
 						<li>
-							<span class="projectPositionName">외부참여자</span>
+							<span class="projectPositionName">참여자</span>
 							<div class="chatList">
 								<img src="http://placehold.it/50x50">
-								<span class="projectUserNameList">userName</span>
+								<span class="projectUserNameList">${projectMember.member_name}</span>
 							</div>
 						</li>
-						<li>
-							<span class="projectPositionName">외부참여자</span>
-							<div class="chatList">
-								<img src="http://placehold.it/50x50">
-								<span class="projectUserNameList">userName</span>
-							</div>
-						</li>
-						<li>
-							<span class="projectPositionName">외부참여자</span>
-							<div class="chatList">
-								<img src="http://placehold.it/50x50">
-								<span class="projectUserNameList">userName</span>
-							</div>
-						</li>
-						<li>
-							<span class="projectPositionName">외부참여자</span>
-							<div class="chatList">
-								<img src="http://placehold.it/50x50">
-								<span class="projectUserNameList">userName</span>
-							</div>
-						</li>
-						<li>
-							<span class="projectPositionName">외부참여자</span>
-							<div class="chatList">
-								<img src="http://placehold.it/50x50">
-								<span class="projectUserNameList">userName</span>
-							</div>
-						</li>
-						<li>
-							<span class="projectPositionName">외부참여자</span>
-							<div class="chatList">
-								<img src="http://placehold.it/50x50">
-								<span class="projectUserNameList">userName</span>
-							</div>
-						</li>
+						</c:if>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>
+
 		</div>
 	</section>
 	
