@@ -82,6 +82,13 @@
 		where PMEMBER_MEMBER = #{pmember_member}
 		and PMEMBER_PROJECT = #{pmember_project}
 	</select>
+	
+	<!--  이미 초대한 회원인지 검색 -->
+	<select id="searchInviteMember" parameterType="pMemberVo" resultType="inviteProjectVo">
+		select * from INVITE_PROJECT
+		where MEMBER_MAIL = #{pmember_member}
+		and PROJECT_ID = #{pmember_project}
+	</select>
 
 	<select id="selectInviteProject" parameterType="String" resultType="inviteProjectVo">
 		select C.MEMBER_NAME,

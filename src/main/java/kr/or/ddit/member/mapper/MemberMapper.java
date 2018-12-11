@@ -128,6 +128,17 @@ public interface MemberMapper {
 	 * @return the p member vo
 	 */
 	PMemberVo searchTeamMember(PMemberVo pMemberVo);
+	
+	/**
+	* Method : searchInviteMember
+	* 작성자 : Mr.KKu
+	* 변경이력 :
+	* @param pMemberVo
+	* @return
+	* Method 설명 : 이미 초대된 회원인지 검색
+	*/
+	InviteProjectVo searchInviteMember(PMemberVo pMemberVo);
+
 
 	/**
 	 * Select invite project list.

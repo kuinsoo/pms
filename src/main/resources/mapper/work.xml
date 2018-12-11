@@ -45,7 +45,7 @@
 	
 	<insert id="createWork" parameterType="workVo">
 		insert into work 
-		values(SEQ_WORK.NEXTVAL, #{work_project}, #{work_title}, #{work_content}, #{work_type}, #{work_importance},
+		values(SEQ_WORK.NEXTVAL, #{work_project}, #{work_title}, #{work_content}, #{work_type}, ${work_importance},
 					 #{work_sdate}, #{work_eedate},0, 'N','',#{work_public},'')
 	</insert>
 	
@@ -55,8 +55,8 @@
 	
 	<update id="updateWork" parameterType="workVo">
 		UPDATE WORK
-		SET WORK_TITLE = #{work_title}, WORK_CONTENT = #{work_content}, WROK_TYPE = #{work_type},
-		 WROK_IMPORTANCE = #{work_importance},  WORK_SDATE = #{work_sdate}, WORK_EEDATE #{work_eedate},
+		SET WORK_TITLE = #{work_title}, WORK_CONTENT = #{work_content}, WORK_TYPE = #{work_type},
+		 WORK_IMPORTANCE = ${work_importance},  WORK_SDATE = #{work_sdate}, WORK_EEDATE = #{work_eedate},
 		 WORK_PROGRESS = #{work_progress}, WORK_EDATE = #{work_edate} , WORK_PUBLIC = #{work_public},
 		 WORK_COLOR = #{work_color}
 		WHERE work_id = #{work_id}

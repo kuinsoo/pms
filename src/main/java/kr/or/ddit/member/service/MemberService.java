@@ -173,6 +173,20 @@ public class MemberService implements MemberServiceInf {
 	public PMemberVo searchTeamMember(PMemberVo pMemberVo) {
 		return memberMapper.searchTeamMember(pMemberVo);
 	}
+	
+	/**
+	* Method : searchInviteMember
+	* 작성자 : Mr.KKu
+	* 변경이력 :
+	* @param pMemberVo
+	* @return
+	* Method 설명 : 이미 초대된 회원인지 검색
+	*/
+	@Override
+	public InviteProjectVo searchInviteMember(PMemberVo pMemberVo) {
+		return memberMapper.searchInviteMember(pMemberVo);
+	}
+
 
 	/**
 	 * Select invite project list.
@@ -188,6 +202,7 @@ public class MemberService implements MemberServiceInf {
 	}
 	
 	
+
 
 	@Override
 	public List<InviteProjectVo> selectInviteProjectMap(Map<String, String> map) {

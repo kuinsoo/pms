@@ -1,5 +1,8 @@
 package kr.or.ddit.member.web;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +15,8 @@ import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.project.model.InviteProjectVo;
+import kr.or.ddit.project.model.ProjectVo;
+import kr.or.ddit.project.service.ProjectServiceInf;
 
 /**
  * kr.or.ddit.member.web
@@ -30,14 +35,17 @@ public class MemberController {
 
 	@Autowired
 	private MemberServiceInf memberService;
+	
+	@Autowired
+	private ProjectServiceInf projectService;
 
 	@RequestMapping(value = "/inviteTeam" ,method = RequestMethod.POST)
-	public String inviteTeam(@RequestParam("inviteTeam")String[] inviteMails, @RequestParam("project_id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo) {
+	public String inviteTeam(@RequestParam("inviteTeam")String[] inviteMails, @RequestParam("project_id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo) throws UnsupportedEncodingException {
 		String subject = "Current Project 초대 알람 입니다.";
 		String content = "프로젝트 주소 : http://127.0.0.1:8081/?teamId="+ project_id;
 		InviteProjectVo inviteProjectVo = new InviteProjectVo();
 		PMemberVo pMemberVo = new PMemberVo();
-
+		String project_title = "";
 		pMemberVo.setPmember_project(project_id);
 		try {
 			for (String inviteMail :
@@ -46,7 +54,7 @@ public class MemberController {
 				if( memberService.selectUser(inviteMail) == null){
 					continue; // 회원이 아닐경우 발송 되지 않는다.
 				}else {
-					if(memberService.searchTeamMember(pMemberVo) == null){
+					if(memberService.searchTeamMember(pMemberVo) == null && memberService.searchInviteMember(pMemberVo) == null ){
 						String to = inviteMail;
 
 						inviteProjectVo.setMember_mail(inviteMail);
@@ -61,12 +69,14 @@ public class MemberController {
 					}
 
 				}
-
+				
 			}
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		return "redirect:/subMain?project_id=" + project_id;
+		ProjectVo projectVo = projectService.selectProjectList(project_id);
+		project_title = URLEncoder.encode(projectVo.getProject_title(),"UTF-8");
+		return "redirect:/subMain?project_id=" + project_id + "&project_title=" + project_title;
 	}
 
 }

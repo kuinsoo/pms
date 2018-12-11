@@ -23,7 +23,7 @@ public class WorkVo {
 	private String work_title;			//	업무제목
 	private String work_content;		//	업무내용
 	private String work_type;			//	업무유형
-	private String work_importance;		//	업무중요도
+	private int work_importance;		//	업무중요도
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
 	private Date   work_sdate;			//	업무시작일자
 	private String format_work_sdate;	//	업무시작일자(String)
@@ -43,7 +43,7 @@ public class WorkVo {
 	
 	/* 생성자 */
 	public WorkVo(String work_id, String work_project, String work_title, String work_content, String work_type,
-			String work_importance, Date work_sdate, String format_work_sdate, Date work_eedate,
+			int work_importance, Date work_sdate, String format_work_sdate, Date work_eedate,
 			String format_work_eedate, Date work_edate, String format_work_edate, int work_progress,
 			String work_approval, String work_public, String work_color) {
 		this.work_id = work_id;
@@ -95,10 +95,10 @@ public class WorkVo {
 	public void setWork_type(String work_type) {
 		this.work_type = work_type;
 	}
-	public String getWork_importance() {
+	public int getWork_importance() {
 		return work_importance;
 	}
-	public void setWork_importance(String work_importance) {
+	public void setWork_importance(int work_importance) {
 		this.work_importance = work_importance;
 	}
 	public Date getWork_sdate() {
