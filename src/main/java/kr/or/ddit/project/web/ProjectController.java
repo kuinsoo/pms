@@ -1,8 +1,11 @@
 package kr.or.ddit.project.web;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.comments.model.CommentsVo;
+import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.work.service.WorkServiceInf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +47,9 @@ public class ProjectController {
 
 	@Autowired
 	private WorkServiceInf workService;
+
+	@Autowired
+	private CommentsServiceInf commentsService;
 
 	/**
 	 * Create project view string.
@@ -121,9 +127,7 @@ public class ProjectController {
 		model.addAttribute("project_id", project_id);
 		model.addAttribute("project_title", project_title);
 
-
-
-
+		model.addAttribute("cmtList", commentsService.cmtList(project_id));
 		model.addAttribute("projectMemberList", memberService.projectMemberList(project_id));
 		Map<String, String> mapWork = new HashMap<>();
 		mapWork.put("member_mail", memberVo.getMember_mail());

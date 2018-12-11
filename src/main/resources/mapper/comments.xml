@@ -3,6 +3,28 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.or.ddit.zcardaa.mapper.CommentsMapper">
+<mapper namespace="kr.or.ddit.comments.mapper.CommentsMapper">
 
+    <select id="cmtList" parameterType="String" resultType="cmtVo">
+        select distinct CMT_ID, CMT_CONTENT,CMT_WORK,CMT_DATE,CMT_MEMBER
+        from comments inner Join work on (CMT_WORK = WORK_ID)
+                      inner join project on (WORK_PROJECT = PROJECT_ID)
+                      inner join PROJECT_MEMBER on (project_id = PMEMBER_PROJECT)
+        where PROJECT_ID = #{project_id}
+    </select>
+
+    <insert id="insertCmt" parameterType="cmtVo">
+        insert into comments values(seq_comments.nextval, #{cmt_work}, #{cmt_member}, #{cmt_content},
+                                           sysdate)
+    </insert>
+
+    <update id="updateCmt" parameterType="cmtVo">
+        update COMMENTS
+        set CMT_CONTENT = #{cmt_content}
+        where CMT_ID = #{cmt_id}
+    </update>
+    
+    <delete id="deleteCmt" parameterType="String">
+        delete from COMMENTS where CMT_ID = #{cmt_id}
+    </delete>
 </mapper>

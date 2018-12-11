@@ -231,8 +231,9 @@
 							<i class="icon-bulb icons"></i>
 							<span>이슈 등록</span>
 						</div>
-
 						<div class="cardContentComment">
+							<c:forEach items="${cmtList}" var="cmt">
+								<c:if test="${cmt.cmt_work eq  work.work_id}">
 							<ul>
 								<li>
 									<div class="cardContentCommentUser">
@@ -240,13 +241,15 @@
 											<img src="http://placehold.it/40x40">
 										</div>
 										<div class="cardContentCommentUserName">
-											<b>userName</b><span class="times">2018-12-05 14:19</span>
+											<b>${cmt.cmt_member}</b><span class="times">${cmt.cmt_date}</span>
 											<br>
-											<span>content~~~!!!!!!!!!!!!!!!~~~~~~~~~~~~~~~~~~~~~~</span>
+											<span>${cmt.cmt_content}</span>
 										</div>
 									</div>
 								</li>
 							</ul>
+							</c:if>
+						</c:forEach>
 							<ul>
 								<li>
 									<div class="cardContentCommentUser">

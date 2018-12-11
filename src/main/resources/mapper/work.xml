@@ -37,7 +37,8 @@
         W.WORK_APPROVAL,
         W.WORK_PUBLIC,
         P.PROJECT_TITLE,
-        M.MEMBER_MAIL
+        M.MEMBER_MAIL,
+		W.WORK_ID
 		from member M INNER JOIN project_member PM ON (M.member_mail = PM.pmember_member AND M.MEMBER_MAIL = #{member_mail})
 		INNER JOIN PROJECT P ON (PM.PMEMBER_PROJECT = P.PROJECT_ID AND P.PROJECT_ID=#{project_id})
 		INNER JOIN WORK W ON (P.PROJECT_ID = W.WORK_PROJECT)
