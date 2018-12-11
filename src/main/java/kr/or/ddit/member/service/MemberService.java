@@ -186,6 +186,14 @@ public class MemberService implements MemberServiceInf {
 	public List<InviteProjectVo> selectInviteProject(String member_email) {
 		return memberMapper.selectInviteProject(member_email);
 	}
+	
+	
+
+	@Override
+	public List<InviteProjectVo> selectInviteProjectMap(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return memberMapper.selectInviteProjectMap(map);
+	}
 
 	/**
 	 * Delete invite project int.
@@ -196,14 +204,14 @@ public class MemberService implements MemberServiceInf {
 	 * @return the int
 	 */
 	@Override
-	public int deleteInviteProject(String member_mail, PMemberVo pMemberVo) {
+	public int deleteInviteProject(Map<String, String> delMap, PMemberVo pMemberVo) {
 						memberMapper.inviteTeam(pMemberVo);
-		return memberMapper.deleteInviteProject(member_mail);
+		return memberMapper.deleteInviteProject(delMap);
 	}
 
 	@Override
-	public int deleteInviteProject(String member_mail) {
-		return memberMapper.deleteInviteProject(member_mail);
+	public int deleteInviteProject(Map<String, String > delMap) {
+		return memberMapper.deleteInviteProject(delMap);
 	}
 
 	

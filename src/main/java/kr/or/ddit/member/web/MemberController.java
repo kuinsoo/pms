@@ -66,8 +66,7 @@ public class MemberController {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-
-		return "redirect:/subMain?project_id=" + project_id ;
+		return "redirect:/subMain?project_id=" + project_id;
 	}
 
 }

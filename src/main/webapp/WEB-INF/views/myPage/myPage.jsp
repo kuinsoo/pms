@@ -4,10 +4,15 @@
 		.error{
 			color: red;
 		}
+		.telerror{
+			color: red;
+		}
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			var certificationNumber;
 			$(".error").hide();
+			$(".telerror").hide();
 			//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
 			//blur()이벤트 사용
 			$("#pass2").blur(function() {
@@ -19,6 +24,26 @@
 			});
 
 		});
+		
+		<!-- 핸드폰 번호 입력 후 인증 버튼 -->
+		function telAjax(){
+			var member_tel = $("#tel").val();
+			$.ajax({
+				type :"GET",
+				url :"/myPageAjax",
+				data : "member_tel="+member_tel,
+				success : function(data){
+					certificationNumber = data;
+				}
+			});
+		}
+		function onkeyup_event(){
+			if(certificationNumber == $("#telnum").val()){
+				$(".telerror").hide();
+			}else{
+				$(".telerror").show();
+			}
+		}
 	</script>
 	
 	<!-- CURRENT SECTION(MAIN) -->
@@ -32,19 +57,21 @@
 				<form action="/myPageUpdate" method="post" enctype="multipart/form-data">
 				<div class="myPageContainerLeft">
 					<div class="myPageContainerLeftUser">
-						<h2>내 프로필</h2>
+						<h2>${memberVo.member_name}님의 프로필</h2>
 						<div class="profileImg">
-							<div id="fileList">
+							<div id="fileList" style="background-image:url('${memberVo.member_profile}');background-repeat:no-repeat;background-position:50% 50%;">
 								<c:choose>
 									<c:when test="${memberVo.member_profile != null}">
-										<input type="file" id="fileElem" class="fileInputCSS" value="${memberVo.member_profile}"
-										name="member_profile" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">									
+										<input type="file" id="fileElem" class="fileInputCSS"
+										name="member_profile" accept="image/*" style="display:none">									
 									</c:when>
 									<c:otherwise>
-										<img src='/profile/noimage.png' />
+										<div>
+										<input type="file" id="fileElem" class="fileInputCSS"
+										name="member_profile"/>
+										</div>
 									</c:otherwise>
 								</c:choose>
-							  	<div></div>
 							</div>
 							<div class="profileUploadImg">
 								<a href="#" id="fileSelect"></a>
@@ -57,6 +84,7 @@
 								<li>사용자 이름 </li>
 								<li>사용자 이메일</li>
 								<li>휴대폰 번호</li>
+								<li>인증번호 입력</li>
 								<li>비밀번호</li>
 								<li>비밀번호 확인</li> 
 							</ul>
@@ -65,7 +93,11 @@
 							<ul>
 								<li><input type="text" value= "${memberVo.member_name}" name ="member_name"/></li>
 								<li><input type="text" value= "${memberVo.member_mail}" disabled="disabled"/></li>
-								<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"/><input type="button" value="인증" class="phoneBtns" /></li>
+								<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"  id ="tel"/>
+									<input type="button" onclick="telAjax();" value="인증" class="phoneBtns" />
+								<li><input type="text" id ="telnum" onkeyup="onkeyup_event();"/>
+									<span class="telerror"> 인증번호가 일치하지 않습니다.</span>
+								</li>
 								<li><input type="password" id = "pass1" value= "${memberVo.member_pass}" name ="member_pass"/></li>
 								<li><input type="password" id = "pass2" value= "${memberVo.member_pass}" /></li>
 									<span class="error"> 입력하신 비밀번호가 일치하지 않습니다.</span>
@@ -104,7 +136,7 @@
 									<input type="text" placeholder="검색어를 입력해주세요"/>
 									<i class="icon-magnifier icons"></i>
 								</div>
-								<table border="1" cellpadding="0" cellspacing="">
+								<table border="1" cellpadding="0" cellspacing="0">
 									<colgroup width="10%" />
 									<colgroup width="60%" />
 									<colgroup width="30%" />

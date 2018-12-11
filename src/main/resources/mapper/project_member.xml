@@ -93,8 +93,22 @@
 	                                                  and B.PROJECT_ID = A.PROJECT_ID
 	                                                  and A.MEMBER_MAIL = #{pmember_member}
 	</select>
+	
+		<select id="selectInviteProjectMap" parameterType="Map" resultType="inviteProjectVo">
+		select C.MEMBER_NAME,
+	       B.PROJECT_TITLE,
+	       B.PROJECT_OVERVIEW,
+	       A.PROJECT_INVITE,
+	       B.PROJECT_ID,
+	       A.invite_name
+			from INVITE_PROJECT A, PROJECT B, MEMBER C where C.MEMBER_MAIL = A.MEMBER_MAIL
+	                                                  and A.PROJECT_ID = B.PROJECT_ID
+	                                                  and A.MEMBER_MAIL = #{member_mail}
+	                                                  and A.PROJECT_ID = #{project_id}
+		</select>
+	
 
-	<delete id="deleteInviteProject" parameterType="String">
-		delete from INVITE_PROJECT where MEMBER_MAIL = #{member_mail}
+	<delete id="deleteInviteProject" parameterType="Map">
+		delete from INVITE_PROJECT where MEMBER_MAIL = #{member_mail} and project_id = #{project_id}
 	</delete>
 </mapper>

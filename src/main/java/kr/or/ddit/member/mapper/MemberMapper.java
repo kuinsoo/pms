@@ -138,6 +138,16 @@ public interface MemberMapper {
 	 * @return the list
 	 */
 	List<InviteProjectVo> selectInviteProject(String member_email);
+	
+	/**
+	* Method : selectInviteProject
+	* 작성자 : Mr.KKu
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 
+	*/
+	List<InviteProjectVo> selectInviteProjectMap(Map<String, String> map);
 
 	/**
 	 * Delete invite project int.
@@ -147,5 +157,5 @@ public interface MemberMapper {
 	 * @param member_mail the member mail
 	 * @return the int
 	 */
-	int  deleteInviteProject(String member_mail);
+	int  deleteInviteProject(Map<String, String> delMap);
 }
