@@ -34,12 +34,12 @@ public class WorkController {
 	public String createWork(Model model, WorkVo workVo, @RequestParam("project_id")String project_id,
 							 @SessionAttribute("memberVo")MemberVo memberVo) {
 
-//		try{
-//			workVo.setWork_project(project_id);
-//			workService.createWork(workVo);
-//		} catch (Exception e){
-//			e.printStackTrace();
-//		}
+		try{
+			workVo.setWork_project(project_id);
+			workService.createWork(workVo);
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 
 		Map<String, String> mapWork = new HashMap<>();
 		mapWork.put("member_mail", memberVo.getMember_mail());
