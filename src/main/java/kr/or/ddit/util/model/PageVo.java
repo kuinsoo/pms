@@ -5,8 +5,9 @@ import org.apache.ibatis.type.Alias;
 @Alias("pageVo")
 public class PageVo {
 	
+	private int page;
+	private int pageSize;
 	private String member_mail;
-	
 	
 	public String getMember_mail() {
 		return member_mail;
@@ -14,10 +15,6 @@ public class PageVo {
 	public void setMember_mail(String member_mail) {
 		this.member_mail = member_mail;
 	}
-	
-	private int page;
-	private int pageSize;
-	
 	public int getPage() {
 		return page;
 	}
@@ -31,13 +28,12 @@ public class PageVo {
 		this.pageSize = pageSize;
 	}
 	
-	
+	public PageVo() {
+	}
+
 	@Override
 	public String toString() {
 		return "PageVo [member_mail=" + member_mail + ", page=" + page + ", pageSize=" + pageSize + "]";
-	}
-	public PageVo() {
-		
 	}
 	
 }
