@@ -87,22 +87,16 @@
 				$('.saveBtn').prop('disabled', true);
 			}
 		}
-	
-
+		
+		// 페이징 처리 Ajax
 		function getMyPageList(page){
 			var pageSize = 10;
-			var searchText = $('form[name=searchProject]').serialize();
-		
-			console.log("page" + page);
 			
 			$.ajax({
 				type: "GET",
 				url : "/myPageProjectAjax",
-				data: "page="+page+"&pageSize="+pageSize+"&searchText="+searchText,
+				data: {"page":page, "pageSize":pageSize},
 				success : function(data){
-					
-					console.log(data);
-					
 					var html ="";
 					$.each(data.projectList, function (idx,my){
 						html += "<tr>";
@@ -128,6 +122,43 @@
 				}
 			});
 		}
+			
+		// 검색 Ajax	
+		function getSearchProject(){
+		var param = $('form[name=searchProject]').serialize();
+			
+			$.ajax({
+				type: "POST",
+				url : "/searchProjectAjax",
+				data: param,
+				success : function(data){
+						console.log("data : " + data);
+					var html ="";
+					$.each(data.projectList, function (idx,my){
+						html += "<tr>";
+						html += "	<td>"+ my.rnum +"</td>";
+						html += "	<td>"+ my.project_title +"</td>";
+						html += "	<td>"+ my.pmember_member +"</td>";
+						html += "</tr>";
+					});
+					
+					$("#projectList").html("");
+					$("#projectList").html(html);
+				
+					var paging ="";
+						paging +="<li><a href='javascript:getMyPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						for(var i= 1; i<=data.pageCnt; i++) {
+							paging += "<li><a href='javascript:getMyPageList("+ i +");'>"+ i+ "</a></li>";
+						}
+							paging +="<li><a href='javascript:getMyPageList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".pagination").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+	
 	</script>
 	
 	<!-- CURRENT SECTION(MAIN) -->
@@ -216,9 +247,11 @@
 							<div class="projectTable">
 								<div class="projectSearchDiv">
 									<label> 프로젝트 명  </label>　　
-									<form class = "search"  name ="searchProject">
-										<input type="text" id="searchText" name ="searchText" value="${searchText}" placeholder="검색어를 입력해주세요"/>
-										<button type="submit" class="btn btn-default">검색하기</button>  
+									<form name ="searchProject" method="POST" onsubmit="return false;">
+										<input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
+										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="pageSize" value='10' />
+										<input type="button" class="searchBtn" onclick="javascript:getSearchProject();" value="검색하기"/>  
 									</form>
 								</div>
 								<table border="1" cellpadding="0" cellspacing="0">

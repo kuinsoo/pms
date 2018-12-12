@@ -76,33 +76,62 @@ public class MemberDetailController {
 	 * @param memberVo
 	 * @param projectVo
 	 * @return
-	 * Method 설명 : 마이페이지 참여중인 프로젝트 Ajax 처리 
+	 * Method 설명 : 마이페이지 참여중인 프로젝트 Ajax처리 
 	 */
-	@RequestMapping(value= "/myPageProjectAjax", method= RequestMethod.GET)
+
 	@ResponseBody
+	@RequestMapping(value= "/myPageProjectAjax", method= RequestMethod.GET)
 	public Map<String, Object> myPageProjectAjax(Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
-							@RequestParam("searchText") String searchText, ProjectVo projectVo, HttpServletRequest request) {
+							ProjectVo projectVo, HttpServletRequest request) {
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
-
+	
 		List<ProjectVo> projectList = memberservice.myprojectselect(pageVo);
 		Map<String, Object> projectMap = new HashMap<>();
 		int pageCnt = memberservice.totalProjectCnt();
 		
-		// 검색 부분 
-		if (pageVo.getSearchText() == null) {
-			pageVo.setSearchText("");
-		}
-		
-		projectMap.put("pageVo", pageVo);
 		projectMap.put("projectList", projectList);		
 		projectMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
 		return projectMap;
 		
 	}
+
 	
-	 
+	/**
+	 * Method : searchProjectAjax
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param model
+	 * @param pageVo
+	 * @param memberVo
+	 * @param projectVo
+	 * @param request
+	 * @return
+	 * Method 설명 : 마이페이지 참여중인 프로젝트 검색 Ajax처리 
+	 */
+	@ResponseBody
+	@RequestMapping(value= "/searchProjectAjax", method= RequestMethod.POST)
+	public Map<String, Object> searchProjectAjax(Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
+							ProjectVo projectVo, HttpServletRequest request) {
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		// 검색 부분 
+		if (pageVo.getSearchText() == null) {
+			pageVo.setSearchText("");
+		}
+		
+		List<ProjectVo> projectList = memberservice.myprojectselect(pageVo);
+		Map<String, Object> projectMap = new HashMap<>();
+		int pageCnt = memberservice.totalProjectCnt();
+		
+		projectMap.put("projectList", projectList);		
+		projectMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return projectMap;
+	}
+	
 	/**
 	 * Method : memberDetailUpdate
 	 * 작성자 : 나진실
@@ -129,10 +158,7 @@ public class MemberDetailController {
 			try {
 				if(part.getSize()>0) {
 					String path = request.getServletContext().getRealPath("/images");
-					
-					
 					String fileName = part.getOriginalFilename();
-				
 					part.transferTo(new File(path + File.separator + fileName));
 								
 					// profile
