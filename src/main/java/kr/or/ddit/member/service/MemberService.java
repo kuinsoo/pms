@@ -7,6 +7,8 @@ import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.project.model.InviteProjectVo;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
+import kr.or.ddit.util.model.PageVo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -111,7 +113,8 @@ public class MemberService implements MemberServiceInf {
 	public int updatePass(MemberVo memberVo) {
 		return memberMapper.updatePass(memberVo);
 	}
-
+	
+	
 	/**
 	 * Select main view list.
 	 * 작성자 : Mr.KKu
@@ -123,7 +126,7 @@ public class MemberService implements MemberServiceInf {
 	public List<PMemberListVo> selectMainView(String member_mail) {
 		return memberMapper.selectMainView(member_mail);
 	}
-
+	
 	/**
 	 * Sets team leader.
 	 * 작성자 : Mr.KKu
@@ -173,20 +176,6 @@ public class MemberService implements MemberServiceInf {
 	public PMemberVo searchTeamMember(PMemberVo pMemberVo) {
 		return memberMapper.searchTeamMember(pMemberVo);
 	}
-	
-	/**
-	* Method : searchInviteMember
-	* 작성자 : Mr.KKu
-	* 변경이력 :
-	* @param pMemberVo
-	* @return
-	* Method 설명 : 이미 초대된 회원인지 검색
-	*/
-	@Override
-	public InviteProjectVo searchInviteMember(PMemberVo pMemberVo) {
-		return memberMapper.searchInviteMember(pMemberVo);
-	}
-
 
 	/**
 	 * Select invite project list.
@@ -202,7 +191,6 @@ public class MemberService implements MemberServiceInf {
 	}
 	
 	
-
 
 	@Override
 	public List<InviteProjectVo> selectInviteProjectMap(Map<String, String> map) {
@@ -230,7 +218,16 @@ public class MemberService implements MemberServiceInf {
 		return memberMapper.deleteInviteProject(delMap);
 	}
 
+	@Override
+	public int totalProjectCnt() {
+		return memberMapper.totalProjectCnt();
+	}
 
+	@Override
+	public List<ProjectVo> myprojectselect(PageVo pageVo) {
+		
+		return memberMapper.myprojectselect(pageVo);
+	}
 	/**
 	 * Project member list list.
 	 * 작성자 : Mr.KKu
@@ -242,4 +239,12 @@ public class MemberService implements MemberServiceInf {
 	public List<PMemberListVo> projectMemberList(String project_id) {
 		return memberMapper.projectMemberList(project_id);
 	}
+
+	@Override
+	public InviteProjectVo searchInviteMember(PMemberVo pMemberVo) {
+		// TODO Auto-generated method stub
+		return memberMapper.searchInviteMember(pMemberVo);
+	}
+	
+	
 }

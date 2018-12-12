@@ -3,6 +3,8 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,6 +23,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.project.model.ProjectVo;
+import kr.or.ddit.util.model.PageVo;
 
 
 /**
@@ -46,15 +50,21 @@ public class MemberDetailController {
 	 * @return
 	 */
 	@RequestMapping(value="/myPage",method = RequestMethod.GET)
-	public String myPage(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
+	public String myPage(Model model, @SessionAttribute("memberVo") MemberVo memberVo 
+						, ProjectVo projectVo , PageVo pageVo ) {
 		
 		memberservice.selectUser(memberVo.getMember_mail());
-		
-		
 		model.addAttribute("memberVo",memberVo);
+	
+		pageVo.setMember_mail(memberVo.getMember_mail());
 		
+		List<ProjectVo> projectList = memberservice.myprojectselect(pageVo);
+		int pageCnt = memberservice.totalProjectCnt();
 		
+		model.addAttribute("projectList",projectList);
 		
+		System.out.println("pageCnt" + pageCnt);
+		model.addAttribute("pageCnt", pageCnt);
 		
 		return "/myPage/myPage";
 	}

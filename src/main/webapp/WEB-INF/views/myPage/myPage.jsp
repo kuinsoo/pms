@@ -7,27 +7,64 @@
 		.telerror{
 			color: red;
 		}
+		.inputerror{
+			color: red;
+		}
+	
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var certificationNumber;
+	
+			$(".phoneBtns").hide();
+			$(".saveBtn").hide();
+			$("#pass2").hide();				
+			$("#pass2input").hide();				
+			$("#telnum").hide();				
+			$("#telnumLi").hide();		
+			$('#member_name').prop('readonly', true);
+			$('#member_tel').prop('readonly', true);
+			$('#pass1').prop('readonly', true);
 			$(".error").hide();
 			$(".telerror").hide();
+			$(".inputerror").hide();
+			
+			$(".updateBtn").click(function(){	
+				$(".phoneBtns").show();
+				$(".saveBtn").show();
+				$("#pass2").show();				
+				$("#pass2input").show();				
+				$("#telnum").show();				
+				$("#telnumLi").show();		
+				$(".updateBtn").hide();
+				
+				$('#member_name').prop('readonly', false);
+				$('#member_tel').prop('readonly', false);
+				$('#pass1').prop('readonly', false);
+			});
+			
+			$('.saveBtn').prop('disabled', true);
+			$(".phoneBtns").click(function(){	
+				$('.saveBtn').prop('disabled', true);
+				$(".inputerror").show();
+			});
+			var certificationNumber;
+			
 			//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
 			//blur()이벤트 사용
-			$("#pass2").blur(function() {
-				if($("#pass2").val() != $("#pass1").val()){
+			$("#pass2input").blur(function() {
+				if($("#pass2input").val() != $("#pass1").val()){
 					$(".error").show();
+					$('.saveBtn').prop('disabled', true);
 				} else{
 					$(".error").hide();
+					$('.saveBtn').prop('disabled', false);
 				}
 			});
-
 		});
 		
 		<!-- 핸드폰 번호 입력 후 인증 버튼 -->
 		function telAjax(){
-			var member_tel = $("#tel").val();
+			var member_tel = $("#member_tel").val();
 			$.ajax({
 				type :"GET",
 				url :"/myPageAjax",
@@ -40,10 +77,16 @@
 		function onkeyup_event(){
 			if(certificationNumber == $("#telnum").val()){
 				$(".telerror").hide();
+				$(".inputerror").hide();
+				$('.saveBtn').prop('disabled', false);
 			}else{
 				$(".telerror").show();
+				$(".inputerror").hide();
+				$('.saveBtn').prop('disabled', true);
 			}
 		}
+
+		
 	</script>
 	
 	<!-- CURRENT SECTION(MAIN) -->
@@ -81,28 +124,30 @@
 					<div class="myPageContainerRightUser">
 						<div class="userContentsInfoRight_1">
 							<ul>
-								<li>사용자 이름 </li>
 								<li>사용자 이메일</li>
+								<li>사용자 이름 </li>
 								<li>휴대폰 번호</li>
-								<li>인증번호 입력</li>
+								<li id = "telnumLi">인증번호 입력</li>
 								<li>비밀번호</li>
-								<li>비밀번호 확인</li> 
+								<li id = "pass2">비밀번호 확인</li> 
 							</ul>
 						</div>
 						<div class="userContentsInfoRight_2">
 							<ul>
-								<li><input type="text" value= "${memberVo.member_name}" name ="member_name"/></li>
-								<li><input type="text" value= "${memberVo.member_mail}" disabled="disabled"/></li>
-								<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"  id ="tel"/>
+								<li><input type="text" value= "${memberVo.member_mail}" disabled="disabled" id = "member_mail"  name = "member_mail"/></li>
+								<li><input type="text" value= "${memberVo.member_name}" name ="member_name" id ="member_name"/></li>
+								<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"  id ="member_tel"/>
 									<input type="button" onclick="telAjax();" value="인증" class="phoneBtns" />
 								<li><input type="text" id ="telnum" onkeyup="onkeyup_event();"/>
-									<span class="telerror"> 인증번호가 일치하지 않습니다.</span>
+									<span class = "inputerror"> 인증번호를 입력해 주세요..</span>
+									<span class= "telerror"> 인증번호가 일치하지 않습니다.</span>
 								</li>
 								<li><input type="password" id = "pass1" value= "${memberVo.member_pass}" name ="member_pass"/></li>
-								<li><input type="password" id = "pass2" value= "${memberVo.member_pass}" /></li>
-									<span class="error"> 입력하신 비밀번호가 일치하지 않습니다.</span>
+								<li><input type="password" id = "pass2input" value= "${memberVo.member_pass}" /></li>
+									<span class = "error"> 입력하신 비밀번호가 일치하지 않습니다.</span>
 								<li>
-									<input type="submit" value="변경" />
+									<input type="button" value="변경" class = "updateBtn"/>
+									<input type="submit" value="확인" class = "saveBtn"/>
 								</li>
 							</ul>
 						</div>
@@ -145,62 +190,35 @@
 										<th><span>참여중인 프로젝트 명</span></th>
 										<th><span>프로젝트 팀장</span></th>
 									</tr>
+								<c:forEach items="${projectList}" var = "vo">
 									<tr>
-										<td>10</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
+										<td>${vo.rnum}</td>
+										<td>${vo.project_title}</td>
+										<td>${vo.pmember_member}</td>
 									</tr>
-									<tr>
-										<td>9</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>8</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>7</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>6</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
+								</c:forEach>
 								</table>
-								<p>
-									<i class="icon-arrow-left icons"></i>
-									<span>1</span>
-									<i class="icon-arrow-right icons"></i>
-								</p>
+							<p>
+							<div class="text-center">
+								<ul>
+									<li>
+										<a href="/myPage?page(1);">
+										<span>&laquo;</span>
+										</a>
+									</li>
+									<li>
+										<c:forEach begin="1" end="${pageCnt}" var="p">
+											<li>
+												<a href="/myPage?page=${p}&pageSize=10">${p}</a>
+											</li>
+										</c:forEach>
+									</li>
+									<li>
+										<a href="/myPage?page(${pageCnt});"> 
+											<span>&raquo;</span>
+										</a>
+									</li> 
+								</ul>
 							</div>
 						</div>
 						<div id="tabs2-2">

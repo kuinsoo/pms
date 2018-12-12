@@ -5,6 +5,7 @@ import kr.or.ddit.member.model.PMemberListVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.project.model.InviteProjectVo;
 import kr.or.ddit.project.model.ProjectVo;
+import kr.or.ddit.util.model.PageVo;
 
 import java.util.List;
 import java.util.Map;
@@ -25,9 +26,7 @@ public interface MemberServiceInf {
 	MemberVo selectUser(String member_mail);
 
 	/**
-	 * Method : insertUser
-	 * 작성자 : pc07
-	 * 변경이력 :
+	 * Method : insertUser 작성자 : pc07 변경이력 :
 	 *
 	 * @param memberVo the member vo
 	 * @return Method 설명 : 회원가입
@@ -35,20 +34,15 @@ public interface MemberServiceInf {
 	public int insertUser(MemberVo memberVo);
 
 	/**
-	 * Method : updateUser
-	 * 작성자 : 나진실
-	 * 변경이력 :
+	 * Method : updateUser 작성자 : 나진실 변경이력 :
 	 *
-	 * @param memberVo the member vo
+	 * @param
 	 * @return Method 설명 : 마이페이지에서 정보 수정
 	 */
 	public int updateUser(MemberVo memberVo);
 
-
 	/**
-	 * Method : selectfindId
-	 * 작성자 : pc07
-	 * 변경이력 :
+	 * Method : selectfindId 작성자 : pc07 변경이력 :
 	 *
 	 * @param memberVo the member vo
 	 * @return Method 설명 : 아이디(이메일) 찾기
@@ -56,9 +50,7 @@ public interface MemberServiceInf {
 	MemberVo selectfindId(MemberVo memberVo);
 
 	/**
-	 * Method : selectfindPass
-	 * 작성자 : pc07
-	 * 변경이력 :
+	 * Method : selectfindPass 작성자 : pc07 변경이력 :
 	 *
 	 * @param member_mail the member mail
 	 * @return Method 설명 : 비밀번호 찾기
@@ -66,20 +58,31 @@ public interface MemberServiceInf {
 	MemberVo selectfindPass(String member_mail);
 
 	/**
-	 * Method : updatePass
-	 * 작성자 : 나진실
-	 * 변경이력 :
+	 * Method : updatePass 작성자 : 나진실 변경이력 :
 	 *
 	 * @param memberVo the member vo
 	 * @return Method 설명 : 비밀번호 찾기 - 임시번호 업데이트
 	 */
 	int updatePass(MemberVo memberVo);
 
+	/**
+	 * Method : myprojectselect 작성자 : pc07 변경이력 :
+	 * 
+	 * @param pageVo
+	 * @param pageVo
+	 * @return Method 설명 : 마이페이지 초대받은 프로젝트
+	 */
+	List<ProjectVo> myprojectselect(PageVo pageVo);
 
 	/**
-	 * Select main view list.
-	 * 작성자 : Mr.KKu
-	 * 메인 페이지 프로젝트 리스트
+	 * Method : totalProjectCnt 작성자 : pc07 변경이력 :
+	 * 
+	 * @return Method 설명 : 프로젝트 건수 조회
+	 */
+	int totalProjectCnt();
+
+	/**
+	 * Select main view list. 작성자 : Mr.KKu 메인 페이지 프로젝트 리스트
 	 *
 	 * @param member_mail the member mail
 	 * @return the list
@@ -87,21 +90,16 @@ public interface MemberServiceInf {
 	List<PMemberListVo> selectMainView(String member_mail);
 
 	/**
-	 * Sets team leader.
-	 * 작성자 : Mr.KKu
-	 * 프로젝트 참여자 권한 설정
+	 * Sets team leader. 작성자 : Mr.KKu 프로젝트 참여자 권한 설정
 	 *
 	 * @param mapPMember the map p member
 	 * @param projectVo  the project vo
 	 * @return the team leader
 	 */
-	int setTeamLeader(Map<String,String> mapPMember, ProjectVo projectVo);
-
+	int setTeamLeader(Map<String, String> mapPMember, ProjectVo projectVo);
 
 	/**
-	 * Invite team int.
-	 * 작성자 : Mr. KKu
-	 * 프로젝트 초대 수락시 팀에 포함시킨다.
+	 * Invite team int. 작성자 : Mr. KKu 프로젝트 초대 수락시 팀에 포함시킨다.
 	 *
 	 * @param pMemberVo the p member vo
 	 * @return the int
@@ -109,9 +107,7 @@ public interface MemberServiceInf {
 	int inviteTeam(PMemberVo pMemberVo);
 
 	/**
-	 * Invited projects int.
-	 * 작성자 : Mr.KKu
-	 * 회원 프로젝트 초대
+	 * Invited projects int. 작성자 : Mr.KKu 회원 프로젝트 초대
 	 *
 	 * @param inviteProjectVo the invite project vo
 	 * @return the int
@@ -119,9 +115,7 @@ public interface MemberServiceInf {
 	int invitedProjects(InviteProjectVo inviteProjectVo);
 
 	/**
-	 * Search team member p member vo.
-	 * 작성자 : Mr.KKu
-	 * 현재 프로젝트에 포함된 회원인지 검색
+	 * Search team member p member vo. 작성자 : Mr.KKu 현재 프로젝트에 포함된 회원인지 검색
 	 *
 	 * @param pMemberVo the p member vo
 	 * @return the p member vo
@@ -148,13 +142,14 @@ public interface MemberServiceInf {
 	 */
 	List<InviteProjectVo> selectInviteProject(String member_mail);
 
+
 	/**
-	 * Method : selectInviteProject
+	 * Method : selectInviteProjectMap
 	 * 작성자 : Mr.KKu
 	 * 변경이력 :
-	 *
-	 * @param map the map
-	 * @return Method 설명 :
+	 * @param map
+	 * @return
+	 * Method 설명 : 맵방식 초대받은 프로젝트
 	 */
 	List<InviteProjectVo> selectInviteProjectMap(Map<String, String> map);
 
