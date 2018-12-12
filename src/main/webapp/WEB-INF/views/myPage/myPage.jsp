@@ -102,7 +102,7 @@
 					<div class="myPageContainerLeftUser">
 						<h2>${memberVo.member_name}님의 프로필</h2>
 						<div class="profileImg">
-							<div id="fileList" style="background-image:url('${memberVo.member_profile}');background-repeat:no-repeat;background-position:50% 50%;">
+							<div id="fileList" style="background-image:url('${memberVo.member_profile}');background-repeat:no-repeat;background-position:50% 50%;background-size:cover;">
 								<c:choose>
 									<c:when test="${memberVo.member_profile != null}">
 										<input type="file" id="fileElem" class="fileInputCSS"
