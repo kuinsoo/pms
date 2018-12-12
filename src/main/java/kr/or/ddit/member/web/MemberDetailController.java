@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,20 +56,28 @@ public class MemberDetailController {
 		
 		memberservice.selectUser(memberVo.getMember_mail());
 		model.addAttribute("memberVo",memberVo);
-	
-		pageVo.setMember_mail(memberVo.getMember_mail());
-		
-		List<ProjectVo> projectList = memberservice.myprojectselect(pageVo);
-		int pageCnt = memberservice.totalProjectCnt();
-		
-		model.addAttribute("projectList",projectList);
-		
-		System.out.println("pageCnt" + pageCnt);
-		model.addAttribute("pageCnt", pageCnt);
-		
-		return "/myPage/myPage";
+		return "myPage/myPage";
 	}
 	
+	
+	@RequestMapping(value= "/myPageProjectAjax", method= RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> myPageProjectAjax(Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,ProjectVo projectVo ) {
+		
+	
+		pageVo.setMember_mail(memberVo.getMember_mail());
+
+		List<ProjectVo> projectList = memberservice.myprojectselect(pageVo);
+
+		Map<String, Object> projectMap = new HashMap<>();
+		projectMap.put("projectList", projectList);
+
+		int pageCnt = memberservice.totalProjectCnt();
+		projectMap.put("pageCnt", pageCnt);
+		
+		return projectMap;
+		
+	}
 	 
 	/**
 	 * Method : memberDetailUpdate

@@ -14,7 +14,8 @@
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
-	
+			getMyPageList(1);
+			
 			$(".phoneBtns").hide();
 			$(".saveBtn").hide();
 			$("#pass2").hide();				
@@ -85,8 +86,43 @@
 				$('.saveBtn').prop('disabled', true);
 			}
 		}
+	
 
-		
+		function getMyPageList(page){
+			var pageSize = 10;
+			console.log("page" + page);
+			
+			$.ajax({
+				type: "GET",
+				url : "/myPageProjectAjax",
+				data: "page="+page+"&pageSize="+pageSize,
+				success : function(data){
+					console.log(data);
+					var html ="";
+					$.each(data.projectList, function (idx,my){
+						html += "<tr>";
+						html += "	<td>"+ my.rnum +"</td>";
+						html += "	<td>"+ my.project_title +"</td>";
+						html += "	<td>"+ my.pmember_member +"</td>";
+						html += "</tr>";
+					});
+			
+					$("#projectList").html("");
+					$("#projectList").html(html);
+				
+					var paging ="";
+					paging +="<li><a href='javascript:getMyPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<=data.pageCnt; i++) {
+					paging += "<li><a href='javascript:getMyPageList("+ i +");'>"+ i+ "</a></li>";
+					}
+					paging +="<li><a href='javascript:getMyPageList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".pagination").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
 	</script>
 	
 	<!-- CURRENT SECTION(MAIN) -->
@@ -185,26 +221,29 @@
 									<colgroup width="10%" />
 									<colgroup width="60%" />
 									<colgroup width="30%" />
-									<tr>
-										<th><span>번호</span></th>
-										<th><span>참여중인 프로젝트 명</span></th>
-										<th><span>프로젝트 팀장</span></th>
-									</tr>
-								<c:forEach items="${projectList}" var = "vo">
-									<tr>
-										<td>${vo.rnum}</td>
-										<td>${vo.project_title}</td>
-										<td>${vo.pmember_member}</td>
-									</tr>
-								</c:forEach>
+									<thead>
+										<tr>
+											<th><span>번호</span></th>
+											<th><span>참여중인 프로젝트 명</span></th>
+											<th><span>프로젝트 팀장</span></th>
+										</tr>
+									</thead>
+									<tbody id = "projectList">
+									<%-- <c:forEach items="${projectList}" var = "vo">
+										<tr>
+											<td>${vo.rnum}</td>
+											<td>${vo.project_title}</td>
+											<td>${vo.pmember_member}</td>
+										</tr>
+										</c:forEach> --%>
+									</tbody>
 								</table>
 							<p>
 							<div class="text-center">
-								<ul>
-									<li>
-										<a href="/myPage?page(1);">
+								 <ul class = "pagination">
+								 <%--<li>
+										<a href="/myPage?page=1&pageSize=10"></a>
 										<span>&laquo;</span>
-										</a>
 									</li>
 									<li>
 										<c:forEach begin="1" end="${pageCnt}" var="p">
@@ -217,7 +256,7 @@
 										<a href="/myPage?page(${pageCnt});"> 
 											<span>&raquo;</span>
 										</a>
-									</li> 
+									</li>  --%>
 								</ul>
 							</div>
 						</div>

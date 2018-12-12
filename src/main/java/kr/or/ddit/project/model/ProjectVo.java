@@ -137,14 +137,25 @@ public class ProjectVo {
 	
 	/* 형변환 getter (20181129 지태 추가) */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
 	public String getFormat_project_sdate() {
-		return sdf.format(project_sdate);
+		if(project_sdate == null) 
+			return "";
+		else
+			return sdf.format(project_sdate);
 	}
 	public String getFormat_project_eedate() {
-		return sdf.format(project_eedate);
+		
+		if(project_eedate == null) 
+			return "";
+		else
+			return sdf.format(project_eedate);
 	}
 	public String getFormat_project_edate() {
-		return sdf.format(project_edate);
+		if(project_edate == null) 
+			return "";
+		else
+			return sdf.format(project_edate);
 	}
 	@Override
 	public String toString() {
