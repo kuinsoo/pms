@@ -4,6 +4,8 @@ import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberListVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.project.model.InviteProjectVo;
+import kr.or.ddit.project.model.ProjectVo;
+import kr.or.ddit.util.model.PageVo;
 
 import java.util.List;
 import java.util.Map;
@@ -70,7 +72,29 @@ public interface MemberMapper {
 	 * @return Method 설명 : 비밀번호 찾기
 	 */
 	MemberVo selectfindPass(String member_mail);
+	
+	
+	/**
+	 * Method : myprojectselect
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo 
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 마이페이지 초대받은 프로젝트 
+	 */
+	List<ProjectVo> myprojectselect(PageVo pageVo);
 
+	
+	/**
+	 * Method : totalProjectCnt
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 프로젝트 건수 조회 
+	 */
+	int totalProjectCnt();
+	
 	/**
 	 * Method : updatePass
 	 * 작성자 : 나진실

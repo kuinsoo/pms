@@ -47,4 +47,49 @@
 		set member_pass = #{member_pass}
 		where member_mail = #{member_mail}
 	</update>
-</mapper>
+	
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  마이페이지 부분  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	
+	<select id="myprojectselect" resultType="projectVo" parameterType="pageVo">
+	select * from(
+ 			select rownum rnum ,a.*
+				from 	
+				    (SELECT (SELECT PROJECT_TITLE FROM PROJECT WHERE PROJECT_ID = PMEMBER_PROJECT) as project_title
+                    , PMEMBER_MEMBER as pmember_member
+               FROM   PROJECT_MEMBER
+               WHERE  PMEMBER_MEMBER = #{member_mail}
+               AND    PMEMBER_POSITION = '1'
+               UNION
+               SELECT (SELECT PROJECT_ID FROM PROJECT WHERE PROJECT_ID = PMEMBER_PROJECT)
+                    , (SELECT B.PMEMBER_MEMBER FROM PROJECT_MEMBER B WHERE B.PMEMBER_PROJECT = A.PMEMBER_PROJECT AND B.PMEMBER_POSITION = 1) 
+               FROM   PROJECT_MEMBER A
+               WHERE  A.PMEMBER_MEMBER = #{member_mail}
+               AND    A.PMEMBER_POSITION = '2')a)
+			where rnum between ${page}*${pageSize}-(${pageSize}-1)
+		and ${page}*${pageSize}
+	</select>
+	
+	<select id="totalProjectCnt" resultType="int">
+		select count (*)
+		from project
+	 </select>
+	</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

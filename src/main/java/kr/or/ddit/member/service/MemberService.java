@@ -1,5 +1,12 @@
 package kr.or.ddit.member.service;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import kr.or.ddit.member.mapper.MemberMapper;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberListVo;
@@ -7,12 +14,7 @@ import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.project.model.InviteProjectVo;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Map;
+import kr.or.ddit.util.model.PageVo;
 
 /**
  * kr.or.ddit.member.service
@@ -22,6 +24,10 @@ import java.util.Map;
  * @Author : Mr.KKu
  * @Date : 2018-11-27 / 오후 3:08
  * @Version :
+ */
+/**
+ * @author pc07
+ *
  */
 @Service
 @Transactional
@@ -111,7 +117,8 @@ public class MemberService implements MemberServiceInf {
 	public int updatePass(MemberVo memberVo) {
 		return memberMapper.updatePass(memberVo);
 	}
-
+	
+	
 	/**
 	 * Select main view list.
 	 * 작성자 : Mr.KKu
@@ -123,7 +130,7 @@ public class MemberService implements MemberServiceInf {
 	public List<PMemberListVo> selectMainView(String member_mail) {
 		return memberMapper.selectMainView(member_mail);
 	}
-
+	
 	/**
 	 * Sets team leader.
 	 * 작성자 : Mr.KKu
@@ -214,5 +221,14 @@ public class MemberService implements MemberServiceInf {
 		return memberMapper.deleteInviteProject(delMap);
 	}
 
-	
+	@Override
+	public int totalProjectCnt() {
+		return memberMapper.totalProjectCnt();
+	}
+
+	@Override
+	public List<ProjectVo> myprojectselect(PageVo pageVo) {
+		
+		return memberMapper.myprojectselect(pageVo);
+	}
 }
