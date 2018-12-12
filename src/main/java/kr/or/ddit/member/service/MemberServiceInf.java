@@ -142,25 +142,14 @@ public interface MemberServiceInf {
 	 */
 	List<InviteProjectVo> selectInviteProject(String member_mail);
 
+
 	/**
-	 * Method : selectInviteProject 작성자 : Mr.KKu 변경이력 :
-	 * 
+	 * Method : selectInviteProjectMap
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
 	 * @param map
-	 * @return Method 설명 :
-	 */
-	 * Method : selectInviteProject
-	 * 작성자 : Mr.KKu
-	 * 변경이력 :
-	 *
-	 * @param map the map
-	 * @return Method 설명 :
-	 */
-	 * Method : selectInviteProject
-	 * 작성자 : Mr.KKu
-	 * 변경이력 :
-	 *
-	 * @param map the map
-	 * @return Method 설명 :
+	 * @return
+	 * Method 설명 : 맵방식 초대받은 프로젝트
 	 */
 	List<InviteProjectVo> selectInviteProjectMap(Map<String, String> map);
 

@@ -7,6 +7,8 @@ import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.project.model.InviteProjectVo;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
+import kr.or.ddit.util.model.PageVo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -237,4 +239,12 @@ public class MemberService implements MemberServiceInf {
 	public List<PMemberListVo> projectMemberList(String project_id) {
 		return memberMapper.projectMemberList(project_id);
 	}
+
+	@Override
+	public InviteProjectVo searchInviteMember(PMemberVo pMemberVo) {
+		// TODO Auto-generated method stub
+		return memberMapper.searchInviteMember(pMemberVo);
+	}
+	
+	
 }
