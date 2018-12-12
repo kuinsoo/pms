@@ -134,37 +134,46 @@
 						<!-- tap1 업무 -->
 						<div id="tabss-1">
 							<form action="/ajaxCreateWork" method="POST" name="workfrm1">
-								<div class="calendarContainerInput">
-									<div class="calendarInputDiv">
+								<div class="workContainerInput">
+									<input type="text" name="work_title" placeholder="업무제목을 입력해주세요" class="workTitle" />
+									
+									<div class="workDateDiv">
+										<!-- 업무 시작일 -->
 										<i class="icon-clock icons"></i>
-										<input type="datetime-local" name="work_sdate"> <!-- 업무시작일 -->
+										<input type="datetime-local" name="work_sdate" class="work_sdate">
+										
+										<!-- 업무 마감 예상일 -->
+										<i class="icon-clock icons"></i>
+										<input type="datetime-local" name="work_eedate" class="work_eedate">
 									</div>
-									<span class="calendarInputDivSpan">~</span>
-									<div class="calendarInputDivs">
-										<i class="icon-clock icons"></i>
-										<input type="datetime-local"  name="work_eedate"> <!-- 마감예상일 -->
+									<textarea class="workTextarea" name="work_content" placeholder="업무내용을 입력해주세요"></textarea>
+									
+									<div class="workTypeDiv">
+										<h3>업무유형</h3>
+										<input type="radio" name="work_type" value="1" class="workType1" /><span>설계</span>
+										<input type="radio" name="work_type" value="2" class="workType2" /><span>개발</span>
+										<input type="radio" name="work_type" value="3" class="workType3" /><span>유지보수</span>
+									</div>
+									<div class="workImportance">
+										<h3>업무 중요도</h3>
+										<select name="work_importance">
+											<option value="1">Level 1</option>
+											<option value="2">Level 2</option>
+											<option value="3">Level 3</option>
+											<option value="4">Level 4</option>
+											<option value="5">Level 5</option>
+										</select>
+									</div>
+									<input type="hidden" name="project_id" value="${project_id}" />
+									<div class="workVisibility">
+										<h3>업무 공개여부</h3>
+										<input type="checkbox" name="work_public" value="Y" class="workVisibilityCheck" />
+										<span>WORK_PUBLIC</span>
+									</div>
+									<div class="workSubmit">
+										<input type="button" class="tabssTextAreaSubmit" value="올리기" onclick="createWork();" />
 									</div>
 								</div>
-								<label>업무</label>
-								<input type="text" name="work_title" placeholder="업무" class="calendarTitle" />
-								<label>업무 내용</label>
-								<textarea class="tabssTextArea" name="work_content" placeholder="업무내용"></textarea><br/>
-								<label>업무 유형</label><br/>
-								<input type="radio" name="work_type" value="1"/>설계
-								<input type="radio" name="work_type" value="2"/>개발
-								<input type="radio" name="work_type" value="3"/>유지보수<br/>
-								<label>업무 중요도</label><br/>
-								<select name="work_importance">
-									<option value="1">Level 1</option>
-									<option value="2">Level 2</option>
-									<option value="3">Level 3</option>
-									<option value="4">Level 4</option>
-									<option value="5">Level 5</option>
-								</select> <br/>
-								<input type="text" name="project_id" value="${project_id}" id="project_id_hide"/>
-								<label>업무 공개여부</label><br/>
-								<input type="checkbox" name="work_public" value="Y"/>WORK_PUBLIC<br/>
-								<input type="button" class="tabssTextAreaSubmit" value="올리기" onclick="createWork();" />
 							</form>
 						</div>
 						<%--tap1 끝 --%>
@@ -512,7 +521,6 @@ var myChart = new Chart(ctx, {
 <script>
 	$(document).ready(function () {
 		$('.kku-hide').hide();
-		$('#project_id_hide').hide();
 	});
 	$( function() {
 		var tabs = $("#planList").tabs();
