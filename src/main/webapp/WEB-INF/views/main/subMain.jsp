@@ -57,7 +57,7 @@
 				</div>
 				<div class="projectTaskContainer">
 					<div class="projectTaskContainerTitle">
-						<i class="icon-share-alt icons"></i><span>업무</span>
+						<i class="icon-share-alt icons"></i><span>TO DO LIST</span>
 					</div>
 				</div>
 				<div class="projectTaskContainerDragDrop">
