@@ -205,8 +205,8 @@
 					</div>
 				</div>
 				<%--카드리스트--%>
-				<div class="currentCardList" >
-					<c:forEach items="${workList}" var="work" varStatus="i">
+				<c:forEach items="${workList}" var="work" varStatus="i">
+				<div class="currentCardList" >					
 						<div class="cardUserInfo">
 							<div class="cardUserInfoImg">
 								<img src="${memberVo.member_profile}">
@@ -263,13 +263,15 @@
 								</li>
 							</ul>
 						</div>
-					</c:forEach>
 				</div> <%-- 끝--%>
+				</c:forEach>
 			</div>
 
 			<div class="currentMainContainerRight">
+				<div class="projectTeamsTop">
+				</div>
 				<div class="projectTeams">
-					<h2>전체 참여자 ${projectMemberList.size()}명</h2>
+					<h2>전체 참여자 ${projectMemberList.size()}명 <i class="icon-plus icons"></i></h2>
 					<ul>
 						<c:forEach items="${projectMemberList}" var="projectMember" varStatus="i" >
 						<c:if test="${projectMember.pmember_position eq '1'}">
@@ -577,6 +579,22 @@ var myChart = new Chart(ctx, {
 		});
 	}
 
+</script>
+<script>
+// html dom 이 다 로딩된 후 실행된다.
+$(document).ready(function(){
+    // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+    $(".projectTeams > h2").click(function(){
+        var submenu = $(this).next("ul");
+
+        // submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+        if( submenu.is(":visible") ){
+            submenu.slideUp();
+        }else{
+            submenu.slideDown();
+        }
+    });
+});
 </script>
 </body>
 </html>
