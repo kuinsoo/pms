@@ -54,6 +54,7 @@
                 <i class="icon-calendar icons"></i>
                 <p><a href="/allSchedule">전체 일정</a></p>
             </li>
+            <c:if test="${project_id >= 0 }" >
             <li>
                 <i class="icon-bubbles icons"></i>
                 <p>회의</p>
@@ -66,6 +67,7 @@
                 <i class="icon-list"></i>
                 <p><a href="/vote">투표</a></p>
             </li>
+            </c:if>
         </ul>
         <ul class="boardMenu">
             <li>
@@ -223,6 +225,7 @@
             </div>
         </div>
     </header>
+
     <script>
 		$('#currentMain').on('click', function () {
 			location.href="/main";
@@ -232,5 +235,5 @@
 			if(window.confirm("로그아웃 하시겠습니까?")) {
 				location.href="/logout";
 			}
-		};
+		}
     </script>

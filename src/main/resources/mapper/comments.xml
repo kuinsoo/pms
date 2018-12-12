@@ -11,7 +11,7 @@
                       inner join project on (WORK_PROJECT = PROJECT_ID)
                       inner join PROJECT_MEMBER on (project_id = PMEMBER_PROJECT)
         where PROJECT_ID = #{project_id}
-        order CMT_ID desc
+        order by to_number(CMT_ID) desc
     </select>
 
     <insert id="insertCmt" parameterType="cmtVo">

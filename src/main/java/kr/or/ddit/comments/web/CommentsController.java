@@ -40,6 +40,7 @@ public class CommentsController {
 		cmtVo.setCmt_member(memberVo.getMember_mail());
 		cmtVo.setCmt_content(cmt_content);
 		cmtVo.setCmt_work(work_id);
+
 		commentsService.insertCmt(cmtVo);
 
 		Map<String, String> mapWork = new HashMap<>();
