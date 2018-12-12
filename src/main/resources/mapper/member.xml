@@ -67,6 +67,7 @@
                AND    A.PMEMBER_POSITION = '2')a)
 			where rnum between ${page}*${pageSize}-(${pageSize}-1)
 		and ${page}*${pageSize}
+		<if test="searchText!=null and searchText!=''">and project_title like '%'||#{searchText}||'%'</if>
 	</select>
 	
 	<select id="totalProjectCnt" resultType="int">

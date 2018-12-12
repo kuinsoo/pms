@@ -17,22 +17,9 @@ import java.util.Date;
  */
 @Alias("projectVo")
 public class ProjectVo {
+	
 	public int rnum;
-	
-	public int getRnum() {
-		return rnum;
-	}
-	public void setRnum(int rnum) {
-		this.rnum = rnum;
-	}
-	
 	private String pmember_member;
-	public String getPmember_member() {
-		return pmember_member;
-	}
-	public void setPmember_member(String pmember_member) {
-		this.pmember_member = pmember_member;
-	}
 
 	private String project_id;
 	private String project_title;
@@ -69,7 +56,19 @@ public class ProjectVo {
 		this.project_color = project_color;					//	20181129 지태 추가
 		
 	}
-	
+	public String getPmember_member() {
+		return pmember_member;
+	}
+	public void setPmember_member(String pmember_member) {
+		this.pmember_member = pmember_member;
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 
 	public String getProject_id() {
 		return project_id;

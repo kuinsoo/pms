@@ -42,17 +42,20 @@ public class MemberDetailController {
 	@Autowired
 	private MemberServiceInf memberservice;
 
+	
+	
 
 	/**
-	 * Method : memberDetail
-	 * 작성자 : 나진실
+	 * Method : myPage
+	 * 작성자 : pc07
 	 * 변경이력 :
-	 * Method 설명 : 마이페이지 
+	 * @param model
+	 * @param memberVo
 	 * @return
+	 * Method 설명 : 마이페이지 화면으로 이동 
 	 */
 	@RequestMapping(value="/myPage",method = RequestMethod.GET)
-	public String myPage(Model model, @SessionAttribute("memberVo") MemberVo memberVo 
-						, ProjectVo projectVo , PageVo pageVo ) {
+	public String myPage(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		
 		memberservice.selectUser(memberVo.getMember_mail());
 		model.addAttribute("memberVo",memberVo);
@@ -60,24 +63,45 @@ public class MemberDetailController {
 	}
 	
 	
+	
+	/**
+	 * Method : myPageProjectAjax
+	 * 작성자 : pc07 
+	 * 
+	 * 
+	 * 
+	 * 변경이력 :
+	 * @param model
+	 * @param pageVo
+	 * @param memberVo
+	 * @param projectVo
+	 * @return
+	 * Method 설명 : 마이페이지 참여중인 프로젝트 Ajax 처리 
+	 */
 	@RequestMapping(value= "/myPageProjectAjax", method= RequestMethod.GET)
 	@ResponseBody
-	public Map<String, Object> myPageProjectAjax(Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,ProjectVo projectVo ) {
+	public Map<String, Object> myPageProjectAjax(Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
+							@RequestParam("searchText") String searchText, ProjectVo projectVo, HttpServletRequest request) {
 		
-	
 		pageVo.setMember_mail(memberVo.getMember_mail());
 
 		List<ProjectVo> projectList = memberservice.myprojectselect(pageVo);
-
 		Map<String, Object> projectMap = new HashMap<>();
-		projectMap.put("projectList", projectList);
-
 		int pageCnt = memberservice.totalProjectCnt();
-		projectMap.put("pageCnt", pageCnt);
+		
+		// 검색 부분 
+		if (pageVo.getSearchText() == null) {
+			pageVo.setSearchText("");
+		}
+		
+		projectMap.put("pageVo", pageVo);
+		projectMap.put("projectList", projectList);		
+		projectMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
 		return projectMap;
 		
 	}
+	
 	 
 	/**
 	 * Method : memberDetailUpdate
@@ -134,7 +158,7 @@ public class MemberDetailController {
 		 * @param request
 		 * @param model
 		 * @return
-		 * Method 설명 : myPage 휴대폰 인증 부분 
+		 * Method 설명 : myPage 휴대폰 인증 부분
 		 */
 		@ResponseBody
 		@RequestMapping(value="/myPageAjax", method=RequestMethod.GET)
@@ -166,7 +190,6 @@ public class MemberDetailController {
 			coolsms.send(set);
 			
 			return certificationNumber;
-			
 		}
 	}
 

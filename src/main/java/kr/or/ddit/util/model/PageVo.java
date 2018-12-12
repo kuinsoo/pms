@@ -9,6 +9,16 @@ public class PageVo {
 	private int pageSize;
 	private String member_mail;
 	
+	// 마이페이지 검색부분 
+	private String searchText;
+	
+	public String getSearchText() {
+		return searchText;
+	}
+	public void setSearchText(String searchText) {
+		this.searchText = searchText;
+	}
+	
 	public String getMember_mail() {
 		return member_mail;
 	}

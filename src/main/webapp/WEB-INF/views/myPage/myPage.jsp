@@ -14,6 +14,7 @@
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
 			getMyPageList(1);
 			
 			$(".phoneBtns").hide();
@@ -90,14 +91,18 @@
 
 		function getMyPageList(page){
 			var pageSize = 10;
+			var searchText = $('form[name=searchProject]').serialize();
+		
 			console.log("page" + page);
 			
 			$.ajax({
 				type: "GET",
 				url : "/myPageProjectAjax",
-				data: "page="+page+"&pageSize="+pageSize,
+				data: "page="+page+"&pageSize="+pageSize+"&searchText="+searchText,
 				success : function(data){
+					
 					console.log(data);
+					
 					var html ="";
 					$.each(data.projectList, function (idx,my){
 						html += "<tr>";
@@ -111,11 +116,11 @@
 					$("#projectList").html(html);
 				
 					var paging ="";
-					paging +="<li><a href='javascript:getMyPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
-					for(var i= 1; i<=data.pageCnt; i++) {
-					paging += "<li><a href='javascript:getMyPageList("+ i +");'>"+ i+ "</a></li>";
-					}
-					paging +="<li><a href='javascript:getMyPageList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+						paging +="<li><a href='javascript:getMyPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						for(var i= 1; i<=data.pageCnt; i++) {
+							paging += "<li><a href='javascript:getMyPageList("+ i +");'>"+ i+ "</a></li>";
+						}
+							paging +="<li><a href='javascript:getMyPageList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 					$(".pagination").html(paging);
 				},
 				fail : function(xhr){
@@ -210,12 +215,11 @@
 						<div id="tabs2-1">
 							<div class="projectTable">
 								<div class="projectSearchDiv">
-									<select>
-										<option>전체</option>
-										<option>프로젝트 명</option>
-									</select>
-									<input type="text" placeholder="검색어를 입력해주세요"/>
-									<i class="icon-magnifier icons"></i>
+									<label> 프로젝트 명  </label>　　
+									<form class = "search"  name ="searchProject">
+										<input type="text" id="searchText" name ="searchText" value="${searchText}" placeholder="검색어를 입력해주세요"/>
+										<button type="submit" class="btn btn-default">검색하기</button>  
+									</form>
 								</div>
 								<table border="1" cellpadding="0" cellspacing="0">
 									<colgroup width="10%" />
@@ -228,7 +232,7 @@
 											<th><span>프로젝트 팀장</span></th>
 										</tr>
 									</thead>
-									<tbody id = "projectList">
+									<tbody id ="projectList">
 									<%-- <c:forEach items="${projectList}" var = "vo">
 										<tr>
 											<td>${vo.rnum}</td>
