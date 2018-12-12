@@ -64,7 +64,7 @@
             </li>
             <li>
                 <i class="icon-list"></i>
-                <p>투표</p>
+                <p><a href="/vote">투표</a></p>
             </li>
         </ul>
         <ul class="boardMenu">

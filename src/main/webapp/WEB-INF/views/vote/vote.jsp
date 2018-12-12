@@ -1,39 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- left & header--%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
-<style media="screen">
-.container{
-	width: 800px;
-	height: auto;
-	margin: 0 auto;
+<!-- CURRENT SECTION(MAIN) -->
+<style type="text/css">
+.voteContainer {
+	width:1400px;background-color:#fff;border:1px solid #dee3eb;height:700px;margin:0 auto;
+	margin-top:20px;
 }
+.voteContainer > h2{font-size:30px;display:block;margin:20px;}
 
-#myProgress {
-	
-	width: 100%;
-	background-color: grey;
-}
-
-.myBar {
-	width: 10px;
-	height: 30px;
-	background-color: green;
-}
 </style>
 <section class="currentMain">
 	<div class="currentMainContainer">
-	
-	
-	
-		<!-- 여기서부터가 지태꺼♡ -->
-		<div class="container" id="ajaxx">
-			<!-- issueHistoryAjax.jsp -->
+		<div class="voteContainer">
+			<h2>투표</h2>
 		</div>
-		<!-- 여기까지가 지태꺼♡ -->
-		
-		
-		
 	</div>
 </section>
 <footer class="currentFooter">
@@ -47,51 +29,6 @@
 </footer>
 <script type="text/javascript" src="../js/classie.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.js"></script>
-<script type="text/javascript">
-	var page = 1;
-	
-	$(document).ready(function(){	//페이지가 로드되면 데이터를 가져오고 page를 증가시킨다. == $(document).ready(function(){});
-		
-		<c:forEach items="${percentList}" var="percent" varStatus="status">
-			console.log('${percent}');
-			if(${percent} > 0 && ${percent} <= 100){
-				$("#myBar${status.index}").width("${percent}%");
-			}else{
-				$("#myBar${status.index}").width('100%');
-			}
-		</c:forEach>
-		
-		getList(1);
-		page++;
-	});
-	
-	$(window).scroll(function(){	//스크롤이 최하단으로 내려가면 리스트를 조회하고 page를 증가시킨다.
-		console.log("window-scroll");
-		if($(window).scrollTop() == $(document).height() - $(window).height()){
-			console.log("scrollTop");
-			getList(page);
-			page++;
-		}
-	});
-	
-	function getList(page){
-		var sid = '${memberVo.member_mail}';
-		var pageSize = 10;
-		console.log("getList");
-		$.ajax({
-			url: '/issueHistoryAjax',
-			type: 'POST',
-			//dataType: 'json',
-			data: {page : page, pageSize : pageSize, member_mail : sid},
-			success: function(data){
-				console.log(data);
-				$("#ajaxx").html("");
-				$("#ajaxx").html(data);
-			}
-		});
-	}
-	
-</script>
 <script>
 //DIM POPUP
 $('.projectCreatePopUp').click(function(){
