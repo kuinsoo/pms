@@ -3,7 +3,9 @@ package kr.or.ddit.issue.mapper;
 import java.util.List;
 
 import kr.or.ddit.issue.model.IssueVo;
+import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
+import kr.or.ddit.util.model.PageVo;
 
 /**
  * kr.or.ddit.issue.mapper
@@ -25,5 +27,15 @@ public interface IssueMapper {
 	* Method 설명 : 이슈 전체 일정
 	*/
 	List<IssueVo> issueAllSchedule(ScheduleVo scheduleVo);
+	
+	/**
+	* Method : issueHistoryPagination
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param pageVo
+	* @return
+	* Method 설명 : 이슈 히스토리 스크롤 페이징처리
+	*/
+	List<ProjectVo> issueHistoryPagination(PageVo pageVo);
 	
 }

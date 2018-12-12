@@ -5,6 +5,7 @@ import java.util.List;
 import kr.or.ddit.issue.model.IssueVo;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
+import kr.or.ddit.util.model.PageVo;
 
 /**
  * kr.or.ddit.issue.service
@@ -36,5 +37,15 @@ public interface IssueServiceInf {
 	* Method 설명 : 일정의 select 프로젝트명 list
 	*/
 	List<ProjectVo> myProjectList(ScheduleVo scheduleVo);
+	
+	/**
+	* Method : issueHistoryPagination
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param pageVo
+	* @return
+	* Method 설명 : 이슈 히스토리 스크롤 페이징처리
+	*/
+	List<ProjectVo> issueHistoryPagination(PageVo pageVo);
 	
 }

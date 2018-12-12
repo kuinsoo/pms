@@ -2,6 +2,8 @@ package kr.or.ddit.issue.service;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,6 +13,7 @@ import kr.or.ddit.issue.model.IssueVo;
 import kr.or.ddit.project.mapper.ProjectMapper;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
+import kr.or.ddit.util.model.PageVo;
 
 /**
  * kr.or.ddit.issue.service
@@ -24,6 +27,7 @@ import kr.or.ddit.schedule.model.ScheduleVo;
 @Service
 @Transactional
 public class IssueService implements IssueServiceInf{
+	Logger logger = LoggerFactory.getLogger(IssueService.class);
 	
 	@Autowired
 	private IssueMapper issueMapper;
@@ -54,6 +58,20 @@ public class IssueService implements IssueServiceInf{
 	@Override
 	public List<ProjectVo> myProjectList(ScheduleVo scheduleVo) {
 		return projectMapper.projectAllSchedule(scheduleVo);
+	}
+
+	/**
+	* Method : issueHistoryPagination
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param pageVo
+	* @return
+	* Method 설명 : 이슈 히스토리 스크롤 페이징처리
+	*/
+	@Override
+	public List<ProjectVo> issueHistoryPagination(PageVo pageVo) {
+		System.out.println("pageVo : " + pageVo);
+		return issueMapper.issueHistoryPagination(pageVo);
 	}
 	
 }
