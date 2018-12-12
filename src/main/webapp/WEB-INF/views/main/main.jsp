@@ -352,7 +352,7 @@ function invitePrject(accept, project_id){
 		url:"/inviteProjectAjax",
 		data : {'accept':accept, 'project_id':project_id},
 		success: function(data) {
-			$('.inviteProject').html();
+			$('.inviteProject').html("");
 			$('.inviteProject').html(data);
 			bookmark(project_id);
 		}

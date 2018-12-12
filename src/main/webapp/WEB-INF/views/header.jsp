@@ -59,7 +59,7 @@
             </li>
             <li>
                 <i class="icon-bulb icons"></i>
-                <p>이슈 히스토리</p>
+                <p><a href="/issueHistory">이슈 히스토리</a></p>
             </li>
             <li>
                 <i class="icon-list"></i>

@@ -22,6 +22,7 @@ import kr.or.ddit.work.model.WorkVo;
  */
 @Service
 @Transactional
+
 public class WorkService implements WorkServiceInf{
 
 	@Autowired

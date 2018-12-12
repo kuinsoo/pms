@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.ddit.issue.mapper.IssueMapper;
 import kr.or.ddit.issue.model.IssueVo;
+import kr.or.ddit.project.mapper.ProjectMapper;
+import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
 
 /**
@@ -25,7 +27,9 @@ public class IssueService implements IssueServiceInf{
 	
 	@Autowired
 	private IssueMapper issueMapper;
-
+	@Autowired
+	private ProjectMapper projectMapper;
+	
 	/**
 	* Method : issueAllSchedule
 	* 작성자 : jerry
@@ -37,6 +41,19 @@ public class IssueService implements IssueServiceInf{
 	@Override
 	public List<IssueVo> issueAllSchedule(ScheduleVo scheduleVo) {
 		return issueMapper.issueAllSchedule(scheduleVo);
+	}
+
+	/**
+	* Method : myProjectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param scheduleVo
+	* @return
+	* Method 설명 : 각 project별 issue history를 위해 project명 조회
+	*/
+	@Override
+	public List<ProjectVo> myProjectList(ScheduleVo scheduleVo) {
+		return projectMapper.projectAllSchedule(scheduleVo);
 	}
 	
 }
