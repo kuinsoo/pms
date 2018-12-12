@@ -22,21 +22,6 @@
 .caldendarRightMenu > ul > li > span{color:#fff;font-weight:bold;}
 .sel_schedule{width:100%;height:30px;font-size:20px;outline:none;}
 .sel_list{width:100%;height:30px;font-size:20px;outline:none;margin-top:10px;}
-	#selectForm{
-		float: right;
-	}
-	#colorBoxDiv{
-		
-	}
-	.colorBox{
-		font-size: 9pt;
-	}
-	.colorBox td:nth-child(2n-1){
-		width: 1em;
-	}
-	.colorBox td:nth-child(2n){
-		width: 4em;
-	}
 </style>
 <section class="currentMain">
 	<div class="currentMainContainer">
