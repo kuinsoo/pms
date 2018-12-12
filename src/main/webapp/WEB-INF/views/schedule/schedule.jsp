@@ -4,10 +4,10 @@
 <%@ include file="/WEB-INF/views/header.jsp" %>
 <link rel='stylesheet' href='../fullcalendar/fullcalendar.css?ver=1' />
 <style type="text/css">
-	.container{
-		margin: 0 auto;
-		width: 60em;
-	}
+.container {
+	margin:0 auto;width:1200px;margin-top:20px;background-color:#fff;border:1px solid #dee3eb;
+	padding:20px;
+}
 	#selectForm{
 		float: right;
 	}
