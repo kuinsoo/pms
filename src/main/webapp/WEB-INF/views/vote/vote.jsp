@@ -5,16 +5,91 @@
 <!-- CURRENT SECTION(MAIN) -->
 <style type="text/css">
 .voteContainer {
-	width:1400px;background-color:#fff;border:1px solid #dee3eb;height:700px;margin:0 auto;
-	margin-top:20px;
+	width:1400px;background-color:#fff;border:1px solid #dee3eb;margin:0 auto;
+	margin-top:20px;overflow:hidden;padding-bottom:20px;margin-bottom:20px;
 }
-.voteContainer > h2{font-size:30px;display:block;margin:20px;}
-
+.voteContainer > ul{padding:10px 20px 20px 20px;}
+.voteContainer > ul > li {
+	display:block;background-color:#fff;border:1px solid #dee3eb;
+	width:440px;height:440px;float:left;margin-left:10px;margin-top:10px;
+}
+.voteContainer > ul > li:first-child{padding:20px;}
+.voteContainer > ul > li:first-child > form > .voteTitle {
+	outline:none;width:100%;height:30px;font-size:17px;margin-top:20px;
+	border:none;border-bottom:1px solid #dee3eb;
+}
+.voteContentContainer{width:100%;height:200px;overflow-y:scroll;margin-top:20px;}
+.voteContainer > ul > li:first-child > form > .voteContentContainer > ul > li > .voteContent {
+	outline:none;width:100%;height:30px;font-size:17px;margin-top:10px;
+}
+.plusIcon{margin-top:10px;cursor:pointer;}
+.plusIcon > i{vertical-align:middle;font-size:20px;float:left;}
+.plusIcon > span{vertical-align:middle;font-size:20px;float:left;display:block;margin-left:5px;}
+.minusIcon{margin-top:10px;cursor:pointer;}
+.minusIcon > i{vertical-align:middle;font-size:20px;float:left;margin-left:20px;}
+.minusIcon > span{vertical-align:middle;font-size:20px;float:left;display:block;margin-left:5px;}
+.voteSubmit {
+	width:100%;height:40px;background-color:#4286f4;color:#fff;border:none;font-size:18px;
+	margin-top:20px;outline:none;cursor:pointer;
+}
 </style>
 <section class="currentMain">
 	<div class="currentMainContainer">
 		<div class="voteContainer">
-			<h2>투표</h2>
+			<ul>
+				<li>
+					<form action="#" method="post">
+						<h2>투표</h2>
+						<input type="text" class="voteTitle" placeholder="투표 제목" />
+						<div class="voteContentContainer">
+							<ul>
+								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
+								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
+								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
+								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
+								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
+							</ul>
+						</div>
+						<div class="plusIcon">
+							<i class="icon-plus icons"></i>
+							<span>항목 추가</span>
+						</div>
+						<div class="minusIcon">
+							<i class="icon-minus icons"></i>
+							<span>항목 제거</span>
+						</div>
+						<input type="submit" class="voteSubmit" value="투표 등록" />
+					</form>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+				<li>
+				</li>
+			</ul>
 		</div>
 	</div>
 </section>
@@ -180,6 +255,15 @@ $(function(){
 
 // 알람 탭 메뉴
 $("#tabs").tabs();
+
+$(document).ready(function(){
+	$(".plusIcon").click(function(){
+		$(".voteContentContainer > ul").append("<li><input type='text' class='voteContent' placeholder='항목 입력' /></li>");
+	});
+	$(".minusIcon").click(function(){
+		$(".voteContentContainer > ul > li:last-child").remove();
+	});
+});
 </script>
 </body>
 </html>
