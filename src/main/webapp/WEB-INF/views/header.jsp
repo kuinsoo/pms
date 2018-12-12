@@ -7,6 +7,11 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+    if (session.getAttribute("memberVo") == null) {
+        response.sendRedirect("/");
+    }
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +36,7 @@
     <div class="currentMainLeftMenu">
         <div class="leftMenuUserInterface">
             <div class="dimLeftMenuUserInterface"></div>
-            <img src="http://placehold.it/100x100">
+            <img src="${memberVo.member_profile}">
             <p>${memberVo.member_name}</p>
         </div>
         <ul class="firstMenu">
@@ -199,11 +204,11 @@
 	                </div>
 	                <!-- CURRENT USER -->
 	                <div class="currentUser dialog__trigger">
-	                    <img src="http://placehold.it/40x40" />
+	                    <img src="${memberVo.member_profile}" />
 	                    <i class="icon-arrow-down icons"></i>
 	                    <div class="dialog">
 	                        <div class="dialogUserImg">
-	                            <img src="http://placehold.it/100x100">
+	                            <img src="${memberVo.member_profile}">
 	                            <p>${memberVo.member_name}</p>
 	                        </div>
 	                        <ul>

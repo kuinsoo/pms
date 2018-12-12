@@ -16,7 +16,7 @@
 	<insert id="insertUser" parameterType="memberVo">    
 		insert into 
 		member
-		values (#{member_mail},#{member_name},#{member_pass},#{member_tel},'','N')
+		values (#{member_mail},#{member_name},#{member_pass},#{member_tel},'/images/basic.png','N')
 	</insert>
 	
 	<update id="updateUser" parameterType="memberVo">    

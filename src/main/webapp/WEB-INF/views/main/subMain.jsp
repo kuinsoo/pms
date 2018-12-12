@@ -209,7 +209,7 @@
 					<c:forEach items="${workList}" var="work" varStatus="i">
 						<div class="cardUserInfo">
 							<div class="cardUserInfoImg">
-								<img src="http://placehold.it/40x40">
+								<img src="${memberVo.member_profile}">
 							</div>
 							<div class="cardUserInfoName">
 								<b>${memberVo.member_name}</b><br> <%-- 작성자 --%>
@@ -238,7 +238,7 @@
 								<li>
 									<div class="cardContentCommentUser">
 										<div class="cardContentCommentUserImg">
-											<img src="http://placehold.it/40x40">
+											<img src="${memberVo.member_profile}">
 										</div>
 										<div class="cardContentCommentUserName">
 											<b>${cmt.cmt_member}</b><span class="times">${cmt.cmt_date}</span>
@@ -254,7 +254,7 @@
 								<li>
 									<div class="cardContentCommentUser">
 										<div class="cardContentCommentUserImg">
-											<img src="http://placehold.it/40x40">
+											<img src="${memberVo.member_profile}">
 										</div>
 										<div class="cardContentCommentUserName">
 											<input type="text" placeholder="댓글을 입력해주세요" class="commentInput">
@@ -285,7 +285,7 @@
 						<li>
 							<span class="projectPositionName">참여자</span>
 							<div class="chatList">
-								<img src="http://placehold.it/50x50">
+								<img src="${memberVo.member_profile}">
 								<span class="projectUserNameList">${projectMember.member_name}</span>
 							</div>
 						</li>
