@@ -236,7 +236,7 @@
 						<!-- 댓글  -->
 						<div class="cardContentBottom">
 							<i class="icon-bubble icons"></i>
-							<span>댓글 작성</span>
+							<span onclick="insertCmt('${work.work_id}', 'cmt_content${i.index}');">댓글 작성</span>
 							<i class="icon-bulb icons"></i>
 							<span>이슈 등록</span>
 						</div>
@@ -266,7 +266,7 @@
 											<img src="${memberVo.member_profile}">
 										</div>
 										<div class="cardContentCommentUserName">
-											<input type="text" placeholder="댓글을 입력해주세요" class="commentInput">
+												<input type="text" id="cmt_content${i.index}"  placeholder="댓글을 입력해주세요">
 										</div>
 									</div>
 								</li>
@@ -305,7 +305,6 @@
 					</ul>
 				</div>
 			</div>
-
 		</div>
 	</section>
 	
@@ -587,6 +586,21 @@ var myChart = new Chart(ctx, {
 		});
 	}
 
+	function insertCmt(work_id, cmt_content) {
+		var cmt_contenta = $('#'+cmt_content).val();
+		$.ajax({
+			method: "GET",
+			url: "/ajaxInsertCmt",
+			data: {"work_id": work_id, "cmt_content": cmt_contenta, "project_id": ${project_id}},
+			success : function (data) {
+				$('.currentCardList').html("");
+				$('.currentCardList').html(data);
+			},
+			error:function (data) {
+				alert("error")
+			}
+		});
+	}
 </script>
 <script>
 // html dom 이 다 로딩된 후 실행된다.

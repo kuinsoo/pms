@@ -42,12 +42,13 @@
 		from member M INNER JOIN project_member PM ON (M.member_mail = PM.pmember_member AND M.MEMBER_MAIL = #{member_mail})
 		INNER JOIN PROJECT P ON (PM.PMEMBER_PROJECT = P.PROJECT_ID AND P.PROJECT_ID=#{project_id})
 		INNER JOIN WORK W ON (P.PROJECT_ID = W.WORK_PROJECT)
+		order by WORK_ID desc
 	</select>
 	
 	<insert id="createWork" parameterType="workVo">
 		insert into work 
 		values(SEQ_WORK.NEXTVAL, #{work_project}, #{work_title}, #{work_content}, #{work_type}, ${work_importance},
-					 #{work_sdate}, #{work_eedate},0, 'N','',#{work_public},'')
+					 #{work_sdate}, #{work_eedate},0, 'N','',#{work_public},'#4286f4')
 	</insert>
 	
 	<delete id="deleteWork" parameterType="String">

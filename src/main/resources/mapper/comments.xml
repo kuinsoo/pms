@@ -11,11 +11,11 @@
                       inner join project on (WORK_PROJECT = PROJECT_ID)
                       inner join PROJECT_MEMBER on (project_id = PMEMBER_PROJECT)
         where PROJECT_ID = #{project_id}
+        order CMT_ID desc
     </select>
 
     <insert id="insertCmt" parameterType="cmtVo">
-        insert into comments values(seq_comments.nextval, #{cmt_work}, #{cmt_member}, #{cmt_content},
-                                           sysdate)
+        insert into comments values(seq_comments.nextval, #{cmt_work}, #{cmt_member}, #{cmt_content}, sysdate)
     </insert>
 
     <update id="updateCmt" parameterType="cmtVo">

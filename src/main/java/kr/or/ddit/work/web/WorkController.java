@@ -1,5 +1,6 @@
 package kr.or.ddit.work.web;
 
+import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.work.model.WorkVo;
 import kr.or.ddit.work.service.WorkServiceInf;
@@ -29,6 +30,9 @@ public class WorkController {
 	@Autowired
 	private WorkServiceInf workService;
 
+	@Autowired
+	private CommentsServiceInf commentsService;
+
 
 	@RequestMapping(value="/ajaxCreateWork",method=RequestMethod.POST)
 	public String createWork(Model model, WorkVo workVo, @RequestParam("project_id")String project_id,
@@ -45,6 +49,7 @@ public class WorkController {
 		mapWork.put("member_mail", memberVo.getMember_mail());
 		mapWork.put("project_id", project_id);
 		model.addAttribute("workList",workService.selectWorks(mapWork));
+		model.addAttribute("cmtList", commentsService.cmtList(project_id));
 		return "work/ajaxCreateWork";
 	}
 
@@ -53,3 +58,4 @@ public class WorkController {
 		return "work/testChart";
 	}
 }
+

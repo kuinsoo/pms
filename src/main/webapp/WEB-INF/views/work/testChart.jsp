@@ -22,12 +22,12 @@ margin: 1em auto;
 <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
 <script src="https://code.highcharts.com/gantt/modules/exporting.js"></script>
 
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
 <script>
 	var today = new Date(),
 		day = 1000 * 60 * 60 * 24,
-// Utility functions
-		dateFormat = Highcharts.dateFormat,
+	// Utility functions
+	dateFormat = Highcharts.dateFormat,
 		defined = Highcharts.defined,
 		isObject = Highcharts.isObject,
 		reduce = Highcharts.reduce;
