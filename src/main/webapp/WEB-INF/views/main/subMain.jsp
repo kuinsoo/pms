@@ -4,7 +4,7 @@
 <%-- header & left --%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 	
-	<!-- CURRENT SECTION(MAIN) -->
+	<%--CURRENT SECTION(MAIN)--%>
 	<section class="currentMain">
 		<div class="currentMainContainer">
 			<div class="currentMainContainerLeft">
@@ -133,16 +133,16 @@
 						</ul>
 						<!-- tap1 업무 -->
 						<div id="tabss-1">
-							<form action="/ajaxCreateWork" method="get">
+							<form action="/ajaxCreateWork" method="POST" name="workfrm1">
 								<div class="calendarContainerInput">
 									<div class="calendarInputDiv">
 										<i class="icon-clock icons"></i>
-										<input type="date" name="work_sdate"> <!-- 업무시작일 -->
+										<input type="datetime-local" name="work_sdate"> <!-- 업무시작일 -->
 									</div>
 									<span class="calendarInputDivSpan">~</span>
 									<div class="calendarInputDivs">
 										<i class="icon-clock icons"></i>
-										<input type="date" name="work_eedate"> <!-- 마감예상일 -->
+										<input type="datetime-local"  name="work_eedate"> <!-- 마감예상일 -->
 									</div>
 								</div>
 								<label>업무</label>
@@ -150,9 +150,9 @@
 								<label>업무 내용</label>
 								<textarea class="tabssTextArea" name="work_content" placeholder="업무내용"></textarea><br/>
 								<label>업무 유형</label><br/>
-								<input type="radio" name="work_type" value="type1"/> 
-								<input type="radio" name="work_type" value="type2"/> 
-								<input type="radio" name="work_type" value="type3"/><br/>
+								<input type="radio" name="work_type" value="1"/>설계
+								<input type="radio" name="work_type" value="2"/>개발
+								<input type="radio" name="work_type" value="3"/>유지보수<br/>
 								<label>업무 중요도</label><br/>
 								<select name="work_importance">
 									<option value="1">Level 1</option>
@@ -161,13 +161,13 @@
 									<option value="4">Level 4</option>
 									<option value="5">Level 5</option>
 								</select> <br/>
+								<input type="text" name="project_id" value="${project_id}" id="project_id_hide"/>
 								<label>업무 공개여부</label><br/>
 								<input type="checkbox" name="work_public" value="Y"/>WORK_PUBLIC<br/>
-								<input type="submit" class="tabssTextAreaSubmit" value="올리기" />
+								<input type="button" class="tabssTextAreaSubmit" value="올리기" onclick="createWork();" />
 							</form>
 						</div>
-						<!-- tap1 업무 끝 -->
-						<!--  -->					
+						<%--tap1 끝 --%>
 						<div id="tabss-2">
 							<textarea class="tabssTextArea" placeholder="글을 작성하세요"></textarea>
 							<input type="submit" class="tabssTextAreaSubmit" value="올리기" />
@@ -200,219 +200,101 @@
 								<i class="icon-plus icons"></i>
 								<span>할일 추가</span>
 							</div>
-							<input type="submit" class="tabssTextAreaSubmit" value="올리기" />
+							<input type="button" class="tabssTextAreaSubmit" value="올리기" />
 						</div>
 					</div>
 				</div>
-				<!-- 카드 리스트  -->
-				<div class="currentCardList">
-					<div class="cardUserInfo">
-						<div class="cardUserInfoImg">
-							<img src="http://placehold.it/40x40">
+				<%--카드리스트--%>
+				<div class="currentCardList" >
+					<c:forEach items="${workList}" var="work" varStatus="i">
+						<div class="cardUserInfo">
+							<div class="cardUserInfoImg">
+								<img src="http://placehold.it/40x40">
+							</div>
+							<div class="cardUserInfoName">
+								<b>${memberVo.member_name}</b><br> <%-- 작성자 --%>
+								<span>2018-12-05 10:27</span>
+							</div>
+							<div class="updateDeleteIcon">
+								<i class="icon-wrench icons"></i>
+							</div>
 						</div>
-						<div class="cardUserInfoName">
-							<b>userName</b><br>
-							<span>2018-12-05 10:27</span>
+
+						<label class="cardContent" >${work.work_title} </label><br/>  <%-- 업무 제목 --%>
+						<div class="cardContent">
+							<textarea readonly> ${work.work_content} </textarea> <%-- 업무 내용 --%>
 						</div>
-						<div class="updateDeleteIcon">
-							<i class="icon-wrench icons"></i>
+						<!-- 댓글  -->
+						<div class="cardContentBottom">
+							<i class="icon-bubble icons"></i>
+							<span>댓글 작성</span>
+							<i class="icon-bulb icons"></i>
+							<span>이슈 등록</span>
 						</div>
-					</div>
-					<div class="cardContent">
-						<textarea readonly>test content test content test content test content test content test content test content test content test content test content</textarea>
-					</div>
-					<!-- 댓글  -->
-					<div class="cardContentBottom">
-						<i class="icon-bubble icons"></i>
-						<span>댓글 작성</span>
-						
-						<i class="icon-bulb icons"></i>
-						<span>이슈 등록</span>
-					</div>
-					<div class="cardContentComment">
-						<ul>
-							<li>
-								<div class="cardContentCommentUser">
-									<div class="cardContentCommentUserImg">
-										<img src="http://placehold.it/40x40">
+						<div class="cardContentComment">
+							<c:forEach items="${cmtList}" var="cmt">
+								<c:if test="${cmt.cmt_work eq  work.work_id}">
+							<ul>
+								<li>
+									<div class="cardContentCommentUser">
+										<div class="cardContentCommentUserImg">
+											<img src="http://placehold.it/40x40">
+										</div>
+										<div class="cardContentCommentUserName">
+											<b>${cmt.cmt_member}</b><span class="times">${cmt.cmt_date}</span>
+											<br>
+											<span>${cmt.cmt_content}</span>
+										</div>
 									</div>
-									<div class="cardContentCommentUserName">
-										<b>userName</b><span class="times">2018-12-05 14:19</span>
-										<br>
-										<span>content~~~~~~~~~~~~~~~~~~~~~~~~~</span>
+								</li>
+							</ul>
+							</c:if>
+						</c:forEach>
+							<ul>
+								<li>
+									<div class="cardContentCommentUser">
+										<div class="cardContentCommentUserImg">
+											<img src="http://placehold.it/40x40">
+										</div>
+										<div class="cardContentCommentUserName">
+											<input type="text" placeholder="댓글을 입력해주세요" class="commentInput">
+										</div>
 									</div>
-								</div>
-							</li>
-							<li>
-								<div class="cardContentCommentUser">
-									<div class="cardContentCommentUserImg">
-										<img src="http://placehold.it/40x40">
-									</div>
-									<div class="cardContentCommentUserName">
-										<b>userName</b><span class="times">2018-12-05 14:19</span>
-										<br>
-										<span>content~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="cardContentCommentUser">
-									<div class="cardContentCommentUserImg">
-										<img src="http://placehold.it/40x40">
-									</div>
-									<div class="cardContentCommentUserName">
-										<b>userName</b><span class="times">2018-12-05 14:19</span>
-										<br>
-										<span>content~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="cardContentCommentUser">
-									<div class="cardContentCommentUserImg">
-										<img src="http://placehold.it/40x40">
-									</div>
-									<div class="cardContentCommentUserName">
-										<b>userName</b><span class="times">2018-12-05 14:19</span>
-										<br>
-										<span>content~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="cardContentCommentUser">
-									<div class="cardContentCommentUserImg">
-										<img src="http://placehold.it/40x40">
-									</div>
-									<div class="cardContentCommentUserName">
-										<b>userName</b><span class="times">2018-12-05 14:19</span>
-										<br>
-										<span>content~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="cardContentCommentUser">
-									<div class="cardContentCommentUserImg">
-										<img src="http://placehold.it/40x40">
-									</div>
-									<div class="cardContentCommentUserName">
-										<b>userName</b><span class="times">2018-12-05 14:19</span>
-										<br>
-										<span>content~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="cardContentCommentUser">
-									<div class="cardContentCommentUserImg">
-										<img src="http://placehold.it/40x40">
-									</div>
-									<div class="cardContentCommentUserName">
-										<b>userName</b><span class="times">2018-12-05 14:19</span>
-										<br>
-										<span>content~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="cardContentCommentUser">
-									<div class="cardContentCommentUserImg">
-										<img src="http://placehold.it/40x40">
-									</div>
-									<div class="cardContentCommentUserName">
-										<b>userName</b><span class="times">2018-12-05 14:19</span>
-										<br>
-										<span>content~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-									</div>
-								</div>
-							</li>
-							<li>
-								<div class="cardContentCommentUser">
-									<div class="cardContentCommentUserImg">
-										<img src="http://placehold.it/40x40">
-									</div>
-									<div class="cardContentCommentUserName">
-										<b>userName</b><span class="times">2018-12-05 14:19</span>
-										<br>
-										<span>content~~~~~~~~~~~~~~~~~~~~~~~~~</span>
-									</div>
-								</div>
-							</li>
-						</ul>
-						<ul>
-							<li>
-								<div class="cardContentCommentUser">
-									<div class="cardContentCommentUserImg">
-										<img src="http://placehold.it/40x40">
-									</div>
-									<div class="cardContentCommentUserName">
-										<input type="text" placeholder="댓글을 입력해주세요" class="commentInput">
-									</div>
-								</div>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<!-- 카드 (글)끝  -->
+								</li>
+							</ul>
+						</div>
+					</c:forEach>
+				</div> <%-- 끝--%>
 			</div>
-			
+
 			<div class="currentMainContainerRight">
 				<div class="projectTeams">
-					<h2>전체 참여자 7명</h2>
+					<h2>전체 참여자 ${projectMemberList.size()}명</h2>
 					<ul>
+						<c:forEach items="${projectMemberList}" var="projectMember" varStatus="i" >
+						<c:if test="${projectMember.pmember_position eq '1'}">
 						<li>
 							<span class="projectPositionName">프로젝트 관리자</span>
 							<div class="chatList">
-								<img src="http://placehold.it/50x50">
-								<span class="projectUserNameList">관리자</span>
+								<img src="${projectMember.member_profile}">
+								<span class="projectUserNameList">${projectMember.member_name}</span>
 							</div>
 						</li>
+						</c:if>
+						<c:if test="${projectMember.pmember_position eq '2'}">
 						<li>
-							<span class="projectPositionName">외부참여자</span>
+							<span class="projectPositionName">참여자</span>
 							<div class="chatList">
 								<img src="http://placehold.it/50x50">
-								<span class="projectUserNameList">userName</span>
+								<span class="projectUserNameList">${projectMember.member_name}</span>
 							</div>
 						</li>
-						<li>
-							<span class="projectPositionName">외부참여자</span>
-							<div class="chatList">
-								<img src="http://placehold.it/50x50">
-								<span class="projectUserNameList">userName</span>
-							</div>
-						</li>
-						<li>
-							<span class="projectPositionName">외부참여자</span>
-							<div class="chatList">
-								<img src="http://placehold.it/50x50">
-								<span class="projectUserNameList">userName</span>
-							</div>
-						</li>
-						<li>
-							<span class="projectPositionName">외부참여자</span>
-							<div class="chatList">
-								<img src="http://placehold.it/50x50">
-								<span class="projectUserNameList">userName</span>
-							</div>
-						</li>
-						<li>
-							<span class="projectPositionName">외부참여자</span>
-							<div class="chatList">
-								<img src="http://placehold.it/50x50">
-								<span class="projectUserNameList">userName</span>
-							</div>
-						</li>
-						<li>
-							<span class="projectPositionName">외부참여자</span>
-							<div class="chatList">
-								<img src="http://placehold.it/50x50">
-								<span class="projectUserNameList">userName</span>
-							</div>
-						</li>
+						</c:if>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>
+
 		</div>
 	</section>
 	
@@ -432,6 +314,8 @@
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
 <script>
+
+
 // DIM POPUP - 팀원초대
 $('.projectCreatePopUps').click(function(){
     var $hrefs = $(this).attr('href');
@@ -626,6 +510,7 @@ var myChart = new Chart(ctx, {
 <script>
 	$(document).ready(function () {
 		$('.kku-hide').hide();
+		$('#project_id_hide').hide();
 	});
 	$( function() {
 		var tabs = $("#planList").tabs();
@@ -669,11 +554,29 @@ var myChart = new Chart(ctx, {
 		});
 	} );
 
-	/*
+	<%--
 	function updateCard(no, group, index){
 		location.href = "/updateCard?card_no="+no+"&card_group="+group+"&card_index="+index;
-	};
-	*/
+	}; --%>
+
+
+
+	function createWork(){
+		var param = $('form[name=workfrm1]').serialize();
+		$.ajax({
+			method: "POST",
+			url : "/ajaxCreateWork",
+			data : param,
+			success: function(data) {
+				$('.currentCardList').html("");
+				$('.currentCardList').html(data);
+			},
+			error:function (data) {
+				alert("error")
+			}
+		});
+	}
+
 </script>
 </body>
 </html>

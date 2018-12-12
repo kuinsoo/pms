@@ -8,6 +8,7 @@
         <id property="member_name" column="member_name" />
         <id property="member_profile" column="member_profile" />
         <id property="pmemberCount" column="pmemberCount" />
+        <id property="pmember_member" column="pmember_member" />
         <id property="pmember_position" column="pmember_position" />
         <id property="project_title" column="project_title" />
         <id property="project_overview" column="project_overview" />
@@ -82,7 +83,15 @@
 		where PMEMBER_MEMBER = #{pmember_member}
 		and PMEMBER_PROJECT = #{pmember_project}
 	</select>
+	
+	<!--  이미 초대한 회원인지 검색 -->
+	<select id="searchInviteMember" parameterType="pMemberVo" resultType="inviteProjectVo">
+		select * from INVITE_PROJECT
+		where MEMBER_MAIL = #{pmember_member}
+		and PROJECT_ID = #{pmember_project}
+	</select>
 
+	<!-- 초대 받은 프로젝트 -->
 	<select id="selectInviteProject" parameterType="String" resultType="inviteProjectVo">
 		select C.MEMBER_NAME,
 	       B.PROJECT_TITLE,
@@ -93,22 +102,30 @@
 	                                                  and B.PROJECT_ID = A.PROJECT_ID
 	                                                  and A.MEMBER_MAIL = #{pmember_member}
 	</select>
-	
-		<select id="selectInviteProjectMap" parameterType="Map" resultType="inviteProjectVo">
-		select C.MEMBER_NAME,
-	       B.PROJECT_TITLE,
-	       B.PROJECT_OVERVIEW,
-	       A.PROJECT_INVITE,
-	       B.PROJECT_ID,
-	       A.invite_name
-			from INVITE_PROJECT A, PROJECT B, MEMBER C where C.MEMBER_MAIL = A.MEMBER_MAIL
-	                                                  and A.PROJECT_ID = B.PROJECT_ID
-	                                                  and A.MEMBER_MAIL = #{member_mail}
-	                                                  and A.PROJECT_ID = #{project_id}
-		</select>
-	
 
+	<!-- 초대받은 프로젝트 맵방식 -->
+	<select id="selectInviteProjectMap" parameterType="Map" resultType="inviteProjectVo">
+	select C.MEMBER_NAME,
+	   B.PROJECT_TITLE,
+	   B.PROJECT_OVERVIEW,
+	   A.PROJECT_INVITE,
+	   B.PROJECT_ID,
+	   A.invite_name
+		from INVITE_PROJECT A, PROJECT B, MEMBER C where C.MEMBER_MAIL = A.MEMBER_MAIL
+												  and A.PROJECT_ID = B.PROJECT_ID
+												  and A.MEMBER_MAIL = #{member_mail}
+												  and A.PROJECT_ID = #{project_id}
+	</select>
+	
+	<!-- 프로젝트 삭제 (미사용중) -->
 	<delete id="deleteInviteProject" parameterType="Map">
 		delete from INVITE_PROJECT where MEMBER_MAIL = #{member_mail} and project_id = #{project_id}
 	</delete>
+
+	<!-- 프로젝트 참여자 리스트 -->
+	<select id="projectMemberList" resultMap="pMemberResultMap" parameterType="String">
+		select PMEMBER_MEMBER, MEMBER_NAME, MEMBER_PROFILE, PMEMBER_POSITION
+		from PROJECT_MEMBER inner join MEMBER on (PMEMBER_MEMBER = MEMBER_MAIL)
+		and PMEMBER_PROJECT = #{project_id}
+	</select>
 </mapper>

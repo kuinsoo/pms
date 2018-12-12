@@ -39,12 +39,12 @@ public interface MemberServiceInf {
 	 * 작성자 : 나진실
 	 * 변경이력 :
 	 *
-	 * @param 
-	 * @return Method 설명 : 마이페이지에서 정보 수정 
+	 * @param memberVo the member vo
+	 * @return Method 설명 : 마이페이지에서 정보 수정
 	 */
 	public int updateUser(MemberVo memberVo);
-	
-	
+
+
 	/**
 	 * Method : selectfindId
 	 * 작성자 : pc07
@@ -129,6 +129,16 @@ public interface MemberServiceInf {
 	PMemberVo searchTeamMember(PMemberVo pMemberVo);
 
 	/**
+	 * Method : searchInviteMember
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 *
+	 * @param pMemberVo the p member vo
+	 * @return Method 설명 : 이미 초대된 회원인지 검색
+	 */
+	InviteProjectVo searchInviteMember(PMemberVo pMemberVo);
+
+	/**
 	 * Select invite project list.
 	 * 작성자 : Mr.KKu
 	 * 초대받은 프로젝트 리스트
@@ -137,15 +147,15 @@ public interface MemberServiceInf {
 	 * @return the list
 	 */
 	List<InviteProjectVo> selectInviteProject(String member_mail);
-	
+
 	/**
-	* Method : selectInviteProject
-	* 작성자 : Mr.KKu
-	* 변경이력 :
-	* @param map
-	* @return
-	* Method 설명 : 
-	*/
+	 * Method : selectInviteProject
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 *
+	 * @param map the map
+	 * @return Method 설명 :
+	 */
 	List<InviteProjectVo> selectInviteProjectMap(Map<String, String> map);
 
 	/**
@@ -153,7 +163,8 @@ public interface MemberServiceInf {
 	 * 작성자 : Mr.KKu
 	 * 초대받은 프로젝트 리스트에서 삭제
 	 *
-	 * @param member_mail the member mail
+	 * @param delMap    the del map
+	 * @param pMemberVo the p member vo
 	 * @return the int
 	 */
 	int  deleteInviteProject(Map<String, String> delMap, PMemberVo pMemberVo);
@@ -163,10 +174,19 @@ public interface MemberServiceInf {
 	 * 작성자 : Mr.KKu
 	 * 초대받은 프로젝트 리스트에서 삭제
 	 *
-	 * @param member_mail the member mail
+	 * @param delMap the del map
 	 * @return the int
 	 */
 	int  deleteInviteProject(Map<String, String> delMap);
 
+
+	/**
+	 * Project member list list.
+	 * 작성자 : Mr.KKu
+	 * 프로젝트 참여자 목록 관리
+	 * @param project_id the project id
+	 * @return the list
+	 */
+	List<PMemberListVo> projectMemberList(String project_id);
 
 }

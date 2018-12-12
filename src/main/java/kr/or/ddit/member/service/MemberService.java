@@ -173,6 +173,20 @@ public class MemberService implements MemberServiceInf {
 	public PMemberVo searchTeamMember(PMemberVo pMemberVo) {
 		return memberMapper.searchTeamMember(pMemberVo);
 	}
+	
+	/**
+	* Method : searchInviteMember
+	* 작성자 : Mr.KKu
+	* 변경이력 :
+	* @param pMemberVo
+	* @return
+	* Method 설명 : 이미 초대된 회원인지 검색
+	*/
+	@Override
+	public InviteProjectVo searchInviteMember(PMemberVo pMemberVo) {
+		return memberMapper.searchInviteMember(pMemberVo);
+	}
+
 
 	/**
 	 * Select invite project list.
@@ -189,6 +203,7 @@ public class MemberService implements MemberServiceInf {
 	
 	
 
+
 	@Override
 	public List<InviteProjectVo> selectInviteProjectMap(Map<String, String> map) {
 		// TODO Auto-generated method stub
@@ -200,7 +215,8 @@ public class MemberService implements MemberServiceInf {
 	 * 작성자 : Mr.KKu
 	 * 초대받은 프로젝트 리스트에서 삭제
 	 *
-	 * @param member_mail the member mail
+	 * @param delMap    the del map
+	 * @param pMemberVo the p member vo
 	 * @return the int
 	 */
 	@Override
@@ -214,5 +230,16 @@ public class MemberService implements MemberServiceInf {
 		return memberMapper.deleteInviteProject(delMap);
 	}
 
-	
+
+	/**
+	 * Project member list list.
+	 * 작성자 : Mr.KKu
+	 * 프로젝트 참여자 목록 관리
+	 * @param project_id the project id
+	 * @return the list
+	 */
+	@Override
+	public List<PMemberListVo> projectMemberList(String project_id) {
+		return memberMapper.projectMemberList(project_id);
+	}
 }
