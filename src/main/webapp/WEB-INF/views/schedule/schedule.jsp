@@ -4,10 +4,24 @@
 <%@ include file="/WEB-INF/views/header.jsp" %>
 <link rel='stylesheet' href='../fullcalendar/fullcalendar.css?ver=1' />
 <style type="text/css">
-.container {
-	margin:0 auto;width:1200px;margin-top:20px;background-color:#fff;border:1px solid #dee3eb;
-	padding:20px;
+.containerDiv {
+	width:1400px;padding:20px;margin:0 auto;margin-top:20px;height:auto;border:1px solid #dee3eb;
+	background-color:#fff;overflow:hidden;
 }
+.container{float:left;width:1000px;background-color:#fff;border:1px solid #dee3eb;padding:20px;}
+.caldendarRightMenu {
+	float:left;width:335px;height:293px;border:1px solid #dee3eb;background-color:#fff;margin-left:20px;
+}
+.caldendarRightMenu > ul > li{padding:10px;}
+.caldendarRightMenu > ul > li > input[type="checkbox"]{width:30px;height:30px;vertical-align:middle;}
+.caldendarRightMenu > ul > li > span{font-size:20px;margin-left:10px;}
+.caldendarRightMenu > ul > li:first-child{background-color:#ab2af6;color:#fff;}
+.caldendarRightMenu > ul > li:nth-child(2){background-color:#4286f4;color:#fff;}
+.caldendarRightMenu > ul > li:nth-child(3){background-color:#F78181;color:#fff;}
+.caldendarRightMenu > ul > li:nth-child(4){background-color:#71D708;color:#fff;}
+.caldendarRightMenu > ul > li > span{color:#fff;font-weight:bold;}
+.sel_schedule{width:100%;height:30px;font-size:20px;outline:none;}
+.sel_list{width:100%;height:30px;font-size:20px;outline:none;margin-top:10px;}
 	#selectForm{
 		float: right;
 	}
@@ -26,45 +40,47 @@
 </style>
 <section class="currentMain">
 	<div class="currentMainContainer">
-		<div class="container">
-			<!-- check box(left) -->
-			<label><input type="checkbox" class="checkSchedule" name="check" value="projectSchedule"/>project</label>
-			<label><input type="checkbox" class="checkSchedule" checked name="check" value="workSchedule"/>work</label>
-			<label><input type="checkbox" class="checkSchedule" checked name="check" value="todoSchedule"/>todo</label>
-			<label><input type="checkbox" class="checkSchedule" checked name="check" value="issueSchedule"/>issue</label>
-		
-			<div id="colorBoxDiv">
-				<table class="colorBox">
-					<tr>
-						<td style="background: #AB2AF6"></td>
-						<td>Project</td>
-						<td style="background: #4286f4"></td>
-						<td>Work</td>
-						<td style="background: #F78181"></td>
-						<td>To-Do</td>
-						<td style="background: #71D708"></td>
-						<td>Issue</td>
-					</tr>
-				</table>
+		<div class="containerDiv">
+			<div class="container">			
+				<!-- select box(right) -->
+				<form id="hiddenSid" name="sid" method="POST" action="/allSchedule">
+					<input type="hidden" value="${memberVo.member_mail}">
+				</form>
+				<!-- FullCalendar -->
+				<div id='calendar'></div>
 			</div>
-		
-			<!-- select box(right) -->
-			<form id="hiddenSid" name="sid" method="POST" action="/allSchedule">
-				<input type="hidden" value="${memberVo.member_mail}">
-			</form>
-			<form id="selectForm" name="selectForm" method="POST" action="/allSchedule">
-				<select class="sel_schedule" name="sel_schedule">
-					<option value="">:::선택해주세요:::</option>
-					<option value="mySchedule">나의 일정</option>
-					<option value="myProject">프로젝트 일정</option>
-				</select>
-				<select class="sel_list" name="sel_list">
-					<option value=''>:::선택해주세요:::</option>
-				</select>
-			</form>
-			
-			<!-- FullCalendar -->
-			<div id='calendar'></div>
+			<div class="caldendarRightMenu">
+				<ul>
+					<li>
+						<input type="checkbox" class="checkSchedule" name="check" value="projectSchedule"/>
+						<span>project</span>
+					</li>
+					<li>
+						<input type="checkbox" class="checkSchedule" checked name="check" value="workSchedule"/>
+						<span>work</span>
+					</li>
+					<li>
+						<input type="checkbox" class="checkSchedule" checked name="check" value="todoSchedule"/>
+						<span>todo</span>
+					</li>
+					<li>
+						<input type="checkbox" class="checkSchedule" checked name="check" value="issueSchedule"/>
+						<span>issue</span>
+					</li>
+					<li>
+						<form id="selectForm" name="selectForm" method="POST" action="/allSchedule">
+							<select class="sel_schedule" name="sel_schedule">
+								<option value="">:::선택해주세요:::</option>
+								<option value="mySchedule">나의 일정</option>
+								<option value="myProject">프로젝트 일정</option>
+							</select>
+							<select class="sel_list" name="sel_list">
+								<option value=''>:::선택해주세요:::</option>
+							</select>
+						</form>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</div>
 </section>
