@@ -90,12 +90,11 @@
 		                                                             FROM   project_member
 		                                                             WHERE  pmember_position = 1) pmem
 		        ON      p.project_id = pmem.pmember_project
-		        WHERE   pm.pmember_member = 'sally1334@naver.com'
+		        WHERE   pm.pmember_member = #{member_mail}
 		        AND     pm.pmember_bookmark = 'Y')a)
 		   		where rnum between ${page}*${pageSize}-(${pageSize}-1)
 			and ${page}*${pageSize}
-		<if test="searchText!=null and searchText!=''">and project_title like '%'||#{searchText}||'%'</if> 
-	
+		<if test="searchText!=null and searchText!=''">and project_title like '%'||#{searchBookText}||'%'</if>
 	</select>
 </mapper>
 

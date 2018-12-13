@@ -16,7 +16,7 @@
 		$(document).ready(function() {
 			
 			getMyPageList(1);
-			getBookMarkProjectList(1);
+			getmybookMarkProjectList(1);
 			
 			$(".phoneBtns").hide();
 			$(".saveBtn").hide();
@@ -144,7 +144,7 @@
 						html += "	<td>"+ my.pmember_member +"</td>";
 						html += "</tr>";
 					});
-			
+					
 					$("#projectList").html("");
 					$("#projectList").html(html);
 				
@@ -219,6 +219,9 @@
 						html += "	<td>"+ mm.pmember_member +"</td>";
 						html += "</tr>";
 					});
+					
+					console.log(data.projectBookList);
+					
 					
 					$("#projectBookList").html("");
 					$("#projectBookList").html(html);
@@ -400,7 +403,7 @@
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
 									<form name ="searchBookProject" method="POST" onsubmit="return false;">
-										<input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
+										<input type="text" id="searchBookText" name ="searchBookText" value='${searchBookText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchBookProject();"></i>  

@@ -142,11 +142,13 @@ public class MemberDetailController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/mybookMarkProjectList", method = RequestMethod.GET)
-	public Map<String, Object> mybookMarkProjectList (Model model , PageVo pageVo, @SessionAttribute("memberVo")MemberVo memberVo, 
+	public Map<String, Object> mybookMarkProjectList (Model model , PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo, 
 						ProjectVo projectVo, HttpServletRequest request) {
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		List<ProjectVo> projectBookList = memberservice.mybookmarkselect(pageVo);
+		
+		System.out.println( "projectBookList 나와죵.. " + projectBookList  +  "projectBookList");
 		
 		Map<String , Object> projectBookMap = new HashMap<>();
 		int pageCnt = memberservice.totalProjectCnt();
