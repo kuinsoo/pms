@@ -247,10 +247,10 @@
 								<li>
 									<div class="cardContentCommentUser">
 										<div class="cardContentCommentUserImg">
-											<img src="${memberVo.member_profile}">
+											<img src="${cmt.member_profile}">
 										</div>
 										<div class="cardContentCommentUserName">
-											<b>${cmt.cmt_member}</b><span class="times">${cmt.cmt_date}</span>
+											<b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
 											<br>
 											<span>${cmt.cmt_content}</span>
 										</div>
@@ -266,7 +266,7 @@
 											<img src="${memberVo.member_profile}">
 										</div>
 										<div class="cardContentCommentUserName">
-												<input type="text" id="cmt_content${i.index}"  placeholder="댓글을 입력해주세요">
+												<input type="text" class="form-control" id="cmt_content${i.index}" value="" placeholder="댓글을 입력해주세요" required >
 										</div>
 									</div>
 								</li>
