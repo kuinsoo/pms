@@ -21,16 +21,18 @@ public class PMemberVo {
 	private String pmember_position;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private String pmember_date;
+	private String pmember_bookmark;
 
 	public PMemberVo() {
 	}
 
-	public PMemberVo(String pmember_id, String pmember_project, String pmember_member, String pmember_position, String pmember_date) {
+	public PMemberVo(String pmember_id, String pmember_project, String pmember_member, String pmember_position, String pmember_date, String pmember_bookmark) {
 		this.pmember_id = pmember_id;
 		this.pmember_project = pmember_project;
 		this.pmember_member = pmember_member;
 		this.pmember_position = pmember_position;
 		this.pmember_date = pmember_date;
+		this.pmember_bookmark = pmember_bookmark;
 	}
 
 	public String getPmember_id() {
@@ -71,5 +73,13 @@ public class PMemberVo {
 
 	public void setPmember_date(String pmember_date) {
 		this.pmember_date = pmember_date;
+	}
+
+	public String getPmember_bookmark() {
+		return pmember_bookmark;
+	}
+
+	public void setPmember_bookmark(String pmember_bookmark) {
+		this.pmember_bookmark = pmember_bookmark;
 	}
 }

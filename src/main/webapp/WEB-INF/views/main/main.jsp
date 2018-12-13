@@ -89,16 +89,16 @@
 				</ul>
 
 				<ul class="bookmarkProject">
-                    <%-- ajax 처리 --%>
+                    <%-- bookmark ajax 처리 --%>
 					<c:forEach items="${pMemberList}" var="pMemberListVo" varStatus="i">
 					<li class="bookmarkProject">
 						<div class="projectCard" >
 							<div class="projectCardTitle" >
 								<c:choose >
-									<c:when test="${pMemberListVo.project_bookmark eq 'N'}">
+									<c:when test="${pMemberListVo.pmember_bookmark eq 'N'}">
 								<i class="icon-star icons" onclick="bookmark('${pMemberListVo.project_id}');"></i>
 									</c:when>
-									<c:when test="${pMemberListVo.project_bookmark eq 'Y'}">
+									<c:when test="${pMemberListVo.pmember_bookmark eq 'Y'}">
 								<i class="icon-star icons"  style="color:yellow;font-weight:bold;" onclick="bookmark('${pMemberListVo.project_id}');"></i>
 									</c:when>
 								</c:choose>
@@ -114,7 +114,7 @@
 							</div>
 						</div>
 					</li>
-					</c:forEach>
+					</c:forEach> <%-- book end --%>
 				</ul>
 			</div>
 			<div class="currentMainProjectCreates">

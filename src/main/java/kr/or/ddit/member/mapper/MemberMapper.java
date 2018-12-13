@@ -215,4 +215,24 @@ public interface MemberMapper {
 	 * @return the list
 	 */
 	List<PMemberListVo> projectMemberList(String project_id);
+
+	/**
+	 * Select bookmark project p member vo.
+	 * 작성자 : Mr.KKu
+	 *  프로젝트 즐겨 찾기 관리
+	 *
+	 * @param pMemberVo the pmember project
+	 * @return the p member vo
+	 */
+	PMemberVo selectBookmarkProject(PMemberVo pMemberVo);
+
+	/**
+	 * Update bookmark int.
+	 * 작성자 : Mr.KKu
+	 * 즐겨찾기 업데이트
+	 *
+	 * @param pMemberVo the p member vo
+	 * @return the int
+	 */
+	int updateBookmark(PMemberVo pMemberVo);
 }

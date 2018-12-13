@@ -37,15 +37,18 @@ public class WorkVo {
 	private String work_approval;		//	업무마감승인여부(ex: Y or N)
 	private String work_public;			//	업무공개여부      (ex: Y or N)
 	private String work_color;			//	일정 색깔
+
+	private String work_wdate;		// 작성일
+	private String member_mail; 	// 작성자
+	private String member_profile;  // 작성자 프로필사진
+
 	
 	/* 기본생성자 */
 	public WorkVo() {}
 	
 	/* 생성자 */
-	public WorkVo(String work_id, String work_project, String work_title, String work_content, String work_type,
-			int work_importance, Date work_sdate, String format_work_sdate, Date work_eedate,
-			String format_work_eedate, Date work_edate, String format_work_edate, int work_progress,
-			String work_approval, String work_public, String work_color) {
+
+	public WorkVo(String work_id, String work_project, String work_title, String work_content, String work_type, int work_importance, Date work_sdate, String format_work_sdate, Date work_eedate, String format_work_eedate, Date work_edate, String format_work_edate, int work_progress, String work_approval, String work_public, String work_color, String work_wdate, String member_mail, String member_profile, SimpleDateFormat sdf) {
 		this.work_id = work_id;
 		this.work_project = work_project;
 		this.work_title = work_title;
@@ -53,15 +56,19 @@ public class WorkVo {
 		this.work_type = work_type;
 		this.work_importance = work_importance;
 		this.work_sdate = work_sdate;
+		this.format_work_sdate = format_work_sdate;
 		this.work_eedate = work_eedate;
+		this.format_work_eedate = format_work_eedate;
 		this.work_edate = work_edate;
+		this.format_work_edate = format_work_edate;
 		this.work_progress = work_progress;
 		this.work_approval = work_approval;
 		this.work_public = work_public;
 		this.work_color = work_color;
-		this.format_work_sdate = format_work_sdate;
-		this.format_work_eedate = format_work_eedate;
-		this.format_work_edate = format_work_edate;
+		this.work_wdate = work_wdate;
+		this.member_mail = member_mail;
+		this.member_profile = member_profile;
+		this.sdf = sdf;
 	}
 
 	/* getter & setter */
@@ -143,7 +150,30 @@ public class WorkVo {
 	public void setWork_color(String work_color) {
 		this.work_color = work_color;
 	}
-	
+	public String getWork_wdate() {
+		return work_wdate;
+	}
+
+	public void setWork_wdate(String work_wdate) {
+		this.work_wdate = work_wdate;
+	}
+
+	public String getMember_mail() {
+		return member_mail;
+	}
+
+	public void setMember_mail(String member_mail) {
+		this.member_mail = member_mail;
+	}
+
+	public String getMember_profile() {
+		return member_profile;
+	}
+
+	public void setMember_profile(String member_profile) {
+		this.member_profile = member_profile;
+	}
+
 	/* 형변환 getter */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public String getFormat_work_sdate() {
@@ -159,13 +189,28 @@ public class WorkVo {
 	/* toString */
 	@Override
 	public String toString() {
-		return "WorkVo [work_id=" + work_id + ", work_project=" + work_project + ", work_title=" + work_title
-				+ ", work_content=" + work_content + ", work_type=" + work_type + ", work_importance=" + work_importance
-				+ ", work_sdate=" + work_sdate + ", format_work_sdate=" + format_work_sdate + ", work_eedate="
-				+ work_eedate + ", format_work_eedate=" + format_work_eedate + ", work_edate=" + work_edate
-				+ ", format_work_edate=" + format_work_edate + ", work_progress=" + work_progress + ", work_approval="
-				+ work_approval + ", work_public=" + work_public + ", work_color=" + work_color + "]";
+		return "WorkVo{" +
+				"work_id='" + work_id + '\'' +
+				", work_project='" + work_project + '\'' +
+				", work_title='" + work_title + '\'' +
+				", work_content='" + work_content + '\'' +
+				", work_type='" + work_type + '\'' +
+				", work_importance=" + work_importance +
+				", work_sdate=" + work_sdate +
+				", work_eedate=" + work_eedate +
+				", work_edate=" + work_edate +
+				", work_progress=" + work_progress +
+				", work_approval='" + work_approval + '\'' +
+				", work_public='" + work_public + '\'' +
+				", work_color='" + work_color + '\'' +
+				", work_wdate='" + work_wdate + '\'' +
+				", member_mail='" + member_mail + '\'' +
+				", member_profile='" + member_profile + '\'' +
+				'}';
 	}
+
+
+
 
 }
 

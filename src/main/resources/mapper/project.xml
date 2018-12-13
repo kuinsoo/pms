@@ -14,7 +14,7 @@
     </select>
 
     <select id="selectBookMarkProject" resultType="projectVo">
-        select * from PROJECT where PROJECT_BOOKMARK = #{project_bookmark}
+        select * from PROJECT
     </select>
 
     <insert id="createProject" parameterType="projectVo">
@@ -28,7 +28,7 @@
     <update id="updateProject" parameterType="projectVo">
         update PROJECT
         set PROJECT_TITLE = #{project_title}, PROJECT_OVERVIEW = #{project_overview},
-         PROJECT_BOOKMARK = #{project_bookmark}, PROJECT_EDATE = #{project_edate}
+         PROJECT_EDATE = #{project_edate}
         where PROJECT_ID = #{project_id}
     </update>
     

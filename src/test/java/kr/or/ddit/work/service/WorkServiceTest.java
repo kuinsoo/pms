@@ -51,7 +51,7 @@ public class WorkServiceTest extends  ResetSQL{
 		workMap.put("member_mail","kkuinsoo@gmail.com");
 		workMap.put("project_id","8");
 		/*** When ***/
-		List<WorkVo> workVos = workService.selectWorks(workMap);
+		List<WorkVo> workVos = workService.selectWorks("8");
 		/*** Then ***/
 		Assert.assertEquals(1,workVos.size());
 	}

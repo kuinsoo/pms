@@ -218,11 +218,11 @@
 				<div class="currentCardList" >					
 						<div class="cardUserInfo">
 							<div class="cardUserInfoImg">
-								<img src="${memberVo.member_profile}">
+								<img src="${work.member_profile}">
 							</div>
 							<div class="cardUserInfoName">
-								<b>${memberVo.member_name}</b><br> <%-- 작성자 --%>
-								<span>2018-12-05 10:27</span>
+								<b>${work.member_mail}</b><br> <%-- 작성자 --%>
+								<span>${work.work_wdate}</span>
 							</div>
 							<div class="updateDeleteIcon">
 								<i class="icon-wrench icons"></i>

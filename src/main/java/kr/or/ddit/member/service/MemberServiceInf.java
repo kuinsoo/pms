@@ -36,7 +36,7 @@ public interface MemberServiceInf {
 	/**
 	 * Method : updateUser 작성자 : 나진실 변경이력 :
 	 *
-	 * @param
+	 * @param memberVo the member vo
 	 * @return Method 설명 : 마이페이지에서 정보 수정
 	 */
 	public int updateUser(MemberVo memberVo);
@@ -67,9 +67,8 @@ public interface MemberServiceInf {
 
 	/**
 	 * Method : myprojectselect 작성자 : pc07 변경이력 :
-	 * 
-	 * @param pageVo
-	 * @param pageVo
+	 *
+	 * @param pageVo the page vo
 	 * @return Method 설명 : 마이페이지 초대받은 프로젝트
 	 */
 	List<ProjectVo> myprojectselect(PageVo pageVo);
@@ -87,7 +86,7 @@ public interface MemberServiceInf {
 	
 	/**
 	 * Method : totalProjectCnt 작성자 : pc07 변경이력 :
-	 * 
+	 *
 	 * @return Method 설명 : 프로젝트 건수 조회
 	 */
 	int totalProjectCnt();
@@ -158,9 +157,9 @@ public interface MemberServiceInf {
 	 * Method : selectInviteProjectMap
 	 * 작성자 : Mr.KKu
 	 * 변경이력 :
-	 * @param map
-	 * @return
-	 * Method 설명 : 맵방식 초대받은 프로젝트
+	 *
+	 * @param map the map
+	 * @return Method 설명 : 맵방식 초대받은 프로젝트
 	 */
 	List<InviteProjectVo> selectInviteProjectMap(Map<String, String> map);
 
@@ -190,9 +189,30 @@ public interface MemberServiceInf {
 	 * Project member list list.
 	 * 작성자 : Mr.KKu
 	 * 프로젝트 참여자 목록 관리
+	 *
 	 * @param project_id the project id
 	 * @return the list
 	 */
 	List<PMemberListVo> projectMemberList(String project_id);
 
+
+	/**
+	 * Select bookmark project p member vo.
+	 * 작성자 : Mr.KKu
+	 * 프로젝트 즐겨 찾기 관리
+	 *
+	 * @param pMemberVo the p member vo
+	 * @return the p member vo
+	 */
+	PMemberVo selectBookmarkProject(PMemberVo pMemberVo);
+
+	/**
+	 * Update bookmark int.
+	 * 작성자 : Mr.KKu
+	 * 즐겨찾기 업데이트
+	 *
+	 * @param pMemberVo the p member vo
+	 * @return the int
+	 */
+	int updateBookmark(PMemberVo pMemberVo);
 }

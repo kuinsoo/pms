@@ -45,13 +45,13 @@ public class WorkService implements WorkServiceInf{
 	* Method : selectWorks
 	* 작성자 : Mr.kku
 	* 변경이력 :
-	* @param mapWork
+	* @param work_project
 	* @return
 	* Method 설명 : 업무 리스트를 이메일과 프로젝트 ID 로 검색한다.
 	*/
 	@Override
-	public List<WorkVo> selectWorks(Map<String, String> mapWork) {
-		return workMapper.selectWorks(mapWork);
+	public List<WorkVo> selectWorks(String work_project ) {
+		return workMapper.selectWorks(work_project);
 	}
 	
 	/**

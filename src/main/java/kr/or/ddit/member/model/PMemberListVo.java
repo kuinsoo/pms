@@ -21,13 +21,13 @@ public class PMemberListVo {
 	private String pmember_position;
 	private String project_title;
 	private String project_overview;
-	private String project_bookmark;
+	private String pmember_bookmark;
 	private String project_id;
 
 	public PMemberListVo() {
 	}
 
-	public PMemberListVo(String member_name, String member_profile, String pmember_member, String pmemberCount, String pmember_position, String project_title, String project_overview, String project_bookmark, String project_id) {
+	public PMemberListVo(String member_name, String member_profile, String pmember_member, String pmemberCount, String pmember_position, String project_title, String project_overview, String pmember_bookmark, String project_id) {
 		this.member_name = member_name;
 		this.member_profile = member_profile;
 		this.pmember_member = pmember_member;
@@ -35,7 +35,7 @@ public class PMemberListVo {
 		this.pmember_position = pmember_position;
 		this.project_title = project_title;
 		this.project_overview = project_overview;
-		this.project_bookmark = project_bookmark;
+		this.pmember_bookmark = pmember_bookmark;
 		this.project_id = project_id;
 	}
 
@@ -53,6 +53,14 @@ public class PMemberListVo {
 
 	public void setMember_profile(String member_profile) {
 		this.member_profile = member_profile;
+	}
+
+	public String getPmember_member() {
+		return pmember_member;
+	}
+
+	public void setPmember_member(String pmember_member) {
+		this.pmember_member = pmember_member;
 	}
 
 	public String getPmemberCount() {
@@ -87,12 +95,12 @@ public class PMemberListVo {
 		this.project_overview = project_overview;
 	}
 
-	public String getProject_bookmark() {
-		return project_bookmark;
+	public String getPmember_bookmark() {
+		return pmember_bookmark;
 	}
 
-	public void setProject_bookmark(String project_bookmark) {
-		this.project_bookmark = project_bookmark;
+	public void setPmember_bookmark(String pmember_bookmark) {
+		this.pmember_bookmark = pmember_bookmark;
 	}
 
 	public String getProject_id() {
@@ -101,13 +109,5 @@ public class PMemberListVo {
 
 	public void setProject_id(String project_id) {
 		this.project_id = project_id;
-	}
-
-	public String getPmember_member() {
-		return pmember_member;
-	}
-
-	public void setPmember_member(String pmember_member) {
-		this.pmember_member = pmember_member;
 	}
 }

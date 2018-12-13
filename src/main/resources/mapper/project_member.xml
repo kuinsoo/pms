@@ -21,7 +21,7 @@
         SELECT  DISTINCT
 		        p.project_title,
 		        p.project_overview,
-		        p.project_bookmark,
+		        pm.PMEMBER_BOOKMARK,
 		        p.project_id,
 		        m.member_name,
 		        m.member_profile,
@@ -128,4 +128,19 @@
 		from PROJECT_MEMBER inner join MEMBER on (PMEMBER_MEMBER = MEMBER_MAIL)
 		and PMEMBER_PROJECT = #{project_id}
 	</select>
+
+
+	<!-- 프로젝트 즐겨 찾기 검색 -->
+	<select id="selectBookmarkProject" parameterType="pMemberVo" resultType="pMemberVo">
+		select PMEMBER_PROJECT, PMEMBER_BOOKMARK from PROJECT_MEMBER
+		where PMEMBER_PROJECT = #{pmember_project}
+		and PMEMBER_MEMBER = #{pmember_member};
+	</select>
+
+	<update id="updateBookmark" parameterType="pMemberVo" >
+		update PROJECT_MEMBER
+		set PMEMBER_BOOKMARK = #{pmember_bookmark}
+		where PMEMBER_PROJECT=  #{pmember_project}
+		and PMEMBER_MEMBER = #{pmember_member}
+	</update>
 </mapper>

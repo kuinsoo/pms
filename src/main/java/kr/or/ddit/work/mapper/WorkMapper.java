@@ -26,17 +26,17 @@ public interface WorkMapper {
 	* Method 설명 : 업무 전체 일정
 	*/
 	List<WorkVo> workAllSchedule(ScheduleVo scheduleVo);
-	
-	
+
+
 	/**
-	* Method : selectWorks
-	* 작성자 : Mr.kku
-	* 변경이력 :
-	* @param mapWork
-	* @return
-	* Method 설명 : 업무 리스트를 이메일과 프로젝트 ID 로 검색한다.
-	*/
-	List<WorkVo> selectWorks(Map<String,String> mapWork);
+	 * Method : selectWorks
+	 * 작성자 : Mr.kku
+	 * 변경이력 :
+	 * @param work_project
+	 * @return
+	 * Method 설명 : 업무 리스트를 이메일과 프로젝트 ID 로 검색한다.
+	 */
+	List<WorkVo> selectWorks(String work_project);
 	
 	/**
 	* Method : createWork
