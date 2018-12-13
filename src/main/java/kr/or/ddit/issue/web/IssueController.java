@@ -56,10 +56,6 @@ public class IssueController {
 		myProjectList.put("percentList", getPercentList(history_myProjectList));
 		myProjectList.put("history_myProjectList", history_myProjectList);
 		
-		System.out.println("projectCnt : " + projectCnt);
-		System.out.println("pageVo.getPageSize() : " + pageVo.getPageSize());
-		System.out.println("(int)Math.ceil((double)projectCnt / pageVo.getPageSize()) : " + (int)Math.ceil((double)projectCnt / pageVo.getPageSize()));
-		
 		model.addAttribute("projectCnt", (int)Math.ceil((double)projectCnt / pageVo.getPageSize()));
 		
 		model.addAttribute("myProjectList", myProjectList);
@@ -76,10 +72,6 @@ public class IssueController {
 		Map<String, Object> myProjectList = new HashMap<String, Object>();
 		myProjectList.put("percentList", getPercentList(history_myProjectList));
 		myProjectList.put("history_myProjectList", history_myProjectList);
-		
-		System.out.println("projectCnt : " + projectCnt);
-		System.out.println("pageVo.getPageSize() : " + pageVo.getPageSize());
-		System.out.println("(int)Math.ceil((double)projectCnt / pageVo.getPageSize()) : " + (int)Math.ceil((double)projectCnt / pageVo.getPageSize()));
 		
 		model.addAttribute("projectCnt", (int)Math.ceil((double)projectCnt / pageVo.getPageSize()));
 		
