@@ -38,4 +38,14 @@ public interface IssueMapper {
 	*/
 	List<ProjectVo> issueHistoryPagination(PageVo pageVo);
 	
+	/**
+	* Method : projectCnt
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param pageVo
+	* @return
+	* Method 설명 : 프로젝트 총 갯수
+	*/
+	int projectCnt(PageVo pageVo);
+	
 }
