@@ -16,6 +16,7 @@
 		$(document).ready(function() {
 			
 			getMyPageList(1);
+			getBookMarkProjectList(1);
 			
 			$(".phoneBtns").hide();
 			$(".saveBtn").hide();
@@ -65,6 +66,9 @@
 			});
 			$('.saveBtn').prop('disabled', false);
 	
+				
+			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 파 일 부 분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+			
 			$("#fileElem").change(function(){
 				console.log("fileChange");
 				
@@ -95,7 +99,9 @@
 			});
 		});
 		
-		<!-- 핸드폰 번호 입력 후 인증 버튼 -->
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 파 일 부 분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		
+		// 핸드폰 번호 입력 후 인증 버튼
 		function telAjax(){
 			var member_tel = $("#member_tel").val();
 			$.ajax({
@@ -107,6 +113,8 @@
 				}
 			});
 		}
+		
+		// 휴대번호 인증 부분 이벤트
 		function onkeyup_event(){
 			if(certificationNumber == $("#telnum").val()){
 				$(".telerror").hide();
@@ -119,7 +127,7 @@
 			}
 		}
 		
-		// 페이징 처리 Ajax
+		// 마이페이지 : 참여중인 프로젝트 목록 / 페이징 처리 Ajax	
 		function getMyPageList(page){
 			var pageSize = 10;
 			
@@ -154,7 +162,7 @@
 			});
 		}
 			
-		// 검색 Ajax	
+		// 마이페이지 : 참여중인 프로젝트 목록 검색 Ajax	
 		function getSearchProject(){
 		var param = $('form[name=searchProject]').serialize();
 			
@@ -184,6 +192,81 @@
 							paging +="<li><a href='javascript:getMyPageList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 					$(".pagination").html(paging);
 				},
+				
+				// 실패시 
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+		
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 즐겨찾기 목록 
+		
+		function getmybookMarkProjectList(page){
+			var pageSize = 10;
+			
+			$.ajax({
+				type: "GET",
+				url : "/mybookMarkProjectList",
+				data: {"page":page, "pageSize":pageSize},
+				sucess : function(data){
+					var html = "";
+					$.each(data.projectBookList, function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.project_title +"</td>";
+						html += "	<td>"+ mm.pmember_member +"</td>";
+						html += "</tr>";
+					});
+					
+					$("#projectBookList").html("");
+					$("#projectBookList").html(html);
+					
+					var paging ="";
+						paging +="<li><a href='javascript:getmybookMarkProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						for(var i= 1; i<=data.pageCnt; i++) {
+							paging += "<li><a href='javascript:getmybookMarkProjectList("+ i +");'>"+ i+ "</a></li>";
+						}
+							paging +="<li><a href='javascript:getmybookMarkProjectList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+						$(".pagination").html(paging);
+					},	
+					fail : function(xhr){
+						console.log(xhr);
+					}
+				});
+			}
+		
+		// 마이페이지 : 참여중인 프로젝트 목록 검색 Ajax	
+		function getSearchBookProject(){
+		var param = $('form[name=searchBookProject]').serialize();
+			
+			$.ajax({
+				type: "POST",
+				url : "/searchBookProjectAjax",
+				data: param,
+				
+				sucess : function(data){
+					var html = "";
+					$.each(data.projectBookList, function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.project_title +"</td>";
+						html += "	<td>"+ mm.pmember_member +"</td>";
+						html += "</tr>";
+					});
+					
+					$("#projectBookList").html("");
+					$("#projectBookList").html(html);
+					
+					var paging ="";
+					paging +="<li><a href='javascript:getmybookMarkProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<=data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getmybookMarkProjectList("+ i +");'>"+ i+ "</a></li>";
+					}
+						paging +="<li><a href='javascript:getmybookMarkProjectList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".pagination").html(paging);
+				},	
 				fail : function(xhr){
 					console.log(xhr);
 				}
@@ -193,13 +276,16 @@
 	</script>
 	
 	<!-- CURRENT SECTION(MAIN) -->	
+	
 	<section class="currentMain">
 		<div class="currentMainContainer">
 			<div class="myPageContainer">
 				<div class="myPageContainerTitle">
 					<h2>사용자 기본 정보</h2>
 				</div>
-				<!-- 사용자 정보 -->
+				
+				<!-- 마이페이지 사용자 정보 수정 부분  -->
+				
 				<form action="/myPageUpdate" method="post" enctype="multipart/form-data">
 				<div class="myPageContainerLeft">
 					<div class="myPageContainerLeftUser">
@@ -274,6 +360,9 @@
 							<li><a href="#tabs2-4">보관함</a></li>
 							<li><a href="#tabs2-5">회원탈퇴</a></li>
 						</ul>
+
+						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 참여중인 목록  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
 						<div id="tabs2-1">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
@@ -296,13 +385,6 @@
 										</tr>
 									</thead>
 									<tbody id ="projectList">
-									<%-- <c:forEach items="${projectList}" var = "vo">
-										<tr>
-											<td>${vo.rnum}</td>
-											<td>${vo.project_title}</td>
-											<td>${vo.pmember_member}</td>
-										</tr>
-										</c:forEach> --%>
 									</tbody>
 								</table>
 								<div class="text-center">
@@ -310,16 +392,18 @@
 								</div>
 							</div>
 						</div>
+						
+						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 즐겨찾기 목록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+						
+						
 						<div id="tabs2-2">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-									<form name="searchProject" method="POST" onsubmit="return false;">
-										<!-- <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/> -->
-									<form name ="searchProject" method="POST" onsubmit="return false;">
-										<!--  <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>-->
+									<form name ="searchBookProject" method="POST" onsubmit="return false;">
+										<input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
-										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchProject();"></i>  
+										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchBookProject();"></i>  
 									</form>
 								</div>
 								<table>
@@ -333,14 +417,7 @@
 											<th><span>프로젝트 팀장</span></th>
 										</tr>
 									</thead>
-									<tbody id ="projectList">
-									<%-- <c:forEach items="${projectList}" var = "vo">
-										<tr>
-											<td>${vo.rnum}</td>
-											<td>${vo.project_title}</td>
-											<td>${vo.pmember_member}</td>
-										</tr>
-										</c:forEach> --%>
+									<tbody id ="projectBookList">
 									</tbody>
 								</table>
 								<div class="text-center">
@@ -348,11 +425,14 @@
 								</div>
 							</div>
 						</div>
+						
+						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+						
+						
 						<div id="tabs2-3">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
 									<form name ="searchProject" method="POST" onsubmit="return false;">
-										<!-- <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/> -->
 										<!--  <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>-->
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
@@ -370,14 +450,7 @@
 											<th><span>프로젝트 팀장</span></th>
 										</tr>
 									</thead>
-									<tbody id ="projectList">
-									<%-- <c:forEach items="${projectList}" var = "vo">
-										<tr>
-											<td>${vo.rnum}</td>
-											<td>${vo.project_title}</td>
-											<td>${vo.pmember_member}</td>
-										</tr>
-										</c:forEach> --%>
+									<tbody id ="아직미구현">
 									</tbody>
 								</table>
 								<div class="text-center">
@@ -389,7 +462,6 @@
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
 									<form name ="searchProject" method="POST" onsubmit="return false;">
-										<!-- <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/> -->
 										<!--  <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>-->
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
@@ -407,14 +479,7 @@
 											<th><span>프로젝트 팀장</span></th>
 										</tr>
 									</thead>
-									<tbody id ="projectList">
-									<%-- <c:forEach items="${projectList}" var = "vo">
-										<tr>
-											<td>${vo.rnum}</td>
-											<td>${vo.project_title}</td>
-											<td>${vo.pmember_member}</td>
-										</tr>
-										</c:forEach> --%>
+									<tbody id ="아직미구현">
 									</tbody>
 								</table>
 								<div class="text-center">

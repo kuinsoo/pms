@@ -49,7 +49,7 @@
 	</update>
 	
 	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  마이페이지 부분  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-	
+	<!--  참여중인 프로젝트  -->
 	<select id="myprojectselect" resultType="projectVo" parameterType="pageVo">
 	select * from(
  			select rownum rnum ,a.*
@@ -70,11 +70,13 @@
 		<if test="searchText!=null and searchText!=''">and project_title like '%'||#{searchText}||'%'</if>
 	</select>
 	
+	<!-- 프로젝트 전체 개수 가져오기  -->	
 	<select id="totalProjectCnt" resultType="int">
 		select count (*)
 		from project
 	 </select>
 
+	<!--  즐겨찾기한 프로젝트  -->
 	<select id = "mybookmarkselect" resultType="projectVo" parameterType="pageVo">
 		
 		select * from
@@ -89,7 +91,7 @@
 		                                                             WHERE  pmember_position = 1) pmem
 		        ON      p.project_id = pmem.pmember_project
 		        WHERE   pm.pmember_member = 'sally1334@naver.com'
-		        AND     p.project_bookmark = 'Y')a)
+		        AND     pm.pmember_bookmark = 'Y')a)
 		   		where rnum between ${page}*${pageSize}-(${pageSize}-1)
 			and ${page}*${pageSize}
 		<if test="searchText!=null and searchText!=''">and project_title like '%'||#{searchText}||'%'</if> 

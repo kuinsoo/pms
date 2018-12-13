@@ -62,7 +62,7 @@ public class MemberDetailController {
 		return "myPage/myPage";
 	}
 	
-	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
 	/**
 	 * Method : myPageProjectAjax
@@ -93,6 +93,7 @@ public class MemberDetailController {
 		return projectMap;
 		
 	}
+	
 
 	
 	/**
@@ -128,6 +129,58 @@ public class MemberDetailController {
 		
 		return projectMap;
 	}
+	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+	/**
+	 * Method : mybookMarkProjectList
+	 * 작성자 : 나진실 
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 마이페이지 : 즐겨찾기한 프로젝트 리스트 Ajax
+	 */
+	
+	@ResponseBody
+	@RequestMapping(value = "/mybookMarkProjectList", method = RequestMethod.GET)
+	public Map<String, Object> mybookMarkProjectList (Model model , PageVo pageVo, @SessionAttribute("memberVo")MemberVo memberVo, 
+						ProjectVo projectVo, HttpServletRequest request) {
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		List<ProjectVo> projectBookList = memberservice.mybookmarkselect(pageVo);
+		
+		Map<String , Object> projectBookMap = new HashMap<>();
+		int pageCnt = memberservice.totalProjectCnt();
+		
+		projectBookMap.put("projectBookList", projectBookList);
+		projectBookMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+	
+		return projectBookMap;
+	}
+	
+	@RequestMapping(value ="/searchBookProjectAjax" , method=  RequestMethod.POST)
+	public Map<String, Object> searchBookProjectAjax (Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
+			ProjectVo projectVo, HttpServletRequest request){
+		
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		// 검색 부분 
+		if (pageVo.getSearchText() == null) {
+			pageVo.setSearchText("");
+		}
+		
+		List<ProjectVo> projectBookList = memberservice.mybookmarkselect(pageVo);
+		
+		Map<String , Object> projectBookMap = new HashMap<>();
+		int pageCnt = memberservice.totalProjectCnt();
+		
+		projectBookMap.put("projectBookList", projectBookList);
+		projectBookMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+	
+		return projectBookMap;
+	}
+	
+	
 	
 	/**
 	 * Method : memberDetailUpdate
