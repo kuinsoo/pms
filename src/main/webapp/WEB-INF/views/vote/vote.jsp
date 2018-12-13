@@ -33,6 +33,9 @@
 	margin-top:20px;outline:none;cursor:pointer;
 }
 .voteContainer > ul > li:nth-child(2){padding:20px;}
+.voteList > form > ul{width:100%;height:200px;overflow-y:scroll;margin-top:20px;}
+.voteList > form > ul > li {width:100%;height:30px;line-height:30px;font-size:20px;text-indent:20px;border:1px solid #4286f4;margin:5px 0px 5px 0px;}
+.voteList > form > ul > li > input[type="checkbox"]{display:block;width:20px;height:20px;float:right;margin-top:5px;margin-right:20px;}
 </style>
 <section class="currentMain">
 	<div class="currentMainContainer">
@@ -62,37 +65,41 @@
 						<input type="submit" class="voteSubmit" value="투표 등록" />
 					</form>
 				</li>
-				<li>
+				<li class="voteList">
 					<form action="#" mehtod="post">
 						<h2>투표 제목 ex) $｛vote.voteTitle｝</h2>
-						
+						<ul>
+							<li>
+								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
+								<input type="checkbox" />
+							</li>
+							<li>
+								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
+								<input type="checkbox" />
+							</li>
+							<li>
+								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
+								<input type="checkbox" />
+							</li>
+							<li>
+								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
+								<input type="checkbox" />
+							</li>
+							<li>
+								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
+								<input type="checkbox" />
+							</li>
+							<li>
+								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
+								<input type="checkbox" />
+							</li>
+							<li>
+								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
+								<input type="checkbox" />
+							</li>
+						</ul>
+						<input type="submit" class="voteSubmit" value="투표 하기" />
 					</form>
-				</li>
-				<li>
-				</li>
-				<li>
-				</li>
-				<li>
-				</li>
-				<li>
-				</li>
-				<li>
-				</li>
-				<li>
-				</li>
-				<li>
-				</li>
-				<li>
-				</li>
-				<li>
-				</li>
-				<li>
-				</li>
-				<li>
-				</li>
-				<li>
-				</li>
-				<li>
 				</li>
 			</ul>
 		</div>
