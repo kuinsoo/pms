@@ -3,7 +3,9 @@ package kr.or.ddit.issue.web;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,27 +47,46 @@ public class IssueController {
 	public String issueHistory(@SessionAttribute("memberVo") MemberVo memberVo, PageVo pageVo, Model model) {
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
-		pageVo.setPage(1);
-		pageVo.setPageSize(10);
-		List<ProjectVo> history_myProjectList = issueService.issueHistoryPagination(pageVo);
+		pageVo.setPageSize(5);
 		
-		model.addAttribute("percentList", getPercentList(history_myProjectList));
-		model.addAttribute("history_myProjectList", history_myProjectList);
+		List<ProjectVo> history_myProjectList = issueService.issueHistoryPagination(pageVo);
+		int projectCnt = issueService.projectCnt(pageVo);
+		
+		Map<String, Object> myProjectList = new HashMap<String, Object>();
+		myProjectList.put("percentList", getPercentList(history_myProjectList));
+		myProjectList.put("history_myProjectList", history_myProjectList);
+		
+		System.out.println("projectCnt : " + projectCnt);
+		System.out.println("pageVo.getPageSize() : " + pageVo.getPageSize());
+		System.out.println("(int)Math.ceil((double)projectCnt / pageVo.getPageSize()) : " + (int)Math.ceil((double)projectCnt / pageVo.getPageSize()));
+		
+		model.addAttribute("projectCnt", (int)Math.ceil((double)projectCnt / pageVo.getPageSize()));
+		
+		model.addAttribute("myProjectList", myProjectList);
 		
 		return "history/issueHistory";
 	}
 	
-	@RequestMapping(value= {"/issueHistoryAjax"}, method=RequestMethod.POST)
+	@RequestMapping(value="/issueHistoryAjax", method=RequestMethod.POST)
 	public String issueHistoryAjax(@SessionAttribute("memberVo") MemberVo memberVo, PageVo pageVo, Model model) {
-		System.out.println("page : " + pageVo.getPage());
-		System.out.println("pageSize : " + pageVo.getPageSize());
-		System.out.println("sid : " + pageVo.getMember_mail());
 		
 		List<ProjectVo> history_myProjectList = issueService.issueHistoryPagination(pageVo);
-		System.out.println("******history_myProjectList : " + history_myProjectList.size());
+		int projectCnt = issueService.projectCnt(pageVo);
 		
-		model.addAttribute("percentList", getPercentList(history_myProjectList));
-		model.addAttribute("history_myProjectList", history_myProjectList);
+		Map<String, Object> myProjectList = new HashMap<String, Object>();
+		myProjectList.put("percentList", getPercentList(history_myProjectList));
+		myProjectList.put("history_myProjectList", history_myProjectList);
+		
+		System.out.println("projectCnt : " + projectCnt);
+		System.out.println("pageVo.getPageSize() : " + pageVo.getPageSize());
+		System.out.println("(int)Math.ceil((double)projectCnt / pageVo.getPageSize()) : " + (int)Math.ceil((double)projectCnt / pageVo.getPageSize()));
+		
+		model.addAttribute("projectCnt", (int)Math.ceil((double)projectCnt / pageVo.getPageSize()));
+		
+		//model.addAttribute("percentList", getPercentList(history_myProjectList));
+		//model.addAttribute("history_myProjectList", history_myProjectList);
+		//model.addAttribute("projectCnt", projectCnt);
+		model.addAttribute("myProjectList", myProjectList);
 		
 		return "history/issueHistoryAjax";
 	}

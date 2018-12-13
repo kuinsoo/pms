@@ -46,5 +46,13 @@
 		        )
 		WHERE   rnum BETWEEN ${page} * ${pageSize} - (${pageSize} - 1) AND ${page} * ${pageSize}	
 	</select>
+	
+	<!-- 프로젝트 총 갯수 -->
+	<select id="projectCnt" resultType="int" parameterType="pageVo">
+		SELECT  COUNT(*)
+		FROM    project p INNER JOIN project_member pm
+		ON      p.project_id = pm.pmember_project
+		WHERE   pm.pmember_member = #{member_mail}
+	</select>
 
 </mapper>

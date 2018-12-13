@@ -70,8 +70,20 @@ public class IssueService implements IssueServiceInf{
 	*/
 	@Override
 	public List<ProjectVo> issueHistoryPagination(PageVo pageVo) {
-		System.out.println("pageVo : " + pageVo);
 		return issueMapper.issueHistoryPagination(pageVo);
+	}
+
+	/**
+	* Method : projectCnt
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param pageVo
+	* @return
+	* Method 설명 : 프로젝트 총 갯수
+	*/
+	@Override
+	public int projectCnt(PageVo pageVo) {
+		return issueMapper.projectCnt(pageVo);
 	}
 	
 }
