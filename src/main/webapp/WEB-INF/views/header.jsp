@@ -42,7 +42,7 @@
             </li>
             <li>
                 <i class="icon-star icons"></i>
-                <p>즐겨찾기</p>
+                <p><a href="/favorites">즐겨찾기</a></p>
             </li>
         </ul>
         <ul class="menuList">
