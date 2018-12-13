@@ -76,11 +76,11 @@
             </li>
             <li>
                 <i class="icon-diamond icons"></i>
-                <p>가이드</p>
+                <p><a href="/guide">가이드</a></p>
             </li>
             <li>
                 <i class="icon-question icons"></i>
-                <p>Q & A</p>
+                <p><a href="/qna">Q & A</a></p>
             </li>
         </ul>
     </div>
