@@ -161,7 +161,7 @@
 	
 	</script>
 	
-	<!-- CURRENT SECTION(MAIN) -->
+	<!-- CURRENT SECTION(MAIN) -->	
 	<section class="currentMain">
 		<div class="currentMainContainer">
 			<div class="myPageContainer">
