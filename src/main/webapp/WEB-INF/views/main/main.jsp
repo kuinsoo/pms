@@ -108,7 +108,7 @@
                                 </c:if>
 							</div>
 							<div class="projectCardUserName">
-								<img src="${memberVo.member_profile}">
+								<img src="${pMemberListVo.member_profile}">
 								<br>
 								${pMemberListVo.member_name} 외 ${pMemberListVo.pmemberCount - 1}명
 							</div>
