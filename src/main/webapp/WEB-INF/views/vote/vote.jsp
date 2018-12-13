@@ -32,6 +32,7 @@
 	width:100%;height:40px;background-color:#4286f4;color:#fff;border:none;font-size:18px;
 	margin-top:20px;outline:none;cursor:pointer;
 }
+.voteContainer > ul > li:nth-child(2){padding:20px;}
 </style>
 <section class="currentMain">
 	<div class="currentMainContainer">
@@ -62,6 +63,10 @@
 					</form>
 				</li>
 				<li>
+					<form action="#" mehtod="post">
+						<h2>투표 제목 ex) $｛vote.voteTitle｝</h2>
+						
+					</form>
 				</li>
 				<li>
 				</li>
