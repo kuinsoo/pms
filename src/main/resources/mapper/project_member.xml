@@ -18,7 +18,36 @@
 
 	<!-- mina Project list -->
     <select id="selectMainView" parameterType="String" resultMap="pMemberResultMap">
-        SELECT  DISTINCT
+        SELECT  p.project_id,
+        p.project_title,
+        p.project_overview,
+        pm.pmember_position,
+        pm.pmember_bookmark,
+        mail.pmember_member,
+        mem.member_name,
+        mem.member_profile,
+        pCount.pmemberCount
+FROM    project_member pm INNER JOIN project p
+            ON      pm.pmember_project = p.project_id INNER JOIN (SELECT  pmember_project,
+                                                                          pmember_member
+                                                                  FROM    project_member
+                                                                  WHERE   pmember_position = 1) mail
+            ON      pm.pmember_project = mail.pmember_project INNER JOIN (SELECT  member_mail,
+                                                                                  member_name,
+                                                                                  member_profile
+                                                                          FROM    member) mem
+            ON      mail.pmember_member = mem.member_mail INNER JOIN (SELECT  pmember_project,
+                                                                              COUNT(*) pmemberCount
+                                                                      FROM    project_member
+                                                                      WHERE   pmember_project IN (SELECT  pmember_project
+                                                                                                  FROM    project_member
+                                                                                                  WHERE   pmember_member = #{member_mail})
+                                                                      GROUP BY pmember_project) pCount
+            ON      pm.pmember_project = pCount.pmember_project
+WHERE   pm.pmember_member = #{member_mail}
+    </select>
+    <!--
+             SELECT  DISTINCT
 		        p.project_title,
 		        p.project_overview,
 		        pm.PMEMBER_BOOKMARK,
@@ -39,26 +68,6 @@
 		ON      pm.pmember_project = pmemberCount.pmember_project
 		WHERE   m.member_mail = #{member_mail}
 		order by to_number(p.PROJECT_id)
-    </select>
-    <!--
-        SELECT  DISTINCT
-                p.project_title,
-                p.project_overview,
-                p.project_bookmark,
-                m.member_name,
-                m.member_profile,
-                pmcount.*
-        FROM    project p INNER JOIN project_member pm
-        ON      p.project_id = pm.pmember_project INNER JOIN member m
-        ON      pm.pmember_member = m.member_mail INNER JOIN (SELECT  pmember_project,
-                                                                      COUNT(*)
-                                                              FROM    project_member
-                                                              WHERE   pmember_project IN (SELECT  pmember_id
-                                                                                          FROM    project_member
-                                                                                          WHERE   pmember_member = 'kkuinsoo@gmail.com')
-                                                              GROUP BY pmember_project) pmcount
-        ON      pm.pmember_project = pmcount.pmember_project
-        WHERE   m.member_mail = 'kkuinsoo@gmail.com';
      -->
 
 	<!-- 팀리더로 업데이트 등록 -->
