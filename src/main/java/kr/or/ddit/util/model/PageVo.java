@@ -47,10 +47,11 @@ public class PageVo {
 	
 	public PageVo() {
 	}
-
+	
 	@Override
 	public String toString() {
-		return "PageVo [member_mail=" + member_mail + ", page=" + page + ", pageSize=" + pageSize + "]";
+		return "PageVo [page=" + page + ", pageSize=" + pageSize + ", member_mail=" + member_mail + ", searchText="
+				+ searchText + ", searchBookText=" + searchBookText + "]";
 	}
-	
+
 }

@@ -71,10 +71,21 @@
 	</select>
 	
 	<!-- 프로젝트 전체 개수 가져오기  -->	
-	<select id="totalProjectCnt" resultType="int">
-		select count (*)
-		from project
+	<select id="totalProjectCnt" resultType="int" parameterType="String">
+		select count(*)
+		from   project_member
+		where  pmember_member = #{member_mail}
 	 </select>
+	 
+	 <select id="selectProjectCnt" resultType="int" parameterType="String">
+	 	SELECT  count(*)
+		FROM    project_member
+		WHERE   pmember_member = #{member_mail}
+		AND     pmember_bookmark = 'Y'
+	 </select>
+	 
+	 
+	 
 
 	<!--  즐겨찾기한 프로젝트  -->
 	<select id = "mybookmarkselect" resultType="projectVo" parameterType="pageVo">
@@ -92,9 +103,8 @@
 		        ON      p.project_id = pmem.pmember_project
 		        WHERE   pm.pmember_member = #{member_mail}
 		        AND     pm.pmember_bookmark = 'Y')a)
-		   		where rnum between ${page}*${pageSize}-(${pageSize}-1)
-			and ${page}*${pageSize}
-		<if test="searchText!=null and searchText!=''">and project_title like '%'||#{searchBookText}||'%'</if>
+		   		where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
+		<if test="searchBookText!=null and searchBookText!=''">and project_title like '%'||#{searchBookText}||'%'</if>
 	</select>
 </mapper>
 

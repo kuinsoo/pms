@@ -104,8 +104,17 @@ public interface MemberMapper {
 	 * @return
 	 * Method 설명 : 프로젝트 건수 조회 
 	 */
-	int totalProjectCnt();
+	int totalProjectCnt(String member_mail);
 	
+	
+	/**
+	 * Method : selectProjectCnt
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 프로젝트 건수(회원아이디로)조회 
+	 */
+	int selectProjectCnt(String member_mail);
 	/**
 	 * Method : updatePass
 	 * 작성자 : 나진실

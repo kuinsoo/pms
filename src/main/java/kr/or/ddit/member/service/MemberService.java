@@ -244,8 +244,8 @@ public class MemberService implements MemberServiceInf {
 	}
 
 	@Override
-	public int totalProjectCnt() {
-		return memberMapper.totalProjectCnt();
+	public int totalProjectCnt(String member_mail) {
+		return memberMapper.totalProjectCnt(member_mail);
 	}
 
 
@@ -293,5 +293,10 @@ public class MemberService implements MemberServiceInf {
 	@Override
 	public int updateBookmark(PMemberVo pMemberVo) {
 		return memberMapper.updateBookmark(pMemberVo);
+	}
+
+	@Override
+	public int selectProjectCnt(String member_mail) {
+		return memberMapper.selectProjectCnt(member_mail);
 	}
 }

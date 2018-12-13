@@ -210,7 +210,7 @@
 				type: "GET",
 				url : "/mybookMarkProjectList",
 				data: {"page":page, "pageSize":pageSize},
-				sucess : function(data){
+				success : function(data){
 					var html = "";
 					$.each(data.projectBookList, function(idx,mm){
 						html += "<tr>";
@@ -232,15 +232,15 @@
 							paging += "<li><a href='javascript:getmybookMarkProjectList("+ i +");'>"+ i+ "</a></li>";
 						}
 							paging +="<li><a href='javascript:getmybookMarkProjectList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
-						$(".pagination").html(paging);
+						$(".pagination2").html(paging);
 					},	
-					fail : function(xhr){
-						console.log(xhr);
+					fail : function(data){
+						console.log(data);
 					}
 				});
 			}
 		
-		// 마이페이지 : 참여중인 프로젝트 목록 검색 Ajax	
+		// 마이페이지 : 즐겨찾기 프로젝트 목록 검색 Ajax	
 		function getSearchBookProject(){
 		var param = $('form[name=searchBookProject]').serialize();
 			
@@ -249,7 +249,9 @@
 				url : "/searchBookProjectAjax",
 				data: param,
 				
-				sucess : function(data){
+				success : function(data){
+					console.log("data : " + data);
+					
 					var html = "";
 					$.each(data.projectBookList, function(idx,mm){
 						html += "<tr>";
@@ -268,8 +270,9 @@
 						paging += "<li><a href='javascript:getmybookMarkProjectList("+ i +");'>"+ i+ "</a></li>";
 					}
 						paging +="<li><a href='javascript:getmybookMarkProjectList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
-					$(".pagination").html(paging);
+					$(".pagination2").html(paging);
 				},	
+				
 				fail : function(xhr){
 					console.log(xhr);
 				}
@@ -398,12 +401,12 @@
 						
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 즐겨찾기 목록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 						
-						
+						 
 						<div id="tabs2-2">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
 									<form name ="searchBookProject" method="POST" onsubmit="return false;">
-										<input type="text" id="searchBookText" name ="searchBookText" value='${searchBookText}'  placeholder="검색어를 입력해주세요"/>
+										<input type="text" id="searchBookText" name ="searchBookText" value='${searchBookText}' placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchBookProject();"></i>  
@@ -424,7 +427,7 @@
 									</tbody>
 								</table>
 								<div class="text-center">
-									 <ul class="pagination"></ul>
+									 <ul class="pagination2"></ul>
 								</div>
 							</div>
 						</div>
@@ -435,12 +438,12 @@
 						<div id="tabs2-3">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-									<form name ="searchProject" method="POST" onsubmit="return false;">
-										<!--  <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>-->
+									<!-- <form name ="searchProject" method="POST" onsubmit="return false;">
+										 <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
-									</form>
+									</form> -->
 								</div>
 								<table>
 									<colgroup width="10%" />
@@ -464,12 +467,12 @@
 						<div id="tabs2-4">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-									<form name ="searchProject" method="POST" onsubmit="return false;">
-										<!--  <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>-->
+									<!-- <form name ="searchProject" method="POST" onsubmit="return false;">
+										 <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
-									</form>
+									</form> -->
 								</div>
 								<table>
 									<colgroup width="10%" />

@@ -85,7 +85,7 @@ public class MemberDetailController {
 	
 		List<ProjectVo> projectList = memberservice.myprojectselect(pageVo);
 		Map<String, Object> projectMap = new HashMap<>();
-		int pageCnt = memberservice.totalProjectCnt();
+		int pageCnt = memberservice.totalProjectCnt(memberVo.getMember_mail());
 		
 		projectMap.put("projectList", projectList);		
 		projectMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
@@ -122,7 +122,7 @@ public class MemberDetailController {
 		
 		List<ProjectVo> projectList = memberservice.myprojectselect(pageVo);
 		Map<String, Object> projectMap = new HashMap<>();
-		int pageCnt = memberservice.totalProjectCnt();
+		int pageCnt = memberservice.totalProjectCnt(memberVo.getMember_mail());
 		
 		projectMap.put("projectList", projectList);		
 		projectMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
@@ -137,9 +137,8 @@ public class MemberDetailController {
 	 * 작성자 : 나진실 
 	 * 변경이력 :
 	 * @return
-	 * Method 설명 : 마이페이지 : 즐겨찾기한 프로젝트 리스트 Ajax
+	 * Method 설명 : 마이페이지 - 즐겨찾기한 프로젝트 리스트 Ajax
 	 */
-	
 	@ResponseBody
 	@RequestMapping(value = "/mybookMarkProjectList", method = RequestMethod.GET)
 	public Map<String, Object> mybookMarkProjectList (Model model , PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo, 
@@ -148,41 +147,54 @@ public class MemberDetailController {
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		List<ProjectVo> projectBookList = memberservice.mybookmarkselect(pageVo);
 		
-		System.out.println( "projectBookList 나와죵.. " + projectBookList  +  "projectBookList");
-		
 		Map<String , Object> projectBookMap = new HashMap<>();
-		int pageCnt = memberservice.totalProjectCnt();
+		int pageCnt = memberservice.selectProjectCnt(memberVo.getMember_mail());
+	
+		System.out.println("pageCnt : " + pageCnt);
+		System.out.println("pageVo.getPageSize() : " + pageVo.getPageSize());	
+		System.out.println("(int)Math.ceil((double)pageCnt/pageVo.getPageSize()) : " + (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
 		projectBookMap.put("projectBookList", projectBookList);
 		projectBookMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 	
 		return projectBookMap;
 	}
+	
+	
+	/**
+	 * Method : searchBookProjectAjax
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param model
+	 * @param pageVo
+	 * @param memberVo
+	 * @param projectVo
+	 * @param request
+	 * @return
+	 * Method 설명 :  마이페이지 - 즐겨찾기한 프로젝트 검색 부분 Ajax
+	 */
 	
 	@RequestMapping(value ="/searchBookProjectAjax" , method=  RequestMethod.POST)
 	public Map<String, Object> searchBookProjectAjax (Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
 			ProjectVo projectVo, HttpServletRequest request){
 		
-		
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		
 		// 검색 부분 
-		if (pageVo.getSearchText() == null) {
-			pageVo.setSearchText("");
+		if (pageVo.getSearchBookText() == null) {
+			pageVo.setSearchBookText("");
 		}
 		
 		List<ProjectVo> projectBookList = memberservice.mybookmarkselect(pageVo);
-		
+	
 		Map<String , Object> projectBookMap = new HashMap<>();
-		int pageCnt = memberservice.totalProjectCnt();
-		
+		int pageCnt = memberservice.selectProjectCnt(memberVo.getMember_mail());
 		projectBookMap.put("projectBookList", projectBookList);
+		
 		projectBookMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 	
 		return projectBookMap;
 	}
-	
-	
 	
 	/**
 	 * Method : memberDetailUpdate

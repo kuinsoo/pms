@@ -85,7 +85,7 @@
 /* 두번째 Tab */
 .myPageBottomContainer > #tabs2 > #tabs2-2{display:flex;justify-content:center;align-items:center;}
 .myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable{width:1000px;}
-.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > .projectSearchDiv{width:319px;float:right;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > .projectSearchDiv{width:320px;float:right;}
 .myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > .projectSearchDiv > form > input[type="text"] {
 	width:300px;height:30px;vertical-align:middle;margin-left:-5px;text-indent:10px;outline:none;border-top:1px solid #333;border-bottom:1px solid #333;float:left;font-size:17px;
 }
@@ -109,7 +109,7 @@
 /* 세번째 Tab */
 .myPageBottomContainer > #tabs2 > #tabs2-3{display:flex;justify-content:center;align-items:center;}
 .myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable{width:1000px;}
-.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > .projectSearchDiv{width:319px;float:right;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > .projectSearchDiv{width:320px;float:right;}
 .myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > .projectSearchDiv > form > input[type="text"] {
 	width:300px;height:30px;vertical-align:middle;margin-left:-5px;text-indent:10px;outline:none;border-top:1px solid #333;border-bottom:1px solid #333;float:left;font-size:17px;
 }
@@ -133,7 +133,7 @@
 /* 네번째 Tab */
 .myPageBottomContainer > #tabs2 > #tabs2-4{display:flex;justify-content:center;align-items:center;}
 .myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable{width:1000px;}
-.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > .projectSearchDiv{width:319px;float:right;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > .projectSearchDiv{width:320px;float:right;}
 .myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > .projectSearchDiv > form > input[type="text"] {
 	width:300px;height:30px;vertical-align:middle;margin-left:-5px;text-indent:10px;outline:none;border-top:1px solid #333;border-bottom:1px solid #333;float:left;font-size:17px;
 }

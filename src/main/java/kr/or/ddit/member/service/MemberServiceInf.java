@@ -89,7 +89,17 @@ public interface MemberServiceInf {
 	 *
 	 * @return Method 설명 : 프로젝트 건수 조회
 	 */
-	int totalProjectCnt();
+	int totalProjectCnt(String member_mail);
+	
+	
+	/**
+	 * Method : selectProjectCnt
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 프로젝트 건수(회원아이디로)조회 
+	 */
+	int selectProjectCnt(String member_mail);
 
 	/**
 	 * Select main view list. 작성자 : Mr.KKu 메인 페이지 프로젝트 리스트
