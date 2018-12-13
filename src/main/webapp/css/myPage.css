@@ -52,7 +52,7 @@
 .myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 > ul > li:nth-child(3) > .phoneBtns {
 	width:100px;height:30px;font-size:17px;margin-top:-9px;border:none;background-color:#746fcc;color:#fff;outline:none;cursor:pointer;
 }
-
+.profileUploadImg{display: none;}
 /* MY PAGE BOTTOM */
 .myPageBottomContainer{width:1400px;height:500px;clear:both;padding-top:20px;}
 .myPageBottomContainer > #tabs2{width:1398px;}

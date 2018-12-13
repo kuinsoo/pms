@@ -67,9 +67,6 @@ public class MemberDetailController {
 	/**
 	 * Method : myPageProjectAjax
 	 * 작성자 : pc07 
-	 * 
-	 * 
-	 * 
 	 * 변경이력 :
 	 * @param model
 	 * @param pageVo

@@ -31,6 +31,7 @@
 			$(".inputerror").hide();
 			
 			$(".updateBtn").click(function(){	
+				$(".profileUploadImg").show();
 				$(".phoneBtns").show();
 				$(".saveBtn").show();
 				$("#pass2").show();				
@@ -61,6 +62,36 @@
 					$(".error").hide();
 					$('.saveBtn').prop('disabled', false);
 				}
+			});
+			$('.saveBtn').prop('disabled', false);
+	
+			$("#fileElem").change(function(){
+				console.log("fileChange");
+				
+				 //var files = e.originalEvent.dataTransfer.files;
+				var file = $(this)[0].files[0];
+	    	    	
+		    	var reader = new FileReader();
+		        reader.readAsDataURL(file);
+		        reader.onload = function(readEvent) {
+		        	
+		        	//$("#fileList").css("background-image", readEvent.target.result);
+		        	
+		        	 //$("#fileList").css("src", window.URL.createObjectURL(file));
+		        	 
+		        	 $("#fileList").css("background-image", window.URL.createObjectURL(file));
+		        	
+		        	/*var img = $("<img/>", {
+		    			src : readEvent.target.result,
+		    			width : 120,
+		    			height : 120
+		    		});
+		        	
+		        	$("#test").prepend(img.clone());*/
+		        	
+		        	//$("#pic").hide();
+		       	}
+			    
 			});
 		});
 		
@@ -177,13 +208,11 @@
 							<div id="fileList" style="background-image:url('${memberVo.member_profile}');background-repeat:no-repeat;background-position:50% 50%;background-size:cover;">
 								<c:choose>
 									<c:when test="${memberVo.member_profile != null}">
-										<input type="file" id="fileElem" class="fileInputCSS"
-										name="member_profile" accept="image/*" style="display:none">									
+										<input type="file" name="member_profile" id="fileElem" class="fileInputCSS" multiple accept="image/*" style="display:none">								
 									</c:when>
 									<c:otherwise>
 										<div>
-										<input type="file" id="fileElem" class="fileInputCSS"
-										name="member_profile"/>
+										<input type="file" name="member_profile" id="fileElem" class="fileInputCSS" multiple accept="image/*" style="display:none" onchange="handleFiles(this.files)">
 										</div>
 									</c:otherwise>
 								</c:choose>
@@ -195,7 +224,7 @@
 					</div>
 					<div class="myPageContainerRightUser">
 						<div class="userContentsInfoRight_1">
-							<ul>
+							<ul id="test">
 								<li>사용자 이메일</li>
 								<li>사용자 이름 </li>
 								<li>휴대폰 번호</li>
@@ -298,7 +327,7 @@
 									<thead>
 										<tr>
 											<th><span>번호</span></th>
-											<th><span>참여중인 프로젝트 명</span></th>
+											<th><span>즐겨찾기한 프로젝트 명</span></th>
 											<th><span>프로젝트 팀장</span></th>
 										</tr>
 									</thead>

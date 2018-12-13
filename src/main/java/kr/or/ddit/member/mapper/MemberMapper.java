@@ -87,6 +87,17 @@ public interface MemberMapper {
 
 	
 	/**
+	 * Method : mybookmarkselect
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 마이페이지 즐겨찾기한 프로젝트 
+	 */
+	List<ProjectVo> mybookmarkselect(PageVo pageVo);
+	
+	
+	/**
 	 * Method : totalProjectCnt
 	 * 작성자 : pc07
 	 * 변경이력 :

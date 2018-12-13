@@ -102,6 +102,31 @@ public class MemberService implements MemberServiceInf {
 	}
 	
 	/**
+	 * Method : myprojectselect
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 마이페이지 참여중인 프로젝트 리스트 
+	 */
+	@Override
+	public List<ProjectVo> myprojectselect(PageVo pageVo) {
+		return memberMapper.myprojectselect(pageVo);
+	}
+	/**
+	 * Method : mybookmarkselect
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 마이페이지 즐겨찾기한 프로젝트 리스트 
+	 */
+	@Override
+	public List<ProjectVo> mybookmarkselect(PageVo pageVo) {
+		return memberMapper.mybookmarkselect(pageVo);
+	}
+	
+	/**
 	 * Method : selectfindPass
 	 * 작성자 : 나진실
 	 * 변경이력 :
@@ -223,11 +248,8 @@ public class MemberService implements MemberServiceInf {
 		return memberMapper.totalProjectCnt();
 	}
 
-	@Override
-	public List<ProjectVo> myprojectselect(PageVo pageVo) {
-		
-		return memberMapper.myprojectselect(pageVo);
-	}
+	
+
 	/**
 	 * Project member list list.
 	 * 작성자 : Mr.KKu
@@ -245,6 +267,5 @@ public class MemberService implements MemberServiceInf {
 		// TODO Auto-generated method stub
 		return memberMapper.searchInviteMember(pMemberVo);
 	}
-	
-	
+
 }
