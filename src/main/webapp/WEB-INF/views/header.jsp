@@ -72,7 +72,7 @@
         <ul class="boardMenu">
             <li>
                 <i class="icon-note icons"></i>
-                <p>공지사항</p>
+                <p><a href="/notice">공지사항</a></p>
             </li>
             <li>
                 <i class="icon-diamond icons"></i>
