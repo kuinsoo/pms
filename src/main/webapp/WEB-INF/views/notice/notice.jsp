@@ -39,7 +39,7 @@
 }
 .noticeSearchDiv > i {
 	float:left;font-size:20px;font-weight:bold;display:block;width:30px;height:27px;margin-top:3px;
-	border-bottom:1px solid #000;
+	border-bottom:1px solid #000;cursor:pointer;
 }
 </style>
 <!-- CURRENT SECTION(MAIN) -->
