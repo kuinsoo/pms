@@ -11,6 +11,7 @@ public class PageVo {
 	
 	// 마이페이지 검색부분 
 	private String searchText;
+	private String searchBookText;
 	
 	public String getSearchText() {
 		return searchText;
@@ -19,6 +20,12 @@ public class PageVo {
 		this.searchText = searchText;
 	}
 	
+	public String getSearchBookText() {
+		return searchBookText;
+	}
+	public void setSearchBookText(String searchBookText) {
+		this.searchBookText = searchBookText;
+	}
 	public String getMember_mail() {
 		return member_mail;
 	}
