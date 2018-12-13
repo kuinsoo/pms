@@ -42,7 +42,7 @@
             </li>
             <li>
                 <i class="icon-star icons"></i>
-                <p>즐겨찾기</p>
+                <p><a href="/favorites">즐겨찾기</a></p>
             </li>
         </ul>
         <ul class="menuList">
@@ -72,15 +72,15 @@
         <ul class="boardMenu">
             <li>
                 <i class="icon-note icons"></i>
-                <p>공지사항</p>
+                <p><a href="/notice">공지사항</a></p>
             </li>
             <li>
                 <i class="icon-diamond icons"></i>
-                <p>가이드</p>
+                <p><a href="/guide">가이드</a></p>
             </li>
             <li>
                 <i class="icon-question icons"></i>
-                <p>Q & A</p>
+                <p><a href="/qna">Q & A</a></p>
             </li>
         </ul>
     </div>

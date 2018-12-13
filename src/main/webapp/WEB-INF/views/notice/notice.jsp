@@ -2,106 +2,127 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%-- left & header--%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
-<!-- CURRENT SECTION(MAIN) -->
 <style type="text/css">
-.voteContainer {
-	width:1400px;background-color:#fff;border:1px solid #dee3eb;margin:0 auto;
-	margin-top:20px;overflow:hidden;padding-bottom:20px;margin-bottom:20px;
+.noticeContainer{width:1200px;margin:0 auto;margin-top:40px;overflow:hidden;}
+.noticeContainerLeft {
+	width:300px;height:300px;padding:20px;float:left;
+	display:flex;justify-content:center;align-items:center;background-color:#fff;
+	border:1px solid #dee3eb;
 }
-.voteContainer > ul{padding:10px 20px 20px 20px;}
-.voteContainer > ul > li {
-	display:block;background-color:#fff;border:1px solid #dee3eb;
-	width:440px;height:440px;float:left;margin-left:10px;margin-top:10px;
+.noticeContainerRight {
+	width:875px;padding:20px;float:left;margin-left:20px;
+	background-color:#fff;border:1px solid #dee3eb;
 }
-.voteContainer > ul > li:first-child{padding:20px;}
-.voteContainer > ul > li:first-child > form > .voteTitle {
-	outline:none;width:100%;height:30px;font-size:17px;margin-top:20px;
-	border:none;border-bottom:1px solid #dee3eb;
+.noticeContainerRight > table{width:100%;border-collapse:collapse;}
+.noticeContainerRight > table > thead > tr{border-top:3px solid #333;border-bottom:1px solid #333;}
+.noticeContainerRight > table > thead > tr > th{padding:20px 0px 20px 0px;font-size:17px;}
+.noticeContainerRight > table > tbody > tr{border-bottom:1px solid #333;}
+.noticeContainerRight > table > tbody > tr > td{padding:20px 0px 20px 0px;font-size:17px;}
+.noticeContainerRight > table > tbody > tr > td:nth-child(odd){text-indent:10px;}
+.noticeContainerRight > table > tbody > tr > td:nth-child(odd) > a{color:#000;}
+.noticeContainerRight > table > tbody > tr > td:nth-child(odd):hover > a {
+	text-decoration:underline;font-weight:bold;
 }
-.voteContentContainer{width:100%;height:200px;overflow-y:scroll;margin-top:20px;}
-.voteContainer > ul > li:first-child > form > .voteContentContainer > ul > li > .voteContent {
-	outline:none;width:100%;height:30px;font-size:17px;margin-top:10px;
+.noticeContainerRight > table > tbody > tr > td:nth-child(even){text-align:center;color:#666;}
+.pagination{width:100%;display:flex;justify-content:center;align-items:center;margin-top:30px;}
+.pagination > ul > li{display:inline-block;}
+.pagination > ul > li > i {
+	text-align:center;line-height:30px;cursor:pointer;font-size:15px;vertical-align:middle;
+	padding:0px 20px 0px 20px;
 }
-.plusIcon{margin-top:10px;cursor:pointer;}
-.plusIcon > i{vertical-align:middle;font-size:20px;float:left;}
-.plusIcon > span{vertical-align:middle;font-size:20px;float:left;display:block;margin-left:5px;}
-.minusIcon{margin-top:10px;cursor:pointer;}
-.minusIcon > i{vertical-align:middle;font-size:20px;float:left;margin-left:20px;}
-.minusIcon > span{vertical-align:middle;font-size:20px;float:left;display:block;margin-left:5px;}
-.voteSubmit {
-	width:100%;height:40px;background-color:#4286f4;color:#fff;border:none;font-size:18px;
-	margin-top:20px;outline:none;cursor:pointer;
+.pagination > ul > li > a{color:#000;}
+.pagination > ul > li > a > span{font-size:17px;padding:0px 10px 0px 10px;vertical-align:middle;}
+.noticeSearchDiv{width:425px;height:50px;margin:0 auto;margin-top:10px;}
+.noticeSearchDiv > .noticeSearchInput {
+	width:390px;border:none;border-bottom:1px solid #333;float:left;height:30px;
+	outline:none;font-size:17px;
 }
-.voteContainer > ul > li:nth-child(2){padding:20px;}
-.voteList > form > ul{width:100%;height:200px;overflow-y:scroll;margin-top:20px;}
-.voteList > form > ul > li {width:100%;height:30px;line-height:30px;font-size:20px;text-indent:20px;border:1px solid #4286f4;margin:5px 0px 5px 0px;}
-.voteList > form > ul > li > input[type="checkbox"]{display:block;width:20px;height:20px;float:right;margin-top:5px;margin-right:20px;}
+.noticeSearchDiv > i {
+	float:left;font-size:20px;font-weight:bold;display:block;width:30px;height:27px;margin-top:3px;
+	border-bottom:1px solid #000;cursor:pointer;
+}
 </style>
+<!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
 	<div class="currentMainContainer">
-		<div class="voteContainer">
-			<ul>
-				<li>
-					<form action="#" method="post">
-						<h2>투표</h2>
-						<input type="text" class="voteTitle" placeholder="투표 제목" />
-						<div class="voteContentContainer">
-							<ul>
-								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
-								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
-								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
-								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
-								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
-							</ul>
-						</div>
-						<div class="plusIcon">
-							<i class="icon-plus icons"></i>
-							<span>항목 추가</span>
-						</div>
-						<div class="minusIcon">
-							<i class="icon-minus icons"></i>
-							<span>항목 제거</span>
-						</div>
-						<input type="submit" class="voteSubmit" value="투표 등록" />
-					</form>
-				</li>
-				<li class="voteList">
-					<form action="#" mehtod="post">
-						<h2>투표 제목 ex) $｛vote.voteTitle｝</h2>
-						<ul>
-							<li>
-								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
-								<input type="checkbox" />
-							</li>
-							<li>
-								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
-								<input type="checkbox" />
-							</li>
-							<li>
-								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
-								<input type="checkbox" />
-							</li>
-							<li>
-								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
-								<input type="checkbox" />
-							</li>
-							<li>
-								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
-								<input type="checkbox" />
-							</li>
-							<li>
-								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
-								<input type="checkbox" />
-							</li>
-							<li>
-								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
-								<input type="checkbox" />
-							</li>
-						</ul>
-						<input type="submit" class="voteSubmit" value="투표 하기" />
-					</form>
-				</li>
-			</ul>
+		<div class="noticeContainer">
+			<div class="noticeContainerLeft">
+				<h2>CURRENT SERVICE<br>NOTICE</h2>
+			</div>
+			<div class="noticeContainerRight">
+				<table>
+					<colgroup width="80%" />
+					<colgroup width="20%" />
+					<thead>
+						<tr>
+							<th>내용</th>
+							<th>등록일</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
+							<td>2018-12-13</td>
+						</tr>
+						<tr>
+							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
+							<td>2018-12-13</td>
+						</tr>
+						<tr>
+							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
+							<td>2018-12-13</td>
+						</tr>
+						<tr>
+							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
+							<td>2018-12-13</td>
+						</tr>
+						<tr>
+							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
+							<td>2018-12-13</td>
+						</tr>
+						<tr>
+							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
+							<td>2018-12-13</td>
+						</tr>
+						<tr>
+							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
+							<td>2018-12-13</td>
+						</tr>
+						<tr>
+							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
+							<td>2018-12-13</td>
+						</tr>
+						<tr>
+							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
+							<td>2018-12-13</td>
+						</tr>
+						<tr>
+							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
+							<td>2018-12-13</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="pagination">
+					<ul>
+						<li><i class="icon-arrow-left"></i></li>
+						<li><a href="#"><span>1</span></a></li>
+						<li><a href="#"><span>2</span></a></li>
+						<li><a href="#"><span>3</span></a></li>
+						<li><a href="#"><span>4</span></a></li>
+						<li><a href="#"><span>5</span></a></li>
+						<li><a href="#"><span>6</span></a></li>
+						<li><a href="#"><span>7</span></a></li>
+						<li><a href="#"><span>8</span></a></li>
+						<li><a href="#"><span>9</span></a></li>
+						<li><a href="#"><span>10</span></a></li>
+						<li><i class="icon-arrow-right"></i></li>
+					</ul>
+				</div>
+				<div class="noticeSearchDiv">
+					<input type="text" class="noticeSearchInput" />
+					<i class="icon-magnifier icons"></i>
+				</div>
+			</div>
 		</div>
 	</div>
 </section>
@@ -267,15 +288,6 @@ $(function(){
 
 // 알람 탭 메뉴
 $("#tabs").tabs();
-
-$(document).ready(function(){
-	$(".plusIcon").click(function(){
-		$(".voteContentContainer > ul").append("<li><input type='text' class='voteContent' placeholder='항목 입력' /></li>");
-	});
-	$(".minusIcon").click(function(){
-		$(".voteContentContainer > ul > li:last-child").remove();
-	});
-});
 </script>
 </body>
 </html>

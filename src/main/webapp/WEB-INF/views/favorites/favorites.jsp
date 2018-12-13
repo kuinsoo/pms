@@ -3,108 +3,53 @@
 <%-- left & header--%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 <!-- CURRENT SECTION(MAIN) -->
-<style type="text/css">
-.voteContainer {
-	width:1400px;background-color:#fff;border:1px solid #dee3eb;margin:0 auto;
-	margin-top:20px;overflow:hidden;padding-bottom:20px;margin-bottom:20px;
-}
-.voteContainer > ul{padding:10px 20px 20px 20px;}
-.voteContainer > ul > li {
-	display:block;background-color:#fff;border:1px solid #dee3eb;
-	width:440px;height:440px;float:left;margin-left:10px;margin-top:10px;
-}
-.voteContainer > ul > li:first-child{padding:20px;}
-.voteContainer > ul > li:first-child > form > .voteTitle {
-	outline:none;width:100%;height:30px;font-size:17px;margin-top:20px;
-	border:none;border-bottom:1px solid #dee3eb;
-}
-.voteContentContainer{width:100%;height:200px;overflow-y:scroll;margin-top:20px;}
-.voteContainer > ul > li:first-child > form > .voteContentContainer > ul > li > .voteContent {
-	outline:none;width:100%;height:30px;font-size:17px;margin-top:10px;
-}
-.plusIcon{margin-top:10px;cursor:pointer;}
-.plusIcon > i{vertical-align:middle;font-size:20px;float:left;}
-.plusIcon > span{vertical-align:middle;font-size:20px;float:left;display:block;margin-left:5px;}
-.minusIcon{margin-top:10px;cursor:pointer;}
-.minusIcon > i{vertical-align:middle;font-size:20px;float:left;margin-left:20px;}
-.minusIcon > span{vertical-align:middle;font-size:20px;float:left;display:block;margin-left:5px;}
-.voteSubmit {
-	width:100%;height:40px;background-color:#4286f4;color:#fff;border:none;font-size:18px;
-	margin-top:20px;outline:none;cursor:pointer;
-}
-.voteContainer > ul > li:nth-child(2){padding:20px;}
-.voteList > form > ul{width:100%;height:200px;overflow-y:scroll;margin-top:20px;}
-.voteList > form > ul > li {width:100%;height:30px;line-height:30px;font-size:20px;text-indent:20px;border:1px solid #4286f4;margin:5px 0px 5px 0px;}
-.voteList > form > ul > li > input[type="checkbox"]{display:block;width:20px;height:20px;float:right;margin-top:5px;margin-right:20px;}
-</style>
 <section class="currentMain">
 	<div class="currentMainContainer">
-		<div class="voteContainer">
-			<ul>
+		<div class="currentMainSlide">
+			<!-- Swiper -->
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<img src="../images/slide1.png">
+					</div>
+					<div class="swiper-slide">
+						<img src="http://placehold.it/1400x500">
+					</div>
+					<div class="swiper-slide">
+						<img src="http://placehold.it/1400x500">
+					</div>
+				</div>
+
+				<!-- Add Pagination -->
+				<div class="swiper-pagination"></div>
+
+				<!-- Add Arrows -->
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
+			</div>
+		</div>
+		<div class="currentMainProjectCreates">
+			<h1>즐겨찾기 한 프로젝트</h1>
+			<ul class="inviteProject">
+				<c:forEach items="${inviteProjectList}" var="inviteProject">
 				<li>
-					<form action="#" method="post">
-						<h2>투표</h2>
-						<input type="text" class="voteTitle" placeholder="투표 제목" />
-						<div class="voteContentContainer">
-							<ul>
-								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
-								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
-								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
-								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
-								<li><input type="text" class="voteContent" placeholder="항목 입력" /></li>
-							</ul>
+					<div class="projectCard">
+						<div class="projectCardTitle">
+							<a href="javascript:popUp(500, 500, '${inviteProject.project_id }');">${inviteProject.project_title}</a>
 						</div>
-						<div class="plusIcon">
-							<i class="icon-plus icons"></i>
-							<span>항목 추가</span>
+						<div class="projectCardUserName">
+							<img src="${memberVo.member_profile}">
+							<br>
+							${inviteProject.member_name}님 참여중
 						</div>
-						<div class="minusIcon">
-							<i class="icon-minus icons"></i>
-							<span>항목 제거</span>
-						</div>
-						<input type="submit" class="voteSubmit" value="투표 등록" />
-					</form>
+					</div>
 				</li>
-				<li class="voteList">
-					<form action="#" mehtod="post">
-						<h2>투표 제목 ex) $｛vote.voteTitle｝</h2>
-						<ul>
-							<li>
-								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
-								<input type="checkbox" />
-							</li>
-							<li>
-								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
-								<input type="checkbox" />
-							</li>
-							<li>
-								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
-								<input type="checkbox" />
-							</li>
-							<li>
-								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
-								<input type="checkbox" />
-							</li>
-							<li>
-								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
-								<input type="checkbox" />
-							</li>
-							<li>
-								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
-								<input type="checkbox" />
-							</li>
-							<li>
-								<span>항목 ex) $｛vote.vote항목이름(?)｝</span>
-								<input type="checkbox" />
-							</li>
-						</ul>
-						<input type="submit" class="voteSubmit" value="투표 하기" />
-					</form>
-				</li>
+				</c:forEach>
 			</ul>
 		</div>
 	</div>
 </section>
+
 <footer class="currentFooter">
 	<div class="footerContent">
 		<p>
@@ -114,9 +59,25 @@
 		</p>
 	</div>
 </footer>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>
 <script type="text/javascript" src="../js/classie.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.js"></script>
 <script>
+var swiper = new Swiper('.swiper-container', {
+	loop: true,
+	pagination: {
+		el: '.swiper-pagination',
+		type: 'progressbar',
+	},
+	navigation: {
+		nextEl: '.swiper-button-next',
+		prevEl: '.swiper-button-prev',
+	},
+	/* 	autoplay: {
+            delay: 1500,
+            disableOnInteraction: false,
+        }, */
+});
 //DIM POPUP
 $('.projectCreatePopUp').click(function(){
 	var $href = $(this).attr('href');
@@ -267,15 +228,6 @@ $(function(){
 
 // 알람 탭 메뉴
 $("#tabs").tabs();
-
-$(document).ready(function(){
-	$(".plusIcon").click(function(){
-		$(".voteContentContainer > ul").append("<li><input type='text' class='voteContent' placeholder='항목 입력' /></li>");
-	});
-	$(".minusIcon").click(function(){
-		$(".voteContentContainer > ul > li:last-child").remove();
-	});
-});
 </script>
 </body>
 </html>

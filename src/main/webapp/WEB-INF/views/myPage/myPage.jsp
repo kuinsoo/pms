@@ -313,11 +313,13 @@
 						<div id="tabs2-2">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
+									<form name="searchProject" method="POST" onsubmit="return false;">
+										<!-- <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/> -->
 									<form name ="searchProject" method="POST" onsubmit="return false;">
 										<!--  <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>-->
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
-										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
+										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchProject();"></i>  
 									</form>
 								</div>
 								<table>
@@ -350,6 +352,7 @@
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
 									<form name ="searchProject" method="POST" onsubmit="return false;">
+										<!-- <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/> -->
 										<!--  <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>-->
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
@@ -386,6 +389,7 @@
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
 									<form name ="searchProject" method="POST" onsubmit="return false;">
+										<!-- <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/> -->
 										<!--  <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>-->
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
