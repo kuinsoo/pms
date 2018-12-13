@@ -219,12 +219,12 @@ public interface MemberMapper {
 	/**
 	 * Select bookmark project p member vo.
 	 * 작성자 : Mr.KKu
-	 *  프로젝트 즐겨 찾기 관리
+	 * 프로젝트 즐겨 찾기 관리
 	 *
-	 * @param pMemberVo the pmember project
+	 * @param bookMap the p member vo
 	 * @return the p member vo
 	 */
-	PMemberVo selectBookmarkProject(PMemberVo pMemberVo);
+	PMemberVo selectBookmarkProject(Map<String, String> bookMap);
 
 	/**
 	 * Update bookmark int.

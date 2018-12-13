@@ -325,7 +325,7 @@
 	// book mark 
 	function bookmark(project_id) {
 		$.ajax({
-			type: "POST",
+			type: "GET",
 			url: "/projectBookmarkAjax",
 			data : {"project_id" : project_id},
 			success: function (data) {

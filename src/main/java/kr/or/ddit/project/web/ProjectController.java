@@ -7,6 +7,7 @@ import java.util.Map;
 import kr.or.ddit.comments.model.CommentsVo;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.work.service.WorkServiceInf;
+import org.apache.commons.collections.map.HashedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,15 +103,17 @@ public class ProjectController {
 	 * @param model      the model
 	 * @return the string
 	 */
-	@RequestMapping(value = "/projectBookmarkAjax", method = RequestMethod.POST)
+	@RequestMapping(value = "/projectBookmarkAjax", method = RequestMethod.GET)
 	public String projectBookmarkAjax(@RequestParam("project_id")String project_id,
 									  @SessionAttribute("memberVo")MemberVo memberVo,
 									  Model model) {
-		PMemberVo pMemberVo = new PMemberVo();
+
+		Map<String, String> mapBook = new HashMap<>();
+		mapBook.put("pmember_project", project_id);
+		mapBook.put("pmember_member",  memberVo.getMember_mail());
+		PMemberVo pMemberVo = (PMemberVo) memberService.selectBookmarkProject(mapBook);
 		pMemberVo.setPmember_member(memberVo.getMember_mail());
 		pMemberVo.setPmember_project(project_id);
-		pMemberVo = (PMemberVo) memberService.selectBookmarkProject(pMemberVo);
-
 		if(pMemberVo.getPmember_bookmark().equals("Y")) {
 			pMemberVo.setPmember_bookmark("N");
 			memberService.updateBookmark(pMemberVo);

@@ -131,10 +131,10 @@
 
 
 	<!-- 프로젝트 즐겨 찾기 검색 -->
-	<select id="selectBookmarkProject" parameterType="pMemberVo" resultType="pMemberVo">
+	<select id="selectBookmarkProject" parameterType="Map" resultType="pMemberVo">
 		select PMEMBER_PROJECT, PMEMBER_BOOKMARK from PROJECT_MEMBER
 		where PMEMBER_PROJECT = #{pmember_project}
-		and PMEMBER_MEMBER = #{pmember_member};
+		and PMEMBER_MEMBER = #{pmember_member}
 	</select>
 
 	<update id="updateBookmark" parameterType="pMemberVo" >
