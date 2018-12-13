@@ -215,8 +215,10 @@
 									<span class= "telerror"> 인증번호가 일치하지 않습니다.</span>
 								</li>
 								<li><input type="password" id = "pass1" value= "${memberVo.member_pass}" name ="member_pass"/></li>
-								<li><input type="password" id = "pass2input" value= "${memberVo.member_pass}" /></li>
-									<span class = "error"> 입력하신 비밀번호가 일치하지 않습니다.</span>
+								<li>
+									<input type="password" id = "pass2input" value= "${memberVo.member_pass}" />
+									<span class="error"> 입력하신 비밀번호가 일치하지 않습니다.</span>
+								</li>
 								<li>
 									<input type="button" value="변경" class = "updateBtn"/>
 									<input type="submit" value="확인" class = "saveBtn"/>
@@ -245,16 +247,15 @@
 						</ul>
 						<div id="tabs2-1">
 							<div class="projectTable">
-								<div class="projectSearchDiv">
-									<label> 프로젝트 명  </label>　　
+								<div class="projectSearchDiv">　　
 									<form name ="searchProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
-										<input type="button" class="searchBtn" onclick="javascript:getSearchProject();" value="검색하기"/>  
+										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
 									</form>
 								</div>
-								<table border="1" cellpadding="0" cellspacing="0">
+								<table>
 									<colgroup width="10%" />
 									<colgroup width="60%" />
 									<colgroup width="30%" />
@@ -275,257 +276,117 @@
 										</c:forEach> --%>
 									</tbody>
 								</table>
-							<p>
-							<div class="text-center">
-								 <ul class = "pagination">
-								 <%--<li>
-										<a href="/myPage?page=1&pageSize=10"></a>
-										<span>&laquo;</span>
-									</li>
-									<li>
-										<c:forEach begin="1" end="${pageCnt}" var="p">
-											<li>
-												<a href="/myPage?page=${p}&pageSize=10">${p}</a>
-											</li>
-										</c:forEach>
-									</li>
-									<li>
-										<a href="/myPage?page(${pageCnt});"> 
-											<span>&raquo;</span>
-										</a>
-									</li>  --%>
-								</ul>
+								<div class="text-center">
+									 <ul class="pagination"></ul>
+								</div>
 							</div>
 						</div>
 						<div id="tabs2-2">
 							<div class="projectTable">
-								<div class="projectSearchDiv">
-									<select>
-										<option>전체</option>
-										<option>프로젝트 명</option>
-									</select>
-									<input type="text" placeholder="검색어를 입력해주세요"/>
-									<i class="icon-magnifier icons"></i>
+								<div class="projectSearchDiv">　　
+									<form name ="searchProject" method="POST" onsubmit="return false;">
+										<input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
+										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="pageSize" value='10' />
+										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
+									</form>
 								</div>
-								<table border="1" cellpadding="0" cellspacing="0">
+								<table>
 									<colgroup width="10%" />
 									<colgroup width="60%" />
 									<colgroup width="30%" />
-									<tr>
-										<th><span>번호</span></th>
-										<th><span>즐겨찾기 한 프로젝트 명</span></th>
-										<th><span>프로젝트 팀장</span></th>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>9</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>8</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>7</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>6</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
+									<thead>
+										<tr>
+											<th><span>번호</span></th>
+											<th><span>참여중인 프로젝트 명</span></th>
+											<th><span>프로젝트 팀장</span></th>
+										</tr>
+									</thead>
+									<tbody id ="projectList">
+									<%-- <c:forEach items="${projectList}" var = "vo">
+										<tr>
+											<td>${vo.rnum}</td>
+											<td>${vo.project_title}</td>
+											<td>${vo.pmember_member}</td>
+										</tr>
+										</c:forEach> --%>
+									</tbody>
 								</table>
-								<p>
-									<i class="icon-arrow-left icons"></i>
-									<span>1</span>
-									<i class="icon-arrow-right icons"></i>
-								</p>
+								<div class="text-center">
+									 <ul class="pagination"></ul>
+								</div>
 							</div>
 						</div>
 						<div id="tabs2-3">
 							<div class="projectTable">
-								<div class="projectSearchDiv">
-									<select>
-										<option>전체</option>
-										<option>프로젝트 명</option>
-									</select>
-									<input type="text" placeholder="검색어를 입력해주세요"/>
-									<i class="icon-magnifier icons"></i>
+								<div class="projectSearchDiv">　　
+									<form name ="searchProject" method="POST" onsubmit="return false;">
+										<input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
+										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="pageSize" value='10' />
+										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
+									</form>
 								</div>
-								<table border="1" cellpadding="0" cellspacing="">
+								<table>
 									<colgroup width="10%" />
 									<colgroup width="60%" />
 									<colgroup width="30%" />
-									<tr>
-										<th><span>번호</span></th>
-										<th><span>일감 리스트</span></th>
-										<th><span>프로젝트 팀장</span></th>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>9</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>8</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>7</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>6</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
+									<thead>
+										<tr>
+											<th><span>번호</span></th>
+											<th><span>참여중인 프로젝트 명</span></th>
+											<th><span>프로젝트 팀장</span></th>
+										</tr>
+									</thead>
+									<tbody id ="projectList">
+									<%-- <c:forEach items="${projectList}" var = "vo">
+										<tr>
+											<td>${vo.rnum}</td>
+											<td>${vo.project_title}</td>
+											<td>${vo.pmember_member}</td>
+										</tr>
+										</c:forEach> --%>
+									</tbody>
 								</table>
-								<p>
-									<i class="icon-arrow-left icons"></i>
-									<span>1</span>
-									<i class="icon-arrow-right icons"></i>
-								</p>
+								<div class="text-center">
+									 <ul class="pagination"></ul>
+								</div>
 							</div>
 						</div>
 						<div id="tabs2-4">
 							<div class="projectTable">
-								<div class="projectSearchDiv">
-									<select>
-										<option>전체</option>
-										<option>프로젝트 명</option>
-									</select>
-									<input type="text" placeholder="검색어를 입력해주세요"/>
-									<i class="icon-magnifier icons"></i>
+								<div class="projectSearchDiv">　　
+									<form name ="searchProject" method="POST" onsubmit="return false;">
+										<input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
+										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="pageSize" value='10' />
+										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
+									</form>
 								</div>
-								<table border="1" cellpadding="0" cellspacing="">
+								<table>
 									<colgroup width="10%" />
 									<colgroup width="60%" />
 									<colgroup width="30%" />
-									<tr>
-										<th><span>번호</span></th>
-										<th><span>보관함</span></th>
-										<th><span>보관 날짜(?)</span></th>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>9</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>8</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>7</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>6</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
+									<thead>
+										<tr>
+											<th><span>번호</span></th>
+											<th><span>참여중인 프로젝트 명</span></th>
+											<th><span>프로젝트 팀장</span></th>
+										</tr>
+									</thead>
+									<tbody id ="projectList">
+									<%-- <c:forEach items="${projectList}" var = "vo">
+										<tr>
+											<td>${vo.rnum}</td>
+											<td>${vo.project_title}</td>
+											<td>${vo.pmember_member}</td>
+										</tr>
+										</c:forEach> --%>
+									</tbody>
 								</table>
-								<p>
-									<i class="icon-arrow-left icons"></i>
-									<span>1</span>
-									<i class="icon-arrow-right icons"></i>
-								</p>
+								<div class="text-center">
+									 <ul class="pagination"></ul>
+								</div>
 							</div>
 						</div>
 						<div id="tabs2-5">
@@ -549,7 +410,6 @@
 			</p>
 		</div>
 	</footer>
-</div>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>

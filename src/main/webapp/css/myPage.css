@@ -58,20 +58,20 @@
 .myPageBottomContainer > #tabs2{width:1398px;}
 /* 첫번째 Tab */
 .myPageBottomContainer > #tabs2 > #tabs2-1{display:flex;justify-content:center;align-items:center;}
-.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable{width:1000px;margin-top:70px;}
-.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv{width:470px;float:right;}
-.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv > select{width:150px;height:30px;vertical-align:middle;outline:none;border:1px solid #333;float:left;font-size:17px;}
-.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv > input[type="text"] {
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable{width:1000px;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv{width:319px;float:right;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv > form > input[type="text"] {
 	width:300px;height:30px;vertical-align:middle;margin-left:-5px;text-indent:10px;outline:none;border-top:1px solid #333;border-bottom:1px solid #333;float:left;font-size:17px;
 }
-.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv > i {
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > .projectSearchDiv > form > i {
 	display:block;width:30px;height:30px;vertical-align:middle;background-color:#fff;font-size:16px;outline:none;line-height:30px;
 	border-top:1px solid #333;border-right:1px solid #333;border-bottom:1px solid #333;margin-left:-6px;cursor:pointer;color:#000;float:left;font-size:17px;
 }
-.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table{width:100%;margin:0 auto;margin-top:40px;border-collapse:collapse;clear:both;}
-.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > tbody > tr > th{padding:10px 0px 10px 0px;}
-.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > tbody > tr > td{padding:5px 0px 5px 0px;}
-.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > tbody > tr > th > span{font-weight:bold;font-size:20px;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table{width:100%;margin:0 auto;margin-top:50px;border-collapse:collapse;clear:both;border:none;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > thead > tr > th{background-color:#007fff;color:#fff;padding:10px 0px 10px 0px;font-size:20px;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > tbody > tr{border-bottom:1px solid #dee3eb;transition: all 0.5s;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > tbody > tr:hover{background-color:#e8f0ff;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > tbody > tr > td{padding:10px 0px 10px 0px;}
 .myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > tbody > tr > td:nth-child(odd){text-align:center;}
 .myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > tbody > tr > td:nth-child(even){text-align:left;text-indent:10px;cursor:pointer;}
 .myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > p {
@@ -79,23 +79,25 @@
 }
 .myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > p > i{vertical-align:middle;font-size:15px;font-weight:bold;cursor:pointer;}
 .myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > p > span{vertical-align:middle;font-size:20px;padding:3px 20px 0px 20px;font-weight:bold;cursor:pointer;}
+.text-center{width:100%;text-align:center;margin-top:20px;}
+.text-center > ul > li{display:inline-block;font-size:20px;padding:10px;}
 
 /* 두번째 Tab */
 .myPageBottomContainer > #tabs2 > #tabs2-2{display:flex;justify-content:center;align-items:center;}
-.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable{width:1000px;margin-top:70px;}
-.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > .projectSearchDiv{width:469px;float:right;}
-.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > .projectSearchDiv > select{width:150px;height:30px;vertical-align:middle;outline:none;border:1px solid #333;float:left;font-size:17px;}
-.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > .projectSearchDiv > input[type="text"] {
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable{width:1000px;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > .projectSearchDiv{width:319px;float:right;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > .projectSearchDiv > form > input[type="text"] {
 	width:300px;height:30px;vertical-align:middle;margin-left:-5px;text-indent:10px;outline:none;border-top:1px solid #333;border-bottom:1px solid #333;float:left;font-size:17px;
 }
-.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > .projectSearchDiv > i {
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > .projectSearchDiv > form > i {
 	display:block;width:30px;height:30px;vertical-align:middle;background-color:#fff;font-size:16px;outline:none;line-height:30px;
 	border-top:1px solid #333;border-right:1px solid #333;border-bottom:1px solid #333;margin-left:-6px;cursor:pointer;color:#000;float:left;font-size:17px;
 }
-.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table{width:100%;margin:0 auto;margin-top:40px;border-collapse:collapse;clear:both;}
-.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > tbody > tr > th{padding:10px 0px 10px 0px;}
-.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > tbody > tr > td{padding:5px 0px 5px 0px;}
-.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > tbody > tr > th > span{font-weight:bold;font-size:20px;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table{width:100%;margin:0 auto;margin-top:50px;border-collapse:collapse;clear:both;border:none;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > thead > tr > th{background-color:#007fff;color:#fff;padding:10px 0px 10px 0px;font-size:20px;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > tbody > tr{border-bottom:1px solid #dee3eb;transition: all 0.5s;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > tbody > tr:hover{background-color:#e8f0ff;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > tbody > tr > td{padding:10px 0px 10px 0px;}
 .myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > tbody > tr > td:nth-child(odd){text-align:center;}
 .myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > tbody > tr > td:nth-child(even){text-align:left;text-indent:10px;cursor:pointer;}
 .myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > p {
@@ -106,20 +108,20 @@
 
 /* 세번째 Tab */
 .myPageBottomContainer > #tabs2 > #tabs2-3{display:flex;justify-content:center;align-items:center;}
-.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable{width:1000px;margin-top:70px;}
-.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > .projectSearchDiv{width:469px;float:right;}
-.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > .projectSearchDiv > select{width:150px;height:30px;vertical-align:middle;outline:none;border:1px solid #333;float:left;font-size:17px;}
-.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > .projectSearchDiv > input[type="text"] {
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable{width:1000px;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > .projectSearchDiv{width:319px;float:right;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > .projectSearchDiv > form > input[type="text"] {
 	width:300px;height:30px;vertical-align:middle;margin-left:-5px;text-indent:10px;outline:none;border-top:1px solid #333;border-bottom:1px solid #333;float:left;font-size:17px;
 }
-.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > .projectSearchDiv > i {
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > .projectSearchDiv > form > i {
 	display:block;width:30px;height:30px;vertical-align:middle;background-color:#fff;font-size:16px;outline:none;line-height:30px;
 	border-top:1px solid #333;border-right:1px solid #333;border-bottom:1px solid #333;margin-left:-6px;cursor:pointer;color:#000;float:left;font-size:17px;
 }
-.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table{width:100%;margin:0 auto;margin-top:40px;border-collapse:collapse;clear:both;}
-.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table > tbody > tr > th{padding:10px 0px 10px 0px;}
-.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table > tbody > tr > td{padding:5px 0px 5px 0px;}
-.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table > tbody > tr > th > span{font-weight:bold;font-size:20px;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table{width:100%;margin:0 auto;margin-top:50px;border-collapse:collapse;clear:both;border:none;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table > thead > tr > th{background-color:#007fff;color:#fff;padding:10px 0px 10px 0px;font-size:20px;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table > tbody > tr{border-bottom:1px solid #dee3eb;transition: all 0.5s;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table > tbody > tr:hover{background-color:#e8f0ff;}
+.myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table > tbody > tr > td{padding:10px 0px 10px 0px;}
 .myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table > tbody > tr > td:nth-child(odd){text-align:center;}
 .myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > table > tbody > tr > td:nth-child(even){text-align:left;text-indent:10px;cursor:pointer;}
 .myPageBottomContainer > #tabs2 > #tabs2-3 > .projectTable > p {
@@ -130,20 +132,20 @@
 
 /* 네번째 Tab */
 .myPageBottomContainer > #tabs2 > #tabs2-4{display:flex;justify-content:center;align-items:center;}
-.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable{width:1000px;margin-top:70px;}
-.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > .projectSearchDiv{width:469px;float:right;}
-.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > .projectSearchDiv > select{width:150px;height:30px;vertical-align:middle;outline:none;border:1px solid #333;float:left;font-size:17px;}
-.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > .projectSearchDiv > input[type="text"] {
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable{width:1000px;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > .projectSearchDiv{width:319px;float:right;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > .projectSearchDiv > form > input[type="text"] {
 	width:300px;height:30px;vertical-align:middle;margin-left:-5px;text-indent:10px;outline:none;border-top:1px solid #333;border-bottom:1px solid #333;float:left;font-size:17px;
 }
-.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > .projectSearchDiv > i {
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > .projectSearchDiv > form > i {
 	display:block;width:30px;height:30px;vertical-align:middle;background-color:#fff;font-size:16px;outline:none;line-height:30px;
 	border-top:1px solid #333;border-right:1px solid #333;border-bottom:1px solid #333;margin-left:-6px;cursor:pointer;color:#000;float:left;font-size:17px;
 }
-.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table{width:100%;margin:0 auto;margin-top:40px;border-collapse:collapse;clear:both;}
-.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table > tbody > tr > th{padding:10px 0px 10px 0px;}
-.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table > tbody > tr > td{padding:5px 0px 5px 0px;}
-.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table > tbody > tr > th > span{font-weight:bold;font-size:20px;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table{width:100%;margin:0 auto;margin-top:50px;border-collapse:collapse;clear:both;border:none;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table > thead > tr > th{background-color:#007fff;color:#fff;padding:10px 0px 10px 0px;font-size:20px;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table > tbody > tr{border-bottom:1px solid #dee3eb;transition: all 0.5s;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table > tbody > tr:hover{background-color:#e8f0ff;}
+.myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table > tbody > tr > td{padding:10px 0px 10px 0px;}
 .myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table > tbody > tr > td:nth-child(odd){text-align:center;}
 .myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > table > tbody > tr > td:nth-child(even){text-align:left;text-indent:10px;cursor:pointer;}
 .myPageBottomContainer > #tabs2 > #tabs2-4 > .projectTable > p {
