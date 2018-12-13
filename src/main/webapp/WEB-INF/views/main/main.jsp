@@ -108,7 +108,7 @@
                                 </c:if>
 							</div>
 							<div class="projectCardUserName">
-								<img src="http://placehold.it/30x30">
+								<img src="${memberVo.member_profile}">
 								<br>
 								${pMemberListVo.member_name} 외 ${pMemberListVo.pmemberCount - 1}명
 							</div>
@@ -127,7 +127,7 @@
 								<a href="javascript:popUp(500, 500, '${inviteProject.project_id }');">${inviteProject.project_title}</a>
 							</div>
 							<div class="projectCardUserName">
-								<img src="http://placehold.it/30x30">
+								<img src="${memberVo.member_profile}">
 								<br>
 								${inviteProject.member_name}님 참여중
 							</div>
@@ -352,7 +352,7 @@ function invitePrject(accept, project_id){
 		url:"/inviteProjectAjax",
 		data : {'accept':accept, 'project_id':project_id},
 		success: function(data) {
-			$('.inviteProject').html();
+			$('.inviteProject').html("");
 			$('.inviteProject').html(data);
 			bookmark(project_id);
 		}

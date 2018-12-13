@@ -7,27 +7,66 @@
 		.telerror{
 			color: red;
 		}
+		.inputerror{
+			color: red;
+		}
+	
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			var certificationNumber;
+			
+			getMyPageList(1);
+			
+			$(".phoneBtns").hide();
+			$(".saveBtn").hide();
+			$("#pass2").hide();				
+			$("#pass2input").hide();				
+			$("#telnum").hide();				
+			$("#telnumLi").hide();		
+			$('#member_name').prop('readonly', true);
+			$('#member_tel').prop('readonly', true);
+			$('#pass1').prop('readonly', true);
 			$(".error").hide();
 			$(".telerror").hide();
+			$(".inputerror").hide();
+			
+			$(".updateBtn").click(function(){	
+				$(".phoneBtns").show();
+				$(".saveBtn").show();
+				$("#pass2").show();				
+				$("#pass2input").show();				
+				$("#telnum").show();				
+				$("#telnumLi").show();		
+				$(".updateBtn").hide();
+				
+				$('#member_name').prop('readonly', false);
+				$('#member_tel').prop('readonly', false);
+				$('#pass1').prop('readonly', false);
+			});
+			
+			$('.saveBtn').prop('disabled', true);
+			$(".phoneBtns").click(function(){	
+				$('.saveBtn').prop('disabled', true);
+				$(".inputerror").show();
+			});
+			var certificationNumber;
+			
 			//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
 			//blur()이벤트 사용
-			$("#pass2").blur(function() {
-				if($("#pass2").val() != $("#pass1").val()){
+			$("#pass2input").blur(function() {
+				if($("#pass2input").val() != $("#pass1").val()){
 					$(".error").show();
+					$('.saveBtn').prop('disabled', true);
 				} else{
 					$(".error").hide();
+					$('.saveBtn').prop('disabled', false);
 				}
 			});
-
 		});
 		
 		<!-- 핸드폰 번호 입력 후 인증 버튼 -->
 		function telAjax(){
-			var member_tel = $("#tel").val();
+			var member_tel = $("#member_tel").val();
 			$.ajax({
 				type :"GET",
 				url :"/myPageAjax",
@@ -40,13 +79,89 @@
 		function onkeyup_event(){
 			if(certificationNumber == $("#telnum").val()){
 				$(".telerror").hide();
+				$(".inputerror").hide();
+				$('.saveBtn').prop('disabled', false);
 			}else{
 				$(".telerror").show();
+				$(".inputerror").hide();
+				$('.saveBtn').prop('disabled', true);
 			}
 		}
+		
+		// 페이징 처리 Ajax
+		function getMyPageList(page){
+			var pageSize = 10;
+			
+			$.ajax({
+				type: "GET",
+				url : "/myPageProjectAjax",
+				data: {"page":page, "pageSize":pageSize},
+				success : function(data){
+					var html ="";
+					$.each(data.projectList, function (idx,my){
+						html += "<tr>";
+						html += "	<td>"+ my.rnum +"</td>";
+						html += "	<td>"+ my.project_title +"</td>";
+						html += "	<td>"+ my.pmember_member +"</td>";
+						html += "</tr>";
+					});
+			
+					$("#projectList").html("");
+					$("#projectList").html(html);
+				
+					var paging ="";
+						paging +="<li><a href='javascript:getMyPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						for(var i= 1; i<=data.pageCnt; i++) {
+							paging += "<li><a href='javascript:getMyPageList("+ i +");'>"+ i+ "</a></li>";
+						}
+							paging +="<li><a href='javascript:getMyPageList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".pagination").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+			
+		// 검색 Ajax	
+		function getSearchProject(){
+		var param = $('form[name=searchProject]').serialize();
+			
+			$.ajax({
+				type: "POST",
+				url : "/searchProjectAjax",
+				data: param,
+				success : function(data){
+						console.log("data : " + data);
+					var html ="";
+					$.each(data.projectList, function (idx,my){
+						html += "<tr>";
+						html += "	<td>"+ my.rnum +"</td>";
+						html += "	<td>"+ my.project_title +"</td>";
+						html += "	<td>"+ my.pmember_member +"</td>";
+						html += "</tr>";
+					});
+					
+					$("#projectList").html("");
+					$("#projectList").html(html);
+				
+					var paging ="";
+						paging +="<li><a href='javascript:getMyPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						for(var i= 1; i<=data.pageCnt; i++) {
+							paging += "<li><a href='javascript:getMyPageList("+ i +");'>"+ i+ "</a></li>";
+						}
+							paging +="<li><a href='javascript:getMyPageList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".pagination").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+	
 	</script>
 	
-	<!-- CURRENT SECTION(MAIN) -->
+	<!-- CURRENT SECTION(MAIN) -->	
 	<section class="currentMain">
 		<div class="currentMainContainer">
 			<div class="myPageContainer">
@@ -59,7 +174,7 @@
 					<div class="myPageContainerLeftUser">
 						<h2>${memberVo.member_name}님의 프로필</h2>
 						<div class="profileImg">
-							<div id="fileList" style="background-image:url('${memberVo.member_profile}');background-repeat:no-repeat;background-position:50% 50%;">
+							<div id="fileList" style="background-image:url('${memberVo.member_profile}');background-repeat:no-repeat;background-position:50% 50%;background-size:cover;">
 								<c:choose>
 									<c:when test="${memberVo.member_profile != null}">
 										<input type="file" id="fileElem" class="fileInputCSS"
@@ -81,28 +196,32 @@
 					<div class="myPageContainerRightUser">
 						<div class="userContentsInfoRight_1">
 							<ul>
-								<li>사용자 이름 </li>
 								<li>사용자 이메일</li>
+								<li>사용자 이름 </li>
 								<li>휴대폰 번호</li>
-								<li>인증번호 입력</li>
+								<li id = "telnumLi">인증번호 입력</li>
 								<li>비밀번호</li>
-								<li>비밀번호 확인</li> 
+								<li id = "pass2">비밀번호 확인</li> 
 							</ul>
 						</div>
 						<div class="userContentsInfoRight_2">
 							<ul>
-								<li><input type="text" value= "${memberVo.member_name}" name ="member_name"/></li>
-								<li><input type="text" value= "${memberVo.member_mail}" disabled="disabled"/></li>
-								<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"  id ="tel"/>
+								<li><input type="text" value= "${memberVo.member_mail}" disabled="disabled" id = "member_mail"  name = "member_mail"/></li>
+								<li><input type="text" value= "${memberVo.member_name}" name ="member_name" id ="member_name"/></li>
+								<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"  id ="member_tel"/>
 									<input type="button" onclick="telAjax();" value="인증" class="phoneBtns" />
 								<li><input type="text" id ="telnum" onkeyup="onkeyup_event();"/>
-									<span class="telerror"> 인증번호가 일치하지 않습니다.</span>
+									<span class = "inputerror"> 인증번호를 입력해 주세요..</span>
+									<span class= "telerror"> 인증번호가 일치하지 않습니다.</span>
 								</li>
 								<li><input type="password" id = "pass1" value= "${memberVo.member_pass}" name ="member_pass"/></li>
-								<li><input type="password" id = "pass2" value= "${memberVo.member_pass}" /></li>
-									<span class="error"> 입력하신 비밀번호가 일치하지 않습니다.</span>
 								<li>
-									<input type="submit" value="변경" />
+									<input type="password" id = "pass2input" value= "${memberVo.member_pass}" />
+									<span class="error"> 입력하신 비밀번호가 일치하지 않습니다.</span>
+								</li>
+								<li>
+									<input type="button" value="변경" class = "updateBtn"/>
+									<input type="submit" value="확인" class = "saveBtn"/>
 								</li>
 							</ul>
 						</div>
@@ -128,310 +247,150 @@
 						</ul>
 						<div id="tabs2-1">
 							<div class="projectTable">
-								<div class="projectSearchDiv">
-									<select>
-										<option>전체</option>
-										<option>프로젝트 명</option>
-									</select>
-									<input type="text" placeholder="검색어를 입력해주세요"/>
-									<i class="icon-magnifier icons"></i>
+								<div class="projectSearchDiv">　　
+									<form name ="searchProject" method="POST" onsubmit="return false;">
+										<input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
+										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="pageSize" value='10' />
+										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchProject();"></i>  
+									</form>
 								</div>
-								<table border="1" cellpadding="0" cellspacing="0">
+								<table>
 									<colgroup width="10%" />
 									<colgroup width="60%" />
 									<colgroup width="30%" />
-									<tr>
-										<th><span>번호</span></th>
-										<th><span>참여중인 프로젝트 명</span></th>
-										<th><span>프로젝트 팀장</span></th>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>9</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>8</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>7</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>6</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
+									<thead>
+										<tr>
+											<th><span>번호</span></th>
+											<th><span>참여중인 프로젝트 명</span></th>
+											<th><span>프로젝트 팀장</span></th>
+										</tr>
+									</thead>
+									<tbody id ="projectList">
+									<%-- <c:forEach items="${projectList}" var = "vo">
+										<tr>
+											<td>${vo.rnum}</td>
+											<td>${vo.project_title}</td>
+											<td>${vo.pmember_member}</td>
+										</tr>
+										</c:forEach> --%>
+									</tbody>
 								</table>
-								<p>
-									<i class="icon-arrow-left icons"></i>
-									<span>1</span>
-									<i class="icon-arrow-right icons"></i>
-								</p>
+								<div class="text-center">
+									 <ul class="pagination"></ul>
+								</div>
 							</div>
 						</div>
 						<div id="tabs2-2">
 							<div class="projectTable">
-								<div class="projectSearchDiv">
-									<select>
-										<option>전체</option>
-										<option>프로젝트 명</option>
-									</select>
-									<input type="text" placeholder="검색어를 입력해주세요"/>
-									<i class="icon-magnifier icons"></i>
+								<div class="projectSearchDiv">　　
+									<form name="searchProject" method="POST" onsubmit="return false;">
+										<!-- <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/> -->
+									<form name ="searchProject" method="POST" onsubmit="return false;">
+										<!--  <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>-->
+										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="pageSize" value='10' />
+										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchProject();"></i>  
+									</form>
 								</div>
-								<table border="1" cellpadding="0" cellspacing="0">
+								<table>
 									<colgroup width="10%" />
 									<colgroup width="60%" />
 									<colgroup width="30%" />
-									<tr>
-										<th><span>번호</span></th>
-										<th><span>즐겨찾기 한 프로젝트 명</span></th>
-										<th><span>프로젝트 팀장</span></th>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>9</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>8</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>7</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>6</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
+									<thead>
+										<tr>
+											<th><span>번호</span></th>
+											<th><span>참여중인 프로젝트 명</span></th>
+											<th><span>프로젝트 팀장</span></th>
+										</tr>
+									</thead>
+									<tbody id ="projectList">
+									<%-- <c:forEach items="${projectList}" var = "vo">
+										<tr>
+											<td>${vo.rnum}</td>
+											<td>${vo.project_title}</td>
+											<td>${vo.pmember_member}</td>
+										</tr>
+										</c:forEach> --%>
+									</tbody>
 								</table>
-								<p>
-									<i class="icon-arrow-left icons"></i>
-									<span>1</span>
-									<i class="icon-arrow-right icons"></i>
-								</p>
+								<div class="text-center">
+									 <ul class="pagination"></ul>
+								</div>
 							</div>
 						</div>
 						<div id="tabs2-3">
 							<div class="projectTable">
-								<div class="projectSearchDiv">
-									<select>
-										<option>전체</option>
-										<option>프로젝트 명</option>
-									</select>
-									<input type="text" placeholder="검색어를 입력해주세요"/>
-									<i class="icon-magnifier icons"></i>
+								<div class="projectSearchDiv">　　
+									<form name ="searchProject" method="POST" onsubmit="return false;">
+										<!-- <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/> -->
+										<!--  <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>-->
+										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="pageSize" value='10' />
+										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
+									</form>
 								</div>
-								<table border="1" cellpadding="0" cellspacing="">
+								<table>
 									<colgroup width="10%" />
 									<colgroup width="60%" />
 									<colgroup width="30%" />
-									<tr>
-										<th><span>번호</span></th>
-										<th><span>일감 리스트</span></th>
-										<th><span>프로젝트 팀장</span></th>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>9</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>8</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>7</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>6</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
+									<thead>
+										<tr>
+											<th><span>번호</span></th>
+											<th><span>참여중인 프로젝트 명</span></th>
+											<th><span>프로젝트 팀장</span></th>
+										</tr>
+									</thead>
+									<tbody id ="projectList">
+									<%-- <c:forEach items="${projectList}" var = "vo">
+										<tr>
+											<td>${vo.rnum}</td>
+											<td>${vo.project_title}</td>
+											<td>${vo.pmember_member}</td>
+										</tr>
+										</c:forEach> --%>
+									</tbody>
 								</table>
-								<p>
-									<i class="icon-arrow-left icons"></i>
-									<span>1</span>
-									<i class="icon-arrow-right icons"></i>
-								</p>
+								<div class="text-center">
+									 <ul class="pagination"></ul>
+								</div>
 							</div>
 						</div>
 						<div id="tabs2-4">
 							<div class="projectTable">
-								<div class="projectSearchDiv">
-									<select>
-										<option>전체</option>
-										<option>프로젝트 명</option>
-									</select>
-									<input type="text" placeholder="검색어를 입력해주세요"/>
-									<i class="icon-magnifier icons"></i>
+								<div class="projectSearchDiv">　　
+									<form name ="searchProject" method="POST" onsubmit="return false;">
+										<!-- <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/> -->
+										<!--  <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>-->
+										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="pageSize" value='10' />
+										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
+									</form>
 								</div>
-								<table border="1" cellpadding="0" cellspacing="">
+								<table>
 									<colgroup width="10%" />
 									<colgroup width="60%" />
 									<colgroup width="30%" />
-									<tr>
-										<th><span>번호</span></th>
-										<th><span>보관함</span></th>
-										<th><span>보관 날짜(?)</span></th>
-									</tr>
-									<tr>
-										<td>10</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>9</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>8</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>7</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>6</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>5</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>4</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>3</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>2</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
-									<tr>
-										<td>1</td>
-										<td>테스트 프로젝트</td>
-										<td>Legend of Mr. Kku</td>
-									</tr>
+									<thead>
+										<tr>
+											<th><span>번호</span></th>
+											<th><span>참여중인 프로젝트 명</span></th>
+											<th><span>프로젝트 팀장</span></th>
+										</tr>
+									</thead>
+									<tbody id ="projectList">
+									<%-- <c:forEach items="${projectList}" var = "vo">
+										<tr>
+											<td>${vo.rnum}</td>
+											<td>${vo.project_title}</td>
+											<td>${vo.pmember_member}</td>
+										</tr>
+										</c:forEach> --%>
+									</tbody>
 								</table>
-								<p>
-									<i class="icon-arrow-left icons"></i>
-									<span>1</span>
-									<i class="icon-arrow-right icons"></i>
-								</p>
+								<div class="text-center">
+									 <ul class="pagination"></ul>
+								</div>
 							</div>
 						</div>
 						<div id="tabs2-5">
@@ -455,7 +414,6 @@
 			</p>
 		</div>
 	</footer>
-</div>
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>

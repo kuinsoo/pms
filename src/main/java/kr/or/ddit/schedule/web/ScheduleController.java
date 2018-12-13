@@ -44,7 +44,8 @@ public class ScheduleController {
 		Map<String, Object> allScheduleList = scheduleService.scheduleList(scheduleVo);
 		
 		model.addAttribute("allScheduleList", allScheduleList);
-		
+		model.addAttribute("myProjectList", scheduleService.myProjectList(sid));
+		logger.debug("****allScheduleList.projectScheduleList : {}", allScheduleList);
 		return "schedule/schedule";
 	}
 	

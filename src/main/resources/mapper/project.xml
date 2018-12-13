@@ -18,7 +18,7 @@
     </select>
 
     <insert id="createProject" parameterType="projectVo">
-        insert into PROJECT values (SEQ_PROJECT.nextval, #{project_title},#{project_overview}, 'N',#{project_sdate}, #{project_edate},'','' )
+        insert into PROJECT values (SEQ_PROJECT.nextval, #{project_title},#{project_overview}, 'N',#{project_sdate}, #{project_edate},'','#ab2af6' )
     </insert>
 
     <delete id="deleteProject" parameterType="String">
@@ -42,11 +42,28 @@
     			p.project_eedate,
     			p.project_edate,
     			p.project_color
-   		<if test="sid != null">
-	    	FROM	project_member pm INNER JOIN project p
-	    	ON		pm.pmember_project = p.project_id
-	    	WHERE	pm.pmember_member = #{sid}
-   		</if>
+    	<choose>
+			<when test="pid != null">
+				FROM	project p
+				WHERE	p.project_id = ${pid}
+	   		</when>
+    		<otherwise>
+    			FROM	project_member pm INNER JOIN project p
+				ON		pm.pmember_project = p.project_id
+				WHERE	pm.pmember_member = #{sid}
+    		</otherwise>
+    	</choose>
     </select>
-	
+    
+    <!-- select box의 project list -->
+    <select id="myProjectList" resultType="projectVo" parameterType="String">
+    	SELECT	p.project_id,
+    			p.project_title
+		<if test="value != null">
+			FROM	project_member pm INNER JOIN project p
+			ON		pm.pmember_project = p.project_id
+			WHERE	pm.pmember_member = #{value}
+		</if>
+    </select>
+    
 </mapper>

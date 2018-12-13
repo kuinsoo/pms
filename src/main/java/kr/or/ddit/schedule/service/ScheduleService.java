@@ -1,6 +1,7 @@
 package kr.or.ddit.schedule.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.ddit.issue.mapper.IssueMapper;
 import kr.or.ddit.project.mapper.ProjectMapper;
+import kr.or.ddit.schedule.mapper.ScheduleMapper;
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.todo.mapper.ToDoMapper;
 import kr.or.ddit.work.mapper.WorkMapper;
@@ -43,6 +45,11 @@ public class ScheduleService implements ScheduleServiceInf{
 		allScheduleList.put("issueScheduleList", issueMapper.issueAllSchedule(scheduleVo));
 		
 		return allScheduleList;
+	}
+
+	@Override
+	public List<ScheduleVo> myProjectList(String sid) {
+		return projectMapper.myProjectList(sid);
 	}
 
 }

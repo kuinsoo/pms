@@ -7,13 +7,14 @@
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAIN - CURRENT</title>
+    <title>CURRENT</title>
     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.png" />
     <!-- NANUM SQUARE FONT -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css">
@@ -31,7 +32,7 @@
     <div class="currentMainLeftMenu">
         <div class="leftMenuUserInterface">
             <div class="dimLeftMenuUserInterface"></div>
-            <img src="http://placehold.it/100x100">
+            <img src="${memberVo.member_profile}">
             <p>${memberVo.member_name}</p>
         </div>
         <ul class="firstMenu">
@@ -53,18 +54,20 @@
                 <i class="icon-calendar icons"></i>
                 <p><a href="/allSchedule">전체 일정</a></p>
             </li>
+            <c:if test="${project_id >= 0 }" >
             <li>
                 <i class="icon-bubbles icons"></i>
                 <p>회의</p>
             </li>
             <li>
                 <i class="icon-bulb icons"></i>
-                <p>이슈 히스토리</p>
+                <p><a href="/issueHistory">이슈 히스토리</a></p>
             </li>
             <li>
                 <i class="icon-list"></i>
-                <p>투표</p>
+                <p><a href="/vote">투표</a></p>
             </li>
+            </c:if>
         </ul>
         <ul class="boardMenu">
             <li>
@@ -199,11 +202,11 @@
 	                </div>
 	                <!-- CURRENT USER -->
 	                <div class="currentUser dialog__trigger">
-	                    <img src="http://placehold.it/40x40" />
+	                    <img src="${memberVo.member_profile}" />
 	                    <i class="icon-arrow-down icons"></i>
 	                    <div class="dialog">
 	                        <div class="dialogUserImg">
-	                            <img src="http://placehold.it/100x100">
+	                            <img src="${memberVo.member_profile}">
 	                            <p>${memberVo.member_name}</p>
 	                        </div>
 	                        <ul>
@@ -222,6 +225,7 @@
             </div>
         </div>
     </header>
+
     <script>
 		$('#currentMain').on('click', function () {
 			location.href="/main";
@@ -231,5 +235,5 @@
 			if(window.confirm("로그아웃 하시겠습니까?")) {
 				location.href="/logout";
 			}
-		};
+		}
     </script>

@@ -17,6 +17,9 @@ import java.util.Date;
  */
 @Alias("projectVo")
 public class ProjectVo {
+	
+	public int rnum;
+	private String pmember_member;
 
 	private String project_id;
 	private String project_title;
@@ -51,6 +54,20 @@ public class ProjectVo {
 		this.format_project_eedate = format_project_eedate;	//	20181129 지태 추가
 		this.format_project_edate = format_project_edate;	//	20181129 지태 추가
 		this.project_color = project_color;					//	20181129 지태 추가
+		
+	}
+	public String getPmember_member() {
+		return pmember_member;
+	}
+	public void setPmember_member(String pmember_member) {
+		this.pmember_member = pmember_member;
+	}
+
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	public String getProject_id() {
@@ -119,24 +136,37 @@ public class ProjectVo {
 	
 	/* 형변환 getter (20181129 지태 추가) */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
 	public String getFormat_project_sdate() {
-		return sdf.format(project_sdate);
+		if(project_sdate == null) 
+			return "";
+		else
+			return sdf.format(project_sdate);
 	}
 	public String getFormat_project_eedate() {
-		return sdf.format(project_eedate);
+		
+		if(project_eedate == null) 
+			return "";
+		else
+			return sdf.format(project_eedate);
 	}
 	public String getFormat_project_edate() {
-		return sdf.format(project_edate);
+		if(project_edate == null) 
+			return "";
+		else
+			return sdf.format(project_edate);
 	}
-
-	/* toString (20181129 지태 추가) */
 	@Override
 	public String toString() {
-		return "ProjectVo [project_id=" + project_id + ", project_title=" + project_title + ", project_overview="
-				+ project_overview + ", project_bookmark=" + project_bookmark + ", project_sdate=" + project_sdate
-				+ ", project_edate=" + project_edate + ", project_eedate=" + project_eedate + ", format_project_sdate="
-				+ format_project_sdate + ", format_project_eedate=" + format_project_eedate + ", format_project_edate="
-				+ format_project_edate + ", project_color=" + project_color + "]";
+		return "ProjectVo [rnum=" + rnum + ", project_id=" + project_id + ", project_title=" + project_title
+				+ ", project_overview=" + project_overview + ", project_bookmark=" + project_bookmark
+				+ ", project_sdate=" + project_sdate + ", project_edate=" + project_edate + ", project_eedate="
+				+ project_eedate + ", format_project_sdate=" + format_project_sdate + ", format_project_eedate="
+				+ format_project_eedate + ", format_project_edate=" + format_project_edate + ", project_color="
+				+ project_color + ", sdf=" + sdf + "]";
 	}
+
+
+	/* toString (20181129 지태 추가)*/
 	
 }

@@ -4,6 +4,8 @@ import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberListVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.project.model.InviteProjectVo;
+import kr.or.ddit.project.model.ProjectVo;
+import kr.or.ddit.util.model.PageVo;
 
 import java.util.List;
 import java.util.Map;
@@ -44,12 +46,12 @@ public interface MemberMapper {
 	 * 작성자 : 나진실
 	 * 변경이력 :
 	 *
-	 * @param 
-	 * @return Method 설명 : 마이페이지에서 정보 수정 
+	 * @param memberVo the member vo
+	 * @return Method 설명 : 마이페이지에서 정보 수정
 	 */
 	public int updateUser(MemberVo memberVo);
-	
-	
+
+
 	/**
 	 * Method : selectfindId
 	 * 작성자 : 나진실
@@ -70,7 +72,29 @@ public interface MemberMapper {
 	 * @return Method 설명 : 비밀번호 찾기
 	 */
 	MemberVo selectfindPass(String member_mail);
+	
+	
+	/**
+	 * Method : myprojectselect
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo 
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 마이페이지 초대받은 프로젝트 
+	 */
+	List<ProjectVo> myprojectselect(PageVo pageVo);
 
+	
+	/**
+	 * Method : totalProjectCnt
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 프로젝트 건수 조회 
+	 */
+	int totalProjectCnt();
+	
 	/**
 	 * Method : updatePass
 	 * 작성자 : 나진실
@@ -115,6 +139,7 @@ public interface MemberMapper {
 	 * Invited projects int.
 	 * 작성자 : Mr.KKu
 	 * 회원 프로젝트 초대
+	 *
 	 * @param inviteProjectVo the invite project vo
 	 * @return the int
 	 */
@@ -124,19 +149,20 @@ public interface MemberMapper {
 	 * Search team member p member vo.
 	 * 작성자 : Mr.KKu
 	 * 현재 프로젝트에 포함된 회원인지 검색
+	 *
 	 * @param pMemberVo the p member vo
 	 * @return the p member vo
 	 */
 	PMemberVo searchTeamMember(PMemberVo pMemberVo);
-	
+
 	/**
-	* Method : searchInviteMember
-	* 작성자 : Mr.KKu
-	* 변경이력 :
-	* @param pMemberVo
-	* @return
-	* Method 설명 : 이미 초대된 회원인지 검색
-	*/
+	 * Method : searchInviteMember
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 *
+	 * @param pMemberVo the p member vo
+	 * @return Method  설명 : 이미 초대된 회원인지 검색
+	 */
 	InviteProjectVo searchInviteMember(PMemberVo pMemberVo);
 
 
@@ -149,15 +175,15 @@ public interface MemberMapper {
 	 * @return the list
 	 */
 	List<InviteProjectVo> selectInviteProject(String member_email);
-	
+
 	/**
-	* Method : selectInviteProject
-	* 작성자 : Mr.KKu
-	* 변경이력 :
-	* @param map
-	* @return
-	* Method 설명 : 
-	*/
+	 * Method : selectInviteProject
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 *
+	 * @param map the map
+	 * @return Method  설명 :
+	 */
 	List<InviteProjectVo> selectInviteProjectMap(Map<String, String> map);
 
 	/**
@@ -165,8 +191,17 @@ public interface MemberMapper {
 	 * 작성자 : Mr.KKu
 	 * 초대받은 프로젝트 리스트에서 삭제
 	 *
-	 * @param member_mail the member mail
+	 * @param delMap the del map
 	 * @return the int
 	 */
 	int  deleteInviteProject(Map<String, String> delMap);
+
+	/**
+	 * Project member list list.
+	 * 작성자 : Mr.KKu
+	 * 프로젝트 참여자 목록 관리
+	 * @param project_id the project id
+	 * @return the list
+	 */
+	List<PMemberListVo> projectMemberList(String project_id);
 }

@@ -69,8 +69,19 @@ public interface ProjectMapper {
 	 * 변경이력 : 2018-11-29 19:03
 	 *
 	 * @param scheduleVo the schedule vo
-	 * @return Method  설명 : 프로젝트 전체 일정
+	 * @return List<ProjectVo>
+	 * Method  설명 : 프로젝트 전체 일정
 	 */
 	List<ProjectVo> projectAllSchedule(ScheduleVo scheduleVo);
+	
+	/**
+	* Method : myProjectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param sid
+	* @return List<ProjectVo>
+	* Method 설명 : 
+	*/
+	List<ScheduleVo> myProjectList(String sid);
 	
 }

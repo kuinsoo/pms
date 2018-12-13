@@ -3,9 +3,12 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.project.model.ProjectVo;
+import kr.or.ddit.util.model.PageVo;
 
 
 /**
@@ -37,29 +42,96 @@ public class MemberDetailController {
 	@Autowired
 	private MemberServiceInf memberservice;
 
+	
+	
 
 	/**
-	 * Method : memberDetail
-	 * 작성자 : 나진실
+	 * Method : myPage
+	 * 작성자 : pc07
 	 * 변경이력 :
-	 * Method 설명 : 마이페이지 
+	 * @param model
+	 * @param memberVo
 	 * @return
+	 * Method 설명 : 마이페이지 화면으로 이동 
 	 */
 	@RequestMapping(value="/myPage",method = RequestMethod.GET)
-	public String myPage(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
+	public String myPage(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		
 		memberservice.selectUser(memberVo.getMember_mail());
-		
-		
 		model.addAttribute("memberVo",memberVo);
-		
-		
-		
-		
-		return "/myPage/myPage";
+		return "myPage/myPage";
 	}
 	
-	 
+	
+	
+	/**
+	 * Method : myPageProjectAjax
+	 * 작성자 : pc07 
+	 * 
+	 * 
+	 * 
+	 * 변경이력 :
+	 * @param model
+	 * @param pageVo
+	 * @param memberVo
+	 * @param projectVo
+	 * @return
+	 * Method 설명 : 마이페이지 참여중인 프로젝트 Ajax처리 
+	 */
+
+	@ResponseBody
+	@RequestMapping(value= "/myPageProjectAjax", method= RequestMethod.GET)
+	public Map<String, Object> myPageProjectAjax(Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
+							ProjectVo projectVo, HttpServletRequest request) {
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+	
+		List<ProjectVo> projectList = memberservice.myprojectselect(pageVo);
+		Map<String, Object> projectMap = new HashMap<>();
+		int pageCnt = memberservice.totalProjectCnt();
+		
+		projectMap.put("projectList", projectList);		
+		projectMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return projectMap;
+		
+	}
+
+	
+	/**
+	 * Method : searchProjectAjax
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param model
+	 * @param pageVo
+	 * @param memberVo
+	 * @param projectVo
+	 * @param request
+	 * @return
+	 * Method 설명 : 마이페이지 참여중인 프로젝트 검색 Ajax처리 
+	 */
+	@ResponseBody
+	@RequestMapping(value= "/searchProjectAjax", method= RequestMethod.POST)
+	public Map<String, Object> searchProjectAjax(Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
+							ProjectVo projectVo, HttpServletRequest request) {
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		// 검색 부분 
+		if (pageVo.getSearchText() == null) {
+			pageVo.setSearchText("");
+		}
+		
+		List<ProjectVo> projectList = memberservice.myprojectselect(pageVo);
+		Map<String, Object> projectMap = new HashMap<>();
+		int pageCnt = memberservice.totalProjectCnt();
+		
+		projectMap.put("projectList", projectList);		
+		projectMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return projectMap;
+	}
+	
 	/**
 	 * Method : memberDetailUpdate
 	 * 작성자 : 나진실
@@ -86,10 +158,7 @@ public class MemberDetailController {
 			try {
 				if(part.getSize()>0) {
 					String path = request.getServletContext().getRealPath("/images");
-					
-					
 					String fileName = part.getOriginalFilename();
-				
 					part.transferTo(new File(path + File.separator + fileName));
 								
 					// profile
@@ -115,7 +184,7 @@ public class MemberDetailController {
 		 * @param request
 		 * @param model
 		 * @return
-		 * Method 설명 : myPage 휴대폰 인증 부분 
+		 * Method 설명 : myPage 휴대폰 인증 부분
 		 */
 		@ResponseBody
 		@RequestMapping(value="/myPageAjax", method=RequestMethod.GET)
@@ -147,7 +216,6 @@ public class MemberDetailController {
 			coolsms.send(set);
 			
 			return certificationNumber;
-			
 		}
 	}
 
