@@ -43,9 +43,6 @@ public class CommentsController {
 
 		commentsService.insertCmt(cmtVo);
 
-		Map<String, String> mapWork = new HashMap<>();
-		mapWork.put("member_mail", memberVo.getMember_mail());
-		mapWork.put("project_id", project_id);
 		model.addAttribute("workList",workService.selectWorks(project_id));
 		model.addAttribute("cmtList", commentsService.cmtList(project_id));
 	return "work/ajaxCreateWork";

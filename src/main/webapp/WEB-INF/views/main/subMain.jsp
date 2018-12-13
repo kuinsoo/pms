@@ -235,8 +235,8 @@
 						</div>
 						<!-- 댓글  -->
 						<div class="cardContentBottom">
-							<i class="icon-bubble icons"></i>
-							<span onclick="insertCmt('${work.work_id}', 'cmt_content${i.index}');">댓글 작성</span>
+							<%--<i class="icon-bubble icons"></i>--%>
+							<%--<span onclick="insertCmt('${work.work_id}', 'cmt_content${i.index}');">댓글 작성</span>--%>
 							<i class="icon-bulb icons"></i>
 							<span>이슈 등록</span>
 						</div>
@@ -247,10 +247,10 @@
 								<li>
 									<div class="cardContentCommentUser">
 										<div class="cardContentCommentUserImg">
-											<img src="${memberVo.member_profile}">
+											<img src="${cmt.member_profile}">
 										</div>
 										<div class="cardContentCommentUserName">
-											<b>${cmt.cmt_member}</b><span class="times">${cmt.cmt_date}</span>
+											<b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
 											<br>
 											<span>${cmt.cmt_content}</span>
 										</div>
@@ -266,7 +266,12 @@
 											<img src="${memberVo.member_profile}">
 										</div>
 										<div class="cardContentCommentUserName">
-												<input type="text" id="cmt_content${i.index}"  placeholder="댓글을 입력해주세요">
+
+											<input type="text" class="form-control" id="cmt_content${i.index}" value="" placeholder="댓글을 입력해주세요" required >
+											<div class="cardContentBottom">
+												<i class="icon-bubble icons"></i>
+												<span onclick="insertCmt('${work.work_id}', 'cmt_content${i.index}');">댓글 작성</span>
+											</div>
 										</div>
 									</div>
 								</li>
@@ -296,7 +301,7 @@
 						<li>
 							<span class="projectPositionName">참여자</span>
 							<div class="chatList">
-								<img src="${memberVo.member_profile}">
+								<img src="${projectMember.member_profile}">
 								<span class="projectUserNameList">${projectMember.member_name}</span>
 							</div>
 						</li>
