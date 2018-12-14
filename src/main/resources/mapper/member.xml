@@ -105,6 +105,7 @@
 		<if test="searchBookText!=null and searchBookText!=''">and project_title like '%'||#{searchBookText}||'%'</if>
 	</select>
 	
+	
 	<!-- 회원탈퇴 update  -->
 	<update id="updateUserwithDrawal" parameterType="projectVo">
 		update member
