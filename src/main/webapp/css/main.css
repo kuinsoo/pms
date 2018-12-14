@@ -1123,14 +1123,14 @@ header {
     font-weight: bold;
 }
 
-.currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li > .projectCard > .projectCardTitle > i.icon-settings {
+.currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li > .projectCard > .projectCardTitle > a > i.icon-settings {
     position: absolute;
     top: 20px;
     right: 20px;
     cursor: pointer;
 }
 
-.currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li > .projectCard > .projectCardTitle > i.icon-settings:hover {
+.currentMain > .currentMainContainer > .currentMainProjectCreates > ul > li > .projectCard > .projectCardTitle > a > i.icon-settings:hover {
     color: white;
     font-weight: bold;
 }
