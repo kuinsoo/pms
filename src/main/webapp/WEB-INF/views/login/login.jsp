@@ -64,6 +64,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 .error{color: red; }
 .signBtn{width:100%;height:50px;line-height:35px;}
 #naver_id_login > a > img{display:block;margin:0 auto;}
+#msg{ color : red;}
 </style>
 </head>
 
@@ -73,7 +74,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 		<div class="well box">
 			<form action="/loginProcess" method="post">
 				<h1>CURRENT 로그인</h1>
-				<h1>${msg}</h1>
+				<h3 id = "msg">${msg}</h3>
 				<br>
 				<div class="form-group label-floating">
 					<label class="control-label">이메일</label>
