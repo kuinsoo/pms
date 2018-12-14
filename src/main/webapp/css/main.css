@@ -1168,7 +1168,10 @@ header {
 	width:500px;height:500px;padding:20px;border:1px solid #dee3eb;
 	background-color:white;overflow:auto;
 }
-.white_content > div > a {float:right;display:block;color:#000;width:30px;height:30px;}
+.white_content > div > a {
+	float:right;display:block;color:#000;width:30px;height:30px;
+	border:1px solid #f00;
+}
 
 /* FOOTER */
 .currentFooter {
