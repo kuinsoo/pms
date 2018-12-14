@@ -181,11 +181,11 @@ Highcharts.ganttChart('container${work.work_id}', {
 	}
 });
 		title: {
-			text: 'Highcharts Gantt Chart'
+			text: 'Current Gantt Chart'
 		},
 
 		subtitle: {
-			text: 'With custom symbols in data labels'
+			text: 'With Work symbols in data labels'
 		},
 
 		xAxis: {
@@ -204,29 +204,29 @@ Highcharts.ganttChart('container${work.work_id}', {
 		series: [{
 			name: 'Project 1',
 			data: [{
-				start: Date.UTC(2018, 11, 1),
-				end: Date.UTC(2018, 11, 2),
+				start: Date.UTC(2018, 12, 15),
+				end: Date.UTC(2019, 11, 5),
 				y: 0,
 				assignee: 'JonArild'
 			}, {
-				start: Date.UTC(2018, 11, 2),
-				end: Date.UTC(2018, 11, 5),
+				start: Date.UTC(2018, 12, 2),
+				end: Date.UTC(2018, 12, 5),
 				y: 1,
 				assignee: 'Oystein',
 				fontSymbol: 'exclamation'
 			}, {
-				start: Date.UTC(2018, 11, 8),
-				end: Date.UTC(2018, 11, 9),
+				start: Date.UTC(2018, 12, 8),
+				end: Date.UTC(2018, 12, 9),
 				y: 2,
 				assignee: 'Torstein'
 			}, {
-				start: Date.UTC(2018, 11, 9),
-				end: Date.UTC(2018, 11, 19),
+				start: Date.UTC(2018, 12, 9),
+				end: Date.UTC(2018, 12, 19),
 				y: 1,
 				assignee: 'JonArild'
 			}, {
-				start: Date.UTC(2018, 11, 10),
-				end: Date.UTC(2018, 11, 23),
+				start: Date.UTC(2018, 12, 10),
+				end: Date.UTC(2018, 12, 23),
 				y: 2,
 				assignee: 'Torstein',
 				fontSymbol: 'smile-o'
