@@ -102,11 +102,17 @@
 								<i class="icon-star icons"  style="color:yellow;font-weight:bold;" onclick="bookmark('${pMemberListVo.project_id}');"></i>
 									</c:when>
 								</c:choose>
-                                <a href="/subMain?project_id=${pMemberListVo.project_id}&project_title=${pMemberListVo.project_title}" > ${pMemberListVo.project_title}</a>
+                                <a href="/subMain?project_id=${pMemberListVo.project_id}&project_title=${pMemberListVo.project_title}" class="ajaxProjectTitle"> ${pMemberListVo.project_title}</a>
 								<c:if test="${pMemberListVo.pmember_position eq '1'}">
-								<i class="icon-settings icons"></i>
+								<a href="#open" class="settingsA"><i class="icon-settings icons"></i></a>
+								<div class="white_content" id="open">
+									<div>
+										<a href="#close">닫기</a>
+									</div>
+							    </div>
                                 </c:if>
 							</div>
+							<div class="projectUpdatePopUp"></div>
 							<div class="projectCardUserName">
 								<img src="${pMemberListVo.member_profile}">
 								<br>
@@ -339,7 +345,7 @@
 		location.href = "main/subMain";
 	});
 
-	var openWin;
+var openWin;
 function popUp(w, h, project_id){
 	x = (screen.availWidth - w) / 2;
 	y = (screen.availHeight - h) / 2;
