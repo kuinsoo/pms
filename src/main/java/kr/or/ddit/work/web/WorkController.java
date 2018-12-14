@@ -57,5 +57,12 @@ public class WorkController {
 	public String testGantt() {
 		return "work/testChart";
 	}
+
+
+
+	@RequestMapping(value = "/testGantt2", method=RequestMethod.GET)
+	public String testGantt2() {
+		return "work/2222";
+	}
 }
 

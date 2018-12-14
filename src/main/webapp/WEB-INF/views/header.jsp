@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="/css/myPage.css">
     <link rel="stylesheet" type="text/css" href="/css/submain.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
 </head>
 
 <body class="cbp-spmenu-push">
