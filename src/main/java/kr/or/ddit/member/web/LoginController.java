@@ -102,7 +102,7 @@ public class LoginController {
 
 		memberVo = memberservice.selectUser(member_mail);
 
-		if(memberVo !=null || memberVo.getMember_withdrawal().equals("Y")) {
+		if(memberVo !=null && memberVo.getMember_withdrawal().equals("Y")) {
 			String msg = "탈퇴한 회원 입니다.";
 			model.addAttribute("msg",msg );
 			return "/login/login";
