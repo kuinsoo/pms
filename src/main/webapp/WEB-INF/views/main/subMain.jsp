@@ -4,6 +4,7 @@
 <%-- header & left --%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
+<script src="https://code.highcharts.com/gantt/modules/exporting.js"></script>
 
 	
 	<%--CURRENT SECTION(MAIN)--%>

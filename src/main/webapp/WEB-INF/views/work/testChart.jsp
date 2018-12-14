@@ -9,7 +9,7 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script>
-	Highcharts.ganttChart('container${work.work_id}', {
+	Highcharts.ganttChart('container${work.work_id }', {
 
 		title: {
 			text: 'Highcharts Gantt Chart'
@@ -77,6 +77,4 @@
 			}]
 		}]
 	});
-
-
 </script>
