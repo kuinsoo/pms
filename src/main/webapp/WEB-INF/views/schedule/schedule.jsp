@@ -2,7 +2,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ include file="/WEB-INF/views/header.jsp" %>
+<link href='../fullcalendar/fullcalendar.min.css' rel='stylesheet' />
 <link rel='stylesheet' href='../fullcalendar/fullcalendar.css?ver=1' />
+<link href='../fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
 <style type="text/css">
 .containerDiv {
 	width:1400px;padding:20px;margin:0 auto;margin-top:20px;height:auto;border:1px solid #dee3eb;
@@ -78,8 +80,8 @@
 		</p>
 	</div>
 </footer>
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src='../lib/moment.min.js?ver=1'></script>
+<script src='../lib/jqeury.min.js'></script>
 <script src='../fullcalendar/fullcalendar.js?ver=1'></script>
 <script src='../fullcalendar/locale-all.js?ver=1'></script>
 <script type="text/javascript" src="js/classie.js"></script>
@@ -87,11 +89,22 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	//fullcalendar 한글화, 사이즈, 일정 출력
-	
+	var result = resultFunc();
 	$('#calendar').fullCalendar({
 		locale : 'ko',	// 한글화
 		//height : 650,	// 사이즈
-		events : resultFunc()
+		eventLimit: true,
+		/*
+		eventRender: function(event, element){
+			element.popover({
+				title : event.title,
+				content: '<b>Inicio</b>: ' + event.start + "<b>Fin</b>: " + event.end,
+				trigger: 'hover',
+				//placement: 'top',
+				//container: 'body'
+			});
+		},*/
+		events : result
 	});
 	
 	//(일정data를 JSON형식으로 변환 후 담을) 배열 변수
