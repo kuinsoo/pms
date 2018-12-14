@@ -20,7 +20,9 @@ import java.util.Map;
  * @Version :
  */
 public interface MemberMapper {
-
+	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 로그인 / 회원가입 / 마이페이지 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	
 	/**
 	 * Method : seletUser
 	 * 작성자 : 나진실
@@ -75,6 +77,37 @@ public interface MemberMapper {
 	
 	
 	/**
+	 * Method : updatePass
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 *
+	 * @param memberVo the member vo
+	 * @return Method 설명 : 비밀번호 찾기 - 임시번호 업데이트
+	 */
+	int updatePass(MemberVo memberVo);
+	
+	
+	/**
+	 * Method : totalProjectCnt
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 프로젝트 건수 조회 
+	 */
+	int totalProjectCnt(String member_mail);
+	
+	
+	/**
+	 * Method : selectProjectCnt
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 프로젝트 건수(회원아이디로)조회 
+	 */
+	int selectProjectCnt(String member_mail);
+	
+	
+	/**
 	 * Method : myprojectselect
 	 * 작성자 : pc07
 	 * 변경이력 :
@@ -98,32 +131,16 @@ public interface MemberMapper {
 	
 	
 	/**
-	 * Method : totalProjectCnt
+	 * Method : updateUserwithDrawal
 	 * 작성자 : pc07
 	 * 변경이력 :
+	 * @param memberVo
 	 * @return
-	 * Method 설명 : 프로젝트 건수 조회 
+	 * Method 설명 : 마이페이지 회원탈퇴 여부 
 	 */
-	int totalProjectCnt(String member_mail);
+	int updateUserwithDrawal(MemberVo memberVo);
 	
-	
-	/**
-	 * Method : selectProjectCnt
-	 * 작성자 : pc07
-	 * 변경이력 :
-	 * @return
-	 * Method 설명 : 프로젝트 건수(회원아이디로)조회 
-	 */
-	int selectProjectCnt(String member_mail);
-	/**
-	 * Method : updatePass
-	 * 작성자 : 나진실
-	 * 변경이력 :
-	 *
-	 * @param memberVo the member vo
-	 * @return Method 설명 : 비밀번호 찾기 - 임시번호 업데이트
-	 */
-	int updatePass(MemberVo memberVo);
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 	/**
 	 * Select main view list.
