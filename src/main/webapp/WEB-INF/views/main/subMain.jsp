@@ -25,7 +25,7 @@
 				</div>
 				<div class="projectList">
 					<div class="projectListTitles">
-						<i class="icon-check icons"></i>
+						<i class="far fa-newspaper"></i>
 						<span>업무 리포트 보기</span>
 					</div>
 					<div class="charts">
@@ -60,7 +60,7 @@
 				</div>
 				<div class="projectTaskContainer">
 					<div class="projectTaskContainerTitle">
-						<i class="icon-share-alt icons"></i><span>TO DO LIST</span>
+						<i class="far fa-sticky-note"></i><span>WORK CARD</span>
 					</div>
 				</div>
 				<div class="projectTaskContainerDragDrop">
@@ -72,7 +72,7 @@
 							<li class="titleBox">처리대기</li>
 							<li class="titleBox">완료</li>
 						</ul>
-						
+
 						<div class="kku-boarder kku-mainPage" id="planList">
 							<div class="column">
 								<div class="portlet">
