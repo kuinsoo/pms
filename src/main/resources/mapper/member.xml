@@ -4,7 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="kr.or.ddit.member.mapper.MemberMapper">
-
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 로그인 및 회원가입 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	
 	<!--  로그인  -->  
 	<select id="selectUser" resultType="memberVo" parameterType="String">
 		select *
@@ -83,9 +84,6 @@
 		WHERE   pmember_member = #{member_mail}
 		AND     pmember_bookmark = 'Y'
 	 </select>
-	 
-	 
-	 
 
 	<!--  즐겨찾기한 프로젝트  -->
 	<select id = "mybookmarkselect" resultType="projectVo" parameterType="pageVo">
@@ -106,6 +104,13 @@
 		   		where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
 		<if test="searchBookText!=null and searchBookText!=''">and project_title like '%'||#{searchBookText}||'%'</if>
 	</select>
+	
+	<!-- 회원탈퇴 update  -->
+	<update id="updateUserwithDrawal" parameterType="projectVo">
+		update member
+		set member_withdrawal = 'Y'
+		where member_mail  = #{member_mail}
+	</update>
 </mapper>
 
 

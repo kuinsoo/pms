@@ -113,6 +113,16 @@ public class MemberService implements MemberServiceInf {
 	public List<ProjectVo> myprojectselect(PageVo pageVo) {
 		return memberMapper.myprojectselect(pageVo);
 	}
+	
+	@Override
+	public int selectProjectCnt(String member_mail) {
+		return memberMapper.selectProjectCnt(member_mail);
+	}
+
+	@Override
+	public int updateUserwithDrawal(MemberVo memberVo) {
+		return memberMapper.updateUserwithDrawal(memberVo);
+	}
 	/**
 	 * Method : mybookmarkselect
 	 * 작성자 : 나진실
@@ -139,6 +149,12 @@ public class MemberService implements MemberServiceInf {
 		return memberMapper.updatePass(memberVo);
 	}
 	
+	@Override
+	public int totalProjectCnt(String member_mail) {
+		return memberMapper.totalProjectCnt(member_mail);
+	}
+
+
 	
 	/**
 	 * Select main view list.
@@ -219,7 +235,6 @@ public class MemberService implements MemberServiceInf {
 
 	@Override
 	public List<InviteProjectVo> selectInviteProjectMap(Map<String, String> map) {
-		// TODO Auto-generated method stub
 		return memberMapper.selectInviteProjectMap(map);
 	}
 
@@ -243,12 +258,7 @@ public class MemberService implements MemberServiceInf {
 		return memberMapper.deleteInviteProject(delMap);
 	}
 
-	@Override
-	public int totalProjectCnt(String member_mail) {
-		return memberMapper.totalProjectCnt(member_mail);
-	}
-
-
+	
 
 	/**
 	 * Project member list list.
@@ -295,8 +305,5 @@ public class MemberService implements MemberServiceInf {
 		return memberMapper.updateBookmark(pMemberVo);
 	}
 
-	@Override
-	public int selectProjectCnt(String member_mail) {
-		return memberMapper.selectProjectCnt(member_mail);
-	}
+
 }
