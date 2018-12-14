@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
+import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.util.model.PageVo;
 
 
@@ -173,7 +174,7 @@ public class MemberDetailController {
 	 * @return
 	 * Method 설명 :  마이페이지 - 즐겨찾기한 프로젝트 검색 부분 Ajax
 	 */
-	
+	@ResponseBody
 	@RequestMapping(value ="/searchBookProjectAjax" , method=  RequestMethod.POST)
 	public Map<String, Object> searchBookProjectAjax (Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
 			ProjectVo projectVo, HttpServletRequest request){
@@ -196,6 +197,56 @@ public class MemberDetailController {
 		return projectBookMap;
 	}
 	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	@ResponseBody
+	@RequestMapping(value ="/myTodoProjectListAjax", method = RequestMethod.GET)
+	public Map<String, Object> myTodoProjectListAjax (Model model , PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo, 
+			ToDoVo todoVo, HttpServletRequest request) {
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		List<ToDoVo> projectTodoList = memberservice.myTodoselect(pageVo);
+		
+		System.out.println("projectListSize" + projectTodoList.size());
+		
+		Map<String , Object> projectTodoMap = new HashMap<>();
+		int pageCnt = memberservice.selectTodoCnt(memberVo.getMember_mail());
+	
+		System.out.println("pageCnt selectTodoCnt: " + pageCnt);
+		System.out.println("pageVo.getPageSize()selectTodoCntselectTodoCnt : " + pageVo.getPageSize());	
+		System.out.println("(int)Math.ceil((double)pageCnt/pageVo.getPageSize()) : " + (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		projectTodoMap.put("projectTodoList", projectTodoList);
+		projectTodoMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return projectTodoMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value ="/searchTodoProjectAjax", method = RequestMethod.POST)
+	public Map<String, Object> searchTodoProjectAjax (Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
+			ToDoVo todoVo, HttpServletRequest request){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		// 검색 부분 
+		if (pageVo.getSearchTodoText() == null) {
+			pageVo.setSearchTodoText("");
+		}
+		
+		List<ToDoVo> projectTodoList = memberservice.myTodoselect(pageVo);
+	
+		Map<String , Object> projectTodoMap = new HashMap<>();
+		int pageCnt = memberservice.selectTodoCnt(memberVo.getMember_mail());
+	
+		projectTodoMap.put("projectTodoList", projectTodoList);
+		
+		projectTodoMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+	
+		return projectTodoMap;
+	}
+	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 	/**
 	 * Method : memberDetailUpdate
 	 * 작성자 : 나진실

@@ -84,6 +84,13 @@
 		WHERE   pmember_member = #{member_mail}
 		AND     pmember_bookmark = 'Y'
 	 </select>
+	 
+	 <select id="selectTodoCnt" resultType="int" parameterType="String">
+	 	select count(*)
+		from   todo
+		where  todo_pmember = #{member_mail}
+	 
+	 </select>
 
 	<!--  즐겨찾기한 프로젝트  -->
 	<select id = "mybookmarkselect" resultType="projectVo" parameterType="pageVo">
@@ -112,6 +119,20 @@
 		set member_withdrawal = 'Y'
 		where member_mail  = #{member_mail}
 	</update>
+	
+	
+	<select id="myTodoselect" resultType="todoVo" parameterType="pageVo">
+		    select * from
+		    (select ROWNUM rnum, a.*
+		     from
+		        (select todo_content
+                      , todo_complet
+                from todo
+                where todo_pmember = #{member_mail})a)
+		   		where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
+		<if test="searchTodoText !=null and searchTodoText!=''">and todo_content like '%'||#{searchTodoText}||'%'</if>
+	</select>
+
 </mapper>
 
 

@@ -20,6 +20,7 @@
 			
 			getMyPageList(1);
 			getmybookMarkProjectList(1);
+			getmyTodoProjectList(1);
 			
 			$(".phoneBtns").hide();
 			$(".saveBtn").hide();
@@ -203,8 +204,7 @@
 			});
 		}
 		
-		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		// 즐겨찾기 목록 
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 즐겨찾기 목록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		
 		function getmybookMarkProjectList(page){
 			var pageSize = 10;
@@ -221,9 +221,9 @@
 						html += "	<td>"+ mm.project_title +"</td>";
 						html += "	<td>"+ mm.pmember_member +"</td>";
 						html += "</tr>";
+						
 					});
 					
-					console.log(data.projectBookList);
 					
 					
 					$("#projectBookList").html("");
@@ -282,9 +282,87 @@
 			});
 		}
 	
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 회원탈퇴 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 나의 일감 목록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		
+		function getmyTodoProjectList(page){
+			var pageSize = 10;
 			
+			$.ajax({
+				type: "GET",
+				url : "/myTodoProjectListAjax",
+				data: {"page":page, "pageSize":pageSize},
+				success : function(data){
+					var html = "";
+					$.each(data.projectTodoList, function(idx,mt){
+						console.log(data.projectTodoList);
+						
+						
+						html += "<tr>";
+						html += "	<td>"+ mt.rnum +"</td>";
+						html += "	<td>"+ mt.todo_content +"</td>";
+						html += "	<td>"+ mt.todo_complet +"</td>";
+						html += "</tr>";
+					
+						console.log(data.projectTodoList);
+	
+					});
+					
+					
+					
+					$("#projectTodoList").html("");
+					$("#projectTodoList").html(html);
+					
+					var paging ="";
+						paging +="<li><a href='javascript:getmyTodoProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						for(var i= 1; i<=data.pageCnt; i++) {
+							paging += "<li><a href='javascript:getmyTodoProjectList("+ i +");'>"+ i+ "</a></li>";
+						}
+							paging +="<li><a href='javascript:getmyTodoProjectList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+						$(".pagination3").html(paging);
+					},	
+					fail : function(data){
+						console.log(data);
+					}
+				});
+			}
+	
+		function getSearchTodoProject(){
+			var param = $('form[name=searchTodoProject]').serialize();
+				
+				$.ajax({
+					type: "POST",
+					url : "/searchTodoProjectAjax",
+					data: param,
+					
+					success : function(data){
+						var html = "";
+						$.each(data.projectTodoList, function(idx,mt){
+							html += "<tr>";
+							html += "	<td>"+ mt.rnum +"</td>";
+							html += "	<td>"+ mt.todo_content +"</td>";
+							html += "	<td>"+ mt.todo_complet +"</td>";
+							html += "</tr>";
+						});
+						
+						console.log(data.projectTodoList);
+						
+						
+						$("#projectTodoList").html("");
+						$("#projectTodoList").html(html);
+						
+						var paging ="";
+						paging +="<li><a href='javascript:getmyTodoProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						for(var i= 1; i<=data.pageCnt; i++) {
+							paging += "<li><a href='javascript:getmyTodoProjectList("+ i +");'>"+ i+ "</a></li>";
+						}
+							paging +="<li><a href='javascript:getmyTodoProjectList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+						$(".pagination3").html(paging);
+					},	
+					fail : function(data){
+						console.log(data);
+					}
+				});
+			}
 	</script>
 	
 	<!-- CURRENT SECTION(MAIN) -->	
@@ -336,7 +414,7 @@
 								<li><input type="text" value= "${memberVo.member_mail}" disabled="disabled" id = "member_mail"  name = "member_mail"/></li>
 								<li><input type="text" value= "${memberVo.member_name}" name ="member_name" id ="member_name"/></li>
 								<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"  id ="member_tel"/>
-									<input type="button" onclick="telAjax();" value="인증" class="phoneBtns" />
+									<input type="button" onclick="telAjax();" value="인증" class="phoneBtns"/>
 								<li><input type="text" id ="telnum" onkeyup="onkeyup_event();"/>
 									<span class = "inputerror"> 인증번호를 입력해 주세요..</span>
 									<span class= "telerror"> 인증번호가 일치하지 않습니다.</span>
@@ -438,18 +516,18 @@
 							</div>
 						</div>
 						
-						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 일감 보관 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 						
 						
 						<div id="tabs2-3">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-									<!-- <form name ="searchProject" method="POST" onsubmit="return false;">
-										 <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
+								 <form name ="searchTodoProject" method="POST" onsubmit="return false;">
+										 <input type="text" id="searchTodoText" name ="searchTodoText" value='${searchTodoText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
-										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
-									</form> -->
+										<i class="icon-magnifier icons" onclick="javascript:getSearchTodoProject();"></i>  
+									</form> 
 								</div>
 								<table>
 									<colgroup width="10%" />
@@ -458,27 +536,30 @@
 									<thead>
 										<tr>
 											<th><span>번호</span></th>
-											<th><span>참여중인 프로젝트 명</span></th>
-											<th><span>프로젝트 팀장</span></th>
+											<th><span>나의 일감 보관</span></th>
+											<th><span>마감일</span></th>
 										</tr>
 									</thead>
-									<tbody id ="아직미구현">
+									<tbody id ="projectTodoList"> 
+									<div> test test</div>
 									</tbody>
 								</table>
 								<div class="text-center">
-									 <ul class="pagination"></ul>
+									 <ul class="pagination3"></ul>
 								</div>
 							</div>
 						</div>
+						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 파일 보관함 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+						
 						<div id="tabs2-4">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-									<!-- <form name ="searchProject" method="POST" onsubmit="return false;">
+									<%--  <form name ="searchProject" method="POST" onsubmit="return false;">
 										 <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
-									</form> -->
+									</form>  --%>
 								</div>
 								<table>
 									<colgroup width="10%" />
@@ -499,6 +580,9 @@
 								</div>
 							</div>
 						</div>
+						
+						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+						
 						<div id="tabs2-5">
 							<div class="tabs2-5center">
 							<h2>회원 탈퇴 </h2>
@@ -508,6 +592,8 @@
 								<span id = "passError"> 비밀번호가 일치하지 않습니다. </span>
 							</div>
 						</div>
+						
+						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 					</div>
 				</div>
 			</div>
@@ -752,11 +838,6 @@ var myChart2 = new Chart(ctx2, {
     }
 });
 
-$(".goodbyeBtn").click(function(){
-	if(window.confirm("정말 탈퇴 하시겠습니까??")) {
-		location.href="/userwithDrawal";
-	}
-});
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 회원탈퇴 비밀번호 확인 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -771,8 +852,15 @@ $(document).ready(function() {
 		} else{
 			$("#passError").hide();
 			$('.goodbyeBtn').prop('disabled', false);
+
+			$(".goodbyeBtn").click(function(){
+				if(window.confirm("정말 탈퇴 하시겠습니까??")) {
+					location.href="/userwithDrawal";
+				}
+			});
 		}
 	});
+	
 });
 
 </script>

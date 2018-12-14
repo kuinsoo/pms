@@ -7,6 +7,7 @@ import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.project.model.InviteProjectVo;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
+import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.util.model.PageVo;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -135,6 +136,20 @@ public class MemberService implements MemberServiceInf {
 	public List<ProjectVo> mybookmarkselect(PageVo pageVo) {
 		return memberMapper.mybookmarkselect(pageVo);
 	}
+	
+	/**
+	 * Method : myTodoselect
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 마이페이지 나의 업무 리스트 
+	 */
+	@Override
+	public List<ToDoVo> myTodoselect(PageVo pageVo) {
+		return memberMapper.myTodoselect(pageVo);
+	}
+
 
 	/**
 	 * Method : selectfindPass
@@ -152,6 +167,11 @@ public class MemberService implements MemberServiceInf {
 	@Override
 	public int totalProjectCnt(String member_mail) {
 		return memberMapper.totalProjectCnt(member_mail);
+	}
+
+	@Override
+	public int selectTodoCnt(String member_mail) {
+		return memberMapper.selectTodoCnt(member_mail);
 	}
 
 
