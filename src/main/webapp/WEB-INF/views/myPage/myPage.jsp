@@ -10,6 +10,9 @@
 		.inputerror{
 			color: red;
 		}
+		#passError{
+			color: red;
+		}
 	
 	</style>
 	<script type="text/javascript">
@@ -279,6 +282,9 @@
 			});
 		}
 	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 회원탈퇴 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	
+			
 	</script>
 	
 	<!-- CURRENT SECTION(MAIN) -->	
@@ -495,8 +501,11 @@
 						</div>
 						<div id="tabs2-5">
 							<div class="tabs2-5center">
-								<p>정말로 탈퇴 하실건가요?ㅜㅜ</p>
-								<input type="button" value="응 탈퇴ㅂㅂ" class="goodbyeBtn" />
+							<h2>회원 탈퇴 </h2>
+								<p> 회원 확인을 위하여 비밀번호를 입력해주세요. </p>
+								<input id ="member_pass" id = "member_pass" placeholder ="비밀번호를 입력해주세요.." type="password" />
+								<input type="button" class= "goodbyeBtn" value= "확인"/>
+								<span id = "passError"> 비밀번호가 일치하지 않습니다. </span>
 							</div>
 						</div>
 					</div>
@@ -744,8 +753,28 @@ var myChart2 = new Chart(ctx2, {
 });
 
 $(".goodbyeBtn").click(function(){
-	confirm("진짜 탈퇴하는건가유?!");
+	if(window.confirm("정말 탈퇴 하시겠습니까??")) {
+		location.href="/userwithDrawal";
+	}
 });
+
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 회원탈퇴 비밀번호 확인 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+$(document).ready(function() {
+	$("#passError").hide();
+	//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
+	//blur()이벤트 사용
+	$("#member_pass").keyup(function() {
+		if($("#member_pass").val() != "${memberVo.member_pass}"){
+			$("#passError").show();
+			$('.goodbyeBtn').prop('disabled', true);
+		} else{
+			$("#passError").hide();
+			$('.goodbyeBtn').prop('disabled', false);
+		}
+	});
+});
+
 </script>
 </body>
 </html>

@@ -281,5 +281,47 @@ public class MemberDetailController {
 			
 			return certificationNumber;
 		}
+		
+		
+		/**
+		 * Method : userwithDrawal
+		 * 작성자 : pc07
+		 * 변경이력 :
+		 * @return
+		 * Method 설명 : 마이페이지 회원 탈퇴시 비밀번호 확인 부분
+		 */
+		@RequestMapping(value="/userwithDrawal")
+		public String userwithDrawal( @SessionAttribute("memberVo") MemberVo memberVo) {
+			
+			memberservice.updateUserwithDrawal(memberVo);
+			
+			return "redirect:/";				
+			
+		}
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

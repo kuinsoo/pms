@@ -35,7 +35,7 @@ public class WorkController {
 
 
 	@RequestMapping(value="/ajaxCreateWork",method=RequestMethod.POST)
-	public String createWork(Model model, WorkVo workVo, @RequestParam("project_id")String project_id,
+	public String ajaxCreateWork(Model model, WorkVo workVo, @RequestParam("project_id")String project_id,
 							 @SessionAttribute("memberVo")MemberVo memberVo) {
 
 		try{
@@ -54,7 +54,7 @@ public class WorkController {
 	}
 
 	@RequestMapping(value = "/testGantt", method=RequestMethod.GET)
-	public String tsetPage() {
+	public String testGantt() {
 		return "work/testChart";
 	}
 }

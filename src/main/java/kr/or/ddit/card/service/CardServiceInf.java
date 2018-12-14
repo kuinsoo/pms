@@ -1,6 +1,6 @@
-package kr.or.ddit.zcardaa.service;
+package kr.or.ddit.card.service;
 
-import kr.or.ddit.zcardaa.model.CardVo;
+import kr.or.ddit.card.model.CardVo;
 
 import java.util.List;
 
