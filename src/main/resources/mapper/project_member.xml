@@ -45,6 +45,7 @@ FROM    project_member pm INNER JOIN project p
                                                                       GROUP BY pmember_project) pCount
             ON      pm.pmember_project = pCount.pmember_project
 WHERE   pm.pmember_member = #{member_mail}
+order by to_number(PROJECT_ID) desc
     </select>
     <!--
              SELECT  DISTINCT

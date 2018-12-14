@@ -73,6 +73,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 		<div class="well box">
 			<form action="/loginProcess" method="post">
 				<h1>CURRENT 로그인</h1>
+				<h1>${msg}</h1>
 				<br>
 				<div class="form-group label-floating">
 					<label class="control-label">이메일</label>
