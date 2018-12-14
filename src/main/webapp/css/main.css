@@ -993,11 +993,20 @@ header {
     position: relative;
     cursor: pointer;
 }
-
-.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > a {
+.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > .settingsA > i.icon-settings {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    color:#fbfbfb;
+}
+.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > .settingsA > i.icon-settings:hover {
+    color: white;
+    font-weight: bold;
+}
+.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > .ajaxProjectTitle {
     color: #fbfbfb;
 }
-
 .currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > i.icon-star {
     position: absolute;
     top: 20px;

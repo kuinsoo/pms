@@ -102,9 +102,9 @@
 								<i class="icon-star icons"  style="color:yellow;font-weight:bold;" onclick="bookmark('${pMemberListVo.project_id}');"></i>
 									</c:when>
 								</c:choose>
-                                <a href="/subMain?project_id=${pMemberListVo.project_id}&project_title=${pMemberListVo.project_title}" > ${pMemberListVo.project_title}</a>
+                                <a href="/subMain?project_id=${pMemberListVo.project_id}&project_title=${pMemberListVo.project_title}" class="ajaxProjectTitle"> ${pMemberListVo.project_title}</a>
 								<c:if test="${pMemberListVo.pmember_position eq '1'}">
-								<a href="#open"><i class="icon-settings icons"></i></a>
+								<a href="#open" class="settingsA"><i class="icon-settings icons"></i></a>
 								<div class="white_content" id="open">
 									<div>
 										<a href="#close">닫기</a>
