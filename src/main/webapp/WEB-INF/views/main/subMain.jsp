@@ -251,7 +251,14 @@
 								<tbody>
 									<tr>
 										<td><input type="checkbox" /></td>
-										<td>샘플 제목 테스트</td>
+										<td>
+											<a href="#open" class="issueTitlePopup">샘플 제목 테스트</a>
+											<div class="white_content" id="open">
+												<div>
+													<a href="#close">닫기</a>
+												</div>
+										    </div>
+										</td>
 										<td>구인수</td>
 										<td>2018-12-14</td>
 										<td>2018-12-18</td>
@@ -259,7 +266,7 @@
 									</tr>
 									<tr>
 										<td><input type="checkbox" /></td>
-										<td>샘플 제목 테스트</td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
 										<td>구인수</td>
 										<td>2018-12-14</td>
 										<td>2018-12-18</td>
@@ -267,7 +274,7 @@
 									</tr>
 									<tr>
 										<td><input type="checkbox" /></td>
-										<td>샘플 제목 테스트</td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
 										<td>구인수</td>
 										<td>2018-12-14</td>
 										<td>2018-12-18</td>
@@ -275,7 +282,7 @@
 									</tr>
 									<tr>
 										<td><input type="checkbox" /></td>
-										<td>샘플 제목 테스트</td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
 										<td>구인수</td>
 										<td>2018-12-14</td>
 										<td>2018-12-18</td>
@@ -283,7 +290,7 @@
 									</tr>
 									<tr>
 										<td><input type="checkbox" /></td>
-										<td>샘플 제목 테스트</td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
 										<td>구인수</td>
 										<td>2018-12-14</td>
 										<td>2018-12-18</td>
@@ -291,7 +298,7 @@
 									</tr>
 									<tr>
 										<td><input type="checkbox" /></td>
-										<td>샘플 제목 테스트</td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
 										<td>구인수</td>
 										<td>2018-12-14</td>
 										<td>2018-12-18</td>
@@ -299,7 +306,7 @@
 									</tr>
 									<tr>
 										<td><input type="checkbox" /></td>
-										<td>샘플 제목 테스트</td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
 										<td>구인수</td>
 										<td>2018-12-14</td>
 										<td>2018-12-18</td>
@@ -307,7 +314,7 @@
 									</tr>
 									<tr>
 										<td><input type="checkbox" /></td>
-										<td>샘플 제목 테스트</td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
 										<td>구인수</td>
 										<td>2018-12-14</td>
 										<td>2018-12-18</td>
@@ -315,7 +322,7 @@
 									</tr>
 									<tr>
 										<td><input type="checkbox" /></td>
-										<td>샘플 제목 테스트</td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
 										<td>구인수</td>
 										<td>2018-12-14</td>
 										<td>2018-12-18</td>
@@ -323,7 +330,7 @@
 									</tr>
 									<tr>
 										<td><input type="checkbox" /></td>
-										<td>샘플 제목 테스트</td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
 										<td>구인수</td>
 										<td>2018-12-14</td>
 										<td>2018-12-18</td>
