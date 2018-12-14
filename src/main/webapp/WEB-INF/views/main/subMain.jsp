@@ -228,7 +228,33 @@
 							<span>${work.work_wdate}</span>
 						</div>
 						<div class="updateDeleteIcon">
-							<i class="icon-wrench icons"></i>
+							<i class="icon-wrench icons"></i>							
+							<a href="#opens"><i class="icon-bulb icons"></i></a>
+							<div class="white_contents" id="opens">
+								<div>
+									<a href="#close"><i class="icon-close icons"></i></a>
+									<div class="issueCreateInputField">
+										<div class="issueCreateInputFieldLeft">
+											<ul>
+												<li>담당자</li>
+												<li>할일내용</li>
+												<li>시작일자</li>
+												<li>마감일자</li>
+											</ul>
+										</div>
+										<div class="issueCreateInputFieldRight">
+											<ul>
+												<li><input type="text" /></li>
+												<li><textarea>할일내용</textarea></li>
+												<li><input type="datetime-local" /></li>
+												<li><input type="datetime-local" /></li>
+											</ul>
+										</div>
+									</div>
+									<input type="button" value="등록" class="issueInfoCreate" />
+									<input type="button" value="취소" class="issueInfoClose"/>
+								</div>
+						    </div>
 						</div>
 					</div>
 					<div class="currentCardContentView">
@@ -255,7 +281,43 @@
 											<a href="#open" class="issueTitlePopup">샘플 제목 테스트</a>
 											<div class="white_content" id="open">
 												<div>
-													<a href="#close">닫기</a>
+													<a href="#close"><i class="icon-close icons"></i></a>
+													<div class="issueSelectPage">
+														<div class="issueSelectPageLeft">
+															<form action="#" method="post">
+																<div class="issueProfile">
+																	<img src="http://placehold.it/150x200" />
+																</div>
+																<div class="issues">
+																	<div class="issuesLeft">
+																		<ul>
+																			<li>담당자</li>
+																			<li>시작</li>
+																			<li>예상마감</li>
+																			<li>마감</li>																			
+																		</ul>
+																	</div>
+																	<div class="issuesRight">
+																		<ul>
+																			<li><input type="text" /></li>
+																			<li><input type="text" /></li>
+																			<li><input type="text" /></li>
+																			<li><input type="text" /></li>																			
+																		</ul>
+																	</div>
+																</div>
+																<textarea>누른것에 대한 상세 내용...........</textarea>
+															</form>
+														</div>
+														<div class="issueSelectPageRight">
+															<h2>발생이슈</h2>
+															<input type="button" value="등록" class="issueCreateBtn" />
+															<input type="button" value="수정" class="insueUpdateBtn" />
+															<form action="#" mehtod="post">
+																<textarea>이슈에 대한 내용,,,,,</textarea>
+															</form>
+														</div>
+													</div>
 												</div>
 										    </div>
 										</td>
