@@ -1010,14 +1010,14 @@ header {
     font-weight: bold;
 }
 
-.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > i.icon-settings {
+.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > a > i.icon-settings {
     position: absolute;
     top: 20px;
     right: 20px;
     cursor: pointer;
 }
 
-.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > i.icon-settings:hover {
+.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle > a > i.icon-settings:hover {
     color: white;
     font-weight: bold;
 }
@@ -1146,6 +1146,20 @@ header {
     width: 30px;
     height: 30px;
 }
+
+/* settings layer popup */
+.white_content {
+	position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0, 0, 0, 0.8);opacity:0;
+	-webkit-transition: opacity 400ms ease-in;-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;pointer-events:none;z-index:4;
+}
+.white_content:target{opacity:1;pointer-events:auto;}
+.white_content > div {
+	position:absolute;top:50%;left:50%;margin-top:-250px;margin-left:-250px;
+	width:500px;height:500px;padding:20px;border:1px solid #dee3eb;
+	background-color:white;overflow:auto;
+}
+.white_content > div > a {float:right;display:block;color:#000;width:30px;height:30px;}
 
 /* FOOTER */
 .currentFooter {
