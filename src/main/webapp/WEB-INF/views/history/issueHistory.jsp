@@ -62,7 +62,6 @@
 	$(window).on('beforeunload', function(){
 		return $(window).scrollTop(0);
 	});
-	
 </script>
 <style media="screen">
 .scroll{
