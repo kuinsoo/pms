@@ -119,8 +119,23 @@
 .cardUserInfoName > span{font-size:18px;color:#333;}
 .updateDeleteIcon{float:right;width:50px;height:50px;margin-right:20px;text-align:center;padding-top:10px;}
 .updateDeleteIcon > i{font-size:25px;cursor:pointer;}
-.cardContent{width:100%;height:250px;padding:20px 30px 20px 30px;}
-.cardContent > textarea{border:none;width:100%;height:100%;outline:none;font-size:18px;}
+.currentCardContentView{width:100%;height:500px;}
+.currentCardContentViewLeft{float:left;width:50%;height:100%;padding:20px;}
+.currentCardContentViewLeft > textarea{outline:none;width:100%;height:90%;margin-top:10px;border:none;}
+.currentCardContentViewRight{float:left;width:50%;height:100%;padding:20px;}
+.currentCardContentViewRight > table{border-collapse:collapse;width:100%;text-align:center;}
+.currentCardContentViewRight > table > thead > tr{border-top:2px solid #333;border-bottom:1px solid #333;}
+.currentCardContentViewRight > table > thead > tr > th{padding:10px 0px 10px 0px;font-size:17px;}
+.currentCardContentViewRight > table > thead > tr > th > input[type="checkbox"]{width:20px;height:20px;}
+.currentCardContentViewRight > table > tbody > tr{border-bottom:1px solid #333;}
+.currentCardContentViewRight > table > tbody > tr > td{padding: 5px 0px 5px 0px;}
+.currentCardContentViewRight > table > tbody > tr > td > input[type="checkbox"]{width:20px;height:20px;}
+.currentCardContentViewRight > .pagination{width:100%;height:20px;text-align:center;margin-top:20px;}
+.currentCardContentViewRight > .pagination > ul > li{padding:0px 10px 0px 10px;display:inline-block;cursor:pointer;}
+.currentCardContentViewRight > .pagination > ul > li > i{vertical-align:middle;}
+.currentCardContentViewRight > .pagination > ul > li > span{vertical-align:middle;}
+.currentCardContentBottomView{width:100%;border-top:1px solid #dee3eb;border-bottom:1px solid #dee3eb;}
+
 .cardContentBottom{width:100%;height:60px;padding:20px;border-top:1px solid #dee3eb;font-size:20px;}
 .cardContentBottom > i{cursor:pointer;}
 .cardContentBottom > span{cursor:pointer;vertical-align:middle;}

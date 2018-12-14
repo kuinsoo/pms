@@ -3,6 +3,9 @@
 
 <%-- header & left --%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
+<script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
+<script src="https://code.highcharts.com/gantt/modules/exporting.js"></script>
+
 	
 	<%--CURRENT SECTION(MAIN)--%>
 	<section class="currentMain">
@@ -216,30 +219,149 @@
 				<%--카드리스트--%>
 				<c:forEach items="${workList}" var="work" varStatus="i">
 				<div class="currentCardList" >					
-						<div class="cardUserInfo">
-							<div class="cardUserInfoImg">
-								<img src="${work.member_profile}">
-							</div>
-							<div class="cardUserInfoName">
-								<b>${work.member_mail}</b><br> <%-- 작성자 --%>
-								<span>${work.work_wdate}</span>
-							</div>
-							<div class="updateDeleteIcon">
-								<i class="icon-wrench icons"></i>
+					<div class="cardUserInfo">
+						<div class="cardUserInfoImg">
+							<img src="${work.member_profile}">
+						</div>
+						<div class="cardUserInfoName">
+							<b>${work.member_mail}</b><br> <%-- 작성자 --%>
+							<span>${work.work_wdate}</span>
+						</div>
+						<div class="updateDeleteIcon">
+							<i class="icon-wrench icons"></i>
+						</div>
+					</div>
+					<div class="currentCardContentView">
+						<div class="currentCardContentViewLeft">
+							<h2>${work.work_title}</h2>
+							<textarea readonly>${work.work_content}</textarea>
+						</div>
+						<div class="currentCardContentViewRight">
+							<table>
+								<thead>
+									<tr>
+										<th><input type="checkbox" /></th>
+										<th>TODO</th>
+										<th>담당자</th>
+										<th>시작</th>
+										<th>마감</th>
+										<th>이슈</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td>
+											<a href="#open" class="issueTitlePopup">샘플 제목 테스트</a>
+											<div class="white_content" id="open">
+												<div>
+													<a href="#close">닫기</a>
+												</div>
+										    </div>
+										</td>
+										<td>구인수</td>
+										<td>2018-12-14</td>
+										<td>2018-12-18</td>
+										<td>발생</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
+										<td>구인수</td>
+										<td>2018-12-14</td>
+										<td>2018-12-18</td>
+										<td></td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
+										<td>구인수</td>
+										<td>2018-12-14</td>
+										<td>2018-12-18</td>
+										<td>발생</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
+										<td>구인수</td>
+										<td>2018-12-14</td>
+										<td>2018-12-18</td>
+										<td>발생</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
+										<td>구인수</td>
+										<td>2018-12-14</td>
+										<td>2018-12-18</td>
+										<td>발생</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
+										<td>구인수</td>
+										<td>2018-12-14</td>
+										<td>2018-12-18</td>
+										<td>발생</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
+										<td>구인수</td>
+										<td>2018-12-14</td>
+										<td>2018-12-18</td>
+										<td>발생</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
+										<td>구인수</td>
+										<td>2018-12-14</td>
+										<td>2018-12-18</td>
+										<td>발생</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
+										<td>구인수</td>
+										<td>2018-12-14</td>
+										<td>2018-12-18</td>
+										<td>발생</td>
+									</tr>
+									<tr>
+										<td><input type="checkbox" /></td>
+										<td><span class="issueInfos">샘플 제목 테스트</span></td>
+										<td>구인수</td>
+										<td>2018-12-14</td>
+										<td>2018-12-18</td>
+										<td>발생</td>
+									</tr>
+								</tbody>
+							</table>
+							<div class="pagination">
+								<ul>
+									<li><i class="icon-arrow-left icons"></i></li>
+									<li><span>1</span></li>
+									<li><span>2</span></li>
+									<li><span>3</span></li>
+									<li><span>4</span></li>
+									<li><span>5</span></li>
+									<li><span>6</span></li>
+									<li><span>7</span></li>
+									<li><span>8</span></li>
+									<li><span>9</span></li>
+									<li><span>10</span></li>
+									<li><i class="icon-arrow-right icons"></i></li>
+								</ul>
 							</div>
 						</div>
+					</div>
+					<div class="currentCardContentBottomView">
+						<div id="container${work.work_id}"></div>
+						<%@ include file="/WEB-INF/views/work/testChart.jsp" %>						
+					</div>
 
-						<label class="cardContent" >${work.work_title} </label><br/>  <%-- 업무 제목 --%>
-						<div class="cardContent">
-							<textarea readonly> ${work.work_content} </textarea> <%-- 업무 내용 --%>
-						</div>
 						<!-- 댓글  -->
-						<div class="cardContentBottom">
-							<%--<i class="icon-bubble icons"></i>--%>
-							<%--<span onclick="insertCmt('${work.work_id}', 'cmt_content${i.index}');">댓글 작성</span>--%>
-							<i class="icon-bulb icons"></i>
-							<span>이슈 등록</span>
-						</div>
 						<div class="cardContentComment">
 							<c:forEach items="${cmtList}" var="cmt">
 								<c:if test="${cmt.cmt_work eq  work.work_id}">
@@ -323,7 +445,6 @@
 		</div>
 	</footer>
 </div>
-
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script> 
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

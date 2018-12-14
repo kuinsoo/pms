@@ -8,22 +8,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<style type="text/css">
-    #container, #button-container {
-        max-width: 800px;
-        margin: 1em auto;
-    }
-
-</style>
-
-
-<script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
-
-<div id="container"></div>
-
-
 <script>
-	Highcharts.ganttChart('container', {
+	Highcharts.ganttChart('container${work.work_id }', {
 
 		title: {
 			text: 'Highcharts Gantt Chart'
@@ -91,5 +77,4 @@
 			}]
 		}]
 	});
-
 </script>
