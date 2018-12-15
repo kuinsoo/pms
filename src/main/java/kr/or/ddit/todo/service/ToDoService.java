@@ -38,5 +38,18 @@ public class ToDoService implements ToDoServiceInf{
 	public List<ToDoVo> todoAllSchedule(ScheduleVo scheduleVo) {
 		return todoMapper.todoAllSchedule(scheduleVo);
 	}
+
+	/**
+	* Method : todoInsert
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todoVo
+	* @return
+	* Method 설명 : to-do 등록
+	*/
+	@Override
+	public int todoInsert(ToDoVo todoVo) {
+		return todoMapper.todoInsert(todoVo);
+	}
 	
 }
