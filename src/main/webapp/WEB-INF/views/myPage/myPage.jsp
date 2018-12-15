@@ -336,7 +336,11 @@
 							html += "<tr>";
 							html += "	<td>"+ mt.rnum +"</td>";
 							html += "	<td>"+ mt.todo_content +"</td>";
-							html += "	<td>"+ mt.todo_complet +"</td>";
+							if(mt.todo_complet==('N')){
+								html += "	<td>"+ '미완료' +"</td>";
+							}else{
+								html += "	<td>"+ '완료' +"</td>";							
+							}
 							html += "</tr>";
 						});
 						
