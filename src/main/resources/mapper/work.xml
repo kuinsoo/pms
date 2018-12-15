@@ -52,7 +52,7 @@
 	<insert id="createWork" parameterType="workVo">
 		insert into work 
 		values(SEQ_WORK.NEXTVAL, #{work_project}, #{work_title}, #{work_content}, #{work_type}, ${work_importance},
-					 #{work_sdate}, #{work_eedate},0, 'N','',#{work_public},'#4286f4')
+					 #{work_sdate}, #{work_eedate},0, 'N','',#{work_public},'#4286f4',sysdate)
 	</insert>
 
 	<delete id="deleteWork" parameterType="String">
@@ -68,6 +68,12 @@
 		WHERE work_id = #{work_id}
 	</update>
 
+	<insert id="insertWorkMember" parameterType="Map">
+		insert into work_member values (seq_work.currval, (SELECT PMEMBER_ID
+														   FROM PROJECT_MEMBER
+														   WHERE PMEMBER_MEMBER = #{pmember_member}
+															 and PMEMBER_PROJECT = #{pmember_project}))
+	</insert>
 
 
 

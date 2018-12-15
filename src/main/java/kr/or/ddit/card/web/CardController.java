@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * kr.or.ddit.card.web
@@ -36,8 +37,8 @@ public class CardController {
 	}
 	*/
 
-	@RequestMapping("/card")
-	public String updateCard(Model model) {
+	@RequestMapping(value = "/card", method = RequestMethod.GET)
+	public String selectAllCard(Model model) {
 		model.addAttribute("cardList",cardService.selectAllCard());
 
 		return "card/cardChart";

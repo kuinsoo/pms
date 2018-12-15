@@ -38,7 +38,9 @@ public class WorkVo {
 	private String work_public;			//	업무공개여부      (ex: Y or N)
 	private String work_color;			//	일정 색깔
 
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
 	private String work_wdate;		// 작성일
+
 	private String member_mail; 	// 작성자
 	private String member_profile;  // 작성자 프로필사진
 

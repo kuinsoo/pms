@@ -14,82 +14,51 @@ import org.apache.ibatis.type.Alias;
 @Alias("cardVo")
 public class CardVo {
 
-	private String 	card_group;
-	private float 	card_index;
-	private int  	card_no;
-	private String 	card_title;
-	private String 	card_content;
-	private int 	progress;
+	private String wc_id;
+	private String wc_work;
+	private float wc_index;
+	private String wc_group;
+
 
 	public CardVo() {
 	}
 
-	public CardVo(String card_group, float card_index, int card_no, String card_title, String card_content, int progress) {
-		this.card_group = card_group;
-		this.card_index = card_index;
-		this.card_no = card_no;
-		this.card_title = card_title;
-		this.card_content = card_content;
-		this.progress = progress;
+	public CardVo(String wc_id, String wc_work, float wc_index, String wc_group) {
+		this.wc_id = wc_id;
+		this.wc_work = wc_work;
+		this.wc_index = wc_index;
+		this.wc_group = wc_group;
 	}
 
-	public String getCard_group() {
-		return card_group;
+	public String getWc_id() {
+		return wc_id;
 	}
 
-	public void setCard_group(String card_group) {
-		this.card_group = card_group;
+	public void setWc_id(String wc_id) {
+		this.wc_id = wc_id;
 	}
 
-	public float getCard_index() {
-		return card_index;
+	public String getWc_work() {
+		return wc_work;
 	}
 
-	public void setCard_index(float card_index) {
-		this.card_index = card_index;
+	public void setWc_work(String wc_work) {
+		this.wc_work = wc_work;
 	}
 
-	public int getCard_no() {
-		return card_no;
+	public float getWc_index() {
+		return wc_index;
 	}
 
-	public void setCard_no(int card_no) {
-		this.card_no = card_no;
+	public void setWc_index(float wc_index) {
+		this.wc_index = wc_index;
 	}
 
-	public String getCard_title() {
-		return card_title;
+	public String getWc_group() {
+		return wc_group;
 	}
 
-	public void setCard_title(String card_title) {
-		this.card_title = card_title;
-	}
-
-	public String getCard_content() {
-		return card_content;
-	}
-
-	public void setCard_content(String card_content) {
-		this.card_content = card_content;
-	}
-
-	public int getProgress() {
-		return progress;
-	}
-
-	public void setProgress(int progress) {
-		this.progress = progress;
-	}
-
-	@Override
-	public String toString() {
-		return "CardVo{" +
-				"card_group='" + card_group + '\'' +
-				", card_index=" + card_index +
-				", card_no=" + card_no +
-				", card_title='" + card_title + '\'' +
-				", card_content='" + card_content + '\'' +
-				", progress=" + progress +
-				'}';
+	public void setWc_group(String wc_group) {
+		this.wc_group = wc_group;
 	}
 }

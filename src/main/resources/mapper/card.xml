@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.ddit.card.mapper.CardMapper">
-<!--        <select id="selectAllCard" resultType="cardVo" >
+<select id="selectAllCard" resultType="cardVo" >
             select * from CARD order by CARD_INDEX desc
         </select>
 
@@ -29,5 +29,5 @@
 
     <delete id="deleteCard" parameterType="Float">
         delete from card where CARD_INDEX = #{card_index}
-    </delete>-->
+    </delete>
 </mapper>

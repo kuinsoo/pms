@@ -64,6 +64,8 @@ public class WorkService implements WorkServiceInf{
 	*/
 	@Override
 	public int createWork(WorkVo workVo) {
+
+
 		return workMapper.createWork(workVo);
 	}
 
@@ -92,8 +94,20 @@ public class WorkService implements WorkServiceInf{
 	public int updateWork(WorkVo workVo) {
 		return workMapper.updateWork(workVo);
 	}
-	
-	
-	
+
+
+	/**
+	 * Method : updateWork
+	 * 작성자 : Mr.kku
+	 * 변경이력 :
+	 * @param wmMap
+	 * @return
+	 * Method 설명 : 업무 등록시 함꼐 등록
+	 */
+	@Override
+	public int insertWorkMember(Map<String, String> wmMap ,WorkVo workVo) {
+		workMapper.createWork(workVo);
+		return workMapper.insertWorkMember(wmMap);
+	}
 }
 
