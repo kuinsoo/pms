@@ -123,7 +123,7 @@
 	} );
 
 	function updateCard(no, group, index){
-		location.href = "/updateCard?card_no="+no+"&card_group="+group+"&card_index="+index;
+		location.href = "/updateCard?card_no="+no+"&wc_group="+group+"&wc_index="+index;
 	};
 </script>
 <ul id="titleList" >
@@ -140,15 +140,15 @@
             <label class="kku-hide kku-group">1</label>
         </div>
         <c:forEach items="${cardList}" var="cardVo" >
-            <c:if test="${cardVo.card_group eq '1'}">
+            <c:if test="${cardVo.wc_group eq '1'}">
                 <div class="portlet">
                     <div class="portlet-header" >${cardVo.card_title}</div>
                     <div class="portlet-content">
                             ${cardVo.card_content}
                     </div>
                     <label class="kku-hide kku-no" >${cardVo.card_no}</label>
-                    <label class="kku-hide kku-group" >${cardVo.card_group}</label>
-                    <label class="kku-hide kku-index" >${cardVo.card_index}</label>
+                    <label class="kku-hide kku-group" >${cardVo.wc_group}</label>
+                    <label class="kku-hide kku-index" >${cardVo.wc_index}</label>
                 </div>
             </c:if>
         </c:forEach>
@@ -159,15 +159,15 @@
             <label class="kku-hide kku-group">2</label>
         </div>
         <c:forEach items="${cardList}" var="cardVo" >
-            <c:if test="${cardVo.card_group eq '2'}">
+            <c:if test="${cardVo.wc_group eq '2'}">
                 <div class="portlet">
                     <div class="portlet-header">${cardVo.card_title}</div>
                     <div class="portlet-content">
                             ${cardVo.card_content}
                     </div>
                     <label class="kku-hide kku-no" >${cardVo.card_no}</label>
-                    <label class="kku-hide kku-group" >${cardVo.card_group}</label>
-                    <label class="kku-hide kku-index" >${cardVo.card_index}</label>
+                    <label class="kku-hide kku-group" >${cardVo.wc_group}</label>
+                    <label class="kku-hide kku-index" >${cardVo.wc_index}</label>
                 </div>
             </c:if>
         </c:forEach>
@@ -178,15 +178,15 @@
             <label class="kku-hide kku-group">3</label>
         </div>
         <c:forEach items="${cardList}" var="cardVo" >
-            <c:if test="${cardVo.card_group eq '3'}">
+            <c:if test="${cardVo.wc_group eq '3'}">
                 <div class="portlet">
                     <div class="portlet-header">${cardVo.card_title}</div>
                     <div class="portlet-content">
                             ${cardVo.card_content}
                     </div>
                     <label class="kku-hide kku-no" >${cardVo.card_no}</label>
-                    <label class="kku-hide kku-group" >${cardVo.card_group}</label>
-                    <label class="kku-hide kku-index" >${cardVo.card_index}</label>
+                    <label class="kku-hide kku-group" >${cardVo.wc_group}</label>
+                    <label class="kku-hide kku-index" >${cardVo.wc_index}</label>
                 </div>
             </c:if>
         </c:forEach>
@@ -197,15 +197,15 @@
             <label class="kku-hide kku-group">4</label>
         </div>
         <c:forEach items="${cardList}" var="cardVo" >
-            <c:if test="${cardVo.card_group eq '4'}">
+            <c:if test="${cardVo.wc_group eq '4'}">
                 <div class="portlet">
                     <div class="portlet-header">${cardVo.card_title}</div>
                     <div class="portlet-content">
                             ${cardVo.card_content}
                     </div>
                     <label class="kku-hide kku-no" >${cardVo.card_no}</label>
-                    <label class="kku-hide kku-group" >${cardVo.card_group}</label>
-                    <label class="kku-hide kku-index" >${cardVo.card_index}</label>
+                    <label class="kku-hide kku-group" >${cardVo.wc_group}</label>
+                    <label class="kku-hide kku-index" >${cardVo.wc_index}</label>
                 </div>
             </c:if>
         </c:forEach>
@@ -216,15 +216,15 @@
             <label class="kku-hide kku-group">5</label>
         </div>
         <c:forEach items="${cardList}" var="cardVo" >
-            <c:if test="${cardVo.card_group eq '5'}">
+            <c:if test="${cardVo.wc_group eq '5'}">
                 <div class="portlet">
                     <div class="portlet-header">${cardVo.card_title}</div>
                     <div class="portlet-content">
                             ${cardVo.card_content}
                     </div>
                     <label class="kku-hide kku-no" >${cardVo.card_no}</label>
-                    <label class="kku-hide kku-group" >${cardVo.card_group}</label>
-                    <label class="kku-hide kku-index" >${cardVo.card_index}</label>
+                    <label class="kku-hide kku-group" >${cardVo.wc_group}</label>
+                    <label class="kku-hide kku-index" >${cardVo.wc_index}</label>
                 </div>
             </c:if>
         </c:forEach>

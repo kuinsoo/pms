@@ -39,8 +39,11 @@ public class WorkController {
 							 @SessionAttribute("memberVo")MemberVo memberVo) {
 
 		try{
+			Map<String, String> mapWM = new HashMap<>();
+			mapWM.put("pmember_member",memberVo.getMember_mail());
+			mapWM.put("pmember_project", project_id);
 			workVo.setWork_project(project_id);
-			workService.createWork(workVo);
+			workService.insertWorkMember(mapWM,workVo);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -48,6 +51,7 @@ public class WorkController {
 		Map<String, String> mapWork = new HashMap<>();
 		mapWork.put("member_mail", memberVo.getMember_mail());
 		mapWork.put("project_id", project_id);
+
 		model.addAttribute("workList",workService.selectWorks(project_id));
 		model.addAttribute("cmtList", commentsService.cmtList(project_id));
 		return "work/ajaxCreateWork";
