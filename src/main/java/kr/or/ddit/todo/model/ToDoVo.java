@@ -123,7 +123,7 @@ public class ToDoVo {
 		this.todo_color = todo_color;
 	}
 	
-	/* 형변환 getter */
+/*	 형변환 getter 
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public String getFormat_todo_sdate() {
 		return sdf.format(todo_sdate);
@@ -133,7 +133,7 @@ public class ToDoVo {
 	}
 	public String getFormat_todo_edate() {
 		return sdf.format(todo_edate);
-	}
+	}*/
 
 	/* toString */
 	@Override

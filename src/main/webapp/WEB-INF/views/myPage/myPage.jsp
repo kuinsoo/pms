@@ -295,7 +295,12 @@
 						html += "<tr>";
 						html += "	<td>"+ mt.rnum +"</td>";
 						html += "	<td>"+ mt.todo_content +"</td>";
-						html += "	<td>"+ mt.todo_complet +"</td>";
+						if(mt.todo_complet==('N')){
+							html += "	<td>"+ '미완료' +"</td>";
+						}else{
+							html += "	<td>"+ '완료' +"</td>";							
+						}
+							
 						html += "</tr>";
 					});
 					
@@ -527,7 +532,7 @@
 										<tr>
 											<th><span>번호</span></th>
 											<th><span>나의 일감 보관</span></th>
-											<th><span>마감일</span></th>
+											<th><span>완료 여부</span></th>
 										</tr>
 									</thead>
 									<tbody id ="projectTodoList"> 
