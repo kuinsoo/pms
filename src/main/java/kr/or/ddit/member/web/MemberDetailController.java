@@ -174,6 +174,7 @@ public class MemberDetailController {
 	 * @return
 	 * Method 설명 :  마이페이지 - 즐겨찾기한 프로젝트 검색 부분 Ajax
 	 */
+	
 	@ResponseBody
 	@RequestMapping(value ="/searchBookProjectAjax" , method=  RequestMethod.POST)
 	public Map<String, Object> searchBookProjectAjax (Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
@@ -198,27 +199,35 @@ public class MemberDetailController {
 	}
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// TodoList
+	
 	@ResponseBody
 	@RequestMapping(value ="/myTodoProjectListAjax", method = RequestMethod.GET)
-	public Map<String, Object> myTodoProjectListAjax (Model model , PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo, 
-			ToDoVo todoVo, HttpServletRequest request) {
+	public Map<String, Object> myTodoProjectListAjax (Model model , PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
+		
+		ToDoVo todoVo = new ToDoVo();
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		System.out.println("*****pageVo : " + pageVo);
+		
 		List<ToDoVo> projectTodoList = memberservice.myTodoselect(pageVo);
+		
+		System.out.println("projectTodoList 투두리스트!! !" + projectTodoList);
 		
 		System.out.println("projectListSize" + projectTodoList.size());
 		
-		Map<String , Object> projectTodoMap = new HashMap<>();
+		Map<String , Object> projectTodoListMap = new HashMap<>();
 		int pageCnt = memberservice.selectTodoCnt(memberVo.getMember_mail());
-	
+		
 		System.out.println("pageCnt selectTodoCnt: " + pageCnt);
-		System.out.println("pageVo.getPageSize()selectTodoCntselectTodoCnt : " + pageVo.getPageSize());	
+		System.out.println("pageVo.ctTodoCntselectTodoCnt : " + pageVo.getPageSize());	
 		System.out.println("(int)Math.ceil((double)pageCnt/pageVo.getPageSize()) : " + (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
-		projectTodoMap.put("projectTodoList", projectTodoList);
-		projectTodoMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		projectTodoListMap.put("projectTodoList", projectTodoList);
+		projectTodoListMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
-		return projectTodoMap;
+		return projectTodoListMap;
 	}
 	
 	@ResponseBody

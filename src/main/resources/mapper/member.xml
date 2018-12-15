@@ -129,10 +129,10 @@
                       , todo_complet
                 from todo
                 where todo_pmember = #{member_mail})a)
-		   		where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
-		<if test="searchTodoText !=null and searchTodoText!=''">and todo_content like '%'||#{searchTodoText}||'%'</if>
+		  where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
+		<if test="searchTodoText != null and searchTodoText != ''">and todo_content like '%'||#{searchTodoText}||'%'</if>
 	</select>
-
+	
 </mapper>
 
 

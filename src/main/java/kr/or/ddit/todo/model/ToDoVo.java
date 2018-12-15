@@ -18,6 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Alias("todoVo")
 public class ToDoVo {
 	
+	private int rnum ;
 	private String todo_id;				//	할일번호(pk)
 	private String todo_work;			//	할일업무번호(fk)
 	private String todo_pmember;		//	할일담당자
@@ -40,7 +41,7 @@ public class ToDoVo {
 	/* 생성자 */
 	public ToDoVo(String todo_id, String todo_work, String todo_pmember, String todo_content, Date todo_sdate,
 			String format_todo_sdate, Date todo_edate, String format_todo_edate, Date todo_eedate,
-			String format_todo_eedate, String todo_complet, String todo_color) {
+			String format_todo_eedate, String todo_complet, String todo_color, int rnum) {
 		super();
 		this.todo_id = todo_id;
 		this.todo_work = todo_work;
@@ -54,7 +55,16 @@ public class ToDoVo {
 		this.format_todo_eedate = format_todo_eedate;
 		this.todo_complet = todo_complet;
 		this.todo_color = todo_color;
-		
+		this.rnum = rnum;
+	}
+
+	
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
 	}
 
 	/* getter & setter */

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Date : 2018-12-12 / 오전 11:03
  * @Version :
  */
-@Controller
+//@Controller
 public class MyErrorController implements ErrorController {
 
 

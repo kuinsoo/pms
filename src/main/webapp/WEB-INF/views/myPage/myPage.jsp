@@ -223,9 +223,6 @@
 						html += "</tr>";
 						
 					});
-					
-					
-					
 					$("#projectBookList").html("");
 					$("#projectBookList").html(html);
 					
@@ -254,7 +251,6 @@
 				
 				success : function(data){
 					console.log("data : " + data);
-					
 					var html = "";
 					$.each(data.projectBookList, function(idx,mm){
 						html += "<tr>";
@@ -296,18 +292,14 @@
 					$.each(data.projectTodoList, function(idx,mt){
 						console.log(data.projectTodoList);
 						
-						
 						html += "<tr>";
 						html += "	<td>"+ mt.rnum +"</td>";
 						html += "	<td>"+ mt.todo_content +"</td>";
 						html += "	<td>"+ mt.todo_complet +"</td>";
 						html += "</tr>";
-					
-						console.log(data.projectTodoList);
-	
 					});
 					
-					
+					console.log(data.projectTodoList);
 					
 					$("#projectTodoList").html("");
 					$("#projectTodoList").html(html);
@@ -315,25 +307,24 @@
 					var paging ="";
 						paging +="<li><a href='javascript:getmyTodoProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 						for(var i= 1; i<=data.pageCnt; i++) {
-							paging += "<li><a href='javascript:getmyTodoProjectList("+ i +");'>"+ i+ "</a></li>";
+							paging += "<li><a href='javascript:getmyTodoProjectList("+ i +");'>"+ i + "</a></li>";
 						}
 							paging +="<li><a href='javascript:getmyTodoProjectList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 						$(".pagination3").html(paging);
-					},	
-					fail : function(data){
-						console.log(data);
-					}
-				});
-			}
+				},	
+				fail : function(data){
+					console.log(data);
+				}
+			});
+		}
 	
 		function getSearchTodoProject(){
-			var param = $('form[name=searchTodoProject]').serialize();
+			var param = $('#searchTodoProject').serialize();
 				
 				$.ajax({
 					type: "POST",
 					url : "/searchTodoProjectAjax",
 					data: param,
-					
 					success : function(data){
 						var html = "";
 						$.each(data.projectTodoList, function(idx,mt){
@@ -345,7 +336,6 @@
 						});
 						
 						console.log(data.projectTodoList);
-						
 						
 						$("#projectTodoList").html("");
 						$("#projectTodoList").html(html);
@@ -522,7 +512,7 @@
 						<div id="tabs2-3">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-								 <form name ="searchTodoProject" method="POST" onsubmit="return false;">
+								 <form name ="searchTodoProject" id ="searchTodoProject" method="POST" onsubmit="return false;">
 										 <input type="text" id="searchTodoText" name ="searchTodoText" value='${searchTodoText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
@@ -541,7 +531,6 @@
 										</tr>
 									</thead>
 									<tbody id ="projectTodoList"> 
-									<div> test test</div>
 									</tbody>
 								</table>
 								<div class="text-center">
