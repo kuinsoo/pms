@@ -13,10 +13,6 @@
         select * from PROJECT where PROJECT_ID = #{project_id}
     </select>
 
-    <select id="selectBookMarkProject" resultType="projectVo">
-        select * from PROJECT
-    </select>
-
     <insert id="createProject" parameterType="projectVo">
         insert into PROJECT values (SEQ_PROJECT.nextval, #{project_title},#{project_overview}, 'N',#{project_sdate}, #{project_edate},'','#ab2af6' )
     </insert>

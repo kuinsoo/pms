@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%--카드리스트--%>
 <c:forEach items="${workList}" var="work" varStatus="i">
     <div class="currentCardList" >
         <div class="cardUserInfo">
@@ -136,54 +135,6 @@
                         <td>2018-12-18</td>
                         <td>발생</td>
                     </tr>
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td><span class="issueInfos">샘플 제목 테스트</span></td>
-                        <td>구인수</td>
-                        <td>2018-12-14</td>
-                        <td>2018-12-18</td>
-                        <td>발생</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td><span class="issueInfos">샘플 제목 테스트</span></td>
-                        <td>구인수</td>
-                        <td>2018-12-14</td>
-                        <td>2018-12-18</td>
-                        <td>발생</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td><span class="issueInfos">샘플 제목 테스트</span></td>
-                        <td>구인수</td>
-                        <td>2018-12-14</td>
-                        <td>2018-12-18</td>
-                        <td>발생</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td><span class="issueInfos">샘플 제목 테스트</span></td>
-                        <td>구인수</td>
-                        <td>2018-12-14</td>
-                        <td>2018-12-18</td>
-                        <td>발생</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td><span class="issueInfos">샘플 제목 테스트</span></td>
-                        <td>구인수</td>
-                        <td>2018-12-14</td>
-                        <td>2018-12-18</td>
-                        <td>발생</td>
-                    </tr>
-                    <tr>
-                        <td><input type="checkbox" /></td>
-                        <td><span class="issueInfos">샘플 제목 테스트</span></td>
-                        <td>구인수</td>
-                        <td>2018-12-14</td>
-                        <td>2018-12-18</td>
-                        <td>발생</td>
-                    </tr>
                     </tbody>
                 </table>
                 <div class="pagination">
@@ -247,6 +198,5 @@
                 </li>
             </ul>
         </div>
-    </div>
+    </div> <%-- 끝--%>
 </c:forEach>
-<%-- 끝--%>

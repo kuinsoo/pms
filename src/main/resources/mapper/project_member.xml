@@ -79,7 +79,7 @@ WHERE   pm.pmember_member = #{member_mail}
 
 	<!-- 팀 원으로 등록 -->
     <insert id="inviteTeam" parameterType="pMemberVo">
-      insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,#{pmember_project},#{pmember_member},'2', sysdate )
+      insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,#{pmember_project},#{pmember_member},'2', sysdate ,'N')
     </insert>
 
 	<!-- 초대받은 프로젝트들 -->

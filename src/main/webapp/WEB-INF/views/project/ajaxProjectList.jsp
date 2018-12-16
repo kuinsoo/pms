@@ -8,6 +8,7 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<%-- bookmark ajax 처리 --%>
 <c:forEach items="${pMemberList}" var="pMemberListVo" varStatus="i">
     <li class="bookmarkProject">
         <div class="projectCard" >
@@ -24,17 +25,18 @@
                 <c:if test="${pMemberListVo.pmember_position eq '1'}">
                     <a href="#open" class="settingsA"><i class="icon-settings icons"></i></a>
                     <div class="white_content" id="open">
-						<div>
-							<a href="#close">닫기</a>
-						</div>
-				    </div>
+                        <div>
+                            <a href="#close">닫기</a>
+                        </div>
+                    </div>
                 </c:if>
             </div>
+            <div class="projectUpdatePopUp"></div>
             <div class="projectCardUserName">
-                <img src="${memberVo.member_profile}">
+                <img src="${pMemberListVo.member_profile}">
                 <br>
                     ${pMemberListVo.member_name} 외 ${pMemberListVo.pmemberCount - 1}명
             </div>
         </div>
     </li>
-</c:forEach>
+</c:forEach> <%-- book end --%>

@@ -31,13 +31,6 @@ public interface ProjectServiceInf {
 	 */
 	ProjectVo selectProjectList(String project_id);
 
-	/**
-	 * Select book mark project list.
-	 *
-	 * @param bookmark the bookmark
-	 * @return the list
-	 */
-	List<ProjectVo> selectBookMarkProject(String bookmark);
 
 	/**
 	 * Create project int.

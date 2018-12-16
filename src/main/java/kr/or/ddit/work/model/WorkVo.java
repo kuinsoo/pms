@@ -30,7 +30,7 @@ public class WorkVo {
 	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
 	private Date   work_eedate;			//	업무예상마감일자
 	private String format_work_eedate;	//	업무예상마감일자(String)
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
 	private Date   work_edate;			//	업무마감일자
 	private String format_work_edate;	//	업무마감일자(String)
 	private int    work_progress;		//	업무진척도
