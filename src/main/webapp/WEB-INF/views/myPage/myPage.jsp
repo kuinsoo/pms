@@ -484,8 +484,9 @@
 				</div>
 				<div class="myPageBottomContainer">
 					<div id="tabs2">
-						<ul>
+						<ul>							
 							<li><a href="#tabs2-1">참여중인 프로젝트</a></li>
+							<li><a href="#tabs2-1-1">참여했던 프로젝트</a></li>
 							<li><a href="#tabs2-2">즐겨찾기한 프로젝트</a></li>
 							<li><a href="#tabs2-3">일감 조회</a></li>
 							<li><a href="#tabs2-4">보관함</a></li>
@@ -521,6 +522,40 @@
 								</table>
 								<div class="text-center">
 									 <ul class="pagination"></ul>
+								</div>
+							</div>
+						</div>
+						
+
+						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 참여했던 목록  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+						<div id="tabs2-1-1">
+							<div class="projectTable">
+								<div class="projectSearchDiv">　　
+									<form name ="" method="POST" onsubmit="return false;">
+										<input type="text" id="" name ="" value=  placeholder="검색어를 입력해주세요"/>
+										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="pageSize" value='10' />
+										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchProject();"></i>  
+									</form>
+								</div>
+								<table>
+									<colgroup width="10%" />
+									<colgroup width="60%" />
+									<colgroup width="30%" />
+									<thead>
+										<tr class = "">
+											<th><span>번호</span></th>
+											<th><span>참여했던 프로젝트 명</span></th>
+											<th><span>프로젝트 아이디 </span></th>
+											<th><span>프로젝트 팀장</span></th>
+										</tr>
+									</thead>
+									<tbody id ="">
+									</tbody>
+								</table>
+								<div class="text-center">
+									 <ul class=""></ul>
 								</div>
 							</div>
 						</div>
