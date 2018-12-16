@@ -22,12 +22,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.ddit.card.service.CardServiceInf;
+import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.util.model.PageVo;
+import kr.or.ddit.work.service.WorkServiceInf;
 
 
 /**
@@ -44,8 +47,14 @@ public class MemberDetailController {
 	@Autowired
 	private MemberServiceInf memberservice;
 
-	
-	
+	@Autowired
+	private WorkServiceInf workService;
+
+	@Autowired
+	private CommentsServiceInf commentsService;
+
+	@Autowired
+	private CardServiceInf cardService;
 
 	/**
 	 * Method : myPage
@@ -140,6 +149,20 @@ public class MemberDetailController {
 			@RequestParam("project_title") String project_title ,@RequestParam("project_id") String project_id , HttpServletRequest request) {
 		
 		model.addAttribute("project_title" , project_title);
+		
+
+		/* 프로젝트에 포함된 멤버 정보 */
+		model.addAttribute("projectMemberList", memberservice.projectMemberList(project_id));
+
+		/* 업무 출력 */
+		model.addAttribute("workList",workService.selectWorks(project_id));
+
+		/* 업무에 달린 댓글 출력 */
+		model.addAttribute("cmtList", commentsService.cmtList(project_id));
+
+		/* 업무 카드 출력 */
+		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
+		
 		return "/main/subMain";
 	}
 	
@@ -149,6 +172,20 @@ public class MemberDetailController {
 			@RequestParam("project_title") String project_title ,@RequestParam("project_id") String project_id , HttpServletRequest request) {
 		
 		model.addAttribute("project_title" , project_title);
+		
+		
+		/* 프로젝트에 포함된 멤버 정보 */
+		model.addAttribute("projectMemberList", memberservice.projectMemberList(project_id));
+
+		/* 업무 출력 */
+		model.addAttribute("workList",workService.selectWorks(project_id));
+
+		/* 업무에 달린 댓글 출력 */
+		model.addAttribute("cmtList", commentsService.cmtList(project_id));
+
+		/* 업무 카드 출력 */
+		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
+		
 		return "/main/subMain";
 	}
 	
