@@ -171,10 +171,6 @@ public class MemberDetailController {
 		
 		Map<String , Object> projectBookMap = new HashMap<>();
 		int pageCnt = memberservice.selectProjectCnt(memberVo.getMember_mail());
-	
-		System.out.println("pageCnt : " + pageCnt);
-		System.out.println("pageVo.getPageSize() : " + pageVo.getPageSize());	
-		System.out.println("(int)Math.ceil((double)pageCnt/pageVo.getPageSize()) : " + (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
 		projectBookMap.put("projectBookList", projectBookList);
 		projectBookMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
