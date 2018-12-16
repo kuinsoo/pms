@@ -16,7 +16,7 @@
 </body>
     <script type="text/javascript">
         var textarea = document.getElementById("messageWindow");
-        var webSocket = new WebSocket('http://localhost:8081/pms/kr.or.ddit.chatting.web/chatting');
+        var webSocket = new WebSocket('http://localhost:8081/pms/kr.or.ddit.message.web/message');
         var inputMessage = document.getElementById('inputMessage');
     webSocket.onerror = function(event) {
       onError(event)
