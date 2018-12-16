@@ -56,11 +56,13 @@
 						</div>
 					</div>
 				</div>
+				
 				<div class="projectTaskContainer">
 					<div class="projectTaskContainerTitle">
 						<i class="far fa-sticky-note"></i><span>WORK CARD</span>
 					</div>
 				</div>
+
 				<div class="projectTaskContainerDragDrop">
 					<div class="projectTaskDragDrop">
 						<ul id="titleList">
@@ -70,18 +72,18 @@
 							<li class="titleBox">처리대기</li>
 							<li class="titleBox">완료</li>
 						</ul>
-
-						<div class="kku-boarder kku-mainPage" id="planList">
+						<%--<%@include file="/WEB-INF/views/card/cardChart.jsp"%>--%>
+						<%--<div class="kku-boarder kku-mainPage" id="planList">
 							<div class="column">
 								<div class="portlet">
 				                    <div class="portlet-header">TITLE</div>
-				                    <div class="portlet-content">
-				                    	CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT
-				                    </div>
+									<div class="portlet-content">
+										CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT CONTENT
+									</div>
 				                    <label class="kku-hide kku-no">1</label>
 				                    <label class="kku-hide kku-group">1</label>
 				                    <label class="kku-hide kku-index">1</label>
-				                </div>
+								 </div>
 				                <div class="portlet">
 				                    <div class="portlet-header">TITLE</div>
 				                    <div class="portlet-content">
@@ -121,9 +123,10 @@
 									<label class="kku-hide kku-group">5</label>
 								</div>
 							</div>
-						</div>
+						</div>--%>
 					</div>
 				</div>
+			
 				<div class="projectWriter">
 					<div id="tabss">
 						<ul>

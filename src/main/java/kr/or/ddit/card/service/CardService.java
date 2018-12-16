@@ -25,9 +25,11 @@ public class CardService implements CardServiceInf {
 	private CardMapper cardMapper;
 
 	@Override
-	public List<CardVo> selectAllCard() {
-		return cardMapper.selectAllCard() ;
+	public List<CardVo> selectWorkCard(String pmember_project) {
+		return cardMapper.selectWorkCard(pmember_project) ;
 	}
+
+
 
 	@Override
 	public List<CardVo> selectGroupCard(String groupNo) {

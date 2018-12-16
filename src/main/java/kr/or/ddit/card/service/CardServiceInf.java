@@ -15,7 +15,7 @@ import java.util.List;
  */
 public interface CardServiceInf {
 
-	List<CardVo> selectAllCard();
+	List<CardVo> selectWorkCard(String pmember_project);
 
 	List<CardVo> selectGroupCard(String groupNo);
 

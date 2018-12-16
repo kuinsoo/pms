@@ -37,10 +37,10 @@ public class CardController {
 	}
 	*/
 
-	@RequestMapping(value = "/card", method = RequestMethod.GET)
-	public String selectAllCard(Model model) {
-		model.addAttribute("cardList",cardService.selectAllCard());
-
-		return "card/cardChart";
-	}
+//	@RequestMapping(value = "/card", method = RequestMethod.GET)
+//	public String selectAllCard(Model model,) {
+//		model.addAttribute("cardList",cardService.selectWorkCard(pmember_project));
+//
+//		return "card/cardChart";
+//	}
 }
