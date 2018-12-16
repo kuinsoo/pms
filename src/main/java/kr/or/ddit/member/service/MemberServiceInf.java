@@ -98,6 +98,17 @@ public interface MemberServiceInf {
 	 */
 	List<ToDoVo> myTodoselect(PageVo pageVo);
 	
+	
+	/**
+	 * Method : selectProjectId
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 참여중인 프로젝트  :  클릭했을때 
+	 */
+	ProjectVo selectProjectId(String project_title);
+	
+	
 	/**
 	 * Method : totalProjectCnt 
 	 * 작성자 : pc07 

@@ -18,9 +18,38 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
+				
 			getMyPageList(1);
 			getmybookMarkProjectList(1);
 			getmyTodoProjectList(1);
+		
+			// 참여중인 프로젝트 클릭
+			$("#projectList").on("click", ".projectClick" ,function(){
+				console.log("projectClick");
+				
+				var project_title = $(this).children()[1].innerHTML;
+				var project_id = $(this).children()[2].innerHTML;
+				
+				$("#project_title").val(project_title);
+				$("#project_id").val(project_id);
+				  $("#frm").submit();
+			});
+			
+			// 즐겨찾기 클릭 
+			$("#projectBookList").on("click", ".projectBookClick" ,function(){
+				console.log("projectClick");
+				
+				var project_title = $(this).children()[1].innerHTML;
+				var project_id = $(this).children()[2].innerHTML;
+				
+				$("#project_title2").val(project_title);
+				$("#project_id2").val(project_id);
+				console.log(project_title);
+				console.log(project_id);
+				
+				  $("#frm2").submit();
+			});
+			
 			
 			$(".phoneBtns").hide();
 			$(".saveBtn").hide();
@@ -103,7 +132,7 @@
 			});
 		});
 		
-		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 파 일 부 분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 프로필 사진 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		
 		// 핸드폰 번호 입력 후 인증 버튼
 		function telAjax(){
@@ -142,9 +171,10 @@
 				success : function(data){
 					var html ="";
 					$.each(data.projectList, function (idx,my){
-						html += "<tr>";
+						html += "<tr class = projectClick>";
 						html += "	<td>"+ my.rnum +"</td>";
 						html += "	<td>"+ my.project_title +"</td>";
+						html += "	<td>"+ my.project_id +"</td>";
 						html += "	<td>"+ my.pmember_member +"</td>";
 						html += "</tr>";
 					});
@@ -178,9 +208,10 @@
 						console.log("data : " + data);
 					var html ="";
 					$.each(data.projectList, function (idx,my){
-						html += "<tr>";
+						html += "<tr class = projectClick >";
 						html += "	<td>"+ my.rnum +"</td>";
 						html += "	<td>"+ my.project_title +"</td>";
+						html += "	<td>"+ my.project_id +"</td>";
 						html += "	<td>"+ my.pmember_member +"</td>";
 						html += "</tr>";
 					});
@@ -216,9 +247,10 @@
 				success : function(data){
 					var html = "";
 					$.each(data.projectBookList, function(idx,mm){
-						html += "<tr>";
+						html += "<tr class = projectBookClick >";
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.project_title +"</td>";
+						html += "	<td>"+ mm.project_id +"</td>";
 						html += "	<td>"+ mm.pmember_member +"</td>";
 						html += "</tr>";
 						
@@ -253,9 +285,10 @@
 					console.log("data : " + data);
 					var html = "";
 					$.each(data.projectBookList, function(idx,mm){
-						html += "<tr>";
+						html += "<tr class = projectBookClick >";
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.project_title +"</td>";
+						html += "	<td>"+ mm.project_id +"</td>";
 						html += "	<td>"+ mm.pmember_member +"</td>";
 						html += "</tr>";
 					});
@@ -363,6 +396,15 @@
 				});
 			}
 	</script>
+<form  id = "frm" action="/projectClickDetail" method = "get">
+	<input type = "hidden" id = "project_title" name = "project_title"/>
+	<input type = "hidden" id = "project_id" name = "project_id"/>
+</form>
+
+<form  id = "frm2" action="/projectBookClickDetail" method = "get">
+	<input type = "hidden" id = "project_title2" name = "project_title"/>
+	<input type = "hidden" id = "project_id2" name = "project_id"/>
+</form>
 	
 	<!-- CURRENT SECTION(MAIN) -->	
 	
@@ -467,9 +509,10 @@
 									<colgroup width="60%" />
 									<colgroup width="30%" />
 									<thead>
-										<tr>
+										<tr class = "projectClick">
 											<th><span>번호</span></th>
 											<th><span>참여중인 프로젝트 명</span></th>
+											<th><span>프로젝트 아이디 </span></th>
 											<th><span>프로젝트 팀장</span></th>
 										</tr>
 									</thead>
@@ -500,9 +543,10 @@
 									<colgroup width="60%" />
 									<colgroup width="30%" />
 									<thead>
-										<tr>
+										<tr class = "projectBookClick" >
 											<th><span>번호</span></th>
 											<th><span>즐겨찾기한 프로젝트 명</span></th>
+											<th><span> 프로젝트 아이디</span></th>
 											<th><span>프로젝트 팀장</span></th>
 										</tr>
 									</thead>
@@ -533,7 +577,7 @@
 									<colgroup width="60%" />
 									<colgroup width="30%" />
 									<thead>
-										<tr>
+										<tr class = "projectTodoList">
 											<th><span>번호</span></th>
 											<th><span>나의 일감 보관</span></th>
 											<th><span>완료 여부</span></th>

@@ -52,22 +52,25 @@
 	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  마이페이지 부분  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 	<!--  참여중인 프로젝트  -->
 	<select id="myprojectselect" resultType="projectVo" parameterType="pageVo">
+		
 	select * from(
- 			select rownum rnum ,a.*
-				from 	
-				    (SELECT (SELECT PROJECT_TITLE FROM PROJECT WHERE PROJECT_ID = PMEMBER_PROJECT) as project_title
-                    , PMEMBER_MEMBER as pmember_member
-               FROM   PROJECT_MEMBER
-               WHERE  PMEMBER_MEMBER = #{member_mail}
-               AND    PMEMBER_POSITION = '1'
-               UNION
-               SELECT (SELECT PROJECT_TITLE FROM PROJECT WHERE PROJECT_ID = PMEMBER_PROJECT)
-                    , (SELECT B.PMEMBER_MEMBER FROM PROJECT_MEMBER B WHERE B.PMEMBER_PROJECT = A.PMEMBER_PROJECT AND B.PMEMBER_POSITION = 1) 
-               FROM   PROJECT_MEMBER A
-               WHERE  A.PMEMBER_MEMBER = #{member_mail}
-               AND    A.PMEMBER_POSITION = '2')a)
-			where rnum between ${page}*${pageSize}-(${pageSize}-1)
-		and ${page}*${pageSize}
+	    select rownum rnum ,a.*
+	             from
+	                  (SELECT (SELECT PROJECT_TITLE  FROM PROJECT  WHERE PROJECT_ID = PMEMBER_PROJECT) as project_title
+	                       , PMEMBER_MEMBER as pmember_member
+	                      , PMEMBER_PROJECT as project_id
+	                   FROM   PROJECT_MEMBER
+	                   WHERE  PMEMBER_MEMBER = #{member_mail}
+	                     AND    PMEMBER_POSITION = '1'
+	                   UNION
+	                   SELECT  (SELECT PROJECT_TITLE FROM PROJECT WHERE PROJECT_ID = PMEMBER_PROJECT)
+	                       , (SELECT B.PMEMBER_MEMBER FROM PROJECT_MEMBER B WHERE B.PMEMBER_PROJECT = A.PMEMBER_PROJECT AND B.PMEMBER_POSITION = 1)
+	                     , PMEMBER_PROJECT
+	                   FROM   PROJECT_MEMBER A
+	                   WHERE  A.PMEMBER_MEMBER = #{member_mail}
+	                     AND    A.PMEMBER_POSITION = '2')a)
+	   where rnum between ${page}*${pageSize}-(${pageSize}-1) 
+	   and ${page}*${pageSize}
 		<if test="searchText!=null and searchText!=''">and project_title like '%'||#{searchText}||'%'</if>
 	</select>
 	
@@ -91,6 +94,14 @@
 		where  todo_pmember = #{member_mail}
 	 
 	 </select>
+	 
+	 <!-- 참여중인 프로젝트 : project_tile 값으로 project_id 얻어오기  -->
+	 <select id="selectProjectId" resultType="projectVo" parameterType="String">
+	  select project_id 
+	  from   project 
+	  where  project_title = #{project_title}	
+	 </select>
+	 
 
 	<!--  즐겨찾기한 프로젝트  -->
 	<select id = "mybookmarkselect" resultType="projectVo" parameterType="pageVo">
@@ -99,6 +110,7 @@
 		    (select ROWNUM rnum, a.*
 		     from
 		        (SELECT  p.project_title  as project_title,
+		         		 p.project_id as project_id,
 		                pmem.pmember_member as pmember_member
 		        FROM    project p INNER JOIN project_member pm
 		        ON      p.project_id = pm.pmember_project LEFT JOIN (SELECT pmember_project,

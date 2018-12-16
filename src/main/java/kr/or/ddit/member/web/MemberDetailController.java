@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.todo.model.ToDoVo;
@@ -65,7 +66,7 @@ public class MemberDetailController {
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
-	/**
+	/*  
 	 * Method : myPageProjectAjax
 	 * 작성자 : pc07 
 	 * 변경이력 :
@@ -129,6 +130,26 @@ public class MemberDetailController {
 		projectMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
 		return projectMap;
+	}
+	
+	
+	
+	// 참여중인 프로젝트 부분 클릭했을시   
+	@RequestMapping(value="/projectClickDetail", method = RequestMethod.GET)
+	public String projectClickDetail (Model model ,PMemberVo pmemberVo ,  ProjectVo projectVo, @SessionAttribute("memberVo") MemberVo memberVo ,
+			@RequestParam("project_title") String project_title ,@RequestParam("project_id") String project_id , HttpServletRequest request) {
+		
+		model.addAttribute("project_title" , project_title);
+		return "/main/subMain";
+	}
+	
+	// 즐겨찾기한 프로젝트 부분 클릭했을시   
+	@RequestMapping(value="/projectBookClickDetail", method = RequestMethod.GET)
+	public String projectBookClickDetail(Model model ,PMemberVo pmemberVo ,  ProjectVo projectVo, @SessionAttribute("memberVo") MemberVo memberVo ,
+			@RequestParam("project_title") String project_title ,@RequestParam("project_id") String project_id , HttpServletRequest request) {
+		
+		model.addAttribute("project_title" , project_title);
+		return "/main/subMain";
 	}
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -348,6 +369,8 @@ public class MemberDetailController {
 			return "redirect:/";				
 			
 		}
+
+		
 	}
 
 

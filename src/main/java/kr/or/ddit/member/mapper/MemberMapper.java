@@ -107,6 +107,14 @@ public interface MemberMapper {
 	 */
 	int selectProjectCnt(String member_mail);
 	
+	/**
+	 * Method : selectProjectId
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 참여중인 프로젝트  :  클릭했을때  
+	 */
+	ProjectVo selectProjectId(String project_title);
 	
 	/**
 	 * Method : selectTodoCnt
@@ -275,7 +283,7 @@ public interface MemberMapper {
 	 * @param bookMap the p member vo
 	 * @return the p member vo
 	 */
-	PMemberVo selectBookmarkProject(Map<String, String> bookMap);
+	PMemberVo selectBookmarkProject(Map<String, String> bookMap);  
 
 	/**
 	 * Update bookmark int.

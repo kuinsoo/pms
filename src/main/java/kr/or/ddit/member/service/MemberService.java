@@ -325,5 +325,10 @@ public class MemberService implements MemberServiceInf {
 		return memberMapper.updateBookmark(pMemberVo);
 	}
 
+	@Override
+	public ProjectVo selectProjectId(String project_title) {
+		return memberMapper.selectProjectId(project_title);
+	}
+
 
 }
