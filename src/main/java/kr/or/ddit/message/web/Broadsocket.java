@@ -1,4 +1,4 @@
-package kr.or.ddit.chatting.web;
+package kr.or.ddit.message.web;
 
 import java.io.IOException;
 import java.util.Collections;
