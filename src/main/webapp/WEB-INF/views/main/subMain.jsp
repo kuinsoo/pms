@@ -26,7 +26,7 @@
 					</div>
 					<div class="charts">
 						<div class="chartsContent">
-							<canvas id="myChart" width="960" height="400"></canvas>
+							<canvas id="myChart" width="760" height="400"></canvas>
 						</div>
 						<div class="chartsNumber">
 							<ul>
@@ -275,11 +275,6 @@
 									<li><span>3</span></li>
 									<li><span>4</span></li>
 									<li><span>5</span></li>
-									<li><span>6</span></li>
-									<li><span>7</span></li>
-									<li><span>8</span></li>
-									<li><span>9</span></li>
-									<li><span>10</span></li>
 									<li><i class="icon-arrow-right icons"></i></li>
 								</ul>
 							</div>

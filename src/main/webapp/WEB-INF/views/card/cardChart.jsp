@@ -26,14 +26,16 @@
         height: 150px;
     }
     .columnCard {
-        width: 150px;
+        width: 156px;
         float: left;
         padding-bottom: 100px;
     }
 
     .portlet {
-        margin: 0 1em 1em 0;
-        padding: 0.3em;
+        margin: 0px;
+        padding: 0px;
+        width:159.5px;
+        
     }
     .portlet-header {
         padding: 0.2em 0.3em;
@@ -55,22 +57,17 @@
         height: 50px;
     }
 
-    #planList {
-        width: 875px;
-        height: 500px;
-        margin: 0 auto;
-        padding-left: 25px;
-    }
+    #planList{width:798px;height:500px;overflow:hidden;}
 
     #titleList {
         list-style: none;
-        width: 875px;
+        width: 798px;
         height: 20px;
         margin: 0 auto;
     }
 
     .titleBox {
-        width: 175px;
+        width: 159.5px;
         float: left;
     }
 
