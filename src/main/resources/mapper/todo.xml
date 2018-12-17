@@ -34,6 +34,15 @@
 	</insert>
 	
 	<!-- to-do select -->
-	
+	<select id="workToDoSelect" resultType="todoVo" parameterType="String">
+		SELECT  todo_content,
+		        todo_pmember,
+		        todo_sdate,
+		        todo_eedate,
+		        todo_complet,
+		        todo_issue
+		FROM    todo
+		WHERE   todo_work = #{todo_work};
+	</select>
 	
 </mapper>

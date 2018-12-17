@@ -7,6 +7,7 @@ html, body {
 
 .wraps {
 
-	background-image: url(http://img.mimint.co.kr/story/bbs/2018/1/2/20180102211501_gqeeskzr.jpg);background-repeat:no-repeat;background-size:100% 100%;background-position:100% 100%;
+	background-image: url(http://placehold.it/1920x1280);background-repeat:no-repeat;
+	background-size:cover;background-position:50% 50%;
 
 }

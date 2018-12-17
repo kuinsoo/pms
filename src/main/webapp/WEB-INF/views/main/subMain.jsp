@@ -217,106 +217,7 @@
 						</div>
 					</div>
 					<div class="currentCardContentView">
-						<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=nPljd7ns8PGll8DWsmSl"></script>
-						<div id="map" style="width:100%;height:300px;"></div>
-						<script>
-						var map = new naver.maps.Map("map", {
-						    center: new naver.maps.LatLng(37.3595316, 127.1052133),
-						    zoom: 10,
-						    mapTypeControl: true
-						});
-						
-						var infoWindow = new naver.maps.InfoWindow({
-						    anchorSkew: true
-						});
-						
-						map.setCursor('pointer');
-						
-						// search by tm128 coordinate
-						function searchCoordinateToAddress(latlng) {
-						    var tm128 = naver.maps.TransCoord.fromLatLngToTM128(latlng);
-						
-						    infoWindow.close();
-						
-						    naver.maps.Service.reverseGeocode({
-						        location: tm128,
-						        coordType: naver.maps.Service.CoordType.TM128
-						    }, function(status, response) {
-						        if (status === naver.maps.Service.Status.ERROR) {
-						            return alert('Something Wrong!');
-						        }
-						
-						        var items = response.result.items,
-						            htmlAddresses = [];
-						
-						        for (var i=0, ii=items.length, item, addrType; i<ii; i++) {
-						            item = items[i];
-						            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]';
-						
-						            htmlAddresses.push((i+1) +'. '+ addrType +' '+ item.address);
-						        }
-						
-						        infoWindow.setContent([
-						                '<div style="padding:10px;min-width:200px;line-height:150%;">',
-						                '<h4 style="margin-top:5px;">검색 좌표</h4><br />',
-						                htmlAddresses.join('<br />'),
-						                '</div>'
-						            ].join('\n'));
-						
-						        infoWindow.open(map, latlng);
-						    });
-						}
-						
-						// result by latlng coordinate
-						function searchAddressToCoordinate(address) {
-						    naver.maps.Service.geocode({
-						        address: address
-						    }, function(status, response) {
-						        if (status === naver.maps.Service.Status.ERROR) {
-						            return alert('Something Wrong!');
-						        }
-						
-						        var item = response.result.items[0],
-						            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
-						            point = new naver.maps.Point(item.point.x, item.point.y);
-						
-						        infoWindow.setContent([
-						                '<div style="padding:10px;min-width:200px;line-height:150%;">',
-						                '<h4 style="margin-top:5px;">검색 주소 : '+ response.result.userquery +'</h4><br />',
-						                addrType +' '+ item.address +'<br />',
-						                '</div>'
-						            ].join('\n'));
-						
-						
-						        map.setCenter(point);
-						        infoWindow.open(map, point);
-						    });
-						}
-						
-						function initGeocoder() {
-						    map.addListener('click', function(e) {
-						        searchCoordinateToAddress(e.coord);
-						    });
-						
-						    $('#address').on('keydown', function(e) {
-						        var keyCode = e.which;
-						
-						        if (keyCode === 13) { // Enter Key
-						            searchAddressToCoordinate($('#address').val());
-						        }
-						    });
-						
-						    $('#submit').on('click', function(e) {
-						        e.preventDefault();
-						
-						        searchAddressToCoordinate($('#address').val());
-						    });
-						
-						    searchAddressToCoordinate('정자동 178-1');
-						}
-						
-						naver.maps.onJSContentLoaded = initGeocoder;
-						</script>
+					
 					</div>
 				</div>
 				<%-- ############################## 일정 카드 끝 ############################## --%>
@@ -355,8 +256,8 @@
 										<div class="issueCreateInputFieldRight">
 											<form method="POST" name="todoInsert" id="todoInsert">
 												<ul>
-													<li><input type="text" name="todo_pmember" value="jerry"/></li>
-													<li><textarea name="todo_content">할일내용</textarea></li>
+													<li><input type="text" name="todo_pmember" placeholder="담당자를 입력하세요."/></li>
+													<li><textarea name="todo_content" placeholder="내용을 입력하세요."></textarea></li>
 													<li><input type="datetime-local" name="non_todo_sdate" id="non_todo_sdate" value=""/></li>
 													<li><input type="hidden" name="todo_sdate" id="todo_sdate" value=""/></li>
 													<li><input type="datetime-local" name="non_todo_eedate"></li>
@@ -455,7 +356,7 @@
 				</div>
 				<div class="projectTeamsTop">
 					<!-- (변찬우) for node // 외부에서 접근해서 인증 허용 해줘야 함..  -->
-					<iframe src="https://192.168.203.24:8443/" width="100%" height="100%"></iframe>
+					<iframe src="https://127.0.0.1:8443/" width="100%" height="100%"></iframe>
 				</div>
 				<div class="projectTeams">
 					<h2>전체 참여자 ${projectMemberList.size()}명 <i class="icon-plus icons"></i></h2>
@@ -797,11 +698,12 @@ var myChart = new Chart(ctx, {
 		$.ajax({
 			method: "POST",
 			url: "/todoInsert",
+			//dataType: html,
 			data: param,
 			success: function(data) {
 				alert("success");
-				//$('.currentCardList').html("");
-				//$('.currentCardList').html(data);
+				$('.currentCardContentViewRight').html("");
+				$('.currentCardContentViewRight').html(data);
 			},
 			error:function(data) {
 				alert("error");
