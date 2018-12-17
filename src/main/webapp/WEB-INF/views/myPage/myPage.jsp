@@ -489,7 +489,7 @@
 							<li><a href="#tabs2-1-1">참여했던 프로젝트</a></li>
 							<li><a href="#tabs2-2">즐겨찾기한 프로젝트</a></li>
 							<li><a href="#tabs2-3">일감 조회</a></li>
-							<li><a href="#tabs2-4">보관함</a></li>
+							<li><a href="#tabs2-4">파일보관함</a></li>
 							<li><a href="#tabs2-5">회원탈퇴</a></li>
 						</ul>
 
@@ -645,8 +645,8 @@
 									<thead>
 										<tr>
 											<th><span>번호</span></th>
-											<th><span>참여중인 프로젝트 명</span></th>
-											<th><span>프로젝트 팀장</span></th>
+											<th><span>파일 명</span></th>
+											<th><span>파일 다운로드</span></th>
 										</tr>
 									</thead>
 									<tbody id ="아직미구현">
