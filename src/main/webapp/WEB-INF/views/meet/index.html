@@ -50,7 +50,6 @@ html, body, section, ul, li, nav, a, h1, h2 {
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     height:400px;
-    width:387px;
     font-size: 17px;
     line-height: 1.5em;
 }
@@ -64,7 +63,6 @@ a:hover {
 }
 
 section {
-  border-bottom: 1px solid #95d4e7;
   padding: 5px 20px;
 }
 
@@ -296,7 +294,7 @@ input[disabled], button[disabled] {
   <header>
     <div style="padding: 10px 0 0 20px;">
       <button class="btn btn-primary" data-toggle="modal" data-target="#startRoomModel">회의 개설하기</button>
-      <button id="btn-show-join-hidden-room" class="top-span btn btn-secondary" data-toggle="modal" data-target="#joinRoomModel">참가하기</button>
+      <button id="btn-show-join-hidden-room" class="top-span btn btn-secondary" data-toggle="modal" data-target="#joinRoomModel">(비공개) 회의 참가</button>
       <span class="top-span"> 회의 중 : <span id="active-rooms">0</span></span>
     </div>
   </header>
@@ -448,7 +446,7 @@ input[disabled], button[disabled] {
           <th>참가 </th>
         </tr>
       </thead>
-      <tbody id="rooms-list"><tr><td colspan=9>진행 중인 회의실이 없습니다.</td></tr></tbody>
+      <tbody id="rooms-list"><tr><td colspan=9>진행 중인 회의가 없습니다.</td></tr></tbody>
     </table>
   </section>
 
@@ -492,7 +490,7 @@ function updateListOfRooms(rooms) {
     $('#rooms-list').html('');
 
     if (!rooms.length) {
-        $('#rooms-list').html('<tr><td colspan=9>진행 중인 회의실이 없습니다.</td></tr>');
+        $('#rooms-list').html('<tr><td colspan=9>진행 중인 회의가 없습니다.</td></tr>');
         return;
     }
     
