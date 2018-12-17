@@ -18,7 +18,33 @@
 					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 쪽지 보내기  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 					<div id="tabs2-1">
 						<div class="facingSend">
-							
+							<form action="#" method="post">
+								<div class="facingSendTitle">
+									<input type="text" class="recipient" placeholder="받는사람을 입력해주세요" />
+									<select class="recipientSelect">
+										<option>친구등록 리스트</option>
+										<option>test1@gmail.com</option>
+										<option>test2@gmail.com</option>
+									</select>
+								</div>
+								<textarea class="facingContent">내용적는곳</textarea>
+								<div class="facingFile">
+									<span>첨부파일</span>
+								</div>
+								<div class="facingFileList">
+									<ul>
+										<li><input type="file" /></li>
+										<li><input type="file" /></li>
+										<li><input type="file" /></li>
+										<li><input type="file" /></li>
+										<li><input type="file" /></li>
+									</ul>
+								</div>
+								<div class="facingBtn">
+									<input type="button" class="facingSendBtn" value="보내기" />
+									<input type="button" class="facingSendReset" value="취소" />
+								</div>
+							</form>
 						</div>
 					</div>
 					
@@ -26,33 +52,95 @@
 					
 					 
 					<div id="tabs2-2">
-						<div class="projectTable">
-							<div class="projectSearchDiv">　　
-								<form name ="searchBookProject" method="POST" onsubmit="return false;">
-									<input type="text" id="searchBookText" name ="searchBookText" value='${searchBookText}' placeholder="검색어를 입력해주세요"/>
-									<input type="hidden" name="page" value='1' />
-									<input type="hidden" name="pageSize" value='10' />
-									<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchBookProject();"></i>  
-								</form>
-							</div>
-							<table>
-								<colgroup width="10%" />
-								<colgroup width="45%" />
-								<colgroup width="15%" />
-								<colgroup width="30%" />
-								<thead>
-									<tr class = "projectBookClick" >
-										<th><span>번호</span></th>
-										<th><span>즐겨찾기한 프로젝트 명</span></th>
-										<th><span> 프로젝트 아이디</span></th>
-										<th><span>프로젝트 팀장</span></th>
-									</tr>
-								</thead>
-								<tbody id ="projectBookList">
-								</tbody>
-							</table>
-							<div class="text-center">
-								 <ul class="pagination2"></ul>
+						<div class="receivedNoteContainer">
+							<form action="#" method="post">
+								<table>							
+									<colgroup width="10%" />
+									<colgroup width="40%" />
+									<colgroup width="10%" />
+									<colgroup width="40%" />
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>보낸 사람</th>
+											<th>친구여부</th>
+											<th>날짜/시간</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>4</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>5</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>6</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>7</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>8</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>9</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>10</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
+							<div class="pagination">
+								<ul>
+									<li><</li>
+									<li>1</li>
+									<li>2</li>
+									<li>3</li>
+									<li>4</li>
+									<li>5</li>
+									<li>></li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -61,62 +149,115 @@
 					
 					
 					<div id="tabs2-3">
-						<div class="projectTable">
-							<div class="projectSearchDiv">　　
-							 <form name ="searchTodoProject" id ="searchTodoProject" method="POST" onsubmit="return false;">
-									 <input type="text" id="searchTodoText" name ="searchTodoText" value='${searchTodoText}'  placeholder="검색어를 입력해주세요"/>
-									<input type="hidden" name="page" value='1' />
-									<input type="hidden" name="pageSize" value='10' />
-									<i class="icon-magnifier icons" onclick="javascript:getSearchTodoProject();"></i>  
-								</form> 
-							</div>
-							<table>
-								<colgroup width="10%" />
-								<colgroup width="60%" />
-								<colgroup width="30%" />
-								<thead>
-									<tr class = "projectTodoList">
-										<th><span>번호</span></th>
-										<th><span>나의 일감 보관</span></th>
-										<th><span>완료 여부</span></th>
-									</tr>
-								</thead>
-								<tbody id ="projectTodoList"> 
-								</tbody>
-							</table>
-							<div class="text-center">
-								 <ul class="pagination3"></ul>
-							</div>
+						<div class="sentNoteContainer">
+							<form action="#" mehtod="post">
+								<div class="recipientFacing">
+									<span>받는사람</span>
+									<input type="text" value="sally1334@naver.com" readonly />
+								</div>
+								<div class="sendDate">
+									<span>보낸날짜</span>
+									<input type="text" value="2018-12-17 19:09:00" readonly />
+								</div>							
+								<textarea class="sentNoteTextArea">답장입니다~~</textarea>
+								<div class="facingDeleteBtnDiv">
+									<input type="button" value="삭제" class="facingDeleteBtn" />
+								</div>
+							</form>
 						</div>
 					</div>
 					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 휴지통 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 					
 					<div id="tabs2-4">
-						<div class="projectTable">
-							<div class="projectSearchDiv">　　
-								<%--  <form name ="searchProject" method="POST" onsubmit="return false;">
-									 <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
-									<input type="hidden" name="page" value='1' />
-									<input type="hidden" name="pageSize" value='10' />
-									<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
-								</form>  --%>
-							</div>
-							<table>
-								<colgroup width="10%" />
-								<colgroup width="60%" />
-								<colgroup width="30%" />
-								<thead>
-									<tr>
-										<th><span>번호</span></th>
-										<th><span>파일 명</span></th>
-										<th><span>파일 다운로드</span></th>
-									</tr>
-								</thead>
-								<tbody id ="아직미구현">
-								</tbody>
-							</table>
-							<div class="text-center">
-								 <ul class="pagination"></ul>
+						<div class="trashCanContainer">
+							<form action="#" method="post">
+								<table>
+									<colgroup width="10%" />
+									<colgroup width="40%" />
+									<colgroup width="10%" />
+									<colgroup width="40%" />
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>보낸 사람</th>
+											<th>친구여부</th>
+											<th>날짜/시간</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>2</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>3</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>4</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>5</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>6</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>7</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>8</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>9</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td>10</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
+							<div class="pagination">
+								<ul>
+									<li><</li>
+									<li>1</li>
+									<li>2</li>
+									<li>3</li>
+									<li>4</li>
+									<li>5</li>
+									<li>></li>
+								</ul>
 							</div>
 						</div>
 					</div>
