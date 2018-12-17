@@ -132,11 +132,13 @@ public class ProjectController {
 
 
 	@RequestMapping(value = "/subMain", method = RequestMethod.GET)
-	public String subMain(Model model, @RequestParam("project_id")String project_id, @RequestParam("project_title")String project_title,
+	public String subMain(Model model, @RequestParam("project_id")String project_id,
 						  @SessionAttribute("memberVo")MemberVo memberVo) {
 
-		model.addAttribute("project_id", project_id);
-		model.addAttribute("project_title", project_title);
+
+
+		/* 프로젝트 객체  */
+		model.addAttribute("projectVo", projectService.selectProject(project_id));
 
 		/* 프로젝트에 포함된 멤버 정보 */
 		model.addAttribute("projectMemberList", memberService.projectMemberList(project_id));

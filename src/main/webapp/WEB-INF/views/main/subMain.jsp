@@ -9,7 +9,7 @@
 			<div class="currentMainContainerLeft">
 				<div class="currentSubMainTitle">
 					<i class="icon-star icons"></i>
-					<span>${project_title}</span>
+					<span>${projectVo.project_title}</span>
 					<i class="icon-share icons dialog__triggerss"></i>
 					<div class="dialogss">
 						<ul>
@@ -61,13 +61,7 @@
 				</div>
 				<div class="projectTaskContainerDragDrop">
 					<div class="projectTaskDragDrop">
-						<ul id="titleList">
-							<li class="titleBox">요청</li>
-							<li class="titleBox">진행</li>
-							<li class="titleBox">이슈발생</li>
-							<li class="titleBox">처리대기</li>
-							<li class="titleBox">완료</li>
-						</ul>
+
 						<%@include file="/WEB-INF/views/card/cardChart.jsp"%>
 						<%--<div class="kku-boarder kku-mainPage" id="planList">
 							<div class="column">
@@ -163,7 +157,7 @@
 											<option value="5">Level 5</option>
 										</select>
 									</div>
-									<input type="hidden" name="project_id" value="${project_id}" />
+									<input type="hidden" name="project_id" value="${projectVo.project_id}" />
 									<div class="workVisibility">
 										<h3>업무 공개여부</h3>
 										<input type="checkbox" name="work_public" value="Y" class="workVisibilityCheck" />
@@ -410,7 +404,7 @@
 													<li><input type="hidden" name="todo_sdate" id="todo_sdate" value=""/></li>
 													<li><input type="datetime-local" name="non_todo_eedate"></li>
 													<li><input type="hidden" name="todo_eedate" id="todo_eedate" value=""/></li>
-													<li><input type="hidden" name="project_id" value="${project_id}"/></li>
+													<li><input type="hidden" name="project_id" value="${projectVo.project_id}"/></li>
 													<li><input type="hidden" name="todo_work" value="${work.work_id}"/></li>
 												</ul>
 											</form>
@@ -801,7 +795,7 @@ var myChart = new Chart(ctx, {
 		$.ajax({
 			method: "GET",
 			url: "/ajaxInsertCmt",
-			data: {"work_id": work_id, "cmt_content": cmt_contenta, "project_id": ${project_id}},
+			data: {"work_id": work_id, "cmt_content": cmt_contenta, "project_id": ${projectVo.project_id}},
 			success : function (data) {
 				$('#submain_work').html("");
 				$('#submain_work').html(data);

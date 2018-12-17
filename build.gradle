@@ -72,4 +72,8 @@ dependencies {
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.1.1.RELEASE'
 	
 
+
+
+
+
 }
