@@ -4,34 +4,43 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.ddit.card.mapper.CardMapper">
-<select id="selectWorkCard" resultType="cardVo" parameterType="String">
-    select WC_ID,WORK_TITLE,WORK_CONTENT, MEMBER_name, W.WORK_ID, PM.PMEMBER_PROJECT, WC_WORK,WC_GROUP
-    from work W, WORK_MEMBER WM, PROJECT_MEMBER PM, MEMBER M, WORK_CARD WC
-    where W.work_id = WM.WORK_ID
-      and WM.PMEMBER_ID = PM.PMEMBER_ID
-      and PM.PMEMBER_MEMBER = M.MEMBER_MAIL
-      and WC.WC_WORK = W.WORK_ID
-      and PM.PMEMBER_PROJECT = #{pmember_project}
-        </select>
+
+    <!-- 업무 카드 출력 -->
+    <select id="selectWorkCard" resultType="cardVo" parameterType="String">
+        select WC_ID,WORK_TITLE,WORK_CONTENT, MEMBER_name, W.WORK_ID, PM.PMEMBER_PROJECT, WC_WORK,WC_GROUP
+        from work W, WORK_MEMBER WM, PROJECT_MEMBER PM, MEMBER M, WORK_CARD WC
+        where W.work_id = WM.WORK_ID
+          and WM.PMEMBER_ID = PM.PMEMBER_ID
+          and PM.PMEMBER_MEMBER = M.MEMBER_MAIL
+          and WC.WC_WORK = W.WORK_ID
+          and PM.PMEMBER_PROJECT = #{pmember_project}
+    </select>
+
+<!-- 업무 카드 이동 후 업데이트 -->
+    <update id="updateCard" parameterType="cardVo">
+        update WORK_CARD
+        set WC_GROUP=#{wc_group}, WC_INDEX=#{wc_index}
+        where wc_id = #{wc_id}
+    </update>
+
+    <!-- 카드 하나를 찾기 -->
+    <select id="selectCard" resultType="cardVo" parameterType="int">
+        select * from WORK_CARD where wc_id = #{wc_id}
+    </select>
+
 
         <select id="selectGroupCard" resultType="cardVo" parameterType="String">
             select * from CARD where CARd_GROUP = #{CARd_GROUP}
         </select>
 
-        <select id="selectCard" resultType="cardVo" parameterType="int">
-        select * from card where CARD_NO = #{card_no}
-    </select>
+
 
     <insert id="createCard" parameterType="cardVo">
         insert into card values (CARD_TITLE= #{card_title}, CARD_CONTENT=#{card_content},
          CARD_GROUP=#{card_group})
     </insert>
 
-    <update id="updateCard" parameterType="cardVo">
-        update card
-        set CARD_TITLE= #{card_title}, CARD_CONTENT=#{card_content}, CARD_GROUP=#{card_group}, CARD_INDEX=#{card_index}
-        where CARD_NO = #{card_no}
-    </update>
+
 
     <delete id="deleteCard" parameterType="Float">
         delete from card where CARD_INDEX = #{card_index}

@@ -11,6 +11,7 @@
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
+
 <style>
 
     /*body {*/
@@ -74,8 +75,7 @@
     }
 
 </style>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script>
 	$(document).ready(function () {
 		$('.kku-hide').hide();
@@ -123,7 +123,7 @@
 	} );
 
 	function updateCard(no, group, index){
-		location.href = "/updateCard?card_no="+no+"&wc_group="+group+"&wc_index="+index;
+		location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${project_id}";
 	};
 </script>
 <%--<ul id="titleList" >
@@ -165,7 +165,7 @@
                     <div class="portlet-content">
                             ${wcVo.work_content}
                     </div>
-                    <label class="kku-hide kku-no" >${wcVo.card_no}</label>
+                    <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                 </div>
@@ -184,7 +184,7 @@
                     <div class="portlet-content">
                             ${wcVo.work_content}
                     </div>
-                    <label class="kku-hide kku-no" >${wcVo.card_no}</label>
+                    <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                 </div>
@@ -203,7 +203,7 @@
                     <div class="portlet-content">
                             ${wcVo.work_content}
                     </div>
-                    <label class="kku-hide kku-no" >${wcVo.card_no}</label>
+                    <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                 </div>
@@ -222,7 +222,7 @@
                     <div class="portlet-content">
                             ${wcVo.work_content}
                     </div>
-                    <label class="kku-hide kku-no" >${wcVo.card_no}</label>
+                    <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                 </div>
@@ -231,3 +231,4 @@
     </div>
 
 </div>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
