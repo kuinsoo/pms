@@ -22,7 +22,7 @@
 .projectTeams > ul > li > .chatList > .projectUserNameList{vertical-align:middle;padding-left:15px;font-size:18px;}
 .projectList{width:800px;background-color:#fff;border:1px solid #dee3eb;float:left;margin-top:10px;}
 .projectList > .projectListTitles{margin:20px 0px 0px 20px;font-size:20px;}
-.projectList > .projectListTitles > i{vertical-align:middle;}
+.projectList > .projectListTitles > i{vertical-align:middle;margin-right:10px;}
 .projectList > .projectListTitles > span{vertical-align:middle;}
 .projectList > .charts{padding:20px;width:100%;}
 .projectList > .charts > .chartsContent{float:left;}
@@ -39,7 +39,7 @@
 
 .projectTaskContainer{width:800px;background-color:#fff;border:1px solid #dee3eb;float:left;margin-top:10px;height:70px;}
 .projectTaskContainer > .projectTaskContainerTitle{margin:20px 0px 0px 20px;font-weight:normal;font-size:20px;}
-.projectTaskContainer > .projectTaskContainerTitle > i{vertical-align:middle;display:block;float:left;}
+.projectTaskContainer > .projectTaskContainerTitle > i{vertical-align:middle;display:block;float:left;margin-right:10px;}
 .projectTaskContainer > .projectTaskContainerTitle > span{display:block;margin-left:10px;vertical-align:middle;float:left;}
 
 .projectTaskContainerDragDrop{width:800px;background-color:transparent;float:left;margin-top:10px;}
@@ -163,8 +163,8 @@
 .cardContentCommentUserName > i{
 	cursor:pointer;margin-left:20px;font-size:30px;margin-top:5px;display:block;float:right;
 }
-.commentUpdateBtn{border:none;background:none;font-size:17px;margin-left:20px;cursor:pointer;}
-.commentDeleteBtn{border:none;background:none;font-size:17px;margin-left:10px;cursor:pointer;}
+.commentUpdateBtn{border:none;background:none;font-size:17px;margin-left:20px;cursor:pointer;outline:none;}
+.commentDeleteBtn{border:none;background:none;font-size:17px;margin-left:10px;cursor:pointer;outline:none;}
 
 /* 이슈 상세조회 팝업 */
 .issueSelectPage{width:100%;overflow:hidden;clear:both;height:95%;padding-top:20px;}
