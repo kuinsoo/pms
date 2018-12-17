@@ -256,7 +256,7 @@
 										</div>
 									</div>
 									<input type="button" value="등록" class="issueInfoCreate" onClick="insertTodo();"/>
-									<input type="button" value="취소" class="issueInfoClose"/>
+									<a href="#close" class="issueInfoClose">취소</a>
 								</div>
 						    </div>
 						</div>

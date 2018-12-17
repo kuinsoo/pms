@@ -229,8 +229,12 @@
 	font-size:20px;color:#fff;margin-top:20px;
 }
 .issueInfoClose {
-	width:90px;height:40px;border:none;outline:none;background-color:#4286f4;
-	font-size:20px;color:#fff;margin-top:20px;
+	display:block !important;
+	width:90px !important;
+	height:40px !important;
+	color:#fff !important;
+	border:none;outline:none;background-color:#4286f4;font-size:20px;margin-top:20px;
+	line-height:40px;
 }
 
 
