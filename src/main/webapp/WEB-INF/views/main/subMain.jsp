@@ -216,7 +216,7 @@
 				<div id="submain_work">
 				<c:forEach items="${workList}" var="work" varStatus="i">
 				<div class="currentCardList" >
-					<h2>${work.work_title}</h2>
+					<h2><i class="icon-speech icons"></i>${work.work_title}</h2>
 					<div class="cardUserInfo">
 						<div class="cardUserInfoImg">
 							<img src="${work.member_profile}">
