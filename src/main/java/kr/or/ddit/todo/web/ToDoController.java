@@ -39,16 +39,12 @@ public class ToDoController {
 	*/
 	@RequestMapping(value="/todoInsert", method=RequestMethod.POST)
 	public String ajaxInsertTodo(@RequestParam("project_id")String project_id, ToDoVo todoVo, Model model) {
-		System.out.println("****todoVo : " + todoVo);
-		System.out.println("****sdate : " + todoVo.getTodo_sdate());
-		
 		
 		try {
 			todoService.todoInsert(todoVo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		
 		return "";
 	}
