@@ -82,7 +82,7 @@
             </li>
             <li>
                 <i class="icon-question icons"></i>
-                <p><a href="/qna">Q & A</a></p>
+                <p><a href="/qnaList">Q & A</a></p>
             </li>
         </ul>
     </div>
