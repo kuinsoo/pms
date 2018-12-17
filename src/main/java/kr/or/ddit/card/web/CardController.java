@@ -2,6 +2,11 @@ package kr.or.ddit.card.web;
 
 import kr.or.ddit.card.model.CardVo;
 import kr.or.ddit.card.service.CardServiceInf;
+import kr.or.ddit.project.model.ProjectVo;
+import kr.or.ddit.project.service.ProjectServiceInf;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.slf4j.spi.LoggerFactoryBinder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,22 +25,32 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class CardController {
 
+
 	@Autowired
 	private CardServiceInf cardService;
 
-	@RequestMapping("/updateCard")
-	public String updateCard(Model model, @RequestParam("wc_id")int wc_id,
+	@Autowired
+	private ProjectServiceInf projectService;
+
+	@RequestMapping("/ajaxUpdateCard")
+	public String updateCard(Model model, @RequestParam("wc_id")String wc_id,
 							 @RequestParam("wc_group")String wc_group,
 							 @RequestParam("wc_index")float wc_index,
 							 @RequestParam("project_id")String project_id){
-		/*CardVo cardVo = cardService.selectCard(wc_id);
+		if(wc_id.equals('0') || wc_group.equals('0') || wc_index == 0) {
 
-		cardVo.setWc_id(wc_group);
-		cardVo.setWc_index(wc_index);
+		} else {
+			CardVo cardVo = cardService.selectCard(wc_id);
+			cardVo.setWc_group(wc_group);
+			cardVo.setWc_index(wc_index);
+			cardService.updateCard(cardVo);
+		}
 
-		cardService.updateCard(cardVo);
-		model.addAttribute("wcList",cardService.selectWorkCard(project_id));*/
-		return "redirect:/subMain?project_id="+project_id;
+		ProjectVo projectVo =  projectService.selectProject(project_id);
+		/* 프로젝트 객체  */
+		model.addAttribute("projectVo", projectVo);
+		model.addAttribute("wcList",cardService.selectWorkCard(project_id));
+		return "card/cardChart";
 	}
 
 
