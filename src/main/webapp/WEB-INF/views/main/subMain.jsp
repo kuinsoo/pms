@@ -355,8 +355,8 @@
 										<div class="issueCreateInputFieldRight">
 											<form method="POST" name="todoInsert" id="todoInsert">
 												<ul>
-													<li><input type="text" name="todo_pmember" value="jerry"/></li>
-													<li><textarea name="todo_content">할일내용</textarea></li>
+													<li><input type="text" name="todo_pmember" placeholder="담당자를 입력하세요."/></li>
+													<li><textarea name="todo_content" placeholder="내용을 입력하세요."></textarea></li>
 													<li><input type="datetime-local" name="non_todo_sdate" id="non_todo_sdate" value=""/></li>
 													<li><input type="hidden" name="todo_sdate" id="todo_sdate" value=""/></li>
 													<li><input type="datetime-local" name="non_todo_eedate"></li>
@@ -797,11 +797,12 @@ var myChart = new Chart(ctx, {
 		$.ajax({
 			method: "POST",
 			url: "/todoInsert",
+			dataType: html,
 			data: param,
 			success: function(data) {
 				alert("success");
-				//$('.currentCardList').html("");
-				//$('.currentCardList').html(data);
+				$('.currentCardContentViewRight').html("");
+				$('.currentCardContentViewRight').html(data);
 			},
 			error:function(data) {
 				alert("error");
