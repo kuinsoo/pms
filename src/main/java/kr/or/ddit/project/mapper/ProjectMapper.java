@@ -29,7 +29,7 @@ public interface ProjectMapper {
 	 * @param project_id the project id
 	 * @return the list
 	 */
-	ProjectVo selectProjectList(String project_id);
+	ProjectVo selectProject(String project_id);
 
 	/**
 	 * Create project int.

@@ -9,7 +9,7 @@
         select * from PROJECT order by PROJECT_ID desc
     </select>
 
-    <select id="selectProjectList" resultType="projectVo" parameterType="String">
+    <select id="selectProject" resultType="projectVo" parameterType="String">
         select * from PROJECT where PROJECT_ID = #{project_id}
     </select>
 

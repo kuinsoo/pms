@@ -74,7 +74,7 @@ public class MemberController {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		ProjectVo projectVo = projectService.selectProjectList(project_id);
+		ProjectVo projectVo = projectService.selectProject(project_id);
 		project_title = URLEncoder.encode(projectVo.getProject_title(),"UTF-8");
 		return "redirect:/subMain?project_id=" + project_id + "&project_title=" + project_title;
 	}

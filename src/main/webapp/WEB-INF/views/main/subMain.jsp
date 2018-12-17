@@ -3,8 +3,6 @@
 
 <%-- header & left --%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
-
-	
 	<%--CURRENT SECTION(MAIN)--%>
 	<section class="currentMain">
 		<div class="currentMainContainer">
@@ -70,7 +68,7 @@
 							<li class="titleBox">처리대기</li>
 							<li class="titleBox">완료</li>
 						</ul>
-						<%--<%@include file="/WEB-INF/views/card/cardChart.jsp"%>--%>
+						<%@include file="/WEB-INF/views/card/cardChart.jsp"%>
 						<%--<div class="kku-boarder kku-mainPage" id="planList">
 							<div class="column">
 								<div class="portlet">
@@ -321,9 +319,10 @@
 												<span onclick="insertCmt('${work.work_id}', 'cmt_content${i.index}');">댓글 작성</span>
 											</div>
 										</div>
-									</li>
-								</ul>
-							</div>
+									</div>
+								</li>
+							</ul>
+						</div>
 					</div> <%-- 끝--%>
 					</c:forEach>
 				</div> <%-- submainwork --%>
