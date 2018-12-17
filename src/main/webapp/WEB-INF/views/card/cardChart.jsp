@@ -9,8 +9,6 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
 <style>
 
     /*body {*/
@@ -25,14 +23,16 @@
         height: 150px;
     }
     .columnCard {
-        width: 150px;
+        width: 156px;
         float: left;
         padding-bottom: 100px;
     }
 
     .portlet {
-        margin: 0 1em 1em 0;
-        padding: 0.3em;
+        margin: 0px;
+        padding: 0px;
+        width:159.5px;
+        
     }
     .portlet-header {
         padding: 0.2em 0.3em;
@@ -54,28 +54,22 @@
         height: 50px;
     }
 
-    #planList {
-        width: 875px;
-        height: 500px;
-        margin: 0 auto;
-        padding-left: 25px;
-    }
+    #planList{width:798px;height:500px;overflow:hidden;}
 
     #titleList {
         list-style: none;
-        width: 875px;
+        width: 798px;
         height: 20px;
         margin: 0 auto;
     }
 
     .titleBox {
-        width: 175px;
+        width: 159.5px;
         float: left;
     }
 
 </style>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <script>
 	$(document).ready(function () {
 		$('.kku-hide').hide();
@@ -123,7 +117,7 @@
 	} );
 
 	function updateCard(no, group, index){
-		location.href = "/updateCard?card_no="+no+"&wc_group="+group+"&wc_index="+index;
+		location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${project_id}";
 	};
 </script>
 <%--<ul id="titleList" >
@@ -165,7 +159,7 @@
                     <div class="portlet-content">
                             ${wcVo.work_content}
                     </div>
-                    <label class="kku-hide kku-no" >${wcVo.card_no}</label>
+                    <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                 </div>
@@ -184,7 +178,7 @@
                     <div class="portlet-content">
                             ${wcVo.work_content}
                     </div>
-                    <label class="kku-hide kku-no" >${wcVo.card_no}</label>
+                    <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                 </div>
@@ -203,7 +197,7 @@
                     <div class="portlet-content">
                             ${wcVo.work_content}
                     </div>
-                    <label class="kku-hide kku-no" >${wcVo.card_no}</label>
+                    <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                 </div>
@@ -222,7 +216,7 @@
                     <div class="portlet-content">
                             ${wcVo.work_content}
                     </div>
-                    <label class="kku-hide kku-no" >${wcVo.card_no}</label>
+                    <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                 </div>
@@ -231,3 +225,4 @@
     </div>
 
 </div>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

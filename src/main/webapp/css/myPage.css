@@ -40,6 +40,9 @@
 .myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 >  ul > li > input[type="submit"] {
 	width:70px;height:40px;background-color:#746fcc;color:#fff;border:none;font-size:18px;cursor:pointer;outline:none;margin-top:10px;
 }
+.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 >  ul > li > .updateBtn {
+	width:70px;height:40px;background-color:#746fcc;color:#fff;border:none;font-size:18px;cursor:pointer;outline:none;margin-top:10px;
+}
 
 .myPageContainerRight{float:left;width:698px;height:500px;border-bottom:1px solid #dee3eb;}
 .myPageContainerRight > .myPageContainerRightLeftChart{width:348px;height:500px;float:left;}

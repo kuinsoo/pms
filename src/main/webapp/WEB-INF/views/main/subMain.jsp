@@ -3,8 +3,6 @@
 
 <%-- header & left --%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
-
-	
 	<%--CURRENT SECTION(MAIN)--%>
 	<section class="currentMain">
 		<div class="currentMainContainer">
@@ -28,7 +26,7 @@
 					</div>
 					<div class="charts">
 						<div class="chartsContent">
-							<canvas id="myChart" width="960" height="400"></canvas>
+							<canvas id="myChart" width="760" height="400"></canvas>
 						</div>
 						<div class="chartsNumber">
 							<ul>
@@ -70,7 +68,7 @@
 							<li class="titleBox">처리대기</li>
 							<li class="titleBox">완료</li>
 						</ul>
-						<%--<%@include file="/WEB-INF/views/card/cardChart.jsp"%>--%>
+						<%@include file="/WEB-INF/views/card/cardChart.jsp"%>
 						<%--<div class="kku-boarder kku-mainPage" id="planList">
 							<div class="column">
 								<div class="portlet">
@@ -217,7 +215,8 @@
 				<%--카드리스트--%>
 				<div id="submain_work">
 				<c:forEach items="${workList}" var="work" varStatus="i">
-				<div class="currentCardList" >					
+				<div class="currentCardList" >
+					<h2><i class="icon-speech icons"></i>${work.work_title}</h2>
 					<div class="cardUserInfo">
 						<div class="cardUserInfoImg">
 							<img src="${work.member_profile}">
@@ -231,7 +230,7 @@
 							<a href="#opens"><i class="icon-bulb icons"></i></a>
 							<div class="white_contents" id="opens">
 								<div>
-<!-- 									<a href="#close"><i class="icon-close icons"></i></a> -->
+ 									<a href="#close"><i class="icon-close icons"></i></a>
 									<div class="issueCreateInputField">
 										<div class="issueCreateInputFieldLeft">
 											<ul>
@@ -257,14 +256,13 @@
 										</div>
 									</div>
 									<input type="button" value="등록" class="issueInfoCreate" onClick="insertTodo();"/>
-									<input type="button" value="취소" class="issueInfoClose"/>
+									<a href="#close" class="issueInfoClose">취소</a>
 								</div>
 						    </div>
 						</div>
 					</div>
 					<div class="currentCardContentView">
 						<div class="currentCardContentViewLeft">
-							<h2>${work.work_title}</h2>
 							<textarea readonly>${work.work_content}</textarea>
 						</div>
 						<div class="currentCardContentViewRight">
@@ -277,11 +275,6 @@
 									<li><span>3</span></li>
 									<li><span>4</span></li>
 									<li><span>5</span></li>
-									<li><span>6</span></li>
-									<li><span>7</span></li>
-									<li><span>8</span></li>
-									<li><span>9</span></li>
-									<li><span>10</span></li>
 									<li><i class="icon-arrow-right icons"></i></li>
 								</ul>
 							</div>
@@ -294,24 +287,6 @@
 
 						<!-- 댓글  -->
 						<div class="cardContentComment">
-							<c:forEach items="${cmtList}" var="cmt">
-								<c:if test="${cmt.cmt_work eq  work.work_id}">
-							<ul>
-								<li>
-									<div class="cardContentCommentUser">
-										<div class="cardContentCommentUserImg">
-											<img src="${cmt.member_profile}">
-										</div>
-										<div class="cardContentCommentUserName">
-											<b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
-											<br>
-											<span>${cmt.cmt_content}</span>
-										</div>
-									</div>
-								</li>
-							</ul>
-							</c:if>
-						</c:forEach>
 							<ul>
 								<li>
 									<div class="cardContentCommentUser">
@@ -319,16 +294,33 @@
 											<img src="${memberVo.member_profile}">
 										</div>
 										<div class="cardContentCommentUserName">
-
-											<input type="text" class="form-control" id="cmt_content${i.index}" value="" placeholder="댓글을 입력해주세요" required >
-											<div class="cardContentBottom">
-												<i class="icon-bubble icons"></i>
-												<span onclick="insertCmt('${work.work_id}', 'cmt_content${i.index}');">댓글 작성</span>
-											</div>
+											<input type="text" class="commentInput" id="cmt_content${i.index}" placeholder="댓글을 입력해주세요" required>
+											<i class="icon-bubble icons" onclick="insertCmt('${work.work_id}', 'cmt_content${i.index}');"></i>
 										</div>
-									</li>
-								</ul>
-							</div>
+									</div>
+								</li>
+							</ul>
+							<c:forEach items="${cmtList}" var="cmt">
+								<c:if test="${cmt.cmt_work eq  work.work_id}">
+									<ul>
+										<li>
+											<div class="cardContentCommentUser">
+												<div class="cardContentCommentUserImg">
+													<img src="${cmt.member_profile}">
+												</div>
+												<div class="cardContentCommentUserName">
+													<b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
+													<input type="button" value="수정" class="commentUpdateBtn" />
+													<input type="button" value="삭제" class="commentDeleteBtn" />
+													<br>
+													<span>${cmt.cmt_content}</span>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</c:if>
+							</c:forEach>
+						</div>
 					</div> <%-- 끝--%>
 					</c:forEach>
 				</div> <%-- submainwork --%>

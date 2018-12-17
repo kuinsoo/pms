@@ -12,7 +12,7 @@ a {
 
 html, body {
     height: 100%;
-    overflow-x: hidden;
+   /* overflow-x: hidden;*/
 }
 
 ul {
@@ -472,11 +472,7 @@ header {
     color: #000;
 }
 
-.dialog > ul > li > label {
-	font-size: 20px;
-    padding-left: 10px;
-    color: #000;
-}
+.dialog > ul > li > label{font-size:20px;padding-left:10px;color:#000;cursor:pointer;}
 
 .dialog__triggers, .dialog__actions {
     display: block;
