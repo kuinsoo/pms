@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.model.CommentsVo;
 import kr.or.ddit.comments.service.CommentsServiceInf;
@@ -131,11 +134,9 @@ public class ProjectController {
 	}
 
 
-	@RequestMapping(value = "/subMain", method = RequestMethod.GET)
-	public String subMain(Model model, @RequestParam("project_id")String project_id,
-						  @SessionAttribute("memberVo")MemberVo memberVo) {
-
-
+	@RequestMapping(value = "/subMain", method = {RequestMethod.POST, RequestMethod.GET})
+	public String subMain(Model model, @RequestParam("project_id")String project_id, @RequestParam("project_title")String project_title,
+						  @SessionAttribute("memberVo")MemberVo memberVo, HttpServletResponse response) {
 
 		/* 프로젝트 객체  */
 		model.addAttribute("projectVo", projectService.selectProject(project_id));
@@ -151,7 +152,17 @@ public class ProjectController {
 
 		/* 업무 카드 출력 */
 		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
+		
 
+		/*<!--  변찬우(수정 2018.12.11):  쿠키생성 추가 for node page  -->*/
+		Cookie cookProject_id= new Cookie("project_id", project_id); 
+		cookProject_id.setMaxAge(60*60*24); // 기간은 하루로 지정
+		response.addCookie(cookProject_id);
+		
+		Cookie cookProject_title = new Cookie("project_title", project_title); 
+		cookProject_title.setMaxAge(60*60*24); // 기간은 하루로 지정
+		response.addCookie(cookProject_title);
+		
 		return "main/subMain";
 	}
 
