@@ -7,8 +7,6 @@
 	<section class="currentMain">
 		<div class="currentMainContainer">
 			<div class="currentMainContainerLeft">
-<<<<<<< HEAD
-=======
 				<div class="currentSubMainTitle">
 					<i class="icon-star icons"></i>
 					<span>${projectVo.project_title}</span>
@@ -21,7 +19,6 @@
 						</ul>
 					</div>
 				</div>
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms.git
 				<div class="projectList">
 					<div class="projectListTitles">
 						<i class="far fa-newspaper"></i>
