@@ -42,24 +42,24 @@ import kr.or.ddit.oauth.bo.NaverLoginBO;
 @SessionAttributes(value = {"memberVo"})  // 	model.addAttribute("memberVo",memberVo); 할때 세션에 없으면 세션영역을 할당해준다.
 @Controller
 public class LoginController {
-	
+
 	// syso 대신 
 	Logger logger = LoggerFactory.getLogger(LoginController.class);
-	
+
 	@Autowired
 	private MemberServiceInf memberservice;
-	
+
 	//NaverLoginBO 
 	@Autowired
-    private NaverLoginBO naverLoginBO;
-    
+	private NaverLoginBO naverLoginBO;
+
 	//private String apiResult = "";
-    
-    @Autowired
-    private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
-        this.naverLoginBO = naverLoginBO;
-    }
-	
+
+	@Autowired
+	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
+		this.naverLoginBO = naverLoginBO;
+	}
+
 
 	/**
 	 * The Email sender.
@@ -74,11 +74,11 @@ public class LoginController {
 	 *
 	 * @return Method  설명 : index 로그인 화면으로
 	 */
-	@RequestMapping(value="/",method=RequestMethod.GET)
-	public String index(HttpServletRequest request , Model model, HttpSession session) {
-		
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String index(HttpServletRequest request, Model model, HttpSession session) {
+
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-		
+
 		session.setAttribute("url", naverAuthUrl);
 		return "login/login";
 	}
@@ -99,7 +99,7 @@ public class LoginController {
 //	public String loginProcess(HttpServletRequest request, Model model, MemberVo memberVo) throws UnsupportedEncodingException {
 //		request.setCharacterEncoding("utf-8");
 	/*<!--  변찬우(수정 2018.12.09):  리스판스 추가 for node page -->*/
-	@RequestMapping(value="/loginProcess",method={RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value = "/loginProcess", method = {RequestMethod.POST, RequestMethod.GET})
 	public String loginProcess(HttpServletRequest request, HttpServletResponse response, Model model, MemberVo memberVo) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
 		String member_mail = request.getParameter("member_mail").toLowerCase();
@@ -107,82 +107,83 @@ public class LoginController {
 
 		memberVo = memberservice.selectUser(member_mail);
 
-		if(memberVo !=null && memberVo.getMember_withdrawal().equals("Y")) {
+		if (memberVo != null && memberVo.getMember_withdrawal().equals("Y")) {
 			String msg = "탈퇴한 회원 입니다.";
-			model.addAttribute("msg",msg );
+			model.addAttribute("msg", msg);
 			return "/login/login";
 		}
 
 
-		if(memberVo==null || !member_mail.equals(memberVo.getMember_mail())||
-							 !member_pass.equals(memberVo.getMember_pass())){
-			
+		if (memberVo == null || !member_mail.equals(memberVo.getMember_mail()) ||
+				!member_pass.equals(memberVo.getMember_pass())) {
+
 			//model.addAttribute("member_mail",member_mail);
 			//model.addAttribute("member_pass",member_pass);
-			model.addAttribute("memberVo",memberVo);
-			model.addAttribute("loginResult","false");
+			model.addAttribute("memberVo", memberVo);
+			model.addAttribute("loginResult", "false");
 			return "/login/login";
-		}else {
-			model.addAttribute("memberVo",memberVo);
-			
+		} else {
+			model.addAttribute("memberVo", memberVo);
+
 			/*<!--  변찬우(수정 2018.12.09):  쿠키생성 추가 for node page  -->*/
-			Cookie cookMember_mail= new Cookie("member_mail", memberVo.getMember_mail()); 
-			cookMember_mail.setMaxAge(60*60*24); // 기간은 하루로 지정
+			Cookie cookMember_mail = new Cookie("member_mail", memberVo.getMember_mail());
+			cookMember_mail.setMaxAge(60 * 60 * 24); // 기간은 하루로 지정
 			response.addCookie(cookMember_mail);
-			
-			Cookie cookMember_name = new Cookie("member_name", memberVo.getMember_name()); 
-			cookMember_name.setMaxAge(60*60*24); // 기간은 하루로 지정
+
+			Cookie cookMember_name = new Cookie("member_name", memberVo.getMember_name());
+			cookMember_name.setMaxAge(60 * 60 * 24); // 기간은 하루로 지정
 			response.addCookie(cookMember_name);
 
 			return "redirect:/main";
 		}
 	}
-	
+
 	@RequestMapping(value = "/callback", method = RequestMethod.GET)
 	public String callback(@RequestParam String code, @RequestParam String state, HttpSession session, Model model, MemberVo memberVo) throws Exception {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
-		 
+
 		JsonParser json = new JsonParser();
-		
+
 		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
-		
+
 		logger.debug("naverLoginBO : {}", oauthToken.getAccessToken());
-		
-		
+
+
 		String apiResult = naverLoginBO.getUserProfile(oauthToken);
 		memberVo = json.changeJson(apiResult); // vo에 userEmail, userGender, userNaver 저장
 		String member_mail = memberVo.getMember_mail();
-		
+
 		// 값이 다르면..
-		if(memberservice.selectUser(member_mail)==null) {
-			memberservice.insertUser(memberVo);		
-			return"/";
-		// 값이 같으면 
-		}else {
-			model.addAttribute("memberVo",memberVo);
+		if (memberservice.selectUser(member_mail) == null) {
+			memberservice.insertUser(memberVo);
+			return "/";
+			// 값이 같으면
+		} else {
+			model.addAttribute("memberVo", memberVo);
 			return "main/main";
 		}
 	}
 
-	
+
 	/**
 	 * Main string.
 	 * 작성자: Mr.KKu
 	 * 변경이력:
+	 *
 	 * @param model    the model
 	 * @param memberVo the member vo
 	 * @return the string
 	 * 설명: 메인화면에 프로젝트리스트를 출력해준다. (Member / Project / project_member  Join)
 	 */
-	@RequestMapping(value="/main",method=RequestMethod.GET)
-	public String main(Model model, @ModelAttribute("memberVo")MemberVo memberVo) {
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public String main(Model model, @ModelAttribute("memberVo") MemberVo memberVo) {
 
-		model.addAttribute("pMemberList",memberservice.selectMainView(memberVo.getMember_mail()));
+		model.addAttribute("pMemberList", memberservice.selectMainView(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberservice.selectInviteProject(memberVo.getMember_mail()));
 		return "main/main";
 	}
-	
-	@RequestMapping(value ="/logout", method=RequestMethod.GET)
+
+	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String logout(SessionStatus status) {
 		status.setComplete();
 		return "redirect:/";
@@ -201,27 +202,27 @@ public class LoginController {
 	 * @param content  the content
 	 * @return Method  설명 : 아이디 찾기
 	 */
-	@RequestMapping(value="/findEmail",method=RequestMethod.POST)
-	public String findEmail(HttpServletRequest request, MemberVo memberVo,String to, String subject, String content){
-		
+	@RequestMapping(value = "/findEmail", method = RequestMethod.POST)
+	public String findEmail(HttpServletRequest request, MemberVo memberVo, String to, String subject, String content) {
+
 		String member_name = request.getParameter("member_name");
 		// 자신의 진짜 메일 
 		String member_email = request.getParameter("member_email");
 		SimpleMailMessage message = new SimpleMailMessage();
-		
+
 		// 보낼사람 이메일
 		message.setTo(member_email);
 		// 제목
 		message.setSubject(member_name + "님 안녕하세요 :) < CURRENT 아이디 찾기 >");
-		
-		if(memberservice.selectfindId(memberVo)!=null) {
+
+		if (memberservice.selectfindId(memberVo) != null) {
 			// 내용
 			message.setText(member_name + "님이 찾으시는 아이디는  [  " + memberservice.selectfindId(memberVo).getMember_mail() + "  ]  입니다.");
-			
+
 			emailSender.send(message);
-			
+
 			return "/login/login";
-		}else {
+		} else {
 			return "/login/login";
 		}
 	}
@@ -239,36 +240,36 @@ public class LoginController {
 	 * @param content  the content
 	 * @return Method  설명 : 비밀번호 찾기
 	 */
-	@RequestMapping(value="/findPass",method=RequestMethod.POST)
-	public String findPass(HttpServletRequest request, MemberVo memberVo,Model model ,String to, String subject, String content) {
+	@RequestMapping(value = "/findPass", method = RequestMethod.POST)
+	public String findPass(HttpServletRequest request, MemberVo memberVo, Model model, String to, String subject, String content) {
 		// 임의값 받아오는거 
 		String member_pass = "";
 		String member_name = request.getParameter("member_name");
 		String member_mail = request.getParameter("member_mail");
-		
+
 		SimpleMailMessage message = new SimpleMailMessage();
-		
+
 		// 아이디 찾기와 동일하게 보낼사람 이메일 
 		message.setTo(member_mail);
 		// 제목
 		message.setSubject(member_name + "님 안녕하세요 :) < CURRENT 비밀번호 찾기 >");
-		
+
 		// memberVo에 member_pass를 담아준다. 
 		// null이 아니면 비밀번호가 전송 
-		if(memberservice.selectfindPass(member_mail)!=null) {		
+		if (memberservice.selectfindPass(member_mail) != null) {
 			// random 로직 
-			String possible ="abcdefghijklmnopqrstuvwxyz0123456789";
-			for(int i = 0; i<8; i++) {
-				member_pass += possible.charAt((int) Math.floor(Math.random()* possible.length()));
+			String possible = "abcdefghijklmnopqrstuvwxyz0123456789";
+			for (int i = 0; i < 8; i++) {
+				member_pass += possible.charAt((int) Math.floor(Math.random() * possible.length()));
 			}
-				// 임시 비밀번호로 수정
-				memberVo.setMember_pass(member_pass);
-				memberservice.updatePass(memberVo);
-				message.setText(member_name +" 님의 임시 비밀번호는  [  " + member_pass + "  ]  입니다. 로그인 후 꼭! 비밀번호를 수정해 주세요. ");				
-				memberVo.setMember_pass(member_pass);
-				emailSender.send(message);
-				return "/login/login";
-		}else {
+			// 임시 비밀번호로 수정
+			memberVo.setMember_pass(member_pass);
+			memberservice.updatePass(memberVo);
+			message.setText(member_name + " 님의 임시 비밀번호는  [  " + member_pass + "  ]  입니다. 로그인 후 꼭! 비밀번호를 수정해 주세요. ");
+			memberVo.setMember_pass(member_pass);
+			emailSender.send(message);
+			return "/login/login";
+		} else {
 			return "/login/login";
 		}
 	}
@@ -280,12 +281,12 @@ public class LoginController {
 	 *
 	 * @return Method  설명 : 회원가입 화면단
 	 */
-	@RequestMapping(value="/signView")
+	@RequestMapping(value = "/signView")
 	public String signView() {
-		return"/sign/sign";
+		return "/sign/sign";
 	}
 
-	 
+
 	/**
 	 * Method : signProcess(POST)
 	 * 작성자 : 나진실
@@ -295,57 +296,57 @@ public class LoginController {
 	 * @param member      the member
 	 * @return Method  설명 : sign.jsp에서 회원가입 버튼을 눌렀을때
 	 */
-	@RequestMapping(value="/signProcess",method=RequestMethod.POST)
-	public String signProcess(@RequestParam("member_mail") String member_mail ,MemberVo member, HttpServletRequest request) {
-	
+	@RequestMapping(value = "/signProcess", method = RequestMethod.POST)
+	public String signProcess(@RequestParam("member_mail") String member_mail, MemberVo member, HttpServletRequest request) {
+
 		// 값이 다르면..
-		if(memberservice.selectUser(member_mail)==null) {
-			memberservice.insertUser(member);		
-			return"/login/login";
-		// 값이 같으면 
-		}else {
+		if (memberservice.selectUser(member_mail) == null) {
+			memberservice.insertUser(member);
+			return "/login/login";
+			// 값이 같으면
+		} else {
 			return "/sign/sign";
 		}
 	}
-	
-	
+
+
 	/**
 	 * Method : signProcess(GET)
 	 * 작성자 : 나진실
 	 * 변경이력 :
-	 * @return
-	 * Method 설명 : sign.jsp에서 휴대전화 인증 버튼을 눌렀을때 
+	 *
+	 * @return Method 설명 : sign.jsp에서 휴대전화 인증 버튼을 눌렀을때
 	 */
 	@ResponseBody
-	@RequestMapping(value="/signProcessAjax",method=RequestMethod.GET)
+	@RequestMapping(value = "/signProcessAjax", method = RequestMethod.GET)
 	public String signProcessAjax(HttpServletRequest request, Model model) {
-		
+
 		// 핸드폰 번호 입력란 
 		String member_tel = request.getParameter("member_tel");
-	
+
 		String api_key = "NCSJQVBNAKBRXLTC";
-		String api_secret ="ZNJ2OS1W0F1A4N9FPRUKO8YXWT1RBXKR";
+		String api_secret = "ZNJ2OS1W0F1A4N9FPRUKO8YXWT1RBXKR";
 		Coolsms coolsms = new Coolsms(api_key, api_secret);
-	
+
 		HashMap<String, String> set = new HashMap<String, String>();
 		set.put("to", member_tel); // 수신
 		set.put("from", "01099011334"); // 발신
-		
+
 		// random 로직 
-		String number ="0123456789";	
-		
+		String number = "0123456789";
+
 		// 인증번호 담아주는 변수 
 		String certificationNumber = "";
-		for(int i = 0; i < 4; i++) {
-			certificationNumber += number.charAt((int) Math.floor(Math.random()* number.length()));
+		for (int i = 0; i < 4; i++) {
+			certificationNumber += number.charAt((int) Math.floor(Math.random() * number.length()));
 		}
 		set.put("text", "CURRENT 인증번호는   [  " + certificationNumber + " ]  입니다. ");
 		set.put("type", "sms"); // 문자타입
-		
+
 		//JSONObject result = coolsms.send(set);// 보내기&전송결과받기
 		coolsms.send(set);
-		
+
 		// sign.jsp ajax로 보내준다.
-	    return certificationNumber;
+		return certificationNumber;
 	}
 }
