@@ -321,7 +321,6 @@ header {
     width: 50px;
     height: 50px;
     float: left;
-    margin-left: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -407,9 +406,9 @@ header {
     font-size: 14px;
     cursor: pointer;
 }
-.headerRightContent > .facing {
+.facing {
 	display:block;width:40px;height:40px;cursor:pointer;
-	margin-top:9px;float:left;color:#000;font-size:30px;margin-right:20px;
+	margin-top:9px;float:left;color:#000;font-size:30px;
 }
 
 .dialog__trigger, .dialog__action {
