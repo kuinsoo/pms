@@ -1,5 +1,7 @@
 package kr.or.ddit.todo.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,15 +40,21 @@ public class ToDoController {
 	* Method 설명 : to-do list 등록(Ajax적용)
 	*/
 	@RequestMapping(value="/todoInsert", method=RequestMethod.POST)
-	public String ajaxInsertTodo(@RequestParam("project_id")String project_id, ToDoVo todoVo, Model model) {
+	public String ajaxInsertTodo(@RequestParam("project_id")String project_id, @RequestParam("todo_work")String todo_work, ToDoVo todoVo, Model model) {
 		
+		/* to-do insert */
 		try {
 			todoService.todoInsert(todoVo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return "";
+		/* to-do select */
+		List<ToDoVo> workToDoSelectList = todoService.workToDoSelect(todo_work);
+		
+		model.addAttribute("workToDoSelectList", workToDoSelectList);
+		
+		return "todo/todoInsertAjax";
 	}
 	
 }

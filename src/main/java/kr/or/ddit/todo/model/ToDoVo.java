@@ -18,7 +18,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Alias("todoVo")
 public class ToDoVo {
 	
-	private int rnum ;
+	private int rnum;
 	private String todo_id;				//	할일번호(pk)
 	private String todo_work;			//	할일업무번호(fk)
 	private String todo_pmember;		//	할일담당자

@@ -51,5 +51,17 @@ public class ToDoService implements ToDoServiceInf{
 	public int todoInsert(ToDoVo todoVo) {
 		return todoMapper.todoInsert(todoVo);
 	}
+	/**
+	* Method : workToDoSelect
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_work
+	* @return
+	* Method 설명 : 각 업무의 to-do list를 조회
+	*/
+	@Override
+	public List<ToDoVo> workToDoSelect(String todo_work) {
+		return todoMapper.workToDoSelect(todo_work);
+	}
 	
 }
