@@ -115,6 +115,21 @@ public class MemberService implements MemberServiceInf {
 		return memberMapper.myprojectselect(pageVo);
 	}
 	
+	/**
+	 * Method : myprojectEndselect
+	 * 작성자 : 나진실
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 마이페이지 참여했던 프로젝트 리스트
+	 */
+	@Override
+	public List<ProjectVo> myprojectEndselect(PageVo pageVo) {
+		return memberMapper.myprojectEndselect(pageVo);
+	}
+
+
+	
 	@Override
 	public int selectProjectCnt(String member_mail) {
 		return memberMapper.selectProjectCnt(member_mail);
@@ -330,5 +345,10 @@ public class MemberService implements MemberServiceInf {
 		return memberMapper.selectProjectId(project_title);
 	}
 
+	@Override
+	public int totalEndProjectCnt(String member_mail) {
+		return memberMapper.totalEndProjectCnt(member_mail);
+	}
 
+	
 }

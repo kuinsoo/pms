@@ -22,6 +22,7 @@
 			getMyPageList(1);
 			getmybookMarkProjectList(1);
 			getmyTodoProjectList(1);
+			getMyEndPageList(1);
 		
 			// 참여중인 프로젝트 클릭
 			$("#projectList").on("click", ".projectClick" ,function(){
@@ -234,6 +235,90 @@
 				}
 			});
 		}
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		
+		
+		// 마이페이지 : 참여 했던 프로젝트 목록 / 페이징 처리 Ajax	
+		function getMyEndPageList(page){
+			var pageSize = 10;
+			
+			$.ajax({
+				type: "GET",
+				url : "/myPageEndProjectAjax",
+				data: {"page":page, "pageSize":pageSize},
+				success : function(data){
+					var html ="";
+					$.each(data.projectEndList, function (idx,my){
+						
+						html += "<tr>";
+						html += "	<td>"+ my.rnum +"</td>";
+						html += "	<td>"+ my.project_title +"</td>";
+						html += "	<td>"+ my.project_id +"</td>";
+						html += "	<td>"+ my.pmember_member +"</td>";
+						html += "</tr>";
+					});
+					
+					$("#projectEndList").html("");
+					$("#projectEndList").html(html);
+				
+					var paging ="";
+						paging +="<li><a href='javascript:getMyEndPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						for(var i= 1; i<=data.pageCnt; i++) {
+							paging += "<li><a href='javascript:getMyEndPageList("+ i +");'>"+ i+ "</a></li>";
+						}
+							paging +="<li><a href='javascript:getMyEndPageList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".pagination1").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+			
+		// 마이페이지 : 참여했던 프로젝트 목록 검색 Ajax	
+		function getSearchEndProject(){
+		var param = $('form[name=searchEndProject]').serialize();
+			
+			$.ajax({
+				type: "POST",
+				url : "/searchEndProjectAjax",
+				data: param,
+				success : function(data){
+						console.log("data : " + data);
+					var html ="";
+					$.each(data.projectEndList, function (idx,my){
+						html += "<tr>";
+						html += "	<td>"+ my.rnum +"</td>";
+						html += "	<td>"+ my.project_title +"</td>";
+						html += "	<td>"+ my.project_id +"</td>";
+						html += "	<td>"+ my.pmember_member +"</td>";
+						html += "</tr>";
+					});
+					
+					$("#projectEndList").html("");
+					$("#projectEndList").html(html);
+				
+					var paging ="";
+						paging +="<li><a href='javascript:getMyEndPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						for(var i= 1; i<=data.pageCnt; i++) {
+							paging += "<li><a href='javascript:getMyEndPageList("+ i +");'>"+ i+ "</a></li>";
+						}
+							paging +="<li><a href='javascript:getMyEndPageList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".pagination1").html(paging);
+				},
+				
+				// 실패시 
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+		
+		
+		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		
+		
 		
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 즐겨찾기 목록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		
@@ -489,7 +574,7 @@
 							<li><a href="#tabs2-1-1">참여했던 프로젝트</a></li>
 							<li><a href="#tabs2-2">즐겨찾기한 프로젝트</a></li>
 							<li><a href="#tabs2-3">일감 조회</a></li>
-							<li><a href="#tabs2-4">보관함</a></li>
+							<li><a href="#tabs2-4">파일보관함</a></li>
 							<li><a href="#tabs2-5">회원탈퇴</a></li>
 						</ul>
 
@@ -533,11 +618,11 @@
 						<div id="tabs2-1-1">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-									<form action="#" method="POST" onsubmit="return false;">
-										<input type="text" placeholder="검색어를 입력해주세요" />
+									<form name ="searchEndProject" method="POST" onsubmit="return false;">
+										<input type="text" id="searchEndText" name="searchEndText" value="${searchEndText}" placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
-										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchProject();"></i>  
+										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchEndProject();"></i>  
 									</form>
 								</div>
 								<table>
@@ -553,14 +638,11 @@
 											<th><span>프로젝트 팀장</span></th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td colspan="4">게시글이 없습니다.</td>
-										</tr>
+									<tbody  id ="projectEndList">
 									</tbody>
-								</table>
+									</table>
 								<div class="text-center">
-									 <ul></ul>
+									 <ul class="pagination1"></ul>
 								</div>
 							</div>
 						</div>
@@ -651,8 +733,8 @@
 									<thead>
 										<tr>
 											<th><span>번호</span></th>
-											<th><span>참여중인 프로젝트 명</span></th>
-											<th><span>프로젝트 팀장</span></th>
+											<th><span>파일 명</span></th>
+											<th><span>파일 다운로드</span></th>
 										</tr>
 									</thead>
 									<tbody id ="아직미구현">
@@ -852,11 +934,11 @@ function handleFiles(files) {
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'line',
-    data: {
-        labels: ["요청", "진행", "피드백", "완료", "보류"],
+    data: {	
+        labels: ["참여중" , "참여했던" , "즐겨찾기", "일감"],
         datasets: [{
-            label: '',
-            data: [12, 19, 3, 5, 2],
+        	  label: '${memberVo.member_name} 님의 CURRENT',
+            data: [${totalProjectCnt}, ${totalEndProjectCnt}, ${selectProjectCnt}, ${selectTodoCnt}],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -889,10 +971,10 @@ var ctx2 = document.getElementById("myChart2").getContext('2d');
 var myChart2 = new Chart(ctx2, {
     type: 'horizontalBar',
     data: {
-        labels: ["요청", "진행", "피드백", "완료", "보류"],
+    	labels: ["참여중" , "참여했던" , "즐겨찾기", "일감"],
         datasets: [{
-            label: '',
-            data: [12, 19, 3, 5, 2],
+            label: '${memberVo.member_name} 님의 CURRENT',
+            data: [${totalProjectCnt}, ${totalEndProjectCnt}, ${selectProjectCnt}, ${selectTodoCnt}],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

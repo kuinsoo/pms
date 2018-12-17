@@ -74,6 +74,34 @@
 		<if test="searchText!=null and searchText!=''">and project_title like '%'||#{searchText}||'%'</if>
 	</select>
 	
+	<!-- 참여했던 프로젝트  -->
+	<select id="myprojectEndselect" resultType="projectVo" parameterType="pageVo">
+		
+		select * from(
+	    select rownum rnum ,a.*
+	             from
+	                  (SELECT (SELECT PROJECT_TITLE  FROM PROJECT  WHERE PROJECT_ID = PMEMBER_PROJECT) as project_title
+	                       , PMEMBER_MEMBER as pmember_member
+	                      , PMEMBER_PROJECT as project_id
+	                     FROM   PROJECT_MEMBER A , PROJECT B
+                      where B.project_id = A.pmember_project 
+	                   AND  PMEMBER_MEMBER = #{member_mail}
+                            AND    PMEMBER_POSITION = '1'
+                        AND   project_eedate is not null
+	                   UNION
+	                   SELECT  (SELECT PROJECT_TITLE FROM PROJECT WHERE PROJECT_ID = PMEMBER_PROJECT)
+	                       , (SELECT B.PMEMBER_MEMBER FROM PROJECT_MEMBER B WHERE B.PMEMBER_PROJECT = A.PMEMBER_PROJECT AND B.PMEMBER_POSITION = 1)
+	                     , PMEMBER_PROJECT
+	                   FROM   PROJECT_MEMBER A , PROJECT B
+                      where B.project_id = A.pmember_project 
+	                   AND  A.PMEMBER_MEMBER = #{member_mail}
+	                     AND    A.PMEMBER_POSITION = '2'
+                          AND    B.project_eedate is not null)a)
+ 		 where rnum between ${page}*${pageSize}-(${pageSize}-1) 
+	   and ${page}*${pageSize}
+		<if test="searchEndText!=null and searchEndText!=''">and project_title like '%'||#{searchEndText}||'%'</if>
+	</select>
+	
 	<!-- 프로젝트 전체 개수 가져오기  -->	
 	<select id="totalProjectCnt" resultType="int" parameterType="String">
 		select count(*)
@@ -92,6 +120,12 @@
 	 	select count(*)
 		from   todo
 		where  todo_pmember = #{member_mail}
+	 
+	 </select>
+	 
+	 <select id="totalEndProjectCnt" resultType="int" parameterType="String">
+	 	select count(*) from project
+		where project_eedate is not null
 	 
 	 </select>
 	 

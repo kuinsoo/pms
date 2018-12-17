@@ -212,24 +212,29 @@
 						</div>
 					</div>
 				</div>
-				<%--카드리스트--%>
-				<div id="submain_work">
-				<c:forEach items="${workList}" var="work" varStatus="i">
-				<div class="currentCardList" >					
+				
+				
+				
+				
+				<%-- ############################## 일정 카드 시작 ############################## --%>
+				<div class="mapCardList">
+					<div class="mapCardListTitle">
+						<h2><i class="icon-map icons"></i>일정제목</h2>
+					</div>
 					<div class="cardUserInfo">
 						<div class="cardUserInfoImg">
-							<img src="${work.member_profile}">
+							<img src="http://placehold.it/40x40">
 						</div>
 						<div class="cardUserInfoName">
-							<b>${work.member_mail}</b><br> <%-- 작성자 --%>
-							<span>${work.work_wdate}</span>
+							<b>홍길동</b><br> <%-- 작성자 --%>
+							<span>2018-12-17</span>
 						</div>
 						<div class="updateDeleteIcon">
 							<i class="icon-wrench icons"></i>							
 							<a href="#opens"><i class="icon-bulb icons"></i></a>
 							<div class="white_contents" id="opens">
 								<div>
-<!-- 									<a href="#close"><i class="icon-close icons"></i></a> -->
+ 									<a href="#close"><i class="icon-close icons"></i></a>
 									<div class="issueCreateInputField">
 										<div class="issueCreateInputFieldLeft">
 											<ul>
@@ -255,14 +260,170 @@
 										</div>
 									</div>
 									<input type="button" value="등록" class="issueInfoCreate" onClick="insertTodo();"/>
-									<input type="button" value="취소" class="issueInfoClose"/>
+									<a href="#close" class="issueInfoClose">취소</a>
+								</div>
+						    </div>
+						</div>
+					</div>
+					<div class="currentCardContentView">
+						<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=nPljd7ns8PGll8DWsmSl"></script>
+						<div id="map" style="width:100%;height:300px;"></div>
+						<script>
+						var map = new naver.maps.Map("map", {
+						    center: new naver.maps.LatLng(37.3595316, 127.1052133),
+						    zoom: 10,
+						    mapTypeControl: true
+						});
+						
+						var infoWindow = new naver.maps.InfoWindow({
+						    anchorSkew: true
+						});
+						
+						map.setCursor('pointer');
+						
+						// search by tm128 coordinate
+						function searchCoordinateToAddress(latlng) {
+						    var tm128 = naver.maps.TransCoord.fromLatLngToTM128(latlng);
+						
+						    infoWindow.close();
+						
+						    naver.maps.Service.reverseGeocode({
+						        location: tm128,
+						        coordType: naver.maps.Service.CoordType.TM128
+						    }, function(status, response) {
+						        if (status === naver.maps.Service.Status.ERROR) {
+						            return alert('Something Wrong!');
+						        }
+						
+						        var items = response.result.items,
+						            htmlAddresses = [];
+						
+						        for (var i=0, ii=items.length, item, addrType; i<ii; i++) {
+						            item = items[i];
+						            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]';
+						
+						            htmlAddresses.push((i+1) +'. '+ addrType +' '+ item.address);
+						        }
+						
+						        infoWindow.setContent([
+						                '<div style="padding:10px;min-width:200px;line-height:150%;">',
+						                '<h4 style="margin-top:5px;">검색 좌표</h4><br />',
+						                htmlAddresses.join('<br />'),
+						                '</div>'
+						            ].join('\n'));
+						
+						        infoWindow.open(map, latlng);
+						    });
+						}
+						
+						// result by latlng coordinate
+						function searchAddressToCoordinate(address) {
+						    naver.maps.Service.geocode({
+						        address: address
+						    }, function(status, response) {
+						        if (status === naver.maps.Service.Status.ERROR) {
+						            return alert('Something Wrong!');
+						        }
+						
+						        var item = response.result.items[0],
+						            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
+						            point = new naver.maps.Point(item.point.x, item.point.y);
+						
+						        infoWindow.setContent([
+						                '<div style="padding:10px;min-width:200px;line-height:150%;">',
+						                '<h4 style="margin-top:5px;">검색 주소 : '+ response.result.userquery +'</h4><br />',
+						                addrType +' '+ item.address +'<br />',
+						                '</div>'
+						            ].join('\n'));
+						
+						
+						        map.setCenter(point);
+						        infoWindow.open(map, point);
+						    });
+						}
+						
+						function initGeocoder() {
+						    map.addListener('click', function(e) {
+						        searchCoordinateToAddress(e.coord);
+						    });
+						
+						    $('#address').on('keydown', function(e) {
+						        var keyCode = e.which;
+						
+						        if (keyCode === 13) { // Enter Key
+						            searchAddressToCoordinate($('#address').val());
+						        }
+						    });
+						
+						    $('#submit').on('click', function(e) {
+						        e.preventDefault();
+						
+						        searchAddressToCoordinate($('#address').val());
+						    });
+						
+						    searchAddressToCoordinate('정자동 178-1');
+						}
+						
+						naver.maps.onJSContentLoaded = initGeocoder;
+						</script>
+					</div>
+				</div>
+				<%-- ############################## 일정 카드 끝 ############################## --%>
+				
+				
+				
+				
+				<%--카드리스트--%>
+				<div id="submain_work">
+				<c:forEach items="${workList}" var="work" varStatus="i">
+				<div class="currentCardList" >
+					<h2><i class="icon-speech icons"></i>${work.work_title}</h2>
+					<div class="cardUserInfo">
+						<div class="cardUserInfoImg">
+							<img src="${work.member_profile}">
+						</div>
+						<div class="cardUserInfoName">
+							<b>${work.member_mail}</b><br> <%-- 작성자 --%>
+							<span>${work.work_wdate}</span>
+						</div>
+						<div class="updateDeleteIcon">
+							<i class="icon-wrench icons"></i>							
+							<a href="#opens"><i class="icon-bulb icons"></i></a>
+							<div class="white_contents" id="opens">
+								<div>
+ 									<a href="#close"><i class="icon-close icons"></i></a>
+									<div class="issueCreateInputField">
+										<div class="issueCreateInputFieldLeft">
+											<ul>
+												<li>담당자</li>
+												<li>할일내용</li>
+												<li>시작일자</li>
+												<li>마감일자</li>
+											</ul>
+										</div>
+										<div class="issueCreateInputFieldRight">
+											<form method="POST" name="todoInsert" id="todoInsert">
+												<ul>
+													<li><input type="text" name="todo_pmember" value="jerry"/></li>
+													<li><textarea name="todo_content">할일내용</textarea></li>
+													<li><input type="datetime-local" name="non_todo_sdate" id="non_todo_sdate" value=""/></li>
+													<li><input type="hidden" name="todo_sdate" id="todo_sdate" value=""/></li>
+													<li><input type="datetime-local" name="non_todo_eedate"></li>
+													<li><input type="hidden" name="todo_eedate" id="todo_eedate" value=""/></li>
+													<li><input type="hidden" name="project_id" value="${project_id}"/></li>
+													<li><input type="hidden" name="todo_work" value="${work.work_id}"/></li>
+												</ul>
+											</form>
+										</div>
+									</div>
+									<input type="button" value="등록" class="issueInfoCreate" onClick="insertTodo();"/>
+									<a href="#close" class="issueInfoClose">취소</a>
 								</div>
 						    </div>
 						</div>
 					</div>
 					<div class="currentCardContentView">
 						<div class="currentCardContentViewLeft">
-							<h2>${work.work_title}</h2>
 							<textarea readonly>${work.work_content}</textarea>
 						</div>
 						<div class="currentCardContentViewRight">
@@ -287,24 +448,6 @@
 
 						<!-- 댓글  -->
 						<div class="cardContentComment">
-							<c:forEach items="${cmtList}" var="cmt">
-								<c:if test="${cmt.cmt_work eq  work.work_id}">
-							<ul>
-								<li>
-									<div class="cardContentCommentUser">
-										<div class="cardContentCommentUserImg">
-											<img src="${cmt.member_profile}">
-										</div>
-										<div class="cardContentCommentUserName">
-											<b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
-											<br>
-											<span>${cmt.cmt_content}</span>
-										</div>
-									</div>
-								</li>
-							</ul>
-							</c:if>
-						</c:forEach>
 							<ul>
 								<li>
 									<div class="cardContentCommentUser">
@@ -312,21 +455,36 @@
 											<img src="${memberVo.member_profile}">
 										</div>
 										<div class="cardContentCommentUserName">
-
-											<input type="text" class="form-control" id="cmt_content${i.index}" value="" placeholder="댓글을 입력해주세요" required >
-											<div class="cardContentBottom">
-												<i class="icon-bubble icons"></i>
-												<span onclick="insertCmt('${work.work_id}', 'cmt_content${i.index}');">댓글 작성</span>
-											</div>
+											<input type="text" class="commentInput" id="cmt_content${i.index}" placeholder="댓글을 입력해주세요" required>
+											<i class="icon-bubble icons" onclick="insertCmt('${work.work_id}', 'cmt_content${i.index}');"></i>
 										</div>
 									</div>
 								</li>
 							</ul>
+							<c:forEach items="${cmtList}" var="cmt">
+								<c:if test="${cmt.cmt_work eq  work.work_id}">
+									<ul>
+										<li>
+											<div class="cardContentCommentUser">
+												<div class="cardContentCommentUserImg">
+													<img src="${cmt.member_profile}">
+												</div>
+												<div class="cardContentCommentUserName">
+													<b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
+													<input type="button" value="수정" class="commentUpdateBtn" />
+													<input type="button" value="삭제" class="commentDeleteBtn" />
+													<br>
+													<span>${cmt.cmt_content}</span>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</c:if>
+							</c:forEach>
 						</div>
 					</div> <%-- 끝--%>
 					</c:forEach>
 				</div> <%-- submainwork --%>
-
 			</div> <%-- MainController --%>
 
 			<div class="currentMainContainerRight">

@@ -61,6 +61,14 @@ public interface MemberServiceInf {
 	MemberVo selectfindPass(String member_mail);
 
 	/**
+	 * Method : totalEndProjectCnt
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 참여했던 프로젝트 개수 조회 
+	 */
+	int totalEndProjectCnt(String member_mail);
+	/**
 	 * Method : updatePass 
 	 * 작성자 : 나진실 
 	 * 변경이력 :
@@ -77,6 +85,17 @@ public interface MemberServiceInf {
 	 * @return Method 설명 : 마이페이지 초대받은 프로젝트
 	 */
 	List<ProjectVo> myprojectselect(PageVo pageVo);
+	
+	/**
+	 * Method : myprojectEndselect
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo 
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 마이페이지 참여했던 프로젝트 
+	 */
+	List<ProjectVo> myprojectEndselect(PageVo pageVo);
 	
 	/**
 	 * Method : mybookmarkselect
