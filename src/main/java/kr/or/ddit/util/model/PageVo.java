@@ -13,7 +13,15 @@ public class PageVo {
 	private String searchText;
 	private String searchBookText;
 	private String searchTodoText;
+	private String searchEndText;
 	
+	
+	public String getSearchEndText() {
+		return searchEndText;
+	}
+	public void setSearchEndText(String searchEndText) {
+		this.searchEndText = searchEndText;
+	}
 	public String getSearchTodoText() {
 		return searchTodoText;
 	}

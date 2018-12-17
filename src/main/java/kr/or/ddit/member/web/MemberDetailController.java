@@ -68,8 +68,29 @@ public class MemberDetailController {
 	@RequestMapping(value="/myPage",method = RequestMethod.GET)
 	public String myPage(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		
+		String member_mail = memberVo.getMember_mail();
+		
 		memberservice.selectUser(memberVo.getMember_mail());
 		model.addAttribute("memberVo",memberVo);
+		
+		// 참여중인 프로젝트 갯수 
+		int totalProjectCnt = memberservice.totalProjectCnt(member_mail);
+		
+		// 참여했던 프로젝트 갯수
+		int totalEndProjectCnt = memberservice.totalEndProjectCnt(member_mail);
+		
+		// 즐겨찾기한 프로젝트 갯수 
+		int selectProjectCnt = memberservice.selectProjectCnt(member_mail);
+		
+		// 나의 일감 갯수
+		int selectTodoCnt = memberservice.selectTodoCnt(member_mail);
+		
+		model.addAttribute("totalProjectCnt",totalProjectCnt);
+		model.addAttribute("totalEndProjectCnt",totalEndProjectCnt);
+		model.addAttribute("selectProjectCnt",selectProjectCnt);
+		model.addAttribute("selectTodoCnt",selectTodoCnt);
+		
+		
 		return "myPage/myPage";
 	}
 	
@@ -105,8 +126,6 @@ public class MemberDetailController {
 		
 	}
 	
-
-	
 	/**
 	 * Method : searchProjectAjax
 	 * 작성자 : pc07
@@ -140,9 +159,55 @@ public class MemberDetailController {
 		
 		return projectMap;
 	}
+	//**********************************************************************************************************************
+	//**********************************************************************************************************************
+	//**********************************************************************************************************************
+
 	
+	// 참여했던 프로젝트 
+	@ResponseBody
+	@RequestMapping(value= "/myPageEndProjectAjax", method= RequestMethod.GET)
+	public Map<String, Object> myPageEndProjectAjax(Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
+							ProjectVo projectVo, HttpServletRequest request) {
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
 	
+		List<ProjectVo> projectEndList = memberservice.myprojectEndselect(pageVo);
+		
+		Map<String, Object> projectMap = new HashMap<>();
+		int pageCnt = memberservice.totalEndProjectCnt(memberVo.getMember_mail());
+		
+		projectMap.put("projectEndList", projectEndList);		
+		projectMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return projectMap;
+		
+	}
 	
+	@ResponseBody
+	@RequestMapping(value= "/searchEndProjectAjax", method= RequestMethod.POST)
+	public Map<String, Object> searchEndProjectAjax(Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
+							ProjectVo projectVo, HttpServletRequest request) {
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		// 검색 부분 
+		if (pageVo.getSearchEndText() == null) {
+			pageVo.setSearchEndText("");
+		}
+		
+		List<ProjectVo> projectEndList = memberservice.myprojectEndselect(pageVo);
+		Map<String, Object> projectMap = new HashMap<>();
+		
+		int pageCnt = memberservice.totalEndProjectCnt(memberVo.getMember_mail());
+		
+		projectMap.put("projectEndList", projectEndList);		
+		projectMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return projectMap;
+	}
+	
+	//===================================================================================================================
 	// 참여중인 프로젝트 부분 클릭했을시   
 	@RequestMapping(value="/projectClickDetail", method = RequestMethod.GET)
 	public String projectClickDetail (Model model ,PMemberVo pmemberVo ,  ProjectVo projectVo, @SessionAttribute("memberVo") MemberVo memberVo ,
@@ -165,6 +230,8 @@ public class MemberDetailController {
 		
 		return "/main/subMain";
 	}
+	
+	
 	
 	// 즐겨찾기한 프로젝트 부분 클릭했을시   
 	@RequestMapping(value="/projectBookClickDetail", method = RequestMethod.GET)

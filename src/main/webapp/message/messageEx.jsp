@@ -1,45 +1,62 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
-	<meta charset="UTF-8">
-    <title>Testing websockets</title>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>Insert title here</title>
 </head>
 <body>
-    <fieldset>
-        <textarea id="messageWindow" rows="10" cols="50" readonly="true"></textarea>
-        <br/>
-        <input id="inputMessage" type="text"/>
-        <input type="submit" value="send" onclick="send()" />
-    </fieldset>
-</body>
+    <div>
+        <input type="text" id="sender" value="${memberVo.member_name}" style="display: none;">
+        <input type="text" id="messageinput">
+    </div>
+    <div>
+        <button type="button" onclick="openSocket();">Open</button>
+        <button type="button" onclick="send();">Send</button>
+        <button type="button" onclick="closeSocket();">Close</button>
+    </div>
+    <!-- Server responses get written here -->
+    <div id="messages"></div>
+    <!-- websocket javascript -->
     <script type="text/javascript">
-        var textarea = document.getElementById("messageWindow");
-        var webSocket = new WebSocket('http://localhost:8081/pms/kr.or.ddit.message.web/message');
-        var inputMessage = document.getElementById('inputMessage');
-    webSocket.onerror = function(event) {
-      onError(event)
-    };
-    webSocket.onopen = function(event) {
-      onOpen(event)
-    };
-    webSocket.onmessage = function(event) {
-      onMessage(event)
-    };
-    function onMessage(event) {
-        textarea.value += "ÏÉÅÎåÄ : " + event.data + "\n";
-    }
-    function onOpen(event) {
-        textarea.value += "Ïó∞Í≤∞ ÏÑ±Í≥µ\n";
-    }
-    function onError(event) {
-      alert(event.data);
-    }
-    function send() {
-        textarea.value += "ÎÇò : " + inputMessage.value + "\n";
-        webSocket.send(inputMessage.value);
-        inputMessage.value = "";
-    }
+        var ws;
+        var messages=document.getElementById("messages");
+        
+        function openSocket(){
+            if(ws!==undefined && ws.readyState!==WebSocket.CLOSED){
+                writeResponse("WebSocket is already opened.");
+                return;
+            }
+            //¿•º“ƒœ ∞¥√º ∏∏µÂ¥¬ ƒ⁄µÂ
+            ws=new WebSocket("ws://localhost:8081/echo.do");
+            
+            ws.onopen=function(event){
+                if(event.data===undefined) return;
+                
+                writeResponse(event.data);
+            };
+            ws.onmessage=function(event){
+                writeResponse(event.data);
+            };
+            ws.onclose=function(event){
+                writeResponse("Connection closed");
+            }
+        }
+        
+        function send(){
+            var text=document.getElementById("messageinput").value+","+document.getElementById("sender").value;
+            ws.send(text);
+            text="";
+        }
+        
+        function closeSocket(){
+            ws.close();
+        }
+        function writeResponse(text){
+            messages.innerHTML+="<br/>"+text;
+        }
   </script>
+</body>
 </html>
