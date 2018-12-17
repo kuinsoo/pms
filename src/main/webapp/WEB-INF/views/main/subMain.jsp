@@ -698,7 +698,7 @@ var myChart = new Chart(ctx, {
 		$.ajax({
 			method: "POST",
 			url: "/todoInsert",
-			dataType: html,
+			//dataType: html,
 			data: param,
 			success: function(data) {
 				alert("success");
