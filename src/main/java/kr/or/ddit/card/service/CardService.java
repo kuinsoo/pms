@@ -37,7 +37,7 @@ public class CardService implements CardServiceInf {
 	}
 
 	@Override
-	public CardVo selectCard(int cardNo) {
+	public CardVo selectCard(String cardNo) {
 		return cardMapper.selectCard(cardNo);
 	}
 
