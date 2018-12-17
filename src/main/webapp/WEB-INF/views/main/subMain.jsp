@@ -7,18 +7,6 @@
 	<section class="currentMain">
 		<div class="currentMainContainer">
 			<div class="currentMainContainerLeft">
-				<div class="currentSubMainTitle">
-					<i class="icon-star icons"></i>
-					<span>${project_title}</span>
-					<i class="icon-share icons dialog__triggerss"></i>
-					<div class="dialogss">
-						<ul>
-							<li>프로젝트 설정</li>
-							<li>알림(푸쉬) 설정</li>
-							<li>프로젝트 숨기기</li>
-						</ul>
-					</div>
-				</div>
 				<div class="projectList">
 					<div class="projectListTitles">
 						<i class="far fa-newspaper"></i>
@@ -26,7 +14,7 @@
 					</div>
 					<div class="charts">
 						<div class="chartsContent">
-							<canvas id="myChart" width="760" height="400"></canvas>
+							<canvas id="myChart" width="860" height="400"></canvas>
 						</div>
 						<div class="chartsNumber">
 							<ul>
@@ -488,6 +476,18 @@
 			</div> <%-- MainController --%>
 
 			<div class="currentMainContainerRight">
+				<div class="currentSubMainTitle">
+					<i class="icon-star icons"></i>
+					<span>${project_title}</span>
+					<i class="icon-share icons dialog__triggerss"></i>
+					<div class="dialogss">
+						<ul>
+							<li>프로젝트 설정</li>
+							<li>알림(푸쉬) 설정</li>
+							<li>프로젝트 숨기기</li>
+						</ul>
+					</div>
+				</div>
 				<div class="projectTeamsTop">
 				</div>
 				<div class="projectTeams">

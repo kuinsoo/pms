@@ -23,7 +23,7 @@
         height: 150px;
     }
     .columnCard {
-        width: 156px;
+        width: 176px;
         float: left;
         padding-bottom: 100px;
     }
@@ -54,17 +54,17 @@
         height: 50px;
     }
 
-    #planList{width:798px;height:500px;overflow:hidden;}
+    #planList{width:898px;height:500px;overflow:hidden;}
 
     #titleList {
         list-style: none;
-        width: 798px;
+        width: 898px;
         height: 20px;
         margin: 0 auto;
     }
 
     .titleBox {
-        width: 159.5px;
+        width: 179.5px;
         float: left;
     }
 

@@ -161,7 +161,7 @@ header {
 }
 
 .headerContainer > .headerRightContent {
-    width: 280px;
+    width:320px;
     height: 45px;
     margin-top: 5px;
     float: right;
@@ -406,6 +406,10 @@ header {
     color: #333;
     font-size: 14px;
     cursor: pointer;
+}
+.headerRightContent > .facing {
+	display:block;width:40px;height:40px;cursor:pointer;
+	margin-top:9px;float:left;color:#000;font-size:30px;margin-right:20px;
 }
 
 .dialog__trigger, .dialog__action {

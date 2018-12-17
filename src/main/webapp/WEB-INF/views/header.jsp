@@ -119,6 +119,7 @@
             </div>
 
             <div class="headerRightContent">
+            	<a href="#" class="facing"><i class="icon-paper-plane icons"></i></a>
             	<!-- 팀원 초대 -->
             	<c:if test="${project_id >= 0 }">
                 <a href="#projectCreatePopUps" class="projectCreatePopUps">
