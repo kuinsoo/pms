@@ -180,6 +180,8 @@
                                 </div>
                                 <div class="cardContentCommentUserName">
                                     <b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
+                                    <input type="button" value="수정" class="commentUpdateBtn" />
+									<input type="button" value="삭제" class="commentDeleteBtn" />
                                     <br>
                                     <span>${cmt.cmt_content}</span>
                                 </div>

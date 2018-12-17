@@ -161,8 +161,8 @@
 .cardContentCommentUserName > i{
 	cursor:pointer;margin-left:20px;font-size:30px;margin-top:5px;display:block;float:right;
 }
-.commentUpdateBtn{border:none;background:none;font-size:18px;margin-left:20px;cursor:pointer;}
-.commentDeleteBtn{border:none;background:none;font-size:18px;margin-left:10px;cursor:pointer;}
+.commentUpdateBtn{border:none;background:none;font-size:17px;margin-left:20px;cursor:pointer;}
+.commentDeleteBtn{border:none;background:none;font-size:17px;margin-left:10px;cursor:pointer;}
 
 /* 이슈 상세조회 팝업 */
 .issueSelectPage{width:100%;overflow:hidden;clear:both;height:95%;padding-top:20px;}
