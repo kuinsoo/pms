@@ -119,7 +119,6 @@
             </div>
 
             <div class="headerRightContent">
-            	<a href="#" class="facing"><i class="icon-paper-plane icons"></i></a>
             	<!-- 팀원 초대 -->
             	<c:if test="${project_id >= 0 }">
                 <a href="#projectCreatePopUps" class="projectCreatePopUps">
@@ -166,7 +165,9 @@
                     </div>
                 </div>
 			</c:if>
+
 				<div class="updateHeader" style="float:right;">
+					<a href="#" class="facing"><i class="icon-paper-plane icons"></i></a>
 	                <!-- 알림 기능 -->
 	                <div class="alarm dialog__triggers">
 	                    <i class="icon-bell icons"></i>

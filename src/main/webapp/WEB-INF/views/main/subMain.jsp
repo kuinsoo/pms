@@ -212,7 +212,7 @@
 							<span>2018-12-17</span>
 						</div>
 						<div class="updateDeleteIcon">
-							<i class="icon-wrench icons"></i>							
+							<i class="icon-wrench icons"></i>
 							<a href="#opens"><i class="icon-bulb icons"></i></a>
 							<div class="white_contents" id="opens">
 								<div>
@@ -473,6 +473,7 @@
 				<div class="currentSubMainTitle">
 					<i class="icon-star icons"></i>
 					<span>${projectVo.project_title}</span>
+					<!--
 					<i class="icon-share icons dialog__triggerss"></i>
 					<div class="dialogss">
 						<ul>
@@ -481,6 +482,7 @@
 							<li>프로젝트 숨기기</li>
 						</ul>
 					</div>
+					-->
 				</div>
 				<div class="projectTeamsTop">
 				</div>
