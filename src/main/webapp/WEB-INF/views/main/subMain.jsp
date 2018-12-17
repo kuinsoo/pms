@@ -230,7 +230,7 @@
 							<a href="#opens"><i class="icon-bulb icons"></i></a>
 							<div class="white_contents" id="opens">
 								<div>
-<!-- 									<a href="#close"><i class="icon-close icons"></i></a> -->
+ 									<a href="#close"><i class="icon-close icons"></i></a>
 									<div class="issueCreateInputField">
 										<div class="issueCreateInputFieldLeft">
 											<ul>

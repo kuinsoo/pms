@@ -212,16 +212,16 @@
 .issueCreateInputFieldLeft > ul > li{font-size:20px;padding:10px 0px 10px 0px;}
 .issueCreateInputFieldLeft > ul > li:nth-child(3){padding-top:100px;}
 .issueCreateInputFieldRight{float:left;width:600px;}
-.issueCreateInputFieldRight > ul > li {
+.issueCreateInputFieldRight > form > ul > li {
 	font-size:20px;padding:10px 0px 10px 0px;text-align:left;
 }
-.issueCreateInputFieldRight > ul > li > input[type="text"] {
+.issueCreateInputFieldRight > form > ul > li > input[type="text"] {
 	border:none;border-bottom:1px solid #333;width:300px;font-size:20px;outline:none;
 }
-.issueCreateInputFieldRight > ul > li > textarea {
+.issueCreateInputFieldRight > form > ul > li > textarea {
 	width:500px;height:100px;font-size:20px;outline:none;padding:10px;
 }
-.issueCreateInputFieldRight > ul > li > input[type="datetime-local"] {
+.issueCreateInputFieldRight > form > ul > li > input[type="datetime-local"] {
 	border:none;border-bottom:1px solid #333;width:300px;font-size:20px;outline:none;
 }
 .issueInfoCreate {
