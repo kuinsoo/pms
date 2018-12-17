@@ -117,16 +117,16 @@
 	} );
 
 	function updateCard(no, group, index){
-		location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${project_id}";
+		location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${projectVo.project_id}";
 	};
 </script>
-<%--<ul id="titleList" >
+<ul id="titleList" >
     <li class="titleBox">요청</li>
     <li class="titleBox">진행</li>
     <li class="titleBox">이슈발생</li>
     <li class="titleBox">처리대기</li>
     <li class="titleBox">완료</li>
-</ul>--%>
+</ul>
 <div class="kku-boarder kku-mainPage" id="planList">
 
     <div class="columnCard">

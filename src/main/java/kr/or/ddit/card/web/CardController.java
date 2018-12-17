@@ -36,7 +36,7 @@ public class CardController {
 
 		cardService.updateCard(cardVo);
 		model.addAttribute("wcList",cardService.selectWorkCard(project_id));
-		return "/subMain";
+		return "redirect:/subMain?project_id="+project_id;
 	}
 
 
