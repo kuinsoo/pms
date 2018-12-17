@@ -14,7 +14,7 @@ var options = {
 		key: fs.readFileSync('./keys/key.pem'),
 		cert: fs.readFileSync('./keys/cert.pem')
 };
-var port=8080;	// ..만약 EADDRINUSE 에러가 뜬다면 = 이미 쓰고있다는 뜻 
+var port=8089;	// ..만약 EADDRINUSE 에러가 뜬다면 = 이미 쓰고있다는 뜻
 var app = express();
 app.use(express.urlencoded());
 https.createServer(options, app).listen(port, function(){  
