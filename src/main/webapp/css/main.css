@@ -1181,6 +1181,7 @@ header {
 	width:1200px;height:70px;background-color:#fff;border:1px solid #dee3eb;
 	margin:0 auto;margin-top:20px;
 }
+.facingTitle > h2{line-height:70px;margin-left:20px;}
 .facingSend{width:100%;height:500px;background-color:#eee;}
 
 /* FOOTER */
