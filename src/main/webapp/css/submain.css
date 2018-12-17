@@ -155,9 +155,14 @@
 .cardContentCommentUser > .cardContentCommentUserName{float:left;padding-top:1px;margin-left:15px;font-size:20px;}
 .cardContentCommentUser > .cardContentCommentUserName > .times{margin-left:15px;color:#333;font-size:18px;}
 .commentInput {
-    width:850px;outline:none;font-size:20px;text-indent:10px;padding:5px 0px 5px 0px;margin-top:2px;
+    width:600px;outline:none;font-size:20px;text-indent:10px;padding:5px 0px 5px 0px;margin-top:2px;
     border:1px solid #dee3eb;
 }
+.cardContentCommentUserName > i{
+	cursor:pointer;margin-left:20px;font-size:30px;margin-top:5px;display:block;float:right;
+}
+.commentUpdateBtn{border:none;background:none;font-size:18px;margin-left:20px;cursor:pointer;}
+.commentDeleteBtn{border:none;background:none;font-size:18px;margin-left:10px;cursor:pointer;}
 
 /* 이슈 상세조회 팝업 */
 .issueSelectPage{width:100%;overflow:hidden;clear:both;height:95%;padding-top:20px;}

@@ -287,24 +287,6 @@
 
 						<!-- 댓글  -->
 						<div class="cardContentComment">
-							<c:forEach items="${cmtList}" var="cmt">
-								<c:if test="${cmt.cmt_work eq  work.work_id}">
-							<ul>
-								<li>
-									<div class="cardContentCommentUser">
-										<div class="cardContentCommentUserImg">
-											<img src="${cmt.member_profile}">
-										</div>
-										<div class="cardContentCommentUserName">
-											<b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
-											<br>
-											<span>${cmt.cmt_content}</span>
-										</div>
-									</div>
-								</li>
-							</ul>
-							</c:if>
-						</c:forEach>
 							<ul>
 								<li>
 									<div class="cardContentCommentUser">
@@ -312,16 +294,32 @@
 											<img src="${memberVo.member_profile}">
 										</div>
 										<div class="cardContentCommentUserName">
-
-											<input type="text" class="form-control" id="cmt_content${i.index}" value="" placeholder="댓글을 입력해주세요" required >
-											<div class="cardContentBottom">
-												<i class="icon-bubble icons"></i>
-												<span onclick="insertCmt('${work.work_id}', 'cmt_content${i.index}');">댓글 작성</span>
-											</div>
+											<input type="text" class="commentInput" id="cmt_content${i.index}" placeholder="댓글을 입력해주세요" required>
+											<i class="icon-bubble icons" onclick="insertCmt('${work.work_id}', 'cmt_content${i.index}');"></i>
 										</div>
 									</div>
 								</li>
 							</ul>
+							<c:forEach items="${cmtList}" var="cmt">
+								<c:if test="${cmt.cmt_work eq  work.work_id}">
+									<ul>
+										<li>
+											<div class="cardContentCommentUser">
+												<div class="cardContentCommentUserImg">
+													<img src="${cmt.member_profile}">
+												</div>
+												<div class="cardContentCommentUserName">
+													<b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
+													<input type="button" value="수정" class="commentUpdateBtn" />
+													<input type="button" value="삭제" class="commentDeleteBtn" />
+													<br>
+													<span>${cmt.cmt_content}</span>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</c:if>
+							</c:forEach>
 						</div>
 					</div> <%-- 끝--%>
 					</c:forEach>
