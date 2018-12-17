@@ -54,75 +54,113 @@
 					<div id="tabs2-2">
 						<div class="receivedNoteContainer">
 							<form action="#" method="post">
-								<table>							
+								<table>
+									<colgroup width="10%" />							
 									<colgroup width="10%" />
 									<colgroup width="40%" />
 									<colgroup width="10%" />
-									<colgroup width="40%" />
+									<colgroup width="30%" />
 									<thead>
 										<tr>
+											<th><input type="checkbox" /></th>
 											<th>번호</th>
-											<th>보낸 사람</th>
-											<th>친구여부</th>
+											<th>받는 사람</th>
+											<th>친구 여부</th>
 											<th>날짜/시간</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>1</td>
-											<td>나진실</td>
+											<td>
+												<a href="#open2">나진실</a>
+												<div class="white_content2" id="open2">
+													<div>
+					 									<a href="#close"><i class="icon-close icons"></i></a>
+														<div class="sentNoteContainer">
+																<div class="recipientFacing">
+																	<span>받는사람</span>
+																	<input type="text" value="sally1334@naver.com" readonly />
+																</div>
+																<div class="sendDate">
+																	<span>보낸날짜</span>
+																	<input type="text" value="2018-12-17 19:09:00" readonly />
+																	<i class="icon-ban icons"></i>
+																	<span>차단</span>
+																	<i class="icon-energy icons"></i>
+																	<span>신고</span>
+																</div>							
+																<textarea class="sentNoteTextArea">답장입니다~~</textarea>
+																<div class="facingDeleteBtnDiv">
+																	<input type="button" value="삭제" class="sentNoteDeleteBtn" />
+																	<a href="#close" class="sentNoteCloseBtn">취소</a>
+																</div>
+														</div>
+													</div>
+											    </div>
+											</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>2</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>3</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>4</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>5</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>6</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>7</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>8</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>9</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>10</td>
 											<td>나진실</td>
 											<td>Y</td>
@@ -130,6 +168,7 @@
 										</tr>
 									</tbody>
 								</table>
+								<input type="button" value="삭제" class="recoveryBtn" />
 							</form>
 							<div class="pagination">
 								<ul>
@@ -150,20 +189,129 @@
 					
 					<div id="tabs2-3">
 						<div class="sentNoteContainer">
-							<form action="#" mehtod="post">
-								<div class="recipientFacing">
-									<span>받는사람</span>
-									<input type="text" value="sally1334@naver.com" readonly />
-								</div>
-								<div class="sendDate">
-									<span>보낸날짜</span>
-									<input type="text" value="2018-12-17 19:09:00" readonly />
-								</div>							
-								<textarea class="sentNoteTextArea">답장입니다~~</textarea>
-								<div class="facingDeleteBtnDiv">
-									<input type="button" value="삭제" class="facingDeleteBtn" />
-								</div>
+							<form action="#" method="post">
+								<table>
+									<colgroup width="10%" />							
+									<colgroup width="10%" />
+									<colgroup width="40%" />
+									<colgroup width="10%" />
+									<colgroup width="30%" />
+									<thead>
+										<tr>
+											<th><input type="checkbox" /></th>
+											<th>번호</th>
+											<th>받는 사람</th>
+											<th>친구 여부</th>
+											<th>날짜/시간</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td><input type="checkbox" /></td>
+											<td>1</td>
+											<td>
+												<a href="#open1">나진실</a>
+												<div class="white_content1" id="open1">
+													<div>
+					 									<a href="#close"><i class="icon-close icons"></i></a>
+														<div class="sentNoteContainer">
+																<div class="recipientFacing">
+																	<span>받는사람</span>
+																	<input type="text" value="sally1334@naver.com" readonly />
+																</div>
+																<div class="sendDate">
+																	<span>보낸날짜</span>
+																	<input type="text" value="2018-12-17 19:09:00" readonly />
+																</div>							
+																<textarea class="sentNoteTextArea">답장입니다~~</textarea>
+																<div class="facingDeleteBtnDiv">
+																	<input type="button" value="삭제" class="sentNoteDeleteBtns" />
+																</div>
+														</div>
+													</div>
+											    </div>
+											</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td><input type="checkbox" /></td>
+											<td>2</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td><input type="checkbox" /></td>
+											<td>3</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td><input type="checkbox" /></td>
+											<td>4</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td><input type="checkbox" /></td>
+											<td>5</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td><input type="checkbox" /></td>
+											<td>6</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td><input type="checkbox" /></td>
+											<td>7</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td><input type="checkbox" /></td>
+											<td>8</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td><input type="checkbox" /></td>
+											<td>9</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+										<tr>
+											<td><input type="checkbox" /></td>
+											<td>10</td>
+											<td>나진실</td>
+											<td>Y</td>
+											<td>2018-12-17</td>
+										</tr>
+									</tbody>
+								</table>
+								<input type="button" value="삭제" class="recoveryBtn" />
 							</form>
+							<div class="pagination">
+								<ul>
+									<li><</li>
+									<li>1</li>
+									<li>2</li>
+									<li>3</li>
+									<li>4</li>
+									<li>5</li>
+									<li>></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 휴지통 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -172,74 +320,86 @@
 						<div class="trashCanContainer">
 							<form action="#" method="post">
 								<table>
+									<colgroup width="10%" />							
 									<colgroup width="10%" />
 									<colgroup width="40%" />
 									<colgroup width="10%" />
-									<colgroup width="40%" />
+									<colgroup width="30%" />
 									<thead>
 										<tr>
+											<th><input type="checkbox" /></th>
 											<th>번호</th>
-											<th>보낸 사람</th>
-											<th>친구여부</th>
+											<th>받는 사람</th>
+											<th>친구 여부</th>
 											<th>날짜/시간</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>1</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>2</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>3</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>4</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>5</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>6</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>7</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>8</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>9</td>
 											<td>나진실</td>
 											<td>Y</td>
 											<td>2018-12-17</td>
 										</tr>
 										<tr>
+											<td><input type="checkbox" /></td>
 											<td>10</td>
 											<td>나진실</td>
 											<td>Y</td>
@@ -247,6 +407,7 @@
 										</tr>
 									</tbody>
 								</table>
+								<input type="button" value="복구" class="recoveryBtn" />
 							</form>
 							<div class="pagination">
 								<ul>
