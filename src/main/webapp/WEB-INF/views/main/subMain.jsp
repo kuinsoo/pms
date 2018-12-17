@@ -279,7 +279,21 @@
 							<textarea readonly>${work.work_content}</textarea>
 						</div>
 						<div class="currentCardContentViewRight">
-							<!-- todoInsertAjax.jsp -->
+								<table>
+								<thead>
+									<tr>
+										<th><input type="checkbox" /></th>
+										<th>TODO</th>
+										<th>담당자</th>
+										<th>시작</th>
+										<th>마감</th>
+										<th>이슈</th>
+									</tr>
+								</thead>
+								<tbody>
+								<!-- todoInsertAjax.jsp -->
+								</tbody>
+							</table>
 							<div class="pagination">
 								<ul>
 									<li><i class="icon-arrow-left icons"></i></li>

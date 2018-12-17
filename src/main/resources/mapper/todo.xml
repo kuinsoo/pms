@@ -42,7 +42,7 @@
 		        todo_complet,
 		        todo_issue
 		FROM    todo
-		WHERE   todo_work = #{todo_work};
+		WHERE   todo_work = #{todo_work}
 	</select>
 	
 </mapper>
