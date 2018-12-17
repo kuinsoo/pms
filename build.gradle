@@ -71,9 +71,4 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-mail
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.1.1.RELEASE'
 	
-
-
-
-
-
 }
