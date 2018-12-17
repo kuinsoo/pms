@@ -48,7 +48,7 @@
 #titleList > li{float:left;}
 .titleBox{width:159.5px;float:left;text-align:center;}
 #planList{width:798px;height:100px;background-color:transparent;}
-#planList > .column{width:190px;float:left;border:1px solid #dee3eb;background-color:#fff;margin-top:5px;padding:0px 0px 5px 0px;}
+#planList > .column{width:159.5px;float:left;border:1px solid #dee3eb;background-color:#fff;margin-top:5px;padding:0px 0px 5px 0px;}
 #planList > .column:first-child{margin-left:1px;}
 #planList > .column:nth-child(2){margin-left:10px;}
 #planList > .column:nth-child(3){margin-left:10px;}
