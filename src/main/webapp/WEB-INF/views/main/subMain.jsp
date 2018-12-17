@@ -455,7 +455,7 @@
 				</div>
 				<div class="projectTeamsTop">
 					<!-- (변찬우) for node // 외부에서 접근해서 인증 허용 해줘야 함..  -->
-					<iframe src="https://192.168.203.24:8443/" width="100%" height="100%"></iframe>
+					<iframe src="https://127.0.0.1:8443/" width="100%" height="100%"></iframe>
 				</div>
 				<div class="projectTeams">
 					<h2>전체 참여자 ${projectMemberList.size()}명 <i class="icon-plus icons"></i></h2>

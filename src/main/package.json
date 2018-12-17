@@ -1,13 +1,8 @@
 {
   "name": "CURRENT",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
-  "author": {
-    "name": "modify by chanwoo",
-    "email": "nornalstory@gmail.com",
-    "url": "https://normalstory.com/"
-  },
+  "author": "modify by chanwoo <nornalstory@gmail.com> (https://normalstory.com/)",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "express": "node express.js",
@@ -32,9 +27,11 @@
     "rtcmulticonnection": "^3.5.9",
     "rtcmulticonnection-server": "latest",
     "socket.io": "^2.2.0",
-    "webpack": "^4.27.0",
+    "webpack": "^4.27.1",
     "webpack-cli": "^3.1.2",
     "webrtc-adapter": "latest",
     "webrtc-screen-capturing": "latest"
-  }
+  },
+  "devDependencies": {},
+  "description": ""
 }
