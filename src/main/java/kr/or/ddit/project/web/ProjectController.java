@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.model.CommentsVo;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.work.service.WorkServiceInf;
@@ -51,6 +52,9 @@ public class ProjectController {
 
 	@Autowired
 	private CommentsServiceInf commentsService;
+
+	@Autowired
+	private CardServiceInf cardService;
 
 	/**
 	 * Create project view string.
@@ -142,6 +146,9 @@ public class ProjectController {
 
 		/* 업무에 달린 댓글 출력 */
 		model.addAttribute("cmtList", commentsService.cmtList(project_id));
+
+		/* 업무 카드 출력 */
+		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
 
 		return "main/subMain";
 	}

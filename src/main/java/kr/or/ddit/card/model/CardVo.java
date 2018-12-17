@@ -14,82 +14,100 @@ import org.apache.ibatis.type.Alias;
 @Alias("cardVo")
 public class CardVo {
 
-	private String 	card_group;
-	private float 	card_index;
-	private int  	card_no;
-	private String 	card_title;
-	private String 	card_content;
-	private int 	progress;
+	private String wc_id;
+	private String wc_work;
+	private float wc_index;
+	private String wc_group;
+	private String work_title;
+	private String work_content;
+	private String pmember_member;
+	private String pmember_project;
+	private String member_name;
 
 	public CardVo() {
 	}
 
-	public CardVo(String card_group, float card_index, int card_no, String card_title, String card_content, int progress) {
-		this.card_group = card_group;
-		this.card_index = card_index;
-		this.card_no = card_no;
-		this.card_title = card_title;
-		this.card_content = card_content;
-		this.progress = progress;
+	public CardVo(String wc_id, String wc_work, float wc_index, String wc_group, String work_title, String work_content, String pmember_member, String pmember_project, String member_name) {
+		this.wc_id = wc_id;
+		this.wc_work = wc_work;
+		this.wc_index = wc_index;
+		this.wc_group = wc_group;
+		this.work_title = work_title;
+		this.work_content = work_content;
+		this.pmember_member = pmember_member;
+		this.pmember_project = pmember_project;
+		this.member_name = member_name;
 	}
 
-	public String getCard_group() {
-		return card_group;
+	public String getWc_id() {
+		return wc_id;
 	}
 
-	public void setCard_group(String card_group) {
-		this.card_group = card_group;
+	public void setWc_id(String wc_id) {
+		this.wc_id = wc_id;
 	}
 
-	public float getCard_index() {
-		return card_index;
+	public String getWc_work() {
+		return wc_work;
 	}
 
-	public void setCard_index(float card_index) {
-		this.card_index = card_index;
+	public void setWc_work(String wc_work) {
+		this.wc_work = wc_work;
 	}
 
-	public int getCard_no() {
-		return card_no;
+	public float getWc_index() {
+		return wc_index;
 	}
 
-	public void setCard_no(int card_no) {
-		this.card_no = card_no;
+	public void setWc_index(float wc_index) {
+		this.wc_index = wc_index;
 	}
 
-	public String getCard_title() {
-		return card_title;
+	public String getWc_group() {
+		return wc_group;
 	}
 
-	public void setCard_title(String card_title) {
-		this.card_title = card_title;
+	public void setWc_group(String wc_group) {
+		this.wc_group = wc_group;
 	}
 
-	public String getCard_content() {
-		return card_content;
+	public String getWork_title() {
+		return work_title;
 	}
 
-	public void setCard_content(String card_content) {
-		this.card_content = card_content;
+	public void setWork_title(String work_title) {
+		this.work_title = work_title;
 	}
 
-	public int getProgress() {
-		return progress;
+	public String getWork_content() {
+		return work_content;
 	}
 
-	public void setProgress(int progress) {
-		this.progress = progress;
+	public void setWork_content(String work_content) {
+		this.work_content = work_content;
 	}
 
-	@Override
-	public String toString() {
-		return "CardVo{" +
-				"card_group='" + card_group + '\'' +
-				", card_index=" + card_index +
-				", card_no=" + card_no +
-				", card_title='" + card_title + '\'' +
-				", card_content='" + card_content + '\'' +
-				", progress=" + progress +
-				'}';
+	public String getPmember_member() {
+		return pmember_member;
+	}
+
+	public void setPmember_member(String pmember_member) {
+		this.pmember_member = pmember_member;
+	}
+
+	public String getPmember_project() {
+		return pmember_project;
+	}
+
+	public void setPmember_project(String pmember_project) {
+		this.pmember_project = pmember_project;
+	}
+
+	public String getMember_name() {
+		return member_name;
+	}
+
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
 	}
 }

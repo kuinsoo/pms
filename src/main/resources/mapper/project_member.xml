@@ -45,7 +45,7 @@ FROM    project_member pm INNER JOIN project p
                                                                       GROUP BY pmember_project) pCount
             ON      pm.pmember_project = pCount.pmember_project
 WHERE   pm.pmember_member = #{member_mail}
-order by to_number(PROJECT_ID) desc
+		order by to_number(PROJECT_ID) desc
     </select>
     <!--
              SELECT  DISTINCT
@@ -79,7 +79,7 @@ order by to_number(PROJECT_ID) desc
 
 	<!-- 팀 원으로 등록 -->
     <insert id="inviteTeam" parameterType="pMemberVo">
-      insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,#{pmember_project},#{pmember_member},'2', sysdate )
+      insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,#{pmember_project},#{pmember_member},'2', sysdate ,'N')
     </insert>
 
 	<!-- 초대받은 프로젝트들 -->

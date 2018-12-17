@@ -70,8 +70,8 @@
 							<li class="titleBox">처리대기</li>
 							<li class="titleBox">완료</li>
 						</ul>
-
-						<div class="kku-boarder kku-mainPage" id="planList">
+						<%--<%@include file="/WEB-INF/views/card/cardChart.jsp"%>--%>
+						<%--<div class="kku-boarder kku-mainPage" id="planList">
 							<div class="column">
 								<div class="portlet">
 				                    <div class="portlet-header">TITLE</div>
@@ -121,7 +121,7 @@
 									<label class="kku-hide kku-group">5</label>
 								</div>
 							</div>
-						</div>
+						</div>--%>
 					</div>
 				</div>
 				<div class="projectWriter">
@@ -215,6 +215,7 @@
 					</div>
 				</div>
 				<%--카드리스트--%>
+				<div id="submain_work">
 				<c:forEach items="${workList}" var="work" varStatus="i">
 				<div class="currentCardList" >					
 					<div class="cardUserInfo">
@@ -325,13 +326,14 @@
 												<span onclick="insertCmt('${work.work_id}', 'cmt_content${i.index}');">댓글 작성</span>
 											</div>
 										</div>
-									</div>
-								</li>
-							</ul>
-						</div>
-				</div> <%-- 끝--%>
-				</c:forEach>
-			</div>
+									</li>
+								</ul>
+							</div>
+					</div> <%-- 끝--%>
+					</c:forEach>
+				</div> <%-- submainwork --%>
+
+			</div> <%-- MainController --%>
 
 			<div class="currentMainContainerRight">
 				<div class="projectTeamsTop">
@@ -633,8 +635,8 @@ var myChart = new Chart(ctx, {
 			url : "/ajaxCreateWork",
 			data : param,
 			success: function(data) {
-				$('.currentCardList').html("");
-				$('.currentCardList').html(data);
+				$('#submain_work').html("");
+				$('#submain_work').html(data);
 			},
 			error:function (data) {
 				alert("error")
@@ -649,8 +651,8 @@ var myChart = new Chart(ctx, {
 			url: "/ajaxInsertCmt",
 			data: {"work_id": work_id, "cmt_content": cmt_contenta, "project_id": ${project_id}},
 			success : function (data) {
-				$('.currentCardList').html("");
-				$('.currentCardList').html(data);
+				$('#submain_work').html("");
+				$('#submain_work').html(data);
 			},
 			error:function (data) {
 				alert("error")

@@ -37,11 +37,6 @@ public class ProjectService implements ProjectServiceInf {
 	}
 
 	@Override
-	public List<ProjectVo> selectBookMarkProject(String bookmark) {
-		return projectMapper.selectBookMarkProject(bookmark);
-	}
-
-	@Override
 	public int createProject(ProjectVo projectVo) {
 		return projectMapper.createProject(projectVo);
 	}

@@ -12,7 +12,14 @@ public class PageVo {
 	// 마이페이지 검색부분 
 	private String searchText;
 	private String searchBookText;
+	private String searchTodoText;
 	
+	public String getSearchTodoText() {
+		return searchTodoText;
+	}
+	public void setSearchTodoText(String searchTodoText) {
+		this.searchTodoText = searchTodoText;
+	}
 	public String getSearchText() {
 		return searchText;
 	}

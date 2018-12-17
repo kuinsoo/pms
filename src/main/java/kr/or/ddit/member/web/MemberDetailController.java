@@ -22,10 +22,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.ddit.card.service.CardServiceInf;
+import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
+import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.util.model.PageVo;
+import kr.or.ddit.work.service.WorkServiceInf;
 
 
 /**
@@ -42,8 +47,14 @@ public class MemberDetailController {
 	@Autowired
 	private MemberServiceInf memberservice;
 
-	
-	
+	@Autowired
+	private WorkServiceInf workService;
+
+	@Autowired
+	private CommentsServiceInf commentsService;
+
+	@Autowired
+	private CardServiceInf cardService;
 
 	/**
 	 * Method : myPage
@@ -64,7 +75,7 @@ public class MemberDetailController {
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
-	/**
+	/*  
 	 * Method : myPageProjectAjax
 	 * 작성자 : pc07 
 	 * 변경이력 :
@@ -130,6 +141,54 @@ public class MemberDetailController {
 		return projectMap;
 	}
 	
+	
+	
+	// 참여중인 프로젝트 부분 클릭했을시   
+	@RequestMapping(value="/projectClickDetail", method = RequestMethod.GET)
+	public String projectClickDetail (Model model ,PMemberVo pmemberVo ,  ProjectVo projectVo, @SessionAttribute("memberVo") MemberVo memberVo ,
+			@RequestParam("project_title") String project_title ,@RequestParam("project_id") String project_id , HttpServletRequest request) {
+		
+		model.addAttribute("project_title" , project_title);
+		
+
+		/* 프로젝트에 포함된 멤버 정보 */
+		model.addAttribute("projectMemberList", memberservice.projectMemberList(project_id));
+
+		/* 업무 출력 */
+		model.addAttribute("workList",workService.selectWorks(project_id));
+
+		/* 업무에 달린 댓글 출력 */
+		model.addAttribute("cmtList", commentsService.cmtList(project_id));
+
+		/* 업무 카드 출력 */
+		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
+		
+		return "/main/subMain";
+	}
+	
+	// 즐겨찾기한 프로젝트 부분 클릭했을시   
+	@RequestMapping(value="/projectBookClickDetail", method = RequestMethod.GET)
+	public String projectBookClickDetail(Model model ,PMemberVo pmemberVo ,  ProjectVo projectVo, @SessionAttribute("memberVo") MemberVo memberVo ,
+			@RequestParam("project_title") String project_title ,@RequestParam("project_id") String project_id , HttpServletRequest request) {
+		
+		model.addAttribute("project_title" , project_title);
+		
+		
+		/* 프로젝트에 포함된 멤버 정보 */
+		model.addAttribute("projectMemberList", memberservice.projectMemberList(project_id));
+
+		/* 업무 출력 */
+		model.addAttribute("workList",workService.selectWorks(project_id));
+
+		/* 업무에 달린 댓글 출력 */
+		model.addAttribute("cmtList", commentsService.cmtList(project_id));
+
+		/* 업무 카드 출력 */
+		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
+		
+		return "/main/subMain";
+	}
+	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 	/**
@@ -149,10 +208,6 @@ public class MemberDetailController {
 		
 		Map<String , Object> projectBookMap = new HashMap<>();
 		int pageCnt = memberservice.selectProjectCnt(memberVo.getMember_mail());
-	
-		System.out.println("pageCnt : " + pageCnt);
-		System.out.println("pageVo.getPageSize() : " + pageVo.getPageSize());	
-		System.out.println("(int)Math.ceil((double)pageCnt/pageVo.getPageSize()) : " + (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
 		projectBookMap.put("projectBookList", projectBookList);
 		projectBookMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
@@ -174,6 +229,7 @@ public class MemberDetailController {
 	 * Method 설명 :  마이페이지 - 즐겨찾기한 프로젝트 검색 부분 Ajax
 	 */
 	
+	@ResponseBody
 	@RequestMapping(value ="/searchBookProjectAjax" , method=  RequestMethod.POST)
 	public Map<String, Object> searchBookProjectAjax (Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
 			ProjectVo projectVo, HttpServletRequest request){
@@ -196,6 +252,54 @@ public class MemberDetailController {
 		return projectBookMap;
 	}
 	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// TodoList
+	
+	@ResponseBody
+	@RequestMapping(value ="/myTodoProjectListAjax", method = RequestMethod.GET)
+	public Map<String, Object> myTodoProjectListAjax (Model model , PageVo pageVo,
+			@SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
+		
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		List<ToDoVo> projectTodoList = memberservice.myTodoselect(pageVo);
+		
+		Map<String , Object> projectTodoListMap = new HashMap<>();
+		int pageCnt = memberservice.selectTodoCnt(memberVo.getMember_mail());
+		
+		projectTodoListMap.put("projectTodoList", projectTodoList);
+		projectTodoListMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return projectTodoListMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value ="/searchTodoProjectAjax", method = RequestMethod.POST)
+	public Map<String, Object> searchTodoProjectAjax (Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo 
+			, HttpServletRequest request){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		// 검색 부분 
+		if (pageVo.getSearchTodoText() == null) {
+			pageVo.setSearchTodoText("");
+		}
+		
+		List<ToDoVo> projectTodoList = memberservice.myTodoselect(pageVo);
+	
+		Map<String , Object> projectTodoMap = new HashMap<>();
+		int pageCnt = memberservice.selectTodoCnt(memberVo.getMember_mail());
+	
+		projectTodoMap.put("projectTodoList", projectTodoList);
+		
+		projectTodoMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+	
+		return projectTodoMap;
+	}
+	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
 	/**
 	 * Method : memberDetailUpdate
 	 * 작성자 : 나진실
@@ -298,6 +402,8 @@ public class MemberDetailController {
 			return "redirect:/";				
 			
 		}
+
+		
 	}
 
 

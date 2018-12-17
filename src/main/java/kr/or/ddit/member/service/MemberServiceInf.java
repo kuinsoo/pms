@@ -5,6 +5,7 @@ import kr.or.ddit.member.model.PMemberListVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.project.model.InviteProjectVo;
 import kr.or.ddit.project.model.ProjectVo;
+import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.util.model.PageVo;
 
 import java.util.List;
@@ -88,6 +89,27 @@ public interface MemberServiceInf {
 	List<ProjectVo> mybookmarkselect(PageVo pageVo);
 	
 	/**
+	 * Method : myTodoselect
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 마이페이지 나의 일감 보관
+	 */
+	List<ToDoVo> myTodoselect(PageVo pageVo);
+	
+	
+	/**
+	 * Method : selectProjectId
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 참여중인 프로젝트  :  클릭했을때 
+	 */
+	ProjectVo selectProjectId(String project_title);
+	
+	
+	/**
 	 * Method : totalProjectCnt 
 	 * 작성자 : pc07 
 	 * 변경이력 :
@@ -104,6 +126,16 @@ public interface MemberServiceInf {
 	 * Method 설명 : 프로젝트 건수(회원아이디로)조회 
 	 */
 	int selectProjectCnt(String member_mail);
+	
+	/**
+	 * Method : selectTodoCnt
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param member_mail
+	 * @return
+	 * Method 설명 : 마이페이지 (나의 일감 조회 부분)
+	 */
+	int selectTodoCnt(String member_mail);
 	
 	
 	/**

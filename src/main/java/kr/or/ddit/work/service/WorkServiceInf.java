@@ -66,7 +66,16 @@ public interface WorkServiceInf {
 	* Method 설명 : 업무 수정
 	*/
 	int updateWork(WorkVo workVo);
-	
-	
+
+
+	/**
+	 * Method : updateWork
+	 * 작성자 : Mr.kku
+	 * 변경이력 :
+	 * @param wmMap
+	 * @return
+	 * Method 설명 : 업무 등록시 함꼐 등록
+	 */
+	int insertWorkMember(Map<String, String> wmMap, WorkVo workVo);
 	
 }

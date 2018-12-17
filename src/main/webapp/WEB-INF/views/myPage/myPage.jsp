@@ -18,8 +18,38 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			
+				
 			getMyPageList(1);
 			getmybookMarkProjectList(1);
+			getmyTodoProjectList(1);
+		
+			// 참여중인 프로젝트 클릭
+			$("#projectList").on("click", ".projectClick" ,function(){
+				console.log("projectClick");
+				
+				var project_title = $(this).children()[1].innerHTML;
+				var project_id = $(this).children()[2].innerHTML;
+				
+				$("#project_title").val(project_title);
+				$("#project_id").val(project_id);
+				  $("#frm").submit();
+			});
+			
+			// 즐겨찾기 클릭 
+			$("#projectBookList").on("click", ".projectBookClick" ,function(){
+				console.log("projectClick");
+				
+				var project_title = $(this).children()[1].innerHTML;
+				var project_id = $(this).children()[2].innerHTML;
+				
+				$("#project_title2").val(project_title);
+				$("#project_id2").val(project_id);
+				console.log(project_title);
+				console.log(project_id);
+				
+				  $("#frm2").submit();
+			});
+			
 			
 			$(".phoneBtns").hide();
 			$(".saveBtn").hide();
@@ -102,7 +132,7 @@
 			});
 		});
 		
-		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 파 일 부 분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 프로필 사진 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		
 		// 핸드폰 번호 입력 후 인증 버튼
 		function telAjax(){
@@ -141,9 +171,10 @@
 				success : function(data){
 					var html ="";
 					$.each(data.projectList, function (idx,my){
-						html += "<tr>";
+						html += "<tr class = projectClick>";
 						html += "	<td>"+ my.rnum +"</td>";
 						html += "	<td>"+ my.project_title +"</td>";
+						html += "	<td>"+ my.project_id +"</td>";
 						html += "	<td>"+ my.pmember_member +"</td>";
 						html += "</tr>";
 					});
@@ -177,9 +208,10 @@
 						console.log("data : " + data);
 					var html ="";
 					$.each(data.projectList, function (idx,my){
-						html += "<tr>";
+						html += "<tr class = projectClick >";
 						html += "	<td>"+ my.rnum +"</td>";
 						html += "	<td>"+ my.project_title +"</td>";
+						html += "	<td>"+ my.project_id +"</td>";
 						html += "	<td>"+ my.pmember_member +"</td>";
 						html += "</tr>";
 					});
@@ -203,8 +235,7 @@
 			});
 		}
 		
-		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		// 즐겨찾기 목록 
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 즐겨찾기 목록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		
 		function getmybookMarkProjectList(page){
 			var pageSize = 10;
@@ -216,16 +247,14 @@
 				success : function(data){
 					var html = "";
 					$.each(data.projectBookList, function(idx,mm){
-						html += "<tr>";
+						html += "<tr class = projectBookClick >";
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.project_title +"</td>";
+						html += "	<td>"+ mm.project_id +"</td>";
 						html += "	<td>"+ mm.pmember_member +"</td>";
 						html += "</tr>";
+						
 					});
-					
-					console.log(data.projectBookList);
-					
-					
 					$("#projectBookList").html("");
 					$("#projectBookList").html(html);
 					
@@ -254,12 +283,12 @@
 				
 				success : function(data){
 					console.log("data : " + data);
-					
 					var html = "";
 					$.each(data.projectBookList, function(idx,mm){
-						html += "<tr>";
+						html += "<tr class = projectBookClick >";
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.project_title +"</td>";
+						html += "	<td>"+ mm.project_id +"</td>";
 						html += "	<td>"+ mm.pmember_member +"</td>";
 						html += "</tr>";
 					});
@@ -282,10 +311,100 @@
 			});
 		}
 	
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 회원탈퇴 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 나의 일감 목록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		
+		function getmyTodoProjectList(page){
+			var pageSize = 10;
 			
+			$.ajax({
+				type: "GET",
+				url : "/myTodoProjectListAjax",
+				data: {"page":page, "pageSize":pageSize},
+				success : function(data){
+					var html = "";
+					$.each(data.projectTodoList, function(idx,mt){
+						console.log(data.projectTodoList);
+						
+						html += "<tr>";
+						html += "	<td>"+ mt.rnum +"</td>";
+						html += "	<td>"+ mt.todo_content +"</td>";
+						if(mt.todo_complet==('N')){
+							html += "	<td>"+ '미완료' +"</td>";
+						}else{
+							html += "	<td>"+ '완료' +"</td>";							
+						}
+							
+						html += "</tr>";
+					});
+					
+					console.log(data.projectTodoList);
+					
+					$("#projectTodoList").html("");
+					$("#projectTodoList").html(html);
+					
+					var paging ="";
+						paging +="<li><a href='javascript:getmyTodoProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						for(var i= 1; i<=data.pageCnt; i++) {
+							paging += "<li><a href='javascript:getmyTodoProjectList("+ i +");'>"+ i + "</a></li>";
+						}
+							paging +="<li><a href='javascript:getmyTodoProjectList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+						$(".pagination3").html(paging);
+				},	
+				fail : function(data){
+					console.log(data);
+				}
+			});
+		}
+	
+		function getSearchTodoProject(){
+			var param = $('#searchTodoProject').serialize();
+				
+				$.ajax({
+					type: "POST",
+					url : "/searchTodoProjectAjax",
+					data: param,
+					success : function(data){
+						var html = "";
+						$.each(data.projectTodoList, function(idx,mt){
+							html += "<tr>";
+							html += "	<td>"+ mt.rnum +"</td>";
+							html += "	<td>"+ mt.todo_content +"</td>";
+							if(mt.todo_complet==('N')){
+								html += "	<td>"+ '미완료' +"</td>";
+							}else{
+								html += "	<td>"+ '완료' +"</td>";							
+							}
+							html += "</tr>";
+						});
+						
+						console.log(data.projectTodoList);
+						
+						$("#projectTodoList").html("");
+						$("#projectTodoList").html(html);
+						
+						var paging ="";
+						paging +="<li><a href='javascript:getmyTodoProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						for(var i= 1; i<=data.pageCnt; i++) {
+							paging += "<li><a href='javascript:getmyTodoProjectList("+ i +");'>"+ i+ "</a></li>";
+						}
+							paging +="<li><a href='javascript:getmyTodoProjectList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+						$(".pagination3").html(paging);
+					},	
+					fail : function(data){
+						console.log(data);
+					}
+				});
+			}
 	</script>
+<form  id = "frm" action="/projectClickDetail" method = "get">
+	<input type = "hidden" id = "project_title" name = "project_title"/>
+	<input type = "hidden" id = "project_id" name = "project_id"/>
+</form>
+
+<form  id = "frm2" action="/projectBookClickDetail" method = "get">
+	<input type = "hidden" id = "project_title2" name = "project_title"/>
+	<input type = "hidden" id = "project_id2" name = "project_id"/>
+</form>
 	
 	<!-- CURRENT SECTION(MAIN) -->	
 	
@@ -336,7 +455,7 @@
 								<li><input type="text" value= "${memberVo.member_mail}" disabled="disabled" id = "member_mail"  name = "member_mail"/></li>
 								<li><input type="text" value= "${memberVo.member_name}" name ="member_name" id ="member_name"/></li>
 								<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"  id ="member_tel"/>
-									<input type="button" onclick="telAjax();" value="인증" class="phoneBtns" />
+									<input type="button" onclick="telAjax();" value="인증" class="phoneBtns"/>
 								<li><input type="text" id ="telnum" onkeyup="onkeyup_event();"/>
 									<span class = "inputerror"> 인증번호를 입력해 주세요..</span>
 									<span class= "telerror"> 인증번호가 일치하지 않습니다.</span>
@@ -365,8 +484,9 @@
 				</div>
 				<div class="myPageBottomContainer">
 					<div id="tabs2">
-						<ul>
+						<ul>							
 							<li><a href="#tabs2-1">참여중인 프로젝트</a></li>
+							<li><a href="#tabs2-1-1">참여했던 프로젝트</a></li>
 							<li><a href="#tabs2-2">즐겨찾기한 프로젝트</a></li>
 							<li><a href="#tabs2-3">일감 조회</a></li>
 							<li><a href="#tabs2-4">보관함</a></li>
@@ -390,9 +510,10 @@
 									<colgroup width="60%" />
 									<colgroup width="30%" />
 									<thead>
-										<tr>
+										<tr class = "projectClick">
 											<th><span>번호</span></th>
 											<th><span>참여중인 프로젝트 명</span></th>
+											<th><span>프로젝트 아이디 </span></th>
 											<th><span>프로젝트 팀장</span></th>
 										</tr>
 									</thead>
@@ -401,6 +522,40 @@
 								</table>
 								<div class="text-center">
 									 <ul class="pagination"></ul>
+								</div>
+							</div>
+						</div>
+						
+
+						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 참여했던 목록  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+
+						<div id="tabs2-1-1">
+							<div class="projectTable">
+								<div class="projectSearchDiv">　　
+									<form name ="" method="POST" onsubmit="return false;">
+										<input type="text" id="" name ="" value=  placeholder="검색어를 입력해주세요"/>
+										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="pageSize" value='10' />
+										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchProject();"></i>  
+									</form>
+								</div>
+								<table>
+									<colgroup width="10%" />
+									<colgroup width="60%" />
+									<colgroup width="30%" />
+									<thead>
+										<tr class = "">
+											<th><span>번호</span></th>
+											<th><span>참여했던 프로젝트 명</span></th>
+											<th><span>프로젝트 아이디 </span></th>
+											<th><span>프로젝트 팀장</span></th>
+										</tr>
+									</thead>
+									<tbody id ="">
+									</tbody>
+								</table>
+								<div class="text-center">
+									 <ul class=""></ul>
 								</div>
 							</div>
 						</div>
@@ -423,9 +578,10 @@
 									<colgroup width="60%" />
 									<colgroup width="30%" />
 									<thead>
-										<tr>
+										<tr class = "projectBookClick" >
 											<th><span>번호</span></th>
 											<th><span>즐겨찾기한 프로젝트 명</span></th>
+											<th><span> 프로젝트 아이디</span></th>
 											<th><span>프로젝트 팀장</span></th>
 										</tr>
 									</thead>
@@ -438,47 +594,49 @@
 							</div>
 						</div>
 						
-						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 일감 보관 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 						
 						
 						<div id="tabs2-3">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-									<!-- <form name ="searchProject" method="POST" onsubmit="return false;">
-										 <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
+								 <form name ="searchTodoProject" id ="searchTodoProject" method="POST" onsubmit="return false;">
+										 <input type="text" id="searchTodoText" name ="searchTodoText" value='${searchTodoText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
-										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
-									</form> -->
+										<i class="icon-magnifier icons" onclick="javascript:getSearchTodoProject();"></i>  
+									</form> 
 								</div>
 								<table>
 									<colgroup width="10%" />
 									<colgroup width="60%" />
 									<colgroup width="30%" />
 									<thead>
-										<tr>
+										<tr class = "projectTodoList">
 											<th><span>번호</span></th>
-											<th><span>참여중인 프로젝트 명</span></th>
-											<th><span>프로젝트 팀장</span></th>
+											<th><span>나의 일감 보관</span></th>
+											<th><span>완료 여부</span></th>
 										</tr>
 									</thead>
-									<tbody id ="아직미구현">
+									<tbody id ="projectTodoList"> 
 									</tbody>
 								</table>
 								<div class="text-center">
-									 <ul class="pagination"></ul>
+									 <ul class="pagination3"></ul>
 								</div>
 							</div>
 						</div>
+						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 파일 보관함 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+						
 						<div id="tabs2-4">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-									<!-- <form name ="searchProject" method="POST" onsubmit="return false;">
+									<%--  <form name ="searchProject" method="POST" onsubmit="return false;">
 										 <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
-									</form> -->
+									</form>  --%>
 								</div>
 								<table>
 									<colgroup width="10%" />
@@ -499,6 +657,9 @@
 								</div>
 							</div>
 						</div>
+						
+						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+						
 						<div id="tabs2-5">
 							<div class="tabs2-5center">
 							<h2>회원 탈퇴 </h2>
@@ -508,6 +669,8 @@
 								<span id = "passError"> 비밀번호가 일치하지 않습니다. </span>
 							</div>
 						</div>
+						
+						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 					</div>
 				</div>
 			</div>
@@ -752,11 +915,6 @@ var myChart2 = new Chart(ctx2, {
     }
 });
 
-$(".goodbyeBtn").click(function(){
-	if(window.confirm("정말 탈퇴 하시겠습니까??")) {
-		location.href="/userwithDrawal";
-	}
-});
 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 회원탈퇴 비밀번호 확인 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -771,8 +929,15 @@ $(document).ready(function() {
 		} else{
 			$("#passError").hide();
 			$('.goodbyeBtn').prop('disabled', false);
+
+			$(".goodbyeBtn").click(function(){
+				if(window.confirm("정말 탈퇴 하시겠습니까??")) {
+					location.href="/userwithDrawal";
+				}
+			});
 		}
 	});
+	
 });
 
 </script>
