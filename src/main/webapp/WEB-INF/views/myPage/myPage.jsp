@@ -499,7 +499,7 @@
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
 									<form name ="searchProject" method="POST" onsubmit="return false;">
-										<input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
+										<input type="text" id="searchText" name="searchText" value="${searchText}" placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchProject();"></i>  
@@ -507,10 +507,11 @@
 								</div>
 								<table>
 									<colgroup width="10%" />
-									<colgroup width="60%" />
+									<colgroup width="45%" />
+									<colgroup width="15%" />
 									<colgroup width="30%" />
 									<thead>
-										<tr class = "projectClick">
+										<tr class="projectClick">
 											<th><span>번호</span></th>
 											<th><span>참여중인 프로젝트 명</span></th>
 											<th><span>프로젝트 아이디 </span></th>
@@ -532,8 +533,8 @@
 						<div id="tabs2-1-1">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-									<form name ="" method="POST" onsubmit="return false;">
-										<input type="text" id="" name ="" value=  placeholder="검색어를 입력해주세요"/>
+									<form action="#" method="POST" onsubmit="return false;">
+										<input type="text" placeholder="검색어를 입력해주세요" />
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchProject();"></i>  
@@ -541,21 +542,25 @@
 								</div>
 								<table>
 									<colgroup width="10%" />
-									<colgroup width="60%" />
+									<colgroup width="45%" />
+									<colgroup width="15%" />
 									<colgroup width="30%" />
 									<thead>
-										<tr class = "">
+										<tr>
 											<th><span>번호</span></th>
 											<th><span>참여했던 프로젝트 명</span></th>
 											<th><span>프로젝트 아이디 </span></th>
 											<th><span>프로젝트 팀장</span></th>
 										</tr>
 									</thead>
-									<tbody id ="">
+									<tbody>
+										<tr>
+											<td colspan="4">게시글이 없습니다.</td>
+										</tr>
 									</tbody>
 								</table>
 								<div class="text-center">
-									 <ul class=""></ul>
+									 <ul></ul>
 								</div>
 							</div>
 						</div>
@@ -575,7 +580,8 @@
 								</div>
 								<table>
 									<colgroup width="10%" />
-									<colgroup width="60%" />
+									<colgroup width="45%" />
+									<colgroup width="15%" />
 									<colgroup width="30%" />
 									<thead>
 										<tr class = "projectBookClick" >
