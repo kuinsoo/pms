@@ -26,4 +26,14 @@ public interface ToDoServiceInf {
 	*/
 	List<ToDoVo> todoAllSchedule(ScheduleVo scheduleVo);
 	
+	/**
+	* Method : todoInsert
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todoVo
+	* @return
+	* Method 설명 : to-do 등록
+	*/
+	int todoInsert(ToDoVo todoVo);
+	
 }

@@ -56,6 +56,7 @@
 /* MY PAGE BOTTOM */
 .myPageBottomContainer{width:1400px;height:500px;clear:both;padding-top:20px;}
 .myPageBottomContainer > #tabs2{width:1398px;}
+
 /* 첫번째 Tab */
 .myPageBottomContainer > #tabs2 > #tabs2-1{display:flex;justify-content:center;align-items:center;}
 .myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable{width:1000px;}
@@ -81,6 +82,34 @@
 .myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > p > span{vertical-align:middle;font-size:20px;padding:3px 20px 0px 20px;font-weight:bold;cursor:pointer;}
 .text-center{width:100%;text-align:center;margin-top:20px;}
 .text-center > ul > li{display:inline-block;font-size:20px;padding:10px;}
+.myPageBottomContainer > #tabs2 > #tabs2-1 > .projectTable > table > tbody > tr > td:last-child{text-align:center;}
+
+/* 참여했던 프로젝트 */
+.myPageBottomContainer > #tabs2 > #tabs2-1-1{display:flex;justify-content:center;align-items:center;}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable{width:1000px;}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable > .projectSearchDiv{width:320px;float:right;}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable > .projectSearchDiv > form > input[type="text"] {
+	width:300px;height:30px;vertical-align:middle;margin-left:-5px;text-indent:10px;outline:none;border-top:1px solid #333;border-bottom:1px solid #333;float:left;font-size:17px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable > .projectSearchDiv > form > i {
+	display:block;width:30px;height:30px;vertical-align:middle;background-color:#fff;font-size:16px;outline:none;line-height:30px;
+	border-top:1px solid #333;border-right:1px solid #333;border-bottom:1px solid #333;margin-left:-6px;cursor:pointer;color:#000;float:left;font-size:17px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable > table{width:100%;margin:0 auto;margin-top:50px;border-collapse:collapse;clear:both;border:none;}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable > table > thead > tr > th{background-color:#007fff;color:#fff;padding:10px 0px 10px 0px;font-size:20px;}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable > table > tbody > tr{border-bottom:1px solid #dee3eb;transition: all 0.5s;}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable > table > tbody > tr:hover{background-color:#e8f0ff;}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable > table > tbody > tr > td{padding:10px 0px 10px 0px;}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable > table > tbody > tr > td:nth-child(odd){text-align:center;}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable > table > tbody > tr > td:nth-child(even){text-align:left;text-indent:10px;cursor:pointer;}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable > p {
+	display:flex;justify-content:center;align-items:center;text-align:center;font-size:20px;margin-top:20px;
+}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable > p > i{vertical-align:middle;font-size:15px;font-weight:bold;cursor:pointer;}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable > p > span{vertical-align:middle;font-size:20px;padding:3px 20px 0px 20px;font-weight:bold;cursor:pointer;}
+.text-center{width:100%;text-align:center;margin-top:20px;}
+.text-center > ul > li{display:inline-block;font-size:20px;padding:10px;}
+.myPageBottomContainer > #tabs2 > #tabs2-1-1 > .projectTable > table > tbody > tr > td:last-child{text-align:center;}
 
 /* 두번째 Tab */
 .myPageBottomContainer > #tabs2 > #tabs2-2{display:flex;justify-content:center;align-items:center;}
@@ -105,6 +134,7 @@
 }
 .myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > p > i{vertical-align:middle;font-size:15px;font-weight:bold;cursor:pointer;}
 .myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > p > span{vertical-align:middle;font-size:20px;padding:3px 20px 0px 20px;font-weight:bold;cursor:pointer;}
+.myPageBottomContainer > #tabs2 > #tabs2-2 > .projectTable > table > tbody > tr > td:last-child{text-align:center;}
 
 /* 세번째 Tab */
 .myPageBottomContainer > #tabs2 > #tabs2-3{display:flex;justify-content:center;align-items:center;}

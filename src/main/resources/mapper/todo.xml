@@ -27,4 +27,10 @@
 		</choose>
 	</select>
 	
+	<!-- to-do insert -->
+	<insert id="todoInsert" parameterType="todoVo">
+		INSERT INTO todo (todo_id, todo_work, todo_pmember, todo_content, todo_sdate, todo_edate, todo_complet, todo_eedate, todo_color)
+		VALUES (todo_id_seq.NEXTVAL, #{todo_work}, #{todo_pmember}, #{todo_content}, #{todo_sdate}, null, 'N', #{todo_eedate}, '#F78181')
+	</insert>
+	
 </mapper>
