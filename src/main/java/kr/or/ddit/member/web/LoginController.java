@@ -3,7 +3,9 @@ package kr.or.ddit.member.web;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
@@ -93,10 +95,13 @@ public class LoginController {
 	 *
 	 * @throws UnsupportedEncodingException the unsupported encoding exception
 	 */
-	@RequestMapping(value="/loginProcess",method=RequestMethod.POST)
-	public String loginProcess(HttpServletRequest request, Model model, MemberVo memberVo) throws UnsupportedEncodingException {
+//	@RequestMapping(value="/loginProcess",method=RequestMethod.POST)
+//	public String loginProcess(HttpServletRequest request, Model model, MemberVo memberVo) throws UnsupportedEncodingException {
+//		request.setCharacterEncoding("utf-8");
+	/*<!--  변찬우(수정 2018.12.09):  리스판스 추가 for node page -->*/
+	@RequestMapping(value="/loginProcess",method={RequestMethod.POST, RequestMethod.GET})
+	public String loginProcess(HttpServletRequest request, HttpServletResponse response, Model model, MemberVo memberVo) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
-
 		String member_mail = request.getParameter("member_mail").toLowerCase();
 		String member_pass = request.getParameter("member_pass").toLowerCase(); // 대소문자를 안가린다.
 
@@ -119,6 +124,15 @@ public class LoginController {
 			return "/login/login";
 		}else {
 			model.addAttribute("memberVo",memberVo);
+			
+			/*<!--  변찬우(수정 2018.12.09):  쿠키생성 추가 for node page  -->*/
+			Cookie cookMember_mail= new Cookie("member_mail", memberVo.getMember_mail()); 
+			cookMember_mail.setMaxAge(60*60*24); // 기간은 하루로 지정
+			response.addCookie(cookMember_mail);
+			
+			Cookie cookMember_name = new Cookie("member_name", memberVo.getMember_name()); 
+			cookMember_name.setMaxAge(60*60*24); // 기간은 하루로 지정
+			response.addCookie(cookMember_name);
 
 			return "redirect:/main";
 		}

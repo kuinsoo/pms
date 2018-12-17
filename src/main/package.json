@@ -1,0 +1,40 @@
+{
+  "name": "CURRENT",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "author": {
+    "name": "modify by chanwoo",
+    "email": "nornalstory@gmail.com",
+    "url": "https://normalstory.com/"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "express": "node express.js",
+    "start": "node server.js",
+    "develop": "webpack -w --mode development --devtool inline-source-map",
+    "build": "webpack --mode production"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "canvas-designer": "latest",
+    "cookie-parser": "^1.4.3",
+    "detectrtc": "latest",
+    "express": "^3.21.2",
+    "fbr": "latest",
+    "getstats": "latest",
+    "jade": "*",
+    "multistreamsmixer": "latest",
+    "oracledb": "^3.0.1",
+    "recordrtc": "latest",
+    "rtcmulticonnection": "^3.5.9",
+    "rtcmulticonnection-server": "latest",
+    "socket.io": "^2.2.0",
+    "webpack": "^4.27.0",
+    "webpack-cli": "^3.1.2",
+    "webrtc-adapter": "latest",
+    "webrtc-screen-capturing": "latest"
+  }
+}

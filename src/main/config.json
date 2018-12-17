@@ -1,0 +1,17 @@
+{
+  "socketURL": "wss://192.168.203.24:8443/",
+  "dirPath": "",
+  "homePage": "/webapp/WEB-INF/views/meet/index.html",
+  "socketMessageEvent": "RTCMultiConnection-Message",
+  "socketCustomEvent": "socketCustomEvent",
+  "port": "8443",
+  "enableLogs": "false",
+  "autoRebootServerOnFailure": "false",
+  "isUseHTTPs": "true",
+  "sslKey": "./keys/key.pem",
+  "sslCert": "./keys/cert.pem",
+  "sslCabundle": "",
+  "enableAdmin": "false",
+  "adminUserName": "username",
+  "adminPassword": "password"
+}

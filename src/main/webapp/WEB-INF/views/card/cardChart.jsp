@@ -23,7 +23,7 @@
         height: 150px;
     }
     .columnCard {
-        width: 156px;
+        width: 176px;
         float: left;
         padding-bottom: 100px;
     }
@@ -54,17 +54,17 @@
         height: 50px;
     }
 
-    #planList{width:798px;height:500px;overflow:hidden;}
+    #planList{width:898px;height:500px;overflow:hidden;}
 
     #titleList {
         list-style: none;
-        width: 798px;
+        width: 898px;
         height: 20px;
         margin: 0 auto;
     }
 
     .titleBox {
-        width: 159.5px;
+        width: 179.5px;
         float: left;
     }
 
@@ -117,16 +117,16 @@
 	} );
 
 	function updateCard(no, group, index){
-		location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${project_id}";
+		location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${projectVo.project_id}";
 	};
 </script>
-<%--<ul id="titleList" >
+<ul id="titleList" >
     <li class="titleBox">요청</li>
     <li class="titleBox">진행</li>
     <li class="titleBox">이슈발생</li>
     <li class="titleBox">처리대기</li>
     <li class="titleBox">완료</li>
-</ul>--%>
+</ul>
 <div class="kku-boarder kku-mainPage" id="planList">
 
     <div class="columnCard">

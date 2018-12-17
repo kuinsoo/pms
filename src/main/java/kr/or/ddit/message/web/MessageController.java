@@ -25,4 +25,5 @@ public class MessageController {
 		model.addAttribute("memberVo",memberVo);
 		return "/message/messageEx";
 	}
+
 }

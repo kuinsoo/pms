@@ -19,7 +19,7 @@ public interface CardServiceInf {
 
 	List<CardVo> selectGroupCard(String groupNo);
 
-	CardVo selectCard(int cardNo);
+	CardVo selectCard(String cardNo);
 
 	int createCard(CardVo cardVo);
 

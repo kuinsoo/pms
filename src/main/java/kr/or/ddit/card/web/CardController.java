@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -29,14 +28,14 @@ public class CardController {
 							 @RequestParam("wc_group")String wc_group,
 							 @RequestParam("wc_index")float wc_index,
 							 @RequestParam("project_id")String project_id){
-		CardVo cardVo = cardService.selectCard(wc_id);
+		/*CardVo cardVo = cardService.selectCard(wc_id);
 
 		cardVo.setWc_id(wc_group);
 		cardVo.setWc_index(wc_index);
 
 		cardService.updateCard(cardVo);
-		model.addAttribute("wcList",cardService.selectWorkCard(project_id));
-		return "/subMain";
+		model.addAttribute("wcList",cardService.selectWorkCard(project_id));*/
+		return "redirect:/subMain?project_id="+project_id;
 	}
 
 

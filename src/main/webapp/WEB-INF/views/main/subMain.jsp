@@ -7,18 +7,6 @@
 	<section class="currentMain">
 		<div class="currentMainContainer">
 			<div class="currentMainContainerLeft">
-				<div class="currentSubMainTitle">
-					<i class="icon-star icons"></i>
-					<span>${project_title}</span>
-					<i class="icon-share icons dialog__triggerss"></i>
-					<div class="dialogss">
-						<ul>
-							<li>프로젝트 설정</li>
-							<li>알림(푸쉬) 설정</li>
-							<li>프로젝트 숨기기</li>
-						</ul>
-					</div>
-				</div>
 				<div class="projectList">
 					<div class="projectListTitles">
 						<i class="far fa-newspaper"></i>
@@ -26,7 +14,7 @@
 					</div>
 					<div class="charts">
 						<div class="chartsContent">
-							<canvas id="myChart" width="760" height="400"></canvas>
+							<canvas id="myChart" width="860" height="400"></canvas>
 						</div>
 						<div class="chartsNumber">
 							<ul>
@@ -61,13 +49,7 @@
 				</div>
 				<div class="projectTaskContainerDragDrop">
 					<div class="projectTaskDragDrop">
-						<ul id="titleList">
-							<li class="titleBox">요청</li>
-							<li class="titleBox">진행</li>
-							<li class="titleBox">이슈발생</li>
-							<li class="titleBox">처리대기</li>
-							<li class="titleBox">완료</li>
-						</ul>
+
 						<%@include file="/WEB-INF/views/card/cardChart.jsp"%>
 						<%--<div class="kku-boarder kku-mainPage" id="planList">
 							<div class="column">
@@ -163,7 +145,7 @@
 											<option value="5">Level 5</option>
 										</select>
 									</div>
-									<input type="hidden" name="project_id" value="${project_id}" />
+									<input type="hidden" name="project_id" value="${projectVo.project_id}" />
 									<div class="workVisibility">
 										<h3>업무 공개여부</h3>
 										<input type="checkbox" name="work_public" value="Y" class="workVisibilityCheck" />
@@ -230,39 +212,8 @@
 							<span>2018-12-17</span>
 						</div>
 						<div class="updateDeleteIcon">
-							<i class="icon-wrench icons"></i>							
+							<i class="icon-wrench icons"></i>
 							<a href="#opens"><i class="icon-bulb icons"></i></a>
-							<div class="white_contents" id="opens">
-								<div>
- 									<a href="#close"><i class="icon-close icons"></i></a>
-									<div class="issueCreateInputField">
-										<div class="issueCreateInputFieldLeft">
-											<ul>
-												<li>담당자</li>
-												<li>할일내용</li>
-												<li>시작일자</li>
-												<li>마감일자</li>
-											</ul>
-										</div>
-										<div class="issueCreateInputFieldRight">
-											<form method="POST" name="todoInsert" id="todoInsert">
-												<ul>
-													<li><input type="text" name="todo_pmember" value="jerry"/></li>
-													<li><textarea name="todo_content">할일내용</textarea></li>
-													<li><input type="datetime-local" name="non_todo_sdate" id="non_todo_sdate" value=""/></li>
-													<li><input type="hidden" name="todo_sdate" id="todo_sdate" value=""/></li>
-													<li><input type="datetime-local" name="non_todo_eedate"></li>
-													<li><input type="hidden" name="todo_eedate" id="todo_eedate" value=""/></li>
-													<li><input type="hidden" name="project_id" value="${project_id}"/></li>
-													<li><input type="hidden" name="todo_work" value="${work.work_id}"/></li>
-												</ul>
-											</form>
-										</div>
-									</div>
-									<input type="button" value="등록" class="issueInfoCreate" onClick="insertTodo();"/>
-									<a href="#close" class="issueInfoClose">취소</a>
-								</div>
-						    </div>
 						</div>
 					</div>
 					<div class="currentCardContentView">
@@ -410,7 +361,7 @@
 													<li><input type="hidden" name="todo_sdate" id="todo_sdate" value=""/></li>
 													<li><input type="datetime-local" name="non_todo_eedate"></li>
 													<li><input type="hidden" name="todo_eedate" id="todo_eedate" value=""/></li>
-													<li><input type="hidden" name="project_id" value="${project_id}"/></li>
+													<li><input type="hidden" name="project_id" value="${projectVo.project_id}"/></li>
 													<li><input type="hidden" name="todo_work" value="${work.work_id}"/></li>
 												</ul>
 											</form>
@@ -488,7 +439,23 @@
 			</div> <%-- MainController --%>
 
 			<div class="currentMainContainerRight">
+				<div class="currentSubMainTitle">
+					<i class="icon-star icons"></i>
+					<span>${projectVo.project_title}</span>
+					<!--
+					<i class="icon-share icons dialog__triggerss"></i>
+					<div class="dialogss">
+						<ul>
+							<li>프로젝트 설정</li>
+							<li>알림(푸쉬) 설정</li>
+							<li>프로젝트 숨기기</li>
+						</ul>
+					</div>
+					-->
+				</div>
 				<div class="projectTeamsTop">
+					<!-- (변찬우) for node // 외부에서 접근해서 인증 허용 해줘야 함..  -->
+					<iframe src="https://192.168.203.24:8443/" width="100%" height="100%"></iframe>
 				</div>
 				<div class="projectTeams">
 					<h2>전체 참여자 ${projectMemberList.size()}명 <i class="icon-plus icons"></i></h2>
@@ -801,7 +768,7 @@ var myChart = new Chart(ctx, {
 		$.ajax({
 			method: "GET",
 			url: "/ajaxInsertCmt",
-			data: {"work_id": work_id, "cmt_content": cmt_contenta, "project_id": ${project_id}},
+			data: {"work_id": work_id, "cmt_content": cmt_contenta, "project_id": ${projectVo.project_id}},
 			success : function (data) {
 				$('#submain_work').html("");
 				$('#submain_work').html(data);
