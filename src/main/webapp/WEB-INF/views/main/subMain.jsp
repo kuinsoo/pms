@@ -215,7 +215,8 @@
 				<%--카드리스트--%>
 				<div id="submain_work">
 				<c:forEach items="${workList}" var="work" varStatus="i">
-				<div class="currentCardList" >					
+				<div class="currentCardList" >
+					<h2>${work.work_title}</h2>
 					<div class="cardUserInfo">
 						<div class="cardUserInfoImg">
 							<img src="${work.member_profile}">
@@ -262,7 +263,6 @@
 					</div>
 					<div class="currentCardContentView">
 						<div class="currentCardContentViewLeft">
-							<h2>${work.work_title}</h2>
 							<textarea readonly>${work.work_content}</textarea>
 						</div>
 						<div class="currentCardContentViewRight">
