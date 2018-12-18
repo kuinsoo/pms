@@ -31,7 +31,7 @@ public interface MessageMapper {
 	 * Method : totalMsgReceived
 	 * 작성자 : pc07
 	 * 변경이력 :
-	 * @param member_mail
+	 * @param msg_smember
 	 * @return
 	 * Method 설명 : 받은 쪽지 갯수 
 	 */

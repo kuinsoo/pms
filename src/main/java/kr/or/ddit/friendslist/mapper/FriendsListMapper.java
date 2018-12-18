@@ -20,7 +20,7 @@ public interface FriendsListMapper {
 	 * Method : selectMyFriends
 	 * 작성자 : pc07
 	 * 변경이력 :
-	 * @param friendVo
+	 * @param friend_myemail
 	 * @return
 	 * Method 설명 : 친구를 뽑아오는 
 	 */
