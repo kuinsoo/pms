@@ -33,7 +33,7 @@
 <body class="cbp-spmenu-push">
 <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
     <div class="currentMainLeftMenu">
-        <div class="leftMenuUserInterface">
+        <div class="leftMenuUserInterface" id="myPageLocation">
             <div class="dimLeftMenuUserInterface"></div>
             <img src="${memberVo.member_profile}">
             <p>${memberVo.member_name}</p>
@@ -207,4 +207,10 @@
 				location.href="/logout";
 			}
 		}
+    </script>
+
+    <script type="text/javascript">
+		$('#myPageLocation').on('click', function () {
+			location.href="/myPage";
+		});
     </script>

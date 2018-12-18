@@ -3,6 +3,7 @@ package kr.or.ddit.commons.web;
 import java.util.HashMap;
 import java.util.Map;
 
+import kr.or.ddit.project.service.ProjectServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,9 @@ public class MainController {
 
 	@Autowired
 	private MemberServiceInf memberService;
+
+	@Autowired
+	private ProjectServiceInf projectService;
 	
 	@RequestMapping(value="/inviteProject", method=RequestMethod.GET)
 	public String inviteProject(Model model, @SessionAttribute("memberVo")MemberVo memberVo, @RequestParam("project_id")String project_id) {
@@ -29,5 +33,13 @@ public class MainController {
 		
 		model.addAttribute("inviteProjectList", memberService.selectInviteProjectMap(inviteMap));
 		return "main/inviteProject";
+	}
+
+	@RequestMapping(value = "/favorites", method = RequestMethod.GET)
+	public String favorites(Model model,@SessionAttribute("memberVo")MemberVo memberVo) {
+
+		model.addAttribute("pMemberList", projectService.bookMarkProjects(memberVo.getMember_mail()));
+		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
+		return "main/favoriteMain";
 	}
 }

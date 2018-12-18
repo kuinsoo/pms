@@ -2,6 +2,7 @@ package kr.or.ddit.project.service;
 
 import java.util.List;
 
+import kr.or.ddit.member.model.PMemberListVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,5 +65,17 @@ public class ProjectService implements ProjectServiceInf {
 		return projectMapper.projectAllSchedule(scheduleVo);
 	}
 
+	/*----------------------------------  정리 ----------------------------- */
+	/**
+	 * Book mark projects list.
+	 * 작성자 : Mr.KKu
+	 * 설명 : 즐겨찾기된 프로젝트 목록
+	 * @param member_mail the member mail
+	 * @return the list
+	 */
+	@Override
+	public List<PMemberListVo> bookMarkProjects(String member_mail) {
+		return projectMapper.bookMarkProjects(member_mail);
+	}
 }
 
