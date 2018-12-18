@@ -8,41 +8,7 @@
 <section class="currentMain">
     <div class="currentMainContainer">
         <div class="currentMainContainerLeft">
-            <div class="projectList">
-                <div class="projectListTitles">
-                    <i class="far fa-newspaper"></i>
-                    <span>업무 리포트 보기</span>
-                </div>
-                <div class="charts">
-                    <div class="chartsContent">
-                        <canvas id="myChart" width="860" height="400"></canvas>
-                    </div>
-                    <div class="chartsNumber">
-                        <ul>
-                            <li>
-                                <i class="icon-pie-chart icons"></i>
-                                <span>요청 12건</span>
-                            </li>
-                            <li>
-                                <i class="icon-pie-chart icons"></i>
-                                <span>진행 19건</span>
-                            </li>
-                            <li>
-                                <i class="icon-pie-chart icons"></i>
-                                <span>피드백 3건</span>
-                            </li>
-                            <li>
-                                <i class="icon-pie-chart icons"></i>
-                                <span>완료 5건</span>
-                            </li>
-                            <li>
-                                <i class="icon-pie-chart icons"></i>
-                                <span>보류 2건</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <%@ include file="/WEB-INF/views/main/report.jsp" %>
             <div class="projectTaskContainer">
                 <div class="projectTaskContainerTitle">
                     <i class="far fa-sticky-note"></i><span>WORK CARD</span>
@@ -62,126 +28,10 @@
                     </div>
                 </div>
             </div>
-            <div class="projectWriter">
-                <div id="tabss">
-                    <ul>
-                        <li><a href="#tabss-1">업무</a></li>
-                        <li><a href="#tabss-2">글</a></li>
-                        <li><a href="#tabss-3">일정</a></li>
-                        <li><a href="#tabss-4">할일</a></li>
-                    </ul>
-                    <!-- tap1 업무 -->
-                    <div id="tabss-1">
-                        <form action="/ajaxCreateWork" method="POST" name="workfrm1">
-                            <div class="workContainerInput">
-                                <input type="text" name="work_title" placeholder="업무제목을 입력해주세요" class="workTitle"/>
-
-                                <div class="workDateDiv">
-                                    <!-- 업무 시작일 -->
-                                    <i class="icon-clock icons"></i>
-                                    <input type="datetime-local" name="work_sdate" class="work_sdate">
-
-                                    <!-- 업무 마감 예상일 -->
-                                    <i class="icon-clock icons"></i>
-                                    <input type="datetime-local" name="work_eedate" class="work_eedate">
-                                </div>
-                                <textarea class="workTextarea" name="work_content"
-                                          placeholder="업무내용을 입력해주세요"></textarea>
-
-                                <div class="workTypeDiv">
-                                    <h3>업무유형</h3>
-                                    <input type="radio" name="work_type" value="1" class="workType1"/><span>설계</span>
-                                    <input type="radio" name="work_type" value="2" class="workType2"/><span>개발</span>
-                                    <input type="radio" name="work_type" value="3" class="workType3"/><span>유지보수</span>
-                                </div>
-                                <div class="workImportance">
-                                    <h3>업무 중요도</h3>
-                                    <select name="work_importance">
-                                        <option value="1">Level 1</option>
-                                        <option value="2">Level 2</option>
-                                        <option value="3">Level 3</option>
-                                        <option value="4">Level 4</option>
-                                        <option value="5">Level 5</option>
-                                    </select>
-                                </div>
-                                <input type="hidden" name="project_id" value="${projectVo.project_id}"/>
-                                <div class="workVisibility">
-                                    <h3>업무 공개여부</h3>
-                                    <input type="checkbox" name="work_public" value="Y" class="workVisibilityCheck"/>
-                                    <span>WORK_PUBLIC</span>
-                                </div>
-                                <div class="workSubmit">
-                                    <input type="button" class="tabssTextAreaSubmit" value="올리기"
-                                           onclick="createWork();"/>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <%--tap1 끝 --%>
-                    <div id="tabss-2">
-                        <textarea class="tabssTextArea" placeholder="글을 작성하세요"></textarea>
-                        <input type="submit" class="tabssTextAreaSubmit" value="올리기"/>
-                    </div>
-                    <div id="tabss-3">
-                        <input type="text" placeholder="일정 제목을 입력하세요" class="calendarTitle"/>
-                        <div class="calendarContainerInput">
-                            <div class="calendarInputDiv">
-                                <i class="icon-clock icons"></i>
-                                <input type="date">
-                            </div>
-                            <span class="calendarInputDivSpan">~</span>
-                            <div class="calendarInputDivs">
-                                <i class="icon-clock icons"></i>
-                                <input type="date">
-                            </div>
-                        </div>
-                        <input type="text" placeholder="장소를 입력하세요" class="calendarTitle"/>
-                        <input type="text" placeholder="메모를 입력하세요" class="calendarMemo"/>
-                        <input type="submit" class="tabssTextAreaSubmit" value="올리기"/>
-                    </div>
-                    <div id="tabss-4">
-                        <input type="text" placeholder="할일제목을 입력하세요(선택)" class="todoInput"/>
-                        <ul>
-                            <li><input type="text" placeholder="할일 입력" class="todoInputContent"/></li>
-                            <li><input type="text" placeholder="할일 입력" class="todoInputContent"/></li>
-                            <li><input type="text" placeholder="할일 입력" class="todoInputContent"/></li>
-                        </ul>
-                        <div class="todoPlus">
-                            <i class="icon-plus icons"></i>
-                            <span>할일 추가</span>
-                        </div>
-                        <input type="button" class="tabssTextAreaSubmit" value="올리기"/>
-                    </div>
-                </div>
-            </div>
-
-
-            <%-- ############################## 일정 카드 시작 ############################## --%>
-            <%--
-            <div class="mapCardList">
-                <div class="mapCardListTitle">
-                    <h2><i class="icon-map icons"></i>일정제목</h2>
-                </div>
-                <div class="cardUserInfo">
-                    <div class="cardUserInfoImg">
-                        <img src="http://placehold.it/40x40">
-                    </div>
-                    <div class="cardUserInfoName">
-                        <b>홍길동</b><br>
-                        <span>2018-12-17</span>
-                    </div>
-                    <div class="updateDeleteIcon">
-                        <i class="icon-wrench icons"></i>
-                        <a href="#opens"><i class="icon-bulb icons"></i></a>
-                    </div>
-                </div>
-                <div class="currentCardContentView">
-
-                </div>
-            </div>--%>
-            <%-- ############################## 일정 카드 끝 ############################## --%>
-
-
+            
+            <%@ include file="/WEB-INF/views/main/projectWriter.jsp" %>
+			<%@ include file="/WEB-INF/views/main/calendarCardList.jsp" %>
+			
             <%--카드리스트--%>
             <div id="submain_work">
                 <c:forEach items="${workList}" var="work" varStatus="i">
@@ -276,45 +126,12 @@
                 <!-- (변찬우) for node // 외부에서 접근해서 인증 허용 해줘야 함..  -->
                 <iframe src="https://127.0.0.1:8443/"></iframe>
             </div>
-            <div class="projectTeams">
-                <h2>전체 참여자 ${projectMemberList.size()}명 <i class="icon-plus icons"></i></h2>
-                <ul>
-                    <c:forEach items="${projectMemberList}" var="projectMember" varStatus="i">
-                        <c:if test="${projectMember.pmember_position eq '1'}">
-                            <li>
-                                <span class="projectPositionName">프로젝트 관리자</span>
-                                <div class="chatList">
-                                    <img src="${projectMember.member_profile}">
-                                    <span class="projectUserNameList">${projectMember.member_name}</span>
-                                </div>
-                            </li>
-                        </c:if>
-                        <c:if test="${projectMember.pmember_position eq '2'}">
-                            <li>
-                                <span class="projectPositionName">참여자</span>
-                                <div class="chatList">
-                                    <img src="${projectMember.member_profile}">
-                                    <span class="projectUserNameList">${projectMember.member_name}</span>
-                                </div>
-                            </li>
-                        </c:if>
-                    </c:forEach>
-                </ul>
-            </div>
+            <%@ include file="/WEB-INF/views/main/participants.jsp" %>
         </div>
     </div>
 </section>
 
-<footer class="currentFooter">
-    <div class="footerContent">
-        <p>
-            대전광역시 중구 중앙로 76 영민빌딩 2층 203호<br>
-            기관명: (재)대덕인재개발원, 최종프로젝트 PMS(Project Management System)<br>
-            Copyright 2018 <span>DDIT 203 Class, CURRENT</span> All rights reserved.
-        </p>
-    </div>
-</footer>
-</div>
+<%@ include file="/WEB-INF/views/main/footer.jsp" %>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

@@ -63,191 +63,49 @@
 					<div id="tabs2">
 						<ul>							
 							<li><a href="#tabs2-1">프로젝트</a></li>
-							<li><a href="#tabs2-1-1">참여했던 프로젝트</a></li>
-							<li><a href="#tabs2-2">즐겨찾기한 프로젝트</a></li>
-							<li><a href="#tabs2-3">일감 조회</a></li>
-							<li><a href="#tabs2-4">파일보관함</a></li>
-							<li><a href="#tabs2-5">회원탈퇴</a></li>
+							<li><a href="#tabs2-1-1">항목1</a></li>
+							<li><a href="#tabs2-2">항목2</a></li>
+							<li><a href="#tabs2-3">항목3</a></li>
+							<li><a href="#tabs2-4">항목4</a></li>
+							<li><a href="#tabs2-5">항목5</a></li>
 						</ul>
 
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 참여중인 목록  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 
 						<div id="tabs2-1">
-							<div class="projectTable">
-								<div class="projectSearchDiv">　　
-									<form name ="searchProject" method="POST" onsubmit="return false;">
-										<input type="text" id="searchText" name="searchText" value="${searchText}" placeholder="검색어를 입력해주세요"/>
-										<input type="hidden" name="page" value='1' />
-										<input type="hidden" name="pageSize" value='10' />
-										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchProject();"></i>  
-									</form>
-								</div>
-								<table>
-									<colgroup width="10%" />
-									<colgroup width="45%" />
-									<colgroup width="15%" />
-									<colgroup width="30%" />
-									<thead>
-										<tr class="projectClick">
-											<th><span>번호</span></th>
-											<th><span>참여중인 프로젝트 명</span></th>
-											<th><span>프로젝트 아이디 </span></th>
-											<th><span>프로젝트 팀장</span></th>
-										</tr>
-									</thead>
-									<tbody id ="projectList">
-									</tbody>
-								</table>
-								<div class="text-center">
-									 <ul class="pagination"></ul>
-								</div>
-							</div>
+							
 						</div>
 						
 
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 참여했던 목록  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 
 						<div id="tabs2-1-1">
-							<div class="projectTable">
-								<div class="projectSearchDiv">　　
-									<form name ="searchEndProject" method="POST" onsubmit="return false;">
-										<input type="text" id="searchEndText" name="searchEndText" value="${searchEndText}" placeholder="검색어를 입력해주세요"/>
-										<input type="hidden" name="page" value='1' />
-										<input type="hidden" name="pageSize" value='10' />
-										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchEndProject();"></i>  
-									</form>
-								</div>
-								<table>
-									<colgroup width="10%" />
-									<colgroup width="45%" />
-									<colgroup width="15%" />
-									<colgroup width="30%" />
-									<thead>
-										<tr>
-											<th><span>번호</span></th>
-											<th><span>참여했던 프로젝트 명</span></th>
-											<th><span>프로젝트 아이디 </span></th>
-											<th><span>프로젝트 팀장</span></th>
-										</tr>
-									</thead>
-									<tbody  id ="projectEndList">
-									</tbody>
-									</table>
-								<div class="text-center">
-									 <ul class="pagination1"></ul>
-								</div>
-							</div>
+							
 						</div>
 						
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 즐겨찾기 목록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 						
 						 
 						<div id="tabs2-2">
-							<div class="projectTable">
-								<div class="projectSearchDiv">　　
-									<form name ="searchBookProject" method="POST" onsubmit="return false;">
-										<input type="text" id="searchBookText" name ="searchBookText" value='${searchBookText}' placeholder="검색어를 입력해주세요"/>
-										<input type="hidden" name="page" value='1' />
-										<input type="hidden" name="pageSize" value='10' />
-										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchBookProject();"></i>  
-									</form>
-								</div>
-								<table>
-									<colgroup width="10%" />
-									<colgroup width="45%" />
-									<colgroup width="15%" />
-									<colgroup width="30%" />
-									<thead>
-										<tr class = "projectBookClick" >
-											<th><span>번호</span></th>
-											<th><span>즐겨찾기한 프로젝트 명</span></th>
-											<th><span> 프로젝트 아이디</span></th>
-											<th><span>프로젝트 팀장</span></th>
-										</tr>
-									</thead>
-									<tbody id ="projectBookList">
-									</tbody>
-								</table>
-								<div class="text-center">
-									 <ul class="pagination2"></ul>
-								</div>
-							</div>
+							
 						</div>
 						
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 일감 보관 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 						
 						
 						<div id="tabs2-3">
-							<div class="projectTable">
-								<div class="projectSearchDiv">　　
-								 <form name ="searchTodoProject" id ="searchTodoProject" method="POST" onsubmit="return false;">
-										 <input type="text" id="searchTodoText" name ="searchTodoText" value='${searchTodoText}'  placeholder="검색어를 입력해주세요"/>
-										<input type="hidden" name="page" value='1' />
-										<input type="hidden" name="pageSize" value='10' />
-										<i class="icon-magnifier icons" onclick="javascript:getSearchTodoProject();"></i>  
-									</form> 
-								</div>
-								<table>
-									<colgroup width="10%" />
-									<colgroup width="60%" />
-									<colgroup width="30%" />
-									<thead>
-										<tr class = "projectTodoList">
-											<th><span>번호</span></th>
-											<th><span>나의 일감 보관</span></th>
-											<th><span>완료 여부</span></th>
-										</tr>
-									</thead>
-									<tbody id ="projectTodoList"> 
-									</tbody>
-								</table>
-								<div class="text-center">
-									 <ul class="pagination3"></ul>
-								</div>
-							</div>
+							
 						</div>
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 파일 보관함 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 						
 						<div id="tabs2-4">
-							<div class="projectTable">
-								<div class="projectSearchDiv">　　
-									<%--  <form name ="searchProject" method="POST" onsubmit="return false;">
-										 <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
-										<input type="hidden" name="page" value='1' />
-										<input type="hidden" name="pageSize" value='10' />
-										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
-									</form>  --%>
-								</div>
-								<table>
-									<colgroup width="10%" />
-									<colgroup width="60%" />
-									<colgroup width="30%" />
-									<thead>
-										<tr>
-											<th><span>번호</span></th>
-											<th><span>파일 명</span></th>
-											<th><span>파일 다운로드</span></th>
-										</tr>
-									</thead>
-									<tbody id ="아직미구현">
-									</tbody>
-								</table>
-								<div class="text-center">
-									 <ul class="pagination"></ul>
-								</div>
-							</div>
+							
 						</div>
 						
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 						
 						<div id="tabs2-5">
-							<div class="tabs2-5center">
-							<h2>회원 탈퇴 </h2>
-								<p> 회원 확인을 위하여 비밀번호를 입력해주세요. </p>
-								<input id ="member_pass" id = "member_pass" placeholder ="비밀번호를 입력해주세요.." type="password" />
-								<input type="button" class= "goodbyeBtn" value= "확인"/>
-								<span id = "passError"> 비밀번호가 일치하지 않습니다. </span>
-							</div>
+							
 						</div>
 						
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
