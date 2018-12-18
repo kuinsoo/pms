@@ -35,9 +35,8 @@ where W.work_id = WM.WORK_ID
 
 
 
-    <insert id="createCard" parameterType="cardVo">
-        insert into card values (CARD_TITLE= #{card_title}, CARD_CONTENT=#{card_content},
-         CARD_GROUP=#{card_group})
+    <insert id="createCard">
+        insert into WORK_CARD values (SEQ_WORK_CARD.nextval, SEQ_WORK.currval, 9999 ,'1' )
     </insert>
 
 

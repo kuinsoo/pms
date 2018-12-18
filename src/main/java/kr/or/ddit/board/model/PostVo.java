@@ -26,6 +26,16 @@ public class PostVo {
 	private String post_group;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private String post_date;
+	
+	private String title;		//게시글 목록용 
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public PostVo() {
 		

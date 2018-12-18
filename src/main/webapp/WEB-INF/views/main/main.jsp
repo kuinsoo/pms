@@ -107,7 +107,14 @@
 								<a href="#open" class="settingsA"><i class="icon-settings icons"></i></a>
 								<div class="white_content" id="open">
 									<div>
-										<a href="#close">닫기</a>
+										<a href="#close" class="mainCloseBtns">
+											<i class="icon-close icons"></i>
+										</a>
+										<div class="btnField">
+											<h2>프로젝트 명 - <span>${pMemberListVo.project_title}</span></h2>
+											<input type="button" value="수정" class="projectUpdateSettings" />
+											<input type="button" value="삭제" class="projectDeleteSettings" />
+										</div>
 									</div>
 							    </div>
                                 </c:if>

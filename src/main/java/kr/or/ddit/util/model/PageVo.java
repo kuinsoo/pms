@@ -8,14 +8,22 @@ public class PageVo {
 	private int page;
 	private int pageSize;
 	private String member_mail;
-	
+
 	// 마이페이지 검색부분 
 	private String searchText;
 	private String searchBookText;
 	private String searchTodoText;
 	private String searchEndText;
+
 	
 	
+	@Override
+	public String toString() {
+		return "PageVo [page=" + page + ", pageSize=" + pageSize + ", member_mail=" + member_mail + ", searchText="
+				+ searchText + ", searchBookText=" + searchBookText + ", searchTodoText=" + searchTodoText
+				+ ", searchEndText=" + searchEndText + "]";
+	}
+
 	public String getSearchEndText() {
 		return searchEndText;
 	}
@@ -63,10 +71,4 @@ public class PageVo {
 	public PageVo() {
 	}
 	
-	@Override
-	public String toString() {
-		return "PageVo [page=" + page + ", pageSize=" + pageSize + ", member_mail=" + member_mail + ", searchText="
-				+ searchText + ", searchBookText=" + searchBookText + "]";
-	}
-
 }

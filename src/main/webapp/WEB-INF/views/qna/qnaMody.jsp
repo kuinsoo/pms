@@ -47,7 +47,7 @@
 	<div class="currentMainContainer">
 		<div class="noticeContainer">
 			<div class="noticeContainerLeft">
-				<h2>CURRENT SERVICE<br>Q & A <br> 작성하기 </h2>
+				<h2>CURRENT SERVICE<br>Q & A <br> 수정하기 </h2>
 			</div>
 			<div class="noticeContainerRight">
 				
