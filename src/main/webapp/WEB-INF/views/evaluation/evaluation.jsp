@@ -6,7 +6,7 @@
 		<div class="currentMainContainer">
 			<div class="myPageContainer">
 				<div class="myPageContainerTitle">
-					<h2>사용자 기본 정보</h2>
+					<h2>능력 및 평가</h2>
 				</div>
 				
 				<form action="#" method="post" enctype="multipart/form-data">
@@ -29,26 +29,40 @@
 						</div>
 						<div class="userContentsInfoRight_2">
 							<ul>
-								<li><input type="text" value= "${memberVo.member_mail}" disabled="disabled" id = "member_mail"  name = "member_mail"/></li>
-								<li><input type="text" value= "${memberVo.member_name}" name ="member_name" id ="member_name"/></li>
-								<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"  id ="member_tel"/></li>
+								<li><input type="text" value= "${memberVo.member_mail}" readonly /></li>
+								<li><input type="text" value= "${memberVo.member_name}" readonly /></li>
+								<li><input type="text"  value= "${memberVo.member_tel}" readonly /></li>
 							</ul>
 						</div>
 					</div>
 				</div>
 			</form>				
 				<div class="myPageContainerRight">
-					<div class="myPageContainerRightLeftChart">
-						<canvas id="myChart" width="349" height="500"></canvas>
+					<div class="myPageContainerRightLeftChart evaluationChart1">
+						<canvas id="myChart" width="349" height="450"></canvas>
+						<select class="myChartSelect1">
+							<option>프로젝트 선택</option>
+							<option>프로젝트 선택</option>
+							<option>프로젝트 선택</option>
+							<option>프로젝트 선택</option>
+							<option>프로젝트 선택</option>
+						</select>
 					</div>
-					<div class="myPageContainerRightRightChart">
-						<canvas id="myChart2" width="349" height="500"></canvas>
+					<div class="myPageContainerRightRightChart evaluationChart2">
+						<canvas id="myChart2" width="349" height="450"></canvas>
+						<select class="myChartSelect2">
+							<option>이슈처리 능력</option>
+							<option>이슈처리 능력</option>
+							<option>이슈처리 능력</option>
+							<option>이슈처리 능력</option>
+							<option>이슈처리 능력</option>
+						</select>
 					</div>
 				</div>
 				<div class="myPageBottomContainer">
 					<div id="tabs2">
 						<ul>							
-							<li><a href="#tabs2-1">참여중인 프로젝트</a></li>
+							<li><a href="#tabs2-1">프로젝트</a></li>
 							<li><a href="#tabs2-1-1">참여했던 프로젝트</a></li>
 							<li><a href="#tabs2-2">즐겨찾기한 프로젝트</a></li>
 							<li><a href="#tabs2-3">일감 조회</a></li>
@@ -378,26 +392,22 @@ $("#tabs2").tabs();
 
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'pie',
     data: {	
-        labels: ["참여중" , "참여했던" , "즐겨찾기", "일감"],
+    	labels: ["이슈해결" , "참여 프로젝트" , "처리업무"],
         datasets: [{
-        	  label: '${memberVo.member_name} 님의 CURRENT',
-            data: [${totalProjectCnt}, ${totalEndProjectCnt}, ${selectProjectCnt}, ${selectTodoCnt}],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)'
-            ],
+        	label: '${memberVo.member_name} 님의 CURRENT',
+        	data: [16, 34, 50],
+        	backgroundColor: [
+				'rgba(255, 99, 132, 0.2)',
+				'rgba(54, 162, 235, 0.2)',
+				'rgba(255, 206, 86, 0.2)'
+			],
+			borderColor: [
+				'rgba(255,99,132,1)',
+				'rgba(54, 162, 235, 1)',
+				'rgba(255, 206, 86, 1)'
+			],
             borderWidth: 1
         }]
     },
@@ -414,26 +424,26 @@ var myChart = new Chart(ctx, {
 
 var ctx2 = document.getElementById("myChart2").getContext('2d');
 var myChart2 = new Chart(ctx2, {
-    type: 'horizontalBar',
+    type: 'line',
     data: {
-    	labels: ["참여중" , "참여했던" , "즐겨찾기", "일감"],
+    	labels: ["프로젝트명1" , "프로젝트명2" , "프로젝트명3", "프로젝트명4", "프로젝트명5"],
         datasets: [{
             label: '${memberVo.member_name} 님의 CURRENT',
-            data: [${totalProjectCnt}, ${totalEndProjectCnt}, ${selectProjectCnt}, ${selectTodoCnt}],
+            data: [21, 13, 18, 30, 21],
             backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255,99,132,1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)'
-            ],
+				'rgba(255, 99, 132, 0.2)',
+				'rgba(54, 162, 235, 0.2)',
+				'rgba(255, 206, 86, 0.2)',
+				'rgba(75, 192, 192, 0.2)',
+				'rgba(153, 102, 255, 0.2)'
+			],
+			borderColor: [
+				'rgba(255,99,132,1)',
+				'rgba(54, 162, 235, 1)',
+				'rgba(255, 206, 86, 1)',
+				'rgba(75, 192, 192, 1)',
+				'rgba(153, 102, 255, 1)'
+			],
             borderWidth: 1
         }]
     },
