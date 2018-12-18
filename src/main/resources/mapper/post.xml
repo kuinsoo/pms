@@ -5,4 +5,152 @@
 
 <mapper namespace="kr.or.ddit.post.mapper.PostMapper">
 
+    <!-- 글 쓰기  -->
+    <insert id="insertQnaPost" parameterType="postVo">
+	insert into 
+	    POST(
+			POST_ID,
+			BOARD_ID,
+			POST_HIERARCHY,
+			POST_WRITER,
+			POST_PASS,
+			POST_TITLE,
+			POST_CONTENT,
+			POST_PUBLIC,
+			POST_GROUP,
+			POST_DATE
+	    )
+	    values(
+			'QApost'||seq_POST_ID.nextval, 
+	        #{board_id},                    
+			#{post_hierarchy},              
+			#{post_writer},                        
+			#{post_pass},                    
+			#{post_title},               
+			#{post_content},                    
+			#{post_public},                     
+			#{post_group},                      
+			sysdate
+	    )
+    </insert>
+    
+	<!-- 선택한 글 내용 출력 -->
+    <select id="selectQnaPost" resultType="postVo" parameterType="String">
+    select 
+	    POST_TITLE title, 
+	    POST_CONTENT, 
+	    POST_DATE
+	from
+	    POST
+	where
+	    POST_ID = #{post_id}
+    </select>
+    
+    <!-- 글 내용 수정 -->
+    <update id="updateQnaPost" parameterType="postVo">
+	update 
+	    post 
+	set 
+	    POST_TITLE = #{post_title},
+	    POST_CONTENT = #{post_content}
+	where 
+	    POST_ID = #{post_id}
+    </update>
+    
+     <!-- 선택한 글 삭제 -->
+    <delete id="deleteQnaPost" parameterType="String">
+    DELETE 
+	FROM 
+    	post 
+	WHERE 
+    	POST_ID = #{post_id}
+    </delete>
+    
+ 	<!-- 글 목록(+페이징) 출력 -->
+    <select id="qnaPostList" resultType="postVo" parameterType="pageVo">
+	select 
+	    lpad('->　',(level-1)*3,'　')||POST_TITLE title, 
+	    POST_CONTENT, 
+	    POST_DATE, 
+	    level
+	from(
+	    select rownum rnum, a.* 
+	    from(
+	        select POST.* 
+	        from POST 
+	        where BOARD_ID = #{board_id}
+	        order by POST_ID desc
+	        ) a
+	    )
+	where 
+	    rnum 
+	        between #{pageNum}*10-(10-1)                                           
+	        and #{pageNum}*10
+	start with POST_HIERARCHY is null 
+	connect by prior POST_ID = POST_HIERARCHY
+	order siblings by POST_ID desc
+    </select>   
+    
+    <!-- 검색 결과(+페이징) 출력 -->
+    <select id="qnaSerachList" resultType="postVo" parameterType="pageVo">
+    select 
+	    lpad('->　',(level-1)*3,'　')||POST_TITLE title, 
+	    POST_CONTENT, 
+	    POST_DATE, 
+	    level
+	from(
+	    select rownum rnum, b.* 
+	    from(
+	        select a.* 
+	        from(
+	            select POST.* 
+	            from POST 
+	            where BOARD_ID = #{board_id}
+	            order by POST_ID desc
+	            ) a
+	        ) b
+	    where POST_TITLE like '%#{searchText}%'
+	    )  
+	where rnum between #{pageNum}*10-(10-1)                                           
+	and #{pageNum}*10
+	start with POST_HIERARCHY is null 
+	connect by prior POST_ID = POST_HIERARCHY
+	order siblings by POST_ID desc
+    </select>    
+    
+    <!-- 글 목록(+페이징) 출력 //답글 빼고  -->
+    <select id="qPostList" resultType="postVo" parameterType="String">
+	select 
+	    POST_TITLE title, 
+	    POST_CONTENT, 
+	    POST_DATE
+	from(
+	    select rownum rnum, a.* 
+	    from(
+	        select POST.* 
+	        from POST 
+	        where BOARD_ID= #{board_id}
+	        and  POST_HIERARCHY is null 
+	        order by POST_ID desc
+	        ) a
+	    )
+	where 
+	    rnum 
+	        between #{pageNum}*10-(10-1)                                           
+	        and #{pageNum}*10
+    </select>
+    
+    
+    <!-- 선택한 글에 대한 답글 내용  -->
+    <select id="aPost" resultType="postVo" parameterType="String">
+	select 
+	    POST_TITLE title, 
+	    POST_CONTENT, 
+	    POST_DATE
+	from
+	    POST
+	where
+	    POST_HIERARCHY = #{post_hierarchy}
+    </select>
+    
 </mapper>
