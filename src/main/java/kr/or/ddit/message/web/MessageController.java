@@ -1,18 +1,23 @@
 package kr.or.ddit.message.web;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import kr.or.ddit.friendslist.model.FriendsListVo;
+import kr.or.ddit.friendslist.model.FriendListVo;
 import kr.or.ddit.friendslist.service.FriendsListServiceInf;
 import kr.or.ddit.member.model.MemberVo;
-import kr.or.ddit.member.web.LoginController;
+import kr.or.ddit.message.model.MessageVo;
+import kr.or.ddit.message.service.MessageServiceInf;
+import kr.or.ddit.util.model.PageVo;
 
 /**
  * kr.or.ddit.message.web
@@ -29,6 +34,9 @@ public class MessageController {
 	@Autowired
 	private FriendsListServiceInf friendservice;
 	
+	@Autowired
+	private MessageServiceInf messageservice;
+	
 	
 	/**
 	 * Method : message
@@ -40,13 +48,67 @@ public class MessageController {
 	 * Method 설명 : header에서 message jsp로 보내기위함  
 	 */
 	@RequestMapping(value= "/message")
-	public String message(@SessionAttribute("memberVo") MemberVo memberVo, Model model, FriendsListVo friendVo) {
+	public String message(@SessionAttribute("memberVo") MemberVo memberVo, Model model, FriendListVo friendVo) {
 		
-		/*FriendsListVo selctMyFriend = friendservice.selectMyFriends(memberVo.getMember_mail());
+		List<FriendListVo> selctMyFriend = friendservice.selectMyFriends(memberVo.getMember_mail());
 		
-		model.addAttribute("selctMyFriend",selctMyFriend);*/
+		model.addAttribute("selctMyFriend",selctMyFriend);
 		
 		return "message/message";
 	}
 	
+	
+	/*
+	 **** 	@ResponseBody ****** 꼭 해주기  
+	 */
+	@ResponseBody
+	@RequestMapping(value= "/messageReceivedAjax" , method= RequestMethod.GET)
+	public Map<String ,Object> messageReceivedAjax(@SessionAttribute("memberVo") MemberVo memberVo ,PageVo pageVo) {
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		System.out.println(pageVo.toString());
+		
+		MessageVo messageVo = new MessageVo();
+		messageVo.setMsg_rmember(memberVo.getMember_mail());
+		
+		List<MessageVo> msgReceiveList = messageservice.messageReceived(pageVo);
+		System.out.println("msgReceiveList의  값은 과연 ?????????????"+ msgReceiveList.size());		
+		
+		int pageCnt = messageservice.totalMsgReceived(memberVo.getMember_mail());
+		
+		Map<String, Object> msgReceiveMap = new HashMap<>();
+		msgReceiveMap.put("msgReceiveList", msgReceiveList);
+		msgReceiveMap.put("pageCnt", pageCnt);
+		
+		return msgReceiveMap;
+	}	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
