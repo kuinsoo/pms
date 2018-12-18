@@ -1,19 +1,16 @@
 package kr.or.ddit.commons.web;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.project.service.ProjectServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import kr.or.ddit.member.model.MemberVo;
-import kr.or.ddit.member.service.MemberServiceInf;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 public class MainController {
@@ -41,5 +38,33 @@ public class MainController {
 		model.addAttribute("pMemberList", projectService.bookMarkProjects(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
 		return "main/favoriteMain";
+	}
+
+	@RequestMapping(value = "/testFileUpload", method = RequestMethod.POST)
+	public @ResponseBody String testFileUpload(MultipartFile[] files) {
+		String fileName = null;
+		String msg = "";
+		if(files != null && files.length > 0) {
+			for (int i = 0; i < files.length ; i++) {
+				try {
+					if (true == files[i].isEmpty()) {
+						continue;
+					}
+
+					fileName = files[i].getOriginalFilename();
+					byte[] bytes = files[i].getBytes();
+//					BufferedOutputStream buffStream = new BufferedOutputStream(
+//							new FileOutputStream(
+//							new File(ExattachApplication.UPLOAD_DIR + "/" + fileName)));
+//					buffStream.write(bytes);
+//					buffStream.close();
+				} catch (Exception e) {
+					return "You failed to upload " + fileName + ": " + e.getMessage() + "<br />";
+				}
+			}
+			return msg;
+		}else {
+			return "Unable to upload. File is empty";
+		}
 	}
 }
