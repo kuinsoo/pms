@@ -39,7 +39,7 @@ public class ToDoController {
 	* @return
 	* Method 설명 : to-do list 등록(Ajax적용)
 	*/
-	@RequestMapping(value="/todoInsert", method=RequestMethod.POST)
+	@RequestMapping(value="/todoInsert", method= {RequestMethod.POST, RequestMethod.GET})
 	public String ajaxInsertTodo(@RequestParam("project_id")String project_id, @RequestParam("todo_work")String todo_work, ToDoVo todoVo, Model model) {
 		
 		/* to-do insert */

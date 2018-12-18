@@ -135,11 +135,12 @@ public class ProjectController {
 
 
 	@RequestMapping(value = "/subMain", method = {RequestMethod.POST, RequestMethod.GET})
-	public String subMain(Model model, @RequestParam("project_id")String project_id, @RequestParam("project_title")String project_title,
+	public String subMain(Model model, @RequestParam("project_id")String project_id,
 						  @SessionAttribute("memberVo")MemberVo memberVo, HttpServletResponse response) {
 
+		ProjectVo projectVo =  projectService.selectProject(project_id);
 		/* 프로젝트 객체  */
-		model.addAttribute("projectVo", projectService.selectProject(project_id));
+		model.addAttribute("projectVo", projectVo);
 
 		/* 프로젝트에 포함된 멤버 정보 */
 		model.addAttribute("projectMemberList", memberService.projectMemberList(project_id));
@@ -159,7 +160,7 @@ public class ProjectController {
 		cookProject_id.setMaxAge(60*60*24); // 기간은 하루로 지정
 		response.addCookie(cookProject_id);
 		
-		Cookie cookProject_title = new Cookie("project_title", project_title); 
+		Cookie cookProject_title = new Cookie("project_title", projectVo.getProject_title());
 		cookProject_title.setMaxAge(60*60*24); // 기간은 하루로 지정
 		response.addCookie(cookProject_title);
 		

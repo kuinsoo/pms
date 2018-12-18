@@ -89,7 +89,7 @@
 				</ul>
 
 				<ul class="bookmarkProject">
-                    <%-- bookmark ajax 처리 --%>
+                    <%-- 프로젝트 처리 --%>
 					<c:forEach items="${pMemberList}" var="pMemberListVo" varStatus="i">
 					<li class="bookmarkProject">
 						<div class="projectCard" >

@@ -61,43 +61,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
+							<td><a href="/qnaForm">CURRENT HOMEPAGE OPEN</a></td>
 							<td>2018-12-13</td>
 						</tr>
 					</tbody>
@@ -106,17 +70,11 @@
 					<ul>
 						<li><i class="icon-arrow-left"></i></li>
 						<li><a href="#"><span>1</span></a></li>
-						<li><a href="#"><span>2</span></a></li>
-						<li><a href="#"><span>3</span></a></li>
-						<li><a href="#"><span>4</span></a></li>
-						<li><a href="#"><span>5</span></a></li>
-						<li><a href="#"><span>6</span></a></li>
-						<li><a href="#"><span>7</span></a></li>
-						<li><a href="#"><span>8</span></a></li>
-						<li><a href="#"><span>9</span></a></li>
-						<li><a href="#"><span>10</span></a></li>
 						<li><i class="icon-arrow-right"></i></li>
 					</ul>
+				</div>
+				<div>
+					<button>새 질문</button>
 				</div>
 				<div class="noticeSearchDiv">
 					<input type="text" class="noticeSearchInput" />
