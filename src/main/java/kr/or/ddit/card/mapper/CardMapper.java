@@ -21,7 +21,7 @@ public interface CardMapper {
 
 	CardVo selectCard(String cardNo);
 
-	int createCard(CardVo cardVo);
+	int createCard();
 
 	int updateCard(CardVo cardVo);
 

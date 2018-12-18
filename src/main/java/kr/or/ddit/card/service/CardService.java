@@ -2,11 +2,14 @@ package kr.or.ddit.card.service;
 
 import kr.or.ddit.card.mapper.CardMapper;
 import kr.or.ddit.card.model.CardVo;
+import kr.or.ddit.work.model.WorkVo;
+import kr.or.ddit.work.service.WorkServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * kr.or.ddit.card.service
@@ -23,6 +26,9 @@ public class CardService implements CardServiceInf {
 
 	@Autowired
 	private CardMapper cardMapper;
+
+	@Autowired
+	private WorkServiceInf workService;
 
 	@Override
 	public List<CardVo> selectWorkCard(String pmember_project) {
@@ -42,8 +48,10 @@ public class CardService implements CardServiceInf {
 	}
 
 	@Override
-	public int createCard(CardVo cardVo) {
-		return cardMapper.createCard(cardVo);
+	public int createCard(Map<String, String> wmMap ,WorkVo workVo) {
+
+		workService.insertWorkMember(wmMap , workVo);
+		return cardMapper.createCard();
 	}
 
 	@Override

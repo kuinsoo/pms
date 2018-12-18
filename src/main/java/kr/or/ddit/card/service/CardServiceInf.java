@@ -1,8 +1,10 @@
 package kr.or.ddit.card.service;
 
 import kr.or.ddit.card.model.CardVo;
+import kr.or.ddit.work.model.WorkVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * kr.or.ddit.card.service
@@ -21,7 +23,7 @@ public interface CardServiceInf {
 
 	CardVo selectCard(String cardNo);
 
-	int createCard(CardVo cardVo);
+	int createCard( Map<String, String> wmMap , WorkVo workVo);
 
 	int updateCard(CardVo cardVo);
 
