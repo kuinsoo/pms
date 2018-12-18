@@ -50,6 +50,22 @@ public class ToDoController {
 		}
 		
 		/* to-do select */
+		return "todo/todoInsertAjax";
+	}
+	
+	/**
+	* Method : ajaxSelectTodo
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_work
+	* @param model
+	* @return
+	* Method 설명 : to-do list 조회
+	*/
+	@RequestMapping(value="/todoSelect", method=RequestMethod.POST)
+	public String ajaxSelectTodo(@RequestParam("todo_work")String todo_work, Model model) {
+		
+		/* to-do select */
 		List<ToDoVo> workToDoSelectList = todoService.workToDoSelect(todo_work);
 		
 		model.addAttribute("workToDoSelectList", workToDoSelectList);

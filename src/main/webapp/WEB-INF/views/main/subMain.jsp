@@ -221,7 +221,7 @@
 													<li><input type="datetime-local" name="non_todo_eedate"></li>
 													<li><input type="hidden" name="todo_eedate" id="todo_eedate" value=""/></li>
 													<li><input type="hidden" name="project_id" value="${projectVo.project_id}"/></li>
-													<li><input type="hidden" name="todo_work" value="${work.work_id}"/></li>
+													<li><input type="hidden" name="todo_work" id="todo_work" value="${work.work_id}"/></li>
 												</ul>
 											</form>
 										</div>
@@ -669,6 +669,7 @@ var myChart = new Chart(ctx, {
 		$("#todo_eedate").attr('value', repEedate); //Controller에 보낼 hidden에 값을 세팅
 		
 		var param = $('#todoInsert').serialize();
+		
 		$.ajax({
 			method: "POST",
 			url: "/todoInsert",
@@ -681,6 +682,22 @@ var myChart = new Chart(ctx, {
 			},
 			error:function(data) {
 				// alert("error");
+			}
+		});
+	}
+	
+	function todoSelect(todo_work){
+		console.log("todo_work : " + todo_work);
+		
+		$.ajax({
+			method: "POST",
+			url: "/todoSelect",
+			data: todo_work,
+			success: function(data){
+				alert("success");
+			}, 
+			error: function(data){
+				alert("error");
 			}
 		});
 	}
@@ -705,8 +722,11 @@ $(document).ready(function(){
     //todo 등록시 시작일자는 현재시간으로 기본값(default) 설정  ==문의: jerry==
     var date = new Date();
     date.setHours(date.getHours() + 9);
-    console.log(date.toISOString());
+    //console.log(date.toISOString());
     document.getElementById('non_todo_sdate').value = date.toISOString().slice(0, 16);
+    
+    var param = $('#todo_work').val();
+    todoSelect(param);
     
 });
 </script>
