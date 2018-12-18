@@ -731,8 +731,8 @@ var myChart = new Chart(ctx, {
 			data: param,
 			success: function(data) {
 				alert("success");
-				$('#todoInsertHtmlAjax').html("");
-				$('#todoInsertHtmlAjax').html(data);
+				//$('#todoInsertHtmlAjax').html("");
+				//$('#todoInsertHtmlAjax').html(data);
 			},
 			error:function(data) {
 				alert("error");
