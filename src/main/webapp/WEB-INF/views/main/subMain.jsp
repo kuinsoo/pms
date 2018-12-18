@@ -198,134 +198,14 @@
                             <div class="updateDeleteIcon">
                                 <i class="icon-wrench icons"></i>
                                 <a href="#opens"><i class="icon-bulb icons"></i></a>
-                                <div class="white_contents" id="opens">
-                                    <div>
-                                        <a href="#close"><i class="icon-close icons"></i></a>
-                                        <div class="issueCreateInputField">
-                                            <div class="issueCreateInputFieldLeft">
-                                                <ul>
-                                                    <li>담당자</li>
-                                                    <li>할일내용</li>
-                                                    <li>시작일자</li>
-                                                    <li>마감일자</li>
-                                                </ul>
-                                            </div>
-                                            <div class="issueCreateInputFieldRight">
-                                                <form method="POST" name="todoInsert" id="todoInsert">
-                                                    <ul>
-                                                        <li><input type="text" name="todo_pmember"
-                                                                   placeholder="담당자를 입력하세요."/></li>
-                                                        <li><textarea name="todo_content"
-                                                                      placeholder="내용을 입력하세요."></textarea></li>
-                                                        <li><input type="datetime-local" name="non_todo_sdate"
-                                                                   id="non_todo_sdate" value=""/></li>
-                                                        <li><input type="hidden" name="todo_sdate" id="todo_sdate"
-                                                                   value=""/></li>
-                                                        <li><input type="datetime-local" name="non_todo_eedate"></li>
-                                                        <li><input type="hidden" name="todo_eedate" id="todo_eedate"
-                                                                   value=""/></li>
-                                                        <li><input type="hidden" name="project_id"
-                                                                   value="${projectVo.project_id}"/></li>
-                                                        <li><input type="hidden" name="todo_work" id="todo_work"
-                                                                   value="${work.work_id}"/></li>
-                                                    </ul>
-                                                </form>
-                                            </div>
-                                        </div>
-                                        <input type="button" value="등록" class="issueInfoCreate"
-                                               onClick="insertTodo();"/>
-                                        <a href="#close" class="issueInfoClose">취소</a>
-                                    </div>
-                                </div>
+                                <%@ include file="/WEB-INF/views/todo/todo.jsp" %>
                             </div>
                         </div>
                         <div class="currentCardContentView">
                             <div class="currentCardContentViewLeft">
                                 <textarea readonly>${work.work_content}</textarea>
                             </div>
-                            <div class="currentCardContentViewRight">
-                                <table>
-                                    <thead>
-                                    <tr>
-                                        <th><input type="checkbox"/></th>
-                                        <th>TODO</th>
-                                        <th>담당자</th>
-                                        <th>시작</th>
-                                        <th>마감</th>
-                                        <th>이슈</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <!-- todoInsertAjax.jsp -->
-										<c:forEach items="${workToDoSelectList}" var="todoSelect">
-											<c:if test="${todoSelect.todo_work eq work.work_id}">
-												<tr>
-													<td><input type="checkbox" /></td>
-													<td>
-														<a href="#open" class="issueTitlePopup">${todoSelect.todo_title}</a>
-														<div class="white_content" id="open">
-															<div>
-																<a href="#close"><i class="icon-close icons"></i></a>
-																<div class="issueSelectPage">
-																	<div class="issueSelectPageLeft">
-																		<form action="#" method="post">
-																			<div class="issueProfile">
-																				<img src="http://placehold.it/150x200" />
-																			</div>
-																			<div class="issues">
-																				<div class="issuesLeft">
-																					<ul>
-																						<li>담당자</li>
-																						<li>시작</li>
-																						<li>예상마감</li>
-																						<li>마감</li>
-																					</ul>
-																				</div>
-																				<div class="issuesRight">
-																					<ul>
-																						<li><input type="text"/>${todoSelect.todo_title}</li>
-																						<li><input type="text"/>${todoSelect.todo_sdate}</li>
-																						<li><input type="text"/>${todoSelect.todo_eedate}</li>
-																						<li><input type="text"/>${todoSelect.todo_complet}</li>
-																					</ul>
-																				</div>
-																			</div>
-																			<textarea>${todoSelect.todo_content}</textarea>
-																		</form>
-																	</div>
-																	<div class="issueSelectPageRight">
-																		<h2>발생이슈</h2>
-																		<input type="button" value="등록" class="issueCreateBtn" />
-																		<input type="button" value="수정" class="insueUpdateBtn" />
-																		<form action="#" mehtod="post">
-																			<textarea>이슈에 대한 내용,,,,,</textarea>
-																		</form>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</td>
-													<td>${todoSelect.todo_pmember}</td>
-													<td>${todoSelect.todo_sdate}</td>
-													<td>${todoSelect.todo_eedate}</td>
-													<td>${todoSelect.todo_issue}</td>
-												</tr>
-											</c:if>
-										</c:forEach>
-                                    </tbody>
-                                </table>
-                                <div class="pagination">
-                                    <ul>
-                                        <li><i class="icon-arrow-left icons"></i></li>
-                                        <li><span>1</span></li>
-                                        <li><span>2</span></li>
-                                        <li><span>3</span></li>
-                                        <li><span>4</span></li>
-                                        <li><span>5</span></li>
-                                        <li><i class="icon-arrow-right icons"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <%@ include file="/WEB-INF/views/todo/todoList.jsp" %>
                         </div>
                         <div class="currentCardContentBottomView">
                             <div id="container${work.work_id}"></div>
@@ -442,399 +322,324 @@
 <script>
 
 
-	// DIM POPUP - 팀원초대
-	$('.projectCreatePopUps').click(function () {
-		var $hrefs = $(this).attr('href');
-		layer_popups($hrefs);
-	});
+   // DIM POPUP - 팀원초대
+   $('.projectCreatePopUps').click(function () {
+      var $hrefs = $(this).attr('href');
+      layer_popups($hrefs);
+   });
 
-	function layer_popups(els) {
-		var $els = $(els);        //레이어의 id를 $el 변수에 저장
-		var isDims = $els.prev().hasClass('dimBgs');   //dimmed 레이어를 감지하기 위한 boolean 변수
+   function layer_popups(els) {
+      var $els = $(els);        //레이어의 id를 $el 변수에 저장
+      var isDims = $els.prev().hasClass('dimBgs');   //dimmed 레이어를 감지하기 위한 boolean 변수
 
-		isDims ? $('.dim-layers').fadeIn() : $els.fadeIn();
+      isDims ? $('.dim-layers').fadeIn() : $els.fadeIn();
 
-		var $elWidths = ~~($els.outerWidth()),
-			$elHeights = ~~($els.outerHeight()),
-			docWidths = $(document).width(),
-			docHeights = $(document).height();
+      var $elWidths = ~~($els.outerWidth()),
+         $elHeights = ~~($els.outerHeight()),
+         docWidths = $(document).width(),
+         docHeights = $(document).height();
 
-		// 화면의 중앙에 레이어를 띄운다.
-		if ($elHeights < docHeights || $elWidths < docWidths) {
-			$els.css({
-				marginTop: -$elHeights / 2,
-				marginLeft: -$elWidths / 2
-			})
-		} else {
-			$els.css({top: 0, left: 0});
-		}
+      // 화면의 중앙에 레이어를 띄운다.
+      if ($elHeights < docHeights || $elWidths < docWidths) {
+         $els.css({
+            marginTop: -$elHeights / 2,
+            marginLeft: -$elWidths / 2
+         })
+      } else {
+         $els.css({top: 0, left: 0});
+      }
 
-		$els.find('a.btn-layerCloses').click(function () {
-			isDims ? $('.dim-layers').fadeOut() : $els.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
-			return false;
-		});
+      $els.find('a.btn-layerCloses').click(function () {
+         isDims ? $('.dim-layers').fadeOut() : $els.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+         return false;
+      });
 
-		$('.layer .dimBgs').click(function () {
-			$('.dim-layers').fadeOut();
-			return false;
-		});
-	}
+      $('.layer .dimBgs').click(function () {
+         $('.dim-layers').fadeOut();
+         return false;
+      });
+   }
 
-	var menuLeft = document.getElementById('cbp-spmenu-s1'),
-		showLeftPush = document.getElementById('showLeftPush'),
-		body = document.body;
+   var menuLeft = document.getElementById('cbp-spmenu-s1'),
+      showLeftPush = document.getElementById('showLeftPush'),
+      body = document.body;
 
-	$("#showLeftPush").click(function () {
-		classie.toggle(this, 'active');
-		classie.toggle(body, 'cbp-spmenu-push-toright');
-		classie.toggle(menuLeft, 'cbp-spmenu-open');
-	});
+   $("#showLeftPush").click(function () {
+      classie.toggle(this, 'active');
+      classie.toggle(body, 'cbp-spmenu-push-toright');
+      classie.toggle(menuLeft, 'cbp-spmenu-open');
+   });
 
-	function dialog() {
-		var dialogBox = $('.dialog'),
-			dialogTrigger = $('.dialog__trigger'),
-			dialogAction = $('.dialog__action');
+   function dialog() {
+      var dialogBox = $('.dialog'),
+         dialogTrigger = $('.dialog__trigger'),
+         dialogAction = $('.dialog__action');
 
-		// Open the dialog
-		dialogTrigger.on('click', function (e) {
-			dialogBox.toggleClass('dialog--active');
-			e.stopPropagation()
-		});
+      // Open the dialog
+      dialogTrigger.on('click', function (e) {
+         dialogBox.toggleClass('dialog--active');
+         e.stopPropagation()
+      });
 
-		$(".dialog").click(function () {
-			dialogBox.toggleClass('dialog--active');
-		});
+      $(".dialog").click(function () {
+         dialogBox.toggleClass('dialog--active');
+      });
 
-		$(".dialog__triggers").click(function () {
-			dialogBox.removeClass('dialog--active');
-		});
-		$(".dialog__triggerss").click(function () {
-			dialogBox.removeClass('dialog--active');
-		});
+      $(".dialog__triggers").click(function () {
+         dialogBox.removeClass('dialog--active');
+      });
+      $(".dialog__triggerss").click(function () {
+         dialogBox.removeClass('dialog--active');
+      });
 
-		// Close the dialog - press escape key // key#27
-		$(document).keyup(function (e) {
-			if (e.keyCode === 27) {
-				dialogBox.removeClass('dialog--active');
-			}
-		});
-	};
+      // Close the dialog - press escape key // key#27
+      $(document).keyup(function (e) {
+         if (e.keyCode === 27) {
+            dialogBox.removeClass('dialog--active');
+         }
+      });
+   };
 
-	// Run function when the document has loaded
-	$(function () {
-		dialog();
-	});
+   // Run function when the document has loaded
+   $(function () {
+      dialog();
+   });
 
-	function dialogs() {
-		var dialogBoxs = $('.dialogs'),
-			dialogTriggers = $('.dialog__triggers'),
-			dialogActions = $('.dialog__actions');
+   function dialogs() {
+      var dialogBoxs = $('.dialogs'),
+         dialogTriggers = $('.dialog__triggers'),
+         dialogActions = $('.dialog__actions');
 
-		// Open the dialog
-		dialogTriggers.on('click', function (e) {
-			dialogBoxs.toggleClass('dialog--actives');
-			e.stopPropagation()
-		});
+      // Open the dialog
+      dialogTriggers.on('click', function (e) {
+         dialogBoxs.toggleClass('dialog--actives');
+         e.stopPropagation()
+      });
 
-		$(".dialogs").click(function () {
-			dialogBoxs.toggleClass('dialog--actives');
-		});
+      $(".dialogs").click(function () {
+         dialogBoxs.toggleClass('dialog--actives');
+      });
 
-		$(".dialog__trigger").click(function () {
-			dialogBoxs.removeClass('dialog--actives');
-		});
-		$(".dialog__triggerss").click(function () {
-			dialogBoxs.removeClass('dialog--actives');
-		});
+      $(".dialog__trigger").click(function () {
+         dialogBoxs.removeClass('dialog--actives');
+      });
+      $(".dialog__triggerss").click(function () {
+         dialogBoxs.removeClass('dialog--actives');
+      });
 
-		// Close the dialog - press escape key // key#27
-		$(document).keyup(function (e) {
-			if (e.keyCode === 27) {
-				dialogBoxs.removeClass('dialog--actives');
-			}
-		});
-	};
+      // Close the dialog - press escape key // key#27
+      $(document).keyup(function (e) {
+         if (e.keyCode === 27) {
+            dialogBoxs.removeClass('dialog--actives');
+         }
+      });
+   };
 
-	// Run function when the document has loaded
-	$(function () {
-		dialogs();
-	});
+   // Run function when the document has loaded
+   $(function () {
+      dialogs();
+   });
 
-	function dialogss() {
-		var dialogBoxss = $('.dialogss'),
-			dialogTriggerss = $('.dialog__triggerss'),
-			dialogActionss = $('.dialog__actionss');
+   function dialogss() {
+      var dialogBoxss = $('.dialogss'),
+         dialogTriggerss = $('.dialog__triggerss'),
+         dialogActionss = $('.dialog__actionss');
 
-		// Open the dialog
-		dialogTriggerss.on('click', function (e) {
-			dialogBoxss.toggleClass('dialog--activess');
-			e.stopPropagation()
-		});
+      // Open the dialog
+      dialogTriggerss.on('click', function (e) {
+         dialogBoxss.toggleClass('dialog--activess');
+         e.stopPropagation()
+      });
 
-		$(".dialog__trigger").click(function () {
-			dialogBoxss.removeClass('dialog--activess');
-		});
+      $(".dialog__trigger").click(function () {
+         dialogBoxss.removeClass('dialog--activess');
+      });
 
-		$(".dialog__triggers").click(function () {
-			dialogBoxss.removeClass('dialog--activess');
-		});
+      $(".dialog__triggers").click(function () {
+         dialogBoxss.removeClass('dialog--activess');
+      });
 
-		// Close the dialog - press escape key key#27
-		$(document).keyup(function (e) {
-			if (e.keyCode === 27) {
-				dialogBoxss.removeClass('dialog--activess');
-			}
-		});
-	};
+      // Close the dialog - press escape key key#27
+      $(document).keyup(function (e) {
+         if (e.keyCode === 27) {
+            dialogBoxss.removeClass('dialog--activess');
+         }
+      });
+   };
 
-	// Run function when the document has loaded
-	$(function () {
-		dialogss();
-	});
+   // Run function when the document has loaded
+   $(function () {
+      dialogss();
+   });
 
-	// 알람 탭 메뉴
-	$("#tabs").tabs();
+   // 알람 탭 메뉴
+   $("#tabs").tabs();
 
-	// 서브 메인 작성 카드 리스트
-	$("#tabss").tabs();
+   // 서브 메인 작성 카드 리스트
+   $("#tabss").tabs();
 
-	var ctx = document.getElementById("myChart").getContext('2d');
-	var myChart = new Chart(ctx, {
-		type: 'pie',
-		data: {
-			labels: ["요청", "진행", "피드백", "완료", "보류"],
-			datasets: [{
-				label: '',
-				data: [12, 19, 3, 5, 2],
-				backgroundColor: [
-					'rgba(255, 99, 132, 0.2)',
-					'rgba(54, 162, 235, 0.2)',
-					'rgba(255, 206, 86, 0.2)',
-					'rgba(75, 192, 192, 0.2)',
-					'rgba(153, 102, 255, 0.2)'
-				],
-				borderColor: [
-					'rgba(255,99,132,1)',
-					'rgba(54, 162, 235, 1)',
-					'rgba(255, 206, 86, 1)',
-					'rgba(75, 192, 192, 1)',
-					'rgba(153, 102, 255, 1)'
-				],
-				borderWidth: 1
-			}]
-		},
-		options: {
-			scales: {
-				yAxes: [{
-					ticks: {
-						beginAtZero: true
-					}
-				}]
-			}
-		}
-	});
+   var ctx = document.getElementById("myChart").getContext('2d');
+   var myChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+         labels: ["요청", "진행", "피드백", "완료", "보류"],
+         datasets: [{
+            label: '',
+            data: [12, 19, 3, 5, 2],
+            backgroundColor: [
+               'rgba(255, 99, 132, 0.2)',
+               'rgba(54, 162, 235, 0.2)',
+               'rgba(255, 206, 86, 0.2)',
+               'rgba(75, 192, 192, 0.2)',
+               'rgba(153, 102, 255, 0.2)'
+            ],
+            borderColor: [
+               'rgba(255,99,132,1)',
+               'rgba(54, 162, 235, 1)',
+               'rgba(255, 206, 86, 1)',
+               'rgba(75, 192, 192, 1)',
+               'rgba(153, 102, 255, 1)'
+            ],
+            borderWidth: 1
+         }]
+      },
+      options: {
+         scales: {
+            yAxes: [{
+               ticks: {
+                  beginAtZero: true
+               }
+            }]
+         }
+      }
+   });
 </script>
 <script>
-	$(document).ready(function () {
-		$('.kku-hide').hide();
+   $(document).ready(function () {
+      $('.kku-hide').hide();
 
-		updateCard('0', '0', 0, '${projectVo.project_id}');
+      updateCard('0', '0', 0, '${projectVo.project_id}');
 
-		// html dom 이 다 로딩된 후 실행된다.
-		$(document).ready(function () {
-			// menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
-			$(".projectTeams > h2").click(function () {
-				var submenu = $(this).next("ul");
+      // html dom 이 다 로딩된 후 실행된다.
+      $(document).ready(function () {
+         // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
+         $(".projectTeams > h2").click(function () {
+            var submenu = $(this).next("ul");
 
-				// submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
-				if (submenu.is(":visible")) {
-					submenu.slideUp();
-				} else {
-					submenu.slideDown();
-				}
-			});
-
-			//todo 등록시 시작일자는 현재시간으로 기본값(default) 설정  ==문의: jerry==
-			var date = new Date();
-			date.setHours(date.getHours() + 9);
-			//console.log(date.toISOString());
-			document.getElementById('non_todo_sdate').value = date.toISOString().slice(0, 16);
-
-			var param = $('#todo_work').val();
-			todoSelect(param);
-
-		});
+            // submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+            if (submenu.is(":visible")) {
+               submenu.slideUp();
+            } else {
+               submenu.slideDown();
+            }
+         });
+      });
 
 
-	});
-	$(function () {
-		var tabs = $("#planList").tabs();
-		tabs.find(".column").sortable({
-			connectWith: ".column",
-			handle: ".portlet-header",
-			cancel: ".portlet-toggle",
-			placeholder: "portlet-placeholder ui-corner-all",
-			stop: function (event, ui) {
-				var prev = isNaN(parseFloat(ui.item.prev().children(".kku-index").text())) ? 9999999 : parseInt(ui.item.prev().children(".kku-index").text());
-				var next = isNaN(parseFloat(ui.item.next().children(".kku-index").text())) ? 0 : parseInt(ui.item.next().children(".kku-index").text());
-				var index = prev - ((prev - next) / 2);
-				var no = parseInt(ui.item.children(".kku-no").text());
-				var group = ui.item.prev().children(".kku-group").text();
-				if (group === "") {
-					group = ui.item.next().children(".kku-group").text();
-				}
-				// alert(next)
-				// alert(index)
-				// alert(index)
+   });
+   $(function () {
+      var tabs = $("#planList").tabs();
+      tabs.find(".column").sortable({
+         connectWith: ".column",
+         handle: ".portlet-header",
+         cancel: ".portlet-toggle",
+         placeholder: "portlet-placeholder ui-corner-all",
+         stop: function (event, ui) {
+            var prev = isNaN(parseFloat(ui.item.prev().children(".kku-index").text())) ? 9999999 : parseInt(ui.item.prev().children(".kku-index").text());
+            var next = isNaN(parseFloat(ui.item.next().children(".kku-index").text())) ? 0 : parseInt(ui.item.next().children(".kku-index").text());
+            var index = prev - ((prev - next) / 2);
+            var no = parseInt(ui.item.children(".kku-no").text());
+            var group = ui.item.prev().children(".kku-group").text();
+            if (group === "") {
+               group = ui.item.next().children(".kku-group").text();
+            }
+            // alert(next)
+            // alert(index)
+            // alert(index)
 
-				//alert(ui.item.prev().index());
-				//alert(ui.item.prev().text()) //전값
-				//alert(ui.item.text()) //현재값
-				//alert(ui.item.next().text()) //다음값
-				tabs.tabs("refresh");
-				updateCard(no, group, index);
-			}
-		});
+            //alert(ui.item.prev().index());
+            //alert(ui.item.prev().text()) //전값
+            //alert(ui.item.text()) //현재값
+            //alert(ui.item.next().text()) //다음값
+            tabs.tabs("refresh");
+            updateCard(no, group, index);
+         }
+      });
 
-		$(".portlet")
-			.addClass("ui-widget ui-widget-content ui-helper-clearfix ui-corner-all")
-			.find(".portlet-header")
-			.addClass("ui-widget-header ui-corner-all")
-			.prepend("<span class='ui-icon ui-icon-minusthick portlet-toggle'></span>");
+      $(".portlet")
+         .addClass("ui-widget ui-widget-content ui-helper-clearfix ui-corner-all")
+         .find(".portlet-header")
+         .addClass("ui-widget-header ui-corner-all")
+         .prepend("<span class='ui-icon ui-icon-minusthick portlet-toggle'></span>");
 
-		$(".portlet-toggle").on("click", function () {
-			var icon = $(this);
-			icon.toggleClass("ui-icon-minusthick ui-icon-plusthick");
-			icon.closest(".portlet").find(".portlet-content").toggle();
-		});
-	});
+      $(".portlet-toggle").on("click", function () {
+         var icon = $(this);
+         icon.toggleClass("ui-icon-minusthick ui-icon-plusthick");
+         icon.closest(".portlet").find(".portlet-content").toggle();
+      });
+   });
 
-	<%--
-	function updateCard(no, group, index){
-		location.href = "/updateCard?card_no="+no+"&card_group="+group+"&card_index="+index;
-	}; --%>
-
-
-	function createWork() {
-		var param = $('form[name=workfrm1]').serialize();
-		$.ajax({
-			method: "POST",
-			url: "/ajaxCreateWork",
-			data: param,
-			success: function (data) {
-				$('#submain_work').html("");
-				$('#submain_work').html(data);
-				updateCard('0', '0', 0, '${projectVo.project_id}');
-			},
-			error: function (data) {
-			}
-		});
-	}
-
-	function insertCmt(work_id, cmt_content) {
-		var cmt_contenta = $('#' + cmt_content).val();
-		$.ajax({
-			method: "GET",
-			url: "/ajaxInsertCmt",
-			data: {"work_id": work_id, "cmt_content": cmt_contenta, "project_id": ${projectVo.project_id}},
-			success: function (data) {
-				$('#submain_work').html("");
-				$('#submain_work').html(data);
-			},
-			error: function (data) {
-			}
-		});
-	}
-
-	//할일등록의 등록버튼에 마우스올리면 커서 변경 ==문의: jerry==
-	$(".issueInfoCreate").mouseover(function () {
-		$(this).css("cursor", "pointer");
-	});
-
-	//to-di list 등록 ==문의: jerry==
-	function insertTodo() {
-		var sdate = $('input[name=non_todo_sdate]').val(); //UTC형식 Date를 sdate에 담는다.
-		var eedate = $('input[name=non_todo_eedate]').val(); //UTC형식 Date를 eedate에 담는다.
-		var repSdate = sdate.replace("T", " "); //Parsing('T' 제거)
-		var repEedate = eedate.replace("T", " "); //Parsing('T' 제거)
-		$("#todo_sdate").attr('value', repSdate); //Controller에 보낼 hidden에 값을 세팅
-		$("#todo_eedate").attr('value', repEedate); //Controller에 보낼 hidden에 값을 세팅
-
-		var param = $('#todoInsert').serialize();
-
-		$.ajax({
-			method: "POST",
-			url: "/todoInsert",
-			data: param,
-			success: function(data) {
-				alert("success");
-				//$('#todoInsertHtmlAjax').html("");
-				//$('#todoInsertHtmlAjax').html(data);
-			},
-			error:function(data) {
-				alert("error");
-			}
-		});
-	}
-
-	//페이지 접속시 to-do list 조회(Ajax) ==문의: jerry==
-	function todoSelect() {
-		var project_id = $('#todo_project_id').val();
-		console.log("project_id : " + project_id);
+   <%--
+   function updateCard(no, group, index){
+      location.href = "/updateCard?card_no="+no+"&card_group="+group+"&card_index="+index;
+   }; --%>
 
 
-		function todoSelect(todo_work) {
-			console.log("todo_work : " + todo_work);
+   function createWork() {
+      var param = $('form[name=workfrm1]').serialize();
+      $.ajax({
+         method: "POST",
+         url: "/ajaxCreateWork",
+         data: param,
+         success: function (data) {
+            $('#submain_work').html("");
+            $('#submain_work').html(data);
+            updateCard('0', '0', 0, '${projectVo.project_id}');
+         },
+         error: function (data) {
+         }
+      });
+   }
 
-			$.ajax({
-				method: "POST",
-				url: "/todoSelect",
-				data: project_id,
-				success: function (data) {
-					alert("success");
-					$('#todoInsertHtmlAjax').html("");
-					$('#todoInsertHtmlAjax').html(data);
-				},
-				error: function (data) {
-					alert("error");
-				}
-			});
-		}
-
-		// submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
-		if (submenu.is(":visible")) {
-			submenu.slideUp();
-		} else {
-			submenu.slideDown();
-		}
-	}
-
-    //to-do 등록시 시작일자는 현재시간으로 기본값(default) 설정  ==문의: jerry==
-    var date = new Date();
-    date.setHours(date.getHours() + 9);
-    //console.log(date.toISOString());
-    document.getElementById('non_todo_sdate').value = date.toISOString().slice(0, 16);
-    
-    //페이지 접속시 to-do list 조회 ==문의: jerry==
-    todoSelect();
+   function insertCmt(work_id, cmt_content) {
+      var cmt_contenta = $('#' + cmt_content).val();
+      $.ajax({
+         method: "GET",
+         url: "/ajaxInsertCmt",
+         data: {"work_id": work_id, "cmt_content": cmt_contenta, "project_id": ${projectVo.project_id}},
+         success: function (data) {
+            $('#submain_work').html("");
+            $('#submain_work').html(data);
+         },
+         error: function (data) {
+         }
+      });
+   }
+   
+// submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+if (submenu.is(":visible")) {
+   submenu.slideUp();
+} else {
+   submenu.slideDown();
+}  
 </script>
 
 <script>
-	function updateCard(no, group, index) {
+   function updateCard(no, group, index) {
 
-		$.ajax({
-			type: "GET",
-			url: "/ajaxUpdateCard",
-			data: {"wc_id": no, "wc_group": group, "wc_index": index, "project_id":${projectVo.project_id}},
-			success: function (data) {
-				$('#planList').html("");
-				$('#planList').html(data);
-				$('.kku-hide').hide();
-			}
-		});
+      $.ajax({
+         type: "GET",
+         url: "/ajaxUpdateCard",
+         data: {"wc_id": no, "wc_group": group, "wc_index": index, "project_id":${projectVo.project_id}},
+         success: function (data) {
+            $('#planList').html("");
+            $('#planList').html(data);
+            $('.kku-hide').hide();
+         }
+      });
 
-		<%--location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${projectVo.project_id}";--%>
-	};
+      <%--location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${projectVo.project_id}";--%>
+   };
 </script>
 </body>
 </html>
