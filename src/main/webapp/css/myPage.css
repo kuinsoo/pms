@@ -218,3 +218,23 @@
 .evaluationChart2{text-align:center;}
 .myChartSelect1{width:80%;height:30px;font-size:20px;outline:none;martgin:0 auto;margin-top:10px;}
 .myChartSelect2{width:80%;height:30px;font-size:20px;outline:none;martgin:0 auto;margin-top:10px;}
+
+.abilityContainer {
+	width:1200px;height:600px;margin:0 auto;overflow:hidden;padding:20px;
+	margin-top:50px;
+}
+.abilityLeft{width:100px;float:left;}
+.abilityLeft > ul > li {padding:10px 0px 10px 0px}
+.abilityLeft > ul > li:nth-child(2){height:175px;}
+.abilityRight{margin-left:20px;width:700px;float:left;}
+.abilityRight > ul > li {padding:10px 0px 10px 0px}
+.abilityRight > ul > li:first-child > input[type="text"] {
+	border:none;border-bottom:1px solid #333;width:700px;height:30px;outline:none;font-size:20px;
+	padding-bottom:5px;
+}
+.abilityRight > ul > li:nth-child(2) > textarea {
+	width:700px;height:150px;outline:none;padding:10px;font-size:20px;
+}
+.accordionView{width:700px;height:330px;border:1px solid #333;overflow-y:scroll;}
+#accordion > h3{text-indent:10px;padding:10px 0px 10px 0px;font-weight:bold;}
+#accordion > div{padding:15px;font-size:18px;}
