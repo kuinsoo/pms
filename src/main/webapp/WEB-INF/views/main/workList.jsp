@@ -22,7 +22,7 @@
             <div class="updateDeleteIcon">
                 <i class="icon-wrench icons"></i>
                 <a href="#opens"><i class="icon-bulb icons"></i></a>
-                    <%-- todo 관련 --%>
+                    <%-- 할일관련 --%>
                 <%@ include file="/WEB-INF/views/todo/todo.jsp" %>
             </div>
         </div>
@@ -30,6 +30,7 @@
             <div class="currentCardContentViewLeft">
                 <textarea readonly>${work.work_content}</textarea>
             </div>
+            <%-- 할일관련 --%>
             <%@ include file="/WEB-INF/views/todo/todoList.jsp" %>
         </div>
         <div class="currentCardContentBottomView">
