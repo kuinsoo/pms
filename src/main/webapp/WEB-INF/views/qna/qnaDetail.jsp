@@ -47,31 +47,18 @@
 	<div class="currentMainContainer">
 		<div class="noticeContainer">
 			<div class="noticeContainerLeft">
-				<h2>CURRENT SERVICE<br>Q & A <br> 작성하기 </h2>
+				<h2>CURRENT SERVICE<br>Q & A <br> 내용 </h2>
 			</div>
 			<div class="noticeContainerRight">
 				
 				<a href="/qnaList">질의 목록보기</a><br/><br/>
 				
-				<label>질의 작성일</label><br/>
-				제목 : <input type="text" placeholder="제목을 입력하세요" class="" id="" ><br/>
-				내용 : <input type="text" placeholder="내용을 입력하세요" class="" id="" ><br/>
+				<label>질의 작성일</label>
+				<a href="/qnaMody"> [수정]</a><a href="/qnaDel"> [삭제]</a><a href="/qnaReply"> [답글]</a><br/>
+				제목 : <label>질의 제목을 작성하였습니다 </label><br/>
+				내용 : <label>질의 내용을 작성하였습니다 </label><br/>
 				
-				<button id="att" >첨부파일</button>
-				<script>
-				$('#att').on('click',function(){
-					$('#attFile').css("display","block");
-				});
-				</script>
-				<input type="file" style="display:none" id="attFile" ><br/>
-				
-				<button id="cecret" >비밀글</button>
-				<script>
-				$('#cecret').on('click',function(){
-					$('#cecretPass').css("display","block");
-				});
-				</script>
-				<input type="text"style="display:none" id="cecretPass"  placeholder="비밀번호를 입력하세요" ><br/>
+				<label>첨부파일</label><br/>
 				
 			</div>
 		</div>
