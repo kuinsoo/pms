@@ -57,7 +57,7 @@
 									<colgroup width="40%" />
 									<colgroup width="30%" />
 									<thead>
-										<tr>
+										<tr  class = "msgClick1"> 
 											<th>번호</th>
 											<th>보낸 사람</th>
 											<th>쪽지 내용</th>
@@ -223,16 +223,20 @@
 			</p>
 		</div>
 	</footer>
+<form action="/">
 
+</form>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		
 		getMessageReceived(1);
 		
-
+		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
+			console.log("msgReceiveList");
+			 window.location = "#open2";
+		});
 	});
 		
 		
@@ -247,7 +251,7 @@
 					console.log(data.msgReceiveList);
 					var html = "";
 					$.each(data.msgReceiveList,function(idx,mm){
-						html += "<tr>";
+						html += "<tr class = msgClick1>";
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.msg_smember+"</td>";
 						html += "	<td>"+ mm.msg_content +"</td>";

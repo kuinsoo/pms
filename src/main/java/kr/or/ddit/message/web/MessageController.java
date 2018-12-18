@@ -49,9 +49,8 @@ public class MessageController {
 	 */
 	@RequestMapping(value= "/message")
 	public String message(@SessionAttribute("memberVo") MemberVo memberVo, Model model, FriendListVo friendVo) {
-		
+
 		List<FriendListVo> selctMyFriend = friendservice.selectMyFriends(memberVo.getMember_mail());
-		
 		model.addAttribute("selctMyFriend",selctMyFriend);
 		
 		return "message/message";
@@ -60,6 +59,15 @@ public class MessageController {
 	
 	/*
 	 **** 	@ResponseBody ****** 꼭 해주기  
+	 */
+	/**
+	 * Method : messageReceivedAjax
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param memberVo
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 받은쪽지 Ajax (페이징 처리 포함)
 	 */
 	@ResponseBody
 	@RequestMapping(value= "/messageReceivedAjax" , method= RequestMethod.GET)
@@ -71,19 +79,18 @@ public class MessageController {
 		MessageVo messageVo = new MessageVo();
 		messageVo.setMsg_rmember(memberVo.getMember_mail());
 		
-		List<MessageVo> msgReceiveList = messageservice.messageReceived(pageVo);
-		System.out.println("msgReceiveList의  값은 과연 ?????????????"+ msgReceiveList.size());		
-		
-		
+		List<MessageVo> msgReceiveList = messageservice.messageReceived(pageVo);	
 		int pageCnt = messageservice.totalMsgReceived(memberVo.getMember_mail());
-		System.out.println(pageCnt + "pageCnt의 값");
-		
+
 		Map<String, Object> msgReceiveMap = new HashMap<>();
 		msgReceiveMap.put("msgReceiveList", msgReceiveList);
 		msgReceiveMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
 		return msgReceiveMap;
 	}	
+	
+	//@RequestMapping
+	
 }
 
 
