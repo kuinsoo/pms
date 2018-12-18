@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="/css/submain.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
+
 </head>
 
 <body class="cbp-spmenu-push">
@@ -56,7 +57,7 @@
                 <i class="icon-calendar icons"></i>
                 <p><a href="/allSchedule">전체 일정</a></p>
             </li>
-            <c:if test="${project_id >= 0 }" >
+            <c:if test="${projectVo.project_id >= 0 }" >
             <li>
                 <i class="icon-bubbles icons"></i>
                 <p>회의</p>
@@ -82,7 +83,7 @@
             </li>
             <li>
                 <i class="icon-question icons"></i>
-                <p><a href="/qna">Q & A</a></p>
+                <p><a href="/qnaList">Q & A</a></p>
             </li>
         </ul>
     </div>
@@ -120,7 +121,7 @@
 
             <div class="headerRightContent">
             	<!-- 팀원 초대 -->
-            	<c:if test="${project_id >= 0 }">
+            	<c:if test="${projectVo.project_id >= 0 }">
                 <a href="#projectCreatePopUps" class="projectCreatePopUps">
                     <div class="teamInvite">
                         <i class="icon-plus icons"></i>
@@ -140,7 +141,7 @@
                                 </div>
                                 <div class="pop-conts-sections">
                                     <div class="pop-conts-section-titles">
-                                        <form action="/inviteTeam?project_id=${project_id}" method="POST" id="inviteForm">
+                                        <form action="/inviteTeam?project_id=${projectVo.project_id}" method="POST" id="inviteForm">
                                         <span>이메일을 통해 팀원을 초대할 수 있습니다</span>
                                         <br>
                                         <input type="email" name="inviteTeam" value="kkuinsoo@gmail.com" placeholder="이메일 입력" class="projectTitleInputs" />

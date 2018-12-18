@@ -10,4 +10,5 @@ package kr.or.ddit.board.mapper;
  * @Version :
  */
 public class BoardMapper {
+	
 }

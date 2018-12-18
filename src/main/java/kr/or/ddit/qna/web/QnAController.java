@@ -23,12 +23,25 @@ public class QnAController {
 	/**
 	 * Method : qnaView
 	 * 작성자 : iks
+	 * 변경이력 : 변찬우 
+	 *
+	 * @return Method 설명 : Q&A 화면단
+	 */
+	@RequestMapping(value= "/qnaList")
+	public String qnaView() {
+		return "qna/qnaList";
+	}
+	
+	
+	/**
+	 * Method : qnaFormView
+	 * 작성자 : 변찬우 
 	 * 변경이력 :
 	 *
 	 * @return Method 설명 : Q&A 화면단
 	 */
-	@RequestMapping(value= "/qna")
-	public String qnaView() {
-		return "qna/qna";
+	@RequestMapping(value= "/qnaForm")
+	public String qnaFormView() {
+		return "qna/qnaForm";
 	}
 }

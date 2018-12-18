@@ -3,6 +3,7 @@
 
 <%-- header & left --%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
+
 	<%--CURRENT SECTION(MAIN)--%>
 	<section class="currentMain">
 		<div class="currentMainContainer">
@@ -49,59 +50,16 @@
 				</div>
 				<div class="projectTaskContainerDragDrop">
 					<div class="projectTaskDragDrop">
-
-						<%@include file="/WEB-INF/views/card/cardChart.jsp"%>
-						<%--<div class="kku-boarder kku-mainPage" id="planList">
-							<div class="column">
-								<div class="portlet">
-				                    <div class="portlet-header">TITLE</div>
-				                    <div class="portlet-content">
-				                    	CONTENT CONTENT CONTENT CONTENT
-				                    </div>
-				                    <label class="kku-hide kku-no">1</label>
-				                    <label class="kku-hide kku-group">1</label>
-				                    <label class="kku-hide kku-index">1</label>
-				                </div>
-				                <div class="portlet">
-				                    <div class="portlet-header">TITLE</div>
-				                    <div class="portlet-content">
-				                    	CONTENT CONTENT CONTENT CONTENT
-				                    </div>
-				                    <label class="kku-hide kku-no">1</label>
-				                    <label class="kku-hide kku-group">1</label>
-				                    <label class="kku-hide kku-index">1</label>
-				                </div>
-				                <div class="portlet">
-				                    <div class="portlet-header">TITLE</div>
-				                    <div class="portlet-content">
-				                    	CONTENT CONTENT CONTENT CONTENT
-				                    </div>
-				                    <label class="kku-hide kku-no">1</label>
-				                    <label class="kku-hide kku-group">1</label>
-				                    <label class="kku-hide kku-index">1</label>
-				                </div>
-							</div>
-							<div class="column">
-								<div class="portlet">
-									<label class="kku-hide kku-group">2</label>
-								</div>
-							</div>
-							<div class="column">
-								<div class="portlet">
-									<label class="kku-hide kku-group">3</label>
-								</div>
-							</div>
-							<div class="column">
-								<div class="portlet">
-									<label class="kku-hide kku-group">4</label>
-								</div>
-							</div>
-							<div class="column">
-								<div class="portlet">
-									<label class="kku-hide kku-group">5</label>
-								</div>
-							</div>
-						</div>--%>
+						<ul id="titleList" >
+							<li class="titleBox">요청</li>
+							<li class="titleBox">진행</li>
+							<li class="titleBox">이슈발생</li>
+							<li class="titleBox">처리대기</li>
+							<li class="titleBox">완료</li>
+						</ul>
+						<div class="kku-boarder kku-mainPage" id="planList">
+							<%@include file="/WEB-INF/views/card/cardChart.jsp"%>
+						</div>
 					</div>
 				</div>
 				<div class="projectWriter">
@@ -370,7 +328,7 @@
 				</div>
 				<div class="projectTeamsTop">
 					<!-- (변찬우) for node // 외부에서 접근해서 인증 허용 해줘야 함..  -->
-					<iframe src="https://127.0.0.1:8443/" width="100%" height="100%"></iframe>
+					<iframe src="https://127.0.0.1:8443/" ></iframe>
 				</div>
 				<div class="projectTeams">
 					<h2>전체 참여자 ${projectMemberList.size()}명 <i class="icon-plus icons"></i></h2>
@@ -412,7 +370,7 @@
 	</footer>
 </div>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
 <script>
@@ -612,6 +570,8 @@ var myChart = new Chart(ctx, {
 <script>
 	$(document).ready(function () {
 		$('.kku-hide').hide();
+
+		<%--updateCard( '0','0',0, '${projectVo.project_id}' );--%>
 	});
 	$( function() {
 		var tabs = $("#planList").tabs();
@@ -716,12 +676,12 @@ var myChart = new Chart(ctx, {
 			//dataType: html,
 			data: param,
 			success: function(data) {
-				alert("success");
+				// alert("success");
 				$('.currentCardContentViewRight').html("");
 				$('.currentCardContentViewRight').html(data);
 			},
 			error:function(data) {
-				alert("error");
+				// alert("error");
 			}
 		});
 	}
@@ -769,6 +729,26 @@ $(document).ready(function(){
     todoSelect(param);
     
 });
+</script>
+
+
+
+<script>
+	function updateCard(no, group, index){
+
+		$.ajax({
+			type: "GET",
+			url : "/ajaxUpdateCard",
+			data: {"wc_id":no , "wc_group":group, "wc_index":index,"project_id":${projectVo.project_id} },
+			success: function (data) {
+				$('#planList').html("");
+				$('#planList').html(data);
+				$('.kku-hide').hide();
+			}
+		});
+
+		<%--location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${projectVo.project_id}";--%>
+	};
 </script>
 </body>
 </html>
