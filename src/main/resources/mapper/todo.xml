@@ -34,8 +34,9 @@
 	</insert>
 	
 	<!-- to-do select -->
-	<select id="workToDoSelect" resultType="todoVo" parameterType="String">
-		SELECT  todo_content,
+	<select id="workToDoSelect" resultType="todoVo" parameterType="workVo">
+		SELECT  todo_id,
+				todo_content,
 		        todo_pmember,
 		        todo_sdate,
 		        todo_eedate,
@@ -44,7 +45,8 @@
 		        todo_work
 		FROM    todo INNER JOIN work
 		ON      todo_work = work_id
-		WHERE   work_project = ${work_project};
+		WHERE   work_project = #{work_project}
+		AND		work_id = #{work_id}
 	</select>
 	
 </mapper>

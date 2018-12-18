@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import kr.or.ddit.commons.ResetSQL;
 import kr.or.ddit.todo.model.ToDoVo;
+import kr.or.ddit.work.model.WorkVo;
 
 public class TodoServiceTest extends ResetSQL{
 
@@ -17,13 +18,15 @@ public class TodoServiceTest extends ResetSQL{
 	@Test
 	public void todoSelectTest() {
 		/***Given***/
-		String todo_work = "2";
+		WorkVo workVo = new WorkVo();
+		workVo.setWork_id("22");
+		workVo.setWork_project("8");
 		
 		/***When***/
-		List<ToDoVo> todoSelectList = todoService.workToDoSelect(todo_work);
+		List<ToDoVo> todoList = todoService.workToDoSelect(workVo);
 		
 		/***Then***/
-		Assert.assertEquals(4, todoSelectList.size());
+		Assert.assertEquals(4, todoList.size());
 		
 	}
 	

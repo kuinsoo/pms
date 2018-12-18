@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.todo.model.ToDoVo;
+import kr.or.ddit.work.model.WorkVo;
 
 /**
  * kr.or.ddit.todo.service
@@ -44,6 +45,6 @@ public interface ToDoServiceInf {
 	* @return
 	* Method 설명 : 각 업무의 to-do list를 조회
 	*/
-	List<ToDoVo> workToDoSelect(String work_project);
+	List<ToDoVo> workToDoSelect(WorkVo workVo);
 	
 }

@@ -51,7 +51,7 @@
                             <div class="updateDeleteIcon">
                                 <i class="icon-wrench icons"></i>
                                 <a href="#opens"><i class="icon-bulb icons"></i></a>
-                                <%-- todo 관련 --%>
+                                <%-- to-do 관련 --%>
                                 <%@ include file="/WEB-INF/views/todo/todo.jsp" %>
                             </div>
                         </div>
@@ -437,11 +437,11 @@ function insertCmt(work_id, cmt_content) {
 }
 
 //submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
-if (submenu.is(":visible")) {
-submenu.slideUp();
-} else {
-submenu.slideDown();
-}
+// if (submenu.is(":visible")) {
+// submenu.slideUp();
+// } else {
+// submenu.slideDown();
+// }
 
 function updateCard(no, group, index) {
 
