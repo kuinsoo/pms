@@ -167,7 +167,7 @@
 			</c:if>
 
 				<div class="updateHeader" style="float:right;">
-					<a href="/facing" class="facing"><i class="icon-paper-plane icons"></i></a>
+					<a href="/message" class="facing"><i class="icon-paper-plane icons"></i></a>
 	                <!-- 알림 기능 -->
 	                <div class="alarm dialog__triggers">
 	                    <i class="icon-bell icons"></i>
