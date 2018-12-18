@@ -74,11 +74,13 @@ public class MessageController {
 		List<MessageVo> msgReceiveList = messageservice.messageReceived(pageVo);
 		System.out.println("msgReceiveList의  값은 과연 ?????????????"+ msgReceiveList.size());		
 		
+		
 		int pageCnt = messageservice.totalMsgReceived(memberVo.getMember_mail());
+		System.out.println(pageCnt + "pageCnt의 값");
 		
 		Map<String, Object> msgReceiveMap = new HashMap<>();
 		msgReceiveMap.put("msgReceiveList", msgReceiveList);
-		msgReceiveMap.put("pageCnt", pageCnt);
+		msgReceiveMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
 		return msgReceiveMap;
 	}	
