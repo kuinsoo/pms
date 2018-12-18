@@ -25,4 +25,14 @@
 		from MESSAGE_MEMBER
 		where MSG_RMEMBER = #{member_mail}
 	</select>
+	
+	<select id = "selectMessageReceived" resultType="msgVo" parameterType="String">
+		select A.MSG_SMEMBER, 
+      		   A.MSG_CONTENT, 
+      		   A.MSG_TIME
+		from  MESSAGE A, MESSAGE_MEMBER B
+		where A.MSG_ID = B.MSGMEMBER_MSG
+ 		and  B.MSG_RMEMBER= #{member_mail}
+ 		and  A.MSG_ID = #{msg_id}
+	</select>
 </mapper>

@@ -78,18 +78,18 @@
  									<a href="#close"><i class="icon-close icons"></i></a>
 									<div class="sentNoteContainer">
 										<div class="recipientFacing">
-											<span>보낸사람</span>
-											<input type="text" value="sally1334@naver.com" readonly />
+											<span></span>
+											<input type="text" value="" readonly />
 										</div>
 										<div class="sendDate">
-											<span>보낸날짜</span>
-											<input type="text" value="2018-12-17 19:09:00" readonly />
+											<span></span>
+											<input type="text" value="" readonly />
 											<i class="icon-ban icons"></i>
 											<span>차단</span>
 											<i class="icon-energy icons"></i>
 											<span>신고</span>
 										</div>							
-										<textarea class="sentNoteTextArea">답장입니다~~</textarea>
+										<textarea class="sentNoteTextArea"></textarea>
 										<div class="facingDeleteBtnDiv">
 											<input type="button" value="삭제" class="sentNoteDeleteBtn" />
 											<a href="#close" class="sentNoteCloseBtn">취소</a>
@@ -151,7 +151,7 @@
 										</div>
 										<div class="sendDate">
 											<span>보낸날짜</span>
-											<input type="text" value="2018-12-17 19:09:00" readonly />
+											<input type="text" value="" readonly />
 										</div>							
 										<textarea class="sentNoteTextArea">답장입니다~~</textarea>
 										<div class="facingDeleteBtnDiv">
@@ -223,9 +223,8 @@
 			</p>
 		</div>
 	</footer>
-<form action="/">
-
-</form>
+	
+<!-- <form id = "frm" action="/msgClick" method = "get"></form> -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
 <script type="text/javascript" src="js/jquery-ui.js"></script>
@@ -236,6 +235,8 @@
 		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
 			console.log("msgReceiveList");
 			 window.location = "#open2";
+
+			  //$("#frm").submit();
 		});
 	});
 		

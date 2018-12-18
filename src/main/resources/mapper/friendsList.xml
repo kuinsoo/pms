@@ -6,7 +6,7 @@
 <mapper namespace="kr.or.ddit.friendslist.mapper.FriendsListMapper">
 <select id="selectMyFriends" parameterType="String" resultType="friendVo">
 	select friend_member 
-	from   FRIENDLIST
+	from   FRIENDSLIST
 	where  friend_myemail = #{member_mail}
 </select> 
 </mapper>
