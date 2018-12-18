@@ -26,6 +26,15 @@ public interface MessageMapper {
 	 */
 	List<MessageVo> messageReceived (PageVo pageVo);
 	
+	/**
+	 * Method : messageSend
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 보낸 쪽지 리스트 
+	 */
+	List<MessageVo> messageSend(PageVo pageVo);
 	
 	/**
 	 * Method : totalMsgReceived
@@ -36,5 +45,15 @@ public interface MessageMapper {
 	 * Method 설명 : 받은 쪽지 갯수 
 	 */
 	int totalMsgReceived(String msg_rmember);
+	
+	/**
+	 * Method : selectMessageReceived
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param msg_id
+	 * @return
+	 * Method 설명 : Detail : 클릭했을때 팝업창에 뿌려주기 위함 
+	 */
+	MessageVo selectMessageReceived(String msg_id);
 	
 }

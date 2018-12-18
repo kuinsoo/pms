@@ -4,14 +4,58 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.ddit.project.mapper.ProjectMapper">
+	<resultMap id="pMemberResultMap" type="pMemberListVo">
+	<id property="member_name" column="member_name" />
+	<id property="member_profile" column="member_profile" />
+	<id property="pmemberCount" column="pmemberCount" />
+	<id property="pmember_member" column="pmember_member" />
+	<id property="pmember_position" column="pmember_position" />
+	<id property="project_title" column="project_title" />
+	<id property="project_overview" column="project_overview" />
+	<id property="project_bookmark" column="project_bookmark" />
+	<id property="project_id" column="project_id" />
+	</resultMap>
 
-    <select id="selectAllProject" resultType="projectVo">
+
+	<select id="selectAllProject" resultType="projectVo">
         select * from PROJECT order by PROJECT_ID desc
     </select>
 
     <select id="selectProject" resultType="projectVo" parameterType="String">
         select * from PROJECT where PROJECT_ID = #{project_id}
     </select>
+
+	<select id="bookMarkProjects" resultMap="pMemberResultMap" parameterType="String">
+		SELECT  p.project_id,
+				p.project_title,
+				p.project_overview,
+				pm.pmember_position,
+				pm.pmember_bookmark,
+				mail.pmember_member,
+				mem.member_name,
+				mem.member_profile,
+				pCount.pmemberCount
+		FROM    project_member pm INNER JOIN project p
+						ON      pm.pmember_project = p.project_id INNER JOIN (SELECT  pmember_project,
+																					  pmember_member
+																			  FROM    project_member
+																			  WHERE   pmember_position = 1) mail
+						ON      pm.pmember_project = mail.pmember_project INNER JOIN (SELECT  member_mail,
+																							  member_name,
+																							  member_profile
+																					  FROM    member) mem
+						ON      mail.pmember_member = mem.member_mail INNER JOIN (SELECT  pmember_project,
+																						  COUNT(*) pmemberCount
+																				  FROM    project_member
+																				  WHERE   pmember_project IN (SELECT  pmember_project
+																											  FROM    project_member
+																											  WHERE   pmember_member = #{member_mail})
+																				  GROUP BY pmember_project) pCount
+						ON      pm.pmember_project = pCount.pmember_project
+		WHERE   pm.pmember_member = #{member_mail}
+		and pm.PMEMBER_BOOKMARK = 'Y'
+		order by to_number(PROJECT_ID) desc
+	</select>
 
     <insert id="createProject" parameterType="projectVo">
         insert into PROJECT values (SEQ_PROJECT.nextval, #{project_title},#{project_overview}, #{project_sdate}, #{project_edate},'','#ab2af6' )

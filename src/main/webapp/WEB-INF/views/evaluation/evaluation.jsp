@@ -50,65 +50,58 @@
 					</div>
 					<div class="myPageContainerRightRightChart evaluationChart2">
 						<canvas id="myChart2" width="349" height="450"></canvas>
-						<select class="myChartSelect2">
-							<option>이슈처리 능력</option>
-							<option>이슈처리 능력</option>
-							<option>이슈처리 능력</option>
-							<option>이슈처리 능력</option>
-							<option>이슈처리 능력</option>
-						</select>
+						<input type="text" class="myChartSelect2" value="이슈 처리 능력" readonly />
 					</div>
 				</div>
-				<div class="myPageBottomContainer">
-					<div id="tabs2">
-						<ul>							
-							<li><a href="#tabs2-1">프로젝트</a></li>
-							<li><a href="#tabs2-1-1">항목1</a></li>
-							<li><a href="#tabs2-2">항목2</a></li>
-							<li><a href="#tabs2-3">항목3</a></li>
-							<li><a href="#tabs2-4">항목4</a></li>
-							<li><a href="#tabs2-5">항목5</a></li>
+				<div class="myPageBottomContainer abilityContainer">
+					<div class="abilityLeft">
+						<ul>
+							<li><h2>프로젝트</h2></li>
+							<li><h2>내용</h2></li>
+							<li><h2>처리 업무</h2></li>
 						</ul>
-
-						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 참여중인 목록  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-
-						<div id="tabs2-1">
-							
-						</div>
-						
-
-						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 참여했던 목록  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-
-						<div id="tabs2-1-1">
-							
-						</div>
-						
-						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 즐겨찾기 목록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-						
-						 
-						<div id="tabs2-2">
-							
-						</div>
-						
-						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 일감 보관 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-						
-						
-						<div id="tabs2-3">
-							
-						</div>
-						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 파일 보관함 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-						
-						<div id="tabs2-4">
-							
-						</div>
-						
-						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-						
-						<div id="tabs2-5">
-							
-						</div>
-						
-						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+					</div>
+					<div class="abilityRight">
+						<ul>
+							<li><input type="text" value="프로젝트 명" readonly /></li>
+							<li>
+								<textarea readonly>프로젝트 내용 메리 크리스마스는 없다</textarea>
+							</li>
+							<li>
+								<div class="accordionView">
+									<div id="accordion">
+									  <h3>처리업무 1</h3>
+									  <div>
+									    <p>처리업무 내용1</p>
+									  </div>
+									  <h3>처리업무 2</h3>
+									  <div>
+									    <p>처리업무 내용2</p>
+									  </div>
+									  <h3>처리업무 3</h3>
+									  <div>
+									    <p>처리업무 내용3</p>
+									  </div>
+									  <h3>처리업무 4</h3>
+									  <div>
+									    <p>처리업무 내용4</p>
+									  </div>
+									  <h3>처리업무 5</h3>
+									  <div>
+									    <p>처리업무 내용5</p>
+									  </div>
+									  <h3>처리업무 6</h3>
+									  <div>
+									    <p>처리업무 내용6</p>
+									  </div>
+									  <h3>처리업무 7</h3>
+									  <div>
+									    <p>처리업무 내용7</p>
+									  </div>
+									</div>
+								</div>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -129,7 +122,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
-<script type="text/javascript" src="js/jquery-ui.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 // DIM POPUP - 팀원초대
 $('.projectCreatePopUps').click(function(){
@@ -245,9 +238,6 @@ $(function(){
 // 알람 탭 메뉴
 $("#tabs").tabs();
 
-// 마이페이지 하단 탭 메뉴
-$("#tabs2").tabs();
-
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'pie',
@@ -314,6 +304,10 @@ var myChart2 = new Chart(ctx2, {
             }]
         }
     }
+});
+
+$(function(){
+  $("#accordion").accordion();
 });
 </script>
 </body>

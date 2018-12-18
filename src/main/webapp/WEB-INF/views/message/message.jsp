@@ -12,7 +12,6 @@
 						<li><a href="#tabs2-1">쪽지 보내기</a></li>
 						<li><a href="#tabs2-2">받은쪽지</a></li>
 						<li><a href="#tabs2-3">보낸쪽지</a></li>
-						<li><a href="#tabs2-4">휴지통</a></li>
 					</ul>
 
 					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 쪽지 보내기  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -78,18 +77,18 @@
  									<a href="#close"><i class="icon-close icons"></i></a>
 									<div class="sentNoteContainer">
 										<div class="recipientFacing">
-											<span>보낸사람</span>
-											<input type="text" value="sally1334@naver.com" readonly />
+											<span></span>
+											<input type="text" value="" readonly />
 										</div>
 										<div class="sendDate">
-											<span>보낸날짜</span>
-											<input type="text" value="2018-12-17 19:09:00" readonly />
+											<span></span>
+											<input type="text" value="" readonly />
 											<i class="icon-ban icons"></i>
 											<span>차단</span>
 											<i class="icon-energy icons"></i>
 											<span>신고</span>
 										</div>							
-										<textarea class="sentNoteTextArea">답장입니다~~</textarea>
+										<textarea class="sentNoteTextArea"></textarea>
 										<div class="facingDeleteBtnDiv">
 											<input type="button" value="삭제" class="sentNoteDeleteBtn" />
 											<a href="#close" class="sentNoteCloseBtn">취소</a>
@@ -108,33 +107,21 @@
 						<div class="sentNoteContainer">
 							<form action="#" method="post">
 								<table>
-									<colgroup width="10%" />							
 									<colgroup width="10%" />
+									<colgroup width="15%" />
 									<colgroup width="40%" />
-									<colgroup width="10%" />
 									<colgroup width="30%" />
 									<thead>
 										<tr>
-											<th><input type="checkbox" /></th>
 											<th>번호</th>
 											<th>받는 사람</th>
 											<th>쪽지 내용</th>
 											<th>날짜/시간</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td><input type="checkbox" /></td>
-											<td></td>
-											<td>
-												<a href="#open1"></a>
-											</td>
-											<td></td>
-											<td></td>
-										</tr>
+									<tbody id = "">
 									</tbody>
 								</table>
-								<input type="button" value="삭제" class="recoveryBtn" />
 							</form>
 							<div>
 								<ul class="pagination2">
@@ -151,7 +138,7 @@
 										</div>
 										<div class="sendDate">
 											<span>보낸날짜</span>
-											<input type="text" value="2018-12-17 19:09:00" readonly />
+											<input type="text" value="" readonly />
 										</div>							
 										<textarea class="sentNoteTextArea">답장입니다~~</textarea>
 										<div class="facingDeleteBtnDiv">
@@ -160,53 +147,6 @@
 									</div>
 								</div>
 						    </div>
-						</div>
-					</div>
-					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 휴지통 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-					
-					<div id="tabs2-4">
-						<div class="trashCanContainer">
-							<form action="#" method="post">
-								<table>
-									<colgroup width="10%" />							
-									<colgroup width="10%" />
-									<colgroup width="40%" />
-									<colgroup width="10%" />
-									<colgroup width="30%" />
-									<thead>
-										<tr>
-											<th><input type="checkbox" /></th>
-											<th>번호</th>
-											<th>받는 사람</th>
-											<th>쪽지 내용</th>
-											<th>날짜/시간</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><input type="checkbox" /></td>
-											<td></td>
-											<td>
-												<a href="#open1"></a>
-											</td>
-											<td></td>
-											<td></td>
-										</tr>
-									</tbody>
-								</table>
-								<input type="button" value="복구" class="recoveryBtn" />
-							</form>
-							<div class="pagination3">
-								<ul>
-									<li><</li>
-									<li>1</li>
-									<li>2</li>
-									<li>3</li>
-									<li>4</li>
-									<li>5</li>
-									<li>></li>
-								</ul>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -223,9 +163,8 @@
 			</p>
 		</div>
 	</footer>
-<form action="/">
-
-</form>
+	
+<!-- <form id = "frm" action="/msgClick" method = "get"></form> -->
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
 <script type="text/javascript" src="js/jquery-ui.js"></script>
@@ -236,6 +175,8 @@
 		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
 			console.log("msgReceiveList");
 			 window.location = "#open2";
+
+			  //$("#frm").submit();
 		});
 	});
 		

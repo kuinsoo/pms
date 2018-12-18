@@ -12,6 +12,14 @@
                         <img src="${projectMember.member_profile}">
                         <span class="projectUserNameList">${projectMember.member_name}</span>
                     </div>
+                    <div class="projectTeamHover">
+                    	<a href="/evaluation">
+	                    	<i class="icon-badge icons"></i>
+	                    	<span>능력 및 평가</span>
+                    	</a>
+                    	<i class="icon-paper-plane icons"></i>
+                    	<span>쪽지 보내기</span>
+                    </div>
                 </li>
             </c:if>
             <c:if test="${projectMember.pmember_position eq '2'}">
@@ -20,6 +28,14 @@
                     <div class="chatList">
                         <img src="${projectMember.member_profile}">
                         <span class="projectUserNameList">${projectMember.member_name}</span>
+                    </div>
+                    <div class="projectTeamHover">
+                    	<a href="/evaluation">
+	                    	<i class="icon-badge icons"></i>
+	                    	<span>능력 및 평가</span>
+                    	</a>
+                    	<i class="icon-paper-plane icons"></i>
+                    	<span>쪽지 보내기</span>
                     </div>
                 </li>
             </c:if>

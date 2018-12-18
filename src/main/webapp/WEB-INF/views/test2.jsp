@@ -9,19 +9,11 @@
 </head>
 <body>
 <h3>test2 입니다.</h3>
-	<table>
-		<tr>
-			<th>아이디</th>
-			<th>비밀번호</th>
-			<th>이름</th>
-		</tr>
-		<c:forEach items="${listAllMember}" var="member">
-		<tr>
-			<th>${member.mem_id}</th>
-			<th>${member.mem_pass}</th>
-			<th>${member.mem_name}</th>
-		</tr>
-		</c:forEach>
-	</table>
+	<form action="/testFileUpload" method="POST" enctype="multipart/form-data" >
+		<input type="file" multiple="multiple" name="files" value="파일첨부1" />
+		<input type="file" multiple="multiple" name="files" value="파일첨부2" />
+		<input type="file" multiple="multiple" name="files" value="파일첨부3" />
+		<input type="submit" value="전송" />
+	</form>
 </body>
 </html>
