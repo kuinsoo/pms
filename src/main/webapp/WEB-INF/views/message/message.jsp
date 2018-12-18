@@ -12,7 +12,6 @@
 						<li><a href="#tabs2-1">쪽지 보내기</a></li>
 						<li><a href="#tabs2-2">받은쪽지</a></li>
 						<li><a href="#tabs2-3">보낸쪽지</a></li>
-						<li><a href="#tabs2-4">휴지통</a></li>
 					</ul>
 
 					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 쪽지 보내기  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -108,33 +107,21 @@
 						<div class="sentNoteContainer">
 							<form action="#" method="post">
 								<table>
-									<colgroup width="10%" />							
 									<colgroup width="10%" />
+									<colgroup width="15%" />
 									<colgroup width="40%" />
-									<colgroup width="10%" />
 									<colgroup width="30%" />
 									<thead>
 										<tr>
-											<th><input type="checkbox" /></th>
 											<th>번호</th>
 											<th>받는 사람</th>
 											<th>쪽지 내용</th>
 											<th>날짜/시간</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td><input type="checkbox" /></td>
-											<td></td>
-											<td>
-												<a href="#open1"></a>
-											</td>
-											<td></td>
-											<td></td>
-										</tr>
+									<tbody id = "">
 									</tbody>
 								</table>
-								<input type="button" value="삭제" class="recoveryBtn" />
 							</form>
 							<div>
 								<ul class="pagination2">
@@ -160,53 +147,6 @@
 									</div>
 								</div>
 						    </div>
-						</div>
-					</div>
-					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 휴지통 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-					
-					<div id="tabs2-4">
-						<div class="trashCanContainer">
-							<form action="#" method="post">
-								<table>
-									<colgroup width="10%" />							
-									<colgroup width="10%" />
-									<colgroup width="40%" />
-									<colgroup width="10%" />
-									<colgroup width="30%" />
-									<thead>
-										<tr>
-											<th><input type="checkbox" /></th>
-											<th>번호</th>
-											<th>받는 사람</th>
-											<th>쪽지 내용</th>
-											<th>날짜/시간</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><input type="checkbox" /></td>
-											<td></td>
-											<td>
-												<a href="#open1"></a>
-											</td>
-											<td></td>
-											<td></td>
-										</tr>
-									</tbody>
-								</table>
-								<input type="button" value="복구" class="recoveryBtn" />
-							</form>
-							<div class="pagination3">
-								<ul>
-									<li><</li>
-									<li>1</li>
-									<li>2</li>
-									<li>3</li>
-									<li>4</li>
-									<li>5</li>
-									<li>></li>
-								</ul>
-							</div>
 						</div>
 					</div>
 				</div>

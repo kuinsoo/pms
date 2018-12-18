@@ -43,4 +43,10 @@ public class MessageService implements MessageServiceInf{
 	public MessageVo selectMessageReceived(String msg_id) {
 		return messageMapper.selectMessageReceived(msg_id);
 	}
+
+
+	@Override
+	public List<MessageVo> messageSend(PageVo pageVo) {
+		return messageMapper.messageSend(pageVo);
+	}
 }

@@ -26,6 +26,15 @@ public interface MessageMapper {
 	 */
 	List<MessageVo> messageReceived (PageVo pageVo);
 	
+	/**
+	 * Method : messageSend
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 보낸 쪽지 리스트 
+	 */
+	List<MessageVo> messageSend(PageVo pageVo);
 	
 	/**
 	 * Method : totalMsgReceived

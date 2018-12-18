@@ -97,6 +97,17 @@ public class MessageController {
 		return msgReceiveMap;
 	}	
 	
+	
+	 /*
+	 	집에서 할 부분  Ajax 처리하고 paging도 하기 
+	 	클릭부분은 내일 처리! 일단 여기까지 commit
+	 	
+	 	send
+	 */
+	
+	
+	
+	
 	/**
 	 * Method : msgClick
 	 * 작성자 : pc07

@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.ddit.message.mapper.MessageMapper">
-	
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 	<!-- 받은 쪽지 리스트 + 페이징처리 -->
 	<select id="messageReceived"  resultType= "msgVo" parameterType="pageVo">
 		select * from(
@@ -35,4 +35,23 @@
  		and  B.MSG_RMEMBER= #{member_mail}
  		and  A.MSG_ID = #{msg_id}
 	</select>
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	<!-- 보낸쪽지 리스트 + 페이징 처리 -->
+		
+	<select id="messageSend"  resultType= "msgVo" parameterType="pageVo">
+		select * from(
+		    select rownum rnum ,a.*
+		             from
+		                  (select A.MSG_SMEMBER, 
+                                  A.MSG_CONTENT, 
+                                  A.MSG_TIME
+                            from  MESSAGE A, MESSAGE_MEMBER B
+                            where A.MSG_ID = B.MSGMEMBER_MSG
+                            and A.MSG_SMEMBER = 'kkuinsoo@gmail.com')a)
+            where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
+	</select>
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	
+	
+	
 </mapper>
