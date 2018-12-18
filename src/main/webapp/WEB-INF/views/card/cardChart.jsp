@@ -23,6 +23,9 @@
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
+                    <div class="portletHover">
+	                	메리 크리스마스 따윈 없다
+	                </div>
                 </div>
             </c:if>
         </c:forEach>
@@ -42,6 +45,9 @@
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
+                    <div class="portletHover">
+	                	메리 크리스마스 따윈 없다
+	                </div>
                 </div>
             </c:if>
         </c:forEach>
@@ -61,6 +67,9 @@
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
+                    <div class="portletHover">
+	                	메리 크리스마스 따윈 없다
+	                </div>
                 </div>
             </c:if>
         </c:forEach>
@@ -80,6 +89,9 @@
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
+                    <div class="portletHover">
+	                	메리 크리스마스 따윈 없다
+	                </div>
                 </div>
             </c:if>
         </c:forEach>
@@ -99,6 +111,9 @@
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
+                    <div class="portletHover">
+	                	메리 크리스마스 따윈 없다
+	                </div>
                 </div>
             </c:if>
         </c:forEach>

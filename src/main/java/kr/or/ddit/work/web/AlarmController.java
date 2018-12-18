@@ -1,19 +1,19 @@
 package kr.or.ddit.work.web;
 
-import kr.or.ddit.member.model.MemberVo;
-import kr.or.ddit.work.model.WorkVo;
-import kr.or.ddit.work.service.WorkServiceInf;
+import java.util.List;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
+
+import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.work.model.WorkVo;
+import kr.or.ddit.work.service.WorkServiceInf;
 
 /**
  * kr.or.ddit.work.web
@@ -27,16 +27,19 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 @Controller
 public class AlarmController {
 	
+	Logger logger = LoggerFactory.getLogger(AlarmController.class);
+	
 	@Autowired
 	private WorkServiceInf workService;
 	
 	@RequestMapping(value="/ajaxAlarm", method=RequestMethod.POST)
-	public String ajaxAlarm(Model model, WorkVo workVo, @SessionAttribute("memberVo") MemberVo memberVo, String work_project) {
-
-		Map<String, String> mapWork = new HashMap<>();
-		mapWork.put("member_mail", memberVo.getMember_mail());
-
-		model.addAttribute("workList",workService.workMember(work_project));
+	public String ajaxAlarm(Model model, String work_project) {		
+		
+		List<WorkVo> workList = workService.workMember(work_project);
+		
+		logger.debug("workList sizes : {}", workList.size());
+		
+		model.addAttribute("workList", workList);
 		
 		return "alarm/ajaxAlarm";
 	}

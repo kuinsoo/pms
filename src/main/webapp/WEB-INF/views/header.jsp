@@ -182,6 +182,10 @@
 	                                <a href="/myPage">마이페이지</a>
 	                            </li>
 	                            <li>
+	                                <i class="icon-badge icons"></i>
+	                                <a href="/evaluation">능력 및 평가</a>
+	                            </li>
+	                            <li>
 	                                <i class="icon-power icons"></i>
 	                                <label onclick="logout();">로그아웃</label>
 	                            </li>

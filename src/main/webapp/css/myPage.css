@@ -194,3 +194,21 @@
 .myPageBottomContainer > #tabs2 > #tabs2-5 > .tabs2-5center > .goodbyeBtn {
 	width:120px;height:50px;background-color:#746fcc;color:#fff;border:none;outline:none;font-size:17px;margin:0 auto;margin-top:20px;display:block;cursor:pointer;
 }
+
+.profileImg > #imgs > .scale > img{width:150px;height:150px;border-radius:100%;}
+.profileImg > #imgs > .scale {
+	transform: scale(1);
+	-webkit-transform: scale(1);
+	-moz-transform: scale(1);
+	-ms-transform: scale(1);
+	-o-transform: scale(1);
+	transition: all 0.3s ease-in-out;
+}
+.profileImg > #imgs > .scale:hover {
+	transform: scale(1.2);
+	-webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	-o-transform: scale(1.2);
+}
+#imgs{width:150px;height:150px;overflow:hidden;}
