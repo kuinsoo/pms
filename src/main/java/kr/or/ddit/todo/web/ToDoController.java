@@ -49,8 +49,7 @@ public class ToDoController {
 			e.printStackTrace();
 		}
 		
-		/* to-do select */
-		return "todo/todoInsertAjax";
+		return "/todoSelect";
 	}
 	
 	/**
@@ -62,15 +61,16 @@ public class ToDoController {
 	* @return
 	* Method 설명 : to-do list 조회
 	*/
-	@RequestMapping(value="/todoSelect", method=RequestMethod.POST)
-	public String ajaxSelectTodo(@RequestParam("todo_work")String todo_work, Model model) {
+	@RequestMapping(value="/todoSelect", method= {RequestMethod.POST, RequestMethod.GET})
+	public String ajaxSelectTodo(@RequestParam("project_id")String project_id, Model model) {
+		System.out.println("project_id : " + project_id);
 		
 		/* to-do select */
-		List<ToDoVo> workToDoSelectList = todoService.workToDoSelect(todo_work);
+		List<ToDoVo> workToDoSelectList = todoService.workToDoSelect(project_id);
 		
 		model.addAttribute("workToDoSelectList", workToDoSelectList);
 		
-		return "todo/todoInsertAjax";
+		return "work/ajaxCreateWork";
 	}
 	
 }

@@ -44,6 +44,6 @@ public interface ToDoMapper {
 	* @return
 	* Method 설명 : 각 업무의 to-do list를 조회
 	*/
-	List<ToDoVo> workToDoSelect(String todo_work);
+	List<ToDoVo> workToDoSelect(String work_project);
 	
 }

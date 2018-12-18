@@ -40,9 +40,11 @@
 		        todo_sdate,
 		        todo_eedate,
 		        todo_complet,
-		        todo_issue
-		FROM    todo
-		WHERE   todo_work = #{todo_work}
+		        todo_issue,
+		        todo_work
+		FROM    todo INNER JOIN work
+		ON      todo_work = work_id
+		WHERE   work_project = ${work_project};
 	</select>
 	
 </mapper>

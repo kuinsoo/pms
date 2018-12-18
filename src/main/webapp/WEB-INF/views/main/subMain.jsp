@@ -220,7 +220,7 @@
 													<li><input type="hidden" name="todo_sdate" id="todo_sdate" value=""/></li>
 													<li><input type="datetime-local" name="non_todo_eedate"></li>
 													<li><input type="hidden" name="todo_eedate" id="todo_eedate" value=""/></li>
-													<li><input type="hidden" name="project_id" value="${projectVo.project_id}"/></li>
+													<li><input type="hidden" name="project_id" id="todo_project_id" value="${projectVo.project_id}"/></li>
 													<li><input type="hidden" name="todo_work" id="todo_work" value="${work.work_id}"/></li>
 												</ul>
 											</form>
@@ -248,8 +248,63 @@
 										<th>이슈</th>
 									</tr>
 								</thead>
-								<tbody>
+								<tbody id="todoInsertHtmlAjax">
 								<!-- todoInsertAjax.jsp -->
+									<c:forEach items="${workToDoSelectList}" var="todoSelect">
+										<c:if test="${todoSelect.todo_work eq work.work_id}">
+											<tr>
+												<td><input type="checkbox" /></td>
+												<td>
+													<a href="#open" class="issueTitlePopup">${todoSelect.todo_title}</a>
+													<div class="white_content" id="open">
+														<div>
+															<a href="#close"><i class="icon-close icons"></i></a>
+															<div class="issueSelectPage">
+																<div class="issueSelectPageLeft">
+																	<form action="#" method="post">
+																		<div class="issueProfile">
+																			<img src="http://placehold.it/150x200" />
+																		</div>
+																		<div class="issues">
+																			<div class="issuesLeft">
+																				<ul>
+																					<li>담당자</li>
+																					<li>시작</li>
+																					<li>예상마감</li>
+																					<li>마감</li>																			
+																				</ul>
+																			</div>
+																			<div class="issuesRight">
+																				<ul>
+																					<li><input type="text"/>${todoSelect.todo_title}</li>
+																					<li><input type="text"/>${todoSelect.todo_sdate}</li>
+																					<li><input type="text"/>${todoSelect.todo_eedate}</li>
+																					<li><input type="text"/>${todoSelect.todo_complet}</li>																			
+																				</ul>
+																			</div>
+																		</div>
+																		<textarea>${todoSelect.todo_content}</textarea>
+																	</form>
+																</div>
+																<div class="issueSelectPageRight">
+																	<h2>발생이슈</h2>
+																	<input type="button" value="등록" class="issueCreateBtn" />
+																	<input type="button" value="수정" class="insueUpdateBtn" />
+																	<form action="#" mehtod="post">
+																		<textarea>이슈에 대한 내용,,,,,</textarea>
+																	</form>
+																</div>
+															</div>
+														</div>
+												    </div>
+												</td>
+												<td>${todoSelect.todo_pmember}</td>
+												<td>${todoSelect.todo_sdate}</td>
+												<td>${todoSelect.todo_eedate}</td>
+												<td>${todoSelect.todo_issue}</td>
+											</tr>
+										</c:if>
+									</c:forEach>
 								</tbody>
 							</table>
 							<div class="pagination">
@@ -673,29 +728,32 @@ var myChart = new Chart(ctx, {
 		$.ajax({
 			method: "POST",
 			url: "/todoInsert",
-			//dataType: html,
 			data: param,
 			success: function(data) {
-				// alert("success");
-				$('.currentCardContentViewRight').html("");
-				$('.currentCardContentViewRight').html(data);
+				alert("success");
+				$('#todoInsertHtmlAjax').html("");
+				$('#todoInsertHtmlAjax').html(data);
 			},
 			error:function(data) {
-				// alert("error");
+				alert("error");
 			}
 		});
 	}
 	
-	function todoSelect(todo_work){
-		console.log("todo_work : " + todo_work);
+	//페이지 접속시 to-do list 조회(Ajax) ==문의: jerry==
+	function todoSelect(){
+		var project_id = $('#todo_project_id').val();
+		console.log("project_id : " + project_id);
 		
 		$.ajax({
 			method: "POST",
 			url: "/todoSelect",
-			data: todo_work,
+			data: project_id,
 			success: function(data){
 				alert("success");
-			}, 
+				$('#todoInsertHtmlAjax').html("");
+				$('#todoInsertHtmlAjax').html(data);
+			},
 			error: function(data){
 				alert("error");
 			}
@@ -719,14 +777,14 @@ $(document).ready(function(){
         }
     });
     
-    //todo 등록시 시작일자는 현재시간으로 기본값(default) 설정  ==문의: jerry==
+    //to-do 등록시 시작일자는 현재시간으로 기본값(default) 설정  ==문의: jerry==
     var date = new Date();
     date.setHours(date.getHours() + 9);
     //console.log(date.toISOString());
     document.getElementById('non_todo_sdate').value = date.toISOString().slice(0, 16);
     
-    var param = $('#todo_work').val();
-    todoSelect(param);
+    //페이지 접속시 to-do list 조회 ==문의: jerry==
+    todoSelect();
     
 });
 </script>

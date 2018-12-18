@@ -60,8 +60,8 @@ public class ToDoService implements ToDoServiceInf{
 	* Method 설명 : 각 업무의 to-do list를 조회
 	*/
 	@Override
-	public List<ToDoVo> workToDoSelect(String todo_work) {
-		return todoMapper.workToDoSelect(todo_work);
+	public List<ToDoVo> workToDoSelect(String work_project) {
+		return todoMapper.workToDoSelect(work_project);
 	}
 	
 }

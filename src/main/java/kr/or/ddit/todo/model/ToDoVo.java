@@ -34,6 +34,7 @@ public class ToDoVo {
 	private String format_todo_eedate;	//	할일예상감일시(String)
 	private String todo_complet;		//	할일완료여부
 	private String todo_color;			//	할일 색깔
+	private String todo_issue;			//	할일이슈번호(fk)
 	
 	/* 기본생성자 */
 	public ToDoVo() {}
@@ -41,7 +42,7 @@ public class ToDoVo {
 	/* 생성자 */
 	public ToDoVo(String todo_id, String todo_work, String todo_pmember, String todo_content, Date todo_sdate,
 			String format_todo_sdate, Date todo_edate, String format_todo_edate, Date todo_eedate,
-			String format_todo_eedate, String todo_complet, String todo_color, int rnum) {
+			String format_todo_eedate, String todo_complet, String todo_color, int rnum, String todo_issue) {
 		super();
 		this.todo_id = todo_id;
 		this.todo_work = todo_work;
@@ -56,6 +57,7 @@ public class ToDoVo {
 		this.todo_complet = todo_complet;
 		this.todo_color = todo_color;
 		this.rnum = rnum;
+		this.todo_issue = todo_issue;
 	}
 
 	
@@ -122,9 +124,16 @@ public class ToDoVo {
 	public void setTodo_color(String todo_color) {
 		this.todo_color = todo_color;
 	}
-	
-	 /*형변환 getter*/
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	 public String getTodo_issue() {
+		return todo_issue;
+	}
+	public void setTodo_issue(String todo_issue) {
+		this.todo_issue = todo_issue;
+	}
+
+
+	/*형변환 getter*/
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	public String getFormat_todo_sdate() {
 		if(todo_sdate == null) {
 			return "";
@@ -147,11 +156,12 @@ public class ToDoVo {
 	/* toString */
 	@Override
 	public String toString() {
-		return "ToDoVo [todo_id=" + todo_id + ", todo_work=" + todo_work + ", todo_pmember=" + todo_pmember
-				+ ", todo_content=" + todo_content + ", todo_sdate=" + todo_sdate + ", format_todo_sdate="
-				+ format_todo_sdate + ", todo_edate=" + todo_edate + ", format_todo_edate=" + format_todo_edate
-				+ ", todo_eedate=" + todo_eedate + ", format_todo_eedate=" + format_todo_eedate + ", todo_complet="
-				+ todo_complet + ", todo_color=" + todo_color + "]";
+		return "ToDoVo [rnum=" + rnum + ", todo_id=" + todo_id + ", todo_work=" + todo_work + ", todo_pmember="
+				+ todo_pmember + ", todo_content=" + todo_content + ", todo_sdate=" + todo_sdate
+				+ ", format_todo_sdate=" + format_todo_sdate + ", todo_edate=" + todo_edate + ", format_todo_edate="
+				+ format_todo_edate + ", todo_eedate=" + todo_eedate + ", format_todo_eedate=" + format_todo_eedate
+				+ ", todo_complet=" + todo_complet + ", todo_color=" + todo_color + ", todo_issue=" + todo_issue
+				+ ", sdf=" + sdf + "]";
 	}
 	
 }
