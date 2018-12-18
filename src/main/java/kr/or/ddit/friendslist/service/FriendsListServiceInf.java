@@ -1,5 +1,7 @@
 package kr.or.ddit.friendslist.service;
 
+import kr.or.ddit.friendslist.model.FriendsListVo;
+
 /**
  * kr.or.ddit.friendslist.service
  * null.java
@@ -10,4 +12,15 @@ package kr.or.ddit.friendslist.service;
  * @Version :
  */
 public interface FriendsListServiceInf {
+	
+	
+/*	*//**
+	 * Method : selectMyFriends
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friendVo
+	 * @return
+	 * Method 설명 : 친구를 뽑아오는 
+	 *//*
+	FriendsListVo selectMyFriends(String friend_mymail);*/
 }

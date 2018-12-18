@@ -1,5 +1,7 @@
 package kr.or.ddit.friendslist.mapper;
 
+import kr.or.ddit.friendslist.model.FriendsListVo;
+
 /**
  * kr.or.ddit.friendlist.mapper
  * null.java
@@ -11,4 +13,17 @@ package kr.or.ddit.friendslist.mapper;
  */
 
 public interface FriendsListMapper {
+
+	
+	/**
+	 * Method : selectMyFriends
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friendVo
+	 * @return
+	 * Method 설명 : 친구를 뽑아오는 
+	 *//*
+	FriendsListVo selectMyFriends(String friend_mymail);*/
+	
+
 }

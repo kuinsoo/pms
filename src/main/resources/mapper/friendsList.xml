@@ -4,5 +4,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.ddit.card.mapper.FriendsListMapper">
-
+<!-- <select id="selectMyFriends" parameterType="String" resultType="friendVo">
+	select friend_member 
+	from   FRIENDSLIST
+	where  FRIEND_MYEMAIL = #{member_mail}
+</select> -->
 </mapper>
