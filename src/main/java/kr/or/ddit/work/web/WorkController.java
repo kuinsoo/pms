@@ -47,6 +47,9 @@ public class WorkController {
 			mapWM.put("pmember_member",memberVo.getMember_mail());
 			mapWM.put("pmember_project", project_id);
 			workVo.setWork_project(project_id);
+			if(workVo.getWork_public() == null )
+				workVo.setWork_public("N");
+
 			cardService.createCard( mapWM , workVo);
 		} catch (Exception e){
 			e.printStackTrace();

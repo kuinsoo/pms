@@ -8,6 +8,7 @@
 <section class="currentMain">
     <div class="currentMainContainer">
         <div class="currentMainContainerLeft">
+            <%-- report  --%>
             <%@ include file="/WEB-INF/views/main/report.jsp" %>
             <div class="projectTaskContainer">
                 <div class="projectTaskContainerTitle">
@@ -28,8 +29,10 @@
                     </div>
                 </div>
             </div>
-            
+            <%-- 등록  --%>
             <%@ include file="/WEB-INF/views/main/projectWriter.jsp" %>
+
+            <%-- 달력 리스트 주석처리중 --%>
 			<%@ include file="/WEB-INF/views/main/calendarCardList.jsp" %>
 			
             <%--카드리스트--%>
@@ -48,6 +51,7 @@
                             <div class="updateDeleteIcon">
                                 <i class="icon-wrench icons"></i>
                                 <a href="#opens"><i class="icon-bulb icons"></i></a>
+                                <%-- todo 관련 --%>
                                 <%@ include file="/WEB-INF/views/todo/todo.jsp" %>
                             </div>
                         </div>
@@ -59,6 +63,7 @@
                         </div>
                         <div class="currentCardContentBottomView">
                             <div id="container${work.work_id}"></div>
+                            <%-- work chart document Ready 에서 초기값으로 시작. --%>
                             <%--<%@ include file="/WEB-INF/views/work/testChart.jsp" %>--%>
                         </div>
 
@@ -126,6 +131,7 @@
                 <!-- (변찬우) for node // 외부에서 접근해서 인증 허용 해줘야 함..  -->
                 <iframe src="https://127.0.0.1:8443/"></iframe>
             </div>
+            <%-- 참여자 목록 --%>
             <%@ include file="/WEB-INF/views/main/participants.jsp" %>
         </div>
     </div>
@@ -435,7 +441,7 @@ if (submenu.is(":visible")) {
 submenu.slideUp();
 } else {
 submenu.slideDown();
-}  
+}
 
 function updateCard(no, group, index) {
 
