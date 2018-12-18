@@ -248,7 +248,7 @@
 					var html = "";
 					$.each(data.msgReceiveList,function(idx,mm){
 						html += "<tr>";
-						html += "	<td>"+ mm.rnum +"</td>";.
+						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.msg_smember+"</td>";
 						html += "	<td>"+ mm.msg_content +"</td>";
 						html += "	<td>"+ mm.msg_time +"</td>";

@@ -34,7 +34,7 @@ public class MessageService implements MessageServiceInf{
 
 	
 	@Override
-	public int totalMsgReceived(String msg_smember) {
-		return messageMapper.totalMsgReceived(msg_smember);
+	public int totalMsgReceived(String msg_rmember) {
+		return messageMapper.totalMsgReceived(msg_rmember);
 	}
 }

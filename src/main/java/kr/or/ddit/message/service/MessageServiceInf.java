@@ -38,6 +38,6 @@ public interface MessageServiceInf {
 	 * @return
 	 * Method 설명 : 받은 쪽지 갯수 
 	 */
-	int totalMsgReceived(String msg_smember);
+	int totalMsgReceived(String msg_rmember);
 }
 
