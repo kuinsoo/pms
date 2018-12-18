@@ -53,12 +53,10 @@
 				
 				<a href="/qnaList">질의 목록보기</a><br/><br/>
 				
-				<label>질의 작성일</label>
+				<label id="post_writer">질의 작성자</label><label id="post_date">질의 작성일</label><br/>
 				<a href="/qnaMody"> [수정]</a><a href="/qnaDel"> [삭제]</a><a href="/qnaReply"> [답글]</a><br/>
-				제목 : <label>질의 제목을 작성하였습니다 </label><br/>
-				내용 : <label>질의 내용을 작성하였습니다 </label><br/>
-				
-				<label>첨부파일</label><br/>
+				제목 : <label id=post_title"">질의 제목을 작성하였습니다 </label><br/>
+				내용 : <label id="post_content">질의 내용을 작성하였습니다 </label><br/>
 				
 			</div>
 		</div>

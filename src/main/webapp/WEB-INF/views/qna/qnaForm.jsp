@@ -53,25 +53,17 @@
 				
 				<a href="/qnaList">질의 목록보기</a><br/><br/>
 				
-				<label>질의 작성일</label><br/>
-				제목 : <input type="text" placeholder="제목을 입력하세요" class="" id="" ><br/>
-				내용 : <input type="text" placeholder="내용을 입력하세요" class="" id="" ><br/>
-				
-				<button id="att" >첨부파일</button>
-				<script>
-				$('#att').on('click',function(){
-					$('#attFile').css("display","block");
-				});
-				</script>
-				<input type="file" style="display:none" id="attFile" ><br/>
+				<label id="post_writer">질의 작성자</label><label id="post_date">질의 작성일</label><br/>
+				제목 : <input type="text" placeholder="제목을 입력하세요" class="" id="post_title" ><br/>
+				내용 : <input type="text" placeholder="내용을 입력하세요" class="" id="post_content" ><br/>
 				
 				<button id="cecret" >비밀글</button>
 				<script>
 				$('#cecret').on('click',function(){
-					$('#cecretPass').css("display","block");
+					$('#post_pass').css("display","block");
 				});
 				</script>
-				<input type="text"style="display:none" id="cecretPass"  placeholder="비밀번호를 입력하세요" ><br/>
+				<input type="text"style="display:none" id="post_pass"  placeholder="비밀번호를 입력하세요" ><br/>
 				
 			</div>
 		</div>
