@@ -34,7 +34,7 @@ header {
     position: fixed;
     z-index: 3;
 }
-
+.colorRed{color:#f00;}
 .headerContainer {
     width: 1400px;
     height: 60px;
@@ -1163,14 +1163,23 @@ header {
 }
 .white_content:target{opacity:1;pointer-events:auto;}
 .white_content > div {
-	position:absolute;top:50%;left:50%;margin-top:-400px;margin-left:-500px;
-	width:1000px;height:800px;padding:20px;border:1px solid #dee3eb;
-	background-color:white;overflow:auto;
+	position:absolute;top:50%;left:50%;margin-top:-150px;margin-left:-150px;
+	width:300px;height:300px;padding:20px;border:1px solid #dee3eb;
+	background-color:white;overflow:hidden;
 }
-.white_content > div > a {
-	float:right;display:block;color:#000;width:30px;height:30px;
+.white_content > div > .mainCloseBtns {
+	float:right;display:block;color:#000;width:30px;height:30px;overflow:hidden;
+	background-image:url("../images/xButtonClose.png");background-repeat:no-repeat;background-size:cover;
 }
-.white_content > div > a > i{font-size:30px;}
+.white_content > div > .mainCloseBtns > i{font-size:20px;}
+
+.btnField{line-height:40px;margin-top:60px;}
+.btnField > h2{color:#000;font-size:20px;}
+.btnField > h2 > span{color:#f00;}
+.projectUpdateSettings{border:none;cursor:pointer;width:100%;height:30px;background-color:#746fcc;color:#fff;font-size:20px;outline:none;}
+.projectDeleteSettings{border:none;cursor:pointer;width:100%;height:30px;background-color:#746fcc;color:#fff;font-size:20px;outline:none;}
+
+
 
 /* 쪽지 기능 */
 .facingContainer {

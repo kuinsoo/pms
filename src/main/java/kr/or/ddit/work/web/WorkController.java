@@ -1,5 +1,7 @@
 package kr.or.ddit.work.web;
 
+import kr.or.ddit.card.model.CardVo;
+import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.work.model.WorkVo;
@@ -33,6 +35,8 @@ public class WorkController {
 	@Autowired
 	private CommentsServiceInf commentsService;
 
+	@Autowired
+	private CardServiceInf cardService;
 
 	@RequestMapping(value="/ajaxCreateWork",method=RequestMethod.POST)
 	public String ajaxCreateWork(Model model, WorkVo workVo, @RequestParam("project_id")String project_id,
@@ -43,7 +47,7 @@ public class WorkController {
 			mapWM.put("pmember_member",memberVo.getMember_mail());
 			mapWM.put("pmember_project", project_id);
 			workVo.setWork_project(project_id);
-			workService.insertWorkMember(mapWM,workVo);
+			cardService.createCard( mapWM , workVo);
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -62,11 +66,8 @@ public class WorkController {
 		return "work/testChart";
 	}
 
-
-
 	@RequestMapping(value = "/testGantt2", method=RequestMethod.GET)
 	public String testGantt2() {
 		return "work/2222";
 	}
 }
-

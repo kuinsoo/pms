@@ -61,7 +61,7 @@
 					</thead>
 					<tbody>
 						<tr>
-							<td><a href="/qnaForm">CURRENT HOMEPAGE OPEN</a></td>
+							<td><a href="/qnaDetail">CURRENT HOMEPAGE OPEN</a></td>
 							<td>2018-12-13</td>
 						</tr>
 					</tbody>
@@ -74,7 +74,7 @@
 					</ul>
 				</div>
 				<div>
-					<button>새 질문</button>
+					<a class="btn" href="/qnaForm">새 질문</a>
 				</div>
 				<div class="noticeSearchDiv">
 					<input type="text" class="noticeSearchInput" />
