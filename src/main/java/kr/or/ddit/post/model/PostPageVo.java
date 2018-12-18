@@ -1,4 +1,4 @@
-package kr.or.ddit.board.model;
+package kr.or.ddit.post.model;
 
 import org.apache.ibatis.type.Alias;
 
@@ -11,14 +11,14 @@ import org.apache.ibatis.type.Alias;
  * @Date : 2018-12-17 / 오후 10:10
  * @Version :
  */
-@Alias("pageVo")
-public class PageVo {
+@Alias("PostPageVo")
+public class PostPageVo {
 	
 	private String board_id;
 	private String pageNum;
 	private String searchText;
 	
-	public PageVo(){
+	public PostPageVo(){
 	}
 
 	public String getBoard_id() {

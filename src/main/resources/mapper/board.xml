@@ -6,7 +6,7 @@
 <mapper namespace="kr.or.dit.board.mapper.BoardMapper">
 
     <!-- 글 쓰기  -->
-    <insert id="createCard" parameterType="postVo">
+    <insert id="insertQnaPost" parameterType="postVo">
 	insert into 
 	    POST(
 			POST_ID,
