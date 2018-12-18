@@ -42,6 +42,7 @@
 	<select id="selectWorks" resultType="workVo" parameterType="String">
 		select W.WORK_ID,
 			   W.WORK_TITLE,
+			   W.WORK_CONTENT,
 			   W.WORK_WDATE,
 			   W.WORK_TYPE,
 			   W.WORK_PROJECT,

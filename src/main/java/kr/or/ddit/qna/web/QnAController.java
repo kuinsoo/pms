@@ -25,7 +25,7 @@ public class QnAController {
 	 * 작성자 : iks
 	 * 변경이력 : 변찬우 
 	 *
-	 * @return Method 설명 : Q&A 화면단
+	 * @return Method 설명 : Q&A 글 목록 
 	 */
 	@RequestMapping(value= "/qnaList")
 	public String qnaView() {
@@ -38,10 +38,62 @@ public class QnAController {
 	 * 작성자 : 변찬우 
 	 * 변경이력 :
 	 *
-	 * @return Method 설명 : Q&A 화면단
+	 * @return Method 설명 : Q&A 글 상세 
+	 */
+	@RequestMapping(value= "/qnaDetail")
+	public String qnaDtailView() {
+		return "qna/qnaDetail";
+	}
+	
+	
+	/**
+	 * Method : qnaFormView
+	 * 작성자 : 변찬우 
+	 * 변경이력 :
+	 *
+	 * @return Method 설명 : Q&A 글 작성 
 	 */
 	@RequestMapping(value= "/qnaForm")
 	public String qnaFormView() {
+		return "qna/qnaForm";
+	}
+	
+	
+	/**
+	 * Method : /qnaModyView
+	 * 작성자 : 변찬우 
+	 * 변경이력 :
+	 *
+	 * @return Method 설명 : Q&A 글 수정 
+	 */
+	@RequestMapping(value= "/qnaMody")
+	public String qnaModyView() {
+		return "qna/qnaMody";
+	}	
+	
+	
+	/**
+	 * Method : /qnaDel 처리 
+	 * 작성자 : 변찬우 
+	 * 변경이력 :
+	 *
+	 * @return Method 설명 : Q&A  글 삭제 
+	 */
+	@RequestMapping(value= "/qnaDel")
+	public String qnaDelView() {
+		return "qna/qnaList";
+	}
+	
+	
+	/**
+	 * Method : /qnaReplyView 
+	 * 작성자 : 변찬우 
+	 * 변경이력 :
+	 *
+	 * @return Method 설명 : Q&A  답글  
+	 */
+	@RequestMapping(value= "/qnaReply")
+	public String qnaReplyView() {
 		return "qna/qnaForm";
 	}
 }
