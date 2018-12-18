@@ -1,7 +1,14 @@
 package kr.or.ddit.message.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import kr.or.ddit.message.mapper.MessageMapper;
+import kr.or.ddit.message.model.MessageVo;
+import kr.or.ddit.util.model.PageVo;
 
 /**
  * kr.or.ddit.message.service
@@ -14,5 +21,20 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class MessageService {
+public class MessageService implements MessageServiceInf{
+
+	
+	@Autowired
+	private MessageMapper messageMapper;
+	
+	@Override
+	public List<MessageVo> messageReceived(PageVo pageVo) {
+		return messageMapper.messageReceived(pageVo);
+	}
+
+	
+	@Override
+	public int totalMsgReceived(String msg_smember) {
+		return messageMapper.totalMsgReceived(msg_smember);
+	}
 }

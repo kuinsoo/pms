@@ -12,7 +12,7 @@ import org.apache.ibatis.type.Alias;
  * @Version :
  */
 @Alias("friendVo")
-public class FriendsListVo {
+public class FriendListVo {
 
     private String friend_mymail;
     private String friend_member;
@@ -43,22 +43,14 @@ public class FriendsListVo {
 	public void setFriend_date(String friend_date) {
 		this.friend_date = friend_date;
 	}
-	public FriendsListVo(String friend_mymail, String friend_member, String friend_accept, String friend_date) {
-		super();
-		this.friend_mymail = friend_mymail;
-		this.friend_member = friend_member;
-		this.friend_accept = friend_accept;
-		this.friend_date = friend_date;
+	@Override
+	public String toString() {
+		return "FriendListVo [friend_mymail=" + friend_mymail + ", friend_member=" + friend_member + ", friend_accept="
+				+ friend_accept + ", friend_date=" + friend_date + "]";
 	}
-	public FriendsListVo() {
+	public FriendListVo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	@Override
-	public String toString() {
-		return "FriendsListVo [friend_mymail=" + friend_mymail + ", friend_member=" + friend_member + ", friend_accept="
-				+ friend_accept + ", friend_date=" + friend_date + "]";
-	}
-	   
-	   
+	
 	}

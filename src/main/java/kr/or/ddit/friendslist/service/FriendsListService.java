@@ -1,11 +1,13 @@
 package kr.or.ddit.friendslist.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.ddit.friendslist.mapper.FriendsListMapper;
-import kr.or.ddit.friendslist.model.FriendsListVo;
+import kr.or.ddit.friendslist.model.FriendListVo;
 
 /**
  * kr.or.ddit.friendslist.service
@@ -20,11 +22,12 @@ import kr.or.ddit.friendslist.model.FriendsListVo;
 @Transactional
 public class FriendsListService implements FriendsListServiceInf{
 	
-/*	@Autowired
+	@Autowired
 	private FriendsListMapper friendMapper;
-	
+
 	@Override
-	public FriendsListVo selectMyFriends(String friend_mymail) {
-		return friendMapper.selectMyFriends(friend_mymail);
-	}*/
+	public List<FriendListVo> selectMyFriends(String friend_myemail) {
+		return friendMapper.selectMyFriends(friend_myemail);
+	}
+
 }

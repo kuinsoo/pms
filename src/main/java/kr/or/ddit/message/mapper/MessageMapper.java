@@ -1,5 +1,10 @@
 package kr.or.ddit.message.mapper;
 
+import java.util.List;
+
+import kr.or.ddit.message.model.MessageVo;
+import kr.or.ddit.util.model.PageVo;
+
 /**
  * kr.or.ddit.message.mapper
  * null.java
@@ -9,5 +14,27 @@ package kr.or.ddit.message.mapper;
  * @Date : 2018-11-27 / 오후 3:11
  * @Version :
  */
-public class MessageMapper {
+public interface MessageMapper {
+	/**
+	 * Method : messageReceived
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo 
+	 * @param pageVo
+	 * @return
+	 * Method 설명 :  받은 쪽지 리스트  
+	 */
+	List<MessageVo> messageReceived (PageVo pageVo);
+	
+	
+	/**
+	 * Method : totalMsgReceived
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param member_mail
+	 * @return
+	 * Method 설명 : 받은 쪽지 갯수 
+	 */
+	int totalMsgReceived(String msg_smember);
+	
 }

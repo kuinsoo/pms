@@ -160,7 +160,7 @@
 	
 	
 	<!-- 회원탈퇴 update  -->
-	<update id="updateUserwithDrawal" parameterType="projectVo">
+	<update id="updateUserwithDrawal" parameterType="projectVo">	
 		update member
 		set member_withdrawal = 'Y'
 		where member_mail  = #{member_mail}

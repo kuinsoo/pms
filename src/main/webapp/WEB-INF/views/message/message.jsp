@@ -23,21 +23,17 @@
 									<input type="text" class="recipient" placeholder="받는사람을 입력해주세요" />
 									<select class="recipientSelect">
 										<option>친구등록 리스트</option>
-										<c:forEach begin="1" end="10">
-											<option>${selctMyFriend}</option>
+										<c:forEach items="${selctMyFriend }" var="mf">
+											<option>${mf.friend_member}</option>
 										</c:forEach>
 									</select>
 								</div>
-								<textarea class="facingContent">내용적는곳</textarea>
+								<textarea class="facingContent"></textarea>
 								<div class="facingFile">
 									<span>첨부파일</span>
 								</div>
 								<div class="facingFileList">
 									<ul>
-										<li><input type="file" /></li>
-										<li><input type="file" /></li>
-										<li><input type="file" /></li>
-										<li><input type="file" /></li>
 										<li><input type="file" /></li>
 									</ul>
 								</div>
@@ -55,47 +51,28 @@
 					<div id="tabs2-2">
 						<div class="receivedNoteContainer">
 							<form action="#" method="post">
-								<table>
-									<colgroup width="10%" />							
+								<table>						
 									<colgroup width="10%" />
+									<colgroup width="15%" />
 									<colgroup width="40%" />
-									<colgroup width="10%" />
 									<colgroup width="30%" />
 									<thead>
 										<tr>
-											<th><input type="checkbox" /></th>
 											<th>번호</th>
-											<th>받는 사람</th>
-											<th>친구 여부</th>
+											<th>보낸 사람</th>
+											<th>쪽지 내용</th>
 											<th>날짜/시간</th>
 										</tr>
 									</thead>
-									<tbody>
-										<tr>
-											<td><input type="checkbox" /></td>
-											<td></td>
-											<td>
-												<a href="#open1"></a>
-											</td>
-											<td></td>
-											<td></td>
-										</tr>
+									<tbody id = "msgReceiveList">
 									</tbody>
 								</table>
-								<input type="button" value="삭제" class="recoveryBtn" />
 							</form>
-							<div class="pagination">
-								<ul>
-									<li><</li>
-									<li>1</li>
-									<li>2</li>
-									<li>3</li>
-									<li>4</li>
-									<li>5</li>
-									<li>></li>
-								</ul>
+							<div>
+								<ul  class="pagination" ></ul>
 							</div>
-							<!-- 팝업부분 -->
+							
+							<!-- 팝업 시작 부분 -->
 							<div class="white_content2" id="open2">
 								<div>
  									<a href="#close"><i class="icon-close icons"></i></a>
@@ -120,7 +97,7 @@
 									</div>
 								</div>
 						    </div>
-							<!-- 팝업끝나는 부분 -->
+							<!-- 팝업 끝나는 부분 -->
 						</div>
 					</div>
 					
@@ -141,7 +118,7 @@
 											<th><input type="checkbox" /></th>
 											<th>번호</th>
 											<th>받는 사람</th>
-											<th>친구 여부</th>
+											<th>쪽지 내용</th>
 											<th>날짜/시간</th>
 										</tr>
 									</thead>
@@ -159,15 +136,8 @@
 								</table>
 								<input type="button" value="삭제" class="recoveryBtn" />
 							</form>
-							<div class="pagination">
-								<ul>
-									<li><</li>
-									<li>1</li>
-									<li>2</li>
-									<li>3</li>
-									<li>4</li>
-									<li>5</li>
-									<li>></li>
+							<div>
+								<ul class="pagination2">
 								</ul>
 							</div>
 							<!-- 팝업  -->
@@ -208,86 +178,25 @@
 											<th><input type="checkbox" /></th>
 											<th>번호</th>
 											<th>받는 사람</th>
-											<th>친구 여부</th>
+											<th>쪽지 내용</th>
 											<th>날짜/시간</th>
 										</tr>
 									</thead>
 									<tbody>
 										<tr>
 											<td><input type="checkbox" /></td>
-											<td>1</td>
-											<td>나진실</td>
-											<td>Y</td>
-											<td>2018-12-17</td>
-										</tr>
-										<tr>
-											<td><input type="checkbox" /></td>
-											<td>2</td>
-											<td>나진실</td>
-											<td>Y</td>
-											<td>2018-12-17</td>
-										</tr>
-										<tr>
-											<td><input type="checkbox" /></td>
-											<td>3</td>
-											<td>나진실</td>
-											<td>Y</td>
-											<td>2018-12-17</td>
-										</tr>
-										<tr>
-											<td><input type="checkbox" /></td>
-											<td>4</td>
-											<td>나진실</td>
-											<td>Y</td>
-											<td>2018-12-17</td>
-										</tr>
-										<tr>
-											<td><input type="checkbox" /></td>
-											<td>5</td>
-											<td>나진실</td>
-											<td>Y</td>
-											<td>2018-12-17</td>
-										</tr>
-										<tr>
-											<td><input type="checkbox" /></td>
-											<td>6</td>
-											<td>나진실</td>
-											<td>Y</td>
-											<td>2018-12-17</td>
-										</tr>
-										<tr>
-											<td><input type="checkbox" /></td>
-											<td>7</td>
-											<td>나진실</td>
-											<td>Y</td>
-											<td>2018-12-17</td>
-										</tr>
-										<tr>
-											<td><input type="checkbox" /></td>
-											<td>8</td>
-											<td>나진실</td>
-											<td>Y</td>
-											<td>2018-12-17</td>
-										</tr>
-										<tr>
-											<td><input type="checkbox" /></td>
-											<td>9</td>
-											<td>나진실</td>
-											<td>Y</td>
-											<td>2018-12-17</td>
-										</tr>
-										<tr>
-											<td><input type="checkbox" /></td>
-											<td>10</td>
-											<td>나진실</td>
-											<td>Y</td>
-											<td>2018-12-17</td>
+											<td></td>
+											<td>
+												<a href="#open1"></a>
+											</td>
+											<td></td>
+											<td></td>
 										</tr>
 									</tbody>
 								</table>
 								<input type="button" value="복구" class="recoveryBtn" />
 							</form>
-							<div class="pagination">
+							<div class="pagination3">
 								<ul>
 									<li><</li>
 									<li>1</li>
@@ -318,6 +227,59 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
 <script type="text/javascript" src="js/jquery-ui.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+		getMessageReceived(1);
+		
+
+	});
+		
+		
+		function getMessageReceived(page){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/messageReceivedAjax",
+				data : {"page":page, "pageSize":pageSize},
+				success: function(data){
+					
+					console.log(data.msgReceiveList);
+					var html = "";
+					$.each(data.msgReceiveList,function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";.
+						html += "	<td>"+ mm.msg_smember+"</td>";
+						html += "	<td>"+ mm.msg_content +"</td>";
+						html += "	<td>"+ mm.msg_time +"</td>";
+						html += "</tr>";
+					});
+					
+					console.log(data.msgReceiveList);
+					
+					$("#msgReceiveList").html("");
+					$("#msgReceiveList").html(html);
+					
+					var paging ="";
+					paging +="<li><a href='javascript:getMessageReceived("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<=data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getMessageReceived("+ i +");'>"+ i+ "</a></li>";
+					}
+						paging +="<li><a href='javascript:getMessageReceived("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".pagination").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+	
+	
+	
+	
+
+</script>
+
 <script>
 // DIM POPUP - 팀원초대
 $('.projectCreatePopUps').click(function(){
