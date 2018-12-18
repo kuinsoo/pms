@@ -4,328 +4,6 @@
 <%-- header & left --%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
-<<<<<<< HEAD
-	<%--CURRENT SECTION(MAIN)--%>
-	<section class="currentMain">
-		<div class="currentMainContainer">
-			<div class="currentMainContainerLeft">
-				<div class="projectList">
-					<div class="projectListTitles">
-						<i class="far fa-newspaper"></i>
-						<span>업무 리포트 보기</span>
-					</div>
-					<div class="charts">
-						<div class="chartsContent">
-							<canvas id="myChart" width="860" height="400"></canvas>
-						</div>
-						<div class="chartsNumber">
-							<ul>
-								<li>
-									<i class="icon-pie-chart icons"></i>
-									<span>요청 12건</span>
-								</li>
-								<li>
-									<i class="icon-pie-chart icons"></i>
-									<span>진행 19건</span>
-								</li>
-								<li>
-									<i class="icon-pie-chart icons"></i>
-									<span>피드백 3건</span>
-								</li>
-								<li>
-									<i class="icon-pie-chart icons"></i>
-									<span>완료 5건</span>
-								</li>
-								<li>
-									<i class="icon-pie-chart icons"></i>
-									<span>보류 2건</span>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div class="projectTaskContainer">
-					<div class="projectTaskContainerTitle">
-						<i class="far fa-sticky-note"></i><span>WORK CARD</span>
-					</div>
-				</div>
-				<div class="projectTaskContainerDragDrop">
-					<div class="projectTaskDragDrop">
-						<ul id="titleList" >
-							<li class="titleBox">요청</li>
-							<li class="titleBox">진행</li>
-							<li class="titleBox">이슈발생</li>
-							<li class="titleBox">처리대기</li>
-							<li class="titleBox">완료</li>
-						</ul>
-						<div class="kku-boarder kku-mainPage" id="planList">
-							<%@include file="/WEB-INF/views/card/cardChart.jsp"%>
-						</div>
-					</div>
-				</div>
-				<div class="projectWriter">
-					<div id="tabss">
-						<ul>
-							<li><a href="#tabss-1">업무</a></li>
-							<li><a href="#tabss-2">글</a></li>
-							<li><a href="#tabss-3">일정</a></li>
-							<li><a href="#tabss-4">할일</a></li>
-						</ul>
-						<!-- tap1 업무 -->
-						<div id="tabss-1">
-							<form action="/ajaxCreateWork" method="POST" name="workfrm1">
-								<div class="workContainerInput">
-									<input type="text" name="work_title" placeholder="업무제목을 입력해주세요" class="workTitle" />
-									
-									<div class="workDateDiv">
-										<!-- 업무 시작일 -->
-										<i class="icon-clock icons"></i>
-										<input type="datetime-local" name="work_sdate" class="work_sdate">
-										
-										<!-- 업무 마감 예상일 -->
-										<i class="icon-clock icons"></i>
-										<input type="datetime-local" name="work_eedate" class="work_eedate">
-									</div>
-									<textarea class="workTextarea" name="work_content" placeholder="업무내용을 입력해주세요"></textarea>
-									
-									<div class="workTypeDiv">
-										<h3>업무유형</h3>
-										<input type="radio" name="work_type" value="1" class="workType1" /><span>설계</span>
-										<input type="radio" name="work_type" value="2" class="workType2" /><span>개발</span>
-										<input type="radio" name="work_type" value="3" class="workType3" /><span>유지보수</span>
-									</div>
-									<div class="workImportance">
-										<h3>업무 중요도</h3>
-										<select name="work_importance">
-											<option value="1">Level 1</option>
-											<option value="2">Level 2</option>
-											<option value="3">Level 3</option>
-											<option value="4">Level 4</option>
-											<option value="5">Level 5</option>
-										</select>
-									</div>
-									<input type="hidden" name="project_id" value="${projectVo.project_id}" />
-									<div class="workVisibility">
-										<h3>업무 공개여부</h3>
-										<input type="checkbox" name="work_public" value="Y" class="workVisibilityCheck" />
-										<span>WORK_PUBLIC</span>
-									</div>
-									<div class="workSubmit">
-										<input type="button" class="tabssTextAreaSubmit" value="올리기" onclick="createWork();" />
-									</div>
-								</div>
-							</form>
-						</div>
-						<%--tap1 끝 --%>
-						<div id="tabss-2">
-							<textarea class="tabssTextArea" placeholder="글을 작성하세요"></textarea>
-							<input type="submit" class="tabssTextAreaSubmit" value="올리기" />
-						</div>
-						<div id="tabss-3">
-							<input type="text" placeholder="일정 제목을 입력하세요" class="calendarTitle" />
-							<div class="calendarContainerInput">
-								<div class="calendarInputDiv">
-									<i class="icon-clock icons"></i>
-									<input type="date">
-								</div>
-								<span class="calendarInputDivSpan">~</span>
-								<div class="calendarInputDivs">
-									<i class="icon-clock icons"></i>
-									<input type="date">
-								</div>
-							</div>
-							<input type="text" placeholder="장소를 입력하세요" class="calendarTitle" />
-							<input type="text" placeholder="메모를 입력하세요" class="calendarMemo" />
-							<input type="submit" class="tabssTextAreaSubmit" value="올리기" />
-						</div>
-						<div id="tabss-4">
-							<input type="text" placeholder="할일제목을 입력하세요(선택)" class="todoInput" />
-							<ul>
-								<li><input type="text" placeholder="할일 입력" class="todoInputContent" /></li>
-								<li><input type="text" placeholder="할일 입력" class="todoInputContent" /></li>
-								<li><input type="text" placeholder="할일 입력" class="todoInputContent" /></li>
-							</ul>
-							<div class="todoPlus">
-								<i class="icon-plus icons"></i>
-								<span>할일 추가</span>
-							</div>
-							<input type="button" class="tabssTextAreaSubmit" value="올리기" />
-						</div>
-					</div>
-				</div>
-				
-				
-				
-				
-				<%-- ############################## 일정 카드 시작 ############################## --%>
-				<div class="mapCardList">
-					<div class="mapCardListTitle">
-						<h2><i class="icon-map icons"></i>일정제목</h2>
-					</div>
-					<div class="cardUserInfo">
-						<div class="cardUserInfoImg">
-							<img src="http://placehold.it/40x40">
-						</div>
-						<div class="cardUserInfoName">
-							<b>홍길동</b><br> <%-- 작성자 --%>
-							<span>2018-12-17</span>
-						</div>
-						<div class="updateDeleteIcon">
-							<i class="icon-wrench icons"></i>
-							<a href="#opens"><i class="icon-bulb icons"></i></a>
-						</div>
-					</div>
-					<div class="currentCardContentView">
-					
-					</div>
-				</div>
-				<%-- ############################## 일정 카드 끝 ############################## --%>
-				
-				
-				
-				
-				<%--카드리스트--%>
-				<div id="submain_work">
-				<c:forEach items="${workList}" var="work" varStatus="i">
-				<div class="currentCardList" >
-					<h2><i class="icon-speech icons"></i>${work.work_title}</h2>
-					<div class="cardUserInfo">
-						<div class="cardUserInfoImg">
-							<img src="${work.member_profile}">
-						</div>
-						<div class="cardUserInfoName">
-							<b>${work.member_mail}</b><br> <%-- 작성자 --%>
-							<span>${work.work_wdate}</span>
-						</div>
-						<div class="updateDeleteIcon">
-							<i class="icon-wrench icons"></i>							
-							<a href="#opens"><i class="icon-bulb icons"></i></a>
-							<div class="white_contents" id="opens">
-								<div>
- 									<a href="#close"><i class="icon-close icons"></i></a>
-									<div class="issueCreateInputField">
-										<div class="issueCreateInputFieldLeft">
-											<ul>
-												<li>담당자</li>
-												<li>할일내용</li>
-												<li>시작일자</li>
-												<li>마감일자</li>
-											</ul>
-										</div>
-										<div class="issueCreateInputFieldRight">
-											<form method="POST" name="todoInsert" id="todoInsert">
-												<ul>
-													<li><input type="text" name="todo_pmember" placeholder="담당자를 입력하세요."/></li>
-													<li><textarea name="todo_content" placeholder="내용을 입력하세요."></textarea></li>
-													<li><input type="datetime-local" name="non_todo_sdate" id="non_todo_sdate" value=""/></li>
-													<li><input type="hidden" name="todo_sdate" id="todo_sdate" value=""/></li>
-													<li><input type="datetime-local" name="non_todo_eedate"></li>
-													<li><input type="hidden" name="todo_eedate" id="todo_eedate" value=""/></li>
-													<li><input type="hidden" name="project_id" id="todo_project_id" value="${projectVo.project_id}"/></li>
-													<li><input type="hidden" name="todo_work" id="todo_work" value="${work.work_id}"/></li>
-												</ul>
-											</form>
-										</div>
-									</div>
-									<input type="button" value="등록" class="issueInfoCreate" onClick="insertTodo();"/>
-									<a href="#close" class="issueInfoClose">취소</a>
-								</div>
-						    </div>
-						</div>
-					</div>
-					<div class="currentCardContentView">
-						<div class="currentCardContentViewLeft">
-							<textarea readonly>${work.work_content}</textarea>
-						</div>
-						<div class="currentCardContentViewRight">
-								<table>
-								<thead>
-									<tr>
-										<th><input type="checkbox" /></th>
-										<th>TODO</th>
-										<th>담당자</th>
-										<th>시작</th>
-										<th>마감</th>
-										<th>이슈</th>
-									</tr>
-								</thead>
-								<tbody id="todoInsertHtmlAjax">
-								<!-- todoInsertAjax.jsp -->
-									<c:forEach items="${workToDoSelectList}" var="todoSelect">
-										<c:if test="${todoSelect.todo_work eq work.work_id}">
-											<tr>
-												<td><input type="checkbox" /></td>
-												<td>
-													<a href="#open" class="issueTitlePopup">${todoSelect.todo_title}</a>
-													<div class="white_content" id="open">
-														<div>
-															<a href="#close"><i class="icon-close icons"></i></a>
-															<div class="issueSelectPage">
-																<div class="issueSelectPageLeft">
-																	<form action="#" method="post">
-																		<div class="issueProfile">
-																			<img src="http://placehold.it/150x200" />
-																		</div>
-																		<div class="issues">
-																			<div class="issuesLeft">
-																				<ul>
-																					<li>담당자</li>
-																					<li>시작</li>
-																					<li>예상마감</li>
-																					<li>마감</li>																			
-																				</ul>
-																			</div>
-																			<div class="issuesRight">
-																				<ul>
-																					<li><input type="text"/>${todoSelect.todo_title}</li>
-																					<li><input type="text"/>${todoSelect.todo_sdate}</li>
-																					<li><input type="text"/>${todoSelect.todo_eedate}</li>
-																					<li><input type="text"/>${todoSelect.todo_complet}</li>																			
-																				</ul>
-																			</div>
-																		</div>
-																		<textarea>${todoSelect.todo_content}</textarea>
-																	</form>
-																</div>
-																<div class="issueSelectPageRight">
-																	<h2>발생이슈</h2>
-																	<input type="button" value="등록" class="issueCreateBtn" />
-																	<input type="button" value="수정" class="insueUpdateBtn" />
-																	<form action="#" mehtod="post">
-																		<textarea>이슈에 대한 내용,,,,,</textarea>
-																	</form>
-																</div>
-															</div>
-														</div>
-												    </div>
-												</td>
-												<td>${todoSelect.todo_pmember}</td>
-												<td>${todoSelect.todo_sdate}</td>
-												<td>${todoSelect.todo_eedate}</td>
-												<td>${todoSelect.todo_issue}</td>
-											</tr>
-										</c:if>
-									</c:forEach>
-								</tbody>
-							</table>
-							<div class="pagination">
-								<ul>
-									<li><i class="icon-arrow-left icons"></i></li>
-									<li><span>1</span></li>
-									<li><span>2</span></li>
-									<li><span>3</span></li>
-									<li><span>4</span></li>
-									<li><span>5</span></li>
-									<li><i class="icon-arrow-right icons"></i></li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="currentCardContentBottomView">
-						<div id="container${work.work_id}"></div>
-						<%@ include file="/WEB-INF/views/work/testChart.jsp" %>						
-					</div>
-=======
 <%--CURRENT SECTION(MAIN)--%>
 <section class="currentMain">
     <div class="currentMainContainer">
@@ -397,7 +75,6 @@
                         <form action="/ajaxCreateWork" method="POST" name="workfrm1">
                             <div class="workContainerInput">
                                 <input type="text" name="work_title" placeholder="업무제목을 입력해주세요" class="workTitle"/>
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms_project.git
 
                                 <div class="workDateDiv">
                                     <!-- 업무 시작일 -->
@@ -580,6 +257,61 @@
                                     </thead>
                                     <tbody>
                                     <!-- todoInsertAjax.jsp -->
+										<c:forEach items="${workToDoSelectList}" var="todoSelect">
+											<c:if test="${todoSelect.todo_work eq work.work_id}">
+												<tr>
+													<td><input type="checkbox" /></td>
+													<td>
+														<a href="#open" class="issueTitlePopup">${todoSelect.todo_title}</a>
+														<div class="white_content" id="open">
+															<div>
+																<a href="#close"><i class="icon-close icons"></i></a>
+																<div class="issueSelectPage">
+																	<div class="issueSelectPageLeft">
+																		<form action="#" method="post">
+																			<div class="issueProfile">
+																				<img src="http://placehold.it/150x200" />
+																			</div>
+																			<div class="issues">
+																				<div class="issuesLeft">
+																					<ul>
+																						<li>담당자</li>
+																						<li>시작</li>
+																						<li>예상마감</li>
+																						<li>마감</li>
+																					</ul>
+																				</div>
+																				<div class="issuesRight">
+																					<ul>
+																						<li><input type="text"/>${todoSelect.todo_title}</li>
+																						<li><input type="text"/>${todoSelect.todo_sdate}</li>
+																						<li><input type="text"/>${todoSelect.todo_eedate}</li>
+																						<li><input type="text"/>${todoSelect.todo_complet}</li>
+																					</ul>
+																				</div>
+																			</div>
+																			<textarea>${todoSelect.todo_content}</textarea>
+																		</form>
+																	</div>
+																	<div class="issueSelectPageRight">
+																		<h2>발생이슈</h2>
+																		<input type="button" value="등록" class="issueCreateBtn" />
+																		<input type="button" value="수정" class="insueUpdateBtn" />
+																		<form action="#" mehtod="post">
+																			<textarea>이슈에 대한 내용,,,,,</textarea>
+																		</form>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</td>
+													<td>${todoSelect.todo_pmember}</td>
+													<td>${todoSelect.todo_sdate}</td>
+													<td>${todoSelect.todo_eedate}</td>
+													<td>${todoSelect.todo_issue}</td>
+												</tr>
+											</c:if>
+										</c:forEach>
                                     </tbody>
                                 </table>
                                 <div class="pagination">
@@ -1034,72 +766,49 @@
 			method: "POST",
 			url: "/todoInsert",
 			data: param,
-<<<<<<< HEAD
 			success: function(data) {
 				alert("success");
 				//$('#todoInsertHtmlAjax').html("");
 				//$('#todoInsertHtmlAjax').html(data);
-=======
-			success: function (data) {
-				// alert("success");
-				$('.currentCardContentViewRight').html("");
-				$('.currentCardContentViewRight').html(data);
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms_project.git
 			},
-<<<<<<< HEAD
 			error:function(data) {
 				alert("error");
-=======
-			error: function (data) {
-				// alert("error");
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms_project.git
 			}
 		});
 	}
-<<<<<<< HEAD
-	
+
 	//페이지 접속시 to-do list 조회(Ajax) ==문의: jerry==
-	function todoSelect(){
+	function todoSelect() {
 		var project_id = $('#todo_project_id').val();
 		console.log("project_id : " + project_id);
-		
-=======
 
-	function todoSelect(todo_work) {
-		console.log("todo_work : " + todo_work);
 
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms_project.git
-		$.ajax({
-			method: "POST",
-			url: "/todoSelect",
-<<<<<<< HEAD
-			data: project_id,
-			success: function(data){
-				alert("success");
-				$('#todoInsertHtmlAjax').html("");
-				$('#todoInsertHtmlAjax').html(data);
-			},
-			error: function(data){
-				alert("error");
-=======
-			data: todo_work,
-			success: function (data) {
-			},
-			error: function (data) {
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms_project.git
-			}
-		});
+		function todoSelect(todo_work) {
+			console.log("todo_work : " + todo_work);
+
+			$.ajax({
+				method: "POST",
+				url: "/todoSelect",
+				data: project_id,
+				success: function (data) {
+					alert("success");
+					$('#todoInsertHtmlAjax').html("");
+					$('#todoInsertHtmlAjax').html(data);
+				},
+				error: function (data) {
+					alert("error");
+				}
+			});
+		}
+
+		// submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+		if (submenu.is(":visible")) {
+			submenu.slideUp();
+		} else {
+			submenu.slideDown();
+		}
 	}
 
-<<<<<<< HEAD
-        // submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
-        if( submenu.is(":visible") ){
-            submenu.slideUp();
-        }else{
-            submenu.slideDown();
-        }
-    });
-    
     //to-do 등록시 시작일자는 현재시간으로 기본값(default) 설정  ==문의: jerry==
     var date = new Date();
     date.setHours(date.getHours() + 9);
@@ -1108,10 +817,6 @@
     
     //페이지 접속시 to-do list 조회 ==문의: jerry==
     todoSelect();
-    
-});
-=======
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms_project.git
 </script>
 
 <script>
