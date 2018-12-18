@@ -349,4 +349,6 @@ public class LoginController {
 		// sign.jsp ajax로 보내준다.
 		return certificationNumber;
 	}
+	
+	
 }

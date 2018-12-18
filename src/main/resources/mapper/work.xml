@@ -26,6 +26,18 @@
 			</otherwise>
 		</choose>
 	</select>
+	
+	<!-- 로그인 한 회원의 업무 생성 알림 2018-12-18 임규승 -->
+	<select id="workMember" resultType="workVo" parameterType="String">
+	SELECT  A.WORK_TITLE
+	    ,   A.WORK_ID
+	    ,   A.WORK_PROJECT
+	FROM    WORK A, WORK_MEMBER B, PROJECT_MEMBER C, MEMBER D
+	WHERE   A.WORK_ID			= B.WORK_ID
+	AND     B.PMEMBER_ID		= C.PMEMBER_ID
+	AND     C.PMEMBER_MEMBER	= D.MEMBER_MAIL
+	AND     D.MEMBER_MAIL		= #{member_mail}
+	</select>
 
 	<select id="selectWorks" resultType="workVo" parameterType="String">
 		select W.WORK_ID,

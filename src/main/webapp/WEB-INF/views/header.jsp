@@ -59,10 +59,6 @@
             </li>
             <c:if test="${projectVo.project_id >= 0 }" >
             <li>
-                <i class="icon-bubbles icons"></i>
-                <p>회의</p>
-            </li>
-            <li>
                 <i class="icon-bulb icons"></i>
                 <p><a href="/issueHistory">이슈 히스토리</a></p>
             </li>
@@ -184,22 +180,12 @@
 	                            </div>
 	                            <div id="tabs-2">
 	                                <ul>
-	                                    <li>
-	                                        <i class="icon-star icons"></i>
-	                                        <span>새 프로젝트가 등록 되었습니다!</span>
-	                                    </li>
-	                                    <li>
-	                                        <i class="icon-star icons"></i>
-	                                        <span>일감이 추가 되었습니다!</span>
-	                                    </li>
-	                                    <li>
-	                                        <i class="icon-star icons"></i>
-	                                        <span>업무가 등록 되었습니다!</span>
-	                                    </li>
-	                                    <li>
-	                                        <i class="icon-star icons"></i>
-	                                        <span>일정이 추가 되었습니다!</span>
-	                                    </li>
+	                            		<c:forEach items="${workList}" var="work" varStatus="i">
+		                                    <li>
+		                                        <i class="icon-star icons"></i>
+		                                        <span class="colorRed">${work.work_title}</span>가 등록 되었습니다!</span>
+		                                    </li>
+	                                    </c:forEach>
 	                                </ul>
 	                            </div>
 	                        </div>

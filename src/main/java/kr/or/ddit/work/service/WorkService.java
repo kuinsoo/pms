@@ -109,5 +109,17 @@ public class WorkService implements WorkServiceInf{
 		workMapper.createWork(workVo);
 		return workMapper.insertWorkMember(wmMap);
 	}
-}
 
+	/**
+	* Method : workMember
+	* 작성자 : 임규승
+	* 변경이력 :
+	* @param work_project
+	* @return
+	* Method 설명 : 해당 회원의 진행중인 프로젝트 명 검색
+	*/
+	@Override
+	public List<WorkVo> workMember(String work_project) {
+		return workMapper.workMember(work_project);
+	}
+}
