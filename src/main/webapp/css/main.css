@@ -1210,8 +1210,8 @@ header {
 .facingFileList{width:100%;margin-top:10px;}
 .facingFileList > ul > li {margin-left:20px;}
 .facingBtn{width:100%;height:100px;display:flex;justify-content:center;align-items:center;}
-.facingBtn > .facingSendBtn{border:none;width:100px;height:40px;background-color:#007fff;color:#fff;}
-.facingBtn > .facingSendReset{border:none;width:100px;height:40px;background-color:#fff;border:1px solid #007fff;margin-left:20px;}
+.facingBtn > .facingSendBtn{border:none;width:100px;height:40px;background-color:#007fff;color:#fff;font-size:20px;cursor:pointer;}
+.facingBtn > .facingSendReset{border:none;width:100px;height:40px;background-color:#fff;border:1px solid #007fff;margin-left:20px;font-size:20px;cursor:pointer;}
 
 /* 받은 쪽지 */
 .receivedNoteContainer{width:100%;}
