@@ -111,7 +111,7 @@
 									<colgroup width="15%" />
 									<colgroup width="30%" />
 									<thead>
-										<tr>
+										<tr class = "msgClick2">
 											<th>번호</th>
 											<th>보낸 쪽지 내용</th>
 											<th>받는 사람</th>
@@ -149,20 +149,6 @@
 					</div>
 					<div id="tabs2-4">
 						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
 					</div>
 				</div>
 			</div>
@@ -194,6 +180,13 @@
 			console.log("msgReceiveList");
 			 window.location = "#open2";
 
+			  //$("#frm").submit();
+		});
+		
+		$("#msgSendList").on("click", ".msgClick2" ,function(){
+			
+			console.log("msgSendList");
+			 window.location = "#open1";
 			 
 			  //$("#frm").submit();
 		});
@@ -223,10 +216,10 @@
 					
 					$("#msgReceiveList").html("");
 					$("#msgReceiveList").html(html);
-					
+					var i  = 1;
 					var paging ="";
-					paging +="<li><a href='javascript:getMessageReceived("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
-					for(var i= 1; i<=data.pageCnt; i++) {
+						paging +="<li><a href='javascript:getMessageReceived("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<= data.pageCnt; i++) {
 						paging += "<li><a href='javascript:getMessageReceived("+ i +");'>"+ i+ "</a></li>";
 					}
 						paging +="<li><a href='javascript:getMessageReceived("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
@@ -250,7 +243,7 @@
 					console.log(data.msgSendList);
 					var html = "";
 					$.each(data.msgSendList,function(idx,mm){
-						html += "<tr>";
+						html += "<tr class= msgClick2>";
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.msg_content +"</td>";
 						html += "	<td>"+ mm.msg_rmember+"</td>";
@@ -263,8 +256,9 @@
 					$("#msgSendList").html("");
 					$("#msgSendList").html(html);
 					
+					var i  = 1;
 					var paging ="";
-					paging +="<li><a href='javascript:getMessageSend("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					paging +="<li><a href='javascript:getMessageSend("+data.pageCnt  +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 					for(var i= 1; i<=data.pageCnt; i++) {
 						paging += "<li><a href='javascript:getMessageSend("+ i +");'>"+ i+ "</a></li>";
 					}
