@@ -12,7 +12,7 @@
 						<li><a href="#tabs2-1">쪽지 보내기</a></li>
 						<li><a href="#tabs2-2">받은쪽지</a></li>
 						<li><a href="#tabs2-3">보낸쪽지</a></li>
-						<li><a href="#tabs2-4">친구추가</a></li>
+						<li><a href="#tabs2-4">친구리스트</a></li>
 					</ul>
 
 					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 쪽지 보내기  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -148,7 +148,77 @@
 						</div>
 					</div>
 					<div id="tabs2-4">
-						<h2>친구 추가 및 검색 화면 배고파아아아아아아앙아아아아아아아아아아아아아아아앙아아아아아아아아아아아아아아아아아아아앙아아아아아아앙아아아앙</h2>
+						<div class="friendContainer">
+							<div class="friendLeft">
+								<form action="#" method="post">
+									<input type="text" placeholder="친구 이메일을 입력해주세요" class="friendSearchInput" />
+									<input type="button" value="검색" class="friendSearchBtn" />
+									
+									<table class="friendCreateTable">
+										<thead>
+											<tr>
+												<th>이메일</th>
+												<th>등록</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>test@gmail.com</td>
+												<td><input type="button" value="친구추가" /></td>
+											</tr>
+											<tr>
+												<td>test@gmail.com</td>
+												<td><input type="button" value="친구추가" /></td>
+											</tr>
+											<tr>
+												<td>test@gmail.com</td>
+												<td><input type="button" value="친구추가" /></td>
+											</tr>
+											<tr>
+												<td>test@gmail.com</td>
+												<td><input type="button" value="친구추가" /></td>
+											</tr>
+											<tr>
+												<td>test@gmail.com</td>
+												<td><input type="button" value="친구추가" /></td>
+											</tr>
+										</tbody>
+									</table>
+									<ul class="friendCreateTablePaging">
+										<li><</li>
+										<li>1</li>
+										<li>2</li>
+										<li>></li>
+									</ul>
+								</form>
+							</div>
+							<div class="friendRight">
+								<input type="text" placeholder="친구 이메일을 입력해주세요" class="friendSearchInput" />
+								<input type="button" value="검색" class="friendSearchBtn" />
+								<table class="friendCreateTable">
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>이메일</th>
+											<th>삭제</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>test@gmail.com</td>
+											<td><input type="button" value="친구삭제" /></td>
+										</tr>
+									</tbody>
+								</table>
+								<ul class="friendCreateTablePaging2">
+									<li><</li>
+									<li>1</li>
+									<li>2</li>
+									<li>></li>
+								</ul>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
