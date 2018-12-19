@@ -182,7 +182,8 @@
 					
 					$("#projectList").html("");
 					$("#projectList").html(html);
-				
+					
+					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getMyPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 						for(var i= 1; i<=data.pageCnt; i++) {
@@ -219,7 +220,8 @@
 					
 					$("#projectList").html("");
 					$("#projectList").html(html);
-				
+					
+					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getMyPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 						for(var i= 1; i<=data.pageCnt; i++) {
@@ -262,6 +264,7 @@
 					$("#projectEndList").html("");
 					$("#projectEndList").html(html);
 				
+					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getMyEndPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 						for(var i= 1; i<=data.pageCnt; i++) {
@@ -299,6 +302,7 @@
 					$("#projectEndList").html("");
 					$("#projectEndList").html(html);
 				
+					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getMyEndPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 						for(var i= 1; i<=data.pageCnt; i++) {
@@ -343,6 +347,7 @@
 					$("#projectBookList").html("");
 					$("#projectBookList").html(html);
 					
+					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getmybookMarkProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 						for(var i= 1; i<=data.pageCnt; i++) {
@@ -381,6 +386,7 @@
 					$("#projectBookList").html("");
 					$("#projectBookList").html(html);
 					
+					var i  = 1;
 					var paging ="";
 					paging +="<li><a href='javascript:getmybookMarkProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 					for(var i= 1; i<=data.pageCnt; i++) {
@@ -427,6 +433,7 @@
 					$("#projectTodoList").html("");
 					$("#projectTodoList").html(html);
 					
+					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getmyTodoProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 						for(var i= 1; i<=data.pageCnt; i++) {
@@ -467,6 +474,7 @@
 						$("#projectTodoList").html("");
 						$("#projectTodoList").html(html);
 						
+						var i  = 1;
 						var paging ="";
 						paging +="<li><a href='javascript:getmyTodoProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 						for(var i= 1; i<=data.pageCnt; i++) {
@@ -1004,7 +1012,6 @@ var myChart2 = new Chart(ctx2, {
 });
 
 
-//@@@@@@@@@@@@@@
 // @@@@@@@@@@@@@@@@@@@ 회원탈퇴 비밀번호 확인 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 $(document).ready(function() {
@@ -1014,6 +1021,9 @@ $(document).ready(function() {
 	$("#member_pass").keyup(function() {
 		if($("#member_pass").val() != "${memberVo.member_pass}"){
 			$("#passError").show();
+			
+			
+			
 			$('.goodbyeBtn').prop('disabled', true);
 		} else{
 			$("#passError").hide();

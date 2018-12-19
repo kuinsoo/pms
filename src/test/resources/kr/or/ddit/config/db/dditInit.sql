@@ -17,7 +17,6 @@ Delete from COMMENTS;
 Delete from ATTACHMENT;
 Delete from WORK_MEMBER;
 Delete from PROJECT_MEMBER;
-Delete from WORK;
 Delete from NOTIFIED_PMEMBER;
 Delete from PROJECT_NOTIFICATION;
 Delete from PROJECT_JPA;
@@ -32,7 +31,6 @@ Delete from AUTHORITY;
 Delete from POST;
 Delete from BOARD;
 Delete from MEMBER;
-
 
 -------- *** for Q&A test : 변찬우20181219
 -- member Table 

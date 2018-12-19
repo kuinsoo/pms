@@ -46,6 +46,17 @@ public interface MessageMapper {
 	 */
 	int totalMsgReceived(String msg_rmember);
 	
+	
+	/**
+	 * Method : totalMsgReceived
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param msg_smember
+	 * @return
+	 * Method 설명 : 보낸 쪽지 갯수 
+	 */
+	int totalMsgSend(String msg_smember);
+	
 	/**
 	 * Method : selectMessageReceived
 	 * 작성자 : pc07

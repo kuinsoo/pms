@@ -1,5 +1,6 @@
 package kr.or.ddit.project.service;
 
+import kr.or.ddit.commons.ResetSQL;
 import kr.or.ddit.project.model.ProjectVo;
 import org.junit.Assert;
 import org.junit.Before;
@@ -20,9 +21,7 @@ import java.util.List;
  * @Date : 2018-12-06 / 오전 10:47
  * @Version :
  */
-@SpringBootTest
-@RunWith(SpringRunner.class)
-public class ProjectServiceTest {
+public class ProjectServiceTest extends ResetSQL {
 
 	@Autowired
 	private ProjectServiceInf projectService;
