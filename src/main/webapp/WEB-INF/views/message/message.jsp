@@ -20,23 +20,21 @@
 						<div class="facingSend">
 							<form action="#" method="post">
 								<div class="facingSendTitle">
-									<input type="text" class="recipient" placeholder="받는사람을 입력해주세요" />
-									<select class="recipientSelect">
-										<option>친구등록 리스트</option>
+									<input type="text" class="recipient" name="textValue" placeholder="받는사람을 입력해주세요" />
+									<select name="selectBox" onChange="getSelectValue(this.form);" class="recipientSelect">
+										<option> 친구등록 리스트 </option>
 										<c:forEach items="${selctMyFriend }" var="mf">
 											<option>${mf.friend_member}</option>
 										</c:forEach>
 									</select>
+									<script>
+									function getSelectValue(frm){
+									 	frm.textValue.value = frm.selectBox.options[frm.selectBox.selectedIndex].text;
+									}
+									</script>
 								</div>
 								<textarea class="facingContent"></textarea>
-								<div class="facingFile">
-									<span>첨부파일</span>
-								</div>
-								<div class="facingFileList">
-									<ul>
-										<li><input type="file" /></li>
-									</ul>
-								</div>
+
 								<div class="facingBtn">
 									<input type="button" class="facingSendBtn" value="보내기" />
 									<input type="button" class="facingSendReset" value="취소" />
@@ -53,12 +51,14 @@
 							<form action="#" method="post">
 								<table>						
 									<colgroup width="10%" />
+									<colgroup width="10%" />
 									<colgroup width="40%" />
 									<colgroup width="15%" />
 									<colgroup width="30%" />
 									<thead>
 										<tr class="msgClick1"> 
 											<th>번호</th>
+											<th>아이디</th>
 											<th>받은 쪽지 내용</th>
 											<th>쪽지 보낸 사람</th>
 											<th>받은 날짜</th>
@@ -76,20 +76,23 @@
  									<a href="#close"><i class="icon-close icons"></i></a>
 									<div class="sentNoteContainer">
 										<div class="recipientFacing">
-											<span></span>
-											<input type="text" value="" readonly />
+											<span>보낸사람</span>
+											<input type="text" id = "reInput1" value="" readonly />
 										</div>
 										<div class="sendDate">
-											<span></span>
-											<input type="text" value="" readonly />
+											<span>날짜/시간</span>
+											<input type="text" value=""  id = "reInput2" readonly />
 											<i class="icon-ban icons"></i>
 											<span>차단</span>
 											<i class="icon-energy icons"></i>
 											<span>신고</span>
 										</div>							
-										<textarea class="sentNoteTextArea"></textarea>
+										<textarea class="sentNoteTextArea" id="reInput3"></textarea>
 										<div class="facingDeleteBtnDiv">
-											<input type="button" value="삭제" class="sentNoteDeleteBtn" />
+											<form method="post" action="/deleteMessageReceived">
+											<input type="submit" value="삭제" class="sentNoteDeleteBtn"/>
+											<input type="hidden" id ="reInput" name ="msg_id" />
+											</form>
 											<a href="#close" class="sentNoteCloseBtn">취소</a>
 										</div>
 									</div>
@@ -107,12 +110,14 @@
 							<form action="#" method="post">
 								<table>
 									<colgroup width="10%" />
+									<colgroup width="10%" />
 									<colgroup width="40%" />
 									<colgroup width="15%" />
 									<colgroup width="30%" />
 									<thead>
 										<tr class = "msgClick2">
 											<th>번호</th>
+											<th>아이디</th>
 											<th>보낸 쪽지 내용</th>
 											<th>받는 사람</th>
 											<th>보낸 날짜</th>
@@ -235,7 +240,9 @@
 		</div>
 	</footer>
 	
-<!-- <form id = "frm" action="/msgClick" method = "get"></form> -->
+<%--  <form id = "frm" action="/updateMessageReceived" method = "get">
+	<input type = "hidden" id = "msg_id" name ="msg_id" value="${msg_id}"/>	
+ </form>  --%>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
 <script type="text/javascript" src="js/jquery-ui.js"></script>
@@ -246,22 +253,18 @@
 		getMessageSend(1);
 		
 		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
-			
 			console.log("msgReceiveList");
-			 window.location = "#open2";
-
-			  //$("#frm").submit();
+			var msg_id = $(this).children()[1].innerHTML;
+			updateMessageReceivedAjax(msg_id);
+			
+			window.location = "#open2";
 		});
 		
 		$("#msgSendList").on("click", ".msgClick2" ,function(){
-			
 			console.log("msgSendList");
 			 window.location = "#open1";
-			 
-			  //$("#frm").submit();
 		});
 	});
-		
 		
 		function getMessageReceived(page){
 			var pageSize = 10;
@@ -276,12 +279,14 @@
 					$.each(data.msgReceiveList,function(idx,mm){
 						html += "<tr class = msgClick1>";
 						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.msg_id +"</td>";
 						html += "	<td>"+ mm.msg_content +"</td>";
 						html += "	<td>"+ mm.msg_smember+"</td>";
 						html += "	<td>"+ mm.msg_time +"</td>";
 						html += "</tr>";
 					});
 					
+					//1. 
 					console.log(data.msgReceiveList);
 					
 					$("#msgReceiveList").html("");
@@ -300,6 +305,40 @@
 				}
 			});
 		}
+		
+		function updateMessageReceivedAjax(msg_id){
+			$.ajax({
+				type:"GET",
+				url : "/updateMessageReceivedAjax",
+				data : "msg_id=" + msg_id, 
+				success : function(data){
+			
+					console.log(data);
+				
+					console.log(data.msg_type);
+					
+				//2.
+		 		/* var msg_type = data.msg_type;
+					
+ 				if(msg_type == 'Y'){
+					$("#msgReceiveList > tr > td").css("color","black");
+				}else{
+					$("#msgReceiveList > tr > td").css("color","red");
+				}	  */
+			  	var msg_id = data.msg_id; 
+			 	var msg_smember = data.msg_smember ;
+				var msg_time = data.msg_time; 
+				var msg_content = data.msg_content;
+				$("#reInput1").val(msg_smember);
+				$("#reInput2").val(msg_time);
+				$("#reInput3").val(msg_content);
+				$("#reInput").val(msg_id);
+				
+				}
+			});
+		}
+		
+		
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		
 		function getMessageSend(page){
@@ -315,6 +354,7 @@
 					$.each(data.msgSendList,function(idx,mm){
 						html += "<tr class= msgClick2>";
 						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.msgmember_msg +"</td>";
 						html += "	<td>"+ mm.msg_content +"</td>";
 						html += "	<td>"+ mm.msg_rmember+"</td>";
 						html += "	<td>"+ mm.msg_rdate +"</td>";

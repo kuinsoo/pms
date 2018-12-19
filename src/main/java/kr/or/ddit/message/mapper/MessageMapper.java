@@ -46,6 +46,35 @@ public interface MessageMapper {
 	 */
 	int totalMsgReceived(String msg_rmember);
 	
+	/**
+	 * Method : insertMessageSend
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param msgVo
+	 * @return
+	 * Method 설명 : 쪽지 보내기 
+	 */
+	int insertMessageSend(MessageVo msgVo);
+	
+	/**
+	 * Method : updateMessageReceived
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param msgVo
+	 * @return
+	 * Method 설명 : 읽음/ 안읽음 구분하기 
+	 */
+	int updateMessageReceived(MessageVo msgVo);
+	
+	/**
+	 * Method : deleteMsgReceived
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param msg_id
+	 * @return
+	 * Method 설명 : 받은 메시지 삭제부분
+	 */
+	int deleteMsgReceived(String msg_id);
 	
 	/**
 	 * Method : totalMsgReceived
@@ -56,6 +85,16 @@ public interface MessageMapper {
 	 * Method 설명 : 보낸 쪽지 갯수 
 	 */
 	int totalMsgSend(String msg_smember);
+	
+	/**
+	 * Method : selectOneMessageReceived
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param msg_id
+	 * @return
+	 * Method 설명 : 클릭시 detail 팝업 
+	 */
+	MessageVo selectOneMessageReceived(String msg_id);
 	
 	/**
 	 * Method : selectMessageReceived
