@@ -73,18 +73,21 @@ WHERE   pm.pmember_member = #{member_mail}
 
 	<!-- 팀리더로 업데이트 등록 -->
     <insert id="setTeamLeader" parameterType="Map">
-	  insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,SEQ_PROJECT.currval,#{member_email},#{pmember_position},sysdate,'N')
+	  insert into PROJECT_MEMBER (PMEMBER_ID, PMEMBER_PROJECT, PMEMBER_MEMBER, PMEMBER_POSITION, PMEMBER_DATE, PMEMBER_BOOKMARK)
+	  values (SEQ_PROJECT_MEMBER.nextval,SEQ_PROJECT.currval,#{member_email},#{pmember_position},sysdate,'N')
     </insert>
 
 
 	<!-- 팀 원으로 등록 -->
     <insert id="inviteTeam" parameterType="pMemberVo">
-      insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,#{pmember_project},#{pmember_member},'N','2', sysdate)
+      insert into PROJECT_MEMBER (PMEMBER_ID, PMEMBER_PROJECT, PMEMBER_MEMBER, PMEMBER_POSITION, PMEMBER_DATE, PMEMBER_BOOKMARK)
+      values (SEQ_PROJECT_MEMBER.nextval,#{pmember_project},#{pmember_member},'N','2', sysdate)
     </insert>
 
 	<!-- 초대받은 프로젝트들 -->
 	<insert id="invitedProjects" parameterType="inviteProjectVo">
-		insert into INVITE_PROJECT values (#{member_mail}, #{project_id}, #{project_invite}, #{invite_mail}, #{invite_name})
+		insert into INVITE_PROJECT (MEMBER_MAIL, PROJECT_ID, PROJECT_INVITE, INVITE_MAIL, INVITE_NAME)
+		values (#{member_mail}, #{project_id}, #{project_invite}, #{invite_mail}, #{invite_name})
 	</insert>
 
 	<!-- 초대받은 프로젝트에 포함된 이메일인지 검색 -->

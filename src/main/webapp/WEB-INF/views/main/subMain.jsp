@@ -64,8 +64,7 @@
 				        </div>
 				        <div class="currentCardContentBottomView">
 				            <div id="container${work.work_id}"></div>
-				                <%-- work chart document Ready 에서 초기값으로 시작. --%>
-				                <%--<%@ include file="/WEB-INF/views/work/testChart.jsp" %>--%>
+				                <%@ include file="/WEB-INF/views/work/testChart.jsp" %>
 				        </div>
 				
 				        <!-- 댓글  -->
