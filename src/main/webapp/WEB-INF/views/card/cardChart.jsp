@@ -25,7 +25,7 @@
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                     <div class="portletHover">
 	                	${wcVo.work_title} <br><br>
-	                	${wcVo.work_content} SDLAFJSLKDGJLKSDJGKLASDJFLKASJDFLKASJDFLKAJSDLFK
+	                	${wcVo.work_content}
 	                </div>
                 </div>
             </c:if>
