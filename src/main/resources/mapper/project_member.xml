@@ -137,6 +137,7 @@ WHERE   pm.pmember_member = #{member_mail}
 		select PMEMBER_MEMBER, MEMBER_NAME, MEMBER_PROFILE, PMEMBER_POSITION
 		from PROJECT_MEMBER inner join MEMBER on (PMEMBER_MEMBER = MEMBER_MAIL)
 		and PMEMBER_PROJECT = #{project_id}
+		order by pmember_position asc
 	</select>
 
 
