@@ -1,6 +1,10 @@
 package kr.or.ddit.commons.util;
 
 import kr.or.ddit.Application;
+import kr.or.ddit.attachment.model.AttachmentVo;
+import kr.or.ddit.attachment.service.AttachmentService;
+import kr.or.ddit.attachment.service.AttachmentServiceInf;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +25,7 @@ import java.util.Date;
  */
 public class FileUpload {
 
+
 	/**
 	 * File upload string.
 	 * 작성자	: Mr.KKu
@@ -29,15 +34,32 @@ public class FileUpload {
 	 * @param file the file
 	 * @return the string
 	 */
-	public static String singleFile(MultipartFile file) {
+	public static String singleFile(MultipartFile file, String att_work) {
 		String msg = "";
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+		String extension = Utils.extractExtension(file);
+		String pathStr =  UUID.UUID() + "_" + sdf.format(new Date()) + "_" +  file.getOriginalFilename();
+		String path  = "/upload-dir/" + pathStr;
+
+		AttachmentServiceInf attachmentService = new AttachmentService();
+		AttachmentVo attVo = new AttachmentVo();
+
+		attVo.setAtt_work(att_work);
+		attVo.setAtt_name(file.getOriginalFilename());
+		attVo.setAtt_extension(extension);
+		attVo.setAtt_path(path);
+		System.out.println(attVo.getAtt_work());
+		System.out.println(attVo.getAtt_name());
+		System.out.println(attVo.getAtt_extension());
+		System.out.println(attVo.getAtt_path());
+      	attachmentService.insertFile(attVo);
+
 		if(!file.isEmpty()) {
 			try {
 				BufferedOutputStream stream = new BufferedOutputStream(
 						new FileOutputStream(
-								new File(Application.UPLOAD_DIR + "/"+ UUID.UUID() + "_" +
-										sdf.format(new Date()) + "_" +  file.getOriginalFilename())));
+								new File(Application.UPLOAD_DIR + "/"+ pathStr)));
 				FileCopyUtils.copy(file.getInputStream(), stream);
 				stream.close();
 				msg = "You successfully uploaded" + file.getOriginalFilename() + "!";
@@ -53,9 +75,18 @@ public class FileUpload {
 		return msg;
 	}
 
+	/**
+	 * Multi files string.
+	 * 작성자	: Mr.KKu
+	 * 내용		: 멀티 파일 업로드
+	 *
+	 * @param files the files
+	 * @return the string
+	 */
 	public static String multiFiles(MultipartFile[] files) {
 		String fileName = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
 		if(files != null && files.length > 0) {
 			for (int i = 0; i < files.length ; i++) {
 				try {

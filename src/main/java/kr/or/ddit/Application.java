@@ -20,7 +20,6 @@ public class Application {
 		File file = new File(UPLOAD_DIR);
 		file.mkdir();
 		UPLOAD_DIR_PATH = file.getAbsolutePath();
-		System.out.println("UploadPath : " + UPLOAD_DIR_PATH);
 		SpringApplication.run(Application.class, args);
 	}
 }

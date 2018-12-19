@@ -13,8 +13,12 @@
 	Upload File 1: <input type="file" name="file" /> <br/>
 	Upload File 2: <input type="file" name="file" /> <br/>
 	Upload File 3: <input type="file" name="file" /> <br/>
-	Upload File 4: <input type="file" name="file" /> <br/>
+	Upload File 4: <input type="file" name="file" id="ds"  /> <br/>
 	<br /><br /><input type="submit" value="Upload" />
 </form>
+
+<script type="text/javascript">
+	$('#ds').val("sdklfjasldk");
+</script>
 </body>
 </html>

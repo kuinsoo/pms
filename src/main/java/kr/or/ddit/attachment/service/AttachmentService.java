@@ -1,5 +1,8 @@
 package kr.or.ddit.attachment.service;
 
+import kr.or.ddit.attachment.mapper.AttachmentMapper;
+import kr.or.ddit.attachment.model.AttachmentVo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,5 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class AttachmentService {
+public class AttachmentService implements AttachmentServiceInf {
+
+	@Autowired
+	private AttachmentMapper attachmentMapper;
+
+	@Override
+	public int insertFile(AttachmentVo attVo) {
+		return attachmentMapper.insertFile(attVo);
+	}
 }

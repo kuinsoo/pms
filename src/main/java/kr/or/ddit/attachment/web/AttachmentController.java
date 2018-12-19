@@ -77,9 +77,9 @@ public class AttachmentController {
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/single_upload")
 	public String fileUpload(@RequestParam("name") String name, @RequestParam("file") MultipartFile file,
-							 RedirectAttributes redirectAttributes) {
+							@RequestParam("workId")String workId) {
 
-		FileUpload.singleFile(file);
+		FileUpload.singleFile(file, workId);
 
 		return "redirect:/files";
 	}
