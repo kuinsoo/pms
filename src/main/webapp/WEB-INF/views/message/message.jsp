@@ -57,20 +57,18 @@
 									<colgroup width="15%" />
 									<colgroup width="30%" />
 									<thead>
-										<tr  class = "msgClick1"> 
+										<tr class="msgClick1"> 
 											<th>번호</th>
 											<th>받은 쪽지 내용</th>
 											<th>쪽지 보낸 사람</th>
 											<th>받은 날짜</th>
 										</tr>
 									</thead>
-									<tbody id = "msgReceiveList">
+									<tbody id="msgReceiveList">
 									</tbody>
 								</table>
 							</form>
-							<div>
-								<ul  class="pagination" ></ul>
-							</div>
+							<ul class="pagination receivePaging"></ul>
 							
 							<!-- 팝업 시작 부분 -->
 							<div class="white_content2" id="open2">
@@ -120,13 +118,12 @@
 											<th>보낸 날짜</th>
 										</tr>
 									</thead>
-									<tbody id = "msgSendList">
+									<tbody id="msgSendList">
 									</tbody>
 								</table>
 							</form>
 							<div>
-								<ul class="pagination2">
-								</ul>
+								<ul class="pagination2"></ul>
 							</div>
 							<!-- 팝업  -->
 							<div class="white_content1" id="open1">
