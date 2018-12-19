@@ -40,13 +40,14 @@
                 <div class="portlet">
                     <div class="portlet-header">${wcVo.work_title}</div>
                     <div class="portlet-content">
-                            ${wcVo.work_content}
+                    	${wcVo.work_content}
                     </div>
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                     <div class="portletHover">
-	                	메리 크리스마스 따윈 없다
+	                	${wcVo.work_title} <br>
+	                	${wcVo.work_content}
 	                </div>
                 </div>
             </c:if>
@@ -68,7 +69,7 @@
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                     <div class="portletHover">
-	                	메리 크리스마스 따윈 없다
+	                	${wcVo.work_title}
 	                </div>
                 </div>
             </c:if>
@@ -111,7 +112,7 @@
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
-                    <div class="portletHover">
+                    <div class="portletHovers">
 	                	메리 크리스마스 따윈 없다
 	                </div>
                 </div>

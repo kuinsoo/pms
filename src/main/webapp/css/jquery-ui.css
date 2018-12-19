@@ -63,10 +63,7 @@
 	width: 100%;
 	height: 100%;
 }
-.ui-tabs {
-	position: relative;/* position: relative prevents IE scroll bug (element with position: relative inside container with overflow: auto appear as "fixed") */
-	padding: .2em;
-}
+.ui-tabs{position:relative;}
 .ui-tabs .ui-tabs-nav {
 	margin: 0;
 	padding: .2em .2em 0;
@@ -107,18 +104,6 @@
 
 /* Component containers
 ----------------------------------*/
-.ui-widget {
-	font-size: 1em;
-}
-.ui-widget .ui-widget {
-	font-size: 1em;
-}
-.ui-widget input,
-.ui-widget select,
-.ui-widget textarea,
-.ui-widget button {
-	font-size: 1em;
-}
 .ui-widget-content {
 	background: #ffffff;
 	color: #333333;
@@ -127,7 +112,7 @@
 	color: #333333;
 }
 .ui-widget-header {
-	background: #e9e9e9;
+	background-color:#fff;
 	color: #333333;
 	font-weight: bold;
 }
@@ -146,7 +131,6 @@
 works properly when clicked or hovered */
 html .ui-button.ui-state-disabled:hover,
 html .ui-button.ui-state-disabled:active {
-	border: 1px solid #c5c5c5;
 	background: #f6f6f6;
 	font-weight: normal;
 	color: #454545;
@@ -169,7 +153,6 @@ a:visited.ui-button,
 .ui-widget-header .ui-state-focus,
 .ui-button:hover,
 .ui-button:focus {
-	border: 1px solid #cccccc;
 	background: #ededed;
 	font-weight: normal;
 	color: #2b2b2b;
@@ -197,14 +180,12 @@ a.ui-button:focus {
 a.ui-button:active,
 .ui-button:active,
 .ui-button.ui-state-active:hover {
-	border: 1px solid #003eff;
 	background: #007fff;
 	font-weight: normal;
 	color: #ffffff;
 }
 .ui-icon-background,
 .ui-state-active .ui-icon-background {
-	border: #003eff;
 	background-color: #ffffff;
 }
 .ui-state-active a,
