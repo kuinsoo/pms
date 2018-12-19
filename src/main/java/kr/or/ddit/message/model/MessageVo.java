@@ -1,8 +1,10 @@
 package kr.or.ddit.message.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * kr.or.ddit.message.model
@@ -20,11 +22,32 @@ public class MessageVo {
 	private String msg_id;
 	private String msg_smember;
 	private Date msg_time;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date format_msg_time;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date format_msg_rdate;
 	private String msg_type;
 	private String msg_content;
 	private String msgmember_msg;
 	private String msg_rmember;
 	private Date msg_rdate;
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	
+	public String getFormat_msg_time() {
+		if(msg_time == null) 
+			return "";
+		else
+			return sdf.format(msg_time);
+	}
+	public String getFormat_msg_rdate() {
+		if(msg_rdate == null) 
+			return "";
+		else
+			return sdf.format(msg_rdate);
+	}
+	
+	
 	public int getRnum() {
 		return rnum;
 	}
@@ -90,7 +113,5 @@ public class MessageVo {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 	
 }

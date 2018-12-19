@@ -26,6 +26,7 @@
 		where MSG_RMEMBER = #{member_mail}
 	</select>
 	
+	
 	<select id = "selectMessageReceived" resultType="msgVo" parameterType="String">
 		select A.MSG_SMEMBER, 
       		   A.MSG_CONTENT, 
@@ -42,14 +43,22 @@
 		select * from(
 		    select rownum rnum ,a.*
 		             from
-		                  (select A.MSG_SMEMBER, 
+		                  (select B.MSG_RMEMBER, 
                                   A.MSG_CONTENT, 
-                                  A.MSG_TIME
+                                  B.MSG_RDATE
                             from  MESSAGE A, MESSAGE_MEMBER B
                             where A.MSG_ID = B.MSGMEMBER_MSG
-                            and A.MSG_SMEMBER = 'kkuinsoo@gmail.com')a)
+                            and A.MSG_SMEMBER = #{member_mail})a)
             where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
 	</select>
+	
+	<!--  보낸쪽지 갯수  -->
+	<select id="totalMsgSend" resultType="int" parameterType="String">
+		select count(*) from message
+        where MSG_SMEMBER = #{member_mail}
+	</select>
+	
+	
 	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 	
 	

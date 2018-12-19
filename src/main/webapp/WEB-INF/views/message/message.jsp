@@ -52,15 +52,15 @@
 							<form action="#" method="post">
 								<table>						
 									<colgroup width="10%" />
-									<colgroup width="15%" />
 									<colgroup width="40%" />
+									<colgroup width="15%" />
 									<colgroup width="30%" />
 									<thead>
 										<tr  class = "msgClick1"> 
 											<th>번호</th>
-											<th>보낸 사람</th>
-											<th>쪽지 내용</th>
-											<th>날짜/시간</th>
+											<th>받은 쪽지 내용</th>
+											<th>쪽지 보낸 사람</th>
+											<th>받은 날짜</th>
 										</tr>
 									</thead>
 									<tbody id = "msgReceiveList">
@@ -108,18 +108,18 @@
 							<form action="#" method="post">
 								<table>
 									<colgroup width="10%" />
-									<colgroup width="15%" />
 									<colgroup width="40%" />
+									<colgroup width="15%" />
 									<colgroup width="30%" />
 									<thead>
 										<tr>
 											<th>번호</th>
+											<th>보낸 쪽지 내용</th>
 											<th>받는 사람</th>
-											<th>쪽지 내용</th>
-											<th>날짜/시간</th>
+											<th>보낸 날짜</th>
 										</tr>
 									</thead>
-									<tbody id = "">
+									<tbody id = "msgSendList">
 									</tbody>
 								</table>
 							</form>
@@ -170,12 +170,16 @@
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
 		getMessageReceived(1);
+		getMessageSend(1);
 		
 		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
+			
 			console.log("msgReceiveList");
 			 window.location = "#open2";
 
+			 
 			  //$("#frm").submit();
 		});
 	});
@@ -194,9 +198,9 @@
 					$.each(data.msgReceiveList,function(idx,mm){
 						html += "<tr class = msgClick1>";
 						html += "	<td>"+ mm.rnum +"</td>";
-						html += "	<td>"+ mm.msg_smember+"</td>";
 						html += "	<td>"+ mm.msg_content +"</td>";
-						html += "	<td>"+ mm.msg_time +"</td>";
+						html += "	<td>"+ mm.msg_smember+"</td>";
+						html += "	<td>"+ mm.format_msg_time +"</td>";
 						html += "</tr>";
 					});
 					
@@ -212,6 +216,45 @@
 					}
 						paging +="<li><a href='javascript:getMessageReceived("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 					$(".pagination").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		
+		function getMessageSend(page){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/messageSendAjax",
+				data : {"page":page, "pageSize":pageSize},
+				success: function(data){
+					
+					console.log(data.msgSendList);
+					var html = "";
+					$.each(data.msgSendList,function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.msg_content +"</td>";
+						html += "	<td>"+ mm.msg_rmember+"</td>";
+						html += "	<td>"+ mm.format_msg_rdate +"</td>";
+						html += "</tr>";
+					});
+					
+					console.log(data.msgSendList);
+					
+					$("#msgSendList").html("");
+					$("#msgSendList").html(html);
+					
+					var paging ="";
+					paging +="<li><a href='javascript:getMessageSend("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<=data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getMessageSend("+ i +");'>"+ i+ "</a></li>";
+					}
+						paging +="<li><a href='javascript:getMessageSend("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".pagination2").html(paging);
 				},
 				fail : function(xhr){
 					console.log(xhr);
