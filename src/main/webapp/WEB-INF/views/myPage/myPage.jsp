@@ -1012,7 +1012,6 @@ var myChart2 = new Chart(ctx2, {
 });
 
 
-//@@@@@@@@@@@@@@
 // @@@@@@@@@@@@@@@@@@@ 회원탈퇴 비밀번호 확인 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 $(document).ready(function() {
@@ -1022,6 +1021,9 @@ $(document).ready(function() {
 	$("#member_pass").keyup(function() {
 		if($("#member_pass").val() != "${memberVo.member_pass}"){
 			$("#passError").show();
+			
+			
+			
 			$('.goodbyeBtn').prop('disabled', true);
 		} else{
 			$("#passError").hide();
