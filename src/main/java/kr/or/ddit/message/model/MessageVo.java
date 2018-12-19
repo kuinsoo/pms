@@ -21,32 +21,34 @@ public class MessageVo {
 	private int rnum;
 	private String msg_id;
 	private String msg_smember;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	private Date msg_time;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date format_msg_time;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private Date format_msg_rdate;
+	
+	//private Date format_msg_time;
+	//private Date format_msg_rdate;
 	private String msg_type;
 	private String msg_content;
 	private String msgmember_msg;
 	private String msg_rmember;
+	
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	private Date msg_rdate;
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	
-	public String getFormat_msg_time() {
+	public String getMsg_time() {
 		if(msg_time == null) 
 			return "";
 		else
 			return sdf.format(msg_time);
 	}
-	public String getFormat_msg_rdate() {
+	public String getMsg_rdate() {
 		if(msg_rdate == null) 
 			return "";
 		else
 			return sdf.format(msg_rdate);
 	}
-	
 	
 	public int getRnum() {
 		return rnum;
@@ -60,9 +62,7 @@ public class MessageVo {
 	public void setMsg_id(String msg_id) {
 		this.msg_id = msg_id;
 	}
-	public Date getMsg_time() {
-		return msg_time;
-	}
+	
 	public void setMsg_time(Date msg_time) {
 		this.msg_time = msg_time;
 	}
@@ -90,9 +90,7 @@ public class MessageVo {
 	public void setMsg_rmember(String msg_rmember) {
 		this.msg_rmember = msg_rmember;
 	}
-	public Date getMsg_rdate() {
-		return msg_rdate;
-	}
+
 	public void setMsg_rdate(Date msg_rdate) {
 		this.msg_rdate = msg_rdate;
 	}
@@ -111,7 +109,6 @@ public class MessageVo {
 	}
 	public MessageVo() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 }
