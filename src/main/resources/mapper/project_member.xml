@@ -73,7 +73,7 @@ WHERE   pm.pmember_member = #{member_mail}
 
 	<!-- 팀리더로 업데이트 등록 -->
     <insert id="setTeamLeader" parameterType="Map">
-	  insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,SEQ_PROJECT.currval,#{member_email},'N', #{pmember_position}, sysdate)
+	  insert into PROJECT_MEMBER values (SEQ_PROJECT_MEMBER.nextval,SEQ_PROJECT.currval,#{member_email},#{pmember_position},sysdate,'N')
     </insert>
 
 
@@ -148,7 +148,7 @@ WHERE   pm.pmember_member = #{member_mail}
 		and PMEMBER_MEMBER = #{pmember_member}
 	</select>
 
-	<update id="updateBookmark" parameterType="pMemberVo" >
+	<update id="updateBookmark" parameterType="pMemberVo">
 		update PROJECT_MEMBER
 		set PMEMBER_BOOKMARK = #{pmember_bookmark}
 		where PMEMBER_PROJECT=  #{pmember_project}
