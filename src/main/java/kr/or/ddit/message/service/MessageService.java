@@ -49,4 +49,10 @@ public class MessageService implements MessageServiceInf{
 	public List<MessageVo> messageSend(PageVo pageVo) {
 		return messageMapper.messageSend(pageVo);
 	}
+
+
+	@Override
+	public int totalMsgSend(String msg_smember) {
+		return messageMapper.totalMsgSend(msg_smember);
+	}
 }

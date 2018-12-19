@@ -104,7 +104,27 @@ public class MessageController {
 	 	
 	 	send
 	 */
-	
+	@ResponseBody
+	@RequestMapping(value= "/messageSendAjax" , method= RequestMethod.GET)
+	public Map<String ,Object> messageSendAjax(@SessionAttribute("memberVo") MemberVo memberVo ,PageVo pageVo) {
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		System.out.println(pageVo.toString());
+		
+		MessageVo messageVo = new MessageVo();
+		messageVo.setMsg_smember(memberVo.getMember_mail());
+		
+		List<MessageVo> msgSendList = messageservice.messageSend(pageVo);	
+		
+		System.out.println(msgSendList + "msgSendList");
+		int pageCnt = messageservice.totalMsgSend(messageVo.getMsg_smember());
+
+		Map<String, Object> msgSendMap = new HashMap<>();
+		msgSendMap.put("msgSendList", msgSendList);
+		msgSendMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return msgSendMap;
+	}	
 	
 	
 	

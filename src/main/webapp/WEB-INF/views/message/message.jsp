@@ -12,6 +12,7 @@
 						<li><a href="#tabs2-1">쪽지 보내기</a></li>
 						<li><a href="#tabs2-2">받은쪽지</a></li>
 						<li><a href="#tabs2-3">보낸쪽지</a></li>
+						<li><a href="#tabs2-4">친구리스트</a></li>
 					</ul>
 
 					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 쪽지 보내기  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -52,24 +53,22 @@
 							<form action="#" method="post">
 								<table>						
 									<colgroup width="10%" />
-									<colgroup width="15%" />
 									<colgroup width="40%" />
+									<colgroup width="15%" />
 									<colgroup width="30%" />
 									<thead>
-										<tr  class = "msgClick1"> 
+										<tr class="msgClick1"> 
 											<th>번호</th>
-											<th>보낸 사람</th>
-											<th>쪽지 내용</th>
-											<th>날짜/시간</th>
+											<th>받은 쪽지 내용</th>
+											<th>쪽지 보낸 사람</th>
+											<th>받은 날짜</th>
 										</tr>
 									</thead>
-									<tbody id = "msgReceiveList">
+									<tbody id="msgReceiveList">
 									</tbody>
 								</table>
 							</form>
-							<div>
-								<ul  class="pagination" ></ul>
-							</div>
+							<ul class="pagination receivePaging"></ul>
 							
 							<!-- 팝업 시작 부분 -->
 							<div class="white_content2" id="open2">
@@ -108,24 +107,23 @@
 							<form action="#" method="post">
 								<table>
 									<colgroup width="10%" />
-									<colgroup width="15%" />
 									<colgroup width="40%" />
+									<colgroup width="15%" />
 									<colgroup width="30%" />
 									<thead>
-										<tr>
+										<tr class = "msgClick2">
 											<th>번호</th>
+											<th>보낸 쪽지 내용</th>
 											<th>받는 사람</th>
-											<th>쪽지 내용</th>
-											<th>날짜/시간</th>
+											<th>보낸 날짜</th>
 										</tr>
 									</thead>
-									<tbody id = "">
+									<tbody id="msgSendList">
 									</tbody>
 								</table>
 							</form>
 							<div>
-								<ul class="pagination2">
-								</ul>
+								<ul class="pagination2"></ul>
 							</div>
 							<!-- 팝업  -->
 							<div class="white_content1" id="open1">
@@ -149,6 +147,79 @@
 						    </div>
 						</div>
 					</div>
+					<div id="tabs2-4">
+						<div class="friendContainer">
+							<div class="friendLeft">
+								<form action="#" method="post">
+									<input type="text" placeholder="친구 이메일을 입력해주세요" class="friendSearchInput" />
+									<input type="button" value="검색" class="friendSearchBtn" />
+									
+									<table class="friendCreateTable">
+										<thead>
+											<tr>
+												<th>이메일</th>
+												<th>등록</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>test@gmail.com</td>
+												<td><input type="button" value="친구추가" /></td>
+											</tr>
+											<tr>
+												<td>test@gmail.com</td>
+												<td><input type="button" value="친구추가" /></td>
+											</tr>
+											<tr>
+												<td>test@gmail.com</td>
+												<td><input type="button" value="친구추가" /></td>
+											</tr>
+											<tr>
+												<td>test@gmail.com</td>
+												<td><input type="button" value="친구추가" /></td>
+											</tr>
+											<tr>
+												<td>test@gmail.com</td>
+												<td><input type="button" value="친구추가" /></td>
+											</tr>
+										</tbody>
+									</table>
+									<ul class="friendCreateTablePaging">
+										<li><</li>
+										<li>1</li>
+										<li>2</li>
+										<li>></li>
+									</ul>
+								</form>
+							</div>
+							<div class="friendRight">
+								<input type="text" placeholder="친구 이메일을 입력해주세요" class="friendSearchInput" />
+								<input type="button" value="검색" class="friendSearchBtn" />
+								<table class="friendCreateTable">
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>이메일</th>
+											<th>삭제</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>1</td>
+											<td>test@gmail.com</td>
+											<td><input type="button" value="친구삭제" /></td>
+										</tr>
+									</tbody>
+								</table>
+								<ul class="friendCreateTablePaging2">
+									<li><</li>
+									<li>1</li>
+									<li>2</li>
+									<li>></li>
+								</ul>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -170,12 +241,23 @@
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
+		
 		getMessageReceived(1);
+		getMessageSend(1);
 		
 		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
+			
 			console.log("msgReceiveList");
 			 window.location = "#open2";
 
+			  //$("#frm").submit();
+		});
+		
+		$("#msgSendList").on("click", ".msgClick2" ,function(){
+			
+			console.log("msgSendList");
+			 window.location = "#open1";
+			 
 			  //$("#frm").submit();
 		});
 	});
@@ -194,8 +276,8 @@
 					$.each(data.msgReceiveList,function(idx,mm){
 						html += "<tr class = msgClick1>";
 						html += "	<td>"+ mm.rnum +"</td>";
-						html += "	<td>"+ mm.msg_smember+"</td>";
 						html += "	<td>"+ mm.msg_content +"</td>";
+						html += "	<td>"+ mm.msg_smember+"</td>";
 						html += "	<td>"+ mm.msg_time +"</td>";
 						html += "</tr>";
 					});
@@ -204,14 +286,54 @@
 					
 					$("#msgReceiveList").html("");
 					$("#msgReceiveList").html(html);
-					
+					var i  = 1;
 					var paging ="";
-					paging +="<li><a href='javascript:getMessageReceived("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
-					for(var i= 1; i<=data.pageCnt; i++) {
+						paging +="<li><a href='javascript:getMessageReceived("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<= data.pageCnt; i++) {
 						paging += "<li><a href='javascript:getMessageReceived("+ i +");'>"+ i+ "</a></li>";
 					}
 						paging +="<li><a href='javascript:getMessageReceived("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 					$(".pagination").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		
+		function getMessageSend(page){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/messageSendAjax",
+				data : {"page":page, "pageSize":pageSize},
+				success: function(data){
+					
+					console.log(data.msgSendList);
+					var html = "";
+					$.each(data.msgSendList,function(idx,mm){
+						html += "<tr class= msgClick2>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.msg_content +"</td>";
+						html += "	<td>"+ mm.msg_rmember+"</td>";
+						html += "	<td>"+ mm.msg_rdate +"</td>";
+						html += "</tr>";
+					});
+					
+					console.log(data.msgSendList);
+					
+					$("#msgSendList").html("");
+					$("#msgSendList").html(html);
+					
+					var i  = 1;
+					var paging ="";
+					paging +="<li><a href='javascript:getMessageSend("+data.pageCnt  +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<=data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getMessageSend("+ i +");'>"+ i+ "</a></li>";
+					}
+						paging +="<li><a href='javascript:getMessageSend("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".pagination2").html(paging);
 				},
 				fail : function(xhr){
 					console.log(xhr);
