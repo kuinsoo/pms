@@ -297,14 +297,12 @@ iframe{border: 1px solid #dee3eb; width:100%; height:100%}
 .projectTeams > ul > li{position:relative;}
 .projectTeams > ul > li > .projectTeamHover{display:none;}
 .projectTeams > ul > li:hover > .projectTeamHover {
-	display:block;width:300px;height:50px;background-color:#fff;border:1px solid #dee3eb;
+	display:block;width:320px;height:50px;background-color:#fff;border:1px solid #dee3eb;
 	position:absolute;z-index:5;top:40px;right:10px;box-shadow:1px 1px 1px #000;
 	line-height:50px;
 }
-.projectTeamHover > a > i{font-size:20px;vertical-align:middle;margin-left:20px;cursor:pointer;color:#000;}
-.projectTeamHover > a > span{font-size:20px;cursor:pointer;color:#000;}
-.projectTeamHover > i{font-size:20px;vertical-align:middle;margin-left:10px;cursor:pointer;}
-.projectTeamHover > span{font-size:20px;cursor:pointer;}
+.projectTeamHover > a > i{font-size:17px;vertical-align:middle;margin-left:5px;cursor:pointer;color:#000;}
+.projectTeamHover > a > span{font-size:17px;cursor:pointer;color:#000;letter-spacing:-1px;}
 
 
 /* FOOTER */
