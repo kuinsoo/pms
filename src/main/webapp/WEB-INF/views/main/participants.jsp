@@ -17,8 +17,14 @@
 	                    	<i class="icon-badge icons"></i>
 	                    	<span>능력 및 평가</span>
                     	</a>
-                    	<i class="icon-paper-plane icons"></i>
-                    	<span>쪽지 보내기</span>
+                    	<a href="/message">
+	                    	<i class="icon-paper-plane icons"></i>
+	                    	<span>쪽지 보내기</span>
+                    	</a>
+                    	<a href="/message#tabs2-4">
+	                    	<i class="icon-user-follow icons"></i>
+	                    	<span>친구 리스트</span>
+                    	</a>
                     </div>
                 </li>
             </c:if>
@@ -34,8 +40,14 @@
 	                    	<i class="icon-badge icons"></i>
 	                    	<span>능력 및 평가</span>
                     	</a>
-                    	<i class="icon-paper-plane icons"></i>
-                    	<span>쪽지 보내기</span>
+                    	<a href="/message">
+	                    	<i class="icon-paper-plane icons"></i>
+	                    	<span>쪽지 보내기</span>
+                    	</a>
+                    	<a href="/message#tabs2-4">
+	                    	<i class="icon-user-follow icons"></i>
+	                    	<span>친구 리스트</span>
+                    	</a>
                     </div>
                 </li>
             </c:if>

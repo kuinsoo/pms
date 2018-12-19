@@ -29,6 +29,18 @@ public interface MessageServiceInf {
 	 */
 	List<MessageVo> messageReceived(PageVo pageVo);
 	
+
+	/**
+	 * Method : insertMessageSend
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param msgVo
+	 * @return
+	 * Method 설명 : 쪽지 보내기 
+	 */
+	int insertMessageSend(MessageVo msgVo);
+	
+	
 	/**
 	 * Method : messageSend
 	 * 작성자 : pc07
@@ -50,6 +62,28 @@ public interface MessageServiceInf {
 	int totalMsgReceived(String msg_rmember);
 
 	/**
+	 * Method : updateMessageReceived
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param msgVo
+	 * @return
+	 * Method 설명 : 읽음/ 안읽음 구분하기 
+	 */
+	int updateMessageReceived(MessageVo msgVo);
+	
+	
+	/**
+	 * Method : selectOneMessageReceived
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param msg_id
+	 * @return
+	 * Method 설명 : 클릭시 detail 팝업 
+	 */
+	MessageVo selectOneMessageReceived(String msg_id);
+	
+	
+	/**
 	 * Method : totalMsgReceived
 	 * 작성자 : pc07
 	 * 변경이력 :
@@ -59,6 +93,17 @@ public interface MessageServiceInf {
 	 */
 	int totalMsgSend(String msg_smember);
 
+	/**
+	 * Method : deleteMsgReceived
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param msg_id
+	 * @return
+	 * Method 설명 : 받은 메시지 삭제부분
+	 */
+	int deleteMsgReceived(String msg_id);
+	
+	
 	/**
 	 * Method : selectMessageReceived
 	 * 작성자 : pc07

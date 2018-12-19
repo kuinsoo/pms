@@ -28,6 +28,9 @@ public interface PostServiceInf {
 	//삭제
 	int deleteQnaPost(String post_id);
 	
+	//전체 글 개수 
+	int postListCnt(PostPageVo postPageVo);
+	
 	//글 목록
 	List<PostVo> qnaPostList(PostPageVo postPageVo);
 	

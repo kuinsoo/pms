@@ -1,10 +1,10 @@
 package kr.or.ddit.todo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.todo.model.ToDoVo;
-import kr.or.ddit.work.model.WorkVo;
 
 /**
  * kr.or.ddit.todo.service
@@ -45,6 +45,16 @@ public interface ToDoServiceInf {
 	* @return
 	* Method 설명 : 각 업무의 to-do list를 조회
 	*/
-	List<ToDoVo> workToDoSelect(WorkVo workVo);
+	Map<String, Object> workToDoSelect(Map todoMap);
+	
+	/**
+	* Method : todoCnt
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_work
+	* @return
+	* Method 설명 : to-do list의 총 to-do 갯수
+	*/
+	int todoCnt(String work_id);
 	
 }

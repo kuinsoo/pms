@@ -19,7 +19,7 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @WebAppConfiguration
-@ActiveProfiles("devTest")
+@ActiveProfiles("devTest")	//yml에 선언해둔 내용 호출하는 어노테이션 
 public class ResetSQL {
 	
 	@Autowired

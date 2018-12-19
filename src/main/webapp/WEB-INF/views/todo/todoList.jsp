@@ -3,36 +3,58 @@
 
 <script>
 $(document).ready(function(){
-    //페이지 접속시 to-do list 조회 ==문의: jerry==
-    //todoSelect();
-    
-    //페이지 접속시 to-do list 조회(Ajax) ==문의: jerry==
-	//function todoSelect() {
 	var project_id = $('#todo_project_id').val();
 	var work_id = ${work.work_id};
-	console.log("project_id : " + project_id);
-	console.log("work_id : " + work_id);
+	//console.log("project_id : " + project_id);
+	//console.log("work_id : " + work_id);
+	console.log('here');
+	//페이지 접속시 to-do list 조회(Ajax) ==문의: jerry==
+	getToDoList${work.work_id}(1, project_id, work_id);	
 	
+	//to-do list의 pagination(Ajax) ==문의: jerry==
+	getToDoPagination${work.work_id}(1, project_id, work_id);
+	
+});
+
+/* 페이지 접속시 to-do list 조회(Ajax) ==문의: jerry== */
+function getToDoList${work.work_id}(page, project_id, work_id){
+	var pageSize = 7;
+	console.log("list-project_id : " + project_id);
 	$.ajax({
 		method: "POST",
 		url: "/todoSelect",
-		data: {"project_id" : project_id, "work_id" : work_id},
+		data: {"project_id" : project_id, "work_id" : work_id, "page" : page, "pageSize" : pageSize},
 		success: function (data) {
 			//alert("success");
-			console.log(data);
-				
-			//$('.currentCardContentViewRight').html(data);
+			//console.log(data);
 			$('#todoInsertHtmlAjax${work.work_id}').html("");
 			$('#todoInsertHtmlAjax${work.work_id}').html(data);
-		   
 		},
 		error: function (data) {
-			alert("error");
+			console.log("list-error : " + data);
 		}
 	});
-	//}
-});
+}
 
+/* to-do list의 pagination(Ajax) ==문의: jerry== */
+function getToDoPagination${work.work_id}(page, project_id, work_id){
+	var pageSize = 7;
+	console.log("page-project_id : " + project_id);
+	$.ajax({
+		method: "POST",
+		url: "/todoPagination",
+		data: {"project_id" : project_id, "work_id" : work_id, "page" : page, "pageSize" : pageSize},
+		success: function(data){
+			console.log(data);
+			$('#pagination${work.work_id}').html("");
+			$('#pagination${work.work_id}').html(data);
+		},
+		error: function(data){
+			console.log("page-error : " + data);
+		}
+	});
+}
+	
 </script>
 
 <!-- to-do list 조회 -->
@@ -49,18 +71,10 @@ $(document).ready(function(){
 			</tr>
 		</thead>
 		<tbody id="todoInsertHtmlAjax${work.work_id}">
-		<!-- todoInsertAjax.jsp -->
+			<!-- todoInsertAjax.jsp -->
 		</tbody>
 	</table>
-	<div class="pagination">
-		<ul>
-			<li><i class="icon-arrow-left icons"></i></li>
-			<li><span>1</span></li>
-			<li><span>2</span></li>
-			<li><span>3</span></li>
-			<li><span>4</span></li>
-			<li><span>5</span></li>
-			<li><i class="icon-arrow-right icons"></i></li>
-		</ul>
+	<div class="pagination" id="pagination${work.work_id}">
+		<!-- todoPageinationHtml.jsp -->
 	</div>
 </div>

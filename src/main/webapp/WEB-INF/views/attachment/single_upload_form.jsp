@@ -12,7 +12,7 @@
     <title>${message}</title>
 </head>
 <body>
-<form method="post" enctype="multipart/form-data" action="/single_upload?workId=1">
+<form method="post" enctype="multipart/form-data" action="/single_upload?work_id=1">
     Upload File : <input type="file" name="file" /> <br/>
     Name: <input type="text" name="name" /> <br/>
     <br /><br /><input type="submit" value="Upload" />

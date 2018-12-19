@@ -4,7 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.ddit.attachment.mapper.AttachmentMapper">
-    <insert id="insertFile" parameterType="attVo" >
-        insert into ATTACHMENT values (SEQ_ATTACHMENT.nextval, #{att_work}, #{att_name}, #{att_extension},#{att_path},'' )
+
+
+    <select id="selectAtt" parameterType="String" resultType="attVo">
+        select* from ATTACHMENT where ATT_ID = #{att_id}
+    </select>
+
+    <insert id="insertAtt" parameterType="attVo">
+        insert into attachment (ATT_ID, ATT_WORK, ATT_NAME, ATT_EXTENSION, ATT_PATH, ATT_FILE)
+        values (SEQ_ATTACHMENT.nextval, #{att_work}, #{att_name}, #{att_extension}, #{att_path},'')
     </insert>
+
 </mapper>

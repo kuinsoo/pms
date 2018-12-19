@@ -22,8 +22,29 @@ public class AttachmentService implements AttachmentServiceInf {
 	@Autowired
 	private AttachmentMapper attachmentMapper;
 
+	/**
+	 * Insert att int.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 첨부파일 추가
+	 *
+	 * @param attVo the att vo
+	 * @return the int
+	 */
 	@Override
-	public int insertFile(AttachmentVo attVo) {
-		return attachmentMapper.insertFile(attVo);
+	public int insertAtt(AttachmentVo attVo) {
+		return attachmentMapper.insertAtt(attVo);
+	}
+
+	/**
+	 * Select att attachment vo.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 첨부파일 찾기
+	 *
+	 * @param att_id the att id
+	 * @return the attachment vo
+	 */
+	@Override
+	public AttachmentVo selectAtt(String att_id) {
+		return attachmentMapper.selectAtt(att_id);
 	}
 }

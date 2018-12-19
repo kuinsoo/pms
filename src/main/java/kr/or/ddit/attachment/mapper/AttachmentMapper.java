@@ -12,13 +12,24 @@ import kr.or.ddit.attachment.model.AttachmentVo;
  * @Version :
  */
 public interface AttachmentMapper {
+
 	/**
-	 * Insert file int.
+	 * Insert att int.
 	 * 작성자 : Mr.KKu
-	 * 설명  : 첨부파일 추가
+	 * 내용 : 첨부파일 추가
 	 *
 	 * @param attVo the att vo
 	 * @return the int
 	 */
-	int insertFile(AttachmentVo attVo);
+	int insertAtt(AttachmentVo attVo);
+
+	/**
+	 * Select att attachment vo.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 첨부파일 찾기
+	 *
+	 * @param att_id the att id
+	 * @return the attachment vo
+	 */
+	AttachmentVo selectAtt(String att_id);
 }
