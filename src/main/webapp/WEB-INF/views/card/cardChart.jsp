@@ -24,7 +24,8 @@
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                     <div class="portletHover">
-	                	메리 크리스마스 따윈 없다
+	                	${wcVo.work_title} <br><br>
+	                	${wcVo.work_content} SDLAFJSLKDGJLKSDJGKLASDJFLKASJDFLKASJDFLKAJSDLFK
 	                </div>
                 </div>
             </c:if>
@@ -46,7 +47,7 @@
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                     <div class="portletHover">
-	                	${wcVo.work_title} <br>
+	                	${wcVo.work_title} <br><br>
 	                	${wcVo.work_content}
 	                </div>
                 </div>
@@ -69,7 +70,8 @@
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                     <div class="portletHover">
-	                	${wcVo.work_title}
+	                	${wcVo.work_title} <br><br>
+	                	${wcVo.work_content}
 	                </div>
                 </div>
             </c:if>
@@ -91,7 +93,8 @@
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                     <div class="portletHover">
-	                	메리 크리스마스 따윈 없다
+	                	${wcVo.work_title} <br><br>
+	                	${wcVo.work_content}	                	
 	                </div>
                 </div>
             </c:if>
@@ -113,7 +116,8 @@
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
                     <div class="portletHovers">
-	                	메리 크리스마스 따윈 없다
+	                	${wcVo.work_title} <br><br>
+	                	${wcVo.work_content}
 	                </div>
                 </div>
             </c:if>
