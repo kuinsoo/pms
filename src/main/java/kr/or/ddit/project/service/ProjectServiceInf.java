@@ -2,6 +2,7 @@ package kr.or.ddit.project.service;
 
 import java.util.List;
 
+import kr.or.ddit.member.model.PMemberListVo;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
 
@@ -62,8 +63,18 @@ public interface ProjectServiceInf {
 	 * 변경이력 : 2018-11-29 19:04
 	 *
 	 * @param scheduleVo the schedule vo
-	 * @return Method  설명 : 프로젝트 전체 일정
+	 * @return Method 설명 : 프로젝트 전체 일정
 	 */
 	List<ProjectVo> projectAllSchedule(ScheduleVo scheduleVo);
 
+
+	/*----------------------------------  정리 ----------------------------- */
+	/**
+	 * Book mark projects list.
+	 * 작성자 : Mr.KKu
+	 * 설명 : 즐겨찾기된 프로젝트 목록
+	 * @param member_mail the member mail
+	 * @return the list
+	 */
+	List<PMemberListVo> bookMarkProjects(String member_mail);
 }

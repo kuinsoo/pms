@@ -11,11 +11,14 @@ import org.apache.ibatis.type.Alias;
  * @Date : 2018-12-17 / 오후 10:10
  * @Version :
  */
-@Alias("PostPageVo")
+@Alias("postPageVo")
 public class PostPageVo {
-	
+
 	private String board_id;
-	private String pageNum;
+	
+	private int pageNum;
+	private int postCnt;
+	
 	private String searchText;
 	
 	public PostPageVo(){
@@ -29,12 +32,20 @@ public class PostPageVo {
 		this.board_id = board_id;
 	}
 
-	public String getPageNum() {
+	public int getPageNum() {
 		return pageNum;
 	}
 
-	public void setPageNum(String pageNum) {
+	public void setPageNum(int pageNum) {
 		this.pageNum = pageNum;
+	}
+
+	public int getPostCnt() {
+		return postCnt;
+	}
+
+	public void setPostCnt(int postCnt) {
+		this.postCnt = postCnt;
 	}
 
 	public String getSearchText() {
@@ -47,7 +58,8 @@ public class PostPageVo {
 
 	@Override
 	public String toString() {
-		return "PageVo [board_id=" + board_id + ", pageNum=" + pageNum + ", searchText=" + searchText + "]";
+		return "PostPageVo [board_id=" + board_id + ", pageNum=" + pageNum + ", postCnt=" + postCnt + ", searchText="
+				+ searchText + "]";
 	}
 	
 }

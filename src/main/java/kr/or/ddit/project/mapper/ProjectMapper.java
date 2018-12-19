@@ -2,6 +2,7 @@ package kr.or.ddit.project.mapper;
 
 import java.util.List;
 
+import kr.or.ddit.member.model.PMemberListVo;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
 
@@ -75,5 +76,17 @@ public interface ProjectMapper {
 	* Method 설명 : 
 	*/
 	List<ScheduleVo> myProjectList(String sid);
+
+
+
+	/*----------------------------------  정리 ----------------------------- */
+	/**
+	 * Book mark projects list.
+	 * 작성자 : Mr.KKu
+	 * 설명 : 즐겨찾기된 프로젝트 목록
+	 * @param member_mail the member mail
+	 * @return the list
+	 */
+	List<PMemberListVo> bookMarkProjects(String member_mail);
 	
 }

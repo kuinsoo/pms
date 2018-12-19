@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.todo.mapper.ToDoMapper;
 import kr.or.ddit.todo.model.ToDoVo;
+import kr.or.ddit.work.model.WorkVo;
 
 /**
  * kr.or.ddit.todo.service
@@ -60,8 +61,8 @@ public class ToDoService implements ToDoServiceInf{
 	* Method 설명 : 각 업무의 to-do list를 조회
 	*/
 	@Override
-	public List<ToDoVo> workToDoSelect(String work_project) {
-		return todoMapper.workToDoSelect(work_project);
+	public List<ToDoVo> workToDoSelect(WorkVo workVo) {
+		return todoMapper.workToDoSelect(workVo);
 	}
 	
 }

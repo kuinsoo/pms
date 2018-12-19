@@ -73,8 +73,8 @@
 	                    <th>이슈</th>
 	                </tr>
 	                </thead>
-	                <tbody>
-	                <!-- todoInsertAjax.jsp -->
+	                <tbody id="todoInsertHtmlAjax${work.work_id}">
+	                	<!-- todoInsertAjax.jsp -->
 	                </tbody>
 	            </table>
 	            <div class="pagination">

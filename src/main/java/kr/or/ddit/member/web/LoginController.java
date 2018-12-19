@@ -1,14 +1,10 @@
 package kr.or.ddit.member.web;
 
-import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.json.simple.JSONObject;
+import com.github.scribejava.core.model.OAuth2AccessToken;
+import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.oauth.bo.JsonParser;
+import kr.or.ddit.oauth.bo.NaverLoginBO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +12,15 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.github.scribejava.core.model.OAuth2AccessToken;
-
-import kr.or.ddit.member.model.MemberVo;
-import kr.or.ddit.member.service.MemberServiceInf;
-import kr.or.ddit.oauth.bo.JsonParser;
-import kr.or.ddit.oauth.bo.NaverLoginBO;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 
 /**
  * LoginController.java
@@ -47,7 +38,7 @@ public class LoginController {
 	Logger logger = LoggerFactory.getLogger(LoginController.class);
 
 	@Autowired
-	private MemberServiceInf memberservice;
+	private MemberServiceInf memberService;
 
 	//NaverLoginBO 
 	@Autowired
@@ -105,7 +96,7 @@ public class LoginController {
 		String member_mail = request.getParameter("member_mail").toLowerCase();
 		String member_pass = request.getParameter("member_pass").toLowerCase(); // 대소문자를 안가린다.
 
-		memberVo = memberservice.selectUser(member_mail);
+		memberVo = memberService.selectUser(member_mail);
 
 		if (memberVo != null && memberVo.getMember_withdrawal().equals("Y")) {
 			String msg = "탈퇴한 회원 입니다.";
@@ -154,8 +145,8 @@ public class LoginController {
 		String member_mail = memberVo.getMember_mail();
 
 		// 값이 다르면..
-		if (memberservice.selectUser(member_mail) == null) {
-			memberservice.insertUser(memberVo);
+		if (memberService.selectUser(member_mail) == null) {
+			memberService.insertUser(memberVo);
 			return "/";
 			// 값이 같으면
 		} else {
@@ -178,8 +169,8 @@ public class LoginController {
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Model model, @ModelAttribute("memberVo") MemberVo memberVo) {
 
-		model.addAttribute("pMemberList", memberservice.selectMainView(memberVo.getMember_mail()));
-		model.addAttribute("inviteProjectList", memberservice.selectInviteProject(memberVo.getMember_mail()));
+		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
+		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
 		return "main/main";
 	}
 
@@ -215,9 +206,9 @@ public class LoginController {
 		// 제목
 		message.setSubject(member_name + "님 안녕하세요 :) < CURRENT 아이디 찾기 >");
 
-		if (memberservice.selectfindId(memberVo) != null) {
+		if (memberService.selectfindId(memberVo) != null) {
 			// 내용
-			message.setText(member_name + "님이 찾으시는 아이디는  [  " + memberservice.selectfindId(memberVo).getMember_mail() + "  ]  입니다.");
+			message.setText(member_name + "님이 찾으시는 아이디는  [  " + memberService.selectfindId(memberVo).getMember_mail() + "  ]  입니다.");
 
 			emailSender.send(message);
 
@@ -256,7 +247,7 @@ public class LoginController {
 
 		// memberVo에 member_pass를 담아준다. 
 		// null이 아니면 비밀번호가 전송 
-		if (memberservice.selectfindPass(member_mail) != null) {
+		if (memberService.selectfindPass(member_mail) != null) {
 			// random 로직 
 			String possible = "abcdefghijklmnopqrstuvwxyz0123456789";
 			for (int i = 0; i < 8; i++) {
@@ -264,7 +255,7 @@ public class LoginController {
 			}
 			// 임시 비밀번호로 수정
 			memberVo.setMember_pass(member_pass);
-			memberservice.updatePass(memberVo);
+			memberService.updatePass(memberVo);
 			message.setText(member_name + " 님의 임시 비밀번호는  [  " + member_pass + "  ]  입니다. 로그인 후 꼭! 비밀번호를 수정해 주세요. ");
 			memberVo.setMember_pass(member_pass);
 			emailSender.send(message);
@@ -300,8 +291,8 @@ public class LoginController {
 	public String signProcess(@RequestParam("member_mail") String member_mail, MemberVo member, HttpServletRequest request) {
 
 		// 값이 다르면..
-		if (memberservice.selectUser(member_mail) == null) {
-			memberservice.insertUser(member);
+		if (memberService.selectUser(member_mail) == null) {
+			memberService.insertUser(member);
 			return "/login/login";
 			// 값이 같으면
 		} else {
