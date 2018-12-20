@@ -240,7 +240,7 @@ public class PostServiceTest extends ResetSQL {
 		int serchResult = searchList.size();
 		
 		/***Then***/
-		assertEquals(2, serchResult);
+		assertEquals(4, serchResult);
 		//issue : out of process memory when trying to allocate 152 bytes
 	}
 	

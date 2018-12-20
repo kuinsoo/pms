@@ -43,7 +43,7 @@ public class ToDoService implements ToDoServiceInf{
 
 	/**
 	* Method : todoInsert
-	* 작성자 : jerry
+	* 작성자 : jerr
 	* 변경이력 :
 	* @param todoVo
 	* @return
@@ -53,6 +53,7 @@ public class ToDoService implements ToDoServiceInf{
 	public int todoInsert(ToDoVo todoVo) {
 		return todoMapper.todoInsert(todoVo);
 	}
+	
 	/**
 	* Method : workToDoSelect
 	* 작성자 : jerry
