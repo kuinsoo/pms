@@ -17,24 +17,25 @@
 							<div id="imgs">
 								<div class="scale"><img src="${memberVo.member_profile}"/></div>
 							</div>
+							<div class="myPageContainerRightUser">
+								<div class="userContentsInfoRight_1">
+									<ul id="test">
+										<li>사용자 이메일</li>
+										<li><input type="text" value= "${memberVo.member_mail}" readonly /></li>
+										<li>사용자 이름 </li>
+										<li><input type="text" value= "${memberVo.member_name}" readonly /></li>
+										<li>휴대폰 번호</li>
+										<li><input type="text"  value= "${memberVo.member_tel}" readonly /></li>
+									</ul>
+								</div>
+								<%--<div class="userContentsInfoRight_2">
+									<ul>
+									</ul>
+								</div>--%>
+							</div>
 						</div>
 					</div>
-					<div class="myPageContainerRightUser">
-						<div class="userContentsInfoRight_1">
-							<ul id="test">
-								<li>사용자 이메일</li>
-								<li>사용자 이름 </li>
-								<li>휴대폰 번호</li> 
-							</ul>
-						</div>
-						<div class="userContentsInfoRight_2">
-							<ul>
-								<li><input type="text" value= "${memberVo.member_mail}" readonly /></li>
-								<li><input type="text" value= "${memberVo.member_name}" readonly /></li>
-								<li><input type="text"  value= "${memberVo.member_tel}" readonly /></li>
-							</ul>
-						</div>
-					</div>
+
 				</div>
 			</form>				
 				<div class="myPageContainerRight">

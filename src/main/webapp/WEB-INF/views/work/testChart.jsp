@@ -44,23 +44,23 @@
 				    start: Date.UTC(2018, 11, 8),
 				    end: Date.UTC(2018, 11, 9),
 				    y: 2,
-				    assignee: 'Torstein'
+				    assignee: 'kimjitae'
 			    }, {
 				    start: Date.UTC(2018, 11, 9),
 				    end: Date.UTC(2018, 11, 19),
 				    y: 1,
-				    assignee: 'JonArild'
+				    assignee: '진시리'
 			    }, {
 				    start: Date.UTC(2018, 11, 10),
 				    end: Date.UTC(2018, 11, 23),
 				    y: 2,
-				    assignee: 'Torstein',
+				    assignee: '구인수',
 				    fontSymbol: 'smile-o'
 			    }],
 			    dataLabels: [{
 				    enabled: true,
 				    format: '<div style="width: 20px; height: 20px; overflow: hidden; border-radius: 50%; margin-left: -25px">' +
-					    '<img src="https://www.highcharts.com/images/employees2014/{point.assignee}.jpg" ' +
+					    '<img src="images/{point.assignee}.jpg" ' +
 					    'style="width: 30px; margin-left: -5px; margin-top: -2px"></div>',
 				    useHTML: true,
 				    align: 'left'
