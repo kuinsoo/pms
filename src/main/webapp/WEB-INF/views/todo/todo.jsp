@@ -35,13 +35,12 @@ function insertTodo() {
       url: "/todoInsert",
       data: param,
       success: function(data) {
-         console.log(data);
          window.location.href = '#close';
          $('#todoInsertHtmlAjax${work.work_id}').html("");
          $('#todoInsertHtmlAjax${work.work_id}').html(data);
       },
       error:function(data) {
-         alert("error");
+         console.log("todo.jsp : insertTodo() - error");
       }
    });
 }
@@ -53,21 +52,18 @@ function popupMemberAjax${work.work_id}(project_id, work_id){
     	url: "/popupMemberList",
     	data: {"project_id" : project_id, "work_id" : work_id},
     	success: function(data){
-    		console.log("data : " + data);
     		$("#popupMemberList${work.work_id}").html("");
     		$("#popupMemberList${work.work_id}").html(data);
     	},
     	error: function(data){
-    		console.log("insert-popup error : " + data);
+    		console.log("todo.jsp : popupMemberAjax() - error");
     	}
     });
 }
 
 /* to-do list의 member list radio 버튼 클릭시 */
 function setMemberName${work.work_id}(name){
-	console.log(name);
 	$('#todo_pmember${work.work_id}').attr('value', name);
-	console.log("todo.jsp(${work.work_id}) : " + $('#todo_pmember${work.work_id}').val());
 }
 
 </script>
