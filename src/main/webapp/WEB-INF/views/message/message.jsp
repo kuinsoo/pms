@@ -137,13 +137,13 @@
 									<div class="sentNoteContainer">
 										<div class="recipientFacing">
 											<span>받는사람</span>
-											<input type="text" value="sally1334@naver.com" readonly />
+											<input type="text" id="sendInput3"readonly />
 										</div>
 										<div class="sendDate">
 											<span>보낸날짜</span>
-											<input type="text" value="" readonly />
+											<input type="text" id="sendInput4" readonly />
 										</div>							
-										<textarea class="sentNoteTextArea">답장입니다~~</textarea>
+										<textarea class="sentNoteTextArea" id = "sendInput2"></textarea>
 										<div class="facingDeleteBtnDiv">
 											<input type="button" value="삭제" class="sentNoteDeleteBtns" />
 										</div>
@@ -256,16 +256,19 @@
 			console.log("msgReceiveList");
 			var msg_id = $(this).children()[1].innerHTML;
 			updateMessageReceivedAjax(msg_id);
-			
 			window.location = "#open2";
 		});
 		
 		$("#msgSendList").on("click", ".msgClick2" ,function(){
 			console.log("msgSendList");
+			var msgmember_msg = $(this).children()[1].innerHTML;
+			console.log(msgmember_msg);
+			updateMessageSendAjax(msgmember_msg);
 			 window.location = "#open1";
 		});
 	});
 		
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		function getMessageReceived(page){
 			var pageSize = 10;
 			$.ajax({
@@ -317,6 +320,7 @@
 				
 					console.log(data.msg_type);
 					
+					
 				//2.
 		 		/* var msg_type = data.msg_type;
 					
@@ -333,12 +337,10 @@
 				$("#reInput2").val(msg_time);
 				$("#reInput3").val(msg_content);
 				$("#reInput").val(msg_id);
-				
 				}
 			});
 		}
-		
-		
+	
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		
 		function getMessageSend(page){
@@ -360,7 +362,6 @@
 						html += "	<td>"+ mm.msg_rdate +"</td>";
 						html += "</tr>";
 					});
-					
 					console.log(data.msgSendList);
 					
 					$("#msgSendList").html("");
@@ -380,10 +381,32 @@
 				}
 			});
 		}
-	
-	
-	
-	
+		
+		function updateMessageSendAjax(msgmember_msg){
+			$.ajax({
+				type:"GET",
+				url : "/updateMessageSendAjax",
+				data : "msg_id=" + msgmember_msg, 
+				success : function(data){
+			
+				console.log(data);
+				console.log(data.msg_content);
+			  	
+				var msgmember_msg = data.msgmember_msg; 
+			 	var msg_content = data.msg_content ;
+				var msg_rmember = data.msg_rmember; 
+				var msg_rdate = data.msg_rdate;
+				
+				$("#sendInput1").val(msgmember_msg);
+				$("#sendInput2").val(msg_content);
+				$("#sendInput3").val(msg_rmember);
+				$("#sendInput4").val(msg_rdate);
+				
+				}
+			});
+		}
+		
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 </script>
 
