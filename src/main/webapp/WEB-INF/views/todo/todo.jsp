@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<style>
+.issueCreateInputFieldRightContainer{
+	overflow: scroll;
+}
+</style>
 <script>
 
 $(document).ready(function(){
@@ -8,6 +12,23 @@ $(document).ready(function(){
     date.setHours(date.getHours() + 9);
     //console.log(date.toISOString());
     document.getElementById('non_todo_sdate${work.work_id}').value = date.toISOString().slice(0, 16);
+    
+    /* to-do 등록 팝업의 참여자 list ajax */
+    var project_id = ${projectVo.project_id};
+    $.ajax({
+    	method: "POST",
+    	url: "/popupMemberList",
+    	data: {"project_id" : project_id},
+    	success: function(data){
+    		console.log("data : " + data);
+    		$("#popupMemberList${work.work_id}").html("");
+    		$("#popupMemberList${work.work_id}").html(data);
+    	},
+    	error: function(data){
+    		console.log("insert-popup error : " + data);
+    	}
+    });
+    
 });
 
 //to-do list 등록 ==문의: jerry==
@@ -73,51 +94,23 @@ function insertTodo${work.work_id}() {
 				</div>
 			</div>
 			<div class="issueCreateInputFieldRightContainer">
+				<input type="text" >
+				<input type="button" value="검색">
 				<table>
 					<colgroup width="20%" />
 					<colgroup width="50%" />
 					<colgroup width="30%" />
 					<thead>
 						<tr>
-							<th>번호</th>
-							<th>제목</th>
-							<th>등록일</th>
+							<th>선택</th>
+							<th>이름</th>
+							<th>이메일</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td>김</td>
-							<td>지</td>
-							<td>태</td>
-						</tr>
-						<tr>
-							<td>김</td>
-							<td>지</td>
-							<td>태</td>
-						</tr>
-						<tr>
-							<td>김</td>
-							<td>지</td>
-							<td>태</td>
-						</tr>
-						<tr>
-							<td>김</td>
-							<td>지</td>
-							<td>태</td>
-						</tr>
-						<tr>
-							<td>김</td>
-							<td>지</td>
-							<td>태</td>
-						</tr>
+					<tbody id="popupMemberList${work.work_id}">
+						<!-- $(function({ajax}) -->
 					</tbody>
 				</table>
-				<ul class="pagings">
-					<li><</li>
-					<li>1</li>
-					<li>2</li>
-					<li>></li>
-				</ul>
 			</div>			
 		</div>
 		<div class="btnPopupCenter">

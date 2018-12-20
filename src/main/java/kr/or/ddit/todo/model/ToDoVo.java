@@ -36,13 +36,17 @@ public class ToDoVo {
 	private String todo_color;			//	할일 색깔
 	private String todo_issue;			//	할일이슈번호(fk)
 	
+	/* 기능단위 */
+	private String member_name;			//	참여자이름
+	private String pmember_member;		//	참여자이메일
+	
 	/* 기본생성자 */
 	public ToDoVo() {}
 
 	/* 생성자 */
 	public ToDoVo(String todo_id, String todo_work, String todo_pmember, String todo_content, Date todo_sdate,
 			String format_todo_sdate, Date todo_edate, String format_todo_edate, Date todo_eedate,
-			String format_todo_eedate, String todo_complet, String todo_color, int rnum, String todo_issue) {
+			String format_todo_eedate, String todo_complet, String todo_color, int rnum, String todo_issue, String member_name, String pmember_member) {
 		super();
 		this.todo_id = todo_id;
 		this.todo_work = todo_work;
@@ -58,6 +62,8 @@ public class ToDoVo {
 		this.todo_color = todo_color;
 		this.rnum = rnum;
 		this.todo_issue = todo_issue;
+		this.member_name = member_name;
+		this.pmember_member = pmember_member;
 	}
 
 	
@@ -130,9 +136,20 @@ public class ToDoVo {
 	public void setTodo_issue(String todo_issue) {
 		this.todo_issue = todo_issue;
 	}
+	public String getMember_name() {
+		return member_name;
+	}
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
+	public String getPmember_member() {
+		return pmember_member;
+	}
+	public void setPmember_member(String pmember_member) {
+		this.pmember_member = pmember_member;
+	}
 
-
-	/*형변환 getter*/
+	/* 형변환 getter */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	public String getFormat_todo_sdate() {
 		if(todo_sdate == null) {
@@ -161,7 +178,7 @@ public class ToDoVo {
 				+ ", format_todo_sdate=" + format_todo_sdate + ", todo_edate=" + todo_edate + ", format_todo_edate="
 				+ format_todo_edate + ", todo_eedate=" + todo_eedate + ", format_todo_eedate=" + format_todo_eedate
 				+ ", todo_complet=" + todo_complet + ", todo_color=" + todo_color + ", todo_issue=" + todo_issue
-				+ ", sdf=" + sdf + "]";
+				+ ", member_name=" + member_name + ", pmember_member=" + pmember_member + "]";
 	}
 	
 }
