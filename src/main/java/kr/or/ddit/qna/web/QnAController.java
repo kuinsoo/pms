@@ -11,9 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
-import kr.or.ddit.member.web.LoginController;
 import kr.or.ddit.post.model.PostPageVo;
 import kr.or.ddit.post.model.PostVo;
 import kr.or.ddit.post.service.PostServiceInf;
@@ -61,7 +59,12 @@ public class QnAController {
 	@RequestMapping(value= "/qnaListAjax", method= {RequestMethod.GET,RequestMethod.POST})
 	public String qnaListAjax(PostPageVo postPageVo, Model model) {
 		
-		List<PostVo> postVoList = postService.qnaPostList(postPageVo);
+		List<PostVo> postVoList;
+		if(postPageVo.getSearchText().equals("")) {
+			postVoList = postService.qnaPostList(postPageVo);			
+		}else {
+			postVoList = postService.qnaSerachList(postPageVo);	
+		}
 		
 		model.addAttribute("postVoList", postVoList);
 
@@ -106,7 +109,7 @@ public class QnAController {
 		postVo = postService.selectQnaPost(postVo.getPost_id());
 		// *** null이 나오는 까닭은 list를 출력하는 sql에 select문에 id가 없었기 때문 
 		
-		model.addAttribute("postVoDetail", postVo);
+		model.addAttribute("postVo", postVo);
 		
 		return "qna/qnaDetail";
 	}
@@ -157,7 +160,7 @@ public class QnAController {
 	 * @return Method 설명 : Q&A  글 삭제 
 	 */
 	@RequestMapping(value= "/qnaDel", method= RequestMethod.GET)
-	public String qnaDelView(PostVo postVo, Model model) {
+	public String qnaDelView(PostVo postVo) {
 		
 		postService.deleteQnaPost(postVo.getPost_id());
 		
@@ -179,7 +182,9 @@ public class QnAController {
 		//postVo.setBoard_id((String)req.getAttribute("board_id"));
 		// ??? (String)
 		
-		System.out.println("###"+postVo.getBoard_id());
+		model.addAttribute("postVo", postVo);
+		//파라미터로 받은, 아직 등록되지않은 변수를 저장하기위해 
+		
 		return "qna/qnaForm";
 	}
 
@@ -189,16 +194,16 @@ public class QnAController {
 	* 작성자 : bhuanchanwoo
 	* 변경이력 :
 	* @return
-	* Method 설명 : 새 질문 글 저장 
+	* Method 설명 : 새 질문 글 저장
 	*/
-	@RequestMapping(value= "/newPost", method= RequestMethod.GET)
-	public String qnaIndert() {
+	@RequestMapping(value= "/newPost", method={RequestMethod.GET, RequestMethod.POST})
+	public String qnaIndert(PostVo postVo) {
 		
-		return "qna/qnaList";
+		postService.insertQnaPost(postVo);
+		
+		return "qna/alert";	
 	}
-	
-	
-	
+	//위에 '수정 저장'과 코드 중복---- 나중에 지울 예정 
 	
 	
 	/**
@@ -209,7 +214,11 @@ public class QnAController {
 	 * @return Method 설명 : Q&A  답글  
 	 */
 	@RequestMapping(value= "/qnaReply")
-	public String qnaReplyView() {
+	public String qnaReplyView(PostVo postVo, Model model) {
+
+		model.addAttribute("postVo", postVo);
+		//파라미터로 받은, 아직 등록되지않은 변수를 저장하기위해 (글 내용 -> 답글)
+		
 		return "qna/qnaForm";
 	}
 }

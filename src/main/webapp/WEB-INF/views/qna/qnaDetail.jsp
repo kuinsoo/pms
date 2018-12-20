@@ -42,6 +42,27 @@
 	border-bottom:1px solid #000;cursor:pointer;
 }
 </style>
+<script>
+$(document).ready(function(){	
+	$("#qnaMody").click(function(){
+		$(location).attr('href','qnaMody?post_id=${postVo.post_id}');
+	});	
+	
+	$("#delPost").click(function(){
+		var result = confirm('정말 삭제하시겠습니까?'); 
+		if(result) { 
+			location.replace('/qnaDel?post_id=${postVo.post_id}'); 
+			} else {  
+				console.log("삭제를 취소하셨습니다.");
+			}
+	});	
+	
+	$("#qnaReply").click(function(){
+		$(location).attr('href','qnaReply/?board_id=${postVo.board_id}&post_hierarchy=${postVo.post_id}');
+	});
+	
+});
+</script>
 <!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
 	<div class="currentMainContainer">
@@ -53,25 +74,19 @@
 				
 				<a href="/qnaList">질의 목록보기</a><br/><br/>
 				
-				<label id="post_writer">질의 작성자 : ${postVoDetail.post_writer }</label><br/>
-				<label id="post_date">질의 작성일 : ${postVoDetail.post_date }</label><br/>
+				<label id="post_writer">질의 작성자 : ${postVo.post_writer }</label><br/>
+				<label id="post_date">질의 작성일 : ${postVo.post_date }</label><br/>
 				
-				<a href="/qnaMody?post_id=${postVoDetail.post_id}"> [수정]</a>
-				<button id="delPost">삭제</button>
-				<script>
-					$("#delPost").click(function(){
-						var result = confirm('정말 삭제하시겠습니까?'); 
-						if(result) { 
-							location.replace('/qnaDel?post_id=${postVoDetail.post_id}'); 
-							} else {  
-								console.log("삭제를 취소하셨습니다.");
-							}
-					});					
-				</script>
-				<a href="/qnaReply?post_id=${postVoDetail.post_id}"> [답글]</a><br/>
+				<c:if test="${memberVo.member_mail==postVo.post_writer}">
+					<button id="qnaMody">수정</button>
+					<button id="delPost">삭제</button>
+				</c:if>
+				<c:if test="${memberVo.member_mail=='admin@admin.com'}">
+					<button id="qnaReply">답글</button>
+				</c:if><br/>
 				
-				제목 : <label id="post_title">${postVoDetail.post_title}</label><br/>
-				내용 : <label id="post_content">${postVoDetail.post_content} </label><br/>
+				제목 : <label id="post_title">${postVo.post_title}</label><br/>
+				내용 : <label id="post_content">${postVo.post_content} </label><br/>
 				
 			</div>
 		</div>
