@@ -491,7 +491,7 @@ header {
 }
 
 .dialogs {
-    width: 500px;
+    width:600px;
     background-color: #fff;
     border: 1px solid #dee3eb;
     border-radius: 10px;
@@ -661,8 +661,18 @@ header {
 .cbp-spmenu-vertical > .currentMainLeftMenu > .menuList {
     border-bottom: 1px solid #dee3eb;
 }
+.cbp-spmenu-vertical > .currentMainLeftMenu > .sayGoodBye {
+	border-top:1px solid #dee3eb;
+    border-bottom: 1px solid #dee3eb;
+}
 
 .cbp-spmenu-vertical > .currentMainLeftMenu > .menuList > li:last-child {
+    margin-bottom: 20px;
+}
+.cbp-spmenu-vertical > .currentMainLeftMenu > .boardMenu > li:last-child {
+    margin-bottom: 20px;
+}
+.cbp-spmenu-vertical > .currentMainLeftMenu > .sayGoodBye > li:last-child {
     margin-bottom: 20px;
 }
 
