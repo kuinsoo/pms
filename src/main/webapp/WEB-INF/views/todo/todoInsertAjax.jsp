@@ -7,7 +7,7 @@
 		<tr>
 			<td><input type="checkbox" /></td>
 			<td><a href="#open" class="issueTitlePopup">${todo.todo_content}</a>
-				<div class="white_content" id="open">
+				<div class="white_content3" id="open">
 					<div>
 						<a href="#close"><i class="icon-close icons"></i></a>
 						<div class="issueSelectPage">

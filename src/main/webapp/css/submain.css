@@ -167,6 +167,23 @@ iframe{border: 1px solid #dee3eb; width:100%; height:100%}
 .commentDeleteBtn{border:none;background:none;font-size:17px;margin-left:10px;cursor:pointer;outline:none;}
 
 /* 이슈 상세조회 팝업 */
+.white_content3 {
+	position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0, 0, 0, 0.8);opacity:0;
+	-webkit-transition: opacity 400ms ease-in;-moz-transition: opacity 400ms ease-in;
+	transition: opacity 400ms ease-in;pointer-events:none;z-index:4;
+}
+.white_content3:target{opacity:1;pointer-events:auto;}
+.white_content3 > div {
+	position:absolute;top:50%;left:50%;margin-top:-400px;margin-left:-500px;
+	width:1000px;height:800px;padding:20px;border:1px solid #dee3eb;
+	background-color:white;overflow:hidden;
+}
+.white_content3 > div > .mainCloseBtns {
+	float:right;display:block;color:#000;width:30px;height:30px;overflow:hidden;
+	background-image:url("../images/xButtonClose.png");background-repeat:no-repeat;background-size:cover;
+}
+.white_content3 > div > .mainCloseBtns > i{font-size:20px;}
+
 .issueSelectPage{width:100%;overflow:hidden;clear:both;height:95%;padding-top:20px;}
 .issueSelectPageLeft{float:left;width:566px;}
 .issueSelectPageLeft > form > textarea{width:100%;font-size:20px;height:480px;outline:none;padding:20px;margin-top:10px;}
