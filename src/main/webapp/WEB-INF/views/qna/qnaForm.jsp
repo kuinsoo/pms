@@ -58,7 +58,7 @@ function savePost(){
 		data: hanBangFormValue,
 		success: function (data) {
 			$(body).append(data);
-			$(location).attr('href','/qna/qnaList');
+			$(location).attr('href','/qnaList');
 		},
 		error: function (data) {
 			console.log("list-error : " + data);
@@ -78,6 +78,11 @@ function savePost(){
 				<a href="/qnaList">질의 목록보기</a><br/><br/>
 				
 				<form name="formValue" >
+				
+					새 글 작성하기 
+					         <input type="hidden" name="post_writer" value="${memberVo.member_mail}"><br>
+					         <input type="hidden" name="board_id" value="${postVo.board_id}"><br>
+					         <input type="hidden" name="post_hierarchy" value="${postVo.post_hierarchy}""><br>
 					제목 : <input type="text" name="post_title" placeholder="제목을 입력하세요" ><br/>
 					내용 : <input type="text" name="post_content" placeholder="내용을 입력하세요" ><br/>
 					<br/>
