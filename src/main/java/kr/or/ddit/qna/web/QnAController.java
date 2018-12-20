@@ -1,10 +1,20 @@
 package kr.or.ddit.qna.web;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
 import kr.or.ddit.member.web.LoginController;
+import kr.or.ddit.post.model.PostPageVo;
+import kr.or.ddit.post.model.PostVo;
+import kr.or.ddit.post.service.PostServiceInf;
 
 /**
  * kr.or.ddit.qna.web
@@ -17,19 +27,49 @@ import kr.or.ddit.member.web.LoginController;
  */
 @Controller
 public class QnAController {
-	 
-	Logger logger = LoggerFactory.getLogger(LoginController.class);
+	@Autowired
+	private PostServiceInf postService;
+	
+	Logger logger = LoggerFactory.getLogger(QnAController.class);
 	
 	/**
 	 * Method : qnaView
-	 * 작성자 : iks
-	 * 변경이력 : 변찬우 
+	 * 작성자 : 변찬우 
+	 * 변경이력 :
 	 *
 	 * @return Method 설명 : Q&A 글 목록 
 	 */
-	@RequestMapping(value= "/qnaList")
+	@RequestMapping(value= "/qnaList") 
 	public String qnaView() {
+		
 		return "qna/qnaList";
+	}
+
+	
+	@RequestMapping(value= "/qnaListAjax", method= {RequestMethod.GET,RequestMethod.POST})
+	public String qnaListAjax(PostPageVo postPageVo, Model model) {
+		
+		List<PostVo> postVoList = postService.qnaPostList(postPageVo);
+		
+		model.addAttribute("postVoList", postVoList);
+
+		return "qna/qnaListAjax";
+	}
+	
+	
+	@RequestMapping(value= "/qnaPagingAjax", method= {RequestMethod.GET,RequestMethod.POST})
+	public String qnaPagingAjax(PostPageVo postPageVo, Model model) {
+		
+		int postListCnt = postService.postListCnt(postPageVo);
+		System.out.println("*** : " + postListCnt);
+		
+		List<PostVo> postVoList = postService.qnaPostList(postPageVo);
+		System.out.println("*** : " + postVoList);
+		
+		model.addAttribute("postListCnt", (int)Math.ceil((double)postListCnt/ postPageVo.getPostCnt()));
+		model.addAttribute("postVoList", postVoList);
+
+		return "qna/qnaPagingAjax";
 	}
 	
 	
