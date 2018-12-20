@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,7 +58,7 @@ public class MessageController {
 		return "message/message";
 	}
 	
-	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	/*
 	 **** 	@ResponseBody ****** 꼭 해주기  
 	 */
@@ -74,7 +76,6 @@ public class MessageController {
 	public Map<String ,Object> messageReceivedAjax(@SessionAttribute("memberVo") MemberVo memberVo ,PageVo pageVo) {
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
-		System.out.println(pageVo.toString());
 		
 		MessageVo messageVo = new MessageVo();
 		messageVo.setMsg_rmember(memberVo.getMember_mail());
@@ -104,16 +105,11 @@ public class MessageController {
 							, @RequestParam("msg_id")String msg_id, Model model, MessageVo msgVo, PageVo pageVo) {
 		model.addAttribute("msg_id", msg_id);
 		
-		System.out.println(msg_id + " ajax에서 ");
-		
 		int updateMessage = messageservice.updateMessageReceived(msgVo);
 		model.addAttribute("updateMessage", updateMessage);
 		
 		MessageVo messageVo = messageservice.selectOneMessageReceived(msg_id);
 		model.addAttribute("messageVo", msgVo);
-		
-		
-		System.out.println("받은거" + messageVo + "messageVo");
 		
 		return messageVo;
 	}
@@ -121,20 +117,26 @@ public class MessageController {
 
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	//ResponseBody : 아작스 처리할때 
+	// ResponseBody : 아작스 처리할때 
+	// 보낸 쪽지 
+	/**
+	 * Method : messageSendAjax
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param memberVo
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 보낸 쪽지 리스트 ajax
+	 */
 	@ResponseBody
 	@RequestMapping(value= "/messageSendAjax" , method= RequestMethod.GET)
 	public Map<String ,Object> messageSendAjax(@SessionAttribute("memberVo") MemberVo memberVo ,PageVo pageVo) {
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
-		System.out.println(pageVo.toString());
 		
 		MessageVo messageVo = new MessageVo();
 		messageVo.setMsg_smember(memberVo.getMember_mail());
-		
 		List<MessageVo> msgSendList = messageservice.messageSend(pageVo);	
-		
-		System.out.println(msgSendList + "msgSendList");
 		int pageCnt = messageservice.totalMsgSend(messageVo.getMsg_smember());
 
 		Map<String, Object> msgSendMap = new HashMap<>();
@@ -144,20 +146,29 @@ public class MessageController {
 		return msgSendMap;
 	}	
 	
+	/**
+	 * Method : updateMessageSendAjax
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param memberVo
+	 * @param msg_id
+	 * @param model
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 보낸쪽지 클릭했을때 Detail부분 
+	 * 		       data를 controller로 보내준다.
+	 */
 	@ResponseBody
 	@RequestMapping(value = "/updateMessageSendAjax", method = RequestMethod.GET)
 	public MessageVo updateMessageSendAjax(@SessionAttribute("memberVo") MemberVo memberVo
 			, @RequestParam("msg_id")String msg_id, Model model, PageVo pageVo) {
 			
 		MessageVo messageVo = new MessageVo();
-		messageVo.setMsg_id("40");
-		messageVo.setMsg_smember("kkuinsoo@gmail.com");
+		messageVo.setMsg_id(msg_id);
+		messageVo.setMsg_smember(memberVo.getMember_mail());
 		MessageVo msgVo = messageservice.selectOneMessageSend(messageVo);
 
-		System.out.println(msgVo.getMsg_smember());
-		model.addAttribute("messageVo", messageVo);
-		
-		return messageVo;
+		return msgVo;
 	}
 	
 	
@@ -170,43 +181,63 @@ public class MessageController {
 	 * @param msgVo
 	 * @param msg_id
 	 * @return
-	 * Method 설명 : 삭제부분  
+	 * Method 설명 : 받는거 삭제  
 	 */
 	@RequestMapping(value= "/deleteMessageReceived", method= RequestMethod.POST)
 	public  String deleteMessageReceived(@SessionAttribute("memberVo") MemberVo memberVo , MessageVo msgVo , @RequestParam("msg_id") String msg_id) {
-		
-		System.out.println(" 여기는 delete " + " 값 " +  msg_id + "msg_id");
 		messageservice.deleteMsgReceived(msg_id);
+		return "redirect:message#tabs2-2";
+	}
+	
+	/**
+	 * Method : deleteMessageSend
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param memberVo
+	 * @param msgVo
+	 * @param msg_id
+	 * @return
+	 * Method 설명 : 보낸거 삭제 
+	 */
+	@RequestMapping(value= "/deleteMessageSend", method= RequestMethod.POST)
+	public  String deleteMessageSend(@SessionAttribute("memberVo") MemberVo memberVo , MessageVo msgVo , @RequestParam("msgmember_msg") String msg_id) {
+		messageservice.deleteMsgReceived(msg_id);
+		return "redirect:message#tabs2-3";
+	}
+
+	/**
+	 * Method : insertMessageSend
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param memberVo
+	 * @param request
+	 * @param msgVo
+	 * @return
+	 * Method 설명 : 쪽지 보내기 
+	 */
+	@RequestMapping(value= "/insertMessageSend" , method= RequestMethod.POST)
+	public String insertMessageSend(@SessionAttribute("memberVo") MemberVo memberVo,
+				HttpServletRequest request ,MessageVo msgVo) {
+		
+		String msg_rmember = request.getParameter("textValue");
+		String msg_content = request.getParameter("textArea");
+		
+		System.out.println("받는사람" + msg_rmember);
+		System.out.println( " 보낸내용" + msg_content);
+		
+		msgVo.setMsg_id(msgVo.getMsg_id());
+		msgVo.setMsg_content(msg_content);
+		msgVo.setMsg_smember(memberVo.getMember_mail());
+		msgVo.setMsg_rmember(msg_rmember);
+		
+		System.out.println("member_mail의 값" + memberVo.getMember_mail());
+		
+		int insertMessage = messageservice.insertMessageSend(msgVo);
 		
 		return "message/message";
 	}
-	
-	@RequestMapping(value= "insertMessageSend" , method= RequestMethod.POST)
-	public String insertMessageSend(@SessionAttribute("memberVo") MemberVo memberVo, MessageVo msgVo) {
-		messageservice.insertMessageSend(msgVo);
-		
-		return "";
-	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
