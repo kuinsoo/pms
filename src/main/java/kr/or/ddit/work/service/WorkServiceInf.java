@@ -87,6 +87,6 @@ public interface WorkServiceInf {
 	* @return
 	* Method 설명 : 해당 회원의 진행중인 프로젝트 명 검색
 	*/
-	List<WorkVo> workMember(String work_project);
+	List<WorkVo> workMember(String member_mail);
 	
 }

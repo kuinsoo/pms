@@ -5,6 +5,8 @@ import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.oauth.bo.JsonParser;
 import kr.or.ddit.oauth.bo.NaverLoginBO;
+import kr.or.ddit.work.service.WorkServiceInf;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +41,9 @@ public class LoginController {
 
 	@Autowired
 	private MemberServiceInf memberService;
+	
+	@Autowired
+	private WorkServiceInf workService;
 
 	//NaverLoginBO 
 	@Autowired
@@ -171,6 +176,7 @@ public class LoginController {
 
 		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
+		// model.addAttribute("workMemberList", workService.workMember(memberVo.getMember_mail()));
 		return "main/main";
 	}
 
