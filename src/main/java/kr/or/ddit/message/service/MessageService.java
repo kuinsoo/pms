@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.ddit.friendslist.model.FriendListVo;
 import kr.or.ddit.message.mapper.MessageMapper;
 import kr.or.ddit.message.model.MessageVo;
 import kr.or.ddit.util.model.PageVo;
@@ -85,6 +86,18 @@ public class MessageService implements MessageServiceInf{
 	@Override
 	public MessageVo selectOneMessageSend(MessageVo msgVo) {
 		return messageMapper.selectOneMessageSend(msgVo);
+	}
+
+
+	@Override
+	public int totalFriends(String friend_myemail) {
+		return messageMapper.totalFriends(friend_myemail);
+	}
+
+
+	@Override
+	public List<FriendListVo> MyFriendsList(PageVo pageVo) {
+		return messageMapper.MyFriendsList(pageVo);
 	}
 
 

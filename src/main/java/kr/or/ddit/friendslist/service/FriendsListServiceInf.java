@@ -27,4 +27,5 @@ public interface FriendsListServiceInf {
 	
 	List<FriendListVo> selectMyFriends(String friend_myemail);
 
+
 }

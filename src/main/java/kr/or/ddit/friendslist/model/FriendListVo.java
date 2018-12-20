@@ -14,11 +14,21 @@ import org.apache.ibatis.type.Alias;
 @Alias("friendVo")
 public class FriendListVo {
 
+	private int rnum;
+	
     private String friend_mymail;
     private String friend_member;
     private String friend_accept;
     private String friend_date;
    
+    
+    
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 	public String getFriend_mymail() {
 		return friend_mymail;
 	}
@@ -43,10 +53,11 @@ public class FriendListVo {
 	public void setFriend_date(String friend_date) {
 		this.friend_date = friend_date;
 	}
+
 	@Override
 	public String toString() {
-		return "FriendListVo [friend_mymail=" + friend_mymail + ", friend_member=" + friend_member + ", friend_accept="
-				+ friend_accept + ", friend_date=" + friend_date + "]";
+		return "FriendListVo [rnum=" + rnum + ", friend_mymail=" + friend_mymail + ", friend_member=" + friend_member
+				+ ", friend_accept=" + friend_accept + ", friend_date=" + friend_date + "]";
 	}
 	public FriendListVo() {
 		super();

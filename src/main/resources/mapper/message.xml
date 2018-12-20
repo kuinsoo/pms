@@ -63,7 +63,16 @@
 						and    A.msg_id = #{msg_id})a)
 	</select>
 	
-	
+	<select id="MyFriendsList"  resultType= "friendVo" parameterType="pageVo">
+       select * from(
+  			 select rownum rnum ,a.*
+            from
+                 (select friend_member 
+                         from   FRIENDSLIST
+                         where  friend_myemail = #{member_mail} )a) 
+            where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
+            <if test="searchTextFriend!=null and searchTextFriend!=''">and friend_member like '%'||#{searchTextFriend}||'%'</if>
+	</select> 
 	
 	
 	<insert id="insertMessageSend" parameterType="msgVo">
@@ -109,7 +118,17 @@
 	
 	
 	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	<!-- 친구목록 부분 -->
 	
+	<select id="totalFriends" resultType="int" parameterType="String">
+		select count(*)
+		from   FRIENDSLIST
+		where  friend_myemail = #{member_mail}
+	</select>
 	
+	<delete id="deleteMyfriend" parameterType="String">
+		delete from friendslist 
+		where friend_code=  #{friend_code}
+	</delete>
 	
 </mapper>
