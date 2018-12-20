@@ -130,7 +130,7 @@ public class PostServiceTest extends ResetSQL {
 		String post_public="n";
 		String post_pass="1234";
 
-		PostVo postVo =postService.selectQnaPost(post_id);
+		PostVo postVo = postService.selectQnaPost(post_id);
 		
 		/***When***/
 		postVo.setPost_title(post_title);

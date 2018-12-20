@@ -1,6 +1,7 @@
 package kr.or.ddit.message.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.or.ddit.message.model.MessageVo;
 import kr.or.ddit.util.model.PageVo;
@@ -66,6 +67,7 @@ public interface MessageMapper {
 	 */
 	int updateMessageReceived(MessageVo msgVo);
 	
+	
 	/**
 	 * Method : deleteMsgReceived
 	 * 작성자 : pc07
@@ -92,9 +94,20 @@ public interface MessageMapper {
 	 * 변경이력 :
 	 * @param msg_id
 	 * @return
-	 * Method 설명 : 클릭시 detail 팝업 
+	 * Method 설명 : 받은 쪽지 클릭시 detail 팝업 
 	 */
 	MessageVo selectOneMessageReceived(String msg_id);
+	
+	/**
+	 * Method : selectOneMessageSend
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param msg_id
+	 * @return
+	 * Method 설명 : 보낸 쪽지 클릭시 detail 팝업 
+	 */
+	MessageVo selectOneMessageSend(MessageVo msgVo);
+	
 	
 	/**
 	 * Method : selectMessageReceived
