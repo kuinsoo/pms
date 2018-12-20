@@ -201,7 +201,7 @@
 	and
 	    POST_PUBLIC = 'n'
 	and
-	    POST_HIERARCHY is not null;
+	    POST_HIERARCHY is not null
     </select> 
     
 </mapper>
