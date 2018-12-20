@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.or.ddit.post.model.PostPageVo;
 import kr.or.ddit.post.model.PostVo;
+import kr.or.ddit.util.model.PageVo;
 
 /**
  * kr.or.ddit.post.service
@@ -48,5 +49,25 @@ public interface PostServiceInf {
 	
 	//비밀 답변만 목록 
 	List<PostVo> secretAReply(String board_id);
+	
+	/**
+	* Method : getPostPageList
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 게시글 페이지 리스트 조회
+	*/
+	List<PostVo> getPostPageList(PageVo pageVo);
+	
+	/**
+	* Method : totalPostCnt
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 게시글 건수 조회
+	*/
+	int totalPostCnt();
 	
 }

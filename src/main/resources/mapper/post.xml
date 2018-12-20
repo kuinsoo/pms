@@ -202,6 +202,24 @@
 	    POST_PUBLIC = 'n'
 	and
 	    POST_HIERARCHY is not null
-    </select> 
+    </select>
     
+    <!-- 공지사항 게시글 페이징 조회 2018-12-20 임규승 -->
+    <select id="getPostPageList" resultType="postVo" parameterType="map">
+    	SELECT *
+		FROM(
+			SELECT a.*, ROWNUM rn
+			FROM (
+				SELECT POST_TITLE, POST_CONTENT, POST_DATE
+		        FROM POST
+		        WHERE BOARD_ID = '1'
+			) a
+		)
+		WHERE rn BETWEEN (#{page}-1) * #{pageSize}+1 AND #{page} * #{pageSize}
+    </select>
+    
+    <select id="totalPostCnt" resultType="int">
+    	SELECT	COUNT(*) FROM POST
+    	WHERE	BOARD_ID = '1'
+    </select>
 </mapper>

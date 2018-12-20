@@ -285,7 +285,7 @@ public interface MemberMapper {
 	 * @param delMap the del map
 	 * @return the int
 	 */
-	int  deleteInviteProject(Map<String, String> delMap);
+	int deleteInviteProject(Map<String, String> delMap);
 
 	/**
 	 * Project member list list.
