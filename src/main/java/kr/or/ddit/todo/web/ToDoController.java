@@ -1,7 +1,7 @@
 package kr.or.ddit.todo.web;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,11 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import kr.or.ddit.todo.mapper.ToDoMapper;
 import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.todo.service.ToDoServiceInf;
 import kr.or.ddit.util.model.PageVo;
@@ -46,12 +46,7 @@ public class ToDoController {
 	*/
 	@RequestMapping(value="/todoInsert", method= {RequestMethod.POST, RequestMethod.GET})
 	public String ajaxInsertTodo(HttpServletRequest request, PageVo pageVo, ToDoVo todoVo, Model model) {
-		WorkVo workVo = new WorkVo();
-		workVo.setWork_project(request.getParameter("work_project"));
-		workVo.setWork_id(request.getParameter("todo_work"));
-		
-		
-		
+
 		/* to-do insert */
 		try {
 			todoService.todoInsert(todoVo);
@@ -59,11 +54,27 @@ public class ToDoController {
 			e.printStackTrace();
 		}
 		
+		WorkVo workVo = new WorkVo();
+		workVo.setWork_project(request.getParameter("work_project"));
+		workVo.setWork_id(request.getParameter("todo_work"));
+		
+		pageVo.setPage(1);
+		pageVo.setPageSize(5);
+		
+		System.out.println("1. workVo : " + workVo);
+		System.out.println("2. pageVo : " + pageVo);
+		
 		Map<String, Object> todoMap = new HashMap<String, Object>();
 		todoMap.put("workVo", workVo);
 		todoMap.put("pageVo", pageVo);
 		
 		Map<String, Object> todoListMap = todoService.workToDoSelect(todoMap);
+		
+		Iterator<String> keys = todoListMap.keySet().iterator();
+		while(keys.hasNext()) {
+			String key = keys.next();
+			System.out.println("key : " + key + " / value : " + todoListMap.get(key));
+		}
 		
 		model.addAttribute("todoListMap", todoListMap);
 		
@@ -99,6 +110,17 @@ public class ToDoController {
 		return "todo/todoInsertAjax";
 	}
 	
+	/**
+	* Method : ajaxPaginationTodo
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param project_id
+	* @param work_id
+	* @param pageVo
+	* @param model
+	* @return
+	* Method 설명 : to-do list 페이징처리
+	*/
 	@RequestMapping(value="todoPagination", method= {RequestMethod.POST, RequestMethod.GET})
 	public String ajaxPaginationTodo(@RequestParam("project_id")String project_id, @RequestParam("work_id")String work_id, PageVo pageVo, Model model) {
 		int todoCnt = todoService.todoCnt(work_id);
