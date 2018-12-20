@@ -7,7 +7,7 @@ $(document).ready(function(){
 	var work_id = ${work.work_id};
 	//console.log("project_id : " + project_id);
 	//console.log("work_id : " + work_id);
-	console.log('here');
+	
 	//페이지 접속시 to-do list 조회(Ajax) ==문의: jerry==
 	getToDoList${work.work_id}(1, project_id, work_id);	
 	
@@ -18,7 +18,7 @@ $(document).ready(function(){
 
 /* 페이지 접속시 to-do list 조회(Ajax) ==문의: jerry== */
 function getToDoList${work.work_id}(page, project_id, work_id){
-	var pageSize = 7;
+	var pageSize = 5;
 	console.log("list-project_id : " + project_id);
 	$.ajax({
 		method: "POST",
@@ -38,14 +38,14 @@ function getToDoList${work.work_id}(page, project_id, work_id){
 
 /* to-do list의 pagination(Ajax) ==문의: jerry== */
 function getToDoPagination${work.work_id}(page, project_id, work_id){
-	var pageSize = 7;
-	console.log("page-project_id : " + project_id);
+	var pageSize = 5;
+	
 	$.ajax({
 		method: "POST",
 		url: "/todoPagination",
 		data: {"project_id" : project_id, "work_id" : work_id, "page" : page, "pageSize" : pageSize},
 		success: function(data){
-			console.log(data);
+			//console.log(data);
 			$('#pagination${work.work_id}').html("");
 			$('#pagination${work.work_id}').html(data);
 		},

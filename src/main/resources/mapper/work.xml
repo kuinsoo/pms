@@ -37,6 +37,7 @@
 	AND     B.PMEMBER_ID		= C.PMEMBER_ID
 	AND     C.PMEMBER_MEMBER	= D.MEMBER_MAIL
 	AND     D.MEMBER_MAIL		= #{member_mail}
+	ORDER	BY A.WORK_ID DESC
 	</select>
 
 	<select id="selectWorks" resultType="workVo" parameterType="String">

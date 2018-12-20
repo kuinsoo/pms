@@ -32,14 +32,12 @@ public class AlarmController {
 	@Autowired
 	private WorkServiceInf workService;
 	
-	@RequestMapping(value="/ajaxAlarm", method=RequestMethod.POST)
-	public String ajaxAlarm(Model model, String work_project) {		
+	@RequestMapping(value="/ajaxAlarm", method=RequestMethod.GET)
+	public String ajaxAlarm(Model model, @SessionAttribute("memberVo") MemberVo memberVo){		
 		
-		List<WorkVo> workList = workService.workMember(work_project);
+		List<WorkVo> workList = workService.workMember(memberVo.getMember_mail());
 		
-		logger.debug("workList sizes : {}", workList.size());
-		
-		model.addAttribute("workList", workList);
+		model.addAttribute("workMemberList", workList);
 		
 		return "alarm/ajaxAlarm";
 	}

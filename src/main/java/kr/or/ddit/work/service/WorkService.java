@@ -119,7 +119,7 @@ public class WorkService implements WorkServiceInf{
 	* Method 설명 : 해당 회원의 진행중인 프로젝트 명 검색
 	*/
 	@Override
-	public List<WorkVo> workMember(String work_project) {
-		return workMapper.workMember(work_project);
+	public List<WorkVo> workMember(String member_mail) {
+		return workMapper.workMember(member_mail);
 	}
 }

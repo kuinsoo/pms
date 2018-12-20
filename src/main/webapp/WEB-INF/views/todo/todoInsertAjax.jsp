@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <c:forEach items="${todoListMap.todoList}" var="todo">
@@ -7,14 +6,14 @@
 		<tr>
 			<td><input type="checkbox" /></td>
 			<td><a href="#open" class="issueTitlePopup">${todo.todo_content}</a>
-				<div class="white_content" id="open">
+				<div class="white_content3" id="open">
 					<div>
-						<a href="#close"><i class="icon-close icons"></i></a>
+						<a href="#close" class="mainCloseBtns"></a>
 						<div class="issueSelectPage">
 							<div class="issueSelectPageLeft">
 								<form action="#" method="post">
 									<div class="issueProfile">
-										<img src="http://placehold.it/150x200" />
+										<img src="${memberVo.member_profile}" />
 									</div>
 									<div class="issues">
 										<div class="issuesLeft">
@@ -27,10 +26,10 @@
 										</div>
 										<div class="issuesRight">
 											<ul>
-												<li><input type="text" />${todo.todo_content}</li>
-												<li><input type="text" />${todo.format_todo_sdate}</li>
-												<li><input type="text" />${todo.format_todo_eedate}</li>
-												<li><input type="text" />${todo.todo_complet}</li>
+												<li><input type="text" value="${todo.todo_content}" /></li>
+												<li><input type="text" value="${todo.format_todo_sdate}" /></li>
+												<li><input type="text" value="${todo.format_todo_eedate}" /></li>
+												<li><input type="text" value="${todo.todo_complet}" /></li>
 											</ul>
 										</div>
 									</div>
@@ -41,7 +40,7 @@
 								<h2>발생이슈</h2>
 								<input type="button" value="등록" class="issueCreateBtn" /> <input
 									type="button" value="수정" class="insueUpdateBtn" />
-								<form action="#" mehtod="post">
+								<form action="#" method="post">
 									<textarea>이슈에 대한 내용,,,,,</textarea>
 								</form>
 							</div>

@@ -109,16 +109,18 @@ public class MessageController {
 		int updateMessage = messageservice.updateMessageReceived(msgVo);
 		model.addAttribute("updateMessage", updateMessage);
 		
-		MessageVo messageVo = messageservice.selectOneMessageReceived(msgVo.getMsg_id());
+		MessageVo messageVo = messageservice.selectOneMessageReceived(msg_id);
 		model.addAttribute("messageVo", msgVo);
 		
-		System.out.println(messageVo + "messageVo");
+		
+		System.out.println("받은거" + messageVo + "messageVo");
 		
 		return messageVo;
 	}
 	
+
 	
-	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	//ResponseBody : 아작스 처리할때 
 	@ResponseBody
 	@RequestMapping(value= "/messageSendAjax" , method= RequestMethod.GET)
@@ -141,6 +143,22 @@ public class MessageController {
 		
 		return msgSendMap;
 	}	
+	
+	@ResponseBody
+	@RequestMapping(value = "/updateMessageSendAjax", method = RequestMethod.GET)
+	public MessageVo updateMessageSendAjax(@SessionAttribute("memberVo") MemberVo memberVo
+			, @RequestParam("msg_id")String msg_id, Model model, PageVo pageVo) {
+			
+		MessageVo messageVo = new MessageVo();
+		messageVo.setMsg_id("40");
+		messageVo.setMsg_smember("kkuinsoo@gmail.com");
+		MessageVo msgVo = messageservice.selectOneMessageSend(messageVo);
+
+		System.out.println(msgVo.getMsg_smember());
+		model.addAttribute("messageVo", messageVo);
+		
+		return messageVo;
+	}
 	
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -165,7 +183,6 @@ public class MessageController {
 	
 	@RequestMapping(value= "insertMessageSend" , method= RequestMethod.POST)
 	public String insertMessageSend(@SessionAttribute("memberVo") MemberVo memberVo, MessageVo msgVo) {
-		
 		messageservice.insertMessageSend(msgVo);
 		
 		return "";

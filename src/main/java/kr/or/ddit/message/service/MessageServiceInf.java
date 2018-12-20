@@ -1,6 +1,7 @@
 package kr.or.ddit.message.service;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.or.ddit.message.model.MessageVo;
 import kr.or.ddit.project.model.ProjectVo;
@@ -81,6 +82,20 @@ public interface MessageServiceInf {
 	 * Method 설명 : 클릭시 detail 팝업 
 	 */
 	MessageVo selectOneMessageReceived(String msg_id);
+	
+	
+	/**
+	 * Method : selectOneMessageSend
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param messageVo
+	 * @return
+	 * Method 설명 : 보낸 쪽지 클릭시 detail 팝업 
+	 */
+	MessageVo selectOneMessageSend(MessageVo msgVo);
+
+	
+	
 	
 	
 	/**

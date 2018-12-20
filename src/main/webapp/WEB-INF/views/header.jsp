@@ -50,8 +50,8 @@
         </ul>
         <ul class="menuList">
             <li>
-                <i class="icon-check icons"></i>
-                <p>전체 업무</p>
+                <i class="icon-settings icons"></i>
+                <p><a href="/myPage">마이 페이지</a></p>
             </li>
             <li>
                 <i class="icon-calendar icons"></i>
@@ -81,6 +81,12 @@
                 <i class="icon-question icons"></i>
                 <p><a href="/qnaList">Q & A</a></p>
             </li>
+        </ul>
+        <ul class="sayGoodBye">
+        	<li>
+        		<i class="icon-power icons"></i>
+                <p onclick="logout();">로그아웃</p>
+        	</li>
         </ul>
     </div>
 </nav>
@@ -165,7 +171,7 @@
 
 				<div class="updateHeader" style="float:right;">
 					<a href="/message" class="facing"><i class="icon-paper-plane icons"></i></a>
-	                <%@ include file="/WEB-INF/views/alarm/ajaxAlarm.jsp" %>
+	                <%@ include file="/WEB-INF/views/alarm/alarm.jsp" %>
 	                
 	                <!-- CURRENT USER -->
 	                <div class="currentUser dialog__trigger">

@@ -1,6 +1,7 @@
 package kr.or.ddit.message.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -79,4 +80,13 @@ public class MessageService implements MessageServiceInf{
 	public int insertMessageSend(MessageVo msgVo) {
 		return messageMapper.insertMessageSend(msgVo);
 	}
+
+
+	@Override
+	public MessageVo selectOneMessageSend(MessageVo msgVo) {
+		return messageMapper.selectOneMessageSend(msgVo);
+	}
+
+
+
 }

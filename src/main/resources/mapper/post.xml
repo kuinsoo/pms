@@ -28,8 +28,11 @@
 			#{post_pass},                    
 			#{post_title},               
 			#{post_content},                    
-			#{post_public},                     
-			#{post_group},                      
+			#{post_public},      
+			<choose>
+				<when test = "post_hierarchy == null or post_hierarchy == '' "> 'QApost'||seq_POST_ID.nextval ,</when> 
+				<otherwise>#{post_hierarchy} ,</otherwise> 
+			</choose>
 			sysdate
 	    )
     </insert>
@@ -37,44 +40,48 @@
 	<!-- 선택한 글 내용 출력 -->
     <select id="selectQnaPost" resultType="postVo" parameterType="String">
     select 
-	    POST_TITLE title, 
-	    POST_CONTENT, 
-	    POST_DATE
+	    *
 	from
 	    POST
 	where
 	    POST_ID = #{post_id}
     </select>
     
+    
     <!-- 글 내용 수정 -->
     <update id="updateQnaPost" parameterType="postVo">
 	update 
-	    post 
+	    POST 
 	set 
 	    POST_TITLE = #{post_title},
-	    POST_CONTENT = #{post_content}
+	    POST_CONTENT = #{post_content},
+		POST_PUBLIC = #{post_public},
+		POST_PASS = #{post_pass}
 	where 
 	    POST_ID = #{post_id}
     </update>
     
+    
      <!-- 선택한 글 삭제 -->
     <delete id="deleteQnaPost" parameterType="String">
-    DELETE 
-	FROM 
-    	post 
-	WHERE 
+    delete 
+	from 
+    	POST 
+	where 
     	POST_ID = #{post_id}
     </delete>
+    
     
     <!-- 전체 글 개수  -->
     <select id="postListCnt" resultType="int" parameterType="postPageVo">
     select 
 	    count(*) 
 	from 
-	    post
+	    POST
 	where
-	    BOARD_ID=#{board_id};
+	    BOARD_ID=#{board_id}
     </select>
+    
     
  	<!-- 글 목록(+페이징) 출력 -->
     <select id="qnaPostList" resultType="postVo" parameterType="postPageVo">
@@ -102,6 +109,7 @@
 	order siblings by POST_ID desc
     </select>   
     
+    
     <!-- 검색 결과(+페이징) 출력 -->
     <select id="qnaSerachList" resultType="postVo" parameterType="postPageVo">
     select 
@@ -120,7 +128,7 @@
 	            order by POST_ID desc
 	            ) a
 	        ) b
-	    where POST_TITLE like '%#{searchText}%'
+	    where POST_TITLE like '%'||#{searchText}||'%'
 	    )  
 	where 
 		rnum 
@@ -132,10 +140,11 @@
 	order siblings by POST_ID desc
     </select>    
     
+    
     <!-- 질문 목록만 출력  -->
     <select id="qPostList" resultType="postVo" parameterType="postPageVo">
 	select 
-	    POST_TITLE title, 
+	    POST_TITLE, 
 	    POST_CONTENT, 
 	    POST_DATE
 	from(
@@ -158,9 +167,7 @@
     <!-- 지정 답글 출력 -->
     <select id="aPost" resultType="postVo" parameterType="String">
 	select 
-	    POST_TITLE title, 
-	    POST_CONTENT, 
-	    POST_DATE
+	    *
 	from
 	    POST
 	where
@@ -171,9 +178,7 @@
     <!-- 비밀 질의만 출력  -->
     <select id="secretQPost" resultType="postVo" parameterType="String">
 	select 
-	    POST_TITLE title, 
-	    POST_CONTENT, 
-	    POST_DATE
+	    *
 	from
 	    POST
 	where
@@ -181,16 +186,14 @@
 	and
 	    POST_PUBLIC = 'n'
 	and
-	    POST_HIERARCHY is null;
+	    POST_HIERARCHY is null
     </select>
     
     
     <!-- 비밀 답변만 출력  -->
     <select id="secretAReply" resultType="postVo" parameterType="String">
 	select 
-	    POST_TITLE title, 
-	    POST_CONTENT, 
-	    POST_DATE
+	   *
 	from
 	    POST
 	where
@@ -198,7 +201,7 @@
 	and
 	    POST_PUBLIC = 'n'
 	and
-	    POST_HIERARCHY is not null;
+	    POST_HIERARCHY is not null
     </select> 
     
 </mapper>
