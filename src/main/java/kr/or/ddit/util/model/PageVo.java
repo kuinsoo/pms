@@ -17,13 +17,14 @@ public class PageVo {
 
 	
 	
+	
 	@Override
 	public String toString() {
 		return "PageVo [page=" + page + ", pageSize=" + pageSize + ", member_mail=" + member_mail + ", searchText="
 				+ searchText + ", searchBookText=" + searchBookText + ", searchTodoText=" + searchTodoText
 				+ ", searchEndText=" + searchEndText + "]";
 	}
-
+	
 	public String getSearchEndText() {
 		return searchEndText;
 	}

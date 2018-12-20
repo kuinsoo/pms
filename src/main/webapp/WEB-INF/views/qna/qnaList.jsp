@@ -42,6 +42,44 @@
 	border-bottom:1px solid #000;cursor:pointer;
 }
 </style>
+<script>
+$(document).ready(function(){
+	var board_id = "board4";
+	getQnaListAjax(1,board_id);
+	getQnaPagingAjax(1,board_id);
+});
+/* 페이지 접속시 qnaListAjax 조회(Ajax)*/
+function getQnaListAjax(pageNum, board_id){
+	var postCnt = 10;
+	$.ajax({
+		method: "POST",
+		url: "/qnaListAjax",
+		data: {"board_id" : board_id, "pageNum" : pageNum, "postCnt" : postCnt},
+		success: function (data) {
+			$('#qnaListAjax').html("");
+			$('#qnaListAjax').html(data);
+		},
+		error: function (data) {
+			console.log("list-error : " + data);
+		}
+	});
+};
+function getQnaPagingAjax(pageNum, board_id){
+	var postCnt = 10;
+	$.ajax({
+		method: "POST",
+		url: "/qnaPagingAjax",
+		data: {"board_id" : board_id, "pageNum" : pageNum, "postCnt" : postCnt},
+		success: function(data){
+			$('#qnaPagingAjax').html("");
+			$('#qnaPagingAjax').html(data);
+		},
+		error: function(data){
+			console.log("page-error : " + data);
+		}
+	});
+}
+</script>
 <!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
 	<div class="currentMainContainer">
@@ -59,19 +97,12 @@
 							<th>등록일</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td><a href="/qnaDetail">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
+					<tbody id="qnaListAjax">
+						<!-- qnaListAjax.jsp -->
 					</tbody>
 				</table>
-				<div class="pagination">
-					<ul>
-						<li><i class="icon-arrow-left"></i></li>
-						<li><a href="#"><span>1</span></a></li>
-						<li><i class="icon-arrow-right"></i></li>
-					</ul>
+				<div class="pagination" id="qnaPagingAjax">
+					<!-- qnaPagingAjax.jsp -->
 				</div>
 				<div>
 					<a class="btn" href="/qnaForm">새 질문</a>
