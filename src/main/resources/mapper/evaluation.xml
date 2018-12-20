@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.or.ddit.evaluation.mapper.EvaluationMapper">
+    <select id="evaluationView" parameterType="Map" resultType="evalVo">
+        SELECT P.PROJECT_TITLE, P.PROJECT_ID, P.PROJECT_OVERVIEW, P.PROJECT_SDATE, P.PROJECT_EEDATE , P.PROJECT_EDATE
+                ,PM.PMEMBER_ID , WORK.WORK_TITLE , WORK.WORK_CONTENT
+        FROM MEMBER M INNER JOIN PROJECT_MEMBER PM ON (M.MEMBER_MAIL = PM.PMEMBER_MEMBER)
+                      INNER JOIN PROJECT P ON (PM.PMEMBER_PROJECT = P.PROJECT_ID)
+                      LEFT OUTER JOIN (SELECT WORK_TITLE, WORK_CONTENT, PM2.PMEMBER_ID
+                                       FROM WORK W, WORK_MEMBER WM, PROJECT_MEMBER PM2
+                                       WHERE W.WORK_ID= WM.WORK_ID
+                                         AND WM.PMEMBER_ID = PM2.PMEMBER_ID
+                                      ) WORK ON PM.PMEMBER_ID= WORK.PMEMBER_ID
+        WHERE PM.PMEMBER_MEMBER = #{member_mail}
+          AND P.PROJECT_ID LIKE #{project_id}
+        ORDER BY TO_NUMBER(PM.PMEMBER_ID)
+    </select>
+
+    <select id="evaluationProjectList" parameterType="String" resultType="evalVo">
+        select PROJECT_TITLE, PROJECT_ID
+        from project inner join PROJECT_MEMBER on PROJECT.PROJECT_ID = PROJECT_MEMBER.PMEMBER_PROJECT
+                     inner join member on PROJECT_MEMBER.PMEMBER_MEMBER = MEMBER.MEMBER_MAIL
+        where MEMBER_MAIL= #{member_mail}
+        order by to_number(PROJECT_ID) desc
+    </select>
+</mapper>

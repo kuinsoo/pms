@@ -55,8 +55,10 @@
 	set 
 	    POST_TITLE = #{post_title},
 	    POST_CONTENT = #{post_content},
-		POST_PUBLIC = #{post_public},
-		POST_PASS = #{post_pass}
+			<choose>
+				<when test = "post_pass == null or post_pass == '' "> POST_PUBLIC = 'y'</when> 
+				<otherwise>POST_PUBLIC = 'n', POST_PASS = #{post_pass} </otherwise> 
+			</choose>
 	where 
 	    POST_ID = #{post_id}
     </update>
@@ -88,7 +90,7 @@
 	select 
 	    lpad('->　',(level-1)*3,'　')||POST_TITLE title, 
 	    POST_CONTENT, 
-	    POST_DATE, 
+	    POST_DATE, POST_ID, 
 	    level
 	from(
 	    select rownum rnum, a.* 
@@ -206,16 +208,26 @@
     
     <!-- 공지사항 게시글 페이징 조회 2018-12-20 임규승 -->
     <select id="getPostPageList" resultType="postVo" parameterType="map">
-    	SELECT *
-		FROM(
-			SELECT a.*, ROWNUM rn
-			FROM (
-				SELECT POST_TITLE, POST_CONTENT, POST_DATE
-		        FROM POST
-		        WHERE BOARD_ID = '1'
-			) a
-		)
-		WHERE rn BETWEEN (#{page}-1) * #{pageSize}+1 AND #{page} * #{pageSize}
+    	SELECT  *
+		FROM    (
+		        select  rownum rnum,
+		                a.*
+		        from    (
+		                select  a.*
+		                from    (
+		                        SELECT  ROWNUM labelrn,
+		                                A.*
+		                        FROM    (
+		                                SELECT POST_TITLE, POST_CONTENT, POST_DATE
+		                                FROM POST
+		                                WHERE BOARD_ID = '1'
+		                                ) A
+		                        ) a
+		                order by labelrn desc
+		                ) a
+		        ) B
+		WHERE   rnum BETWEEN #{page} * #{pageSize} - (#{pageSize} - #{page}) AND #{page} * #{pageSize}
+		ORDER BY rnum
     </select>
     
     <select id="totalPostCnt" resultType="int">

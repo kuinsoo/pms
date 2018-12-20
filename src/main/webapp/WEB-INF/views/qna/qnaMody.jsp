@@ -42,6 +42,31 @@
 	border-bottom:1px solid #000;cursor:pointer;
 }
 </style>
+<script>
+$(document).ready(function(){	
+	$('#cecret').on('click',function(){
+		$('#post_pass').css("display","block");
+	});
+});
+
+function savePost(){
+	var hanBangFormValue=$('form[name=formValue]').serialize();
+	
+	$.ajax({
+		method: "POST",
+		url: "/qnaPostSave",
+		data: hanBangFormValue,
+		success: function (data) {
+			$(body).append(data);
+			//location.href="/qnaDetail?post_id=${postVoDetail.post_id }";
+			$(location).attr('href','/qnaDetail?post_id=${postVoDetail.post_id }');
+		},
+		error: function (data) {
+			console.log("list-error : " + data);
+		}
+	});
+}
+</script>
 <!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
 	<div class="currentMainContainer">
@@ -50,21 +75,18 @@
 				<h2>CURRENT SERVICE<br>Q & A <br> 수정하기 </h2>
 			</div>
 			<div class="noticeContainerRight">
-				
 				<a href="/qnaList">질의 목록보기</a><br/><br/>
 				
-				<label id="post_writer">질의 작성자</label><label id="post_date">질의 작성일</label><br/>
-				제목 : <input type="text" placeholder="제목을 입력하세요" class="" id="post_title" ><br/>
-				내용 : <input type="text" placeholder="내용을 입력하세요" class="" id="post_content" ><br/>
+				<form name="formValue" >
+				    수정하기 <input type="hidden" name="post_id" value="${postVoDetail.post_id }"><br/>
+					제목 : <input type="text" name="post_title" value="${postVoDetail.post_title }" placeholder="제목을 입력하세요" ><br/>
+					내용 : <input type="text" name="post_content" value="${postVoDetail.post_content }" placeholder="내용을 입력하세요" ><br/>
+					<br/>
+					<span id="cecret" >[비밀글로 작성(클릭)] </span>
+					<input type="text" style="display:none" id="post_pass"  value="" name="post_pass" placeholder="비밀번호를 입력하세요" ><br/>				
+				</form>
 				
-				<button id="cecret" >비밀글</button>
-				<script>
-				$('#cecret').on('click',function(){
-					$('#post_pass').css("display","block");
-				});
-				</script>
-				<input type="text"style="display:none" id="post_pass"  placeholder="비밀번호를 입력하세요" ><br/>
-				
+				<input type="button" onclick="savePost();" value="저장하기">
 			</div>
 		</div>
 	</div>

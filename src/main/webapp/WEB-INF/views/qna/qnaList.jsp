@@ -47,6 +47,10 @@ $(document).ready(function(){
 	var board_id = "board4";
 	getQnaListAjax(1,board_id);
 	getQnaPagingAjax(1,board_id);
+	
+	$("#newPost").click(function(){
+		$(location).attr('href','/qnaForm?board_id='+board_id);
+	});
 });
 /* 페이지 접속시 qnaListAjax 조회(Ajax)*/
 function getQnaListAjax(pageNum, board_id){
@@ -79,6 +83,7 @@ function getQnaPagingAjax(pageNum, board_id){
 		}
 	});
 }
+
 </script>
 <!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
@@ -105,7 +110,7 @@ function getQnaPagingAjax(pageNum, board_id){
 					<!-- qnaPagingAjax.jsp -->
 				</div>
 				<div>
-					<a class="btn" href="/qnaForm">새 질문</a>
+					<button id="newPost" >새 질문</button>
 				</div>
 				<div class="noticeSearchDiv">
 					<input type="text" class="noticeSearchInput" />

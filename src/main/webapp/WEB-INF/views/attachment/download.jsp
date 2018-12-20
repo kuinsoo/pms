@@ -27,9 +27,6 @@
     // 실제 내보낼 파일명
     String orgfilename = attVo.getAtt_name();
 
-
-    System.out.println(savePath);
-    System.out.println(filename);
     InputStream in = null;
     OutputStream os = null;
     File file = null;
@@ -40,9 +37,9 @@
     try{
         // 파일을 읽어 스트림에 담기
         try{
-            file = new File(attVo.getAtt_path());
-            in = new FileInputStream(file);
-        }catch(FileNotFoundException fe){
+//            in = new FileInputStream(file);
+            in = new ByteArrayInputStream(attVo.getAtt_file());
+        }catch(Exception fe){
             skip = true;
         }
         client = request.getHeader("User-Agent");
@@ -68,12 +65,13 @@
                 response.setHeader("Content-Type", "application/octet-stream; charset=utf-8");
             }
 
-            response.setHeader ("Content-Length", ""+file.length() );
+            response.setHeader ("Content-Length", ""+attVo.getAtt_file().length );
 
 
 
             os = response.getOutputStream();
-            byte b[] = new byte[(int)file.length()];
+//            byte b[] = new byte[(int)file.length()];
+            byte b[] = new byte[attVo.getAtt_file().length];
             int leng = 0;
 
             while( (leng = in.read(b)) > 0 ){

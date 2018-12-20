@@ -95,9 +95,6 @@ public interface MessageServiceInf {
 	MessageVo selectOneMessageSend(MessageVo msgVo);
 
 	
-	
-	
-	
 	/**
 	 * Method : totalMsgReceived
 	 * 작성자 : pc07

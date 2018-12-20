@@ -4,6 +4,8 @@ import kr.or.ddit.Application;
 import kr.or.ddit.attachment.model.AttachmentVo;
 import kr.or.ddit.attachment.service.AttachmentServiceInf;
 import kr.or.ddit.commons.util.UUID;
+import kr.or.ddit.commons.util.Utils;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -84,37 +87,28 @@ public class AttachmentController {
 	 * @return the string
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/single_upload")
-	public String fileUpload(@RequestParam("file") MultipartFile file, @RequestParam("work_id") String work_id) {
-//		FileUpload.singleFile(file, work_id);
-		String msg = "";
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	public String fileUpload(@RequestParam("file") MultipartFile file, @RequestParam("work_id") String work_id,
+							 @RequestParam("downUrl")String downUrl) throws IOException {
 
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String path = Application.UPLOAD_DIR + "/" + UUID.UUID() + "_" + sdf.format(new Date()) + "_" + file.getOriginalFilename();
+			String extension = path.substring(path.lastIndexOf(".") + 1, path.length());
+			AttachmentVo attVo = new AttachmentVo();
+			attVo.setAtt_work(work_id);
+			attVo.setAtt_name(file.getOriginalFilename());
+			attVo.setAtt_extension(extension);
+			attVo.setAtt_path(path);
+			attVo.setAtt_file(file.getBytes());
+			attachmentService.insertAtt(attVo);
 
-		String path = Application.UPLOAD_DIR + "/" + UUID.UUID() + "_" + sdf.format(new Date()) + "_" + file.getOriginalFilename();
-		String extension = path.substring(path.lastIndexOf(".") + 1, path.length());
-		AttachmentVo attVo = new AttachmentVo();
-		attVo.setAtt_work(work_id);
-		attVo.setAtt_name(file.getOriginalFilename());
-		attVo.setAtt_extension(extension);
-		attVo.setAtt_path(path);
-		if (!file.isEmpty()) {
-			try {
-				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(
-								new File(path)));
-				FileCopyUtils.copy(file.getInputStream(), stream);
-				stream.close();
-				attachmentService.insertAtt(attVo);
-				msg = "You successfully uploaded" + file.getOriginalFilename() + "!";
-
-			} catch (Exception e) {
-				/* 실패시 */
-				msg = "You failde to upload" + file.getOriginalFilename() + "==>" + e.getMessage();
-			}
-		} else {
-			/* 파일 첨부가 안되었을시 */
-			msg = "You failed to upload" + file.getOriginalFilename() + "because the file was empty";
+		} catch (IOException ioe) {
+			ioe.printStackTrace();
+			/* 파일 첨부가 되지 않았을 경우 */
+			return "Unable to upload. File is empty";
 		}
+
+
 
 		return "redirect:/files";
 	}
@@ -162,12 +156,15 @@ public class AttachmentController {
 					String extension = path.substring(path.lastIndexOf(".") + 1, path.length());
 					attVo.setAtt_extension(extension);
 					attVo.setAtt_path(path);
+					attVo.setAtt_file(files[i].getBytes());
+					/*
 					byte[] bytes = files[i].getBytes();
 					BufferedOutputStream buffStream = new BufferedOutputStream(
 							new FileOutputStream(
 									new File(path)));
 					buffStream.write(bytes);
 					buffStream.close();
+					*/
 					attachmentService.insertAtt(attVo);
 				} catch (Exception e) {
 					return "You failed to upload " + fileName + ": " + e.getMessage() + "<br />";

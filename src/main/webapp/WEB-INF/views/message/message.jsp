@@ -18,7 +18,7 @@
 					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 쪽지 보내기  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 					<div id="tabs2-1">
 						<div class="facingSend">
-							<form action="#" method="post">
+							<form action="/insertMessageSend" method="post">
 								<div class="facingSendTitle">
 									<input type="text" class="recipient" name="textValue" placeholder="받는사람을 입력해주세요" />
 									<select name="selectBox" onChange="getSelectValue(this.form);" class="recipientSelect">
@@ -27,16 +27,17 @@
 											<option>${mf.friend_member}</option>
 										</c:forEach>
 									</select>
+									<!-- option으로 선택한 갑이 input에 넣어진다 -->
 									<script>
 									function getSelectValue(frm){
 									 	frm.textValue.value = frm.selectBox.options[frm.selectBox.selectedIndex].text;
 									}
 									</script>
 								</div>
-								<textarea class="facingContent"></textarea>
-
+								<textarea class="facingContent" name = "textArea"></textarea>
 								<div class="facingBtn">
-									<input type="button" class="facingSendBtn" value="보내기" />
+									<input type = "hidden" name = "msg_smember" />
+									<input type="submit" class="facingSendBtn" value="보내기" />
 									<input type="button" class="facingSendReset" value="취소" />
 								</div>
 							</form>
@@ -45,7 +46,7 @@
 					
 					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 받은쪽지 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 					
-					 
+					<input type="hidden" id ="msg_type" name ="msg_type"/> 
 					<div id="tabs2-2">
 						<div class="receivedNoteContainer">
 							<form action="#" method="post">
@@ -80,7 +81,7 @@
 											<input type="text" id = "reInput1" value="" readonly />
 										</div>
 										<div class="sendDate">
-											<span>날짜/시간</span>
+											<span>받은 날짜</span>
 											<input type="text" value=""  id = "reInput2" readonly />
 											<i class="icon-ban icons"></i>
 											<span>차단</span>
@@ -90,8 +91,8 @@
 										<textarea class="sentNoteTextArea" id="reInput3"></textarea>
 										<div class="facingDeleteBtnDiv">
 											<form method="post" action="/deleteMessageReceived">
-											<input type="submit" value="삭제" class="sentNoteDeleteBtn"/>
-											<input type="hidden" id ="reInput" name ="msg_id" />
+												<input type="submit" value="삭제" class="sentNoteDeleteBtn"/>
+												<input type="hidden" id ="reInput" name ="msg_id" />
 											</form>
 											<a href="#close" class="sentNoteCloseBtn">취소</a>
 										</div>
@@ -136,16 +137,19 @@
 									<a href="#close"><i class="icon-close icons"></i></a>
 									<div class="sentNoteContainer">
 										<div class="recipientFacing">
-											<span>받는사람</span>
+											<span>받는 사람</span>
 											<input type="text" id="sendInput3"readonly />
 										</div>
 										<div class="sendDate">
-											<span>보낸날짜</span>
+											<span>보낸 날짜</span>
 											<input type="text" id="sendInput4" readonly />
 										</div>							
 										<textarea class="sentNoteTextArea" id = "sendInput2"></textarea>
 										<div class="facingDeleteBtnDiv">
-											<input type="button" value="삭제" class="sentNoteDeleteBtns" />
+											<form method="post" action="/deleteMessageSend">
+												<input type="submit" value="삭제" class="sentNoteDeleteBtn"/>
+												<input type="hidden" id ="sendInput1" name ="msgmember_msg" />
+											</form>
 										</div>
 									</div>
 								</div>
@@ -167,25 +171,15 @@
 											</tr>
 										</thead>
 										<tbody>
+										<%-- <c:forEach items="${selctMyFriend }" var="mf">	
 											<tr>
-												<td>test@gmail.com</td>
-												<td><input type="button" value="친구추가" /></td>
+												<td>${mf.friend_member}</td>
+												<td><input type="button" value="친구삭제"/></td>
 											</tr>
+										</c:forEach>	 --%>
 											<tr>
-												<td>test@gmail.com</td>
-												<td><input type="button" value="친구추가" /></td>
-											</tr>
-											<tr>
-												<td>test@gmail.com</td>
-												<td><input type="button" value="친구추가" /></td>
-											</tr>
-											<tr>
-												<td>test@gmail.com</td>
-												<td><input type="button" value="친구추가" /></td>
-											</tr>
-											<tr>
-												<td>test@gmail.com</td>
-												<td><input type="button" value="친구추가" /></td>
+												<td>${mf.friend_member}</td>
+												<td><input type="button" value="친구삭제"/></td>
 											</tr>
 										</tbody>
 									</table>
@@ -276,8 +270,18 @@
 				url : "/messageReceivedAjax",
 				data : {"page":page, "pageSize":pageSize},
 				success: function(data){
+					var msg_type = data.msgReceiveList[0].msg_type;
+					
+					console.log(msg_type);
+				
+					if(msg_type == 'N'){
+						$("#msgReceiveList > tr > td").css("color","blue");
+					}else{
+						$("#msgReceiveList > tr > td").css("color","red");
+					}	
 					
 					console.log(data.msgReceiveList);
+					
 					var html = "";
 					$.each(data.msgReceiveList,function(idx,mm){
 						html += "<tr class = msgClick1>";
@@ -333,10 +337,16 @@
 			 	var msg_smember = data.msg_smember ;
 				var msg_time = data.msg_time; 
 				var msg_content = data.msg_content;
+				var msg_type = data.msg_type;
+				
 				$("#reInput1").val(msg_smember);
 				$("#reInput2").val(msg_time);
 				$("#reInput3").val(msg_content);
 				$("#reInput").val(msg_id);
+				$("#msg_type").val(msg_type);
+				
+				console.log(msg_type);
+				
 				}
 			});
 		}
