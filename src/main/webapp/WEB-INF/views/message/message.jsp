@@ -160,7 +160,7 @@
 						<div class="friendContainer">
 							<div class="friendLeft">
 								<form action="#" method="post">
-									<input type="text" placeholder="친구 이메일을 입력해주세요" class="friendSearchInput" />
+									<input type="text" placeholder="찾는 이메일을 입력해주세요" class="friendSearchInput" />
 									<input type="button" value="검색" class="friendSearchBtn" />
 									
 									<table class="friendCreateTable">
@@ -179,21 +179,24 @@
 										</c:forEach>	 --%>
 											<tr>
 												<td>${mf.friend_member}</td>
-												<td><input type="button" value="친구삭제"/></td>
+												<td><input type="button" value="친구 등록"/></td>
 											</tr>
 										</tbody>
 									</table>
 									<ul class="friendCreateTablePaging">
-										<li><</li>
-										<li>1</li>
-										<li>2</li>
-										<li>></li>
 									</ul>
 								</form>
 							</div>
+							<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+							
+							
 							<div class="friendRight">
-								<input type="text" placeholder="친구 이메일을 입력해주세요" class="friendSearchInput" />
-								<input type="button" value="검색" class="friendSearchBtn" />
+								<form name ="searchTextFriend" method="POST" onsubmit="return false;">
+										<input type="text" id="searchTextFriend" name="searchTextFriend" class="friendSearchInput" placeholder="찾으시는 친구의 이메일을 입력해주세요" />
+										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="pageSize" value='10' />
+										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getSearchFriendProject();"/>
+								</form>
 								<table class="friendCreateTable">
 									<thead>
 										<tr>
@@ -202,19 +205,13 @@
 											<th>삭제</th>
 										</tr>
 									</thead>
-									<tbody>
+									<tbody id ="myFriendList">
 										<tr>
-											<td>1</td>
-											<td>test@gmail.com</td>
-											<td><input type="button" value="친구삭제" /></td>
+											<!-- <td><input type="button" value="친구삭제" /> -->
 										</tr>
 									</tbody>
 								</table>
-								<ul class="friendCreateTablePaging2">
-									<li><</li>
-									<li>1</li>
-									<li>2</li>
-									<li>></li>
+								<ul class="paginationFriends">
 								</ul>
 							</div>
 						</div>
@@ -245,6 +242,7 @@
 		
 		getMessageReceived(1);
 		getMessageSend(1);
+		getMyFriends(1);
 		
 		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
 			console.log("msgReceiveList");
@@ -274,6 +272,7 @@
 					
 					console.log(msg_type);
 				
+					// 이 부분 다시 !
 					if(msg_type == 'N'){
 						$("#msgReceiveList > tr > td").css("color","blue");
 					}else{
@@ -415,6 +414,83 @@
 				}
 			});
 		}
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 친구 리스트 뽑아오는 Ajax
+		function getMyFriends(page){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/myfriendListAjax",
+				data : {"page" : page, "pageSize":pageSize},
+				success: function(data){
+				
+					var html = "";
+					$.each(data.myFriendList,function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.friend_member +"</td>";
+						html += "	<td>"+ "<input type='button' value='친구삭제'/>"+"</td>";
+						html += "</tr>";
+					});
+					
+					console.log(data.myFriendList);
+					
+					$("#myFriendList").html("");
+					$("#myFriendList").html(html);
+					
+					var i  = 1;
+					var paging ="";
+						paging +="<li><a href='javascript:getMyFriends("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<= data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getMyFriends("+ i +");'>"+ i+ "</a></li>";
+					}
+						paging +="<li><a href='javascript:getMyFriends("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".paginationFriends").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+		
+		function getSearchFriendProject(){
+				var param = $('form[name=searchTextFriend]').serialize();
+					
+					$.ajax({
+						type: "POST",
+						url : "/searchTextFriendAjax",
+						data: param,
+						success: function(data){
+							
+							var html = "";
+							$.each(data.myFriendList,function(idx,mm){
+								html += "<tr>";
+								html += "	<td>"+ mm.rnum +"</td>";
+								html += "	<td>"+ mm.friend_member +"</td>";
+								html += "	<td>"+ "<input type='button' value='친구삭제'/>"+"</td>";
+								html += "</tr>";
+							});
+							
+							console.log(data.myFriendList);
+							
+							$("#myFriendList").html("");
+							$("#myFriendList").html(html);
+							
+							var i  = 1;
+							var paging ="";
+								paging +="<li><a href='javascript:getMyFriends("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+							for(var i= 1; i<= data.pageCnt; i++) {
+								paging += "<li><a href='javascript:getMyFriends("+ i +");'>"+ i+ "</a></li>";
+							}
+								paging +="<li><a href='javascript:getMyFriends("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+							$(".paginationFriends").html(paging);
+						},
+						fail : function(xhr){
+							console.log(xhr);
+						}
+					});
+			}
+		
 		
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
