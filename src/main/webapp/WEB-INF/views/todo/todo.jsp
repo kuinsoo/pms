@@ -58,11 +58,6 @@ function insertTodo() {
    });
 }
 
-//할일등록의 등록버튼에 마우스올리면 커서 변경 ==문의: jerry==
-$(".issueInfoCreate").mouseover(function () {
-   $(this).css("cursor", "pointer");
-});
-
 </script>
 
 <!-- to-do insert 입력 -->
