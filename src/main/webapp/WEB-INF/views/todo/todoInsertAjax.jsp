@@ -14,7 +14,7 @@
 							<div class="issueSelectPageLeft">
 								<form action="#" method="post">
 									<div class="issueProfile">
-										<img src="http://placehold.it/150x200" />
+										<img src="${memberVo.member_profile}" />
 									</div>
 									<div class="issues">
 										<div class="issuesLeft">
