@@ -55,4 +55,28 @@ public class MessageService implements MessageServiceInf{
 	public int totalMsgSend(String msg_smember) {
 		return messageMapper.totalMsgSend(msg_smember);
 	}
+
+
+	@Override
+	public int updateMessageReceived(MessageVo msgVo) {
+		return messageMapper.updateMessageReceived(msgVo);
+	}
+
+
+	@Override
+	public MessageVo selectOneMessageReceived(String msg_id) {
+		return messageMapper.selectOneMessageReceived(msg_id);
+	}
+
+
+	@Override
+	public int deleteMsgReceived(String msg_id) {
+		return messageMapper.deleteMsgReceived(msg_id);
+	}
+
+
+	@Override
+	public int insertMessageSend(MessageVo msgVo) {
+		return messageMapper.insertMessageSend(msgVo);
+	}
 }

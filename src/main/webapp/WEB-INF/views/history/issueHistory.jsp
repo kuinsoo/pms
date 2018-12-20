@@ -21,16 +21,16 @@
 		//console.log(Math.abs($(window).scrollTop() - ($(document).height() - $(window).height())));
 		
 		if(ingFlag == false){
-			//if(Math.abs($(window).scrollTop() - ($(document).height() - $(window).height())) < 3){
-			if($(window).scrollTop() == $(document).height() - $(window).height()){
+			if(Math.abs($(window).scrollTop() - ($(document).height() - $(window).height())) < 1){
+			//if($(window).scrollTop() == $(document).height() - $(window).height()){
 				console.log("scrollTop : " + $(window).scrollTop() + " / height : " + ($(document).height() - $(window).height()));
 				getList(curPage);
 				ingFlag = true;
 			}
 		}
-// 		else{
-// 			return false;
-// 		}
+		//else{
+		//	return false;
+		//}
 	});
 	
 	function getList(page){

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:forEach items="${todoList}" var="todo">
+<c:forEach items="${todoListMap.todoList}" var="todo">
 <%-- 	<c:if test="${todo.todo_work eq work.work_id}"> --%>
 		<tr>
 			<td><input type="checkbox" /></td>

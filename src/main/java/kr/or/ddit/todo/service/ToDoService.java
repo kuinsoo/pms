@@ -1,6 +1,8 @@
 package kr.or.ddit.todo.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.todo.mapper.ToDoMapper;
 import kr.or.ddit.todo.model.ToDoVo;
-import kr.or.ddit.work.model.WorkVo;
 
 /**
  * kr.or.ddit.todo.service
@@ -61,8 +62,27 @@ public class ToDoService implements ToDoServiceInf{
 	* Method 설명 : 각 업무의 to-do list를 조회
 	*/
 	@Override
-	public List<ToDoVo> workToDoSelect(WorkVo workVo) {
-		return todoMapper.workToDoSelect(workVo);
+	public Map<String, Object> workToDoSelect(Map todoMap) {
+		
+		List<ToDoVo> getToDoList = todoMapper.workToDoSelect(todoMap);
+		
+		Map<String, Object> getToDoMap = new HashMap<String, Object>();
+		getToDoMap.put("todoList", getToDoList);
+		
+		return getToDoMap;
+	}
+
+	/**
+	* Method : todoCnt
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_work
+	* @return
+	* Method 설명 : to-do list의 총 to-do 갯수
+	*/
+	@Override
+	public int todoCnt(String work_id) {
+		return todoMapper.todoCnt(work_id);
 	}
 	
 }

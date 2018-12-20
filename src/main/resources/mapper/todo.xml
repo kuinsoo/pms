@@ -33,20 +33,37 @@
 		VALUES (todo_id_seq.NEXTVAL, #{todo_work}, #{todo_pmember}, #{todo_content}, #{todo_sdate}, null, 'N', #{todo_eedate}, '#F78181')
 	</insert>
 	
-	<!-- to-do select -->
-	<select id="workToDoSelect" resultType="todoVo" parameterType="workVo">
-		SELECT  todo_id,
-				todo_content,
-		        todo_pmember,
-		        todo_sdate,
-		        todo_eedate,
-		        todo_complet,
-		        todo_issue,
-		        todo_work
-		FROM    todo INNER JOIN work
-		ON      todo_work = work_id
-		WHERE   work_project = #{work_project}
-		AND		work_id = #{work_id}
+	<!-- to-do select + paging -->
+	<select id="workToDoSelect" resultType="todoVo" parameterType="Map">
+		SELECT  *
+		FROM    (
+		        SELECT  ROWNUM rnum,
+		                A.*
+		        FROM    (
+		                SELECT  todo_id,
+		                		todo_content,
+		                        todo_pmember,
+		                        todo_sdate,
+		                        todo_eedate,
+		                        todo_complet,
+		                        todo_issue,
+		                        todo_work
+		                FROM    todo INNER JOIN work
+		                ON      todo_work = work_id
+		                WHERE   work_project = ${workVo.work_project}
+                        AND     work_id = ${workVo.work_id}
+		                ORDER BY todo_sdate DESC
+		                ) A
+		        )
+		WHERE   rnum BETWEEN ${pageVo.page} * ${pageVo.pageSize} - (${pageVo.pageSize} - 1) AND ${pageVo.page} * ${pageVo.pageSize}
+		ORDER BY rnum
+	</select>
+	
+	<!-- page Count -->
+	<select id="todoCnt" resultType="int" parameterType="String">
+		SELECT  COUNT(*)
+		FROM    todo
+		WHERE   todo_work = #{workVo.work_id}
 	</select>
 	
 </mapper>
