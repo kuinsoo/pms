@@ -88,6 +88,14 @@ function popupSearchMember${work.work_id}(work_id){
 	
 }
 
+/* to-do 등록시 검색창에 ENTER KEY event */
+function enterKey${work.work_id}(e){
+	if(e.keyCode == 13){
+		popupSearchMember${work.work_id}('${work.work_id}');
+		return false;
+	}
+}
+
 </script>
 
 <!-- to-do insert 입력 -->
@@ -125,7 +133,7 @@ function popupSearchMember${work.work_id}(work_id){
 						<option value="member_name">이름</option>
 						<option value="pmember_member">이메일</option>
 					</select>
-					<input type="text" name="memberSearch${work.work_id}" id="memberSearch${work.work_id}">
+					<input type="text" name="memberSearch${work.work_id}" id="memberSearch${work.work_id}" onkeypress="return enterKey${work.work_id}(event)">
 					<input type="button" value="검색" onclick="javascript:popupSearchMember${work.work_id}('${work.work_id}');">
 				</form>
 				<table>
