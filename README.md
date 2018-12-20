@@ -1,4 +1,4 @@
-# pms_project
+# pms
 
 Team : Current /   ddit.or.kr.203
         PL : Mr.KKu
