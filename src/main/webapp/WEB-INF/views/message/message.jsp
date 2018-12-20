@@ -165,7 +165,7 @@
 									
 									<table class="friendCreateTable">
 										<thead>
-											<tr>
+											<tr class= "friends">
 												<th>이메일</th>
 												<th>등록</th>
 											</tr>
@@ -220,7 +220,7 @@
 			</div>
 		</div>
 	</section>
-	
+
 	<footer class="currentFooter">
 		<div class="footerContent">
 			<p>
@@ -237,6 +237,14 @@
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
 <script type="text/javascript" src="js/jquery-ui.js"></script>
+
+<style>
+<!--
+	 tr.msgClick1:hover { background-color: lightyellow; } 
+	 tr.msgClick2:hover { background-color: lightyellow; } 
+	 tr.friends:hover { background-color: lightyellow; } 
+-->
+</style>
 <script type="text/javascript">
 	$(document).ready(function(){
 		
@@ -292,7 +300,6 @@
 						html += "</tr>";
 					});
 					
-					//1. 
 					console.log(data.msgReceiveList);
 					
 					$("#msgReceiveList").html("");
@@ -323,15 +330,6 @@
 				
 					console.log(data.msg_type);
 					
-					
-				//2.
-		 		/* var msg_type = data.msg_type;
-					
- 				if(msg_type == 'Y'){
-					$("#msgReceiveList > tr > td").css("color","black");
-				}else{
-					$("#msgReceiveList > tr > td").css("color","red");
-				}	  */
 			  	var msg_id = data.msg_id; 
 			 	var msg_smember = data.msg_smember ;
 				var msg_time = data.msg_time; 
@@ -426,7 +424,7 @@
 				
 					var html = "";
 					$.each(data.myFriendList,function(idx,mm){
-						html += "<tr>";
+						html += "<tr class =friends>";
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.friend_member +"</td>";
 						html += "	<td>"+ "<input type='button' value='친구삭제'/>"+"</td>";
@@ -464,7 +462,7 @@
 							
 							var html = "";
 							$.each(data.myFriendList,function(idx,mm){
-								html += "<tr>";
+								html += "<tr class =friends>";
 								html += "	<td>"+ mm.rnum +"</td>";
 								html += "	<td>"+ mm.friend_member +"</td>";
 								html += "	<td>"+ "<input type='button' value='친구삭제'/>"+"</td>";
