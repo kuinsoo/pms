@@ -13,7 +13,8 @@
 		                  (select A.MSG_ID,
 		                  		  A.MSG_SMEMBER, 
 	                              A.MSG_CONTENT, 
-	                              A.MSG_TIME
+	                              A.MSG_TIME,
+	                              A.MSG_TYPE
 	                        from  MESSAGE A, MESSAGE_MEMBER B
 	                        where A.MSG_ID = B.MSGMEMBER_MSG
 	                         and  B.MSG_RMEMBER= #{member_mail})a)
@@ -67,11 +68,11 @@
 	
 	<insert id="insertMessageSend" parameterType="msgVo">
 		insert all
-		<selectKey keyProperty="insertMessage" resultType="int" order="BEFORE">
-		     Select MSG_ID_SEQ.nextVal From Dual
+		<selectKey keyProperty="msg_id" resultType="String" order="BEFORE">
+		     Select msg_id_SEQ.NEXTVAL From Dual
 		  </selectKey>
-			 into message values(#{insertMessage},#{msg_smember},sysdate,'Y',#{msg_content})
-			 into message_member values(#{insertMessage},#{msg_rmember},sysdate)
+			 into message values(#{msg_id},#{msg_smember},sysdate,'Y',#{msg_content})
+			 into message_member values(#{msg_id},#{msg_rmember},sysdate)
 		 	 select * from dual
 	</insert>
 	
@@ -101,6 +102,12 @@
 	<delete id="deleteMsgReceived" parameterType="String">
 		delete from message_member where msgmember_msg = #{msg_id}
 	</delete>
+	
+	<delete id="deleteMsgSend" parameterType="String">
+		delete from message_member where msgmember_msg = #{msg_id}
+	</delete>
+	
+	
 	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 	
 	

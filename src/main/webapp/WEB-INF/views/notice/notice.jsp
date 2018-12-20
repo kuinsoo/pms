@@ -15,9 +15,9 @@
 }
 .noticeContainerRight > table{width:100%;border-collapse:collapse;}
 .noticeContainerRight > table > thead > tr{border-top:3px solid #333;border-bottom:1px solid #333;}
-.noticeContainerRight > table > thead > tr > th{padding:20px 0px 20px 0px;font-size:17px;}
+.noticeContainerRight > table > thead > tr > th{padding:20px 0px 20px 0px;font-size:20px;}
 .noticeContainerRight > table > tbody > tr{border-bottom:1px solid #333;}
-.noticeContainerRight > table > tbody > tr > td{padding:20px 0px 20px 0px;font-size:17px;}
+.noticeContainerRight > table > tbody > tr > td{padding:20px 0px 20px 0px;font-size:20px;}
 .noticeContainerRight > table > tbody > tr > td:nth-child(odd){text-indent:10px;}
 .noticeContainerRight > table > tbody > tr > td:nth-child(odd) > a{color:#000;}
 .noticeContainerRight > table > tbody > tr > td:nth-child(odd):hover > a {
@@ -59,64 +59,11 @@
 							<th>등록일</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
+					<tbody id="noticeList">
 					</tbody>
 				</table>
 				<div class="pagination">
-					<ul>
-						<li><i class="icon-arrow-left"></i></li>
-						<li><a href="#"><span>1</span></a></li>
-						<li><a href="#"><span>2</span></a></li>
-						<li><a href="#"><span>3</span></a></li>
-						<li><a href="#"><span>4</span></a></li>
-						<li><a href="#"><span>5</span></a></li>
-						<li><a href="#"><span>6</span></a></li>
-						<li><a href="#"><span>7</span></a></li>
-						<li><a href="#"><span>8</span></a></li>
-						<li><a href="#"><span>9</span></a></li>
-						<li><a href="#"><span>10</span></a></li>
-						<li><i class="icon-arrow-right"></i></li>
-					</ul>
+					<ul class="paginationNotice"></ul>
 				</div>
 				<div class="noticeSearchDiv">
 					<input type="text" class="noticeSearchInput" />
@@ -288,6 +235,46 @@ $(function(){
 
 // 알람 탭 메뉴
 $("#tabs").tabs();
+
+$(document).ready(function(){
+	noticeList(1);
+});
+
+// 공지사항 게시글 페이지 리스트 조회
+function noticeList(page){
+	var pageSize = 10;
+	
+	$.ajax({
+		type: "POST",
+		url : "/ajaxNotice",
+		data: {"page":page, "pageSize":pageSize},
+		success : function(data){
+			var html ="";
+			$.each(data.noticeList, function (idx,notice){
+				
+				html += "<tr>";
+				html += "	<td>"+ notice.post_title +"</td>";
+				html += "	<td>"+ notice.post_date +"</td>";
+				html += "</tr>";
+			});
+			
+			$("#noticeList").html("");
+			$("#noticeList").html(html);
+		
+			var i = 1;
+			var paging ="";
+				paging +="<li><a href='javascript:noticeList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+				for(var i= 1; i<=data.pageCnt; i++) {
+					paging += "<li><a href='javascript:noticeList("+ i +");'>"+ i+ "</a></li>";
+				}
+					paging +="<li><a href='javascript:noticeList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+			$(".paginationNotice").html(paging);
+		},
+		fail : function(xhr){
+			console.log(xhr);
+		}
+	});
+}
 </script>
 </body>
 </html>

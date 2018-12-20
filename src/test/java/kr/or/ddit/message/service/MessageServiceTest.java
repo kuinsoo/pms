@@ -2,9 +2,6 @@ package kr.or.ddit.message.service;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -40,14 +37,8 @@ public class MessageServiceTest  extends ResetSQL{
 	messageVo.setMsg_id(msg_id);
 	messageVo.setMsg_smember("kkuinsoo@gmail.com");
 	
-	
-	
 	MessageVo msgVo = messageservice.selectOneMessageSend(messageVo);
-	
-	
 	/***Then***/
 	assertEquals(msgVo.getMsg_rmember(), "sally1334@naver.com");
-
-	
 	}
 }

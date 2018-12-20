@@ -26,8 +26,9 @@
 	            <p>새 프로젝트 및 새 글이 등록되었을 때,<br>Push 메시지로 알려드려요!</p>
 	        </div>
 	        <div id="tabs-4">
-	            <i class="icon-bell icons"></i>
-	            <p>새 프로젝트 및 새 글이 등록되었을 때,<br>Push 메시지로 알려드려요!</p>
+	            <ul id="noticeMemberList">
+	            	<%-- ajaxNoticeAlarm jsp --%>
+	            </ul>
 	        </div>
 	    </div>
 	</div>
@@ -36,6 +37,7 @@
 <script>
 $(document).ready(function(){
 	workMemberList();
+	noticeMemberList();
 });
 
 function workMemberList(){
@@ -54,6 +56,27 @@ function workMemberList(){
 			},
 		    timeout: 3000,
 		    complete: setTimeout(function(){ poll(); }, 6000)
+		 })
+	})();
+	
+};
+
+function noticeMemberList(){
+	
+	(function polls(){
+		$.ajax({
+		    type: "GET",
+		    url: "/ajaxNoticeAlarm",
+		    data: {"page" : 1, "pageSize" : 10},
+		    success: function (data) {
+		       $('#noticeMemberList').html("");
+		       $('#noticeMemberList').html(data);
+		    },
+		    error: function (data) {
+				alert("error");
+			},
+		    timeout: 3000,
+		    complete: setTimeout(function(){ polls(); }, 6000)
 		 })
 	})();
 	
