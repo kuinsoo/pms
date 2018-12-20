@@ -50,6 +50,21 @@
 		where msg_id = #{msg_id}
 	</select>
 	
+	
+	<select id = "selectOneMessageSend" parameterType="msgVo" resultType="msgVo">    
+		
+		select * from(
+			select rownum rnum ,a.*
+		         from
+		              (select * from message A inner join message_member B
+						on A.msg_id = B.msgmember_msg
+						where  A.msg_smember = #{msg_smember}
+						and    A.msg_id = #{msg_id})a)
+	</select>
+	
+	
+	
+	
 	<insert id="insertMessageSend" parameterType="msgVo">
 		insert all
 		<selectKey keyProperty="insertMessage" resultType="int" order="BEFORE">

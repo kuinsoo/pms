@@ -46,6 +46,9 @@ public class ToDoController {
 	*/
 	@RequestMapping(value="/todoInsert", method= {RequestMethod.POST, RequestMethod.GET})
 	public String ajaxInsertTodo(HttpServletRequest request, PageVo pageVo, ToDoVo todoVo, Model model) {
+		WorkVo workVo = new WorkVo();
+		workVo.setWork_project(request.getParameter("work_project"));
+		workVo.setWork_id(request.getParameter("todo_work"));
 
 		/* to-do insert */
 		try {
@@ -54,27 +57,14 @@ public class ToDoController {
 			e.printStackTrace();
 		}
 		
-		WorkVo workVo = new WorkVo();
-		workVo.setWork_project(request.getParameter("work_project"));
-		workVo.setWork_id(request.getParameter("todo_work"));
-		
 		pageVo.setPage(1);
 		pageVo.setPageSize(5);
-		
-		System.out.println("1. workVo : " + workVo);
-		System.out.println("2. pageVo : " + pageVo);
 		
 		Map<String, Object> todoMap = new HashMap<String, Object>();
 		todoMap.put("workVo", workVo);
 		todoMap.put("pageVo", pageVo);
 		
 		Map<String, Object> todoListMap = todoService.workToDoSelect(todoMap);
-		
-		Iterator<String> keys = todoListMap.keySet().iterator();
-		while(keys.hasNext()) {
-			String key = keys.next();
-			System.out.println("key : " + key + " / value : " + todoListMap.get(key));
-		}
 		
 		model.addAttribute("todoListMap", todoListMap);
 		
