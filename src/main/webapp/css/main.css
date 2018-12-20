@@ -388,6 +388,101 @@ header {
     vertical-align: middle;
 }
 
+/* 알림 첫번째 탭 */
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-1 {
+    font-size: 20px;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-1 > i {
+    font-size: 30px;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-1 > p {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-1 > ul > li {
+    padding: 10px 0px 10px 0px;
+    border-bottom: 1px solid #dee3eb;
+    width: 100%;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-1 > ul > li > i {
+    vertical-align: middle;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-1 > ul > li > span {
+    vertical-align: middle;
+}
+
+/* 알림 세번째 탭 */
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-3 {
+    font-size: 20px;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-3 > i {
+    font-size: 30px;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-3 > p {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-3 > ul > li {
+    padding: 10px 0px 10px 0px;
+    border-bottom: 1px solid #dee3eb;
+    width: 100%;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-3 > ul > li > i {
+    vertical-align: middle;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-3 > ul > li > span {
+    vertical-align: middle;
+}
+
+/* 알림 네번째 탭 */
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-4 {
+    font-size: 20px;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-4 > i {
+    font-size: 30px;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-4 > p {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 10px;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-4 > ul > li {
+    padding: 10px 0px 10px 0px;
+    border-bottom: 1px solid #dee3eb;
+    width: 100%;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-4 > ul > li > i {
+    vertical-align: middle;
+}
+
+.headerContainer > .headerRightContent > .updateHeader > .alarm > .dialogs > #tabs > #tabs-4 > ul > li > span {
+    vertical-align: middle;
+}
+
+
+
 .headerContainer > .headerRightContent > .updateHeader > .currentUser {
     position: relative;
     width: 70px;
