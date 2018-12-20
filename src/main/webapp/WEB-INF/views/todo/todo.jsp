@@ -26,9 +26,10 @@ function insertTodo() {
       url: "/todoInsert",
       data: param,
       success: function(data) {
-         alert("success");
-         //$('#todoInsertHtmlAjax').html("");
-         //$('#todoInsertHtmlAjax').html(data);
+         console.log(data);
+         window.location.href = '#close';
+         $('#todoInsertHtmlAjax${work.work_id}').html("");
+         $('#todoInsertHtmlAjax${work.work_id}').html(data);
       },
       error:function(data) {
          alert("error");
@@ -65,7 +66,7 @@ $(".issueInfoCreate").mouseover(function () {
 						<li><input type="hidden" name="todo_sdate" id="todo_sdate" value="" /></li>
 						<li><input type="datetime-local" name="non_todo_eedate"></li>
 						<li><input type="hidden" name="todo_eedate" id="todo_eedate" value="" /></li>
-						<li><input type="hidden" name="project_id" id="todo_project_id" value="${projectVo.project_id}" /></li>
+						<li><input type="hidden" name="work_project" id="todo_project_id" value="${projectVo.project_id}" /></li>
 						<li><input type="hidden" name="todo_work" id="todo_work" value="${work.work_id}" /></li>
 					</ul>
 				</form>

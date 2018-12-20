@@ -1,5 +1,7 @@
 package kr.or.ddit.attachment.mapper;
 
+import kr.or.ddit.attachment.model.AttachmentVo;
+
 /**
  * kr.or.ddit.attachment.mapper
  * null.java
@@ -10,4 +12,24 @@ package kr.or.ddit.attachment.mapper;
  * @Version :
  */
 public interface AttachmentMapper {
+
+	/**
+	 * Insert att int.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 첨부파일 추가
+	 *
+	 * @param attVo the att vo
+	 * @return the int
+	 */
+	int insertAtt(AttachmentVo attVo);
+
+	/**
+	 * Select att attachment vo.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 첨부파일 찾기
+	 *
+	 * @param att_id the att id
+	 * @return the attachment vo
+	 */
+	AttachmentVo selectAtt(String att_id);
 }

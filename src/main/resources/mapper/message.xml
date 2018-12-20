@@ -10,7 +10,8 @@
 		select * from(
 		    select rownum rnum ,a.*
 		             from
-		                  (select A.MSG_SMEMBER, 
+		                  (select A.MSG_ID,
+		                  		  A.MSG_SMEMBER, 
 	                              A.MSG_CONTENT, 
 	                              A.MSG_TIME
 	                        from  MESSAGE A, MESSAGE_MEMBER B
@@ -36,6 +37,29 @@
  		and  B.MSG_RMEMBER= #{member_mail}
  		and  A.MSG_ID = #{msg_id}
 	</select>
+	
+	<!-- 받은 쪽지  읽음/안읽음 처리하기  -->
+	<update id="updateMessageReceived" parameterType="msgVo">
+		update message
+		set msg_type = 'N'
+		where msg_id = #{msg_id}
+	</update>
+	
+	<select id = "selectOneMessageReceived" parameterType="String" resultType="msgVo">    
+		select * from message
+		where msg_id = #{msg_id}
+	</select>
+	
+	<insert id="insertMessageSend" parameterType="msgVo">
+		insert all
+		<selectKey keyProperty="insertMessage" resultType="int" order="BEFORE">
+		     Select MSG_ID_SEQ.nextVal From Dual
+		  </selectKey>
+			 into message values(#{insertMessage},#{msg_smember},sysdate,'Y',#{msg_content})
+			 into message_member values(#{insertMessage},#{msg_rmember},sysdate)
+		 	 select * from dual
+	</insert>
+	
 	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 	<!-- 보낸쪽지 리스트 + 페이징 처리 -->
 		
@@ -43,7 +67,8 @@
 		select * from(
 		    select rownum rnum ,a.*
 		             from
-		                  (select B.MSG_RMEMBER, 
+		                  (select B.MSGMEMBER_MSG,
+		                  		  B.MSG_RMEMBER, 
                                   A.MSG_CONTENT, 
                                   B.MSG_RDATE
                             from  MESSAGE A, MESSAGE_MEMBER B
@@ -58,6 +83,9 @@
         where MSG_SMEMBER = #{member_mail}
 	</select>
 	
+	<delete id="deleteMsgReceived" parameterType="String">
+		delete from message_member where msgmember_msg = #{msg_id}
+	</delete>
 	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 	
 	

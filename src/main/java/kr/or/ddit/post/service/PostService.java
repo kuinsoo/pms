@@ -47,6 +47,11 @@ public class PostService implements PostServiceInf {
 	}
 
 	@Override
+	public int postListCnt(PostPageVo postPageVo) {
+		return postMapper.postListCnt(postPageVo);
+	}
+	
+	@Override
 	public List<PostVo> qnaPostList(PostPageVo postPageVo) {
 		return postMapper.qnaPostList(postPageVo);
 	}
@@ -62,8 +67,8 @@ public class PostService implements PostServiceInf {
 	}
 
 	@Override
-	public PostVo aPostList(String post_hierarchy) {
-		return postMapper.aPostList(post_hierarchy);
+	public PostVo aPost(String post_hierarchy) {
+		return postMapper.aPost(post_hierarchy);
 	}
 
 	@Override
@@ -75,4 +80,5 @@ public class PostService implements PostServiceInf {
 	public List<PostVo> secretAReply(String board_id) {
 		return postMapper.secretAReply(board_id);
 	}
+
 }

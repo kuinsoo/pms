@@ -41,7 +41,7 @@ public interface PostMapper {
 	List<PostVo> qPostList(PostPageVo postPageVo);
 
 	//지정 답글 
-	PostVo aPostList(String post_hierarchy);
+	PostVo aPost(String post_hierarchy);
 	
 	//비밀 질의만 목록 
 	List<PostVo> secretQPost(String board_id);

@@ -28,6 +28,9 @@ public interface PostServiceInf {
 	//삭제
 	int deleteQnaPost(String post_id);
 	
+	//전체 글 개수 
+	int postListCnt(PostPageVo postPageVo);
+	
 	//글 목록
 	List<PostVo> qnaPostList(PostPageVo postPageVo);
 	
@@ -38,7 +41,7 @@ public interface PostServiceInf {
 	List<PostVo> qPostList(PostPageVo postPageVo);
 
 	//지정 답글 
-	PostVo aPostList(String post_hierarchy);
+	PostVo aPost(String post_hierarchy);
 	
 	//비밀 질의만 목록 
 	List<PostVo> secretQPost(String board_id);
