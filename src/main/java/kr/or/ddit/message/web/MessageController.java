@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,6 +90,70 @@ public class MessageController {
 		
 		return msgReceiveMap;
 	}	
+	
+	
+
+	/**
+	 * Method : myfriendListAjax
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param memberVo
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 친구리스트 + 페이징 처리 
+	 */  
+	@ResponseBody
+	@RequestMapping(value="/myfriendListAjax", method= RequestMethod.GET)
+	public Map<String, Object>myfriendListAjax (@SessionAttribute("memberVo") MemberVo memberVo , PageVo pageVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		FriendListVo freidListVo = new FriendListVo();
+		freidListVo.setFriend_mymail(memberVo.getMember_mail());
+		
+		List<FriendListVo> myFriendList = messageservice.MyFriendsList(pageVo);
+		
+		int pageCnt = messageservice.totalFriends(memberVo.getMember_mail());
+		
+		Map<String, Object> myFriendMap = new HashMap<>();
+		myFriendMap.put("myFriendList", myFriendList);
+		myFriendMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myFriendMap;
+	}
+	
+	/**
+	 * Method : searchTextFriendAjax
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param memberVo
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 친구리스트 + 페이징 처리  ==> 검색 처리 
+	 */
+	@ResponseBody
+	@RequestMapping(value="/searchTextFriendAjax",method = RequestMethod.POST)
+	public Map<String, Object> searchTextFriendAjax (@SessionAttribute("memberVo") MemberVo memberVo , PageVo pageVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		if(pageVo.getSearchTextFriend() == null) {
+			pageVo.setSearchTextFriend("");
+		}
+		
+		FriendListVo friendListVo = new FriendListVo();
+		friendListVo.setFriend_mymail(memberVo.getMember_mail());
+		
+		List<FriendListVo> myFriendList = messageservice.MyFriendsList(pageVo);
+		
+		int pageCnt = messageservice.totalFriends(memberVo.getMember_mail());
+		
+		Map<String, Object> myFriendMap = new HashMap<>();
+		myFriendMap.put("myFriendList", myFriendList);
+		myFriendMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myFriendMap;
+	}
 	
 	
 	/**
@@ -236,7 +301,8 @@ public class MessageController {
 		
 		return "message/message";
 	}
-
+	
+	
 }
 
 

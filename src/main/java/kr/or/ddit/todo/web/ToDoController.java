@@ -1,7 +1,7 @@
 package kr.or.ddit.todo.web;
 
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -122,4 +121,27 @@ public class ToDoController {
 		
 		return "todo/todoPaginationHtml";
 	}
+	
+	/**
+	* Method : ajaxPopupMember
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param project_id
+	* @param model
+	* @return
+	* Method 설명 : to-do insert시 popup창에 참여자 리스트 조회
+	*/
+	@RequestMapping(value="/popupMemberList", method= {RequestMethod.POST, RequestMethod.GET})
+	public String ajaxPopupMember(@RequestParam("project_id")String project_id, @RequestParam("work_id")String work_id, Model model) {
+		List<ToDoVo> popupMemberList = todoService.getProjectMember(project_id);
+		
+		Map<String, Object> popupMap = new HashMap<String, Object>();
+		popupMap.put("popupMemberList", popupMemberList);
+		popupMap.put("popup_work_id", work_id);
+
+		model.addAttribute("popupMap", popupMap);
+		
+		return "todo/popupMemberList";
+	}
+	
 }

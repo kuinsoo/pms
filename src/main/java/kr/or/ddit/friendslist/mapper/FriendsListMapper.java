@@ -26,4 +26,7 @@ public interface FriendsListMapper {
 	 */
 	
 	List<FriendListVo> selectMyFriends(String friend_myemail);
+	
+	
+
 }

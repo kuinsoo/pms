@@ -3,6 +3,7 @@ package kr.or.ddit.message.service;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.friendslist.model.FriendListVo;
 import kr.or.ddit.message.model.MessageVo;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.util.model.PageVo;
@@ -30,7 +31,30 @@ public interface MessageServiceInf {
 	 */
 	List<MessageVo> messageReceived(PageVo pageVo);
 	
+	
+	
+	/**
+	 * Method : MyFriendsList
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friend_myemail
+	 * @return
+	 * Method 설명 : 페이징 처리 포함 
+	 */
+	List<FriendListVo> MyFriendsList(PageVo pageVo);
 
+
+	
+	/**
+	 * Method : tatalFriends
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friend_myemail
+	 * @return
+	 * Method 설명 : 친구목록 중 count(*)
+	 */
+	int totalFriends(String friend_myemail);
+	
 	/**
 	 * Method : insertMessageSend
 	 * 작성자 : pc07

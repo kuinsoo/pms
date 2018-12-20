@@ -57,4 +57,14 @@ public interface ToDoServiceInf {
 	*/
 	int todoCnt(String work_id);
 	
+	/**
+	* Method : getProjectMember
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param project_id
+	* @return
+	* Method 설명 : 참여자의 이름과 메일 조회
+	*/
+	List<ToDoVo> getProjectMember(String project_id);
+	
 }

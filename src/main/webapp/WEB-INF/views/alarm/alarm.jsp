@@ -52,7 +52,8 @@ function workMemberList(){
 		       $('#workMemberList').html(data);
 		    },
 		    error: function (data) {
-				alert("error");
+		    	location.href = "/";
+				// alert("error");
 			},
 		    timeout: 3000,
 		    complete: setTimeout(function(){ poll(); }, 6000)
@@ -73,7 +74,8 @@ function noticeMemberList(){
 		       $('#noticeMemberList').html(data);
 		    },
 		    error: function (data) {
-				alert("error");
+			    location.href = "/";
+				// alert("error");
 			},
 		    timeout: 3000,
 		    complete: setTimeout(function(){ polls(); }, 6000)

@@ -85,5 +85,18 @@ public class ToDoService implements ToDoServiceInf{
 	public int todoCnt(String work_id) {
 		return todoMapper.todoCnt(work_id);
 	}
+
+	/**
+	* Method : getProjectMember
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param project_id
+	* @return
+	* Method 설명 : 참여자의 이름과 메일 조회
+	*/
+	@Override
+	public List<ToDoVo> getProjectMember(String project_id) {
+		return todoMapper.getProjectMember(project_id);
+	}
 	
 }

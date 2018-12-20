@@ -66,4 +66,14 @@
 		WHERE   todo_work = #{workVo.work_id}
 	</select>
 	
+	<!-- member name, member_mail list -->
+	<select id="getProjectMember" resultType="todoVo" parameterType="String">
+		SELECT  member_name,
+		        pmember_member
+		FROM    project_member INNER JOIN member
+		ON      pmember_member = member_mail
+		WHERE   pmember_project = #{project_id}
+<!-- 		AND     member_name LIKE '%%' -->
+	</select>
+	
 </mapper>

@@ -14,17 +14,22 @@ public class PageVo {
 	private String searchBookText;
 	private String searchTodoText;
 	private String searchEndText;
+	private String searchTextFriend;
 
-	
-	
 	
 	@Override
 	public String toString() {
 		return "PageVo [page=" + page + ", pageSize=" + pageSize + ", member_mail=" + member_mail + ", searchText="
 				+ searchText + ", searchBookText=" + searchBookText + ", searchTodoText=" + searchTodoText
-				+ ", searchEndText=" + searchEndText + "]";
+				+ ", searchEndText=" + searchEndText + ", searchTextFriend=" + searchTextFriend + "]";
 	}
-	
+	public String getSearchTextFriend() {
+		return searchTextFriend;
+	}
+	public void setSearchTextFriend(String searchTextFriend) {
+		this.searchTextFriend = searchTextFriend;
+	}
+
 	public String getSearchEndText() {
 		return searchEndText;
 	}

@@ -15,7 +15,7 @@ import java.util.Date;
  * @Version :
  */
 @Alias("evalVo")
-public class Evaluation {
+public class EvaluationVo {
 	private String 	project_id;
 	private String 	project_title;
 	private String 	project_overview;
@@ -31,7 +31,7 @@ public class Evaluation {
 	private String 	work_title;
 	private String 	work_content;
 
-	public Evaluation() {
+	public EvaluationVo() {
 	}
 
 	public String getProject_id() {
