@@ -132,8 +132,14 @@ public class ToDoController {
 	* Method 설명 : to-do insert시 popup창에 참여자 리스트 조회
 	*/
 	@RequestMapping(value="/popupMemberList", method= {RequestMethod.POST, RequestMethod.GET})
-	public String ajaxPopupMember(@RequestParam("project_id")String project_id, @RequestParam("work_id")String work_id, Model model) {
-		List<ToDoVo> popupMemberList = todoService.getProjectMember(project_id);
+	public String ajaxPopupMember(Model model, @RequestParam("project_id")String project_id, @RequestParam("work_id")String work_id, 
+									@RequestParam("searchOption")String searchOption, @RequestParam("searchMember")String searchMember) {
+		Map<String, Object> searchMap = new HashMap<String, Object>();
+		searchMap.put("project_id", project_id);
+		searchMap.put("searchOption", searchOption);
+		searchMap.put("searchMember", searchMember);
+		
+		List<ToDoVo> popupMemberList = todoService.getProjectMember(searchMap);
 		
 		Map<String, Object> popupMap = new HashMap<String, Object>();
 		popupMap.put("popupMemberList", popupMemberList);

@@ -15,7 +15,7 @@ $(document).ready(function(){
     /* to-do 등록 팝업의 참여자 list ajax */
     var project_id = ${projectVo.project_id};
     var work_id = ${work.work_id};
-    popupMemberAjax${work.work_id}(project_id, work_id);
+    popupSearchMember${work.work_id}(work_id);
     
 });
 
@@ -66,6 +66,28 @@ function setMemberName${work.work_id}(name){
 	$('#todo_pmember${work.work_id}').attr('value', name);
 }
 
+/* to-do 등록시 참여자 이름/이메일 검색 */
+function popupSearchMember${work.work_id}(work_id){
+	//할 일 1. enter쳐도 검색 될 수 있게 기능 구현하기
+	var project_id = ${projectVo.project_id};
+	var searchMember = $('#popupSearchForm${work.work_id}').find("#memberSearch${work.work_id}").val();
+	var searchOption = $('#popupSearchForm${work.work_id}').find("#sel_popupSearch${work.work_id} option:selected").val();
+	
+	$.ajax({
+		method: "POST",
+		url: '/popupMemberList',
+		data: {"project_id" : project_id, "work_id" : work_id, "searchMember" : searchMember, "searchOption" : searchOption},
+		success: function(data){
+			$("#popupMemberList${work.work_id}").html("");
+    		$("#popupMemberList${work.work_id}").html(data);
+		},
+		error: function(data){
+			console.log("todo.jsp : popupSearchMember() - error");
+		}
+	});
+	
+}
+
 </script>
 
 <!-- to-do insert 입력 -->
@@ -98,8 +120,14 @@ function setMemberName${work.work_id}(name){
 				</div>
 			</div>
 			<div class="issueCreateInputFieldRightContainer">
-				<input type="text" >
-				<input type="button" value="검색">
+				<form id="popupSearchForm${work.work_id}" name="popupSearchForm${work.work_id}">
+					<select name="sel_popupSearch${work.work_id}" id="sel_popupSearch${work.work_id}">
+						<option value="member_name">이름</option>
+						<option value="pmember_member">이메일</option>
+					</select>
+					<input type="text" name="memberSearch${work.work_id}" id="memberSearch${work.work_id}">
+					<input type="button" value="검색" onclick="javascript:popupSearchMember${work.work_id}('${work.work_id}');">
+				</form>
 				<table>
 					<colgroup width="20%" />
 					<colgroup width="50%" />
