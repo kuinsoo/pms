@@ -2,6 +2,8 @@ package kr.or.ddit.qna.web;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +34,14 @@ public class QnAController {
 	
 	Logger logger = LoggerFactory.getLogger(QnAController.class);
 	
+
 	/**
-	 * Method : qnaView
-	 * 작성자 : 변찬우 
-	 * 변경이력 :
-	 *
-	 * @return Method 설명 : Q&A 글 목록 
-	 */
+	* Method : qnaView
+	* 작성자 : bhuanchanwoo
+	* 변경이력 :
+	* @return
+	* Method 설명 : 질의응답 게시판 목록 
+	*/
 	@RequestMapping(value= "/qnaList") 
 	public String qnaView() {
 		
@@ -46,6 +49,15 @@ public class QnAController {
 	}
 
 	
+	/**
+	* Method : qnaListAjax
+	* 작성자 : bhuanchanwoo
+	* 변경이력 :
+	* @param postPageVo
+	* @param model
+	* @return
+	* Method 설명 : qnaList에서 ajax를 통해 qnaListAjax(글 목록) jsp 호출 
+	*/
 	@RequestMapping(value= "/qnaListAjax", method= {RequestMethod.GET,RequestMethod.POST})
 	public String qnaListAjax(PostPageVo postPageVo, Model model) {
 		
@@ -57,14 +69,21 @@ public class QnAController {
 	}
 	
 	
+	/**
+	* Method : qnaPagingAjax
+	* 작성자 : bhuanchanwoo
+	* 변경이력 :
+	* @param postPageVo
+	* @param model
+	* @return
+	* Method 설명 : qnaList에서 ajax를 통해 qnaPagingAjax(페이지 네비게이션) jsp 호출 
+	*/
 	@RequestMapping(value= "/qnaPagingAjax", method= {RequestMethod.GET,RequestMethod.POST})
 	public String qnaPagingAjax(PostPageVo postPageVo, Model model) {
 		
 		int postListCnt = postService.postListCnt(postPageVo);
-		System.out.println("*** : " + postListCnt);
 		
 		List<PostVo> postVoList = postService.qnaPostList(postPageVo);
-		System.out.println("*** : " + postVoList);
 		
 		model.addAttribute("postListCnt", (int)Math.ceil((double)postListCnt/ postPageVo.getPostCnt()));
 		model.addAttribute("postVoList", postVoList);
@@ -73,29 +92,23 @@ public class QnAController {
 	}
 	
 	
+
 	/**
-	 * Method : qnaFormView
-	 * 작성자 : 변찬우 
-	 * 변경이력 :
-	 *
-	 * @return Method 설명 : Q&A 글 상세 
-	 */
-	@RequestMapping(value= "/qnaDetail")
-	public String qnaDtailView() {
+	* Method : qnaDtailView
+	* 작성자 : bhuanchanwoo
+	* 변경이력 :
+	* @return
+	* Method 설명 : 글 상세 
+	*/
+	@RequestMapping(value= "/qnaDetail", method= RequestMethod.GET)
+	public String qnaDtailView(PostVo postVo, Model model) {
+
+		postVo = postService.selectQnaPost(postVo.getPost_id());
+		// *** null이 나오는 까닭은 list를 출력하는 sql에 select문에 id가 없었기 때문 
+		
+		model.addAttribute("postVoDetail", postVo);
+		
 		return "qna/qnaDetail";
-	}
-	
-	
-	/**
-	 * Method : qnaFormView
-	 * 작성자 : 변찬우 
-	 * 변경이력 :
-	 *
-	 * @return Method 설명 : Q&A 글 작성 
-	 */
-	@RequestMapping(value= "/qnaForm")
-	public String qnaFormView() {
-		return "qna/qnaForm";
 	}
 	
 	
@@ -106,10 +119,34 @@ public class QnAController {
 	 *
 	 * @return Method 설명 : Q&A 글 수정 
 	 */
-	@RequestMapping(value= "/qnaMody")
-	public String qnaModyView() {
+	@RequestMapping(value= "/qnaMody", method= RequestMethod.GET)
+	public String qnaModyView(PostVo postVo, Model model) {
+
+		postVo = postService.selectQnaPost(postVo.getPost_id());
+		
+		model.addAttribute("postVoDetail", postVo);
+		
 		return "qna/qnaMody";
 	}	
+	
+	
+	/**
+	* Method : qnaPostSave
+	* 작성자 : bhuanchanwoo
+	* 변경이력 :
+	* @return
+	* Method 설명 : 작성(수정)한 글 저장 
+	*/
+	@RequestMapping(value= "/qnaPostSave", method= {RequestMethod.GET, RequestMethod.POST})
+	public String qnaPostSave(PostVo postVo, Model model) {
+		
+		postService.updateQnaPost(postVo);
+		//set하지 않아도 form에서 전달하는 순간, public String qnaPostSave(Vo vo)에 선언한 vo 중 name이 같으면 vo에 저장한다
+		
+		//return "qna/qnaList";
+		//return "redirect:/qnaDetail?post_id="+postVo.getPost_id();
+		return "qna/alert";
+	}
 	
 	
 	/**
@@ -119,10 +156,49 @@ public class QnAController {
 	 *
 	 * @return Method 설명 : Q&A  글 삭제 
 	 */
-	@RequestMapping(value= "/qnaDel")
-	public String qnaDelView() {
+	@RequestMapping(value= "/qnaDel", method= RequestMethod.GET)
+	public String qnaDelView(PostVo postVo, Model model) {
+		
+		postService.deleteQnaPost(postVo.getPost_id());
+		
 		return "qna/qnaList";
 	}
+	
+
+	/**
+	 * Method : qnaFormView
+	 * 작성자 : 변찬우 
+	 * 변경이력 :
+	 *
+	 * @return Method 설명 : Q&A 글 작성 
+	 */
+	@RequestMapping(value= "/qnaForm", method= RequestMethod.GET)
+	public String qnaFormView(PostVo postVo, HttpServletRequest req, Model model) {  
+		// ??? @RequestParam("userId") String userId
+				
+		//postVo.setBoard_id((String)req.getAttribute("board_id"));
+		// ??? (String)
+		
+		System.out.println("###"+postVo.getBoard_id());
+		return "qna/qnaForm";
+	}
+
+	
+	/**
+	* Method : qnaIndert
+	* 작성자 : bhuanchanwoo
+	* 변경이력 :
+	* @return
+	* Method 설명 : 새 질문 글 저장 
+	*/
+	@RequestMapping(value= "/newPost", method= RequestMethod.GET)
+	public String qnaIndert() {
+		
+		return "qna/qnaList";
+	}
+	
+	
+	
 	
 	
 	/**

@@ -53,10 +53,25 @@
 				
 				<a href="/qnaList">질의 목록보기</a><br/><br/>
 				
-				<label id="post_writer">질의 작성자</label><label id="post_date">질의 작성일</label><br/>
-				<a href="/qnaMody"> [수정]</a><a href="/qnaDel"> [삭제]</a><a href="/qnaReply"> [답글]</a><br/>
-				제목 : <label id=post_title"">질의 제목을 작성하였습니다 </label><br/>
-				내용 : <label id="post_content">질의 내용을 작성하였습니다 </label><br/>
+				<label id="post_writer">질의 작성자 : ${postVoDetail.post_writer }</label><br/>
+				<label id="post_date">질의 작성일 : ${postVoDetail.post_date }</label><br/>
+				
+				<a href="/qnaMody?post_id=${postVoDetail.post_id}"> [수정]</a>
+				<button id="delPost">삭제</button>
+				<script>
+					$("#delPost").click(function(){
+						var result = confirm('정말 삭제하시겠습니까?'); 
+						if(result) { 
+							location.replace('/qnaDel?post_id=${postVoDetail.post_id}'); 
+							} else {  
+								console.log("삭제를 취소하셨습니다.");
+							}
+					});					
+				</script>
+				<a href="/qnaReply?post_id=${postVoDetail.post_id}"> [답글]</a><br/>
+				
+				제목 : <label id="post_title">${postVoDetail.post_title}</label><br/>
+				내용 : <label id="post_content">${postVoDetail.post_content} </label><br/>
 				
 			</div>
 		</div>
