@@ -65,6 +65,6 @@ public interface ToDoServiceInf {
 	* @return
 	* Method 설명 : 참여자의 이름과 메일 조회
 	*/
-	List<ToDoVo> getProjectMember(String project_id);
+	List<ToDoVo> getProjectMember(Map searchMap);
 	
 }

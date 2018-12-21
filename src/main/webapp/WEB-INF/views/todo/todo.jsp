@@ -5,7 +5,6 @@
 }
 </style>
 <script>
-
 $(document).ready(function(){
 	//to-do 등록시 시작일자는 현재시간으로 기본값(default) 설정  ==문의: jerry==
     var date = new Date();
@@ -15,23 +14,12 @@ $(document).ready(function(){
     
     /* to-do 등록 팝업의 참여자 list ajax */
     var project_id = ${projectVo.project_id};
-    $.ajax({
-    	method: "POST",
-    	url: "/popupMemberList",
-    	data: {"project_id" : project_id},
-    	success: function(data){
-    		console.log("data : " + data);
-    		$("#popupMemberList${work.work_id}").html("");
-    		$("#popupMemberList${work.work_id}").html(data);
-    	},
-    	error: function(data){
-    		console.log("insert-popup error : " + data);
-    	}
-    });
+    var work_id = ${work.work_id};
+    popupSearchMember${work.work_id}(work_id);
     
 });
 
-//to-di list 등록 ==문의: jerry==
+//to-do list 등록 ==문의: jerry==
 function insertTodo() {
    var sdate = $('input[name=non_todo_sdate]').val(); //UTC형식 Date를 sdate에 담는다.
    var eedate = $('input[name=non_todo_eedate]').val(); //UTC형식 Date를 eedate에 담는다.
@@ -47,15 +35,65 @@ function insertTodo() {
       url: "/todoInsert",
       data: param,
       success: function(data) {
-         console.log(data);
          window.location.href = '#close';
          $('#todoInsertHtmlAjax${work.work_id}').html("");
          $('#todoInsertHtmlAjax${work.work_id}').html(data);
       },
       error:function(data) {
-         alert("error");
+         console.log("todo.jsp : insertTodo() - error");
       }
    });
+}
+
+/* popup member list Ajax */
+function popupMemberAjax${work.work_id}(project_id, work_id){
+    $.ajax({
+    	method: "POST",
+    	url: "/popupMemberList",
+    	data: {"project_id" : project_id, "work_id" : work_id},
+    	success: function(data){
+    		$("#popupMemberList${work.work_id}").html("");
+    		$("#popupMemberList${work.work_id}").html(data);
+    	},
+    	error: function(data){
+    		console.log("todo.jsp : popupMemberAjax() - error");
+    	}
+    });
+}
+
+/* to-do list의 member list radio 버튼 클릭시 */
+function setMemberName${work.work_id}(name){
+	$('#todo_pmember${work.work_id}').attr('value', name);
+}
+
+/* to-do 등록시 참여자 이름/이메일 검색 */
+function popupSearchMember${work.work_id}(work_id){
+	//할 일 1. enter쳐도 검색 될 수 있게 기능 구현하기
+	var project_id = ${projectVo.project_id};
+	var searchMember = $('#popupSearchForm${work.work_id}').find("#memberSearch${work.work_id}").val();
+	var searchOption = $('#popupSearchForm${work.work_id}').find("#sel_popupSearch${work.work_id} option:selected").val();
+	
+	$.ajax({
+		method: "POST",
+		url: '/popupMemberList',
+		data: {"project_id" : project_id, "work_id" : work_id, "searchMember" : searchMember, "searchOption" : searchOption},
+		success: function(data){
+			$("#popupMemberList${work.work_id}").html("");
+    		$("#popupMemberList${work.work_id}").html(data);
+		},
+		error: function(data){
+			console.log("todo.jsp : popupSearchMember() - error");
+		}
+	});
+	
+}
+
+/* to-do 등록시 검색창에 ENTER KEY event */
+function enterKey${work.work_id}(e){
+	if(e.keyCode == 13){
+		popupSearchMember${work.work_id}('${work.work_id}');
+		return false;
+	}
 }
 
 </script>
@@ -76,25 +114,28 @@ function insertTodo() {
 				</div>
 				<div class="issueCreateInputFieldRight">
 					<form method="POST" name="todoInsert${work.work_id}" id="todoInsert${work.work_id}">
-					
 						<input type="hidden" name="todo_sdate" id="todo_sdate${work.work_id}" value=""/>
 						<input type="hidden" name="todo_eedate" id="todo_eedate${work.work_id}" value=""/>
 						<input type="hidden" name="work_project" id="todo_project_id" value="${projectVo.project_id}" />
 						<input type="hidden" name="todo_work" id="todo_work" value="${work.work_id}" />
-						
 						<ul>
-							<li><input type="text" name="todo_pmember" placeholder="담당자를 입력하세요." /></li>
+							<li><input type="text" name="todo_pmember" id="todo_pmember${work.work_id}" placeholder="담당자를 입력하세요." /></li>
 							<li><textarea name="todo_content" placeholder="내용을 입력하세요."></textarea></li>
 							<li><input type="datetime-local" name="non_todo_sdate${work.work_id}" id="non_todo_sdate${work.work_id}" value=""/></li>
 							<li><input type="datetime-local" name="non_todo_eedate${work.work_id}" id="non_todo_eedate${work.work_id}" value=""/></li>
 						</ul>
-						
 					</form>
 				</div>
 			</div>
 			<div class="issueCreateInputFieldRightContainer">
-				<input type="text" >
-				<input type="button" value="검색">
+				<form id="popupSearchForm${work.work_id}" name="popupSearchForm${work.work_id}">
+					<select name="sel_popupSearch${work.work_id}" id="sel_popupSearch${work.work_id}">
+						<option value="member_name">이름</option>
+						<option value="pmember_member">이메일</option>
+					</select>
+					<input type="text" name="memberSearch${work.work_id}" id="memberSearch${work.work_id}" onkeypress="return enterKey${work.work_id}(event)">
+					<input type="button" value="검색" onclick="javascript:popupSearchMember${work.work_id}('${work.work_id}');">
+				</form>
 				<table>
 					<colgroup width="20%" />
 					<colgroup width="50%" />
@@ -112,8 +153,6 @@ function insertTodo() {
 				</table>
 			</div>			
 		</div>
-		<input type="button" value="등록" class="issueInfoCreate" onClick="insertTodo();"/>
-		<a href="#close" class="issueInfoClose">취소</a>
 		<div class="btnPopupCenter">
 			<input type="button" value="등록" class="issueInfoCreate" onclick="insertTodo${work.work_id}();"/>
 			<a href="#close" class="issueInfoClose">취소</a>

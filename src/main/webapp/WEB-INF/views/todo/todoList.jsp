@@ -19,7 +19,6 @@ $(document).ready(function(){
 /* 페이지 접속시 to-do list 조회(Ajax) ==문의: jerry== */
 function getToDoList${work.work_id}(page, project_id, work_id){
 	var pageSize = 5;
-	console.log("list-project_id : " + project_id);
 	$.ajax({
 		method: "POST",
 		url: "/todoSelect",
@@ -31,7 +30,7 @@ function getToDoList${work.work_id}(page, project_id, work_id){
 			$('#todoInsertHtmlAjax${work.work_id}').html(data);
 		},
 		error: function (data) {
-			console.log("list-error : " + data);
+			console.log("todoList.jsp : getToDoList() - error");
 		}
 	});
 }
@@ -39,7 +38,6 @@ function getToDoList${work.work_id}(page, project_id, work_id){
 /* to-do list의 pagination(Ajax) ==문의: jerry== */
 function getToDoPagination${work.work_id}(page, project_id, work_id){
 	var pageSize = 5;
-	
 	$.ajax({
 		method: "POST",
 		url: "/todoPagination",
@@ -50,7 +48,7 @@ function getToDoPagination${work.work_id}(page, project_id, work_id){
 			$('#pagination${work.work_id}').html(data);
 		},
 		error: function(data){
-			console.log("page-error : " + data);
+			console.log("todoList.jsp : getToDoPagination() - error");
 		}
 	});
 }

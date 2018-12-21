@@ -95,8 +95,8 @@ public class ToDoService implements ToDoServiceInf{
 	* Method 설명 : 참여자의 이름과 메일 조회
 	*/
 	@Override
-	public List<ToDoVo> getProjectMember(String project_id) {
-		return todoMapper.getProjectMember(project_id);
+	public List<ToDoVo> getProjectMember(Map searchMap) {
+		return todoMapper.getProjectMember(searchMap);
 	}
 	
 }

@@ -45,20 +45,28 @@
 <script>
 $(document).ready(function(){
 	var board_id = "board4";
+
 	getQnaListAjax(1,board_id);
 	getQnaPagingAjax(1,board_id);
 	
 	$("#newPost").click(function(){
 		$(location).attr('href','/qnaForm?board_id='+board_id);
 	});
+	
+ 	$("#searching").click(function(){
+		getQnaListAjax(1,board_id);
+		getQnaPagingAjax(1,board_id);
+	}); 
+	
 });
-/* 페이지 접속시 qnaListAjax 조회(Ajax)*/
+
 function getQnaListAjax(pageNum, board_id){
 	var postCnt = 10;
+	var searchText = $(searching).prev().val();
 	$.ajax({
 		method: "POST",
 		url: "/qnaListAjax",
-		data: {"board_id" : board_id, "pageNum" : pageNum, "postCnt" : postCnt},
+		data: {"board_id" : board_id, "pageNum" : pageNum, "postCnt" : postCnt, "searchText" : searchText},
 		success: function (data) {
 			$('#qnaListAjax').html("");
 			$('#qnaListAjax').html(data);
@@ -98,7 +106,7 @@ function getQnaPagingAjax(pageNum, board_id){
 					<colgroup width="20%" />
 					<thead>
 						<tr>
-							<th>내용</th>
+							<th>제목</th>
 							<th>등록일</th>
 						</tr>
 					</thead>
@@ -113,8 +121,8 @@ function getQnaPagingAjax(pageNum, board_id){
 					<button id="newPost" >새 질문</button>
 				</div>
 				<div class="noticeSearchDiv">
-					<input type="text" class="noticeSearchInput" />
-					<i class="icon-magnifier icons"></i>
+					<input type="text" class="noticeSearchInput" value=""/>
+					<i id="searching" class="icon-magnifier icons"></i>
 				</div>
 			</div>
 		</div>
