@@ -33,7 +33,7 @@
 		${memberVo.member_name}
 	</td>
 	<td>
-		${postVo.post_date}
+		${postVo.format_todo_sdate}
 	</td>
 </tr>
 </c:forEach>
