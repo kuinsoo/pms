@@ -132,12 +132,12 @@ $(document).ready(function() {
 						json.title = '${schedule.project_title}';
 						json.start = "${schedule.format_project_sdate}";
 						<c:choose>
-							<c:when test="${schedule.project_eedate != null}">
+							<c:when test="${schedule.project_edate == null}">
 								json.end = "${schedule.format_project_eedate}";
 							</c:when>
-							<c:otherwise>
+							<c:when test="${schedule.project_edate != null}">
 								json.end = "${schedule.format_project_edate}";
-							</c:otherwise>
+							</c:when>
 						</c:choose>
 						json.color = "${schedule.project_color}";
 						result.push(json);
@@ -152,12 +152,12 @@ $(document).ready(function() {
 						json.title = '${schedule.work_title}';
 						json.start = "${schedule.format_work_sdate}";
 						<c:choose>
-							<c:when test="${schedule.work_eedate != null}">
+							<c:when test="${schedule.work_edate == null}">
 								json.end = "${schedule.format_work_eedate}";
 							</c:when>
-							<c:otherwise>
+							<c:when test="${schedule.work_edate != null}">
 								json.end = "${schedule.format_work_edate}";
-							</c:otherwise>
+							</c:when>
 						</c:choose>
 						json.color = "${schedule.work_color}";
 						result.push(json);
@@ -172,12 +172,12 @@ $(document).ready(function() {
 						json.title = '${schedule.todo_content}';
 						json.start = "${schedule.format_todo_sdate}";
 						<c:choose>
-							<c:when test="${schedule.todo_eedate != null}">
+							<c:when test="${schedule.todo_edate == null}">
 								json.end = "${schedule.format_todo_eedate}";
 							</c:when>
-							<c:otherwise>
+							<c:when test="${schedule.todo_edate != null}">
 								json.end = "${schedule.format_todo_edate}";
-							</c:otherwise>
+							</c:when>
 						</c:choose>
 						json.color = "${schedule.todo_color}";
 						result.push(json);
@@ -241,7 +241,7 @@ $(document).ready(function() {
 				<%-- </c:forEach> --%>
 				subSelectBox.append("<option value=''>:::선택해주세요:::</option>");
 				subSelectBox.append("<c:forEach items='${myProjectList}' var='projectList'>");
-				subSelectBox.append("	<option value='${projectList.project_id}'>${projectList.project_title}(${projectList.project_id})</option>");
+				subSelectBox.append("	<option value='${projectList.project_id}'>${projectList.project_title}</option>");
 				subSelectBox.append("</c:forEach>");
 			}
 		});
