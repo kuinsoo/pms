@@ -37,24 +37,29 @@
 		.signCloseBtns{width:100%;}
 		.error{color: red;}
 		#telerror{color: red;}
+		#passError{color: red;}
 	</style>
-	<script type="text/javascript" src="http://code.jquery.com/jquery-3.1.0.js"></script>
 	<script type="text/javascript">
-		$(document).ready(function() {
-			var certificationNumber;
-			$("#telerror").hide();
-			$(".error").hide();
-			//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
-			//blur()이벤트 사용
-			$("#passCheck").blur(function() {
-				if($("#passCheck").val() != $("#password").val()){
-					$("#passCheck").next().show();
-				} else{
-					$("#passCheck").next().hide();
-				}
-			});
-
+	
+	// document.ready에는 var를 넣으면 안된당.!!!
+	var passwordRules = /^[0-9a-z]+$/;
+	var certificationNumber;
+	
+	$(document).ready(function() {
+		$("#passError").hide();
+		$("#telerror").hide();
+		$(".error").hide();
+		
+		//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
+		//blur()이벤트 사용
+		$("#passCheck").blur(function() {
+			if($("#passCheck").val() != $("#password").val()){
+				$("#passCheck").next().show();
+			} else{
+				$("#passCheck").next().hide();
+			}
 		});
+	}); // document.ready 끝 
 
 		<!-- 핸드폰 번호 입력 후 인증 버튼 -->
 		function telAjax(){
@@ -76,9 +81,16 @@
 				$("#telerror").show();
 			}
 		}
-
-
-
+		
+		function onkeyup_event2(){
+			if(passwordRules ==  $("#password").val()){
+				$("#passError").hide();
+			}else {
+				$("#passError").show();
+			}
+		}
+			
+			
 	</script>
 </head>
 <body>
@@ -98,7 +110,8 @@
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호</label>
-					<input type="password" name="member_pass" id ="password" class="form-control" required />
+					<input type="password" name="member_pass" id ="password"  onkeyup="onkeyup_event2();" class="form-control" required />
+					<span id="passError"> 영문 숫자 포함 6글자 이상 다시 입력해주세요..</span>
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호 확인</label>
