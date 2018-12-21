@@ -13,12 +13,13 @@
 		#passError{
 			color: red;
 		}
+		.errorpass{
+			color: red;
+		}
 	
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
-				
 			getMyPageList(1);
 			getmybookMarkProjectList(1);
 			getmyTodoProjectList(1);
@@ -48,10 +49,10 @@
 				console.log(project_title);
 				console.log(project_id);
 				
-				  $("#frm2").submit();
+				$("#frm2").submit();
 			});
 			
-			
+			$(".errorpass").hide();
 			$(".phoneBtns").hide();
 			$(".saveBtn").hide();
 			$("#pass2").hide();				
@@ -66,6 +67,7 @@
 			$(".inputerror").hide();
 			
 			$(".updateBtn").click(function(){	
+				$(".errorpass").hide();
 				$(".profileUploadImg").show();
 				$(".phoneBtns").show();
 				$(".saveBtn").show();
@@ -93,14 +95,17 @@
 				if($("#pass2input").val() != $("#pass1").val()){
 					$(".error").show();
 					$('.saveBtn').prop('disabled', true);
-				} else{
+				}else{
 					$(".error").hide();
+					$(".errorpass").hide();
 					$('.saveBtn').prop('disabled', false);
 				}
 			});
 			$('.saveBtn').prop('disabled', false);
-	
 				
+			
+			
+			
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 파 일 부 분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 			
 			$("#fileElem").change(function(){
@@ -147,6 +152,12 @@
 				}
 			});
 		}
+		
+		function onkeyup_event2(){
+			$('.saveBtn').prop('disabled', true);
+			$(".errorpass").show();
+		}
+		
 		
 		// 휴대번호 인증 부분 이벤트
 		function onkeyup_event(){
@@ -549,13 +560,15 @@
 								<li><input type="text" value= "${memberVo.member_name}" name ="member_name" id ="member_name"/></li>
 								<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"  id ="member_tel"/>
 									<input type="button" onclick="telAjax();" value="인증" class="phoneBtns"/>
-								<li><input type="text" id ="telnum" onkeyup="onkeyup_event();"/>
+								<li><input type="text" id ="telnum" placeholder="인증번호 4자리를 입력해주세요.." onkeyup="onkeyup_event();"/>
 									<span class = "inputerror"> 인증번호를 입력해 주세요..</span>
 									<span class= "telerror"> 인증번호가 일치하지 않습니다.</span>
 								</li>
-								<li><input type="password" id = "pass1" value= "${memberVo.member_pass}" name ="member_pass"/></li>
+								<li><input type="password" id = "pass1" value= "${memberVo.member_pass}"  name ="member_pass" onkeyup="onkeyup_event2();"/>
+									<span class="errorpass"> 비밀번호를 확인란에 입력해주세요.</span>
+								</li>
 								<li>
-									<input type="password" id = "pass2input" value= "${memberVo.member_pass}" />
+									<input type="password" id = "pass2input" />
 									<span class="error"> 입력하신 비밀번호가 일치하지 않습니다.</span>
 								</li>
 								<li>
@@ -591,6 +604,7 @@
 						<div id="tabs2-1">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
+									<button onclick="getMyPageList(1);">목록으로</button>
 									<form name ="searchProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchText" name="searchText" value="${searchText}" placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
@@ -626,6 +640,7 @@
 						<div id="tabs2-1-1">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
+								<button onclick="getMyEndPageList(1);">목록으로</button>
 									<form name ="searchEndProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchEndText" name="searchEndText" value="${searchEndText}" placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
@@ -661,6 +676,7 @@
 						<div id="tabs2-2">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
+									<button onclick="getmybookMarkProjectList(1);">목록으로</button>
 									<form name ="searchBookProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchBookText" name ="searchBookText" value='${searchBookText}' placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
@@ -696,6 +712,7 @@
 						<div id="tabs2-3">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
+								<button onclick="getmyTodoProjectList(1);">목록으로</button>
 								 <form name ="searchTodoProject" id ="searchTodoProject" method="POST" onsubmit="return false;">
 										 <input type="text" id="searchTodoText" name ="searchTodoText" value='${searchTodoText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
@@ -727,6 +744,7 @@
 						<div id="tabs2-4">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
+								<a href="/myPage#tabs2-4">목록으로</a>
 									<%--  <form name ="searchProject" method="POST" onsubmit="return false;">
 										 <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />

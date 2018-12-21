@@ -65,6 +65,7 @@
 											<th>받은 날짜</th>
 										</tr>
 									</thead>
+									
 									<tbody id="msgReceiveList">
 									</tbody>
 								</table>
@@ -240,9 +241,9 @@
 
 <style>
 <!--
-	 tr.msgClick1:hover { background-color: lightyellow; } 
-	 tr.msgClick2:hover { background-color: lightyellow; } 
-	 tr.friends:hover { background-color: lightyellow; } 
+	 tr.msgClick1:hover { background-color: lightyellow; cursor: pointer;} 
+	 tr.msgClick2:hover { background-color: lightyellow; cursor: pointer;} 
+	 tr.friends:hover { background-color: lightyellow; cursor: pointer;} 
 -->
 </style>
 <script type="text/javascript">
