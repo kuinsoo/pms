@@ -41,7 +41,7 @@ public interface ToDoServiceInf {
 	* Method : workToDoSelect
 	* 작성자 : jerry
 	* 변경이력 :
-	* @param todo_work
+	* @param todoMap
 	* @return
 	* Method 설명 : 각 업무의 to-do list를 조회
 	*/
@@ -51,7 +51,7 @@ public interface ToDoServiceInf {
 	* Method : todoCnt
 	* 작성자 : jerry
 	* 변경이력 :
-	* @param todo_work
+	* @param work_id
 	* @return
 	* Method 설명 : to-do list의 총 to-do 갯수
 	*/
