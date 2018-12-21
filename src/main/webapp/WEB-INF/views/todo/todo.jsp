@@ -20,15 +20,15 @@ $(document).ready(function(){
 });
 
 //to-do list 등록 ==문의: jerry==
-function insertTodo() {
-   var sdate = $('input[name=non_todo_sdate]').val(); //UTC형식 Date를 sdate에 담는다.
-   var eedate = $('input[name=non_todo_eedate]').val(); //UTC형식 Date를 eedate에 담는다.
+function insertTodo${work.work_id}() {
+   var sdate = $('input[name=non_todo_sdate${work.work_id}]').val(); //UTC형식 Date를 sdate에 담는다.
+   var eedate = $('input[name=non_todo_eedate${work.work_id}]').val(); //UTC형식 Date를 eedate에 담는다.
    var repSdate = sdate.replace("T", " "); //Parsing('T' 제거)
    var repEedate = eedate.replace("T", " "); //Parsing('T' 제거)
-   $("#todo_sdate").attr('value', repSdate); //Controller에 보낼 hidden에 값을 세팅
-   $("#todo_eedate").attr('value', repEedate); //Controller에 보낼 hidden에 값을 세팅
+   $("#todo_sdate${work.work_id}").attr('value', repSdate); //Controller에 보낼 hidden에 값을 세팅
+   $("#todo_eedate${work.work_id}").attr('value', repEedate); //Controller에 보낼 hidden에 값을 세팅
 
-   var param = $('#todoInsert').serialize();
+   var param = $('#todoInsert${work.work_id}').serialize();
 
    $.ajax({
       method: "POST",
