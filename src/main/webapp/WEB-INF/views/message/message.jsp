@@ -272,7 +272,7 @@
 					
 					console.log(msg_type);
 				
-					// 이 부분 다시 !
+					// !!!!!!!!!!!!!!!!!!!!!!! 규승님 부탁합니다..
 					if(msg_type == 'N'){
 						$("#msgReceiveList > tr > td").css("color","blue");
 					}else{
