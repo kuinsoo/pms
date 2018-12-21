@@ -42,7 +42,7 @@ public class MemberController {
 	@RequestMapping(value = "/inviteTeam" ,method = RequestMethod.POST)
 	public String inviteTeam(@RequestParam("inviteTeam")String[] inviteMails, @RequestParam("project_id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo) throws UnsupportedEncodingException {
 		String subject = "Current Project 초대 알람 입니다.";
-		String content = "프로젝트 주소 : http://127.0.0.1:8081/?teamId="+ project_id;
+		String content = "프로젝트 주소 : http://127.0.0.1:8081/?teamId="+ project_id + "https://imgur.com/a/GUN203X";
 		InviteProjectVo inviteProjectVo = new InviteProjectVo();
 		PMemberVo pMemberVo = new PMemberVo();
 		String project_title = "";
