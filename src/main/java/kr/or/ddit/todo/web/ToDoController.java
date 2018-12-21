@@ -113,7 +113,7 @@ public class ToDoController {
 	@RequestMapping(value="todoPagination", method= {RequestMethod.POST, RequestMethod.GET})
 	public String ajaxPaginationTodo(@RequestParam("project_id")String project_id, @RequestParam("work_id")String work_id, PageVo pageVo, Model model) {
 		int todoCnt = todoService.todoCnt(work_id);
-		
+		System.out.println("todoCnt : " + (int)Math.ceil((double)todoCnt / pageVo.getPageSize()));
 		model.addAttribute("todoCnt", (int)Math.ceil((double)todoCnt / pageVo.getPageSize()));
 		model.addAttribute("work_id", work_id);
 		model.addAttribute("project_id", project_id);
