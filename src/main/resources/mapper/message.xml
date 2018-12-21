@@ -17,7 +17,8 @@
 	                              A.MSG_TYPE
 	                        from  MESSAGE A, MESSAGE_MEMBER B
 	                        where A.MSG_ID = B.MSGMEMBER_MSG
-	                         and  B.MSG_RMEMBER= #{member_mail})a)
+	                         and  B.MSG_RMEMBER= #{member_mail}
+	                         ORDER BY A.MSG_TYPE desc)a)
 	 		 where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
 	</select>
 	
@@ -98,7 +99,8 @@
                                   B.MSG_RDATE
                             from  MESSAGE A, MESSAGE_MEMBER B
                             where A.MSG_ID = B.MSGMEMBER_MSG
-                            and A.MSG_SMEMBER = #{member_mail})a)
+                            and A.MSG_SMEMBER = #{member_mail}
+                              ORDER BY B.MSG_RDATE desc)a)
             where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
 	</select>
 	
