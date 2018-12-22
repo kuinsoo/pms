@@ -214,7 +214,12 @@ hr {
 	<!-- left -->		
 		<div style="width: 40%; height: 100%; position: absolute; left: 0;">
 			<!-- 참석자 이름 s -->
-			<div style="padding: 0 5px ; font-size:11px;"> 	<div id="onUserStatusChanged"></div> </div>
+			<div style="padding: 0 5px ; font-size:11px;"> 	
+				<div id="onUserStatusChanged"></div> 
+				<div id="timmer">
+					<p>회의 내용 : <span id="meetTitle"></span> 권장 회의시간 : <span id="timer"></span></p>
+				</div>
+			</div>
 			<!-- 참석자 영상 s  -->
 			<div id="other-videos"></div>
 			<hr>
@@ -236,6 +241,50 @@ hr {
 
 
 <script>
+
+//타이머 1초간격으로 수행
+tid=setInterval('msg_time()',1000); 
+
+var RemainDate = 6000;	//제한시간 설정 60000*30
+var overT =1;	//제한시간 설정 
+ 
+function msg_time() {
+  var hours = Math.floor((RemainDate % (1000 * 60 * 60 * 24)) / (1000*60*60));
+  var miniutes = Math.floor((RemainDate % (1000 * 60 * 60)) / (1000*60));
+  var seconds = Math.floor((RemainDate % (1000 * 60)) / 1000);
+  
+  m = hours + ":" +  miniutes + ":" + seconds ; // 남은 시간 text형태로 변경
+  
+  document.all.timer.innerHTML = m;   // div 영역에 보여줌 
+  
+  if (RemainDate < 0) {   // 시간이 종료 되었으면..
+    clearInterval(tid);   // 타이머 해제
+
+	var result = confirm('예정시간이 초과했습니다. 회의를 계속 하시겠습니까?'); 
+	if(result) { 
+			alert("긴 회의는 정신건강에 헤로울 수 있습니다.."); 
+		} else {  
+			alert("고생하셨습니다! 오늘도 힘내세요~"); 
+			self.close(); 
+		}
+	
+    setInterval('overTime()',1000);
+  }else{
+    RemainDate = RemainDate - 1000; // 남은시간 -1초
+  }
+}
+function overTime() {
+	  var hours = Math.floor((overT % (1000 * 60 * 60 * 24)) / (1000*60*60));
+	  var miniutes = Math.floor((overT % (1000 * 60 * 60)) / (1000*60));
+	  var seconds = Math.floor((overT % (1000 * 60)) / 1000);
+	  
+	  m = "(초과시간)"+ hours + ":" +  miniutes + ":" + seconds  ; // 남은 시간 text형태로 변경
+	  
+	  	document.all.timer.innerHTML = m;   // div 영역에 보여줌 
+	  	overT = overT + 1000; // 초과시간 -1초
+	}
+
+
 // url get 파라미터로부터 값 가져오기  
 (function() {
     var params = {},
@@ -255,10 +304,12 @@ var connection = new RTCMultiConnection();
 
 // connection.socketURL = 'https://rtcmulticonnection.herokuapp.com:443/';
 connection.socketURL = '/';
-//접속자 이름 
+
+//*** index와 주고받는 데이터  접속자이름 
 connection.extra.userFullName = params.userFullName;
-//*** 개요..index가 이 페이지랑 주고받네.. 
+//*** index와 주고받는 데이터  회의 개요
 connection.extra.todayRoomTitle = params.todayRoomTitle;
+document.all.meetTitle.innerHTML = connection.extra.todayRoomTitle; //ui에 출력 
 
 /// make this room public
 connection.publicRoomIdentifier = params.publicRoomIdentifier;
