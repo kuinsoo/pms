@@ -5,15 +5,15 @@
 <%-- 	<c:if test="${todo.todo_work eq work.work_id}"> --%>
 		<tr>
 			<td><input type="checkbox" /></td>
-			<td><a href="#open" class="issueTitlePopup">${todo.todo_content}</a>
-				<div class="white_content3" id="open">
+			<td><a href="#open${todo.todo_id}" class="issueTitlePopup">${todo.todo_content}</a>
+				<div class="white_content3" id="open${todo.todo_id}">
 					<div>
 						<a href="#close" class="mainCloseBtns"></a>
 						<div class="issueSelectPage">
 							<div class="issueSelectPageLeft">
 								<form action="#" method="post">
 									<div class="issueProfile">
-										<img src="${memberVo.member_profile}" />
+										<img src="${todo.member_profile}" />
 									</div>
 									<div class="issues">
 										<div class="issuesLeft">
@@ -26,7 +26,7 @@
 										</div>
 										<div class="issuesRight">
 											<ul>
-												<li><input type="text" value="${todo.todo_content}" /></li>
+												<li><input type="text" value="${todo.todo_pmember}" /></li>
 												<li><input type="text" value="${todo.format_todo_sdate}" /></li>
 												<li><input type="text" value="${todo.format_todo_eedate}" /></li>
 												<li><input type="text" value="${todo.todo_complet}" /></li>
