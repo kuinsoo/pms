@@ -29,6 +29,14 @@ ul {
     height: 100%;
 }
 
+/* loading */
+#Progress_Loading {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+
+
 /* HEADER */
 header {
     width: 100%;

@@ -53,9 +53,10 @@
 								<table>						
 									<colgroup width="10%" />
 									<colgroup width="10%" />
-									<colgroup width="40%" />
-									<colgroup width="15%" />
 									<colgroup width="30%" />
+									<colgroup width="15%" />
+									<colgroup width="20%" />
+									<colgroup width="10%" />
 									<thead>
 										<tr class="msgClick1"> 
 											<th>번호</th>
@@ -63,6 +64,7 @@
 											<th>받은 쪽지 내용</th>
 											<th>쪽지 보낸 사람</th>
 											<th>받은 날짜</th>
+											<th>읽음 확인</th>
 										</tr>
 									</thead>
 									
@@ -240,11 +242,7 @@
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 
 <style>
-<!--
-	 tr.msgClick1:hover { background-color: lightyellow; cursor: pointer;} 
-	 tr.msgClick2:hover { background-color: lightyellow; cursor: pointer;} 
-	 tr.friends:hover { background-color: lightyellow; cursor: pointer;} 
--->
+#read{background-color:#fcfcfc;color:#ccc;}
 </style>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -263,6 +261,7 @@
 		$("#msgSendList").on("click", ".msgClick2" ,function(){
 			console.log("msgSendList");
 			var msgmember_msg = $(this).children()[1].innerHTML;
+			
 			console.log(msgmember_msg);
 			updateMessageSendAjax(msgmember_msg);
 			 window.location = "#open1";
@@ -277,27 +276,26 @@
 				url : "/messageReceivedAjax",
 				data : {"page":page, "pageSize":pageSize},
 				success: function(data){
-					var msg_type = data.msgReceiveList[0].msg_type;
-					
 					console.log(msg_type);
-				
-					// !!!!!!!!!!!!!!!!!!!!!!! 규승님 부탁합니다..
-					if(msg_type == 'N'){
-						$("#msgReceiveList > tr > td").css("color","blue");
-					}else{
-						$("#msgReceiveList > tr > td").css("color","red");
-					}	
-					
 					console.log(data.msgReceiveList);
 					
 					var html = "";
 					$.each(data.msgReceiveList,function(idx,mm){
-						html += "<tr class = msgClick1>";
+						if(mm.msg_type =="N")
+							html += "<tr class = 'msgClick1' id = 'read'>";
+						else if(mm.msg_type =="Y")
+							html += "<tr class = 'msgClick1'>";
+						
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.msg_id +"</td>";
 						html += "	<td>"+ mm.msg_content +"</td>";
 						html += "	<td>"+ mm.msg_smember+"</td>";
 						html += "	<td>"+ mm.msg_time +"</td>";
+						if(mm.msg_type =='Y'){
+							html += "<td>"+ '읽지않음' +"</td>";						
+						}else{
+							html += "<td>"+ '읽음' +"</td>";	
+						}
 						html += "</tr>";
 					});
 					

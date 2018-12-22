@@ -406,7 +406,6 @@
 						paging +="<li><a href='javascript:getmybookMarkProjectList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 					$(".pagination2").html(paging);
 				},	
-				
 				fail : function(xhr){
 					console.log(xhr);
 				}
@@ -435,7 +434,6 @@
 						}else{
 							html += "	<td>"+ '완료' +"</td>";							
 						}
-							
 						html += "</tr>";
 					});
 					
