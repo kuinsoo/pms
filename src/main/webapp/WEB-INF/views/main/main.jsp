@@ -4,136 +4,98 @@
 <%-- left & header--%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 
-	<!-- CURRENT SECTION(MAIN) -->
-	<section class="currentMain">
-		<div class="currentMainContainer">
-			<div class="currentMainSlide">
-				<!-- Swiper -->
-				<div class="swiper-container">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide">
-							<img src="../images/slide1.png">
-						</div>
-						<div class="swiper-slide">
-							<img src="http://placehold.it/1400x500">
-						</div>
-						<div class="swiper-slide">
-							<img src="http://placehold.it/1400x500">
-						</div>
+<!-- CURRENT SECTION(MAIN) -->
+<section class="currentMain">
+	<div class="currentMainContainer">
+		<div class="currentMainSlide">
+			<!-- Swiper -->
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<img src="../images/slide1.png">
 					</div>
-
-					<!-- Add Pagination -->
-					<div class="swiper-pagination"></div>
-
-					<!-- Add Arrows -->
-					<div class="swiper-button-next"></div>
-					<div class="swiper-button-prev"></div>
+					<div class="swiper-slide">
+						<img src="http://placehold.it/1400x500">
+					</div>
+					<div class="swiper-slide">
+						<img src="http://placehold.it/1400x500">
+					</div>
 				</div>
+
+				<!-- Add Pagination -->
+				<div class="swiper-pagination"></div>
+
+				<!-- Add Arrows -->
+				<div class="swiper-button-next"></div>
+				<div class="swiper-button-prev"></div>
 			</div>
-			<div class="currentMainProjectCreate">
-				<h1>진행중인 프로젝트</h1>
-				<ul class="projectCreateULS">
-					<li>
-						<a href="#projectCreatePopUp" class="projectCreatePopUp">
-							<div class="projectCard">
-								<div class="projectCardContent">
-									<i class="icon-folder-alt icons"></i>
-									<br>
-									<p>프로젝트 만들기</p>
-								</div>
-							</div>
-						</a>
-						<div class="dim-layer">
-							<div class="dimBg"></div>
-							<div id="projectCreatePopUp" class="pop-layer">
-								<div class="pop-container">
-									<div class="pop-conts">
-										<div class="pop-conts-header">
-											<p>프로젝트 만들기</p>
-											<a href="#" class="btn-layerClose">
-												<i class="icon-close icons"></i>
-											</a>
-										</div>
-										<div class="pop-conts-section">
-											<div class="pop-conts-section-title">
-												<%-- 프로젝트 생성 시작 --%>
-												<form action="/createProject" method="post">
-													<span>프로젝트명</span>
-													<br>
-													<input type="text"  class="projectTitleInput" name="project_title" placeholder="프로젝트명 입력(최대 50자)" />
-													<br><br>
-													<span>프로젝트 개요</span>
-													<br>
-													<textarea class="projectContentInput" name="project_overview" placeholder="프로젝트 개요 입력"></textarea>
-
-													<div class="projectStartEndDiv">
-														<span class="projectStart">프로젝트 시작일</span>
-														<input type="date" name="project_sdate" class="projectStartInput" />
-														<span class="projectEnd">프로젝트 마감일</span>
-														<input type="date" name="project_edate" class="projectEndInput" />
-													</div>
-
-													<div class="layerPopUpBtnss">
-														<input type="submit" value="만들기" class="createProjectSubmit">
-														<a href="#" class="btn-layerClose layerPopupClose">취소</a>
-													</div>
-												</form>
-												<%-- 프로젝트 생성 끝 --%>
-											</div>
-										</div>
-									</div>
-								</div>
+		</div>
+		<div class="currentMainProjectCreate">
+			<h1>진행중인 프로젝트</h1>
+			<ul class="projectCreateULS">
+				<li>
+					<a href="#projectCreatePopUp" class="projectCreatePopUp">
+						<div class="projectCard">
+							<div class="projectCardContent">
+								<i class="icon-folder-alt icons"></i>
+								<br>
+								<p>프로젝트 만들기</p>
 							</div>
 						</div>
-					</li>
-				</ul>
-
-				<ul class="bookmarkProject">
-                    <%-- 프로젝트 처리 --%>
-					<c:forEach items="${pMemberList}" var="pMemberListVo" varStatus="i">
-					<li class="bookmarkProject">
-						<div class="projectCard" >
-							<div class="projectCardTitle" >
-								<c:choose >
-									<c:when test="${pMemberListVo.pmember_bookmark eq 'N'}">
-								<i class="icon-star icons" onclick="bookmark('${pMemberListVo.project_id}');"></i>
-									</c:when>
-									<c:when test="${pMemberListVo.pmember_bookmark eq 'Y'}">
-								<i class="icon-star icons"  style="color:yellow;font-weight:bold;" onclick="bookmark('${pMemberListVo.project_id}');"></i>
-									</c:when>
-								</c:choose>
-                                <a href="/subMain?project_id=${pMemberListVo.project_id}&project_title=${pMemberListVo.project_title}" class="ajaxProjectTitle"> ${pMemberListVo.project_title}</a>
-								<c:if test="${pMemberListVo.pmember_position eq '1'}">
-								<a href="#open" class="settingsA"><i class="icon-settings icons"></i></a>
-								<div class="white_content" id="open">
-									<div>
-										<a href="#close" class="mainCloseBtns">
+					</a>
+					<div class="dim-layer">
+						<div class="dimBg"></div>
+						<div id="projectCreatePopUp" class="pop-layer">
+							<div class="pop-container">
+								<div class="pop-conts">
+									<div class="pop-conts-header">
+										<p>프로젝트 만들기</p>
+										<a href="#" class="btn-layerClose">
 											<i class="icon-close icons"></i>
 										</a>
-										<div class="btnField">
-											<h2>프로젝트 명 - <span>${pMemberListVo.project_title}</span></h2>
-											<input type="button" value="수정" class="projectUpdateSettings" />
-											<input type="button" value="삭제" class="projectDeleteSettings" />
+									</div>
+									<div class="pop-conts-section">
+										<div class="pop-conts-section-title">
+											<%-- 프로젝트 생성 시작 --%>
+											<form action="/createProject" method="post">
+												<span>프로젝트명</span>
+												<br>
+												<input type="text"  class="projectTitleInput" name="project_title" placeholder="프로젝트명 입력(최대 50자)" />
+												<br><br>
+												<span>프로젝트 개요</span>
+												<br>
+												<textarea class="projectContentInput" name="project_overview" placeholder="프로젝트 개요 입력"></textarea>
+
+												<div class="projectStartEndDiv">
+													<span class="projectStart">프로젝트 시작일</span>
+													<input type="date" name="project_sdate" class="projectStartInput" />
+													<span class="projectEnd">프로젝트 마감일</span>
+													<input type="date" name="project_edate" class="projectEndInput" />
+												</div>
+												<div class="layerPopUpBtnss">
+													<input type="submit" value="만들기" class="createProjectSubmit">
+													<a href="#" class="btn-layerClose layerPopupClose">취소</a>
+												</div>
+											</form>
+											<%-- 프로젝트 생성 끝 --%>
 										</div>
 									</div>
-							    </div>
-                                </c:if>
-							</div>
-							<div class="projectUpdatePopUp"></div>
-							<div class="projectCardUserName">
-								<img src="${pMemberListVo.member_profile}">
-								<br>
-								${pMemberListVo.member_name} 외 ${pMemberListVo.pmemberCount - 1}명
+								</div>
 							</div>
 						</div>
-					</li>
-					</c:forEach> <%-- book end --%>
-				</ul>
-			</div>
-			<div class="currentMainProjectCreates">
-				<h1>초대받은 프로젝트</h1>
-				<ul class="inviteProject">
-					<c:forEach items="${inviteProjectList}" var="inviteProject">
+						<%-- layer --%>
+					</div>
+				</li>
+			</ul>
+
+			<ul class="bookmarkProject">
+				<%-- 프로젝트 리스트 --%>
+			</ul>
+		</div>
+		<div class="currentMainProjectCreates">
+			<h1>초대받은 프로젝트</h1>
+			<ul class="inviteProject">
+				<c:forEach items="${inviteProjectList}" var="inviteProject">
 					<li>
 						<div class="projectCard">
 							<div class="projectCardTitle">
@@ -142,27 +104,26 @@
 							<div class="projectCardUserName">
 								<img src="${memberVo.member_profile}">
 								<br>
-								${inviteProject.member_name}님 참여중
+									${inviteProject.member_name}님 참여중
 							</div>
 						</div>
 					</li>
-					</c:forEach>
-				</ul>
-			</div>
+				</c:forEach>
+			</ul>
 		</div>
-	</section>
+	</div>
+</section>
 
-	<footer class="currentFooter">
-		<div class="footerContent">
-			<p>
-				대전광역시 중구 중앙로 76 영민빌딩 2층 203호<br>
-				기관명: (재)대덕인재개발원, 최종프로젝트 PMS(Project Management System)<br>
-				Copyright 2018 <span>DDIT 203 Class, CURRENT</span> All rights reserved.
-			</p>
-		</div>
-	</footer>
+<footer class="currentFooter">
+	<div class="footerContent">
+		<p>
+			대전광역시 중구 중앙로 76 영민빌딩 2층 203호<br>
+			기관명: (재)대덕인재개발원, 최종프로젝트 PMS(Project Management System)<br>
+			Copyright 2018 <span>DDIT 203 Class, CURRENT</span> All rights reserved.
+		</p>
+	</div>
+</footer>
 </div>
-
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.2/js/swiper.min.js"></script>
 <script type="text/javascript" src="../js/classie.js"></script>
@@ -334,7 +295,7 @@
 
 	// 알람 탭 메뉴
 	$("#tabs").tabs();
-	
+
 	// book mark 
 	function bookmark(project_id) {
 		$.ajax({
@@ -352,25 +313,59 @@
 		location.href = "main/subMain";
 	});
 
-var openWin;
-function popUp(w, h, project_id){
-	x = (screen.availWidth - w) / 2;
-	y = (screen.availHeight - h) / 2;
-	openWin = window.open('/inviteProject?project_id='+project_id, '초대받은 프로젝트','width='+w+', height='+h+', left='+x+', top='+y, 'location=no, directories=no, resizable=no, status=no, toolbar=no, menubar=no');
-}
+	var openWin;
+	function popUp(w, h, project_id){
+		x = (screen.availWidth - w) / 2;
+		y = (screen.availHeight - h) / 2;
+		openWin = window.open('/inviteProject?project_id='+project_id, '초대받은 프로젝트','width='+w+', height='+h+', left='+x+', top='+y, 'location=no, directories=no, resizable=no, status=no, toolbar=no, menubar=no');
+	}
 
-function invitePrject(accept, project_id){
-	$.ajax({
-		type: "GET",
-		url:"/inviteProjectAjax",
-		data : {'accept':accept, 'project_id':project_id},
-		success: function(data) {
-			$('.inviteProject').html("");
-			$('.inviteProject').html(data);
-			bookmark(project_id);
-		}
+	function invitePrject(accept, project_id){
+		$.ajax({
+			type: "GET",
+			url:"/inviteProjectAjax",
+			data : {'accept':accept, 'project_id':project_id},
+			success: function(data) {
+				$('.inviteProject').html("");
+				$('.inviteProject').html(data);
+			}
+		});
+	}
+
+	/* 프로젝트 수정 */
+	function projectUpdate() {
+
+	}
+
+	/* 프로젝트 삭제 */
+	function projectDelete(project_id) {
+		$.ajax({
+			type: "GET",
+			url:"/deleteProject",
+			data : {'project_id':project_id},
+			success: function(data) {
+				$('.inviteProject').html("");
+				$('.inviteProject').html(data);
+			}
+		});
+	}
+
+	// book mark
+	function ajaxMainProjectList() {
+		$.ajax({
+			type: "GET",
+			url: "/ajaxMainProjectList",
+			success: function (data) {
+				$('.bookmarkProject').html("");
+				$('.bookmarkProject').html(data);
+			}
+		});
+	}
+
+	$(document).ready(function () {
+		ajaxMainProjectList();
 	});
-}
+
 </script>
 </body>
 </html>

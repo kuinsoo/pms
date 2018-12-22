@@ -17,24 +17,6 @@
   <script src="/webapp/WEB-INF/views/dist/RTCMultiConnection.js"></script>  
   <script src="https://127.0.0.1:8443/socket.io/socket.io.js"></script>
 
-<script type="text/javascript">
-  $(document).ready(function(){
-	 //1. 브라우저 쿠키 가져오기
-	 function getCookie(name){
-	     name = new RegExp(name + '=([^;]*)');
-	     return name.test(document.cookie) ? unescape(RegExp.$1) : '';
-	  }
-	 var member_mail = getCookie('member_mail');
-	 var member_name = getCookie('member_name');
-	 var project_id = getCookie('project_id');
-	 var project_title = getCookie('project_title');
-	  
-	 //2. 쿠키에서 가져온 값 
-	 console.log("cookie values: " + member_mail+", "+member_name+", "+project_id+", "+project_title)
-	 $('#txt-user-name').val(member_name);		//등록
-	
-  }); 
-</script>
 
 <style type="text/css">
 html, body, section, ul, li, nav, a, h1, h2 {
@@ -287,6 +269,10 @@ input[disabled], button[disabled] {
   text-overflow: ellipsis;
   display: block;
 }
+
+.none{
+	display: none;
+}
 </style>
 </head>
 
@@ -294,7 +280,7 @@ input[disabled], button[disabled] {
   <header>
     <div style="padding: 10px 0 0 20px;">
       <button class="btn btn-primary" data-toggle="modal" data-target="#startRoomModel">회의 개설하기</button>
-      <button id="btn-show-join-hidden-room" class="top-span btn btn-secondary" data-toggle="modal" data-target="#joinRoomModel">(비공개) 회의 참가</button>
+      <span id="btn-show-join-hidden-room" data-toggle="modal" data-target="#joinRoomModel"></span>
       <span class="top-span"> 회의 중 : <span id="active-rooms">0</span></span>
     </div>
   </header>
@@ -311,7 +297,7 @@ input[disabled], button[disabled] {
         </div>
         <div class="modal-body">
           <form>
-              <label id="txt-projectNum" >프로젝트 번호</label>    |             
+              <label id="txt-projectNum" >프로젝트 번호 : </label>    |             
               <label id="txt-meetingStart" >회의 시작 시간</label>   |            
               <label id="txt-meetingEnd" >회의 종료 시간</label>
               
@@ -333,7 +319,7 @@ input[disabled], button[disabled] {
 
               <p style="display: none;">
                 <label for="txt-room-password" class="col-form-label">회의참여 비밀번호 등록:</label>
-                <input type="text" class="form-control" id="txt-room-password">
+                <input type="password" class="form-control" id="txt-room-password">
               </p>
               
             </div>
@@ -452,7 +438,24 @@ input[disabled], button[disabled] {
 
 <script>
 
-// 
+//1. 브라우저 쿠키 가져오기
+function getCookie(name){
+	var results = document.cookie.match ('(^|;) ?' + name + '=([^;]*)(;|$)');
+	return results ? decodeURIComponent(results[2]) : null; 
+ }
+
+var member_mail = getCookie('member_mail');
+var member_name = getCookie('member_name');
+var project_id = getCookie('project_id');
+var project_title = getCookie('project_title');
+ 
+//2. 쿠키에서 가져온 값 
+console.log("cookie values: 1" + member_mail+", "+member_name+", "+project_id+", "+project_title)
+$('#txt-user-name').val(member_name);		//등록
+$('#txt-projectNum').after('<span>'+ project_title +'</span>');
+
+
+// RTCMultiConnection
 var publicRoomIdentifier = 'dashboard';
 
 var connection = new RTCMultiConnection();

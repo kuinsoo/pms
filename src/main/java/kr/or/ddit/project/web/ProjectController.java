@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,7 +42,7 @@ public class ProjectController {
 	 * The Logger.
 	 */
 	Logger logger = LoggerFactory.getLogger(ProjectController.class);
-	
+
 	@Autowired
 	private ProjectServiceInf projectService;
 
@@ -75,10 +79,10 @@ public class ProjectController {
 	@RequestMapping(value = "/createProject",method = RequestMethod.POST)
 	public String createProject(ProjectVo projectVo, @SessionAttribute("memberVo")MemberVo memberVo) {
 		if(projectVo.getProject_title() != null){
-				Map<String,String> mapPMember = new HashMap<>();
-				mapPMember.put("member_email", memberVo.getMember_mail());
-				mapPMember.put("pmember_position", "1");
-				memberService.setTeamLeader(mapPMember, projectVo);
+			Map<String,String> mapPMember = new HashMap<>();
+			mapPMember.put("member_email", memberVo.getMember_mail());
+			mapPMember.put("pmember_position", "1");
+			memberService.setTeamLeader(mapPMember, projectVo);
 		}
 		return "redirect:/main";
 	}
@@ -124,14 +128,14 @@ public class ProjectController {
 			memberService.updateBookmark(pMemberVo);
 		}
 
-			model.addAttribute("pMemberList",memberService.selectMainView(memberVo.getMember_mail()));
+		model.addAttribute("pMemberList",memberService.selectMainView(memberVo.getMember_mail()));
 		return "project/ajaxProjectList";
 	}
 
 
 	@RequestMapping(value = "/subMain", method = {RequestMethod.POST, RequestMethod.GET})
 	public String subMain(Model model, @RequestParam("project_id")String project_id,
-						  @SessionAttribute("memberVo")MemberVo memberVo, HttpServletResponse response) {
+						  @SessionAttribute("memberVo")MemberVo memberVo, HttpServletResponse response) throws UnsupportedEncodingException {
 
 		ProjectVo projectVo =  projectService.selectProject(project_id);
 		/* 프로젝트 객체  */
@@ -148,17 +152,19 @@ public class ProjectController {
 
 		/* 업무 카드 출력 */
 		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
-		
+
 
 		/*<!--  변찬우(수정 2018.12.11):  쿠키생성 추가 for node page  -->*/
-		Cookie cookProject_id= new Cookie("project_id", project_id); 
-		cookProject_id.setMaxAge(60*60*24); // 기간은 하루로 지정
+		Cookie cookProject_id= new Cookie("project_id",URLEncoder.encode(project_id, "UTF-8"));
+		cookProject_id.setMaxAge(6);
 		response.addCookie(cookProject_id);
-		
-		Cookie cookProject_title = new Cookie("project_title", projectVo.getProject_title());
-		cookProject_title.setMaxAge(60*60*24); // 기간은 하루로 지정
+
+		/*<!--  변찬우(수정 2018.12.22):  쿠키 + 띄어쓰기 에러 및 html 인코딩에러  -->*/
+		String project_title = projectVo.getProject_title();
+		Cookie cookProject_title= new Cookie("project_title",URLEncoder.encode(project_title, "UTF-8").replace("+", "%20")); 
+		cookProject_title.setMaxAge(6); 
 		response.addCookie(cookProject_title);
-		
+
 		return "main/subMain";
 	}
 
@@ -186,21 +192,41 @@ public class ProjectController {
 			PMemberVo pMemberVo = new PMemberVo();
 			pMemberVo.setPmember_member(memberVo.getMember_mail());
 			pMemberVo.setPmember_project(project_id);
-			delMap.put("member_mail",memberVo.getMember_mail());
-			delMap.put("project_id",project_id);
-			if(accept.equals("Y")) {
+			delMap.put("member_mail", memberVo.getMember_mail());
+			delMap.put("project_id", project_id);
+			if (accept.equals("Y")) {
 				memberService.deleteInviteProject(delMap, pMemberVo);
 			}
 			memberService.deleteInviteProject(delMap);
-			model.addAttribute("pMemberList",memberService.selectMainView(memberVo.getMember_mail()));
+			model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
 			model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
-		}catch (Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "project/ajaxInviteProject";
 	}
 
+	@RequestMapping(value = "/deleteProject", method = RequestMethod.GET)
+	public String deleteProject(Model model, @SessionAttribute("memberVo")MemberVo memberVo,
+								@RequestParam("project_id")String project_id) {
+		try {
+			projectService.deleteProject(project_id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
+		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
+		return "main/main";
+	}
 
+
+	@RequestMapping(value = "/ajaxMainProjectList", method = RequestMethod.GET)
+	public String ajaxMainProjectList(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
+
+		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
+		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
+		return "project/ajaxMainProjectList";
+	}
 
 
 }

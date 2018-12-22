@@ -53,17 +53,20 @@
 																				  GROUP BY pmember_project) pCount
 						ON      pm.pmember_project = pCount.pmember_project
 		WHERE   pm.pmember_member = #{member_mail}
+		and p.PROJECT_DELETE = 'N'
 		and pm.PMEMBER_BOOKMARK = 'Y'
 		order by to_number(PROJECT_ID) desc
 	</select>
 
     <insert id="createProject" parameterType="projectVo">
-        insert into PROJECT values (SEQ_PROJECT.nextval, #{project_title},#{project_overview}, #{project_sdate}, #{project_edate}, '' ,'#ab2af6' )
+        insert into PROJECT values (SEQ_PROJECT.nextval, #{project_title},#{project_overview}, #{project_sdate}, #{project_edate}, '' ,'#ab2af6','N')
     </insert>
 
-    <delete id="deleteProject" parameterType="String">
-        delete from PROJECT where PROJECT_ID
-    </delete>
+    <update id="deleteProject" parameterType="String">
+        update PROJECT
+        set  project_delete = 'Y'
+        where project_id = #{project_id}
+    </update>
 
     <update id="updateProject" parameterType="projectVo">
         update PROJECT

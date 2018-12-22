@@ -117,8 +117,8 @@
   <term name="게시물관리자" description="게시물관리자" physicalName="POST_ADMIN" physicalDescription="게시물관리자" tag="//@tag.4"/>
   <term name="친구요청일자" description="친구요청일자" physicalName="FRIEND_DATE" physicalDescription="친구요청일자" tag="//@tag.18"/>
   <term name="프로젝트시작일자" description="프로젝트시작일자" physicalName="PROJECT_SDATE" physicalDescription="프로젝트시작일자" tag="//@tag.8"/>
-  <term name="프로젝트실제마감일자" description="프로젝트실제마감일자" physicalName="PROJECT_EEDATE" physicalDescription="프로젝트실제마감일자" tag="//@tag.8"/>
-  <term name="프로젝트종료일자" description="프로젝트종료일자" physicalName="PROJECT_EDATE" physicalDescription="프로젝트종료일자" tag="//@tag.8"/>
+  <term name="프로젝트예상마감일자" description="프로젝트실제마감일자" physicalName="PROJECT_EEDATE" physicalDescription="프로젝트실제마감일자" tag="//@tag.8"/>
+  <term name="프로젝트실제종료일자" description="프로젝트종료일자" physicalName="PROJECT_EDATE" physicalDescription="프로젝트종료일자" tag="//@tag.8"/>
   <term name="회의업무번호" description="회의업무번호" physicalName="MEETING_WORK" physicalDescription="회의업무번호" tag="//@tag.10"/>
   <term name="참여업무번호" description="참여업무번호" physicalName="WMEMBER_WORK" physicalDescription="참여업무번호" tag="//@tag.19"/>
   <term name="참여프로젝트번호" description="참여프로젝트번호" physicalName="WMEMBER_PROJECT" physicalDescription="참여프로젝트번호" tag="//@tag.19"/>
@@ -141,6 +141,7 @@
   <term name="프로젝트알림수신일자" description="프로젝트알림수신일자" physicalName="NOTED_DATE" physicalDescription="프로젝트알림수신일자" tag="//@tag.2"/>
   <term name="게시물작성일자" description="게시물작성일자" physicalName="POST_DATE" physicalDescription="게시물작성일자" tag="//@tag.4"/>
   <term name="권한구분" description="권한구분" physicalName="AUTH_ASSORT" physicalDescription="권한구분" tag="//@tag.22"/>
+  <term name="프로젝트삭제여부" description="프로젝트삭제여부" physicalName="PROJECT_DELETE" physicalDescription="프로젝트삭제여부" tag="//@tag.8"/>
   <tag name="프로젝트알림"/>
   <tag name="회원"/>
   <tag name="프로젝트알림수신회원"/>

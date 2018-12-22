@@ -148,7 +148,7 @@ function enterKey${work.work_id}(e){
 						</tr>
 					</thead>
 					<tbody id="popupMemberList${work.work_id}">
-						<!-- $(function({ajax}) -->
+						<!-- popupMemberList.jsp -->
 					</tbody>
 				</table>
 			</div>			
