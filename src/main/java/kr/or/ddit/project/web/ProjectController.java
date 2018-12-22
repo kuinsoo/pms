@@ -159,7 +159,9 @@ public class ProjectController {
 		cookProject_id.setMaxAge(6);
 		response.addCookie(cookProject_id);
 
-		Cookie cookProject_title= new Cookie("project_title",URLEncoder.encode(projectVo.getProject_title(), "UTF-8")); 
+		/*<!--  변찬우(수정 2018.12.22):  쿠키 + 띄어쓰기 에러 및 html 인코딩에러  -->*/
+		String project_title = projectVo.getProject_title();
+		Cookie cookProject_title= new Cookie("project_title",URLEncoder.encode(project_title, "UTF-8").replace("+", "%20")); 
 		cookProject_title.setMaxAge(6); 
 		response.addCookie(cookProject_title);
 		
