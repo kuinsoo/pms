@@ -1,5 +1,7 @@
+<%@page import="kr.or.ddit.commons.util.KISA_SHA256"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
+
 	<style>
 		.error{
 			color: red;
@@ -13,7 +15,7 @@
 		#passError{
 			color: red;
 		}
-		.errorpass{
+		.passNot{
 			color: red;
 		}
 	
@@ -24,14 +26,12 @@
 			getmybookMarkProjectList(1);
 			getmyTodoProjectList(1);
 			getMyEndPageList(1);
-		
+			
 			// 참여중인 프로젝트 클릭
 			$("#projectList").on("click", ".projectClick" ,function(){
 				console.log("projectClick");
-				
 				var project_title = $(this).children()[1].innerHTML;
 				var project_id = $(this).children()[2].innerHTML;
-				
 				$("#project_title").val(project_title);
 				$("#project_id").val(project_id);
 				  $("#frm").submit();
@@ -48,15 +48,18 @@
 				$("#project_id2").val(project_id);
 				console.log(project_title);
 				console.log(project_id);
-				
 				$("#frm2").submit();
 			});
 			
-			$(".errorpass").hide();
+			$(".passNot").hide();
 			$(".phoneBtns").hide();
 			$(".saveBtn").hide();
-			$("#pass2").hide();				
+			$("#pass1").hide();				
+			$("#inpupass1").hide();				
+			$("#inpupass2").hide();				
+			$("#inpupass3").hide();				
 			$("#pass2input").hide();				
+			$("#pass1input").hide();				
 			$("#telnum").hide();				
 			$("#telnumLi").hide();		
 			$('#member_name').prop('readonly', true);
@@ -71,12 +74,15 @@
 				$(".profileUploadImg").show();
 				$(".phoneBtns").show();
 				$(".saveBtn").show();
-				$("#pass2").show();				
+				$("#pass1").show();				
+				$("#inpupass1").show();				
+				$("#inpupass2").show();				
+				$("#inpupass3").show();				
 				$("#pass2input").show();				
+				$("#pass1input").show();				
 				$("#telnum").show();				
 				$("#telnumLi").show();		
 				$(".updateBtn").hide();
-				
 				$('#member_name').prop('readonly', false);
 				$('#member_tel').prop('readonly', false);
 				$('#pass1').prop('readonly', false);
@@ -92,7 +98,7 @@
 			//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
 			//blur()이벤트 사용
 			$("#pass2input").blur(function() {
-				if($("#pass2input").val() != $("#pass1").val()){
+				if($("#pass1input").val() != $("#pass2input").val()){
 					$(".error").show();
 					$('.saveBtn').prop('disabled', true);
 				}else{
@@ -102,37 +108,26 @@
 				}
 			});
 			$('.saveBtn').prop('disabled', false);
-				
-			
-			
-			
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 파 일 부 분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 			
 			$("#fileElem").change(function(){
 				console.log("fileChange");
-				
-				 //var files = e.originalEvent.dataTransfer.files;
+				//var files = e.originalEvent.dataTransfer.files;
 				var file = $(this)[0].files[0];
-	    	    	
 		    	var reader = new FileReader();
 		        reader.readAsDataURL(file);
 		        reader.onload = function(readEvent) {
 		        	
-		        	//$("#fileList").css("background-image", readEvent.target.result);
-		        	
-		        	 //$("#fileList").css("src", window.URL.createObjectURL(file));
-		        	 
-		        	 $("#fileList").css("background-image", window.URL.createObjectURL(file));
-		        	
-		        	/*var img = $("<img/>", {
-		    			src : readEvent.target.result,
-		    			width : 120,
-		    			height : 120
-		    		});
-		        	
-		        	$("#test").prepend(img.clone());*/
-		        	
-		        	//$("#pic").hide();
+	        	//$("#fileList").css("background-image", readEvent.target.result);
+	        	 //$("#fileList").css("src", window.URL.createObjectURL(file));
+	        	 $("#fileList").css("background-image", window.URL.createObjectURL(file));
+	        	/*var img = $("<img/>", {
+	    			src : readEvent.target.result,
+	    			width : 120,
+	    			height : 120
+	    		});
+	        	$("#test").prepend(img.clone());*/
+	        	//$("#pic").hide();
 		       	}
 			    
 			});
@@ -152,12 +147,35 @@
 				}
 			});
 		}
-		
-		function onkeyup_event2(){
-			$('.saveBtn').prop('disabled', true);
-			$(".errorpass").show();
+
+		var kisa;
+		function kisaaa(){
+			
+			if( kisa === '${memberVo.member_pass}'){ 
+				$('.saveBtn').prop('disabled', true);
+				$(".passNot").hide();
+			}else{
+				$('.saveBtn').prop('disabled', true);
+				$(".passNot").show();
+			}				
 		}
 		
+		
+		function onkeyup_event2(){
+			$.ajax({
+				type: "GET",
+				url : "/myPageSHA256Ajax",
+				data : "pass1="+ $("#pass1").val(),
+				success : function(data){
+					 kisa = data.kisa256;
+					 console.log(kisa);
+					 console.log(data.kisa256);
+					 
+					 kisaaa();
+				}
+		});
+			
+	}	
 		
 		// 휴대번호 인증 부분 이벤트
 		function onkeyup_event(){
@@ -175,7 +193,6 @@
 		// 마이페이지 : 참여중인 프로젝트 목록 / 페이징 처리 Ajax	
 		function getMyPageList(page){
 			var pageSize = 10;
-			
 			$.ajax({
 				type: "GET",
 				url : "/myPageProjectAjax",
@@ -190,10 +207,8 @@
 						html += "	<td>"+ my.pmember_member +"</td>";
 						html += "</tr>";
 					});
-					
 					$("#projectList").html("");
 					$("#projectList").html(html);
-					
 					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getMyPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
@@ -228,10 +243,8 @@
 						html += "	<td>"+ my.pmember_member +"</td>";
 						html += "</tr>";
 					});
-					
 					$("#projectList").html("");
 					$("#projectList").html(html);
-					
 					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getMyPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
@@ -241,7 +254,6 @@
 							paging +="<li><a href='javascript:getMyPageList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 					$(".pagination").html(paging);
 				},
-				
 				// 실패시 
 				fail : function(xhr){
 					console.log(xhr);
@@ -255,7 +267,6 @@
 		// 마이페이지 : 참여 했던 프로젝트 목록 / 페이징 처리 Ajax	
 		function getMyEndPageList(page){
 			var pageSize = 10;
-			
 			$.ajax({
 				type: "GET",
 				url : "/myPageEndProjectAjax",
@@ -263,7 +274,6 @@
 				success : function(data){
 					var html ="";
 					$.each(data.projectEndList, function (idx,my){
-						
 						html += "<tr>";
 						html += "	<td>"+ my.rnum +"</td>";
 						html += "	<td>"+ my.project_title +"</td>";
@@ -271,10 +281,8 @@
 						html += "	<td>"+ my.pmember_member +"</td>";
 						html += "</tr>";
 					});
-					
 					$("#projectEndList").html("");
 					$("#projectEndList").html(html);
-				
 					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getMyEndPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
@@ -299,7 +307,7 @@
 				url : "/searchEndProjectAjax",
 				data: param,
 				success : function(data){
-						console.log("data : " + data);
+					console.log("data : " + data);
 					var html ="";
 					$.each(data.projectEndList, function (idx,my){
 						html += "<tr>";
@@ -309,10 +317,8 @@
 						html += "	<td>"+ my.pmember_member +"</td>";
 						html += "</tr>";
 					});
-					
 					$("#projectEndList").html("");
 					$("#projectEndList").html(html);
-				
 					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getMyEndPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
@@ -322,24 +328,16 @@
 							paging +="<li><a href='javascript:getMyEndPageList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 					$(".pagination1").html(paging);
 				},
-				
 				// 실패시 
 				fail : function(xhr){
 					console.log(xhr);
 				}
 			});
 		}
-		
-		
-		// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		
-		
-		
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 즐겨찾기 목록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		
 		function getmybookMarkProjectList(page){
 			var pageSize = 10;
-			
 			$.ajax({
 				type: "GET",
 				url : "/mybookMarkProjectList",
@@ -353,11 +351,9 @@
 						html += "	<td>"+ mm.project_id +"</td>";
 						html += "	<td>"+ mm.pmember_member +"</td>";
 						html += "</tr>";
-						
 					});
 					$("#projectBookList").html("");
 					$("#projectBookList").html(html);
-					
 					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getmybookMarkProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
@@ -372,16 +368,13 @@
 					}
 				});
 			}
-		
 		// 마이페이지 : 즐겨찾기 프로젝트 목록 검색 Ajax	
 		function getSearchBookProject(){
 		var param = $('form[name=searchBookProject]').serialize();
-			
 			$.ajax({
 				type: "POST",
 				url : "/searchBookProjectAjax",
 				data: param,
-				
 				success : function(data){
 					console.log("data : " + data);
 					var html = "";
@@ -393,10 +386,8 @@
 						html += "	<td>"+ mm.pmember_member +"</td>";
 						html += "</tr>";
 					});
-					
 					$("#projectBookList").html("");
 					$("#projectBookList").html(html);
-					
 					var i  = 1;
 					var paging ="";
 					paging +="<li><a href='javascript:getmybookMarkProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
@@ -411,12 +402,9 @@
 				}
 			});
 		}
-	
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 나의 일감 목록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		
 		function getmyTodoProjectList(page){
 			var pageSize = 10;
-			
 			$.ajax({
 				type: "GET",
 				url : "/myTodoProjectListAjax",
@@ -425,7 +413,6 @@
 					var html = "";
 					$.each(data.projectTodoList, function(idx,mt){
 						console.log(data.projectTodoList);
-						
 						html += "<tr>";
 						html += "	<td>"+ mt.rnum +"</td>";
 						html += "	<td>"+ mt.todo_content +"</td>";
@@ -436,12 +423,9 @@
 						}
 						html += "</tr>";
 					});
-					
 					console.log(data.projectTodoList);
-					
 					$("#projectTodoList").html("");
 					$("#projectTodoList").html(html);
-					
 					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getmyTodoProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
@@ -456,10 +440,8 @@
 				}
 			});
 		}
-	
 		function getSearchTodoProject(){
 			var param = $('#searchTodoProject').serialize();
-				
 				$.ajax({
 					type: "POST",
 					url : "/searchTodoProjectAjax",
@@ -477,12 +459,9 @@
 							}
 							html += "</tr>";
 						});
-						
 						console.log(data.projectTodoList);
-						
 						$("#projectTodoList").html("");
 						$("#projectTodoList").html(html);
-						
 						var i  = 1;
 						var paging ="";
 						paging +="<li><a href='javascript:getmyTodoProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
@@ -507,18 +486,14 @@
 	<input type = "hidden" id = "project_title2" name = "project_title"/>
 	<input type = "hidden" id = "project_id2" name = "project_id"/>
 </form>
-	
 	<!-- CURRENT SECTION(MAIN) -->	
-	
 	<section class="currentMain">
 		<div class="currentMainContainer">
 			<div class="myPageContainer">
 				<div class="myPageContainerTitle">
 					<h2>사용자 기본 정보</h2>
 				</div>
-				
 				<!-- 마이페이지 사용자 정보 수정 부분  -->
-				
 				<form action="/myPageUpdate" method="post" enctype="multipart/form-data">
 				<div class="myPageContainerLeft">
 					<div class="myPageContainerLeftUser">
@@ -548,8 +523,9 @@
 								<li>사용자 이름 </li>
 								<li>휴대폰 번호</li>
 								<li id = "telnumLi">인증번호 입력</li>
-								<li>비밀번호</li>
-								<li id = "pass2">비밀번호 확인</li> 
+								<li id= "inpupass1">현재 비밀번호</li>
+								<li id ="inpupass2">새 비밀번호</li>
+								<li id = "inpupass3">새 비밀번호 확인</li> 
 							</ul>
 						</div>
 						<div class="userContentsInfoRight_2">
@@ -562,8 +538,11 @@
 									<span class = "inputerror"> 인증번호를 입력해 주세요..</span>
 									<span class= "telerror"> 인증번호가 일치하지 않습니다.</span>
 								</li>
-								<li><input type="password" id = "pass1" value= "${memberVo.member_pass}"  name ="member_pass" onkeyup="onkeyup_event2();"/>
-									<span class="errorpass"> 비밀번호를 확인란에 입력해주세요.</span>
+								<li><input type="password" id = "pass1" name = "member_pass" onkeyup="onkeyup_event2();"/>
+									<span class="passNot"> 비밀번호가 일치하지 않습니다.. </span>
+								</li>
+								<li>
+									<input type="password" id = "pass1input" name = "member_pass"/>
 								</li>
 								<li>
 									<input type="password" id = "pass2input" />
@@ -598,7 +577,6 @@
 						</ul>
 
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 참여중인 목록  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-
 						<div id="tabs2-1">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
@@ -631,10 +609,7 @@
 								</div>
 							</div>
 						</div>
-						
-
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 참여했던 목록  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-
 						<div id="tabs2-1-1">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
@@ -667,10 +642,7 @@
 								</div>
 							</div>
 						</div>
-						
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 즐겨찾기 목록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-						
-						 
 						<div id="tabs2-2">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
@@ -703,10 +675,7 @@
 								</div>
 							</div>
 						</div>
-						
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 일감 보관 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-						
-						
 						<div id="tabs2-3">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
@@ -738,7 +707,6 @@
 							</div>
 						</div>
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 파일 보관함 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-						
 						<div id="tabs2-4">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
@@ -769,9 +737,7 @@
 								</div>
 							</div>
 						</div>
-						
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-						
 						<div id="tabs2-5">
 							<div class="tabs2-5center">
 							<h2>회원 탈퇴 </h2>
@@ -781,14 +747,12 @@
 								<span id = "passError"> 비밀번호가 일치하지 않습니다. </span>
 							</div>
 						</div>
-						
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	
 	<footer class="currentFooter">
 		<div class="footerContent">
 			<p>
@@ -878,12 +842,10 @@ function dialog(){
 			 }
 		 });
 };
-
 // Run function when the document has loaded
 $(function(){
 	dialog();
 });
-
 function dialogs(){
 	var dialogBoxs = $('.dialogs'),
 		 dialogTriggers = $('.dialog__triggers'),
@@ -910,7 +872,6 @@ function dialogs(){
 			 }
 		 });
 };
-
 // Run function when the document has loaded
 $(function(){
 	dialogs();

@@ -39,17 +39,19 @@
 		#telerror{color: red;}
 		#passError{color: red;}
 	</style>
-	<script type="text/javascript">
-	
+<script type="text/javascript">
+
 	// document.ready에는 var를 넣으면 안된당.!!!
-	var passwordRules = /^[0-9a-z]+$/;
+	var passwordRules = /^[A-Za-z0-9]{6,12}$/;
+
+	//숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
 	var certificationNumber;
-	
+
 	$(document).ready(function() {
 		$("#passError").hide();
 		$("#telerror").hide();
 		$(".error").hide();
-		
+
 		//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
 		//blur()이벤트 사용
 		$("#passCheck").blur(function() {
@@ -60,8 +62,8 @@
 			}
 		});
 	}); // document.ready 끝 
-
-		<!-- 핸드폰 번호 입력 후 인증 버튼 -->
+		
+	<!-- 핸드폰 번호 입력 후 인증 버튼 -->
 		function telAjax(){
 			var member_tel = $("#tel").val();
 			$.ajax({
@@ -73,24 +75,21 @@
 				}
 			});
 		}
-		
 		function onkeyup_event(){
 			if(certificationNumber ==  $("#telnum").val()){
 				$("#telerror").hide();
+
 			}else{
 				$("#telerror").show();
 			}
 		}
-		
 		function onkeyup_event2(){
-			if(passwordRules ==  $("#password").val()){
+			if(passwordRules.test($("#password").val())){
 				$("#passError").hide();
 			}else {
 				$("#passError").show();
 			}
 		}
-			
-			
 	</script>
 </head>
 <body>
@@ -110,7 +109,7 @@
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호</label>
-					<input type="password" name="member_pass" id ="password"  onkeyup="onkeyup_event2();" class="form-control" required />
+					<input type="password" name="member_pass" id ="password" onkeyup="onkeyup_event2();" class="form-control" required />
 					<span id="passError"> 영문 숫자 포함 6글자 이상 다시 입력해주세요..</span>
 				</div>
 				<div class="form-group label-floating">

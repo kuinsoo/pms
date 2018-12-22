@@ -1,6 +1,8 @@
 package kr.or.ddit.member.web;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+
+import kr.or.ddit.commons.util.KISA_SHA256;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.oauth.bo.JsonParser;
@@ -100,7 +102,7 @@ public class LoginController {
 		request.setCharacterEncoding("utf-8");
 		String member_mail = request.getParameter("member_mail").toLowerCase();
 		String member_pass = request.getParameter("member_pass").toLowerCase(); // 대소문자를 안가린다.
-
+		
 		memberVo = memberService.selectUser(member_mail);
 
 		if (memberVo != null && memberVo.getMember_withdrawal().equals("Y")) {
@@ -109,15 +111,15 @@ public class LoginController {
 			return "/login/login";
 		}
 
-
 		if (memberVo == null || !member_mail.equals(memberVo.getMember_mail()) ||
-				!member_pass.equals(memberVo.getMember_pass())) {
+				!memberVo.getMember_pass().equals(KISA_SHA256.encrypt(member_pass))) {
 
 			//model.addAttribute("member_mail",member_mail);
 			//model.addAttribute("member_pass",member_pass);
 			model.addAttribute("memberVo", memberVo);
 			model.addAttribute("loginResult", "false");
 			return "/login/login";
+			
 		} else {
 			model.addAttribute("memberVo", memberVo);
 
@@ -139,9 +141,7 @@ public class LoginController {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
 
 		JsonParser json = new JsonParser();
-
 		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
-
 		logger.debug("naverLoginBO : {}", oauthToken.getAccessToken());
 
 
@@ -214,8 +214,7 @@ public class LoginController {
 
 		if (memberService.selectfindId(memberVo) != null) {
 			// 내용
-			message.setText(member_name + "님이 찾으시는 아이디는  [  " + memberService.selectfindId(memberVo).getMember_mail() + "  ]  입니다.");
-
+			message.setText(member_name + "님이 찾으시는 아이디는  [ " + memberService.selectfindId(memberVo).getMember_mail() + "  ]  입니다.");
 			emailSender.send(message);
 
 			return "/login/login";
@@ -295,7 +294,14 @@ public class LoginController {
 	 */
 	@RequestMapping(value = "/signProcess", method = RequestMethod.POST)
 	public String signProcess(@RequestParam("member_mail") String member_mail, MemberVo member, HttpServletRequest request) {
-
+		
+		String member_pass = request.getParameter("member_pass");
+		System.out.println( "ffffff " + KISA_SHA256.encrypt(member_pass).toLowerCase());
+		String kisa = KISA_SHA256.encrypt(member_pass).toLowerCase();
+		System.out.println(kisa);
+		
+		member.setMember_pass(kisa);
+		System.out.println(member.getMember_pass());
 		// 값이 다르면..
 		if (memberService.selectUser(member_mail) == null) {
 			memberService.insertUser(member);

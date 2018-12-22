@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
+import kr.or.ddit.commons.util.KISA_SHA256;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
@@ -390,7 +391,11 @@ public class MemberDetailController {
 			
 			memberVo.setMember_name(member_name);
 			memberVo.setMember_tel(member_tel);
-			memberVo.setMember_pass(member_pass);
+			
+			// 암호화로 비교한다. 입력된값이랑 
+			if(memberVo.getMember_pass().equals(KISA_SHA256.encrypt(member_pass))) {
+				model.addAttribute("memberVo",memberVo);
+			}
 			
 			try {
 				if(part.getSize()>0) {
@@ -413,7 +418,21 @@ public class MemberDetailController {
 			return "redirect:/myPage?member_mail=" + memberVo.getMember_mail();
 		}
 	
-	
+		@ResponseBody
+		@RequestMapping(value="/myPageSHA256Ajax", method=RequestMethod.GET)
+		public Map<String , String> myPageSHA256Ajax(HttpServletRequest request,Model model) {
+			
+			String pass1 = request.getParameter("pass1").toLowerCase();
+			
+			String kisa256 = KISA_SHA256.encrypt(pass1);
+			System.out.println("kisa256"+ kisa256);
+			
+			Map<String, String> passMap = new HashMap<>();
+			passMap.put("kisa256", kisa256);
+			
+			return passMap;
+		}
+		
 		/**
 		 * Method : myPageAjax
 		 * 작성자 : 나진실
