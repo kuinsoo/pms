@@ -23,23 +23,23 @@ public class AspectTest {
 
 //	@Before("execution(* kr.or.ddit.card.service.*.*(..))")
 	public void onBeforeHandler(JoinPoint joinPoint) {
-		System.out.println("=======================  onBeforeThing");
+		logger.debug("=======================  onBeforeThing");
 	}
 
 //	@After("execution(* kr.or.ddit.member.service.*.*Aop(..))")
 	public void onAfterHandler(JoinPoint joinPoint) {
-		logger.info("=============== onAfterHandler");
+		logger.debug("=============== onAfterHandler");
 	}
 
 //	@AfterReturning(pointcut = "execution(* kr.or.ddit.member.service.*.*Aop(..))", returning = "str")
 	public void onAfterReturningHandler(JoinPoint joinPoint, Object str) {
-		logger.info("@AfterReturning : " + str);
-		logger.info("=============== onAfterReturningHandler");
+		logger.debug("@AfterReturning : " + str);
+		logger.debug("=============== onAfterReturningHandler");
 	}
 
 //	@Pointcut("execution(* kr.or.ddit.member.service.*.*Aop(..))")
 	public void onPointcut(JoinPoint joinPoint) {
-		logger.info("=============== onPointcut");
+		logger.debug("=============== onPointcut");
 	}
 	}
 
