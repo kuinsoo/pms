@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -131,7 +135,7 @@ public class ProjectController {
 
 	@RequestMapping(value = "/subMain", method = {RequestMethod.POST, RequestMethod.GET})
 	public String subMain(Model model, @RequestParam("project_id")String project_id,
-						  @SessionAttribute("memberVo")MemberVo memberVo, HttpServletResponse response) {
+						  @SessionAttribute("memberVo")MemberVo memberVo, HttpServletResponse response) throws UnsupportedEncodingException {
 
 		ProjectVo projectVo =  projectService.selectProject(project_id);
 		/* 프로젝트 객체  */
@@ -149,14 +153,14 @@ public class ProjectController {
 		/* 업무 카드 출력 */
 		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
 		
-
-		/*<!--  변찬우(수정 2018.12.11):  쿠키생성 추가 for node page  -->*/
-		Cookie cookProject_id= new Cookie("project_id", project_id); 
-		cookProject_id.setMaxAge(60*60*24); // 기간은 하루로 지정
-		response.addCookie(cookProject_id);
 		
-		Cookie cookProject_title = new Cookie("project_title", projectVo.getProject_title());
-		cookProject_title.setMaxAge(60*60*24); // 기간은 하루로 지정
+		/*<!--  변찬우(수정 2018.12.11):  쿠키생성 추가 for node page  -->*/
+		Cookie cookProject_id= new Cookie("project_id",URLEncoder.encode(project_id, "UTF-8")); 
+		cookProject_id.setMaxAge(6);
+		response.addCookie(cookProject_id);
+
+		Cookie cookProject_title= new Cookie("project_title",URLEncoder.encode(projectVo.getProject_title(), "UTF-8")); 
+		cookProject_title.setMaxAge(6); 
 		response.addCookie(cookProject_title);
 		
 		return "main/subMain";

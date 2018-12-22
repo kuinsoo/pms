@@ -32,6 +32,7 @@
 	 //2. 쿠키에서 가져온 값 
 	 console.log("cookie values: " + member_mail+", "+member_name+", "+project_id+", "+project_title)
 	 $('#txt-user-name').val(member_name);		//등록
+	 $('#txt-projectNum').after('<span>'+ project_title +'</span>');
 	
   }); 
 </script>
@@ -311,7 +312,7 @@ input[disabled], button[disabled] {
         </div>
         <div class="modal-body">
           <form>
-              <label id="txt-projectNum" >프로젝트 번호</label>    |             
+              <label id="txt-projectNum" >프로젝트 번호 : </label>    |             
               <label id="txt-meetingStart" >회의 시작 시간</label>   |            
               <label id="txt-meetingEnd" >회의 종료 시간</label>
               

@@ -56,6 +56,7 @@ $(document).ready(function(){
  	$("#searching").click(function(){
 		getQnaListAjax(1,board_id);
 		getQnaPagingAjax(1,board_id);
+		$('#searching').after("<a href='/qnaList'>[-> 목록가기]</a> ");
 	}); 
 	
 });

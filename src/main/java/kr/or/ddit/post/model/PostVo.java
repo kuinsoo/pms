@@ -30,7 +30,7 @@ public class PostVo {
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	private Date post_date;
-	private String format_todo_sdate;	
+	private String format_post_date;	
 	
 	private String title;		//게시글 목록용 
 
@@ -120,7 +120,7 @@ public class PostVo {
 	
 	/* 형변환 getter */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	public String getFormat_todo_sdate() {
+	public String getFormat_post_date() {
 		if(post_date == null) {
 			return "";
 		}

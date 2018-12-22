@@ -181,8 +181,18 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(SessionStatus status) {
+	/*<!--  변찬우(수정 2018.12.21):  리스판스 추가 for node page -->*/
+	public String logout(SessionStatus status, HttpServletResponse response) {
 		status.setComplete();
+
+		/*<!--  변찬우(수정 2018.12.21):  쿠키삭제 코추가 for node page -->*/
+		Cookie cookieMember_mail = new Cookie("member_mail", null); 
+		cookieMember_mail.setMaxAge(0); 
+		response.addCookie(cookieMember_mail); 
+		Cookie cookieMember_name = new Cookie("member_name", null); 
+		cookieMember_name.setMaxAge(0); 
+		response.addCookie(cookieMember_name); 
+
 		return "redirect:/";
 	}
 

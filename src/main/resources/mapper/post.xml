@@ -97,7 +97,7 @@
 	    lpad('┗　', (level-1)*4,'　')||POST_TITLE title, 
 	    POST_CONTENT, 
 	    POST_DATE, 
-	    POST_ID, POST_PUBLIC,
+	    POST_ID, POST_PUBLIC,POST_WRITER,
 	    level
 	from(
 	    select rownum rnum, a.* 
@@ -125,6 +125,7 @@
 	    POST_TITLE title, 
 	    POST_CONTENT, 
 	    POST_DATE, 
+	    POST_ID, POST_PUBLIC,POST_WRITER,
 	    level
 	from(
 	    select rownum rnum, b.* 
