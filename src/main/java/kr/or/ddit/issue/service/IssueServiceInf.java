@@ -58,4 +58,14 @@ public interface IssueServiceInf {
 	*/
 	int projectCnt(PageVo pageVo);
 	
+	/**
+	* Method : issueInsert
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 이슈 등록
+	*/
+	int issueInsert(IssueVo issueVo);
+	
 }

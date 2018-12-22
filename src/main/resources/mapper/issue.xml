@@ -55,4 +55,15 @@
 		WHERE   pm.pmember_member = #{member_mail}
 	</select>
 
+	<!-- 이슈 발생 등록 -->
+	<insert id="issueInsert" parameterType="issueVo">
+		INSERT INTO issue (issue_id, issue_work, issue_member, issue_level, issue_title, issue_content, issue_sdate)
+		VALUES (issue_seq.NEXTVAL, #{issue_work}, #{issue_member}, #{issue_level}, #{issue_title}, #{issue_content}, #{issue_sdate})
+	</insert>
+	
+	<!-- 이슈 수정 -->
+	
+	
+	<!-- 이슈 해결 등록 -->
+	
 </mapper>

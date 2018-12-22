@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.todo.service.ToDoServiceInf;
@@ -113,7 +114,7 @@ public class ToDoController {
 	@RequestMapping(value="todoPagination", method= {RequestMethod.POST, RequestMethod.GET})
 	public String ajaxPaginationTodo(@RequestParam("project_id")String project_id, @RequestParam("work_id")String work_id, PageVo pageVo, Model model) {
 		int todoCnt = todoService.todoCnt(work_id);
-		System.out.println("todoCnt : " + (int)Math.ceil((double)todoCnt / pageVo.getPageSize()));
+		
 		model.addAttribute("todoCnt", (int)Math.ceil((double)todoCnt / pageVo.getPageSize()));
 		model.addAttribute("work_id", work_id);
 		model.addAttribute("project_id", project_id);
@@ -148,6 +149,17 @@ public class ToDoController {
 		model.addAttribute("popupMap", popupMap);
 		
 		return "todo/popupMemberList";
+	}
+	
+	@RequestMapping(value="/todoCompletY", method= {RequestMethod.POST, RequestMethod.GET})
+	@ResponseBody
+	public void todoCompletY(@RequestParam("todo_id")String todo_id, @RequestParam("chk")String chk) {
+		Map<String, Object> todoUpdateMap = new HashMap<String, Object>();
+		todoUpdateMap.put("todo_id", todo_id);
+		todoUpdateMap.put("chk", chk);
+		
+		todoService.todoCompletYN(todoUpdateMap);
+		
 	}
 	
 }

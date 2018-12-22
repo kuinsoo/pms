@@ -67,4 +67,14 @@ public interface ToDoMapper {
 	*/
 	List<ToDoVo> getProjectMember(Map searchMap);
 	
+	/**
+	* Method : todoCompletYN
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todoUpdateMap
+	* @return
+	* Method 설명 : to-do의 완료여부 변경
+	*/
+	int todoCompletYN(Map todoUpdateMap);
+	
 }

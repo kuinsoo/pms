@@ -79,4 +79,11 @@
 		AND     ${searchOption} LIKE '%'||#{searchMember}||'%'
 	</select>
 	
+	<!-- todoComplet(완료여부) 변경 -->
+	<update id="todoCompletYN" parameterType="Map">
+		UPDATE	todo
+		SET		todo_complet = #{chk}
+		WHERE	todo_id = #{todo_id}
+	</update>
+	
 </mapper>

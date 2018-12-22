@@ -3,7 +3,16 @@
 
 <c:forEach items="${todoListMap.todoList}" var="todo">
 	<tr>
-		<td><input type="checkbox" /></td>
+		<td>
+			<c:choose>
+				<c:when test="${todo.todo_complet == 'Y'}">
+					<input type="checkbox" class="todoListCheck" name="todoListCheck" id="todoListCheck${todo.todo_id}" onclick="todoComplet(${todo.todo_id}, ${todo.todo_issue});" checked="checked"/>
+				</c:when>
+				<c:when test="${todo.todo_complet == 'N'}">
+					<input type="checkbox" class="todoListCheck" name="todoListCheck" id="todoListCheck${todo.todo_id}" onclick="todoComplet(${todo.todo_id}, ${todo.todo_issue});"/>
+				</c:when>
+			</c:choose>
+		</td>
 		<td><a href="#open${todo.todo_id}" class="issueTitlePopup">${todo.todo_content}</a>
 			<div class="white_content3" id="open${todo.todo_id}">
 				<div>
@@ -76,5 +85,13 @@
 		<td>${todo.format_todo_sdate}</td>
 		<td>${todo.format_todo_eedate}</td>
 		<td>${todo.todo_issue}</td>
+		<c:choose>
+			<c:when test="${todo.todo_complet == 'N' && todo.todo_issue == null}">
+				<td id="minusBtn${todo.todo_id}"><i class='fas fa-minus' style='color: red; cursor: pointer;' id='todoDelete${todo.todo_id}'></i></td>
+			</c:when>
+			<c:otherwise>
+				<td id="minusBtn${todo.todo_id}"></td>
+			</c:otherwise>
+		</c:choose>
 	</tr>
 </c:forEach>

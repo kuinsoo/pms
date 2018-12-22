@@ -9,10 +9,19 @@ $(document).ready(function(){
 	//console.log("work_id : " + work_id);
 	
 	//페이지 접속시 to-do list 조회(Ajax) ==문의: jerry==
-	getToDoList${work.work_id}(1, project_id, work_id);	
+	getToDoList${work.work_id}(1, project_id, work_id);
 	
 	//to-do list의 pagination(Ajax) ==문의: jerry==
 	getToDoPagination${work.work_id}(1, project_id, work_id);
+	
+	//삭제할 수 있는 to-do만 삭제 버튼 출력
+// 	var todo_id = getElementById("").val();
+// 	todoDeleteConfirm(todo_id);
+	
+	
+	//마감일자와 오늘날짜를 비교하여 자동 체크
+// 	var beforeDate = new Date();
+// 	todoEdateCheck(beforeDate);
 	
 });
 
@@ -53,23 +62,51 @@ function getToDoPagination${work.work_id}(page, project_id, work_id){
 	});
 }
 
-/* to-do list 전체 체크해주는 체크박스 */
-function goAllSelect(){
+/* todoComplet을 Y로 변경 */
+function todoComplet(todo_id, todo_issue){
+	var chk = "";
+	var checked = document.getElementById("todoListCheck"+todo_id).checked;
 	
-	var allSelect = document.getElementById("todoListTopCheck");
-	var select = document.getElementsByName("todoListCheck");
-	
-	if(allSelect.checked){
-		for(var i = 0; i < select.length; i++){
-			select[i].checked = true;
-		}
-	}else{
-		for(var i = 0; i < select.length; i++){
-			select[i].checked = false;
-		}
+	/* 체크를 했으면 Y로 변경 */
+	if(checked == true){
+		chk = "Y";
+		$.ajax({
+			method: "POST",
+			url: "/todoCompletY",
+			data: {"todo_id" : todo_id, "chk" : chk},
+			success: function(data){
+				$("#minusBtn"+todo_id).html("");
+			},
+			error: function(data){
+				console.log("todoList.jsp : todoComplet() - Y, error");
+			}
+		});
+	/* 체크를 풀었으면 N으로 변경 */	
+	}else if(checked == false && todo_issue == null){
+		chk = "N";
+		$.ajax({
+			method: "POST",
+			url: "/todoCompletY",
+			data: {"todo_id" : todo_id, "chk" : chk},
+			success: function(data){
+					var html = "<i class='fas fa-minus' style='color: red; cursor: pointer;' id='todoDelete${todo.todo_id}'></i>";
+					$("#minusBtn"+todo_id).html("");
+					$("#minusBtn"+todo_id).html(html);
+			},
+			error: function(data){
+				console.log("todoList.jsp : todoComplet() - N, error");
+			}
+		});
 	}
-	
 }
+
+/* 날짜 비교(보류) */
+// function todoEdateCheck(beforeDate){
+// 	beforeDate.setHours(beforeDate.getHours() + 9);
+// 	var utcDate = beforeDate.toISOString().slice(0, 16);
+// 	var date = utcDate.replace("T", " ");
+// 	if()
+// }
 
 </script>
 
@@ -78,7 +115,7 @@ function goAllSelect(){
 	<table>
 		<thead>
 			<tr>
-				<th><input type="checkbox" class="todoListCheck" id="todoListTopCheck" onclick="goAllSelect();"/></th>
+				<th>선택</th>
 				<th>TODO</th>
 				<th>담당자</th>
 				<th>시작</th>

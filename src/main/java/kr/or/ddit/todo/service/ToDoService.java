@@ -98,5 +98,18 @@ public class ToDoService implements ToDoServiceInf{
 	public List<ToDoVo> getProjectMember(Map searchMap) {
 		return todoMapper.getProjectMember(searchMap);
 	}
+
+	/**
+	* Method : todoCompletYN
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todoUpdateMap
+	* @return
+	* Method 설명 : to-do의 완료여부 변경
+	*/
+	@Override
+	public int todoCompletYN(Map todoUpdateMap) {
+		return todoMapper.todoCompletYN(todoUpdateMap);
+	}
 	
 }
