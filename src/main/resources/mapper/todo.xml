@@ -43,6 +43,9 @@
 		                SELECT  todo_id,
 		                		todo_content,
 		                        todo_pmember,
+		                        (SELECT	 m.member_profile
+		                         FROM	 member m
+		                         WHERE   member_name = todo_pmember) member_profile,
 		                        todo_sdate,
 		                        todo_eedate,
 		                        todo_complet,
