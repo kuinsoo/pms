@@ -53,6 +53,7 @@ function getToDoPagination${work.work_id}(page, project_id, work_id){
 	});
 }
 
+/* to-do list 전체 체크해주는 체크박스 */
 function goAllSelect(){
 	
 	var allSelect = document.getElementById("todoListTopCheck");
