@@ -40,6 +40,7 @@ public class ToDoVo {
 	private String member_name;			//	참여자 이름
 	private String pmember_member;		//	참여자 이메일
 	private String member_profile;		//	참여자 프로필사진
+	private String issue_id;			//	이슈아이디
 	
 	/* 기본생성자 */
 	public ToDoVo() {}
@@ -187,7 +188,8 @@ public class ToDoVo {
 				+ ", format_todo_sdate=" + format_todo_sdate + ", todo_edate=" + todo_edate + ", format_todo_edate="
 				+ format_todo_edate + ", todo_eedate=" + todo_eedate + ", format_todo_eedate=" + format_todo_eedate
 				+ ", todo_complet=" + todo_complet + ", todo_color=" + todo_color + ", todo_issue=" + todo_issue
-				+ ", member_name=" + member_name + ", pmember_member=" + pmember_member + ", member_profile=" + member_profile + "]";
+				+ ", member_name=" + member_name + ", pmember_member=" + pmember_member + ", member_profile=" 
+				+ member_profile + "]";
 	}
 	
 }
