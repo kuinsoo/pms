@@ -52,7 +52,24 @@ function getToDoPagination${work.work_id}(page, project_id, work_id){
 		}
 	});
 }
+
+function goAllSelect(){
 	
+	var allSelect = document.getElementById("todoListTopCheck");
+	var select = document.getElementsByName("todoListCheck");
+	
+	if(allSelect.checked){
+		for(var i = 0; i < select.length; i++){
+			select[i].checked = true;
+		}
+	}else{
+		for(var i = 0; i < select.length; i++){
+			select[i].checked = false;
+		}
+	}
+	
+}
+
 </script>
 
 <!-- to-do list 조회 -->
@@ -60,12 +77,13 @@ function getToDoPagination${work.work_id}(page, project_id, work_id){
 	<table>
 		<thead>
 			<tr>
-				<th><input type="checkbox" /></th>
+				<th><input type="checkbox" class="todoListCheck" id="todoListTopCheck" onclick="goAllSelect();"/></th>
 				<th>TODO</th>
 				<th>담당자</th>
 				<th>시작</th>
 				<th>마감</th>
 				<th>이슈</th>
+				<th>삭제</th>
 			</tr>
 		</thead>
 		<tbody id="todoInsertHtmlAjax${work.work_id}">
