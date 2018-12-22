@@ -168,23 +168,6 @@ public class ProjectController {
 		return "main/subMain";
 	}
 
-//	@RequestMapping(value = "/acceptInvitation", method = RequestMethod.GET)
-//	public String acceptInvitation(@RequestParam("accept")String accept, @RequestParam("id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo) {
-//		try {
-//			PMemberVo pMemberVo = new PMemberVo();
-//			pMemberVo.setPmember_member(memberVo.getMember_mail());
-//			pMemberVo.setPmember_project(project_id);
-//			if(accept.equals("Y")) {
-//				memberService.deleteInviteProject(memberVo.getMember_mail(), pMemberVo);
-//			}
-//			memberService.deleteInviteProject(memberVo.getMember_mail());
-//		}catch (Exception e){
-//			e.printStackTrace();
-//		}
-//		return "redirect:/main";
-//	}
-
-
 	@RequestMapping(value = "/inviteProjectAjax", method = RequestMethod.GET)
 	public String inviteProjectAjax(Model model,@RequestParam("accept")String accept, @RequestParam("project_id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo) {
 		try {

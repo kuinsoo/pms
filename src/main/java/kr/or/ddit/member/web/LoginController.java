@@ -102,7 +102,7 @@ public class LoginController {
 		request.setCharacterEncoding("utf-8");
 		String member_mail = request.getParameter("member_mail").toLowerCase();
 		String member_pass = request.getParameter("member_pass").toLowerCase(); // 대소문자를 안가린다.
-		
+
 		memberVo = memberService.selectUser(member_mail);
 
 		if (memberVo != null && memberVo.getMember_withdrawal().equals("Y")) {
