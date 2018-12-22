@@ -89,45 +89,7 @@
 			</ul>
 
 			<ul class="bookmarkProject">
-				<%-- 프로젝트 처리 --%>
-				<c:forEach items="${pMemberList}" var="pMemberListVo" varStatus="i">
-					<li class="bookmarkProject">
-						<div class="projectCard" >
-							<div class="projectCardTitle" >
-								<c:choose >
-									<c:when test="${pMemberListVo.pmember_bookmark eq 'N'}">
-										<i class="icon-star icons" onclick="bookmark('${pMemberListVo.project_id}');"></i>
-									</c:when>
-									<c:when test="${pMemberListVo.pmember_bookmark eq 'Y'}">
-										<i class="icon-star icons"  style="color:yellow;font-weight:bold;" onclick="bookmark('${pMemberListVo.project_id}');"></i>
-									</c:when>
-								</c:choose>
-								<a href="/subMain?project_id=${pMemberListVo.project_id}&project_title=${pMemberListVo.project_title}" class="ajaxProjectTitle"> ${pMemberListVo.project_title}</a>
-								<c:if test="${pMemberListVo.pmember_position eq '1'}">
-									<a href="#open" class="settingsA"><i class="icon-settings icons"></i></a>
-									<div class="white_content" id="open">
-										<div>
-											<a href="#close" class="mainCloseBtns">
-												<i class="icon-close icons"></i>
-											</a>
-											<div class="btnField">
-												<h2>프로젝트 명 - <span>${pMemberListVo.project_title}</span></h2>
-												<input type="button" value="수정" class="projectUpdateSettings" onclick="projectUpdate();"/>
-												<input type="button" value="삭제" class="projectDeleteSettings" onclick="projectDelete();"/>
-											</div>
-										</div>
-									</div>
-								</c:if>
-							</div>
-							<div class="projectUpdatePopUp"></div>
-							<div class="projectCardUserName">
-								<img src="${pMemberListVo.member_profile}">
-								<br>
-									${pMemberListVo.member_name} 외 ${pMemberListVo.pmemberCount - 1}명
-							</div>
-						</div>
-					</li>
-				</c:forEach> <%-- book end --%>
+				<%-- 프로젝트 리스트 --%>
 			</ul>
 		</div>
 		<div class="currentMainProjectCreates">
@@ -366,7 +328,6 @@
 			success: function(data) {
 				$('.inviteProject').html("");
 				$('.inviteProject').html(data);
-				bookmark(project_id);
 			}
 		});
 	}
@@ -377,9 +338,33 @@
 	}
 
 	/* 프로젝트 삭제 */
-	function projectDelete() {
-
+	function projectDelete(project_id) {
+		$.ajax({
+			type: "GET",
+			url:"/deleteProject",
+			data : {'project_id':project_id},
+			success: function(data) {
+				$('.inviteProject').html("");
+				$('.inviteProject').html(data);
+			}
+		});
 	}
+
+	// book mark
+	function ajaxMainProjectList() {
+		$.ajax({
+			type: "GET",
+			url: "/ajaxMainProjectList",
+			success: function (data) {
+				$('.bookmarkProject').html("");
+				$('.bookmarkProject').html(data);
+			}
+		});
+	}
+
+	$(document).ready(function () {
+		ajaxMainProjectList();
+	});
 
 </script>
 </body>
