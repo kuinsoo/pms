@@ -306,12 +306,9 @@ public class LoginController {
 	public String signProcess(@RequestParam("member_mail") String member_mail, MemberVo member, HttpServletRequest request) {
 		
 		String member_pass = request.getParameter("member_pass");
-		System.out.println( "ffffff " + KISA_SHA256.encrypt(member_pass).toLowerCase());
 		String kisa = KISA_SHA256.encrypt(member_pass).toLowerCase();
-		System.out.println(kisa);
 		
 		member.setMember_pass(kisa);
-		System.out.println(member.getMember_pass());
 		// 값이 다르면..
 		if (memberService.selectUser(member_mail) == null) {
 			memberService.insertUser(member);

@@ -392,10 +392,14 @@ public class MemberDetailController {
 			memberVo.setMember_name(member_name);
 			memberVo.setMember_tel(member_tel);
 			
-			// 암호화로 비교한다. 입력된값이랑 
-			if(memberVo.getMember_pass().equals(KISA_SHA256.encrypt(member_pass))) {
-				model.addAttribute("memberVo",memberVo);
-			}
+//			// 암호화로 비교한다. 입력된값이랑 
+//			if(memberVo.getMember_pass().equals(KISA_SHA256.encrypt(member_pass))) {
+//				model.addAttribute("memberVo",memberVo);
+//			}
+			
+			String kisa = KISA_SHA256.encrypt(member_pass).toLowerCase();
+			memberVo.setMember_pass(kisa);
+			
 			
 			try {
 				if(part.getSize()>0) {
@@ -425,7 +429,6 @@ public class MemberDetailController {
 			String pass1 = request.getParameter("pass1").toLowerCase();
 			
 			String kisa256 = KISA_SHA256.encrypt(pass1);
-			System.out.println("kisa256"+ kisa256);
 			
 			Map<String, String> passMap = new HashMap<>();
 			passMap.put("kisa256", kisa256);
