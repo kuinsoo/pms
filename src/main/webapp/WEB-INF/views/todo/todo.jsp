@@ -21,28 +21,30 @@ $(document).ready(function(){
 
 //to-do list 등록 ==문의: jerry==
 function insertTodo${work.work_id}() {
-   var sdate = $('input[name=non_todo_sdate${work.work_id}]').val(); //UTC형식 Date를 sdate에 담는다.
-   var eedate = $('input[name=non_todo_eedate${work.work_id}]').val(); //UTC형식 Date를 eedate에 담는다.
-   var repSdate = sdate.replace("T", " "); //Parsing('T' 제거)
-   var repEedate = eedate.replace("T", " "); //Parsing('T' 제거)
-   $("#todo_sdate${work.work_id}").attr('value', repSdate); //Controller에 보낼 hidden에 값을 세팅
-   $("#todo_eedate${work.work_id}").attr('value', repEedate); //Controller에 보낼 hidden에 값을 세팅
+    var sdate = $('input[name=non_todo_sdate${work.work_id}]').val(); //UTC형식 Date를 sdate에 담는다.
+    var eedate = $('input[name=non_todo_eedate${work.work_id}]').val(); //UTC형식 Date를 eedate에 담는다.
+    var repSdate = sdate.replace("T", " "); //Parsing('T' 제거)
+    var repEedate = eedate.replace("T", " "); //Parsing('T' 제거)
+    $("#todo_sdate${work.work_id}").attr('value', repSdate); //Controller에 보낼 hidden에 값을 세팅
+    $("#todo_eedate${work.work_id}").attr('value', repEedate); //Controller에 보낼 hidden에 값을 세팅
+	var work_id = ${work.work_id};
+    var project_id = ${projectVo.project_id};
+    var param = $('#todoInsert${work.work_id}').serialize();
 
-   var param = $('#todoInsert${work.work_id}').serialize();
-
-   $.ajax({
-      method: "POST",
-      url: "/todoInsert",
-      data: param,
-      success: function(data) {
-         window.location.href = '#close';
-         $('#todoInsertHtmlAjax${work.work_id}').html("");
-         $('#todoInsertHtmlAjax${work.work_id}').html(data);
-      },
-      error:function(data) {
-         console.log("todo.jsp : insertTodo() - error");
-      }
-   });
+	$.ajax({
+	   method: "POST",
+	   url: "/todoInsert",
+	   data: param,
+	   success: function(data) {
+	      window.location.href = '#close';
+	      $('#todoInsertHtmlAjax${work.work_id}').html("");
+	      $('#todoInsertHtmlAjax${work.work_id}').html(data);
+	      getToDoPagination${work.work_id}(1, project_id, work_id);
+	   },
+	   error:function(data) {
+	      console.log("todo.jsp : insertTodo() - error");
+	   }
+	});
 }
 
 /* popup member list Ajax */

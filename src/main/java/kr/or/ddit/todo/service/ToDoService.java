@@ -111,5 +111,18 @@ public class ToDoService implements ToDoServiceInf{
 	public int todoCompletYN(Map todoUpdateMap) {
 		return todoMapper.todoCompletYN(todoUpdateMap);
 	}
+
+	/**
+	* Method : todoDelete
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_id
+	* @return
+	* Method 설명 : to-do를 삭제
+	*/
+	@Override
+	public int todoDelete(String todo_id) {
+		return todoMapper.todoDelete(todo_id);
+	}
 	
 }

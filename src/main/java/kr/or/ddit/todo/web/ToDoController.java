@@ -116,6 +116,7 @@ public class ToDoController {
 		int todoCnt = todoService.todoCnt(work_id);
 		
 		model.addAttribute("todoCnt", (int)Math.ceil((double)todoCnt / pageVo.getPageSize()));
+		
 		model.addAttribute("work_id", work_id);
 		model.addAttribute("project_id", project_id);
 		model.addAttribute("pageVo", pageVo);
@@ -151,15 +152,54 @@ public class ToDoController {
 		return "todo/popupMemberList";
 	}
 	
+	/**
+	* Method : todoCompletY
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_id
+	* @param chk
+	* Method 설명 : to-do 완료여부 체크
+	*/
 	@RequestMapping(value="/todoCompletY", method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
 	public void todoCompletY(@RequestParam("todo_id")String todo_id, @RequestParam("chk")String chk) {
 		Map<String, Object> todoUpdateMap = new HashMap<String, Object>();
 		todoUpdateMap.put("todo_id", todo_id);
 		todoUpdateMap.put("chk", chk);
-		
-		todoService.todoCompletYN(todoUpdateMap);
+		try {
+			todoService.todoCompletYN(todoUpdateMap);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 	
+	@RequestMapping(value="/todoDelete", method= {RequestMethod.POST, RequestMethod.GET})
+	public String todoDelete(@RequestParam("todo_id")String todo_id, @RequestParam("project_id")String project_id,
+							@RequestParam("work_id")String work_id, PageVo pageVo, Model model) {
+		WorkVo workVo = new WorkVo();
+		workVo.setWork_project(project_id);
+		workVo.setWork_id(work_id);
+
+		/* to-do delete */
+		try {
+			todoService.todoDelete(todo_id);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		pageVo.setPage(1);
+		pageVo.setPageSize(5);
+		
+		Map<String, Object> todoMap = new HashMap<String, Object>();
+		todoMap.put("workVo", workVo);
+		todoMap.put("pageVo", pageVo);
+		
+		/* to-do select */
+		Map<String, Object> todoListMap = todoService.workToDoSelect(todoMap);
+		
+		model.addAttribute("todoListMap", todoListMap);
+		
+		return "todo/todoInsertAjax";
+	}
 }

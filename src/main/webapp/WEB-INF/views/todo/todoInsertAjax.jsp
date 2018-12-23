@@ -87,7 +87,7 @@
 		<td>${todo.todo_issue}</td>
 		<c:choose>
 			<c:when test="${todo.todo_complet == 'N' && todo.todo_issue == null}">
-				<td id="minusBtn${todo.todo_id}"><i class='fas fa-minus' style='color: red; cursor: pointer;' id='todoDelete${todo.todo_id}'></i></td>
+				<td id="minusBtn${todo.todo_id}"><i class='fas fa-minus' style='color: red; cursor: pointer;' id='todoDelete${todo.todo_id}' onclick="goTodoDelete${todo.todo_work}(${todo.todo_id}, ${todo.todo_work});"></i></td>
 			</c:when>
 			<c:otherwise>
 				<td id="minusBtn${todo.todo_id}"></td>
