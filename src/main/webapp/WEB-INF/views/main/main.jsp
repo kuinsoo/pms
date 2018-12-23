@@ -367,8 +367,8 @@
 	});
 
 	<%-- submain 이동 스크립트  POST 방식 --%>
-	function pageSub() {
-		$('#pageSubMain').submit();
+	function pageSub(project_id) {
+		$('#pageSubMain'+project_id).submit();
 	}
 
 </script>

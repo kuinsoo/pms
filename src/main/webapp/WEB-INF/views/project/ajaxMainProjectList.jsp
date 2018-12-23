@@ -21,10 +21,10 @@
                         <i class="icon-star icons"  style="color:yellow;font-weight:bold;" onclick="bookmark('${pMemberListVo.project_id}');"></i>
                     </c:when>
                 </c:choose>
-                <form id="pageSubMain" action="/subMain" method="post">
+                <form id="pageSubMain${pMemberListVo.project_id}" action="/subMain" method="post">
                     <input type="hidden" name="project_id" value="${pMemberListVo.project_id}" />
                 </form>
-                <a onclick="pageSub();" class="ajaxProjectTitle" > ${pMemberListVo.project_title} </a>
+                <a onclick="pageSub('${pMemberListVo.project_id}');" class="ajaxProjectTitle" > ${pMemberListVo.project_title} </a>
                     <%--  <a href="/subMain?project_id=${pMemberListVo.project_id}" class="ajaxProjectTitle"> ${pMemberListVo.project_title}</a>
             <a href='#' onclick="javascript:page_move('/subMain','${pMemberListVo.project_id}')" class="ajaxProjectTitle" >${pMemberListVo.project_title}</a>--%>
     <c:if test="${pMemberListVo.pmember_position eq '1'}">
