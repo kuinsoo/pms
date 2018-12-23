@@ -32,18 +32,18 @@ import kr.or.ddit.work.model.WorkVo;
 public class ToDoController {
 	@Autowired
 	private ToDoServiceInf todoService;
-	
+
 	/**
-	* Method : ajaxInsertTodo
-	* 작성자 : jerry
-	* 변경이력 :
-	* @param memberVo
-	* @param project_id
-	* @param todoVo
-	* @param model
-	* @return
-	* Method 설명 : to-do list 등록(Ajax적용)
-	*/
+	 * Method : ajaxInsertTodo
+	 * 작성자 : jerry
+	 * 변경이력 :
+	 *
+	 * @param request the request
+	 * @param pageVo  the page vo
+	 * @param todoVo  the todo vo
+	 * @param model   the model
+	 * @return Method  설명 : to-do list 등록(Ajax적용)
+	 */
 	@RequestMapping(value="/todoInsert", method= {RequestMethod.POST, RequestMethod.GET})
 	public String ajaxInsertTodo(HttpServletRequest request, PageVo pageVo, ToDoVo todoVo, Model model) {
 		WorkVo workVo = new WorkVo();
@@ -70,16 +70,17 @@ public class ToDoController {
 		
 		return "todo/todoInsertAjax";
 	}
-	
+
 	/**
-	* Method : ajaxSelectTodo
-	* 작성자 : jerry
-	* 변경이력 :
-	* @param todo_work
-	* @param model
-	* @return
-	* Method 설명 : to-do list 조회
-	*/
+	 * Method : ajaxSelectTodo
+	 * 작성자 : jerry
+	 * 변경이력 :
+	 *
+	 * @param request the request
+	 * @param pageVo  the page vo
+	 * @param model   the model
+	 * @return Method  설명 : to-do list 조회
+	 */
 	@RequestMapping(value="/todoSelect", method= {RequestMethod.POST, RequestMethod.GET})
 	public String ajaxSelectTodo(HttpServletRequest request, PageVo pageVo, Model model) {
 		WorkVo workVo = new WorkVo();
@@ -99,18 +100,18 @@ public class ToDoController {
 		
 		return "todo/todoInsertAjax";
 	}
-	
+
 	/**
-	* Method : ajaxPaginationTodo
-	* 작성자 : jerry
-	* 변경이력 :
-	* @param project_id
-	* @param work_id
-	* @param pageVo
-	* @param model
-	* @return
-	* Method 설명 : to-do list 페이징처리
-	*/
+	 * Method : ajaxPaginationTodo
+	 * 작성자 : jerry
+	 * 변경이력 :
+	 *
+	 * @param project_id the project id
+	 * @param work_id    the work id
+	 * @param pageVo     the page vo
+	 * @param model      the model
+	 * @return Method  설명 : to-do list 페이징처리
+	 */
 	@RequestMapping(value="todoPagination", method= {RequestMethod.POST, RequestMethod.GET})
 	public String ajaxPaginationTodo(@RequestParam("project_id")String project_id, @RequestParam("work_id")String work_id, PageVo pageVo, Model model) {
 		int todoCnt = todoService.todoCnt(work_id);
@@ -123,16 +124,19 @@ public class ToDoController {
 		
 		return "todo/todoPaginationHtml";
 	}
-	
+
 	/**
-	* Method : ajaxPopupMember
-	* 작성자 : jerry
-	* 변경이력 :
-	* @param project_id
-	* @param model
-	* @return
-	* Method 설명 : to-do insert시 popup창에 참여자 리스트 조회
-	*/
+	 * Method : ajaxPopupMember
+	 * 작성자 : jerry
+	 * 변경이력 :
+	 *
+	 * @param model        the model
+	 * @param project_id   the project id
+	 * @param work_id      the work id
+	 * @param searchOption the search option
+	 * @param searchMember the search member
+	 * @return Method  설명 : to-do insert시 popup창에 참여자 리스트 조회
+	 */
 	@RequestMapping(value="/popupMemberList", method= {RequestMethod.POST, RequestMethod.GET})
 	public String ajaxPopupMember(Model model, @RequestParam("project_id")String project_id, @RequestParam("work_id")String work_id, 
 									@RequestParam("searchOption")String searchOption, @RequestParam("searchMember")String searchMember) {
@@ -151,15 +155,15 @@ public class ToDoController {
 		
 		return "todo/popupMemberList";
 	}
-	
+
 	/**
-	* Method : todoCompletY
-	* 작성자 : jerry
-	* 변경이력 :
-	* @param todo_id
-	* @param chk
-	* Method 설명 : to-do 완료여부 체크
-	*/
+	 * Method : todoCompletY
+	 * 작성자 : jerry
+	 * 변경이력 :
+	 *
+	 * @param todo_id the todo id
+	 * @param chk     Method 설명 : to-do 완료여부 체크
+	 */
 	@RequestMapping(value="/todoCompletY", method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
 	public void todoCompletY(@RequestParam("todo_id")String todo_id, @RequestParam("chk")String chk) {
@@ -173,7 +177,17 @@ public class ToDoController {
 		}
 		
 	}
-	
+
+	/**
+	 * Todo delete string.
+	 *
+	 * @param todo_id    the todo id
+	 * @param project_id the project id
+	 * @param work_id    the work id
+	 * @param pageVo     the page vo
+	 * @param model      the model
+	 * @return the string
+	 */
 	@RequestMapping(value="/todoDelete", method= {RequestMethod.POST, RequestMethod.GET})
 	public String todoDelete(@RequestParam("todo_id")String todo_id, @RequestParam("project_id")String project_id,
 							@RequestParam("work_id")String work_id, PageVo pageVo, Model model) {

@@ -48,5 +48,15 @@ public class CommentsController {
 	return "work/ajaxCreateWork";
 	}
 
+	@RequestMapping(value = "/deleteCmt", method = RequestMethod.GET)
+	public String ajaxInsertCmt(Model model, @RequestParam("project_id")String project_id,
+								@RequestParam("cmt_id")String cmt_id){
+		commentsService.deleteCmt(cmt_id);
+
+		model.addAttribute("workList",workService.selectWorks(project_id));
+		model.addAttribute("cmtList", commentsService.cmtList(project_id));
+		return "work/ajaxCreateWork";
+	}
+
 
 }
