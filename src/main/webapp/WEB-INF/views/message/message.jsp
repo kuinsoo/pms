@@ -97,7 +97,7 @@
 												<input type="submit" value="삭제" class="sentNoteDeleteBtn"/>
 												<input type="hidden" id ="reInput" name ="msg_id" />
 											</form>
-											<a href="#close" class="sentNoteCloseBtn">취소</a>
+											<a onclick="getFriendsListGo();" href="#close" class="sentNoteCloseBtn"> 취소 </a>
 										</div>
 									</div>
 								</div>
@@ -253,11 +253,13 @@
 		getMessageSend(1);
 		getMyFriends(1);
 		
+		
 		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
 			console.log("msgReceiveList");
 			var msg_id = $(this).children()[1].innerHTML;
 			updateMessageReceivedAjax(msg_id);
 			window.location = "#open2";
+			
 		});
 		
 		$("#msgSendList").on("click", ".msgClick2" ,function(){
@@ -269,6 +271,10 @@
 			 window.location = "#open1";
 		});
 	});
+	
+	function getFriendsListGo(){
+		getMessageReceived(1);
+	};	
 		
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		function getMessageReceived(page){
@@ -327,9 +333,8 @@
 				data : "msg_id=" + msg_id, 
 				success : function(data){
 			
-					console.log(data);
-				
-					console.log(data.msg_type);
+				console.log(data);
+				console.log(data.msg_type);
 					
 			  	var msg_id = data.msg_id; 
 			 	var msg_smember = data.msg_smember ;

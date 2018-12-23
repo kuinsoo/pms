@@ -118,8 +118,7 @@
 	<delete id="deleteMsgSend" parameterType="String">
 		delete from message_member where msgmember_msg = #{msg_id}
 	</delete>
-	
-	
+
 	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 	<!-- 친구목록 부분 -->
 	
@@ -130,7 +129,7 @@
 	</select>
 	
 	<delete id="deleteMyfriend" parameterType="String">
-		delete from friendslist 
+		delete from FRIENDSLIST 
 		where friend_code=  #{friend_code}
 	</delete>
 	

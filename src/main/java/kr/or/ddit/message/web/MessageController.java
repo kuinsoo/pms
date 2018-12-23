@@ -287,15 +287,10 @@ public class MessageController {
 		String msg_rmember = request.getParameter("textValue");
 		String msg_content = request.getParameter("textArea");
 		
-		System.out.println("받는사람" + msg_rmember);
-		System.out.println( " 보낸내용" + msg_content);
-		
 		msgVo.setMsg_id(msgVo.getMsg_id());
 		msgVo.setMsg_content(msg_content);
 		msgVo.setMsg_smember(memberVo.getMember_mail());
 		msgVo.setMsg_rmember(msg_rmember);
-		
-		System.out.println("member_mail의 값" + memberVo.getMember_mail());
 		
 		int insertMessage = messageservice.insertMessageSend(msgVo);
 		
