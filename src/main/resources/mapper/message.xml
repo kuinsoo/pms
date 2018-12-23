@@ -106,8 +106,9 @@
 	
 	<!--  보낸쪽지 갯수  -->
 	<select id="totalMsgSend" resultType="int" parameterType="String">
-		select count(*) from message
+		select count(*) from message A, message_member B
         where MSG_SMEMBER = #{member_mail}
+        and A.MSG_ID = B.MSGMEMBER_MSG
 	</select>
 	
 	<delete id="deleteMsgReceived" parameterType="String">

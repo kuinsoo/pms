@@ -196,9 +196,11 @@
 							<div class="friendRight">
 								<form name ="searchTextFriend" method="POST" onsubmit="return false;">
 										<input type="text" id="searchTextFriend" name="searchTextFriend" class="friendSearchInput" placeholder="찾으시는 친구의 이메일을 입력해주세요" />
-										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="page" value='1'/>
 										<input type="hidden" name="pageSize" value='10' />
 										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getSearchFriendProject();"/>
+										<button onclick="getMyFriends(1);">목록으로</button>
+										
 								</form>
 								<table class="friendCreateTable">
 									<thead>
@@ -375,7 +377,7 @@
 					
 					var i  = 1;
 					var paging ="";
-					paging +="<li><a href='javascript:getMessageSend("+data.pageCnt  +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					paging +="<li><a href='javascript:getMessageSend("+ i  +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 					for(var i= 1; i<=data.pageCnt; i++) {
 						paging += "<li><a href='javascript:getMessageSend("+ i +");'>"+ i+ "</a></li>";
 					}
@@ -452,7 +454,7 @@
 		
 		function getSearchFriendProject(){
 				var param = $('form[name=searchTextFriend]').serialize();
-					
+				var pageSize = 10;
 					$.ajax({
 						type: "POST",
 						url : "/searchTextFriendAjax",
