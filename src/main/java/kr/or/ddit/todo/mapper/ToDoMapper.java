@@ -77,4 +77,14 @@ public interface ToDoMapper {
 	*/
 	int todoCompletYN(Map todoUpdateMap);
 	
+	/**
+	* Method : todoDelete
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_id
+	* @return
+	* Method 설명 : to-do를 삭제
+	*/
+	int todoDelete(String todo_id);
+	
 }

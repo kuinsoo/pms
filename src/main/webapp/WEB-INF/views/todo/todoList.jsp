@@ -14,11 +14,6 @@ $(document).ready(function(){
 	//to-do list의 pagination(Ajax) ==문의: jerry==
 	getToDoPagination${work.work_id}(1, project_id, work_id);
 	
-	//삭제할 수 있는 to-do만 삭제 버튼 출력
-// 	var todo_id = getElementById("").val();
-// 	todoDeleteConfirm(todo_id);
-	
-	
 	//마감일자와 오늘날짜를 비교하여 자동 체크
 // 	var beforeDate = new Date();
 // 	todoEdateCheck(beforeDate);
@@ -98,6 +93,25 @@ function todoComplet(todo_id, todo_issue){
 			}
 		});
 	}
+}
+
+function goTodoDelete${work.work_id}(todo_id, work_id){
+	var project_id = $('#todo_project_id').val();
+	
+	$.ajax({
+		method: "POST",
+		url: "/todoDelete",
+		data: {"todo_id" : todo_id, "project_id" : project_id, "work_id" : work_id},
+		success: function(data){
+			console.log(data);
+			$('#todoInsertHtmlAjax${work.work_id}').html("");
+	        $('#todoInsertHtmlAjax${work.work_id}').html(data);
+	        getToDoPagination${work.work_id}(1, project_id, work_id);
+		},
+		error: function(data){
+			console.log("todoList.jsp : goTodoDelete() - error");
+		}
+	});
 }
 
 /* 날짜 비교(보류) */

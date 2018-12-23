@@ -86,4 +86,11 @@
 		WHERE	todo_id = #{todo_id}
 	</update>
 	
+	<!-- to-do delete -->
+	<delete id="todoDelete" parameterType="String">
+		DELETE
+		FROM	todo
+		WHERE	todo_id = #{todo_id}
+	</delete>
+	
 </mapper>
