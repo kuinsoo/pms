@@ -7,17 +7,17 @@ $(document).ready(function(){
 	var work_id = ${work.work_id};
 	//console.log("project_id : " + project_id);
 	//console.log("work_id : " + work_id);
-	
+
 	//페이지 접속시 to-do list 조회(Ajax) ==문의: jerry==
 	getToDoList${work.work_id}(1, project_id, work_id);
-	
+
 	//to-do list의 pagination(Ajax) ==문의: jerry==
 	getToDoPagination${work.work_id}(1, project_id, work_id);
-	
+
 	//마감일자와 오늘날짜를 비교하여 자동 체크
 // 	var beforeDate = new Date();
 // 	todoEdateCheck(beforeDate);
-	
+
 });
 
 /* 페이지 접속시 to-do list 조회(Ajax) ==문의: jerry== */
@@ -61,7 +61,7 @@ function getToDoPagination${work.work_id}(page, project_id, work_id){
 function todoComplet(todo_id, todo_issue){
 	var chk = "";
 	var checked = document.getElementById("todoListCheck"+todo_id).checked;
-	
+
 	/* 체크를 했으면 Y로 변경 */
 	if(checked == true){
 		chk = "Y";
@@ -76,7 +76,7 @@ function todoComplet(todo_id, todo_issue){
 				console.log("todoList.jsp : todoComplet() - Y, error");
 			}
 		});
-	/* 체크를 풀었으면 N으로 변경 */	
+	/* 체크를 풀었으면 N으로 변경 */
 	}else if(checked == false && todo_issue == null){
 		chk = "N";
 		$.ajax({
@@ -97,7 +97,7 @@ function todoComplet(todo_id, todo_issue){
 
 function goTodoDelete${work.work_id}(todo_id, work_id){
 	var project_id = $('#todo_project_id').val();
-	
+
 	$.ajax({
 		method: "POST",
 		url: "/todoDelete",
