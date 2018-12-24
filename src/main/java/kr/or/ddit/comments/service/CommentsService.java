@@ -1,6 +1,7 @@
 package kr.or.ddit.comments.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,19 @@ public class CommentsService implements CommentsServiceInf {
 	@Override
 	public List<CommentsVo> cmtList(String project_id) {
 		return commentsMapper.cmtList(project_id) ;
+	}
+
+	/**
+	 * Ajax cmt list list.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 댓글 조회
+	 *
+	 * @param mapCmtList the map cmt list
+	 * @return the list
+	 */
+	@Override
+	public List<CommentsVo> ajaxCmtList(Map<String, String> mapCmtList) {
+		return commentsMapper.ajaxCmtList(mapCmtList);
 	}
 
 	/**

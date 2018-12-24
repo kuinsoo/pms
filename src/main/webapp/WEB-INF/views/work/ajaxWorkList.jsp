@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <c:forEach items="${workList}" var="work" varStatus="i">
@@ -49,26 +49,29 @@
 					</div>
 				</li>
 			</ul>
-			<c:forEach items="${cmtList}" var="cmt">
-				<c:if test="${cmt.cmt_work eq  work.work_id}">
-					<ul>
-						<li>
-							<div class="cardContentCommentUser">
-								<div class="cardContentCommentUserImg">
-									<img src="${cmt.member_profile}">
+			<div id="commentListNewDiv${work.work_id}">
+					<%-- commentList --%>
+				<c:forEach items="${cmtList}" var="cmt">
+					<c:if test="${cmt.cmt_work eq  work.work_id}">
+						<ul>
+							<li>
+								<div class="cardContentCommentUser">
+									<div class="cardContentCommentUserImg">
+										<img src="${cmt.member_profile}">
+									</div>
+									<div class="cardContentCommentUserName">
+										<b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
+										<input type="button" value="수정" class="commentUpdateBtn"/>
+										<input type="button" value="삭제" class="commentDeleteBtn" onclick="deleteCmt('${cmt.cmt_id}', '${work.work_id}');" />
+										<br>
+										<span>${cmt.cmt_content}</span>
+									</div>
 								</div>
-								<div class="cardContentCommentUserName">
-									<b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
-									<input type="button" value="수정" class="commentUpdateBtn"/>
-									<input type="button" value="삭제" class="commentDeleteBtn"/>
-									<br>
-									<span>${cmt.cmt_content}</span>
-								</div>
-							</div>
-						</li>
-					</ul>
-				</c:if>
-			</c:forEach>
+							</li>
+						</ul>
+					</c:if>
+				</c:forEach>
+			</div>
 		</div>
 	</div> <%-- 끝--%>
 </c:forEach>

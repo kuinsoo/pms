@@ -145,7 +145,10 @@ iframe{border: 1px solid #dee3eb; width:100%; height:100%}
 .cardContentBottom > span{cursor:pointer;vertical-align:middle;}
 .cardContentBottom > i.icon-bubble{margin-left:20px;vertical-align:middle;}
 .cardContentBottom > i.icon-bulb{margin-left:25px;vertical-align:middle;}
+
+/* 댓글 */
 .cardContentComment{width:100%;min-height:auto;background-color:#f6f7f8;border-top:1px solid #dee3eb;}
+#commentListNewDiv{padding-bottom:20px;}
 .cardContentComment > ul > li:last-child{padding-bottom:20px;}
 .cardContentCommentUser{width:100%;height:70px;padding:20px;}
 .cardContentCommentUser > .cardContentCommentUserImg{float:left;margin-left:20px;}

@@ -122,6 +122,34 @@ public class MessageController {
 		return myFriendMap;
 	}
 	
+	@ResponseBody
+	@RequestMapping(value="/myFriendsDelete", method = RequestMethod.GET)
+	public Map<String , Object> myFriendsDelete(@SessionAttribute("memberVo")MemberVo memberVo, PageVo pageVo, 
+								HttpServletRequest request){
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		String friend_code = request.getParameter("friend_code");
+
+		System.out.println("friend_code"+ friend_code);
+		System.out.println("friend_code"+ friend_code);
+		System.out.println("friend_code"+ friend_code);
+		
+		FriendListVo freidListVo = new FriendListVo();
+		freidListVo.setFriend_mymail(memberVo.getMember_mail());
+		
+		messageservice.deleteMyfriend(friend_code);
+		
+		List<FriendListVo> myFriendList = messageservice.MyFriendsList(pageVo);
+		
+		int pageCnt = messageservice.totalFriends(memberVo.getMember_mail());
+		
+		Map<String, Object> myFriendDeleteMap = new HashMap<>();
+		myFriendDeleteMap.put("myFriendList", myFriendList);
+		myFriendDeleteMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+
+		return myFriendDeleteMap;
+	}
+	
 	/**
 	 * Method : searchTextFriendAjax
 	 * 작성자 : pc07

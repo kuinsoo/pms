@@ -43,7 +43,7 @@ public interface MemberMapper {
 	 * @return Method 설명 : 회원가입
 	 */
 	public int insertUser(MemberVo memberVo);
-
+	
 	/**
 	 * Method : updateUser
 	 * 작성자 : 나진실

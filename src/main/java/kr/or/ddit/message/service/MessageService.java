@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.ddit.friendslist.model.FriendListVo;
+import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.message.mapper.MessageMapper;
 import kr.or.ddit.message.model.MessageVo;
 import kr.or.ddit.util.model.PageVo;
@@ -101,5 +102,15 @@ public class MessageService implements MessageServiceInf{
 	}
 
 
+	@Override
+	public int deleteMyfriend(String friend_code) {
+		return messageMapper.deleteMyfriend(friend_code);
+	}
+
+
+	@Override
+	public List<MemberVo> totalMemberSearch(PageVo pageVo) {
+		return messageMapper.totalMemberSearch(pageVo);
+	}
 
 }

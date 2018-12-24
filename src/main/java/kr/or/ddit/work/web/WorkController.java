@@ -61,7 +61,7 @@ public class WorkController {
 
 		model.addAttribute("workList",workService.selectWorks(project_id));
 		model.addAttribute("cmtList", commentsService.cmtList(project_id));
-		return "work/ajaxCreateWork";
+		return "work/ajaxWorkList";
 	}
 
 	@RequestMapping(value = "/testGantt", method=RequestMethod.GET)

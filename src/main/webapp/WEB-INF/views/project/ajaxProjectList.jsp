@@ -26,13 +26,27 @@
                     <a href="#open${pMemberListVo.project_id}" class="settingsA"><i class="icon-settings icons"></i></a>
                     <div class="white_content" id="open${pMemberListVo.project_id}">
                         <div>
-                            <a href="#close" class="mainCloseBtns">
-                                <i class="icon-close icons"></i>
-                            </a>
-                            <div class="btnField">
-                                <h2>프로젝트 명 - <span>${pMemberListVo.project_title}</span></h2>
-                                <input type="button" value="수정" class="projectUpdateSettings" onclick="projectUpdate();"/>
-                                <input type="button" value="삭제" class="projectDeleteSettings" onclick="projectDelete('${pMemberListVo.project_id}');"/>
+                            <div class="projectUDTitle">
+                                <h2>프로젝트 수정 & 삭제</h2>
+                                <a href="#close" class="mainCloseBtns">
+                                    <i class="icon-close icons"></i>
+                                </a>
+                            </div>
+                            <div class="projectUDContent">
+                                <span>프로젝트명</span>
+                                <input type="text" class="projectUDTitleInput" value="이엘값으로 프로젝트명 뽑기" />
+                                <span class="projectSpan">프로젝트 개요</span>
+                                <textarea class="projectContentInput">이엘값으로 프로젝트 개요명 뽑기</textarea>
+                            </div>
+                            <div class="projectStartEndDivp">
+                                <span class="projectStartp">프로젝트 시작일</span>
+                                <input type="date" name="project_sdate" class="projectStartInputp" />
+                                <span class="projectEndp">프로젝트 마감일</span>
+                                <input type="date" name="project_edate" class="projectEndInputp" />
+                            </div>
+                            <div class="layerPopUpBtnss">
+                                <input type="button" value="수정" class="createProjectSubmit" onclick="projectUpdate();">
+                                <a href="#" class="btn-layerClose layerPopupClose" onclick="projectDelete('${pMemberListVo.project_id}');">삭제</a>
                             </div>
                         </div>
                     </div>
