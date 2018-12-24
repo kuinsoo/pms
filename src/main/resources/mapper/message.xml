@@ -68,7 +68,8 @@
        select * from(
   			 select rownum rnum ,a.*
             from
-                 (select friend_member 
+                 (select friend_member,
+                 		 friend_code
                          from   FRIENDSLIST
                          where  friend_myemail = #{member_mail} )a) 
             where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}

@@ -29,8 +29,6 @@ public interface MessageMapper {
 	 */
 	List<MessageVo> messageReceived (PageVo pageVo);
 	
-	//MessageVo deleteFriends = (HashMap <String, Object> map);
-	
 	
 	/**
 	 * Method : MyFriendsList
@@ -105,6 +103,15 @@ public interface MessageMapper {
 	 */
 	int deleteMsgReceived(String msg_id);
 	
+	/**
+	 * Method : deleteMyfriend
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friend_code
+	 * @return
+	 * Method 설명 : 친구목록중 친구 삭제하기 
+	 */
+	int deleteMyfriend(String friend_code);
 	
 	
 	/**

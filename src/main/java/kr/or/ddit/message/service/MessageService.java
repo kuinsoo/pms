@@ -101,5 +101,11 @@ public class MessageService implements MessageServiceInf{
 	}
 
 
+	@Override
+	public int deleteMyfriend(String friend_code) {
+		return messageMapper.deleteMyfriend(friend_code);
+	}
+
+
 
 }

@@ -161,7 +161,8 @@
 					</div>
 					<div id="tabs2-4">
 						<div class="friendContainer">
-							<div class="friendLeft">
+						 	<div class="friendLeft">
+						      <h2>친구찾기</h2>
 								<form action="#" method="post">
 									<input type="text" placeholder="찾는 이메일을 입력해주세요" class="friendSearchInput" />
 									<input type="button" value="검색" class="friendSearchBtn" />
@@ -192,8 +193,8 @@
 							</div>
 							<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 							
-							
 							<div class="friendRight">
+							<h2>나의친구목록</h2>
 								<form name ="searchTextFriend" method="POST" onsubmit="return false;">
 										<input type="text" id="searchTextFriend" name="searchTextFriend" class="friendSearchInput" placeholder="찾으시는 친구의 이메일을 입력해주세요" />
 										<input type="hidden" name="page" value='1'/>
@@ -206,6 +207,7 @@
 									<thead>
 										<tr>
 											<th>번호</th>
+											<th>친구 번호</th>
 											<th>이메일</th>
 											<th>삭제</th>
 										</tr>
@@ -420,6 +422,8 @@
 		}
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		// 친구 리스트 뽑아오는 Ajax
+		
+							
 		function getMyFriends(page){
 			var pageSize = 10;
 			$.ajax({
@@ -427,13 +431,14 @@
 				url : "/myfriendListAjax",
 				data : {"page" : page, "pageSize":pageSize},
 				success: function(data){
-				
+					
 					var html = "";
 					$.each(data.myFriendList,function(idx,mm){
 						html += "<tr class =friends>";
 						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.friend_code +"</td>";
 						html += "	<td>"+ mm.friend_member +"</td>";
-						html += "	<td>"+ "<input type='button' value='친구삭제'/>"+"</td>";
+						html += "	<td>"+ "<input type='button' onclick ='deleteMyFriends("+mm.friend_code+");' value='친구삭제'/>"+"</td>";
 						html += "</tr>";
 					});
 					
@@ -457,6 +462,22 @@
 			});
 		}
 		
+		// 삭제버튼 눌렀을때 처리 
+		function deleteMyFriends(friend_code){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/myFriendsDelete",
+				data : "friend_code="+friend_code,
+				success: function(data){
+					console.log(data.friend_code);
+					console.log(data);
+					getMyFriends(1);
+				}
+			});
+		}
+		
+		
 		function getSearchFriendProject(){
 				var param = $('form[name=searchTextFriend]').serialize();
 				var pageSize = 10;
@@ -470,6 +491,7 @@
 							$.each(data.myFriendList,function(idx,mm){
 								html += "<tr class =friends>";
 								html += "	<td>"+ mm.rnum +"</td>";
+								html += "	<td>"+ mm.friend_code +"</td>";
 								html += "	<td>"+ mm.friend_member +"</td>";
 								html += "	<td>"+ "<input type='button' value='친구삭제'/>"+"</td>";
 								html += "</tr>";
