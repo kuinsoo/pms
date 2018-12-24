@@ -1023,6 +1023,7 @@ header {
     width: 100%;
     outline: none;
     padding: 5px;
+    height:100px;
 }
 
 .projectStartEndDiv {
@@ -1281,8 +1282,8 @@ header {
 }
 .white_content:target{opacity:1;pointer-events:auto;}
 .white_content > div {
-	position:absolute;top:50%;left:50%;margin-top:-150px;margin-left:-150px;
-	width:300px;height:300px;padding:20px;border:1px solid #dee3eb;
+	position:absolute;top:50%;left:50%;margin-top:-250px;margin-left:-300px;
+	width:600px;height:500px;border:1px solid #dee3eb;border-radius:10px;
 	background-color:white;overflow:hidden;
 }
 .white_content > div > .mainCloseBtns {
@@ -1297,6 +1298,27 @@ header {
 .projectUpdateSettings{border:none;cursor:pointer;width:100%;height:30px;background-color:#746fcc;color:#fff;font-size:20px;outline:none;}
 .projectDeleteSettings{border:none;cursor:pointer;width:100%;height:30px;background-color:#746fcc;color:#fff;font-size:20px;outline:none;}
 
+/* 프로젝트 수정 및 삭제 */
+.projectUDTitle {
+	width:100%;height:50px;background-color:#eee;border-radius:10px 10px 0px 0px;
+	line-height:50px;
+}
+.projectUDTitle > h2{display:block;float:left;color:#000;font-size:20px;text-indent:20px;}
+.projectUDTitle > a{display:block;float:right;margin-top:3px;}
+.projectUDTitle > a > i{color:#000;margin-right:20px;}
+.projectUDContent{width:100%;line-height:20px;padding:20px;}
+.projectUDContent > span {
+	display:block;width:100%;color:#000;text-align:left;
+}
+.projectUDContent > .projectSpan{margin-top:20px;}
+.projectUDTitleInput{width:100%;height:30px;font-size:20px;margin-top:10px;outline:none;}
+.projectStartEndDivp{line-height:20px;}
+.projectStartEndDivp > span{color:#000;text-indent:20px;}
+.projectStartEndDivp{margin-top:20px;}
+.projectStartp{float:left;padding-top:3px;}
+.projectStartInputp{float:left;font-size:20px;margin-left:15px;}
+.projectEndp{clear:left;float:left;padding-top:3px;margin-top:15px;}
+.projectEndInputp{float:left;font-size:20px;margin-left:15px;margin-top:15px;}
 
 
 /* 쪽지 기능 */
