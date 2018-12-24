@@ -37,78 +37,8 @@
 			
             <%--카드리스트--%>
             <div id="submain_work">
-                <c:forEach items="${workList}" var="work" varStatus="i">
-				    <div class="currentCardList">
-				        <h2><i class="icon-speech icons"></i>${work.work_title}</h2>
-				        <div class="cardUserInfo">
-				            <div class="cardUserInfoImg">
-				                <img src="${work.member_profile}">
-				            </div>
-				            <div class="cardUserInfoName">
-				                <b>${work.member_mail}</b><br> <%-- 작성자 --%>
-				                <span>${work.work_wdate}</span>
-				            </div>
-				            <div class="updateDeleteIcon">
-				                <i class="icon-wrench icons"></i>
-				                <a href="#opens${work.work_id}"><i class="icon-bulb icons"></i></a>
-				                    <%-- 할일관련 --%>
-				                <%@ include file="/WEB-INF/views/todo/todo.jsp" %>
-				            </div>
-				        </div>
-				        <div class="currentCardContentView">
-				            <div class="currentCardContentViewLeft">
-				                <textarea readonly>${work.work_content}</textarea>
-				            </div>
-				            <%-- 할일관련 --%>
-				            <%@ include file="/WEB-INF/views/todo/todoList.jsp" %>
-				        </div>
-				        <div class="currentCardContentBottomView">
-				            <div id="container${work.work_id}"></div>
-				            <%@ include file="/WEB-INF/views/work/testChart.jsp" %>
-				        </div>
-				
-				        <!-- 댓글  -->
-				        <div class="cardContentComment">
-				            <ul>
-				                <li>
-				                    <div class="cardContentCommentUser">
-				                        <div class="cardContentCommentUserImg">
-				                            <img src="${memberVo.member_profile}">
-				                        </div>
-				                        <div class="cardContentCommentUserName">
-				                            <input type="text" class="commentInput" id="cmt_content${i.index}"
-				                                   placeholder="댓글을 입력해주세요" required>
-				                            <i class="icon-bubble icons"
-				                               onclick="insertCmt('${work.work_id}', 'cmt_content${i.index}');"></i>
-				                        </div>
-				                    </div>
-				                </li>
-				            </ul>
-				            <div class="commentListNewDiv">
-				            <c:forEach items="${cmtList}" var="cmt">
-				                <c:if test="${cmt.cmt_work eq  work.work_id}">
-				                    <ul>
-				                        <li>
-				                            <div class="cardContentCommentUser">
-				                                <div class="cardContentCommentUserImg">
-				                                    <img src="${cmt.member_profile}">
-				                                </div>
-				                                <div class="cardContentCommentUserName">
-				                                    <b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
-				                                    <input type="button" value="수정" class="commentUpdateBtn"/>
-				                                    <input type="button" value="삭제" class="commentDeleteBtn" onclick="deleteCmt('${cmt.cmt_id}', '${work.work_id}');" />
-				                                    <br>
-				                                    <span>${cmt.cmt_content}</span>
-				                                </div>
-				                            </div>
-				                        </li>
-				                    </ul>
-				                </c:if>
-				            </c:forEach>
-				            </div>
-				        </div>
-				    </div> <%-- 끝--%>
-				</c:forEach>
+               <%-- 업무 List --%>
+				<%@ include file="/WEB-INF/views/work/ajaxWorkList.jsp"%>
             </div>
             <%-- submainwork --%>
         </div>
@@ -422,7 +352,7 @@ function createWork() {
       }
    });
 }
-
+<%-- 댓글 삽입 --%>
 function insertCmt(work_id, cmt_content) {
    var cmt_contenta = $('#' + cmt_content).val();
    $.ajax({
@@ -430,14 +360,46 @@ function insertCmt(work_id, cmt_content) {
       url: "/ajaxInsertCmt",
       data: {"work_id": work_id, "cmt_content": cmt_contenta, "project_id": ${projectVo.project_id}},
       success: function (data) {
-         $('#submain_work').html("");
-         $('#submain_work').html(data);
+         $('#commentListNewDiv'+work_id).html("");
+         $('#commentListNewDiv'+work_id).html(data);
+         $('.commentInput').val("");
       },
       error: function (data) {
       }
    });
 }
 
+
+<%-- 댓글 삭제 --%>
+function deleteCmt(cmt_id, work_id) {
+	$.ajax({
+		type: "GET",
+		url: "/deleteCmt",
+		data: {"cmt_id": cmt_id, "project_id": ${projectVo.project_id}, "work_id" : work_id },
+		success: function (data) {
+			$('#commentListNewDiv'+work_id).html("");
+			$('#commentListNewDiv'+work_id).html(data);
+			$('.commentInput').val("");
+
+		}
+	});
+}
+
+function updateCard(no, group, index) {
+
+	$.ajax({
+		type: "GET",
+		url: "/ajaxUpdateCard",
+		data: {"wc_id": no, "wc_group": group, "wc_index": index, "project_id":${projectVo.project_id}},
+		success: function (data) {
+			$('#planList').html("");
+			$('#planList').html(data);
+			$('.kku-hide').hide();
+		}
+	});
+
+	// location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${projectVo.project_id}";
+};
 //submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
 // if (submenu.is(":visible")) {
 // submenu.slideUp();
@@ -445,35 +407,6 @@ function insertCmt(work_id, cmt_content) {
 // submenu.slideDown();
 // }
 
-function updateCard(no, group, index) {
-
-   $.ajax({
-      type: "GET",
-      url: "/ajaxUpdateCard",
-      data: {"wc_id": no, "wc_group": group, "wc_index": index, "project_id":${projectVo.project_id}},
-      success: function (data) {
-         $('#planList').html("");
-         $('#planList').html(data);
-         $('.kku-hide').hide();
-      }
-   });
-
-   // location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${projectVo.project_id}";
-};
-
-
-function deleteCmt(cmt_id, work_id) {
-	$.ajax({
-		type: "GET",
-		url: "/deleteCmt",
-		data: {"cmt_id": cmt_id, "project_id": ${projectVo.project_id} },
-		success: function (data) {
-			$('#submain_work').html("");
-			$('#submain_work').html(data);
-			getToDoList(1, '${projectVo.project_id}',work_id);
-		}
-	});
-}
 </script>
 
 </body>

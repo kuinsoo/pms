@@ -4,6 +4,7 @@ import kr.or.ddit.comments.model.CommentsVo;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.work.service.WorkServiceInf;
+import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -41,21 +42,29 @@ public class CommentsController {
 		cmtVo.setCmt_content(cmt_content);
 		cmtVo.setCmt_work(work_id);
 
-		commentsService.insertCmt(cmtVo);
+		Map<String,String> cmtMap = new HashMap<>();
+		cmtMap.put("work_project", project_id);
+		cmtMap.put("cmt_work", work_id);
 
+		commentsService.insertCmt(cmtVo);
 		model.addAttribute("workList",workService.selectWorks(project_id));
-		model.addAttribute("cmtList", commentsService.cmtList(project_id));
-	return "work/ajaxCreateWork";
+		model.addAttribute("cmtList", commentsService.ajaxCmtList(cmtMap));
+	return "work/ajaxCmtList";
 	}
 
 	@RequestMapping(value = "/deleteCmt", method = RequestMethod.GET)
 	public String ajaxInsertCmt(Model model, @RequestParam("project_id")String project_id,
-								@RequestParam("cmt_id")String cmt_id){
+								@RequestParam("cmt_id")String cmt_id,
+								@RequestParam("work_id")String work_id){
 		commentsService.deleteCmt(cmt_id);
 
+		Map<String,String> cmtMap = new HashMap<>();
+		cmtMap.put("work_project", project_id);
+		cmtMap.put("cmt_work", work_id);
+
 		model.addAttribute("workList",workService.selectWorks(project_id));
-		model.addAttribute("cmtList", commentsService.cmtList(project_id));
-		return "work/ajaxCreateWork";
+		model.addAttribute("cmtList", commentsService.ajaxCmtList(cmtMap));
+		return "work/ajaxCmtList";
 	}
 
 
