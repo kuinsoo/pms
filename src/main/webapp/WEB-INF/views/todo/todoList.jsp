@@ -114,6 +114,10 @@ function goTodoDelete${work.work_id}(todo_id, work_id){
 	});
 }
 
+function insertIssue() {
+	var param = $('form[name=insertIssueForm${todo.todo_work}]').serialize();
+}
+
 /* 날짜 비교(보류) */
 // function todoEdateCheck(beforeDate){
 // 	beforeDate.setHours(beforeDate.getHours() + 9);

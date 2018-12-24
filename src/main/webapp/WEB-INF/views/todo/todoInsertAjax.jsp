@@ -55,17 +55,17 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
-						<form style="text-align: left;">
-							<label>Title</label><input type="text"><br>
+						<form style="text-align: left;" name="insertIssueForm${todo.todo_work}">
+							<label>Title</label><input type="text" name=""><br>
 							<label>Level</label>
-							<select>
+							<select class="sel_issueLevel" name="sel_issueLevel">
 								<option value="1">level 1</option>
 								<option value="2">level 2</option>
 								<option value="3">level 3</option>
 								<option value="4">level 4</option>
 								<option value="5">level 5</option>
 							</select><br>
-							<label>담당자</label><input type="text" readonly><br>
+							<label>담당자</label><input type="text" id="" name="" readonly><br>
 							<label>발생일시</label><input type="datetime-local"><br>
 							<label>이슈내용</label><br>
 							<textarea placeholder="내용을 입력해주세요."></textarea><br>
