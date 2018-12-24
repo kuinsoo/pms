@@ -93,11 +93,14 @@
 				$('.saveBtn').prop('disabled', true);
 				$(".inputerror").show();
 			});
+			
+			
 			var certificationNumber;
+			
 			
 			//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
 			//blur()이벤트 사용
-			$("#pass2input").blur(function() {
+		 	$("#pass2input").blur(function() {
 				if($("#pass1input").val() != $("#pass2input").val()){
 					$(".error").show();
 					$('.saveBtn').prop('disabled', true);
@@ -106,7 +109,25 @@
 					$(".errorpass").hide();
 					$('.saveBtn').prop('disabled', false);
 				}
-			});
+			}); 
+			
+			/* var pass1input1 = $("#pass1input").val();
+			var pass2input2 = $("#pass2input").val();
+			
+			function onkeyup_event3(){
+				if(pass1input1 != pass2input2){
+					$(".error").show();
+					$('.saveBtn').prop('disabled', true);
+				}else{
+					$(".error").hide();
+					$(".errorpass").hide();
+					$('.saveBtn').prop('disabled', false);
+				}
+			} */
+			
+			
+			
+			
 			$('.saveBtn').prop('disabled', false);
 			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 파 일 부 분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 			
@@ -150,7 +171,6 @@
 
 		var kisa;
 		function kisaaa(){
-			
 			if( kisa === '${memberVo.member_pass}'){ 
 				$('.saveBtn').prop('disabled', true);
 				$(".passNot").hide();
@@ -538,14 +558,14 @@
 									<span class = "inputerror"> 인증번호를 입력해 주세요..</span>
 									<span class= "telerror"> 인증번호가 일치하지 않습니다.</span>
 								</li>
-								<li><input type="password" id = "pass1" name = "member_pass" onkeyup="onkeyup_event2();"/>
+								<li><input type="password" id = "pass1" onkeyup="onkeyup_event2();"/>
 									<span class="passNot"> 비밀번호가 일치하지 않습니다.. </span>
 								</li>
 								<li>
 									<input type="password" id = "pass1input" name = "member_pass"/>
 								</li>
 								<li>
-									<input type="password" id = "pass2input" />
+									<input type="password" id = "pass2input"  onkeyup="onkeyup_event3();"/>
 									<span class="error"> 입력하신 비밀번호가 일치하지 않습니다.</span>
 								</li>
 								<li>

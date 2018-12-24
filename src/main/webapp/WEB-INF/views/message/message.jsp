@@ -97,7 +97,7 @@
 												<input type="submit" value="삭제" class="sentNoteDeleteBtn"/>
 												<input type="hidden" id ="reInput" name ="msg_id" />
 											</form>
-											<a href="#close" class="sentNoteCloseBtn">취소</a>
+											<a onclick="getFriendsListGo();" href="#close" class="sentNoteCloseBtn"> 취소 </a>
 										</div>
 									</div>
 								</div>
@@ -196,9 +196,11 @@
 							<div class="friendRight">
 								<form name ="searchTextFriend" method="POST" onsubmit="return false;">
 										<input type="text" id="searchTextFriend" name="searchTextFriend" class="friendSearchInput" placeholder="찾으시는 친구의 이메일을 입력해주세요" />
-										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="page" value='1'/>
 										<input type="hidden" name="pageSize" value='10' />
 										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getSearchFriendProject();"/>
+										<button onclick="getMyFriends(1);">목록으로</button>
+										
 								</form>
 								<table class="friendCreateTable">
 									<thead>
@@ -251,11 +253,13 @@
 		getMessageSend(1);
 		getMyFriends(1);
 		
+		
 		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
 			console.log("msgReceiveList");
 			var msg_id = $(this).children()[1].innerHTML;
 			updateMessageReceivedAjax(msg_id);
 			window.location = "#open2";
+			
 		});
 		
 		$("#msgSendList").on("click", ".msgClick2" ,function(){
@@ -267,6 +271,10 @@
 			 window.location = "#open1";
 		});
 	});
+	
+	function getFriendsListGo(){
+		getMessageReceived(1);
+	};	
 		
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		function getMessageReceived(page){
@@ -325,9 +333,8 @@
 				data : "msg_id=" + msg_id, 
 				success : function(data){
 			
-					console.log(data);
-				
-					console.log(data.msg_type);
+				console.log(data);
+				console.log(data.msg_type);
 					
 			  	var msg_id = data.msg_id; 
 			 	var msg_smember = data.msg_smember ;
@@ -375,7 +382,7 @@
 					
 					var i  = 1;
 					var paging ="";
-					paging +="<li><a href='javascript:getMessageSend("+data.pageCnt  +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					paging +="<li><a href='javascript:getMessageSend("+ i  +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 					for(var i= 1; i<=data.pageCnt; i++) {
 						paging += "<li><a href='javascript:getMessageSend("+ i +");'>"+ i+ "</a></li>";
 					}
@@ -452,7 +459,7 @@
 		
 		function getSearchFriendProject(){
 				var param = $('form[name=searchTextFriend]').serialize();
-					
+				var pageSize = 10;
 					$.ajax({
 						type: "POST",
 						url : "/searchTextFriendAjax",

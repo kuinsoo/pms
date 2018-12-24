@@ -1,5 +1,6 @@
 package kr.or.ddit.message.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,6 +29,7 @@ public interface MessageMapper {
 	 */
 	List<MessageVo> messageReceived (PageVo pageVo);
 	
+	//MessageVo deleteFriends = (HashMap <String, Object> map);
 	
 	
 	/**

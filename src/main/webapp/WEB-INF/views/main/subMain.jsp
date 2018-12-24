@@ -95,7 +95,7 @@
 				                                <div class="cardContentCommentUserName">
 				                                    <b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
 				                                    <input type="button" value="수정" class="commentUpdateBtn"/>
-				                                    <input type="button" value="삭제" class="commentDeleteBtn"/>
+				                                    <input type="button" value="삭제" class="commentDeleteBtn" onclick="deleteCmt('${cmt.cmt_id}', '${work.work_id}');" />
 				                                    <br>
 				                                    <span>${cmt.cmt_content}</span>
 				                                </div>
@@ -458,6 +458,20 @@ function updateCard(no, group, index) {
 
    // location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${projectVo.project_id}";
 };
+
+
+function deleteCmt(cmt_id, work_id) {
+	$.ajax({
+		type: "GET",
+		url: "/deleteCmt",
+		data: {"cmt_id": cmt_id, "project_id": ${projectVo.project_id} },
+		success: function (data) {
+			$('#submain_work').html("");
+			$('#submain_work').html(data);
+			getToDoList(1, '${projectVo.project_id}',work_id);
+		}
+	});
+}
 </script>
 
 </body>
