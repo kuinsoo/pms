@@ -19,6 +19,7 @@ ul{list-style-type:none;}
 .adminLogo{float:left;margin-left:20px;color:red;font-size:20px;line-height:50px;}
 .adminInfo{float:right;color:#fff;font-size:17px;line-height:50px;margin-right:20px;}
 .adminInfo > span{color:#ccc;}
+.adminInfo > a{color:#f00;margin-left:20px;}
 .subHeader{width:100%;height:35px;background-color:#494b50;}
 .subHeader > ul > li{
 	display:inline-block;font-size:18px;line-height:35px;
@@ -43,7 +44,8 @@ ul{list-style-type:none;}
 .adminRightContentTop {
 	width:100%;height:40px;border-bottom:1px solid #dee3db;line-height:40px;text-indent:20px;
 }
-.adminRightContentTop > p{font-size:17px;}
+.adminRightContentTop > p > i {vertical-align:middle;font-size:13px;}
+.adminRightContentTop > p{font-size:17px;vertical-align:middle;}
 .adminRightContent > .adminRightContentInner > h2 {
 	display:block;font-size:20px;width:100%;border-bottom:1px solid #333;
 	padding-bottom:10px;
@@ -52,7 +54,7 @@ ul{list-style-type:none;}
 
 /* 테이블 */
 .adminRightContent > .adminRightContentInner > table {
-	border-collapse:collapse;width:80%;margin:0 auto;margin-top:50px;font-size:17px;
+	border-collapse:collapse;width:100%;margin:0 auto;margin-top:50px;font-size:17px;
 }
 .adminRightContent > .adminRightContentInner > table > thead > tr{border-top:2px solid #333;border-bottom:1px solid #333;}
 .adminRightContent > .adminRightContentInner > table > thead > tr > th{padding:10px 40px 10px 40px;font-size:20px;}
@@ -61,15 +63,14 @@ ul{list-style-type:none;}
 .adminRightContent > .adminRightContentInner > table > tbody > tr > td:nth-child(odd){text-align:center;}
 .adminRightContent > .adminRightContentInner > table > tbody > tr > td:nth-child(even){text-indent:20px;}
 .adminPagination{width:100%;height:30px;text-align:center;line-height:30px;}
-.adminBtns{width:80%;margin:0 auto;margin-top:20px;}
+.adminBtns{width:100%;margin:0 auto;margin-top:20px;}
 .adminBtns > .adminDelete {
 	opacity:0;
 	float:left;width:100px;height:30px;border:none;background-color:#333;color:#fff;
 	font-size:17px;outline:none;cursor:pointer;border-radius:5px;
 }
 .adminBtns > .adminCreate {
-	float:right;width:100px;height:30px;border:none;background-color:#333;color:#fff;
-	font-size:17px;outline:none;cursor:pointer;border-radius:5px;
+	width:80px;height:40px;background-color:#fa2828;color:#fff;border:none;cursor:pointer;font-size:17px;float:right;outline:none;
 }
 .adminPagination > ul > li{display:inline-block;font-size:20px;}
 .adminPagination > ul > li > i{vertical-align:middle;}
@@ -91,6 +92,7 @@ ul{list-style-type:none;}
 		</div>
 		<div class="adminInfo">
 			전체관리자<span>님</span> (admin@admin.com)
+			<a href="/logout">로그아웃</a>
 		</div>
 	</div>
 	<div class="subHeader">
@@ -111,7 +113,7 @@ ul{list-style-type:none;}
 	</div>
 	<div class="adminRightContent">
 		<div class="adminRightContentTop">
-			<p>CURRENT ADMIN > 공지사항</p>
+			<p>CURRENT ADMIN <i class="icon-arrow-right icons"></i> 공지사항</p>
 		</div>
 		<div class="adminRightContentInner">
 			<h2>공지사항 관리<span>공지사항 정보를 관리할 수 있습니다.</span></h2>
@@ -182,7 +184,7 @@ ul{list-style-type:none;}
 			<div class="adminPagination">
 				<div class="adminBtns">
 					<input type="button" value="삭제" class="adminDelete" />
-					<input type="button" value="글쓰기" class="adminCreate" />
+					<input type="button" value="글쓰기" class="adminCreate" onclick="adminCreateView();" />
 				</div>
 				<ul>
 					<li><i class="icon-arrow-left icons"></i></li>
@@ -198,11 +200,16 @@ ul{list-style-type:none;}
 	</div>
 </div>
 <div class="footerContent">
-        <p>
-            대전광역시 중구 중앙로 76 영민빌딩 2층 203호<br>
-            기관명: (재)대덕인재개발원, 최종프로젝트 PMS(Project Management System)<br>
-            Copyright 2018 <span>DDIT 203 Class, CURRENT</span> All rights reserved.
-        </p>
-    </div>
+    <p>
+        대전광역시 중구 중앙로 76 영민빌딩 2층 203호<br>
+        기관명: (재)대덕인재개발원, 최종프로젝트 PMS(Project Management System)<br>
+        Copyright 2018 <span>DDIT 203 Class, CURRENT</span> All rights reserved.
+    </p>
+</div>
+<script>
+function adminCreateView(){
+	window.location.href='/adminCreate';
+}
+</script>    
 </body>
 </html>
