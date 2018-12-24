@@ -119,7 +119,7 @@
 	<delete id="deleteMsgSend" parameterType="String">
 		delete from message_member where msgmember_msg = #{msg_id}
 	</delete>
-
+	
 	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 	<!-- 친구목록 부분 -->
 	
@@ -134,4 +134,13 @@
 		where friend_code=  #{friend_code}
 	</delete>
 	
+	<select id ="totalMemberSearch"  resultType="memberVo" parameterType="pageVo">
+		 select * from(
+  			 select rownum rnum ,a.*
+           		 from
+                	 (select member_mail  
+                       from member)a) 
+        where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
+		<if test="searchTextFriendList!=null and searchTextFriendList!=''">and member_mail like '%'||#{searchTextFriendList}||'%'</if>
+	</select>
 </mapper>

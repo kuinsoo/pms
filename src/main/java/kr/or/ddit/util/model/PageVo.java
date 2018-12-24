@@ -15,13 +15,20 @@ public class PageVo {
 	private String searchTodoText;
 	private String searchEndText;
 	private String searchTextFriend;
-
+	private String searchTextFriendList;
 	
+	public String getSearchTextFriendList() {
+		return searchTextFriendList;
+	}
+	public void setSearchTextFriendList(String searchTextFriendList) {
+		this.searchTextFriendList = searchTextFriendList;
+	}
 	@Override
 	public String toString() {
 		return "PageVo [page=" + page + ", pageSize=" + pageSize + ", member_mail=" + member_mail + ", searchText="
 				+ searchText + ", searchBookText=" + searchBookText + ", searchTodoText=" + searchTodoText
-				+ ", searchEndText=" + searchEndText + ", searchTextFriend=" + searchTextFriend + "]";
+				+ ", searchEndText=" + searchEndText + ", searchTextFriend=" + searchTextFriend
+				+ ", searchTextFriendList=" + searchTextFriendList + "]";
 	}
 	public String getSearchTextFriend() {
 		return searchTextFriend;

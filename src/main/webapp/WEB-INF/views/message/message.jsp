@@ -170,7 +170,8 @@
 									<table class="friendCreateTable">
 										<thead>
 											<tr class= "friends">
-												<th>이메일</th>
+												<th>회원이메일</th>
+												<th>회원이름</th>
 												<th>등록</th>
 											</tr>
 										</thead>

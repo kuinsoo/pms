@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.friendslist.model.FriendListVo;
+import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.message.model.MessageVo;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.util.model.PageVo;
@@ -32,6 +33,15 @@ public interface MessageServiceInf {
 	List<MessageVo> messageReceived(PageVo pageVo);
 	
 	
+	/**
+	 * Method : totalMemberSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+     * Method 설명 : 전체 사용자 리스트 + 페이징 처리 
+	 */
+	List<MemberVo> totalMemberSearch(PageVo pageVo);
 	
 	/**
 	 * Method : deleteMyfriend
