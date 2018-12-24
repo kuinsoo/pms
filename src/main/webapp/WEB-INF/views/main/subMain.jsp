@@ -84,6 +84,7 @@
 				                    </div>
 				                </li>
 				            </ul>
+				            <div class="commentListNewDiv">
 				            <c:forEach items="${cmtList}" var="cmt">
 				                <c:if test="${cmt.cmt_work eq  work.work_id}">
 				                    <ul>
@@ -104,6 +105,7 @@
 				                    </ul>
 				                </c:if>
 				            </c:forEach>
+				            </div>
 				        </div>
 				    </div> <%-- 끝--%>
 				</c:forEach>
