@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import kr.or.ddit.issue.model.IssueVo;
+import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.todo.service.ToDoServiceInf;
 import kr.or.ddit.util.model.PageVo;
@@ -30,8 +32,12 @@ import kr.or.ddit.work.model.WorkVo;
  */
 @Controller
 public class ToDoController {
+
 	@Autowired
 	private ToDoServiceInf todoService;
+	
+	@Autowired
+	private IssueServiceInf issueService;
 
 	/**
 	 * Method : ajaxInsertTodo
@@ -83,9 +89,11 @@ public class ToDoController {
 	 */
 	@RequestMapping(value="/todoSelect", method= {RequestMethod.POST, RequestMethod.GET})
 	public String ajaxSelectTodo(HttpServletRequest request, PageVo pageVo, Model model) {
+		String work_id = request.getParameter("work_id");
+		
 		WorkVo workVo = new WorkVo();
 		workVo.setWork_project(request.getParameter("project_id"));
-		workVo.setWork_id(request.getParameter("work_id"));
+		workVo.setWork_id(work_id);
 		
 		//todoCnt param -> String todo_work
 		
@@ -96,7 +104,11 @@ public class ToDoController {
 		/* to-do select */
 		Map<String, Object> todoListMap = todoService.workToDoSelect(todoMap);
 		
+		/* issue select list */
+		List<IssueVo> issueMemberList = issueService.selGetProjectMember(work_id);
+		
 		model.addAttribute("todoListMap", todoListMap);
+		model.addAttribute("issueMemberList", issueMemberList);
 		
 		return "todo/todoInsertAjax";
 	}

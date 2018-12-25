@@ -68,4 +68,14 @@ public interface IssueServiceInf {
 	*/
 	int issueInsert(IssueVo issueVo);
 	
+	/**
+	* Method : selGetProjectMember
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param work_id
+	* @return
+	* Method 설명 : issue 등록시 select-option에 프로젝트 참여자 리스트
+	*/
+	List<IssueVo> selGetProjectMember(String work_id);
+	
 }

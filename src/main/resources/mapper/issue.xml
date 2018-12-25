@@ -57,9 +57,22 @@
 
 	<!-- 이슈 발생 등록 -->
 	<insert id="issueInsert" parameterType="issueVo">
-		INSERT INTO issue (issue_id, issue_work, issue_member, issue_level, issue_title, issue_content, issue_sdate)
-		VALUES (issue_seq.NEXTVAL, #{issue_work}, #{issue_member}, #{issue_level}, #{issue_title}, #{issue_content}, #{issue_sdate})
+		INSERT INTO issue (issue_id, issue_work, issue_title, issue_level, issue_member, issue_sdate, issue_content)
+		VALUES (issue_seq.NEXTVAL, #{issue_work}, #{issue_title}, #{issue_level}, #{issue_member}, #{issue_sdate}, #{issue_content})
 	</insert>
+	
+	<!-- project 참여자 : issue 등록시 select -->
+	<select id="selGetProjectMember" resultType="issueVo" parameterType="String">
+		SELECT  member_name,
+		        pmember_member
+		FROM    project_member INNER JOIN member
+		ON      pmember_member = member_mail
+		WHERE   pmember_project = (
+		                           SELECT  work_project
+		                           FROM    work
+		                           WHERE   work_id = #{work_id}
+		                           )
+	</select>
 	
 	<!-- 이슈 수정 -->
 	

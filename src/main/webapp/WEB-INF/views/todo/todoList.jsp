@@ -14,10 +14,6 @@ $(document).ready(function(){
 	//to-do list의 pagination(Ajax) ==문의: jerry==
 	getToDoPagination${work.work_id}(1, project_id, work_id);
 
-	//마감일자와 오늘날짜를 비교하여 자동 체크
-// 	var beforeDate = new Date();
-// 	todoEdateCheck(beforeDate);
-
 });
 
 /* 페이지 접속시 to-do list 조회(Ajax) ==문의: jerry== */
@@ -114,6 +110,15 @@ function goTodoDelete${work.work_id}(todo_id, work_id){
 	});
 }
 
+/* issue 등록시 발생일자를 현재 일시로 default 셋팅 설정  ==문의: jerry== */
+function issueDateSet(todo_id){
+    var date = new Date();
+    date.setHours(date.getHours() + 9);
+
+    document.getElementById('non_issue_sdate'+todo_id).value = date.toISOString().slice(0, 16);
+    document.getElementById('non_issue_edate'+todo_id).value = date.toISOString().slice(0, 16);
+}
+
 function insertIssue() {
 	var param = $('form[name=insertIssueForm${todo.todo_work}]').serialize();
 }
@@ -133,7 +138,7 @@ function insertIssue() {
 	<table>
 		<thead>
 			<tr>
-				<th>선택</th>
+				<th>완료</th>
 				<th>TODO</th>
 				<th>담당자</th>
 				<th>시작</th>

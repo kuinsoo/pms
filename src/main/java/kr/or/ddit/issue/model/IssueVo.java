@@ -35,6 +35,9 @@ public class IssueVo {
 	private Date   issue_edate;		//	이슈해결일시
 	private String format_issue_edate;//이슈해결일시(String)
 	private String issue_color;		//	이슈일시색깔
+	
+	private String member_name;		//	참여자 이름
+	private String pmember_member;	//	참여자 메일
 
 	/* 기본생성자 */
 	public IssueVo() {}
@@ -43,7 +46,7 @@ public class IssueVo {
 	public IssueVo(String issue_id, String issue_work, String issue_member, String issue_helper, String issue_wc,
 			String issue_level, String issue_title, String issue_content, String issue_solution, int issue_noviews,
 			Date issue_sdate, String format_issue_sdate, Date issue_edate, String format_issue_edate,
-			String issue_color) {
+			String issue_color, String member_name, String pmember_member) {
 		this.issue_id = issue_id;
 		this.issue_work = issue_work;
 		this.issue_member = issue_member;
@@ -59,113 +62,102 @@ public class IssueVo {
 		this.issue_edate = issue_edate;
 		this.format_issue_edate = format_issue_edate;
 		this.issue_color = issue_color;
+		this.member_name = member_name;
+		this.pmember_member = pmember_member;
 	}
 
 	/* getter & setter */
 	public String getIssue_id() {
 		return issue_id;
 	}
-
 	public void setIssue_id(String issue_id) {
 		this.issue_id = issue_id;
 	}
-
 	public String getIssue_work() {
 		return issue_work;
 	}
-
 	public void setIssue_work(String issue_work) {
 		this.issue_work = issue_work;
 	}
-
 	public String getIssue_member() {
 		return issue_member;
 	}
-
 	public void setIssue_member(String issue_member) {
 		this.issue_member = issue_member;
 	}
-
 	public String getIssue_helper() {
 		return issue_helper;
 	}
-
 	public void setIssue_helper(String issue_helper) {
 		this.issue_helper = issue_helper;
 	}
-
 	public String getIssue_wc() {
 		return issue_wc;
 	}
-
 	public void setIssue_wc(String issue_wc) {
 		this.issue_wc = issue_wc;
 	}
-
 	public String getIssue_level() {
 		return issue_level;
 	}
-
 	public void setIssue_level(String issue_level) {
 		this.issue_level = issue_level;
 	}
-
 	public String getIssue_title() {
 		return issue_title;
 	}
-
 	public void setIssue_title(String issue_title) {
 		this.issue_title = issue_title;
 	}
-
 	public String getIssue_content() {
 		return issue_content;
 	}
-
 	public void setIssue_content(String issue_content) {
 		this.issue_content = issue_content;
 	}
-
 	public String getIssue_solution() {
 		return issue_solution;
 	}
-
 	public void setIssue_solution(String issue_solution) {
 		this.issue_solution = issue_solution;
 	}
-
 	public int getIssue_noviews() {
 		return issue_noviews;
 	}
-
 	public void setIssue_noviews(int issue_noviews) {
 		this.issue_noviews = issue_noviews;
 	}
-
 	public Date getIssue_sdate() {
 		return issue_sdate;
 	}
-
 	public void setIssue_sdate(Date issue_sdate) {
 		this.issue_sdate = issue_sdate;
 	}
-
 	public Date getIssue_edate() {
 		return issue_edate;
 	}
-
 	public void setIssue_edate(Date issue_edate) {
 		this.issue_edate = issue_edate;
 	}
-
 	public String getIssue_color() {
 		return issue_color;
 	}
-
 	public void setIssue_color(String issue_color) {
 		this.issue_color = issue_color;
 	}
-	
+	public String getMember_name() {
+		return member_name;
+	}
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
+	public String getPmember_member() {
+		return pmember_member;
+	}
+	public void setPmember_member(String pmember_member) {
+		this.pmember_member = pmember_member;
+	}
+
 	/* 형변환 getter */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	public String getFormat_issue_sdate() {
@@ -183,7 +175,8 @@ public class IssueVo {
 				+ ", issue_title=" + issue_title + ", issue_content=" + issue_content + ", issue_solution="
 				+ issue_solution + ", issue_noviews=" + issue_noviews + ", issue_sdate=" + issue_sdate
 				+ ", format_issue_sdate=" + format_issue_sdate + ", issue_edate=" + issue_edate
-				+ ", format_issue_edate=" + format_issue_edate + ", issue_color=" + issue_color + ", sdf=" + sdf + "]";
+				+ ", format_issue_edate=" + format_issue_edate + ", issue_color=" + issue_color 
+				+ ", member_name=" + member_name + ", pmember_member=" + pmember_member + "]";
 	}
 	
 }
