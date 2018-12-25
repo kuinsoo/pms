@@ -13,6 +13,8 @@
         <id property="project_title" column="project_title" />
         <id property="project_overview" column="project_overview" />
         <id property="project_bookmark" column="project_bookmark" />
+		<id property="project_sdate" column="project_sdate" />
+		<id property="project_eedate" column="project_eedate" />
         <id property="project_id" column="project_id" />
     </resultMap>
 
@@ -21,6 +23,8 @@
         SELECT  p.project_id,
         p.project_title,
         p.project_overview,
+		p.project_sdate,
+		p.project_eedate,
         pm.pmember_position,
         pm.pmember_bookmark,
         mail.pmember_member,

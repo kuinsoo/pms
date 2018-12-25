@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%-- left & header--%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
@@ -70,7 +71,7 @@
 													<span class="projectStart">프로젝트 시작일</span>
 													<input type="date" name="project_sdate" class="projectStartInput" />
 													<span class="projectEnd">프로젝트 마감일</span>
-													<input type="date" name="project_edate" class="projectEndInput" />
+													<input type="date" name="project_eedate" class="projectEndInput" />
 												</div>
 												<div class="layerPopUpBtnss">
 													<input type="submit" value="만들기" class="createProjectSubmit">

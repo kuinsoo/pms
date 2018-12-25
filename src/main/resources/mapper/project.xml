@@ -71,7 +71,7 @@
     <update id="updateProject" parameterType="projectVo">
         update PROJECT
         set PROJECT_TITLE = #{project_title}, PROJECT_OVERVIEW = #{project_overview},
-         PROJECT_EDATE = #{project_edate}
+         PROJECT_SDATE = #{project_sdate}, PROJECT_EEDATE = #{project_eedate}
         where PROJECT_ID = #{project_id}
     </update>
     

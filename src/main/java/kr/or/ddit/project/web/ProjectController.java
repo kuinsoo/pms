@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,6 +89,20 @@ public class ProjectController {
 	}
 
 	/**
+	 * Update project string.
+	 *
+	 * @param projectVo the project vo
+	 * @return the string
+	 */
+	@RequestMapping(value = "/ajaxUpdateProject", method = RequestMethod.POST)
+	public String updateProject(ProjectVo projectVo) {
+
+		projectService.updateProject(projectVo);
+
+		return "redirect:/main";
+	}
+
+	/**
 	 * Project list string.
 	 * 접속한 회원의 참여중인 프로젝트 리스트
 	 *
@@ -133,6 +148,17 @@ public class ProjectController {
 	}
 
 
+	/**
+	 * Sub main string.
+	 *
+	 * @param model      the model
+	 * @param project_id the project id
+	 * @param memberVo   the member vo
+	 * @param response   the response
+	 * @return the string
+	 *
+	 * @throws UnsupportedEncodingException the unsupported encoding exception
+	 */
 	@RequestMapping(value = "/subMain", method = RequestMethod.POST )
 	public String subMain(Model model, @RequestParam("project_id")String project_id,
 						  @SessionAttribute("memberVo")MemberVo memberVo, HttpServletResponse response) throws UnsupportedEncodingException {
@@ -168,6 +194,15 @@ public class ProjectController {
 		return "main/subMain";
 	}
 
+	/**
+	 * Invite project ajax string.
+	 *
+	 * @param model      the model
+	 * @param accept     the accept
+	 * @param project_id the project id
+	 * @param memberVo   the member vo
+	 * @return the string
+	 */
 	@RequestMapping(value = "/inviteProjectAjax", method = RequestMethod.GET)
 	public String inviteProjectAjax(Model model,@RequestParam("accept")String accept, @RequestParam("project_id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo) {
 		try {
@@ -189,6 +224,14 @@ public class ProjectController {
 		return "project/ajaxInviteProject";
 	}
 
+	/**
+	 * Delete project string.
+	 *
+	 * @param model      the model
+	 * @param memberVo   the member vo
+	 * @param project_id the project id
+	 * @return the string
+	 */
 	@RequestMapping(value = "/deleteProject", method = RequestMethod.GET)
 	public String deleteProject(Model model, @SessionAttribute("memberVo")MemberVo memberVo,
 								@RequestParam("project_id")String project_id) {
@@ -203,6 +246,13 @@ public class ProjectController {
 	}
 
 
+	/**
+	 * Ajax main project list string.
+	 *
+	 * @param model    the model
+	 * @param memberVo the member vo
+	 * @return the string
+	 */
 	@RequestMapping(value = "/ajaxMainProjectList", method = RequestMethod.GET)
 	public String ajaxMainProjectList(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 
