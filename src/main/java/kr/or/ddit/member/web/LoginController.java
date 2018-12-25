@@ -161,24 +161,7 @@ public class LoginController {
 	}
 
 
-	/**
-	 * Main string.
-	 * 작성자: Mr.KKu
-	 * 변경이력:
-	 *
-	 * @param model    the model
-	 * @param memberVo the member vo
-	 * @return the string
-	 * 설명: 메인화면에 프로젝트리스트를 출력해준다. (Member / Project / project_member  Join)
-	 */
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main(Model model, @ModelAttribute("memberVo") MemberVo memberVo) {
 
-		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
-		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
-		// model.addAttribute("workMemberList", workService.workMember(memberVo.getMember_mail()));
-		return "main/main";
-	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	/*<!--  변찬우(수정 2018.12.21):  리스판스 추가 for node page -->*/
