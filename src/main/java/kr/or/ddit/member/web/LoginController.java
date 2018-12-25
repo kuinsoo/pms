@@ -152,7 +152,8 @@ public class LoginController {
 		// 값이 다르면..
 		if (memberService.selectUser(member_mail) == null) {
 			memberService.insertUser(memberVo);
-			return "/";
+			// 이부분 수정함 PL님이랑 상의할것.
+			return "login/login";
 			// 값이 같으면
 		} else {
 			model.addAttribute("memberVo", memberVo);

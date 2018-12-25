@@ -119,4 +119,10 @@ public class MessageService implements MessageServiceInf{
 		return messageMapper.totalMember(member_mail);
 	}
 
+
+	@Override
+	public int insertFriendN(FriendListVo friendVo) {
+		return messageMapper.insertFriendN(friendVo);
+	}
+
 }

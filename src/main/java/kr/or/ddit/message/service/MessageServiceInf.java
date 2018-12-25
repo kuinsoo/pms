@@ -31,6 +31,15 @@ public interface MessageServiceInf {
 	 */
 	int totalMember(String member_mail); 
 	
+	/**
+	 * Method : insertFriendN
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friendVo
+	 * @return
+	 * Method 설명 : 전체 사용자중 친구요청을 보내는거 
+	 */
+	int insertFriendN(FriendListVo friendVo);
 	
 	/**
 	 * Method : myprojectselect
