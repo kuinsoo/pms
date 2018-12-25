@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import kr.or.ddit.issue.model.IssueVo;
 import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.project.model.ProjectVo;
@@ -70,15 +71,18 @@ public class IssueController {
 		
 		model.addAttribute("projectCnt", (int)Math.ceil((double)projectCnt / pageVo.getPageSize()));
 		
-		//model.addAttribute("percentList", getPercentList(history_myProjectList));
-		//model.addAttribute("history_myProjectList", history_myProjectList);
-		//model.addAttribute("projectCnt", projectCnt);
 		model.addAttribute("myProjectList", myProjectList);
 		
 		return "history/issueHistoryAjax";
 	}
 	
-	@RequestMapping(value="")
+	@RequestMapping(value="/issueInsert", method= {RequestMethod.POST, RequestMethod.GET})
+	public String issueInsert(IssueVo issueVo) {
+		
+		
+		
+		return "";
+	}
 	
 	/**
 	* Method : getPercentList

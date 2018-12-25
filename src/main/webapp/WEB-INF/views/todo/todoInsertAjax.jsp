@@ -13,7 +13,7 @@
 				</c:when>
 			</c:choose>
 		</td>
-		<td><a href="#open${todo.todo_id}" class="issueTitlePopup">${todo.todo_content}</a>
+		<td><a href="#open${todo.todo_id}" class="issueTitlePopup" onclick="issueDateSet(${todo.todo_id});">${todo.todo_content}</a>
 			<div class="white_content3" id="open${todo.todo_id}">
 				<div>
 					<a href="#close" class="mainCloseBtns"></a>
@@ -41,7 +41,8 @@
 										</ul>
 									</div>
 								</div>
-								<textarea>${todo.todo_content}</textarea>
+								<!-- p태그로 변경 시 틀이 깨짐 -->
+								<textarea readonly>${todo.todo_content}</textarea>
 							</form>
 						</div>
 						<div class="issueSelectPageRight">
@@ -55,28 +56,33 @@
 								</c:otherwise>
 							</c:choose>
 						</div>
-						<form style="text-align: left;" name="insertIssueForm${todo.todo_work}">
-							<label>Title</label><input type="text" name=""><br>
+						<form style="text-align: left;" name="insertIssueForm${todo.todo_id}">
+							<label>Title</label><input type="text" name="issue_title"><br>
 							<label>Level</label>
-							<select class="sel_issueLevel" name="sel_issueLevel">
+							<select class="sel_issueLevel" name="issue_level">
 								<option value="1">level 1</option>
 								<option value="2">level 2</option>
 								<option value="3">level 3</option>
 								<option value="4">level 4</option>
 								<option value="5">level 5</option>
 							</select><br>
-							<label>담당자</label><input type="text" id="" name="" readonly><br>
-							<label>발생일시</label><input type="datetime-local"><br>
+							<label>담당자</label><input type="text" name="issue_member" value="${todo.todo_pmember}" readonly><br>
+							<label>발생일시</label><input type="datetime-local" id="non_issue_sdate${todo.todo_id}" value=""><br>
 							<label>이슈내용</label><br>
-							<textarea placeholder="내용을 입력해주세요."></textarea><br>
+							<textarea name="issue_content" placeholder="내용을 입력해주세요."></textarea><br>
 							<br><hr><br>
 							<label>해결자</label>
-							<select>
-								<option>프로젝트 참여자들</option>
+							<select class="sel_issue_helper" name="issue_helper">
+								<c:forEach items="${issueMemberList}" var="member">
+									<option>${member.member_name}(${member.pmember_member})</option>
+								</c:forEach>
 							</select><br>
-							<label>해결일시</label><input type="datetime-local"><br>
+							<label>해결일시</label><input type="datetime-local" id="non_issue_edate${todo.todo_id}" value=""><br>
 							<label>해결방법</label><br>
 							<textarea placeholder="내용을 입력해주세요."></textarea>
+							<input type="hidden" name="issue_work" value="${todo.todo_work}">
+							<input type="hidden" id="issue_sdate${todo.todo_id}" name="issue_sdate" value="">
+							<input type="hidden" id="issue_edate${todo.todo_id}" name="issue_edate" value="">
 						</form>
 					</div>
 				</div>
