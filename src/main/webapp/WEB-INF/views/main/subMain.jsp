@@ -269,6 +269,8 @@ var myChart = new Chart(ctx, {
 
 $(document).ready(function () {
    $('.kku-hide').hide();
+   <%-- 댓글감추기 --%>
+   $('.cmtContentC').hide();
 
    updateCard('0', '0', 0, '${projectVo.project_id}');
 
@@ -385,6 +387,30 @@ function deleteCmt(cmt_id, work_id) {
 	});
 }
 
+<%-- 댓글 수정 --%>
+
+
+function updateCmt(cmt_id, work_id) {
+	$('#cmtContent'+cmt_id).hide();
+	$('.cmtContentC').hide();
+	$('#cmt'+cmt_id).show();
+}
+
+function updateCmtAjax(cmt_id, work_id, project_id, cmt_content) {
+	var cmtSave = $('#cmtSave'+cmt_id).val();
+	$.ajax({
+		type: "GET",
+		url: "/updateCmt",
+		data: {"cmt_id": cmt_id, "work_id":work_id, "project_id": project_id, "cmt_content": cmtSave},
+		success: function (data) {
+			$('#commentListNewDiv'+work_id).html("");
+			$('#commentListNewDiv'+work_id).html(data);
+			$('.commentInput').val("");
+		}
+	});
+}
+
+/* */
 function updateCard(no, group, index) {
 
 	$.ajax({

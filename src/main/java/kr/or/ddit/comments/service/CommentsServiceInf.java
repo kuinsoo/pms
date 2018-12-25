@@ -45,6 +45,17 @@ public interface CommentsServiceInf {
 	 */
 	int insertCmt(CommentsVo cmtVo);
 
+
+	/**
+	 * Select cmt comments vo.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 댓글 찾기
+	 *
+	 * @param cmt_id the cmt id
+	 * @return the comments vo
+	 */
+	CommentsVo selectCmt(String cmt_id);
+
 	/**
 	 * Update cmt int.
 	 * 작성자 : Mr.KKu

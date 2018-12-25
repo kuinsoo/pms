@@ -32,6 +32,11 @@
         insert into comments values(seq_comments.nextval, #{cmt_work}, #{cmt_member}, #{cmt_content}, sysdate)
     </insert>
 
+
+    <select id="selectCmt" parameterType="String" resultType="cmtVo">
+        select * from COMMENTS where CMT_ID = #{cmt_id}
+    </select>
+
     <update id="updateCmt" parameterType="cmtVo">
         update COMMENTS
         set CMT_CONTENT = #{cmt_content}

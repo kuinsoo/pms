@@ -65,6 +65,19 @@ public class CommentsService implements CommentsServiceInf {
 	}
 
 	/**
+	 * Select cmt comments vo.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 댓글 찾기
+	 *
+	 * @param cmt_id the cmt id
+	 * @return the comments vo
+	 */
+	@Override
+	public CommentsVo selectCmt(String cmt_id) {
+		return commentsMapper.selectCmt(cmt_id);
+	}
+
+	/**
 	 * Update cmt int.
 	 * 작성자 : Mr.KKu
 	 * 내용 : 댓글 수정

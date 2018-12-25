@@ -67,5 +67,20 @@ public class CommentsController {
 		return "work/ajaxCmtList";
 	}
 
+	@RequestMapping(value = "/updateCmt", method = RequestMethod.GET)
+	public String updateCmt(Model model, @RequestParam("project_id")String project_id,
+								CommentsVo cmtVo,
+								@RequestParam("work_id")String work_id){
+		commentsService.updateCmt(cmtVo);
+
+		Map<String,String> cmtMap = new HashMap<>();
+		cmtMap.put("work_project", project_id);
+		cmtMap.put("cmt_work", work_id);
+		model.addAttribute("workList",workService.selectWorks(project_id));
+		model.addAttribute("cmtList", commentsService.ajaxCmtList(cmtMap));
+		return  "work/ajaxCmtList";
+	}
+
+
 
 }

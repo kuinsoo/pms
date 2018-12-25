@@ -61,10 +61,14 @@
 									</div>
 									<div class="cardContentCommentUserName">
 										<b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
-										<input type="button" value="수정" class="commentUpdateBtn"/>
+										<input type="button" value="수정" class="commentUpdateBtn" onclick="updateCmt('${cmt.cmt_id}', '${work.work_id}');" />
 										<input type="button" value="삭제" class="commentDeleteBtn" onclick="deleteCmt('${cmt.cmt_id}', '${work.work_id}');" />
 										<br>
-										<span>${cmt.cmt_content}</span>
+										<span id="cmtContent${cmt.cmt_id}">${cmt.cmt_content}</span>
+											<div class="cmtContentC"  id="cmt${cmt.cmt_id}" >
+												<input type="text" name="cmt_content" value="${cmt.cmt_content}" id="cmtSave${cmt.cmt_id}" />
+												<input type="button" value="확인" onclick="updateCmtAjax('${cmt.cmt_id}', '${work.work_id}', '${projectVo.project_id}', '${cmt.cmt_content}' );"  >
+											</div>
 									</div>
 								</div>
 							</li>
