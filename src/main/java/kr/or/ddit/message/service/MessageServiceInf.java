@@ -22,6 +22,17 @@ public interface MessageServiceInf {
 
 
 	/**
+	 * Method : totalMember
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friend_myemail
+	 * @return
+	 * Method 설명 : 전체 사용자
+	 */
+	int totalMember(String member_mail); 
+	
+	
+	/**
 	 * Method : myprojectselect
 	 * 작성자 : pc07
 	 * 변경이력 :

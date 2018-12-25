@@ -123,6 +123,48 @@ public class MessageController {
 	}
 	
 	@ResponseBody
+	@RequestMapping(value="/AllMemberListAjax", method= RequestMethod.GET)
+	public Map<String, Object>AllMemberListAjax (@SessionAttribute("memberVo") MemberVo memberVo , PageVo pageVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		List<MemberVo> myMemberList = messageservice.totalMemberSearch(pageVo);
+		
+		int pageCnt = messageservice.totalMember(memberVo.getMember_mail());
+		
+		Map<String, Object> myMemberMap = new HashMap<>();
+		myMemberMap.put("myMemberList", myMemberList);
+		myMemberMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myMemberMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/AllMemberListSearchAjax", method= RequestMethod.POST)
+	public Map<String, Object> AllMemberListSearchAjax (@SessionAttribute("memberVo") MemberVo memberVo , PageVo pageVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		if(pageVo.getSearchTextFriendList() == null) {
+			pageVo.setSearchTextFriendList("");
+		}
+
+		System.out.println("입력한 값 알아오기 " + pageVo.getSearchTextFriendList());
+		
+		List<MemberVo> myMemberList = messageservice.totalMemberSearch(pageVo);
+		
+		int pageCnt = messageservice.totalMember(memberVo.getMember_mail());
+		
+		Map<String, Object> myMemberMap = new HashMap<>();
+		myMemberMap.put("myMemberList", myMemberList);
+		myMemberMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myMemberMap;
+	}
+	
+	
+	
+	@ResponseBody
 	@RequestMapping(value="/myFriendsDelete", method = RequestMethod.GET)
 	public Map<String , Object> myFriendsDelete(@SessionAttribute("memberVo")MemberVo memberVo, PageVo pageVo, 
 								HttpServletRequest request){
@@ -130,10 +172,6 @@ public class MessageController {
 		
 		String friend_code = request.getParameter("friend_code");
 
-		System.out.println("friend_code"+ friend_code);
-		System.out.println("friend_code"+ friend_code);
-		System.out.println("friend_code"+ friend_code);
-		
 		FriendListVo freidListVo = new FriendListVo();
 		freidListVo.setFriend_mymail(memberVo.getMember_mail());
 		
@@ -163,11 +201,14 @@ public class MessageController {
 	@RequestMapping(value="/searchTextFriendAjax",method = RequestMethod.POST)
 	public Map<String, Object> searchTextFriendAjax (@SessionAttribute("memberVo") MemberVo memberVo , PageVo pageVo){
 		
+		
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		
 		if(pageVo.getSearchTextFriend() == null) {
 			pageVo.setSearchTextFriend("");
 		}
+		
+		System.out.println(pageVo.getSearchTextFriend()+  " 친구 리스트에서 ");
 		
 		FriendListVo friendListVo = new FriendListVo();
 		friendListVo.setFriend_mymail(memberVo.getMember_mail());

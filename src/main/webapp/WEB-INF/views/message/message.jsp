@@ -163,34 +163,28 @@
 						<div class="friendContainer">
 						 	<div class="friendLeft">
 						      <h2>친구찾기</h2>
-								<form action="#" method="post">
-									<input type="text" placeholder="찾는 이메일을 입력해주세요" class="friendSearchInput" />
-									<input type="button" value="검색" class="friendSearchBtn" />
+								<form name ="searchTextFriendList" method="POST" onsubmit="return false;">
+										<input type="text" id="searchTextFriendList" name="searchTextFriendList" class="friendSearchInput" placeholder="찾으시는 분의 이메일을 입력해주세요" />
+										<input type="hidden" name="page" value='1'/>
+										<input type="hidden" name="pageSize" value='10' />
+										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getAllMemberSearch();"/>
+										<button onclick="getAllMember(1);">목록으로</button>
+								</form>
 									
 									<table class="friendCreateTable">
 										<thead>
-											<tr class= "friends">
+											<tr>
+												<th>번호</th>
 												<th>회원이메일</th>
 												<th>회원이름</th>
 												<th>등록</th>
 											</tr>
 										</thead>
-										<tbody>
-										<%-- <c:forEach items="${selctMyFriend }" var="mf">	
-											<tr>
-												<td>${mf.friend_member}</td>
-												<td><input type="button" value="친구삭제"/></td>
-											</tr>
-										</c:forEach>	 --%>
-											<tr>
-												<td>${mf.friend_member}</td>
-												<td><input type="button" value="친구 등록"/></td>
-											</tr>
+										<tbody id = "myMemberList">
 										</tbody>
 									</table>
-									<ul class="friendCreateTablePaging">
+									<ul class="paginationMember">
 									</ul>
-								</form>
 							</div>
 							<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 							
@@ -255,6 +249,7 @@
 		getMessageReceived(1);
 		getMessageSend(1);
 		getMyFriends(1);
+		getAllMember(1);
 		
 		
 		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
@@ -462,23 +457,7 @@
 				}
 			});
 		}
-		
-		// 삭제버튼 눌렀을때 처리 
-		function deleteMyFriends(friend_code){
-			var pageSize = 10;
-			$.ajax({
-				type: "GET",
-				url : "/myFriendsDelete",
-				data : "friend_code="+friend_code,
-				success: function(data){
-					console.log(data.friend_code);
-					console.log(data);
-					getMyFriends(1);
-				}
-			});
-		}
-		
-		
+
 		function getSearchFriendProject(){
 				var param = $('form[name=searchTextFriend]').serialize();
 				var pageSize = 10;
@@ -518,7 +497,107 @@
 					});
 			}
 		
+		// 삭제버튼 눌렀을때 처리 
+		function deleteMyFriends(friend_code){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/myFriendsDelete",
+				data : "friend_code="+friend_code,
+				success: function(data){
+					console.log(data.friend_code);
+					console.log(data);
+					getMyFriends(1);
+				}
+			});
+		}
 		
+		
+		//#########################################################################################
+		// 전체 사용자 뽑아오는 리스트
+		
+							
+		function getAllMember(page){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/AllMemberListAjax",
+				data : {"page" : page, "pageSize":pageSize},
+				success: function(data){
+					
+					var html = "";
+					$.each(data.myMemberList,function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.member_mail +"</td>";
+						html += "	<td>"+ mm.member_name +"</td>";
+						html += "	<td>"+ "<input type='button' value='친구 등록'/>"+"</td>";
+						html += "</tr>";
+					});
+					
+					console.log(data.myMemberList);
+					
+					$("#myMemberList").html("");
+					$("#myMemberList").html(html);
+					
+					var i  = 1;
+					var paging ="";
+						paging +="<li><a href='javascript:getAllMember("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<= data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getAllMember("+ i +");'>"+ i+ "</a></li>";
+					}
+						paging +="<li><a href='javascript:getAllMember("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".paginationMember").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+							
+		function getAllMemberSearch(){
+			var param = $('form[name=searchTextFriendList]').serialize();
+			var pageSize = 10;
+			$.ajax({
+				type: "POST",
+				url : "/AllMemberListSearchAjax",
+				data : param,
+				success: function(data){
+					
+					console.log(data);
+					
+					var html = "";
+					$.each(data.myMemberList,function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.member_mail +"</td>";
+						html += "	<td>"+ mm.member_name +"</td>";
+						html += "	<td>"+ "<input type='button' value='친구 등록'/>"+"</td>";
+						html += "</tr>";
+					});
+					
+					console.log(data.myMemberList);
+					
+					$("#myMemberList").html("");
+					$("#myMemberList").html(html);
+					
+					var i  = 1;
+					var paging ="";
+						paging +="<li><a href='javascript:getAllMember("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<= data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getAllMember("+ i +");'>"+ i+ "</a></li>";
+					}
+						paging +="<li><a href='javascript:getAllMember("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".paginationMember").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+		
+	
+		//#########################################################################################
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 </script>

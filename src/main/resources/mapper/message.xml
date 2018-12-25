@@ -125,20 +125,28 @@
 	
 	<select id="totalFriends" resultType="int" parameterType="String">
 		select count(*)
-		from   FRIENDSLIST
+		from   FRIENDSLIST 
 		where  friend_myemail = #{member_mail}
 	</select>
+	
+	
+	<select id="totalMember" resultType="int" parameterType="String">
+		select count(*) from member
+	</select>
+	
+	
 	
 	<delete id="deleteMyfriend" parameterType="String">
 		delete from FRIENDSLIST 
 		where friend_code=  #{friend_code}
 	</delete>
 	
-	<select id ="totalMemberSearch"  resultType="memberVo" parameterType="pageVo">
+	<select id ="totalMemberSearch" resultType="memberVo" parameterType="pageVo">
 		 select * from(
   			 select rownum rnum ,a.*
            		 from
-                	 (select member_mail  
+                	 (select member_mail,
+                	 		 member_name 
                        from member)a) 
         where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
 		<if test="searchTextFriendList!=null and searchTextFriendList!=''">and member_mail like '%'||#{searchTextFriendList}||'%'</if>

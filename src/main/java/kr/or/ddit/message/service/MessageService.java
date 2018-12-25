@@ -113,4 +113,10 @@ public class MessageService implements MessageServiceInf{
 		return messageMapper.totalMemberSearch(pageVo);
 	}
 
+
+	@Override
+	public int totalMember(String member_mail) {
+		return messageMapper.totalMember(member_mail);
+	}
+
 }
