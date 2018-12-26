@@ -140,6 +140,29 @@ public class MessageController {
 		return myMemberMap;
 	}
 	
+	// 친구추가 버튼을 클릭했을때 
+	@ResponseBody
+	@RequestMapping(value="/youGiveNoAjax", method= RequestMethod.GET)
+	public Map<String, Object> youGiveNoAjax (@SessionAttribute("memberVo") MemberVo memberVo , FriendListVo friendVo,
+			PageVo pageVo, HttpServletRequest request){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		friendVo.setFriend_myemail(memberVo.getMember_mail());
+		List<MemberVo> myMemberList = messageservice.totalMemberSearch(pageVo);
+		
+		messageservice.insertFriendN(friendVo);
+		int pageCnt = messageservice.totalMember(memberVo.getMember_mail());
+		
+		Map<String, Object> myMemberMap = new HashMap<>();
+		myMemberMap.put("myMemberList", myMemberList);
+		myMemberMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myMemberMap;
+	}
+	
+	
+	
 	@ResponseBody
 	@RequestMapping(value="/AllMemberListSearchAjax", method= RequestMethod.POST)
 	public Map<String, Object> AllMemberListSearchAjax (@SessionAttribute("memberVo") MemberVo memberVo , PageVo pageVo){
@@ -457,6 +480,59 @@ public class MessageController {
 		return yougiveListMap;
 	}
 	
+	
+	
+	// 친구 수락 버튼을 클릭했을때 
+	@ResponseBody
+	@RequestMapping(value="/youGiveYesAjax", method= RequestMethod.GET)
+	public Map<String, Object> youGiveYesAjax (@SessionAttribute("memberVo") MemberVo memberVo , FriendListVo friendVo,
+							PageVo pageVo, HttpServletRequest request){
+		
+		String friend_code = request.getParameter("friend_code");
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		friendVo.setMember_name(memberVo.getMember_name());
+		
+		List<FriendListVo> giveFriendList = messageservice.youGiveFriendList(pageVo);
+		
+		messageservice.updateAcceptFriend(friend_code);
+		//messageservice.insertFriendY(friendVo);
+		
+		int pageCnt = messageservice.totalyouGiveFriendList(memberVo.getMember_mail());
+		
+		Map<String, Object> yougiveListMap = new HashMap<>();
+		yougiveListMap.put("giveFriendList", giveFriendList);
+		yougiveListMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return yougiveListMap;
+	}
+	
+	
+	// 친구 수락 버튼을 클릭했을때 
+	@ResponseBody
+	@RequestMapping(value="/youGiveXXXAjax", method= RequestMethod.GET)
+	public Map<String, Object> youGiveXXXAjax (@SessionAttribute("memberVo") MemberVo memberVo , FriendListVo friendVo,
+			PageVo pageVo, HttpServletRequest request){
+		
+		String friend_code = request.getParameter("friend_code");
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		friendVo.setMember_name(memberVo.getMember_name());
+		
+		List<FriendListVo> giveFriendList = messageservice.youGiveFriendList(pageVo);
+		
+		messageservice.updateRefuseFriend(friend_code);
+		
+		int pageCnt = messageservice.totalyouGiveFriendList(memberVo.getMember_mail());
+		
+		Map<String, Object> yougiveListMap = new HashMap<>();
+		yougiveListMap.put("giveFriendList", giveFriendList);
+		yougiveListMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return yougiveListMap;
+	}
+	
+
 	// 검색 부분
 	@ResponseBody
 	@RequestMapping(value="/youGiveFriendListSearchAjax", method= RequestMethod.POST)

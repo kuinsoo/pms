@@ -581,8 +581,11 @@
 		//#########################################################################################
 		// 전체 사용자 뽑아오는 리스트
 		///* onclick ='insertMyFriendN("+mm.member_mail+");' */
-		
-							
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
 		function getAllMember(page){
 			var pageSize = 10;
 			$.ajax({
@@ -593,11 +596,13 @@
 					
 					var html = "";
 					$.each(data.myMemberList,function(idx,mm){
+					//var member_mail = encodeURIComponent(mm.member_mail);
+					//console.log(member_mail);
 						html += "<tr>";
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.member_mail +"</td>";
 						html += "	<td>"+ mm.member_name +"</td>";
-						html += "	<td>"+ "<input type='button' value='친구 등록'/>"+"</td>";
+						html += "	<td>"+ "<input type='button' onclick ='getyouGiveNoAjax("+mm.member_mail+");' value='친구 등록'/>"+"</td>";
 						html += "</tr>";
 					});
 					
@@ -621,6 +626,25 @@
 			});
 		}
 		
+		// 친구 추가 버튼을 클릭할때  
+		function getyouGiveNoAjax(member_mail){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/youGiveNoAjax",
+				data : "friend_member="+ member_mail,
+				success: function(data){
+					console.log(data.member_mail);
+					console.log(data);
+					getAllMember(1);
+				}
+			});
+		}
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
+		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
 		
 		function getAllMemberSearch(){
 			var param = $('form[name=searchTextFriendList]').serialize();
@@ -720,9 +744,6 @@
 			});
 		}
 		
-		
-		
-		
 		function getMySendFriendListSearch(){
 			var param = $('form[name=searchTextMySendFriendList]').serialize();
 			var pageSize = 10;
@@ -736,6 +757,7 @@
 					$.each(data.sendFriendList,function(idx,mm){
 						html += "<tr>";
 						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.friend_code +"</td>";
 						html += "	<td>"+ mm.friend_member +"</td>";
 						html += "	<td>"+ mm.member_name +"</td>";
 						html += "	<td>"+ "<input type='button' value='요청 취소 '/>"+"</td>";
@@ -778,8 +800,8 @@
 						html += "	<td>"+ mm.friend_code +"</td>";
 						html += "	<td>"+ mm.friend_myemail +"</td>";
 						html += "	<td>"+ mm.member_name +"</td>";
-						html += "	<td>"+ "<input type='button' value='수락'/>"+"</td>";
-						html += "	<td>"+ "<input type='button' value='거절'/>"+"</td>";
+						html += "	<td>"+ "<input type='button'onclick ='getyouGiveYesAjax("+mm.friend_code+");' value='수락'/>"+"</td>";
+						html += "	<td>"+ "<input type='button'onclick ='getyouGiveXXXAjax("+mm.friend_code+");' value='거절'/>"+"</td>";
 						html += "</tr>";
 					});
 					
@@ -802,6 +824,39 @@
 				}
 			});
 		}
+		
+		// 수락버튼 클릭시 
+		function getyouGiveYesAjax(friend_code){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/youGiveYesAjax",
+				data : "friend_code="+friend_code,
+				success: function(data){
+					console.log(data.friend_code);
+					console.log(data);
+					getYouGiveFriendList(1);
+				}
+			});
+		}		
+		
+		
+		// 거절버튼 클릭시 
+		function getyouGiveXXXAjax(friend_code){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/youGiveXXXAjax",
+				data : "friend_code="+friend_code,
+				success: function(data){
+					console.log(data.friend_code);
+					console.log(data);
+					getYouGiveFriendList(1);
+				}
+			});
+		}		
+		
+		
 		
 		// 검색 부분 
 		function getYouGiveFriendListSearch(){

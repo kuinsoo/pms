@@ -32,6 +32,17 @@ public interface MessageServiceInf {
 	int totalMember(String member_mail); 
 	
 	/**
+	 * Method : updateAcceptFriend
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friendVo
+	 * @return
+	 * Method 설명 : 내가 받은요청에서 수락 버튼을 클릭했을때
+	 */
+	int updateAcceptFriend(String friend_code);
+	
+	
+	/**
 	 * Method : insertFriendN
 	 * 작성자 : pc07
 	 * 변경이력 :
@@ -40,6 +51,29 @@ public interface MessageServiceInf {
 	 * Method 설명 : 전체 사용자중 친구요청을 보내는거 
 	 */
 	int insertFriendN(FriendListVo friendVo);
+	
+	
+	/**
+	 * Method : updateRefuseFriend
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friendVo
+	 * @return
+	 * Method 설명 : 내가 받은요청에서 거절 버튼을 클릭했을때
+	 */
+	int updateRefuseFriend (String friend_code);
+	
+	
+	/**
+	 * Method : insertFriendY
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friendVo
+	 * @return
+	 * Method 설명 : 내가 받은 친구요청에서 수락을 눌렀을때 경우 1.업데이트가 되고 2. 생성을 한다.
+	 */
+	int insertFriendY(FriendListVo friendVo);
+	
 	
 	/**
 	 * Method : myprojectselect
