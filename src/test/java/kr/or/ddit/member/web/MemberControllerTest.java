@@ -24,3 +24,5 @@ public class MemberControllerTest {
 	public void invitedProjects() {
 	}
 }
+
+
