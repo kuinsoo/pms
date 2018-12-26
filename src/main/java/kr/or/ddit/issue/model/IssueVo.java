@@ -28,10 +28,10 @@ public class IssueVo {
 	private String issue_content;	//	이슈내용
 	private String issue_solution;	//	이슈해결방법
 	private int	   issue_noviews;	//	이슈조회수
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	private Date   issue_sdate;		//	이슈발행일시
 	private String format_issue_sdate;//이슈발행일시(String)
-	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	private Date   issue_edate;		//	이슈해결일시
 	private String format_issue_edate;//이슈해결일시(String)
 	private String issue_color;		//	이슈일시색깔
@@ -159,7 +159,7 @@ public class IssueVo {
 	}
 
 	/* 형변환 getter */
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	public String getFormat_issue_sdate() {
 		return sdf.format(issue_sdate);
 	}

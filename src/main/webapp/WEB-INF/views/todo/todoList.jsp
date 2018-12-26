@@ -119,8 +119,25 @@ function issueDateSet(todo_id){
     document.getElementById('non_issue_edate'+todo_id).value = date.toISOString().slice(0, 16);
 }
 
-function insertIssue() {
-	var param = $('form[name=insertIssueForm${todo.todo_work}]').serialize();
+function insertIssue(todo_id) {
+	var sdate = $('input[name=non_issue_sdate'+ todo_id +']').val();
+	var repSdate = sdate.replace("T", " ");
+	$("#issue_sdate"+todo_id).val(repSdate);
+	console.log($('#issue_sdate'+todo_id).val());
+	var param = $('form[name=insertIssueForm'+ todo_id +']').serialize();
+	
+	$.ajax({
+		method: "POST",
+		url: "/issueInsert",
+		data: param,
+		success: function(data){
+			alert(":)");
+			
+		},
+		error: function(data){
+			console.log("todoList.jsp : insertIssue() - error");
+		}
+	});
 }
 
 /* 날짜 비교(보류) */
