@@ -191,7 +191,31 @@
 	    AND     friend_accept = 'N'
 	</select>
 	
+	
 	<delete  id="deletemySendFriendList" parameterType="String">
 		delete from FRIENDSLIST where friend_code = #{friend_code}
 	</delete>
+	
+	<!-- 내가 받은 요청  -->
+	<select id ="youGiveFriendList" resultType="friendVo" parameterType="pageVo">
+		 select * from(
+  			 select rownum rnum ,a.*
+           		 from
+                	(select friend_myemail
+                	 	  , friend_code
+					      , (select member_name from member where member_mail = friend_myemail) as member_name
+					from   FRIENDSLIST
+					where  friend_member  = #{member_mail}
+					and    friend_accept  = 'N')a) 
+            where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
+		<if test="searchTextyouGiveFriendList!=null and searchTextyouGiveFriendList!=''">and friend_myemail like '%'||#{searchTextyouGiveFriendList}||'%'</if>
+	</select>
+	
+	<select id="totalyouGiveFriendList" resultType="int" parameterType="String">
+		select count(*) 
+		from   FRIENDSLIST
+		where  friend_member  = #{member_mail}
+		and    friend_accept  = 'N'
+	</select>
+	
 </mapper>

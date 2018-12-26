@@ -109,7 +109,7 @@ public class MessageController {
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		
 		FriendListVo freidListVo = new FriendListVo();
-		freidListVo.setFriend_mymail(memberVo.getMember_mail());
+		freidListVo.setFriend_myemail(memberVo.getMember_mail());
 		
 		List<FriendListVo> myFriendList = messageservice.MyFriendsList(pageVo);
 		
@@ -173,7 +173,7 @@ public class MessageController {
 		String friend_code = request.getParameter("friend_code");
 
 		FriendListVo freidListVo = new FriendListVo();
-		freidListVo.setFriend_mymail(memberVo.getMember_mail());
+		freidListVo.setFriend_myemail(memberVo.getMember_mail());
 		
 		messageservice.deleteMyfriend(friend_code);
 		
@@ -211,7 +211,7 @@ public class MessageController {
 		System.out.println(pageVo.getSearchTextFriend()+  " 친구 리스트에서 ");
 		
 		FriendListVo friendListVo = new FriendListVo();
-		friendListVo.setFriend_mymail(memberVo.getMember_mail());
+		friendListVo.setFriend_myemail(memberVo.getMember_mail());
 		
 		List<FriendListVo> myFriendList = messageservice.MyFriendsList(pageVo);
 		
@@ -442,6 +442,49 @@ public class MessageController {
 		return myFriendsListMap;
 	}
 	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// 친구 요청 : 내가 받은 요청 
+	
+	@ResponseBody
+	@RequestMapping(value="/youGiveFriendListAjax", method= RequestMethod.GET)
+	public Map<String, Object> youGiveFriendListAjax (@SessionAttribute("memberVo") MemberVo memberVo , FriendListVo friendVo, PageVo pageVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		friendVo.setMember_name(memberVo.getMember_name());
+		
+		List<FriendListVo> giveFriendList = messageservice.youGiveFriendList(pageVo);
+		
+		System.out.println(giveFriendList + "과연 값은friendVo");
+		int pageCnt = messageservice.totalyouGiveFriendList(memberVo.getMember_mail());
+		
+		Map<String, Object> yougiveListMap = new HashMap<>();
+		yougiveListMap.put("giveFriendList", giveFriendList);
+		yougiveListMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return yougiveListMap;
+	}
+	
+	// 검색 부분
+	@ResponseBody
+	@RequestMapping(value="/youGiveFriendListSearchAjax", method= RequestMethod.POST)
+	public Map<String, Object> youGiveFriendListSearchAjax (@SessionAttribute("memberVo") MemberVo memberVo , FriendListVo friendVo, PageVo pageVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		friendVo.setMember_name(memberVo.getMember_name());
+		
+		if(pageVo.getSearchTextyouGiveFriendList()== null) {
+			pageVo.setSearchTextyouGiveFriendList("");
+		}
+		List<FriendListVo> giveFriendList = messageservice.youGiveFriendList(pageVo);
+		
+		int pageCnt = messageservice.totalyouGiveFriendList(memberVo.getMember_mail());
+		
+		Map<String, Object> yougiveListMap = new HashMap<>();
+		yougiveListMap.put("giveFriendList", giveFriendList);
+		yougiveListMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return yougiveListMap;
+	}
 }
 
 

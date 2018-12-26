@@ -144,4 +144,16 @@ public class MessageService implements MessageServiceInf{
 		return messageMapper.deletemySendFriendList(friend_code);
 	}
 
+
+	@Override
+	public List<FriendListVo> youGiveFriendList(PageVo pageVo) {
+		return messageMapper.youGiveFriendList(pageVo);
+	}
+
+
+	@Override
+	public int totalyouGiveFriendList(String member_mail) {
+		return messageMapper.totalyouGiveFriendList(member_mail);
+	}
+
 }

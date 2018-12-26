@@ -253,29 +253,30 @@
 						
 							<div class="friendRight">
 							<h2>내가 받은 친구 요청</h2>
-								<form name ="" method="POST" onsubmit="return false;">
-										<input type="text" id="" name="" class="friendSearchInput" placeholder="찾으시는 친구의 이메일을 입력해주세요" />
+								<form name ="searchTextYouGiveFriendList" method="POST" onsubmit="return false;">
+										<input type="text" id="searchTextYouGiveFriendList" name="searchTextYouGiveFriendList" class="friendSearchInput" placeholder="찾으시는 친구의 이메일을 입력해주세요" />
 										<input type="hidden" name="page" value='1'/>
 										<input type="hidden" name="pageSize" value='10' />
-										<input type="button" value="검색" class="friendSearchBtn" onclick=""/>
-										<button onclick="">목록으로</button>
+										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getYouGiveFriendListSearch();"/>
+										<button onclick="getYouGiveFriendList(1);">목록으로</button>
 								</form>
 								<table class="friendCreateTable">
 									<thead>
 										<tr>
 											<th>번호</th>
+											<th>회원 코드</th>
 											<th>회원이메일</th>
 											<th>회원이름</th>
 											<th>수락</th>
 											<th>거절</th>
 										</tr>
 									</thead>
-									<tbody id ="">
+									<tbody id ="giveFriendList">
 										<tr>
 										</tr>
 									</tbody>
 								</table>
-								<ul class="">
+								<ul class="paginationYouGiveFriends">
 								</ul>
 							</div>
 						</div>
@@ -313,6 +314,7 @@
 		getMyFriends(1);
 		getAllMember(1);
 		getMySendFriendList(1);
+		getYouGiveFriendList(1);
 		
 		
 		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
@@ -618,7 +620,8 @@
 				}
 			});
 		}
-							
+		
+		
 		function getAllMemberSearch(){
 			var param = $('form[name=searchTextFriendList]').serialize();
 			var pageSize = 10;
@@ -758,8 +761,89 @@
 				}
 			});
 		}
-
-	
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 내가 받은 친구 요청 
+		function getYouGiveFriendList(page){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/youGiveFriendListAjax",
+				data : {"page" : page, "pageSize":pageSize},
+				success: function(data){
+					
+					var html = "";
+					$.each(data.giveFriendList,function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.friend_code +"</td>";
+						html += "	<td>"+ mm.friend_myemail +"</td>";
+						html += "	<td>"+ mm.member_name +"</td>";
+						html += "	<td>"+ "<input type='button' value='수락'/>"+"</td>";
+						html += "	<td>"+ "<input type='button' value='거절'/>"+"</td>";
+						html += "</tr>";
+					});
+					
+					console.log(data.giveFriendList);
+					
+					$("#giveFriendList").html("");
+					$("#giveFriendList").html(html);
+					
+					var i  = 1;
+					var paging ="";
+						paging +="<li><a href='javascript:getYouGiveFriendList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<= data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getYouGiveFriendList("+ i +");'>"+ i+ "</a></li>";
+					}
+						paging +="<li><a href='javascript:getYouGiveFriendList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".paginationYouGiveFriends").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+		
+		// 검색 부분 
+		function getYouGiveFriendListSearch(){
+			var param = $('form[name=searchTextYouGiveFriendList]').serialize(); 
+			var pageSize = 10;
+			$.ajax({
+				type: "POST",
+				url : "/youGiveFriendListSearchAjax",
+				data : param,
+				success: function(data){
+					
+					var html = "";
+					$.each(data.giveFriendList,function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.friend_code +"</td>";
+						html += "	<td>"+ mm.friend_myemail +"</td>";
+						html += "	<td>"+ mm.member_name +"</td>";
+						html += "	<td>"+ "<input type='button' value='수락'/>"+"</td>";
+						html += "	<td>"+ "<input type='button' value='거절'/>"+"</td>";
+						html += "</tr>";
+					});
+					
+					console.log(data.giveFriendList);
+					
+					$("#giveFriendList").html("");
+					$("#giveFriendList").html(html);
+					
+					var i  = 1;
+					var paging ="";
+						paging +="<li><a href='javascript:getYouGiveFriendList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<= data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getYouGiveFriendList("+ i +");'>"+ i+ "</a></li>";
+					}
+						paging +="<li><a href='javascript:getYouGiveFriendList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".paginationYouGiveFriends").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
 		
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

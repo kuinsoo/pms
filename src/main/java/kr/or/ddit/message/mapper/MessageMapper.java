@@ -50,6 +50,16 @@ public interface MessageMapper {
 	 */
 	List<FriendListVo> MyFriendsList(PageVo pageVo);
 
+	
+	/**
+	 * Method : youGiveFriendList
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 내가 받은 친구 요청 
+	 */
+	List<FriendListVo> youGiveFriendList(PageVo pageVo);
 	/**
 	 * Method : totalMemberSearch
 	 * 작성자 : pc07
@@ -80,6 +90,15 @@ public interface MessageMapper {
 	 */
 	int totalMsgReceived(String msg_rmember);
 
+	/**
+	 * Method : totalyouGiveFriendListt
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param member_mail
+	 * @return
+	 * Method 설명 : 받은 요청 개수 
+	 */
+	int totalyouGiveFriendList(String member_mail);
 	
 	/**
 	 * Method : totalmySendFriendList

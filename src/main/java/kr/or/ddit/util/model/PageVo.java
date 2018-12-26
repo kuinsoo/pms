@@ -17,16 +17,27 @@ public class PageVo {
 	private String searchTextFriend;
 	private String searchTextFriendList;
 	private String searchTextMySendFriendList;
+	private String searchTextyouGiveFriendList;
 	
+
+
 	@Override
 	public String toString() {
 		return "PageVo [page=" + page + ", pageSize=" + pageSize + ", member_mail=" + member_mail + ", searchText="
 				+ searchText + ", searchBookText=" + searchBookText + ", searchTodoText=" + searchTodoText
 				+ ", searchEndText=" + searchEndText + ", searchTextFriend=" + searchTextFriend
 				+ ", searchTextFriendList=" + searchTextFriendList + ", searchTextMySendFriendList="
-				+ searchTextMySendFriendList + "]";
+				+ searchTextMySendFriendList + ", searchTextyouGiveFriendList=" + searchTextyouGiveFriendList + "]";
 	}
 	
+	public String getSearchTextyouGiveFriendList() {
+		return searchTextyouGiveFriendList;
+	}
+	
+	
+	public void setSearchTextyouGiveFriendList(String searchTextyouGiveFriendList) {
+		this.searchTextyouGiveFriendList = searchTextyouGiveFriendList;
+	}
 	
 	public String getSearchTextMySendFriendList() {
 		return searchTextMySendFriendList;
