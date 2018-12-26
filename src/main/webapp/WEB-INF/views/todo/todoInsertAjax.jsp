@@ -81,6 +81,7 @@
 							<label>해결방법</label><br>
 							<textarea placeholder="내용을 입력해주세요."></textarea>
 							<input type="hidden" name="issue_work" value="${todo.todo_work}">
+							<input type="hidden" name="todo_id" value="${todo.todo_id}">
 							<input type="hidden" id="issue_sdate${todo.todo_id}" name="issue_sdate" value="">
 							<input type="hidden" id="issue_edate${todo.todo_id}" name="issue_edate" value="">
 						</form>

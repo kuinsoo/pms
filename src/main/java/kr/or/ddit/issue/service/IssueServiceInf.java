@@ -69,6 +69,16 @@ public interface IssueServiceInf {
 	int issueInsert(IssueVo issueVo);
 	
 	/**
+	* Method : todoIssueUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : issue 등록시 todo테이블의 todo_issue컬럼 추가(수정)
+	*/
+	int todoIssueUpdate(IssueVo issueVo);
+	
+	/**
 	* Method : selGetProjectMember
 	* 작성자 : jerry
 	* 변경이력 :
