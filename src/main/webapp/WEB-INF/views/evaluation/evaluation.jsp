@@ -6,7 +6,7 @@
 	<div class="currentMainContainer">
 		<div class="myPageContainer">
 			<div class="myPageContainerTitle">
-				<h2>능력 및 평가</h2>
+				<h2>업무수행능력</h2>
 			</div>
 
 			<form action="#" method="post" enctype="multipart/form-data">
@@ -28,10 +28,11 @@
 										<li><input type="text"  value= "${memberVo.member_tel}" readonly /></li>
 									</ul>
 								</div>
-								<%--<div class="userContentsInfoRight_2">
-									<ul>
-									</ul>
-								</div>--%>
+								<%--<div class="userContentsInfoRight_2">--%>
+									<%--<ul>--%>
+										<%--<li> 극혐나진실</li>--%>
+									<%--</ul>--%>
+								<%--</div>--%>
 							</div>
 						</div>
 					</div>
