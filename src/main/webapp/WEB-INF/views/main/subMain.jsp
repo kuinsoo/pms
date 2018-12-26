@@ -9,10 +9,11 @@
     <div class="currentMainContainer">
         <div class="currentMainContainerLeft">
             <%-- report  --%>
-            <div id="tabSubMain">
+            <div id="tabSubMain"> <%-- tab에 hight가 민값만 정해있어 크기가 변경된다. 참고 --%>
                 <ul>
                     <li><a href="#tabSubMain-1">업무 리포트</a></li>
                     <li><a href="#tabSubMain-2">업무 카드</a></li>
+                    <li><a href="#tabSubMain-3">회의 리스트</a></li>
                 </ul>
                 <div id="tabSubMain-1" class="projectList">
                     <%@ include file="/WEB-INF/views/main/report.jsp" %>
@@ -38,6 +39,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div id="tabSubMain-3" >
+                <%-- 회의 리스트를 넣어주시면 됩니다. !!--%>
             </div>
             <%-- 등록  --%>
             <%@ include file="/WEB-INF/views/main/projectWriter.jsp" %>
