@@ -119,10 +119,29 @@ public class MessageService implements MessageServiceInf{
 		return messageMapper.totalMember(member_mail);
 	}
 
+	
 
 	@Override
 	public int insertFriendN(FriendListVo friendVo) {
 		return messageMapper.insertFriendN(friendVo);
+	}
+
+
+	@Override
+	public List<FriendListVo> mySendFriendList(PageVo pageVo) {
+		return messageMapper.mySendFriendList(pageVo);
+	}
+
+
+	@Override
+	public int totalmySendFriendList(String member_mail) {
+		return messageMapper.totalmySendFriendList(member_mail);
+	}
+
+
+	@Override
+	public int deletemySendFriendList(String friend_code) {
+		return messageMapper.deletemySendFriendList(friend_code);
 	}
 
 }

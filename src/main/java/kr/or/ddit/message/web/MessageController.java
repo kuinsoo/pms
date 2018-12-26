@@ -366,11 +366,83 @@ public class MessageController {
 		return "message/message";
 	}
 	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// 친구 요청 : 내가 보낸 요청 
+
+	@ResponseBody
+	@RequestMapping(value="/myFriendSendListAjax", method= RequestMethod.GET)
+	public Map<String, Object> myFriendSendListAjax (@SessionAttribute("memberVo") MemberVo memberVo , FriendListVo friendVo, PageVo pageVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		friendVo.setMember_name(memberVo.getMember_name());
+		
+		List<FriendListVo> sendFriendList = messageservice.mySendFriendList(pageVo);
+		
+		System.out.println( "sendFriendList 의 값은?"+ sendFriendList);
+		
+		int pageCnt = messageservice.totalmySendFriendList(memberVo.getMember_mail());
+		
+		Map<String, Object> myFriendsListMap = new HashMap<>();
+		myFriendsListMap.put("sendFriendList", sendFriendList);
+		myFriendsListMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myFriendsListMap;
+	}
+	
+	// 요청 취소부분 ajax처리 
+	
+	
+	// 친구 요청 : 내가 보낸 요청 
+	// 검색 부분 
+	@ResponseBody
+	@RequestMapping(value="/myFriendSendListSearchAjax", method= RequestMethod.POST)
+	public Map<String, Object> myFriendSendListSearchAjax (@SessionAttribute("memberVo") MemberVo memberVo , PageVo pageVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+
+		if(pageVo.getSearchTextMySendFriendList()== null) {
+			pageVo.setSearchTextMySendFriendList("");
+		}
+		
+		List<FriendListVo> sendFriendList = messageservice.mySendFriendList(pageVo);
+		
+		int pageCnt = messageservice.totalmySendFriendList(memberVo.getMember_mail());
+		
+		Map<String, Object> myFriendsListMap = new HashMap<>();
+		myFriendsListMap.put("sendFriendList", sendFriendList);
+		myFriendsListMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myFriendsListMap;
+		
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/deletemySendFriendAjax", method = RequestMethod.GET)
+	public Map<String , Object> deletemySendFriendAjax(@SessionAttribute("memberVo") MemberVo memberVo, PageVo pageVo, FriendListVo friendVo,
+								HttpServletRequest request ){
+		
+		String friend_code = request.getParameter("friend_code");
+		
+		System.out.println(" friend_code의 값 " + friend_code);
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		friendVo.setMember_name(memberVo.getMember_name());
+		
+		List<FriendListVo> sendFriendList = messageservice.mySendFriendList(pageVo);
+		
+		messageservice.deletemySendFriendList(friend_code);
+		
+		int pageCnt = messageservice.totalmySendFriendList(memberVo.getMember_mail());
+		
+		Map<String, Object> myFriendsListMap = new HashMap<>();
+		myFriendsListMap.put("sendFriendList", sendFriendList);
+		myFriendsListMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myFriendsListMap;
+	}
 	
 }
-
-
-
 
 
 

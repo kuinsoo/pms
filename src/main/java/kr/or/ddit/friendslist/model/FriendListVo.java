@@ -21,9 +21,15 @@ public class FriendListVo {
     private String friend_accept;
     private String friend_date;
     private String friend_code;
-   
+    private String member_name;   
     
     
+	public String getMember_name() {
+		return member_name;
+	}
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
 	public String getFriend_code() {
 		return friend_code;
 	}
@@ -65,7 +71,7 @@ public class FriendListVo {
 	public String toString() {
 		return "FriendListVo [rnum=" + rnum + ", friend_mymail=" + friend_mymail + ", friend_member=" + friend_member
 				+ ", friend_accept=" + friend_accept + ", friend_date=" + friend_date + ", friend_code=" + friend_code
-				+ "]";
+				+ ", member_name=" + member_name + "]";
 	}
 	public FriendListVo() {
 		super();
