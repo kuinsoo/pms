@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import kr.or.ddit.issue.mapper.IssueMapper;
 import kr.or.ddit.issue.model.IssueVo;
 import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.member.model.MemberVo;
@@ -38,7 +39,7 @@ public class IssueController {
 	
 	@Autowired
 	private IssueServiceInf issueService;
-
+	
 	@RequestMapping(value="/issueHistory")
 	public String issueHistory(@SessionAttribute("memberVo") MemberVo memberVo, PageVo pageVo, Model model) {
 		
@@ -78,8 +79,8 @@ public class IssueController {
 	
 	@RequestMapping(value="/issueInsert", method= {RequestMethod.POST, RequestMethod.GET})
 	public String issueInsert(IssueVo issueVo) {
-		
-		
+		System.out.println("issueVo : " + issueVo);
+		issueService.issueInsert(issueVo);
 		
 		return "";
 	}
