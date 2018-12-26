@@ -14,13 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.ddit.issue.model.IssueVo;
 import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.project.model.ProjectVo;
-import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.util.model.PageVo;
 
 /**
@@ -40,6 +40,16 @@ public class IssueController {
 	@Autowired
 	private IssueServiceInf issueService;
 	
+	/**
+	* Method : issueHistory
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param memberVo
+	* @param pageVo
+	* @param model
+	* @return
+	* Method 설명 : 이슈히스토리 메뉴에 프로젝트 list 조회
+	*/
 	@RequestMapping(value="/issueHistory")
 	public String issueHistory(@SessionAttribute("memberVo") MemberVo memberVo, PageVo pageVo, Model model) {
 		
@@ -60,6 +70,16 @@ public class IssueController {
 		return "history/issueHistory";
 	}
 	
+	/**
+	* Method : issueHistoryAjax
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param memberVo
+	* @param pageVo
+	* @param model
+	* @return
+	* Method 설명 : 이슈히스토리 메뉴에 프로젝트 list 조회(Ajax 적용)
+	*/
 	@RequestMapping(value="/issueHistoryAjax", method=RequestMethod.POST)
 	public String issueHistoryAjax(@SessionAttribute("memberVo") MemberVo memberVo, PageVo pageVo, Model model) {
 		
@@ -77,10 +97,17 @@ public class IssueController {
 		return "history/issueHistoryAjax";
 	}
 	
+	/**
+	* Method : issueInsert
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @param model
+	* @return
+	* Method 설명 : 이슈 등록 / TODO_ISSUE 컬럼 값 추가 / 이슈 list 조회
+	*/
 	@RequestMapping(value="/issueInsert", method= {RequestMethod.POST, RequestMethod.GET})
-	public String issueInsert(IssueVo issueVo) {
-		String issue_id = null;
-
+	public String issueInsert(IssueVo issueVo, Model model) {
 		try {
 			int result = issueService.issueInsert(issueVo);
 			if(result != 0) {
@@ -90,9 +117,32 @@ public class IssueController {
 			e.printStackTrace();
 		}
 		
+		List<IssueVo> issueList = issueService.issueSelectList(issueVo);
 		
+		model.addAttribute("issueList", issueList);
 		
-		return "";
+		return "issue/issueSelectHtmlAjax";
+	}
+	
+	/**
+	* Method : issueSelectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_id
+	* @param model
+	* @return
+	* Method 설명 : 이슈 list 조회
+	*/
+	@RequestMapping(value="/issueSelectList", method= {RequestMethod.POST, RequestMethod.GET})
+	public String issueSelectList(@RequestParam("todo_id")String todo_id, Model model) {
+		IssueVo issueVo = new IssueVo();
+		issueVo.setTodo_id(todo_id);
+		
+		List<IssueVo> issueList = issueService.issueSelectList(issueVo);
+		
+		model.addAttribute("issueList", issueList);
+		
+		return "issue/issueSelectHtmlAjax";
 	}
 	
 	/**
