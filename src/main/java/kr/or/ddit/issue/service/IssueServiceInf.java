@@ -88,4 +88,14 @@ public interface IssueServiceInf {
 	*/
 	List<IssueVo> selGetProjectMember(String work_id);
 	
+	/**
+	* Method : issueSelectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 이슈 리스트 조회
+	*/
+	List<IssueVo> issueSelectList(IssueVo issueVo);
+	
 }

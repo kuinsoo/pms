@@ -13,10 +13,10 @@
 				</c:when>
 			</c:choose>
 		</td>
-		<td><a href="#open${todo.todo_id}" class="issueTitlePopup" onclick="issueDateSet(${todo.todo_id});">${todo.todo_content}</a>
+		<td><a href="#open${todo.todo_id}" class="issueTitlePopup" onclick="initialization${todo.todo_work}(${todo.todo_id});">${todo.todo_content}</a>
 			<div class="white_content3" id="open${todo.todo_id}">
 				<div>
-					<a href="#close" class="mainCloseBtns"></a>
+					<a href="#close" class="mainCloseBtns" onclick="getToDoList${todo.todo_work}(1, ${todo.work_project}, ${todo.todo_work});"></a>
 					<div class="issueSelectPage">
 						<div class="issueSelectPageLeft">
 							<form action="#" method="post">
@@ -49,7 +49,7 @@
 							<h2>발생이슈</h2>
 							<c:choose>
 								<c:when test="${todo.todo_issue == null}">
-									<input type="button" value="등록" class="issueCreateBtn" onclick="insertIssue(${todo.todo_id});"/>
+									<input type="button" value="등록" class="issueCreateBtn" onclick="insertIssue${todo.todo_work}(${todo.todo_id}, ${todo.todo_work});"/>
 								</c:when>
 								<c:otherwise>
 									<input type="button" value="수정" class="insueUpdateBtn" />

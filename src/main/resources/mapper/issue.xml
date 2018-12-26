@@ -86,8 +86,16 @@
 	</select>
 	
 	<!-- 이슈 리스트 조회 -->
-	<select id="">
-		
+	<select id="issueSelectList" resultType="issueVo" parameterType="issueVo">
+		SELECT  issue_id,
+		        issue_title,
+		        issue_level,
+		        issue_member,
+		        issue_sdate,
+		        issue_content
+		FROM    issue INNER JOIN todo
+		ON      issue_id = todo_issue
+		WHERE   todo_id = #{todo_id}
 	</select>
 	
 	<!-- 이슈 수정 -->
