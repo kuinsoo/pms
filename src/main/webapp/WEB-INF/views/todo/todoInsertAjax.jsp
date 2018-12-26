@@ -49,10 +49,11 @@
 							<h2>발생이슈</h2>
 							<c:choose>
 								<c:when test="${todo.todo_issue == null}">
-									<input type="button" value="등록" class="issueCreateBtn" onclick="insertIssue${todo.todo_work}(${todo.todo_id}, ${todo.todo_work});"/>
+									<input type="button" value="등록" class="issueCreateBtn" onclick="insertIssue${todo.todo_work}(${todo.todo_id});"/>
 								</c:when>
+								
 								<c:otherwise>
-									<input type="button" value="수정" class="insueUpdateBtn" />
+									<input type="button" value="수정" class="insueUpdateBtn" onclick="updateIssue${todo.todo_work}(${todo.todo_id});"/>
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -71,21 +72,28 @@
 							<label>이슈내용</label><br>
 							<textarea name="issue_content" placeholder="내용을 입력해주세요."></textarea><br>
 							<br><hr><br>
-							<label>해결자</label>
-							<select class="sel_issue_helper" name="issue_helper">
-								<c:forEach items="${issueMemberList}" var="member">
-									<option>${member.member_name}(${member.pmember_member})</option>
-								</c:forEach>
-							</select><br>
-							<label>해결일시</label><input type="datetime-local" id="non_issue_edate${todo.todo_id}" name="non_issue_edate${todo.todo_id}" value=""><br>
-							<label>해결방법</label><br>
-							<textarea placeholder="내용을 입력해주세요."></textarea>
+							<c:choose>
+								<c:when test="${todo.todo_issue == null}"></c:when>
+								<c:otherwise>
+									<label>해결자</label>
+									<select class="sel_issue_helper" name="issue_helper">
+										<c:forEach items="${issueMemberList}" var="member">
+											<option>${member.member_name}(${member.pmember_member})</option>
+										</c:forEach>
+									</select><br>
+									<label>해결일시</label><input type="datetime-local" id="non_issue_edate${todo.todo_id}" name="non_issue_edate${todo.todo_id}" value=""><br>
+									<label>해결방법</label><br>
+									<textarea placeholder="내용을 입력해주세요." name="issue_solution"></textarea>
+									<input type="button" value="해결등록" class="insueUpdateBtn" onclick="helperUpdate${todo.todo_work}(${todo.todo_id});"/>
+								</c:otherwise>
+							</c:choose>
+							<input type="hidden" name="issue_id" value="${todo.todo_issue}">
 							<input type="hidden" name="issue_work" value="${todo.todo_work}">
 							<input type="hidden" name="todo_id" value="${todo.todo_id}">
 							<input type="hidden" id="issue_sdate${todo.todo_id}" name="issue_sdate" value="">
 							<input type="hidden" id="issue_edate${todo.todo_id}" name="issue_edate" value="">
 						</form>
-						<hr>
+						<br><hr><br>
 						<div>
 							<table>
 								<thead>
@@ -100,6 +108,14 @@
 								<tbody id="issueSelectHtmlAjax${todo.todo_id}">
 									<!-- issueSelectHtmlAjax.jsp -->
 								</tbody>
+								<tr>
+									<th>해결자</th>
+									<th>해결일시</th>
+									<th>해결방법</th>
+								</tr>
+								<tbody id="issueHelperHtmlAjax${todo.todo_id}">
+									<!-- issueHelperHtmlAjax.jsp -->
+								</tbody>
 							</table>
 						</div>
 					</div>
@@ -109,6 +125,7 @@
 		<td>${todo.format_todo_sdate}</td>
 		<td>${todo.format_todo_eedate}</td>
 		<td>${todo.todo_issue}</td>
+		<td></td>
 		<c:choose>
 			<c:when test="${todo.todo_complet == 'N' && todo.todo_issue == null}">
 				<td id="minusBtn${todo.todo_id}"><i class='fas fa-minus' style='color: red; cursor: pointer;' id='todoDelete${todo.todo_id}' onclick="goTodoDelete${todo.todo_work}(${todo.todo_id}, ${todo.todo_work});"></i></td>

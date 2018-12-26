@@ -12,9 +12,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.ddit.issue.model.IssueVo;
@@ -143,6 +145,59 @@ public class IssueController {
 		model.addAttribute("issueList", issueList);
 		
 		return "issue/issueSelectHtmlAjax";
+	}
+	
+	/**
+	* Method : issueUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* Method 설명 : 이슈 수정
+	*/
+	@RequestMapping(value="/issueUpdate", method= {RequestMethod.POST, RequestMethod.GET})
+	@ResponseBody
+	public void issueUpdate(IssueVo issueVo) {
+		try {
+			issueService.issueUpdate(issueVo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	* Method : helperUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* Method 설명 : 도움 등록
+	*/
+	@RequestMapping(value="/helperUpdate", method= {RequestMethod.POST, RequestMethod.GET})
+	public String helperUpdate(IssueVo issueVo, Model model) {
+		List<IssueVo> issueList = new ArrayList<IssueVo>();
+		try {
+			int result = issueService.helperUpdate(issueVo);
+			if(result != 0) {
+				issueList = issueService.issueSelectList(issueVo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("issueList", issueList);
+		
+		return "issue/issueHelperHtmlAjax";
+	}
+	
+	@RequestMapping(value="/issueHelperList", method= {RequestMethod.POST, RequestMethod.GET})
+	public String issueHelperList(@RequestParam("todo_id")String todo_id, Model model) {
+		IssueVo issueVo = new IssueVo();
+		issueVo.setTodo_id(todo_id);
+		
+		List<IssueVo> helperList = issueService.issueSelectList(issueVo);
+		
+		model.addAttribute("helperList", helperList);
+		
+		return "issue/issueHelperHtmlAjax";
 	}
 	
 	/**

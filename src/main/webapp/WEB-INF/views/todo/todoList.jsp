@@ -116,10 +116,13 @@ function initialization${work.work_id}(todo_id){
     
     /* issue 조회 함수 호출 ==문의: jerry== */
     getIssueList${work.work_id}(todo_id);
+
+    /* 도움 조회 함수 호출 ==문의: jerry== */
+    getHelperList${work.work_id}(todo_id);
 }
 
 /* issue 등록 ==문의: jerry== */
-function insertIssue${work.work_id}(todo_id, todo_work) {
+function insertIssue${work.work_id}(todo_id) {
 	var sdate = $('input[name=non_issue_sdate'+ todo_id +']').val();
 	var repSdate = sdate.replace("T", " ");
 	$("#issue_sdate"+todo_id).val(repSdate);
@@ -156,13 +159,64 @@ function getIssueList${work.work_id}(todo_id) {
 	});
 }
 
-/* 날짜 비교(보류) */
-// function todoEdateCheck(beforeDate){
-// 	beforeDate.setHours(beforeDate.getHours() + 9);
-// 	var utcDate = beforeDate.toISOString().slice(0, 16);
-// 	var date = utcDate.replace("T", " ");
-// 	if()
-// }
+/* 등록된 issue 수정 ==문의: jerry== */
+function updateIssue${work.work_id}(todo_id){
+	var sdate = $('input[name=non_issue_sdate'+ todo_id +']').val();
+	var repSdate = sdate.replace("T", " ");
+	$("#issue_sdate"+todo_id).val(repSdate);
+	
+	var param = $('form[name=insertIssueForm'+ todo_id +']').serialize();
+	
+	$.ajax({
+		method: "POST",
+		url: "/issueUpdate",
+		data: param,
+		success: function(data){
+			getIssueList${work.work_id}(todo_id);
+		},
+		error: function(data){
+			console.log("todoList.jsp : updateIssue() - error");
+		}
+	});
+}
+
+/* 도움 등록 ==문의: jerry== */
+function helperUpdate${work.work_id}(todo_id){
+	var edate = $('input[name=non_issue_edate'+ todo_id +']').val();
+	var repEdate = edate.replace("T", " ");
+	$("#issue_edate"+todo_id).val(repEdate);
+	
+	var param = $('form[name=insertIssueForm'+ todo_id +']').serialize();
+	
+	$.ajax({
+		method: "POST",
+		url: "/helperUpdate",
+		data: param,
+		success: function(data){
+			$('#issueHelperHtmlAjax'+todo_id).html("");
+			$('#issueHelperHtmlAjax'+todo_id).html(data);
+		},
+		error: function(data){
+			console.log("todoList.jsp : helperUpdate() - error");
+		}
+	});
+}
+
+/* helper list 조회 ==문의: jerry== */
+function getHelperList${work.work_id}(todo_id) {
+	$.ajax({
+		method: "POST",
+		url: "/issueHelperList",
+		data: {"todo_id" : todo_id},
+		success: function(data){
+			$('#issueHelperHtmlAjax'+todo_id).html("");
+			$('#issueHelperHtmlAjax'+todo_id).html(data);
+		},
+		error: function(data){
+			console.log("todoList.jsp : getIssueList() - error");
+		}
+	});
+}
 
 </script>
 

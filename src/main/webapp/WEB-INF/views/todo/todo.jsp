@@ -64,9 +64,11 @@ function popupMemberAjax${work.work_id}(project_id, work_id){
 }
 
 /* to-do list의 member list radio 버튼 클릭시 */
-function setMemberName${work.work_id}(name){
+function setMemberName${work.work_id}(name, mail){
 	$('#todo_pmember${work.work_id}').val('');
+	$('#pmember_member${work.work_id}').val('');
 	$('#todo_pmember${work.work_id}').val(name);
+	$('#pmember_member${work.work_id}').val(mail);
 }
 
 /* to-do 등록시 참여자 이름/이메일 검색 */
@@ -121,6 +123,7 @@ function enterKey${work.work_id}(e){
 						<input type="hidden" name="todo_eedate" id="todo_eedate${work.work_id}" value=""/>
 						<input type="hidden" name="work_project" id="todo_project_id" value="${projectVo.project_id}" />
 						<input type="hidden" name="todo_work" id="todo_work" value="${work.work_id}" />
+						<input type="hidden" name="pmember_member" id="pmember_member${work.work_id}" value="">
 						<ul>
 							<li><input type="text" name="todo_pmember" id="todo_pmember${work.work_id}" placeholder="담당자를 입력하세요." /></li>
 							<li><textarea name="todo_content" placeholder="내용을 입력하세요."></textarea></li>

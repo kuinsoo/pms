@@ -99,8 +99,32 @@
 	</select>
 	
 	<!-- 이슈 수정 -->
+	<update id="issueUpdate" parameterType="issueVo">
+		UPDATE	issue
+		SET		issue_title = #{issue_title},
+				issue_level = #{issue_level},
+				issue_sdate = #{issue_sdate},
+				issue_content = #{issue_content}
+		WHERE	issue_id = #{issue_id}
+	</update>
 	
+	<!-- 이슈 해결(도움) 등록 -->
+	<update id="helperUpdate" parameterType="issueVo">
+		UPDATE	issue
+		SET		issue_helper = #{issue_helper},
+				issue_edate = #{issue_edate},
+				issue_solution = #{issue_solution}
+		WHERE	issue_id = #{issue_id}
+	</update>
 	
-	<!-- 이슈 해결 등록 -->
-	
+	<!-- 이슈 해결(도움) 조회 -->
+	<select id="helperSelectList" parameterType="issueVo">
+		SELECT  issue_id,
+		        issue_helper,
+		        issue_edate,
+		        issue_solution
+		FROM    issue INNER JOIN todo
+		ON      issue_id = todo_issue
+		WHERE   todo_id = #{todo_id}
+	</select>
 </mapper>

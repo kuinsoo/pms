@@ -137,5 +137,44 @@ public class IssueService implements IssueServiceInf{
 	public List<IssueVo> issueSelectList(IssueVo issueVo) {
 		return issueMapper.issueSelectList(issueVo);
 	}
+
+	/**
+	* Method : issueUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 이슈 수정
+	*/
+	@Override
+	public int issueUpdate(IssueVo issueVo) {
+		return issueMapper.issueUpdate(issueVo);
+	}
+
+	/**
+	* Method : helperUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 도움 등록
+	*/
+	@Override
+	public int helperUpdate(IssueVo issueVo) {
+		return issueMapper.helperUpdate(issueVo);
+	}
+
+	/**
+	* Method : helperSelectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 도움 리스트 조회
+	*/
+	@Override
+	public List<IssueVo> helperSelectList(IssueVo issueVo) {
+		return issueMapper.helperSelectList(issueVo);
+	}
 	
 }

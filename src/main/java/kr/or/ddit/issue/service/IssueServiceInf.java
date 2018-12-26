@@ -98,4 +98,34 @@ public interface IssueServiceInf {
 	*/
 	List<IssueVo> issueSelectList(IssueVo issueVo);
 	
+	/**
+	* Method : issueUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 이슈 수정
+	*/
+	int issueUpdate(IssueVo issueVo);
+	
+	/**
+	* Method : helperUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 도움 등록
+	*/
+	int helperUpdate(IssueVo issueVo);
+	
+	/**
+	* Method : helperSelectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 도움 리스트 조회
+	*/
+	List<IssueVo> helperSelectList(IssueVo issueVo);
+	
 }
