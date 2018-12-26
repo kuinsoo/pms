@@ -152,6 +152,17 @@ public interface MessageMapper {
 	 */
 	int insertFriendN(FriendListVo friendVo);
 	
+	
+	/**
+	 * Method : insertFriendY
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friendVo
+	 * @return
+	 * Method 설명 : 내가 받은 친구요청에서 수락을 눌렀을때 경우 1.업데이트가 되고 2. 생성을 한다
+	 */
+	int insertFriendY(FriendListVo friendVo);
+	
 	/**
 	 * Method : updateMessageReceived
 	 * 작성자 : pc07
@@ -161,6 +172,26 @@ public interface MessageMapper {
 	 * Method 설명 : 읽음/ 안읽음 구분하기 
 	 */
 	int updateMessageReceived(MessageVo msgVo);
+	
+	/**
+	 * Method : updateAcceptFriend
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friendVo
+	 * @return
+	 * Method 설명 : 내가 받은요청에서 수락 버튼을 클릭했을때
+	 */
+	int updateAcceptFriend(String friend_code);
+	
+	/**
+	 * Method : updateRefuseFriend
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friendVo
+	 * @return
+	 * Method 설명 : 내가 받은요청에서 거절 버튼을 클릭했을때
+	 */
+	int updateRefuseFriend (String friend_code);
 	
 	
 	/**

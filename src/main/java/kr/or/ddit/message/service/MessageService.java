@@ -156,4 +156,20 @@ public class MessageService implements MessageServiceInf{
 		return messageMapper.totalyouGiveFriendList(member_mail);
 	}
 
+
+	@Override
+	public int updateAcceptFriend(String friend_code) {
+		return messageMapper.updateAcceptFriend(friend_code);
+	}
+
+	@Override
+	public int insertFriendY(FriendListVo friendVo) {
+		return messageMapper.insertFriendY(friendVo);
+	}
+
+
+	@Override
+	public int updateRefuseFriend(String friend_code) {
+		return messageMapper.updateRefuseFriend(friend_code);
+	}
 }
