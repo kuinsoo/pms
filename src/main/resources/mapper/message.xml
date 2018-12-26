@@ -208,7 +208,7 @@
 					where  friend_member  = #{member_mail}
 					and    friend_accept  = 'N')a) 
             where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
-		<if test="searchTextyouGiveFriendList!=null and searchTextyouGiveFriendList!=''">and friend_myemail like '%'||#{searchTextyouGiveFriendList}||'%'</if>
+		<if test="searchTextYouGiveFriendList!=null and searchTextYouGiveFriendList!=''">and friend_myemail like '%'||#{searchTextYouGiveFriendList}||'%'</if>
 	</select>
 	
 	<select id="totalyouGiveFriendList" resultType="int" parameterType="String">

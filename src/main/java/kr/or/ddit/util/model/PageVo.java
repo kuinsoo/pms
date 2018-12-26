@@ -17,7 +17,7 @@ public class PageVo {
 	private String searchTextFriend;
 	private String searchTextFriendList;
 	private String searchTextMySendFriendList;
-	private String searchTextyouGiveFriendList;
+	private String searchTextYouGiveFriendList;
 	
 
 
@@ -27,18 +27,18 @@ public class PageVo {
 				+ searchText + ", searchBookText=" + searchBookText + ", searchTodoText=" + searchTodoText
 				+ ", searchEndText=" + searchEndText + ", searchTextFriend=" + searchTextFriend
 				+ ", searchTextFriendList=" + searchTextFriendList + ", searchTextMySendFriendList="
-				+ searchTextMySendFriendList + ", searchTextyouGiveFriendList=" + searchTextyouGiveFriendList + "]";
-	}
-	
-	public String getSearchTextyouGiveFriendList() {
-		return searchTextyouGiveFriendList;
+				+ searchTextMySendFriendList + ", searchTextYouGiveFriendList=" + searchTextYouGiveFriendList + "]";
 	}
 	
 	
-	public void setSearchTextyouGiveFriendList(String searchTextyouGiveFriendList) {
-		this.searchTextyouGiveFriendList = searchTextyouGiveFriendList;
+	public String getSearchTextYouGiveFriendList() {
+		return searchTextYouGiveFriendList;
 	}
-	
+
+	public void setSearchTextYouGiveFriendList(String searchTextYouGiveFriendList) {
+		this.searchTextYouGiveFriendList = searchTextYouGiveFriendList;
+	}
+
 	public String getSearchTextMySendFriendList() {
 		return searchTextMySendFriendList;
 	}

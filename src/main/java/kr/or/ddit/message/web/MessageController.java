@@ -22,6 +22,7 @@ import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.message.model.MessageVo;
 import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.util.model.PageVo;
+import oracle.net.aso.f;
 
 /**
  * kr.or.ddit.message.web
@@ -148,9 +149,6 @@ public class MessageController {
 		if(pageVo.getSearchTextFriendList() == null) {
 			pageVo.setSearchTextFriendList("");
 		}
-
-		System.out.println("입력한 값 알아오기 " + pageVo.getSearchTextFriendList());
-		
 		List<MemberVo> myMemberList = messageservice.totalMemberSearch(pageVo);
 		
 		int pageCnt = messageservice.totalMember(memberVo.getMember_mail());
@@ -378,8 +376,6 @@ public class MessageController {
 		
 		List<FriendListVo> sendFriendList = messageservice.mySendFriendList(pageVo);
 		
-		System.out.println( "sendFriendList 의 값은?"+ sendFriendList);
-		
 		int pageCnt = messageservice.totalmySendFriendList(memberVo.getMember_mail());
 		
 		Map<String, Object> myFriendsListMap = new HashMap<>();
@@ -424,8 +420,6 @@ public class MessageController {
 		
 		String friend_code = request.getParameter("friend_code");
 		
-		System.out.println(" friend_code의 값 " + friend_code);
-		
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		friendVo.setMember_name(memberVo.getMember_name());
 		
@@ -454,7 +448,6 @@ public class MessageController {
 		
 		List<FriendListVo> giveFriendList = messageservice.youGiveFriendList(pageVo);
 		
-		System.out.println(giveFriendList + "과연 값은friendVo");
 		int pageCnt = messageservice.totalyouGiveFriendList(memberVo.getMember_mail());
 		
 		Map<String, Object> yougiveListMap = new HashMap<>();
@@ -467,14 +460,16 @@ public class MessageController {
 	// 검색 부분
 	@ResponseBody
 	@RequestMapping(value="/youGiveFriendListSearchAjax", method= RequestMethod.POST)
-	public Map<String, Object> youGiveFriendListSearchAjax (@SessionAttribute("memberVo") MemberVo memberVo , FriendListVo friendVo, PageVo pageVo){
+	public Map<String, Object> youGiveFriendListSearchAjax (@SessionAttribute("memberVo") MemberVo memberVo, FriendListVo friendVo, PageVo pageVo){
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		friendVo.setMember_name(memberVo.getMember_name());
+
 		
-		if(pageVo.getSearchTextyouGiveFriendList()== null) {
-			pageVo.setSearchTextyouGiveFriendList("");
+		if(pageVo.getSearchTextYouGiveFriendList()==null) {
+			pageVo.setSearchTextYouGiveFriendList("");
 		}
+		
 		List<FriendListVo> giveFriendList = messageservice.youGiveFriendList(pageVo);
 		
 		int pageCnt = messageservice.totalyouGiveFriendList(memberVo.getMember_mail());

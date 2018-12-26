@@ -813,6 +813,8 @@
 				data : param,
 				success: function(data){
 					
+					console.log(data);
+					
 					var html = "";
 					$.each(data.giveFriendList,function(idx,mm){
 						html += "<tr>";
