@@ -24,6 +24,47 @@
         from project inner join PROJECT_MEMBER on PROJECT.PROJECT_ID = PROJECT_MEMBER.PMEMBER_PROJECT
                      inner join member on PROJECT_MEMBER.PMEMBER_MEMBER = MEMBER.MEMBER_MAIL
         where MEMBER_MAIL= #{member_mail}
+        and PROJECT_DELETE = 'N'
         order by to_number(PROJECT_ID) desc
+    </select>
+
+    <select id="evaluationWorkCnt" parameterType="Map" resultType="int">
+        select count (*) from member,  PROJECT_MEMBER, PROJECT, WORK, TODO
+            where MEMBER_MAIL = PMEMBER_MEMBER
+            and PMEMBER_PROJECT = PROJECT_ID
+            and PROJECT_ID = WORK_PROJECT
+            and WORK_ID = TODO_WORK
+            and MEMBER_MAIL = #{member_mail}
+            and TODO_PMEMBER = #{member_name}
+    </select>
+
+    <select id="evaluationIssueCnt" parameterType="Map" resultType="int">
+        select count(*) from member,  PROJECT_MEMBER, PROJECT, WORK, ISSUE
+            where MEMBER_MAIL = PMEMBER_MEMBER
+            and PMEMBER_PROJECT = PROJECT_ID
+            and PROJECT_ID = WORK_PROJECT
+            and WORK_ID = ISSUE_WORK
+            and MEMBER_MAIL = #{member_mail}
+            and ISSUE_HELPER = #{member_mail}
+            order by to_number(PROJECT_ID) desc
+    </select>
+
+
+    <select id="evaluationProjectIssueCnt" parameterType="Map" resultType="evalVo">
+               select PMEMBER_PROJECT ,(
+                select count(*) as cnt from member,  PROJECT_MEMBER PM1, PROJECT, WORK, ISSUE
+                where MEMBER_MAIL = PMEMBER_MEMBER
+                and PMEMBER_PROJECT = PROJECT_ID
+                and PROJECT_ID = WORK_PROJECT
+                and WORK_ID = ISSUE_WORK
+                and MEMBER_MAIL = #{member_mail}
+                  and PM2.PMEMBER_PROJECT = PM1.PMEMBER_PROJECT
+                and ISSUE_HELPER = #{member_mail} ) issueCnt
+              from MEMBER, PROJECT_MEMBER PM2, project
+                where MEMBER_MAIL = PMEMBER_MEMBER
+                  and PMEMBER_PROJECT = PROJECT_ID
+                and MEMBER_MAIL = #{member_mail}
+                and PROJECT_DELETE = 'N'
+                ORDER by to_number(project_id) desc
     </select>
 </mapper>

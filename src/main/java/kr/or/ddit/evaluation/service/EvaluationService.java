@@ -39,6 +39,8 @@ public class EvaluationService  implements EvaluationServiceInf {
 	}
 
 
+
+
 	/**
 	 * Evaluation project list list.
 	 * 작성자 : Mr.KKu
@@ -50,5 +52,44 @@ public class EvaluationService  implements EvaluationServiceInf {
 	@Override
 	public List<EvaluationVo> evaluationProjectList(Map<String, String> evalMap) {
 		return evaluationMapper.evaluationProjectList(evalMap);
+	}
+
+	/**
+	 * Evaluation work cnt int.
+	 * 작성자 : Mr.KKu
+	 * 내용	: 사용자 업무 처리 수
+	 *
+	 * @param evalMap the eval map
+	 * @return the int
+	 */
+	@Override
+	public int evaluationWorkCnt(Map<String, String> evalMap) {
+		return evaluationMapper.evaluationWorkCnt(evalMap);
+	}
+
+	/**
+	 * Evaluation work cnt int.
+	 * 작성자 : Mr.KKu
+	 * 내용	: 이슈 처리수
+	 *
+	 * @param evalMap the eval map
+	 * @return the int
+	 */
+	@Override
+	public int evaluationIssueCnt(Map<String, String> evalMap) {
+		return evaluationMapper.evaluationIssueCnt(evalMap);
+	}
+
+	/**
+	 * Evaluation work cnt int.
+	 * 작성자 : Mr.KKu
+	 * 내용	: 프로젝트 내에 이슈처리 건수
+	 *
+	 * @param evalMap the eval map
+	 * @return the int
+	 */
+	@Override
+	public List<EvaluationVo> evaluationProjectIssueCnt(Map<String, String> evalMap) {
+		return evaluationMapper.evaluationProjectIssueCnt(evalMap);
 	}
 }

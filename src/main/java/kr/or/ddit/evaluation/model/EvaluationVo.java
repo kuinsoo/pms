@@ -31,6 +31,8 @@ public class EvaluationVo {
 	private String 	work_title;
 	private String 	work_content;
 
+	private int issueCnt;
+
 	public EvaluationVo() {
 	}
 
@@ -104,5 +106,13 @@ public class EvaluationVo {
 
 	public void setWork_content(String work_content) {
 		this.work_content = work_content;
+	}
+
+	public int getIssueCnt() {
+		return issueCnt;
+	}
+
+	public void setIssueCnt(int issueCnt) {
+		this.issueCnt = issueCnt;
 	}
 }

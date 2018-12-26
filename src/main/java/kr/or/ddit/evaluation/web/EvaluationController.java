@@ -45,9 +45,12 @@ public class EvaluationController {
 	public String evaluationView(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		model.addAttribute("memberVo",memberVo);
 		Map<String, String> evalMap = new HashMap<>();
-
 		evalMap.put("member_mail", memberVo.getMember_mail());
+		evalMap.put("member_name", memberVo.getMember_name());
 		model.addAttribute("evalProjectList", evaluationService.evaluationProjectList(evalMap));
+		model.addAttribute("evalWorkCnt", evaluationService.evaluationWorkCnt(evalMap));
+		model.addAttribute("evalIssueCnt", evaluationService.evaluationIssueCnt(evalMap));
+		model.addAttribute("evalProjectIssueCnt", evaluationService.evaluationProjectIssueCnt(evalMap));
 
 		return "evaluation/evaluation";
 	}
@@ -64,7 +67,5 @@ public class EvaluationController {
 
 		return "evaluation/ajaxEvaluation";
 	}
-
-
 
 }

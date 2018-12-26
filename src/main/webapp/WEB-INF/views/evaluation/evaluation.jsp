@@ -220,10 +220,10 @@
 	var myChart = new Chart(ctx, {
 		type: 'pie',
 		data: {
-			labels: ["이슈해결" , "참여 프로젝트" , "처리업무"],
+			labels: ["이슈해결" , "업무" , "프로젝트"],
 			datasets: [{
 				label: '${memberVo.member_name} 님의 CURRENT',
-				data: [16, 34, 50],
+				data: [${evalIssueCnt}, ${evalWorkCnt}, ${evalProjectList.size()}],
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',
@@ -252,10 +252,20 @@
 	var myChart2 = new Chart(ctx2, {
 		type: 'line',
 		data: {
-			labels: ["프로젝트명1" , "프로젝트명2" , "프로젝트명3", "프로젝트명4", "프로젝트명5"],
+			labels:
+			[
+				<c:forEach items="${evalProjectList}" var="evalVo">
+					'${evalVo.project_title}',
+				</c:forEach>
+			],
 			datasets: [{
+
 				label: '${memberVo.member_name} 님의 CURRENT',
-				data: [21, 13, 18, 30, 21],
+				data: [
+					<c:forEach items="${evalProjectIssueCnt}" var="evalVo" >
+						${evalVo.issueCnt},
+					</c:forEach>
+				],
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',
