@@ -69,6 +69,16 @@ public interface IssueServiceInf {
 	int issueInsert(IssueVo issueVo);
 	
 	/**
+	* Method : todoIssueUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : issue 등록시 todo테이블의 todo_issue컬럼 추가(수정)
+	*/
+	int todoIssueUpdate(IssueVo issueVo);
+	
+	/**
 	* Method : selGetProjectMember
 	* 작성자 : jerry
 	* 변경이력 :
@@ -77,5 +87,15 @@ public interface IssueServiceInf {
 	* Method 설명 : issue 등록시 select-option에 프로젝트 참여자 리스트
 	*/
 	List<IssueVo> selGetProjectMember(String work_id);
+	
+	/**
+	* Method : issueSelectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 이슈 리스트 조회
+	*/
+	List<IssueVo> issueSelectList(IssueVo issueVo);
 	
 }

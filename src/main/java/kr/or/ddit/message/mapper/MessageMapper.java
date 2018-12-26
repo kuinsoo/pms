@@ -30,6 +30,15 @@ public interface MessageMapper {
 	 */
 	List<MessageVo> messageReceived (PageVo pageVo);
 	
+	/**
+	 * Method : mySendFriendList
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 :  친구 요청  :  내가 보낸 요청 페이징 처리 + 리스트 
+	 */
+	List<FriendListVo> mySendFriendList (PageVo pageVo);
 	
 	/**
 	 * Method : MyFriendsList
@@ -41,6 +50,16 @@ public interface MessageMapper {
 	 */
 	List<FriendListVo> MyFriendsList(PageVo pageVo);
 
+	
+	/**
+	 * Method : youGiveFriendList
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 내가 받은 친구 요청 
+	 */
+	List<FriendListVo> youGiveFriendList(PageVo pageVo);
 	/**
 	 * Method : totalMemberSearch
 	 * 작성자 : pc07
@@ -70,6 +89,26 @@ public interface MessageMapper {
 	 * Method 설명 : 받은 쪽지 갯수 
 	 */
 	int totalMsgReceived(String msg_rmember);
+
+	/**
+	 * Method : totalyouGiveFriendListt
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param member_mail
+	 * @return
+	 * Method 설명 : 받은 요청 개수 
+	 */
+	int totalyouGiveFriendList(String member_mail);
+	
+	/**
+	 * Method : totalmySendFriendList
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param member_mail
+	 * @return
+	 * Method 설명 : 내가 보낸 친구요청 개수
+	 */
+	int totalmySendFriendList(String member_mail);
 	
 	
 	/**
@@ -133,6 +172,17 @@ public interface MessageMapper {
 	 * Method 설명 : 받은 메시지 삭제부분
 	 */
 	int deleteMsgReceived(String msg_id);
+	
+	/**
+	 * Method : deletemySendFriendList
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friend_member
+	 * @return
+	 * Method 설명 : 내가 보낸 요청  : 요청 취소 --> 삭제 
+	 */
+	int deletemySendFriendList(String friend_code);
+	
 	
 	/**
 	 * Method : deleteMyfriend

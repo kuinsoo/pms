@@ -22,6 +22,7 @@ import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.message.model.MessageVo;
 import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.util.model.PageVo;
+import oracle.net.aso.f;
 
 /**
  * kr.or.ddit.message.web
@@ -109,7 +110,7 @@ public class MessageController {
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		
 		FriendListVo freidListVo = new FriendListVo();
-		freidListVo.setFriend_mymail(memberVo.getMember_mail());
+		freidListVo.setFriend_myemail(memberVo.getMember_mail());
 		
 		List<FriendListVo> myFriendList = messageservice.MyFriendsList(pageVo);
 		
@@ -148,9 +149,6 @@ public class MessageController {
 		if(pageVo.getSearchTextFriendList() == null) {
 			pageVo.setSearchTextFriendList("");
 		}
-
-		System.out.println("입력한 값 알아오기 " + pageVo.getSearchTextFriendList());
-		
 		List<MemberVo> myMemberList = messageservice.totalMemberSearch(pageVo);
 		
 		int pageCnt = messageservice.totalMember(memberVo.getMember_mail());
@@ -173,7 +171,7 @@ public class MessageController {
 		String friend_code = request.getParameter("friend_code");
 
 		FriendListVo freidListVo = new FriendListVo();
-		freidListVo.setFriend_mymail(memberVo.getMember_mail());
+		freidListVo.setFriend_myemail(memberVo.getMember_mail());
 		
 		messageservice.deleteMyfriend(friend_code);
 		
@@ -211,7 +209,7 @@ public class MessageController {
 		System.out.println(pageVo.getSearchTextFriend()+  " 친구 리스트에서 ");
 		
 		FriendListVo friendListVo = new FriendListVo();
-		friendListVo.setFriend_mymail(memberVo.getMember_mail());
+		friendListVo.setFriend_myemail(memberVo.getMember_mail());
 		
 		List<FriendListVo> myFriendList = messageservice.MyFriendsList(pageVo);
 		
@@ -366,11 +364,123 @@ public class MessageController {
 		return "message/message";
 	}
 	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// 친구 요청 : 내가 보낸 요청 
+
+	@ResponseBody
+	@RequestMapping(value="/myFriendSendListAjax", method= RequestMethod.GET)
+	public Map<String, Object> myFriendSendListAjax (@SessionAttribute("memberVo") MemberVo memberVo , FriendListVo friendVo, PageVo pageVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		friendVo.setMember_name(memberVo.getMember_name());
+		
+		List<FriendListVo> sendFriendList = messageservice.mySendFriendList(pageVo);
+		
+		int pageCnt = messageservice.totalmySendFriendList(memberVo.getMember_mail());
+		
+		Map<String, Object> myFriendsListMap = new HashMap<>();
+		myFriendsListMap.put("sendFriendList", sendFriendList);
+		myFriendsListMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myFriendsListMap;
+	}
 	
+	// 요청 취소부분 ajax처리 
+	
+	
+	// 친구 요청 : 내가 보낸 요청 
+	// 검색 부분 
+	@ResponseBody
+	@RequestMapping(value="/myFriendSendListSearchAjax", method= RequestMethod.POST)
+	public Map<String, Object> myFriendSendListSearchAjax (@SessionAttribute("memberVo") MemberVo memberVo , PageVo pageVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+
+		if(pageVo.getSearchTextMySendFriendList()== null) {
+			pageVo.setSearchTextMySendFriendList("");
+		}
+		
+		List<FriendListVo> sendFriendList = messageservice.mySendFriendList(pageVo);
+		
+		int pageCnt = messageservice.totalmySendFriendList(memberVo.getMember_mail());
+		
+		Map<String, Object> myFriendsListMap = new HashMap<>();
+		myFriendsListMap.put("sendFriendList", sendFriendList);
+		myFriendsListMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myFriendsListMap;
+		
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/deletemySendFriendAjax", method = RequestMethod.GET)
+	public Map<String , Object> deletemySendFriendAjax(@SessionAttribute("memberVo") MemberVo memberVo, PageVo pageVo, FriendListVo friendVo,
+								HttpServletRequest request ){
+		
+		String friend_code = request.getParameter("friend_code");
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		friendVo.setMember_name(memberVo.getMember_name());
+		
+		List<FriendListVo> sendFriendList = messageservice.mySendFriendList(pageVo);
+		
+		messageservice.deletemySendFriendList(friend_code);
+		
+		int pageCnt = messageservice.totalmySendFriendList(memberVo.getMember_mail());
+		
+		Map<String, Object> myFriendsListMap = new HashMap<>();
+		myFriendsListMap.put("sendFriendList", sendFriendList);
+		myFriendsListMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myFriendsListMap;
+	}
+	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// 친구 요청 : 내가 받은 요청 
+	
+	@ResponseBody
+	@RequestMapping(value="/youGiveFriendListAjax", method= RequestMethod.GET)
+	public Map<String, Object> youGiveFriendListAjax (@SessionAttribute("memberVo") MemberVo memberVo , FriendListVo friendVo, PageVo pageVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		friendVo.setMember_name(memberVo.getMember_name());
+		
+		List<FriendListVo> giveFriendList = messageservice.youGiveFriendList(pageVo);
+		
+		int pageCnt = messageservice.totalyouGiveFriendList(memberVo.getMember_mail());
+		
+		Map<String, Object> yougiveListMap = new HashMap<>();
+		yougiveListMap.put("giveFriendList", giveFriendList);
+		yougiveListMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return yougiveListMap;
+	}
+	
+	// 검색 부분
+	@ResponseBody
+	@RequestMapping(value="/youGiveFriendListSearchAjax", method= RequestMethod.POST)
+	public Map<String, Object> youGiveFriendListSearchAjax (@SessionAttribute("memberVo") MemberVo memberVo, FriendListVo friendVo, PageVo pageVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		friendVo.setMember_name(memberVo.getMember_name());
+
+		
+		if(pageVo.getSearchTextYouGiveFriendList()==null) {
+			pageVo.setSearchTextYouGiveFriendList("");
+		}
+		
+		List<FriendListVo> giveFriendList = messageservice.youGiveFriendList(pageVo);
+		
+		int pageCnt = messageservice.totalyouGiveFriendList(memberVo.getMember_mail());
+		
+		Map<String, Object> yougiveListMap = new HashMap<>();
+		yougiveListMap.put("giveFriendList", giveFriendList);
+		yougiveListMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return yougiveListMap;
+	}
 }
-
-
-
 
 
 

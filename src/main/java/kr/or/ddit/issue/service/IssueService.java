@@ -111,5 +111,31 @@ public class IssueService implements IssueServiceInf{
 	public List<IssueVo> selGetProjectMember(String work_id) {
 		return issueMapper.selGetProjectMember(work_id);
 	}
+
+	/**
+	* Method : todoIssueUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : issue 등록시 todo테이블의 todo_issue컬럼 추가(수정)
+	*/
+	@Override
+	public int todoIssueUpdate(IssueVo issueVo) {
+		return issueMapper.todoIssueUpdate(issueVo);
+	}
+
+	/**
+	* Method : issueSelectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 이슈 리스트 조회
+	*/
+	@Override
+	public List<IssueVo> issueSelectList(IssueVo issueVo) {
+		return issueMapper.issueSelectList(issueVo);
+	}
 	
 }

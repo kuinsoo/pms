@@ -41,6 +41,7 @@ public class ToDoVo {
 	private String pmember_member;		//	참여자 이메일
 	private String member_profile;		//	참여자 프로필사진
 	private String issue_id;			//	이슈아이디
+	private String work_project;		//	참여중인 프로젝트 ID
 	
 	/* 기본생성자 */
 	public ToDoVo() {}
@@ -49,7 +50,7 @@ public class ToDoVo {
 	public ToDoVo(String todo_id, String todo_work, String todo_pmember, String todo_content, Date todo_sdate,
 			String format_todo_sdate, Date todo_edate, String format_todo_edate, Date todo_eedate,
 			String format_todo_eedate, String todo_complet, String todo_color, int rnum, String todo_issue, 
-			String member_name, String pmember_member, String member_profile) {
+			String member_name, String pmember_member, String member_profile, String issue_id, String work_project) {
 		super();
 		this.todo_id = todo_id;
 		this.todo_work = todo_work;
@@ -68,18 +69,17 @@ public class ToDoVo {
 		this.member_name = member_name;
 		this.pmember_member = pmember_member;
 		this.member_profile = member_profile;
-	}
-
-	
-	public int getRnum() {
-		return rnum;
-	}
-
-	public void setRnum(int rnum) {
-		this.rnum = rnum;
+		this.issue_id = issue_id;
+		this.work_project = work_project;
 	}
 
 	/* getter & setter */
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 	public String getTodo_id() {
 		return todo_id;
 	}
@@ -158,6 +158,18 @@ public class ToDoVo {
 	public void setMember_profile(String member_profile) {
 		this.member_profile = member_profile;
 	}
+	public String getIssue_id() {
+		return issue_id;
+	}
+	public void setIssue_id(String issue_id) {
+		this.issue_id = issue_id;
+	}
+	public String getWork_project() {
+		return work_project;
+	}
+	public void setWork_project(String work_project) {
+		this.work_project = work_project;
+	}
 
 	/* 형변환 getter */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -189,7 +201,7 @@ public class ToDoVo {
 				+ format_todo_edate + ", todo_eedate=" + todo_eedate + ", format_todo_eedate=" + format_todo_eedate
 				+ ", todo_complet=" + todo_complet + ", todo_color=" + todo_color + ", todo_issue=" + todo_issue
 				+ ", member_name=" + member_name + ", pmember_member=" + pmember_member + ", member_profile=" 
-				+ member_profile + "]";
+				+ member_profile + ", issue_id=" + issue_id + ", work_project=" + work_project + "]";
 	}
 	
 }

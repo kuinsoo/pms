@@ -65,7 +65,8 @@ function popupMemberAjax${work.work_id}(project_id, work_id){
 
 /* to-do list의 member list radio 버튼 클릭시 */
 function setMemberName${work.work_id}(name){
-	$('#todo_pmember${work.work_id}').attr('value', name);
+	$('#todo_pmember${work.work_id}').val('');
+	$('#todo_pmember${work.work_id}').val(name);
 }
 
 /* to-do 등록시 참여자 이름/이메일 검색 */

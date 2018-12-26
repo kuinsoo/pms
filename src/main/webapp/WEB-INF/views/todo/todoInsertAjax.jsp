@@ -13,10 +13,10 @@
 				</c:when>
 			</c:choose>
 		</td>
-		<td><a href="#open${todo.todo_id}" class="issueTitlePopup" onclick="issueDateSet(${todo.todo_id});">${todo.todo_content}</a>
+		<td><a href="#open${todo.todo_id}" class="issueTitlePopup" onclick="initialization${todo.todo_work}(${todo.todo_id});">${todo.todo_content}</a>
 			<div class="white_content3" id="open${todo.todo_id}">
 				<div>
-					<a href="#close" class="mainCloseBtns"></a>
+					<a href="#close" class="mainCloseBtns" onclick="getToDoList${todo.todo_work}(1, ${todo.work_project}, ${todo.todo_work});"></a>
 					<div class="issueSelectPage">
 						<div class="issueSelectPageLeft">
 							<form action="#" method="post">
@@ -49,7 +49,7 @@
 							<h2>발생이슈</h2>
 							<c:choose>
 								<c:when test="${todo.todo_issue == null}">
-									<input type="button" value="등록" class="issueCreateBtn" />
+									<input type="button" value="등록" class="issueCreateBtn" onclick="insertIssue${todo.todo_work}(${todo.todo_id}, ${todo.todo_work});"/>
 								</c:when>
 								<c:otherwise>
 									<input type="button" value="수정" class="insueUpdateBtn" />
@@ -67,7 +67,7 @@
 								<option value="5">level 5</option>
 							</select><br>
 							<label>담당자</label><input type="text" name="issue_member" value="${todo.todo_pmember}" readonly><br>
-							<label>발생일시</label><input type="datetime-local" id="non_issue_sdate${todo.todo_id}" value=""><br>
+							<label>발생일시</label><input type="datetime-local" id="non_issue_sdate${todo.todo_id}" name="non_issue_sdate${todo.todo_id}" value=""><br>
 							<label>이슈내용</label><br>
 							<textarea name="issue_content" placeholder="내용을 입력해주세요."></textarea><br>
 							<br><hr><br>
@@ -77,13 +77,31 @@
 									<option>${member.member_name}(${member.pmember_member})</option>
 								</c:forEach>
 							</select><br>
-							<label>해결일시</label><input type="datetime-local" id="non_issue_edate${todo.todo_id}" value=""><br>
+							<label>해결일시</label><input type="datetime-local" id="non_issue_edate${todo.todo_id}" name="non_issue_edate${todo.todo_id}" value=""><br>
 							<label>해결방법</label><br>
 							<textarea placeholder="내용을 입력해주세요."></textarea>
 							<input type="hidden" name="issue_work" value="${todo.todo_work}">
+							<input type="hidden" name="todo_id" value="${todo.todo_id}">
 							<input type="hidden" id="issue_sdate${todo.todo_id}" name="issue_sdate" value="">
 							<input type="hidden" id="issue_edate${todo.todo_id}" name="issue_edate" value="">
 						</form>
+						<hr>
+						<div>
+							<table>
+								<thead>
+									<tr>
+										<th>제목</th>
+										<th>레벨</th>
+										<th>담당자</th>
+										<th>발생일시</th>
+										<th>이슈내용</th>
+									</tr>
+								</thead>
+								<tbody id="issueSelectHtmlAjax${todo.todo_id}">
+									<!-- issueSelectHtmlAjax.jsp -->
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div></td>

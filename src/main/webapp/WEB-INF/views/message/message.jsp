@@ -13,6 +13,7 @@
 						<li><a href="#tabs2-2">받은쪽지</a></li>
 						<li><a href="#tabs2-3">보낸쪽지</a></li>
 						<li><a href="#tabs2-4">친구리스트</a></li>
+						<li><a href="#tabs2-5">친구요청</a></li>
 					</ul>
 
 					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 쪽지 보내기  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -159,6 +160,7 @@
 						    </div>
 						</div>
 					</div>
+					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 					<div id="tabs2-4">
 						<div class="friendContainer">
 						 	<div class="friendLeft">
@@ -186,7 +188,6 @@
 									<ul class="paginationMember">
 									</ul>
 							</div>
-							<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 							
 							<div class="friendRight">
 							<h2>나의친구목록</h2>
@@ -214,6 +215,68 @@
 									</tbody>
 								</table>
 								<ul class="paginationFriends">
+								</ul>
+							</div>
+						</div>
+					</div>
+					<!-- ################################################################################################################################# -->
+					<!-- 요청 부분  -->
+					<div id="tabs2-5">
+						<div class="friendContainer">
+						 	<div class="friendLeft">
+						      <h2>내가 보낸 친구요청</h2>
+								<form name ="searchTextMySendFriendList" method="POST" onsubmit="return false;">
+										<input type="text" id="searchTextMySendFriendList" name="searchTextMySendFriendList" class="friendSearchInput" placeholder= "찾으시는 친구의 이메일을 입력하세요"/>
+										<input type="hidden" name="page" value='1'/>
+										<input type="hidden" name="pageSize" value='10' />
+										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getMySendFriendListSearch();"/>
+										<button onclick="getMySendFriendList(1);">목록으로</button>
+								</form>
+									<table class="friendCreateTable">
+										<thead>
+											<tr>
+												<th>번호</th>
+												<th>회원 코드</th>
+												<th>회원이메일</th>
+												<th>회원이름</th>
+												<th>요청취소</th>
+											</tr>
+										</thead>
+										<tbody id = "sendFriendList">
+										</tbody>
+									</table>
+									<ul class="paginationMySendFriends">
+									</ul>
+							</div>
+						
+							<!-- ################################################################################################################### -->
+						
+							<div class="friendRight">
+							<h2>내가 받은 친구 요청</h2>
+								<form name ="searchTextYouGiveFriendList" method="POST" onsubmit="return false;">
+										<input type="text" id="searchTextYouGiveFriendList" name="searchTextYouGiveFriendList" class="friendSearchInput" placeholder="찾으시는 친구의 이메일을 입력해주세요" />
+										<input type="hidden" name="page" value='1'/>
+										<input type="hidden" name="pageSize" value='10' />
+										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getYouGiveFriendListSearch();"/>
+										<button onclick="getYouGiveFriendList(1);">목록으로</button>
+								</form>
+								<table class="friendCreateTable">
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>회원 코드</th>
+											<th>회원이메일</th>
+											<th>회원이름</th>
+											<th>수락</th>
+											<th>거절</th>
+										</tr>
+									</thead>
+									<tbody id ="giveFriendList">
+										<tr>
+										</tr>
+									</tbody>
+								</table>
+								<ul class="paginationYouGiveFriends">
 								</ul>
 							</div>
 						</div>
@@ -250,6 +313,8 @@
 		getMessageSend(1);
 		getMyFriends(1);
 		getAllMember(1);
+		getMySendFriendList(1);
+		getYouGiveFriendList(1);
 		
 		
 		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
@@ -555,7 +620,8 @@
 				}
 			});
 		}
-							
+		
+		
 		function getAllMemberSearch(){
 			var param = $('form[name=searchTextFriendList]').serialize();
 			var pageSize = 10;
@@ -598,8 +664,190 @@
 		}
 		
 	
-		//#########################################################################################
-		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		//###############################################################################################################################
+		// 내가보낸 친구 요청 부분 
+		function getMySendFriendList(page){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/myFriendSendListAjax",
+				data : {"page" : page, "pageSize":pageSize},
+				success: function(data){
+					
+					var html = "";
+					$.each(data.sendFriendList,function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.friend_code +"</td>";
+						html += "	<td>"+ mm.friend_member +"</td>";
+						html += "	<td>"+ mm.member_name +"</td>";
+						html += "	<td>"+ "<input type='button' onclick ='deletemySendFriend("+mm.friend_code+");' value='요청 취소 '/>"+"</td>";
+						html += "</tr>";
+					});
+					
+					console.log(data.sendFriendList);
+					
+					$("#sendFriendList").html("");
+					$("#sendFriendList").html(html);
+					
+					var i  = 1;
+					var paging ="";
+						paging +="<li><a href='javascript:getMySendFriendList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<= data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getMySendFriendList("+ i +");'>"+ i+ "</a></li>";
+					}
+						paging +="<li><a href='javascript:getMySendFriendList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".paginationMySendFriends").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+		
+		// 요청 취소 버튼 클릭시 처리 
+		function deletemySendFriend(friend_code){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/deletemySendFriendAjax",
+				data : "friend_code="+friend_code,
+				success: function(data){
+					console.log(data.friend_code);
+					console.log(data);
+					getMySendFriendList(1);
+				}
+			});
+		}
+		
+		
+		
+		
+		function getMySendFriendListSearch(){
+			var param = $('form[name=searchTextMySendFriendList]').serialize();
+			var pageSize = 10;
+			$.ajax({
+				type: "POST",
+				url : "/myFriendSendListSearchAjax",
+				data : param,
+				success: function(data){
+					
+					var html = "";
+					$.each(data.sendFriendList,function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.friend_member +"</td>";
+						html += "	<td>"+ mm.member_name +"</td>";
+						html += "	<td>"+ "<input type='button' value='요청 취소 '/>"+"</td>";
+						html += "</tr>";
+					});
+					
+					console.log(data.sendFriendList);
+					
+					$("#sendFriendList").html("");
+					$("#sendFriendList").html(html);
+					
+					var i  = 1;
+					var paging ="";
+						paging +="<li><a href='javascript:getMySendFriendList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<= data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getMySendFriendList("+ i +");'>"+ i+ "</a></li>";
+					}
+						paging +="<li><a href='javascript:getMySendFriendList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".paginationMySendFriends").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		// 내가 받은 친구 요청 
+		function getYouGiveFriendList(page){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/youGiveFriendListAjax",
+				data : {"page" : page, "pageSize":pageSize},
+				success: function(data){
+					
+					var html = "";
+					$.each(data.giveFriendList,function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.friend_code +"</td>";
+						html += "	<td>"+ mm.friend_myemail +"</td>";
+						html += "	<td>"+ mm.member_name +"</td>";
+						html += "	<td>"+ "<input type='button' value='수락'/>"+"</td>";
+						html += "	<td>"+ "<input type='button' value='거절'/>"+"</td>";
+						html += "</tr>";
+					});
+					
+					console.log(data.giveFriendList);
+					
+					$("#giveFriendList").html("");
+					$("#giveFriendList").html(html);
+					
+					var i  = 1;
+					var paging ="";
+						paging +="<li><a href='javascript:getYouGiveFriendList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<= data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getYouGiveFriendList("+ i +");'>"+ i+ "</a></li>";
+					}
+						paging +="<li><a href='javascript:getYouGiveFriendList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".paginationYouGiveFriends").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+		
+		// 검색 부분 
+		function getYouGiveFriendListSearch(){
+			var param = $('form[name=searchTextYouGiveFriendList]').serialize(); 
+			var pageSize = 10;
+			$.ajax({
+				type: "POST",
+				url : "/youGiveFriendListSearchAjax",
+				data : param,
+				success: function(data){
+					
+					console.log(data);
+					
+					var html = "";
+					$.each(data.giveFriendList,function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.friend_code +"</td>";
+						html += "	<td>"+ mm.friend_myemail +"</td>";
+						html += "	<td>"+ mm.member_name +"</td>";
+						html += "	<td>"+ "<input type='button' value='수락'/>"+"</td>";
+						html += "	<td>"+ "<input type='button' value='거절'/>"+"</td>";
+						html += "</tr>";
+					});
+					
+					console.log(data.giveFriendList);
+					
+					$("#giveFriendList").html("");
+					$("#giveFriendList").html(html);
+					
+					var i  = 1;
+					var paging ="";
+						paging +="<li><a href='javascript:getYouGiveFriendList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<= data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getYouGiveFriendList("+ i +");'>"+ i+ "</a></li>";
+					}
+						paging +="<li><a href='javascript:getYouGiveFriendList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".paginationYouGiveFriends").html(paging);
+				},
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
+		
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 </script>
 

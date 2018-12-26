@@ -5,8 +5,6 @@
 $(document).ready(function(){
 	var project_id = $('#todo_project_id').val();
 	var work_id = ${work.work_id};
-	//console.log("project_id : " + project_id);
-	//console.log("work_id : " + work_id);
 
 	//페이지 접속시 to-do list 조회(Ajax) ==문의: jerry==
 	getToDoList${work.work_id}(1, project_id, work_id);
@@ -24,8 +22,6 @@ function getToDoList${work.work_id}(page, project_id, work_id){
 		url: "/todoSelect",
 		data: {"project_id" : project_id, "work_id" : work_id, "page" : page, "pageSize" : pageSize},
 		success: function (data) {
-			//alert("success");
-			//console.log(data);
 			$('#todoInsertHtmlAjax${work.work_id}').html("");
 			$('#todoInsertHtmlAjax${work.work_id}').html(data);
 		},
@@ -43,7 +39,6 @@ function getToDoPagination${work.work_id}(page, project_id, work_id){
 		url: "/todoPagination",
 		data: {"project_id" : project_id, "work_id" : work_id, "page" : page, "pageSize" : pageSize},
 		success: function(data){
-			//console.log(data);
 			$('#pagination${work.work_id}').html("");
 			$('#pagination${work.work_id}').html(data);
 		},
@@ -53,12 +48,12 @@ function getToDoPagination${work.work_id}(page, project_id, work_id){
 	});
 }
 
-/* todoComplet을 Y로 변경 */
+/* todoComplet을 Y로 변경 ==문의: jerry== */
 function todoComplet(todo_id, todo_issue){
 	var chk = "";
 	var checked = document.getElementById("todoListCheck"+todo_id).checked;
 
-	/* 체크를 했으면 Y로 변경 */
+	/* 체크를 했으면 Y로 변경  */
 	if(checked == true){
 		chk = "Y";
 		$.ajax({
@@ -91,6 +86,7 @@ function todoComplet(todo_id, todo_issue){
 	}
 }
 
+/* todo delete ==문의: jerry== */
 function goTodoDelete${work.work_id}(todo_id, work_id){
 	var project_id = $('#todo_project_id').val();
 
@@ -99,7 +95,6 @@ function goTodoDelete${work.work_id}(todo_id, work_id){
 		url: "/todoDelete",
 		data: {"todo_id" : todo_id, "project_id" : project_id, "work_id" : work_id},
 		success: function(data){
-			console.log(data);
 			$('#todoInsertHtmlAjax${work.work_id}').html("");
 	        $('#todoInsertHtmlAjax${work.work_id}').html(data);
 	        getToDoPagination${work.work_id}(1, project_id, work_id);
@@ -110,17 +105,55 @@ function goTodoDelete${work.work_id}(todo_id, work_id){
 	});
 }
 
-/* issue 등록시 발생일자를 현재 일시로 default 셋팅 설정  ==문의: jerry== */
-function issueDateSet(todo_id){
+/* TO-DO 상세보기시 레이어팝업 초기화 ==문의: jerry== */
+function initialization${work.work_id}(todo_id){
+	/* issue 등록시 발생일자를 현재 일시로 default 셋팅 설정  ==문의: jerry== */
     var date = new Date();
     date.setHours(date.getHours() + 9);
 
     document.getElementById('non_issue_sdate'+todo_id).value = date.toISOString().slice(0, 16);
     document.getElementById('non_issue_edate'+todo_id).value = date.toISOString().slice(0, 16);
+    
+    /* issue 조회 함수 호출 ==문의: jerry== */
+    getIssueList${work.work_id}(todo_id);
 }
 
-function insertIssue() {
-	var param = $('form[name=insertIssueForm${todo.todo_work}]').serialize();
+/* issue 등록 ==문의: jerry== */
+function insertIssue${work.work_id}(todo_id, todo_work) {
+	var sdate = $('input[name=non_issue_sdate'+ todo_id +']').val();
+	var repSdate = sdate.replace("T", " ");
+	$("#issue_sdate"+todo_id).val(repSdate);
+	
+	var param = $('form[name=insertIssueForm'+ todo_id +']').serialize();
+	
+	$.ajax({
+		method: "POST",
+		url: "/issueInsert",
+		data: param,
+		success: function(data){
+			$('#issueSelectHtmlAjax'+todo_id).html("");
+			$('#issueSelectHtmlAjax'+todo_id).html(data);
+		},
+		error: function(data){
+			console.log("todoList.jsp : insertIssue() - error");
+		}
+	});
+}
+
+/* issue list 조회 ==문의: jerry== */
+function getIssueList${work.work_id}(todo_id) {
+	$.ajax({
+		method: "POST",
+		url: "/issueSelectList",
+		data: {"todo_id" : todo_id},
+		success: function(data){
+			$('#issueSelectHtmlAjax'+todo_id).html("");
+			$('#issueSelectHtmlAjax'+todo_id).html(data);
+		},
+		error: function(data){
+			console.log("todoList.jsp : getIssueList() - error");
+		}
+	});
 }
 
 /* 날짜 비교(보류) */

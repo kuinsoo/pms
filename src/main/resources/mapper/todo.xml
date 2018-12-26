@@ -50,7 +50,8 @@
 		                        todo_eedate,
 		                        todo_complet,
 		                        todo_issue,
-		                        todo_work
+		                        todo_work,
+		                        work_project
 		                FROM    todo INNER JOIN work
 		                ON      todo_work = work_id
 		                WHERE   work_project = ${workVo.work_project}
