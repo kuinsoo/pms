@@ -59,9 +59,20 @@
 	<insert id="issueInsert" parameterType="issueVo">
 		INSERT INTO issue (issue_id, issue_work, issue_title, issue_level, issue_member, issue_sdate, issue_content)
 		VALUES (issue_seq.NEXTVAL, #{issue_work}, #{issue_title}, #{issue_level}, #{issue_member}, #{issue_sdate}, #{issue_content})
+		<selectKey keyProperty="issue_id" resultType="String" order="AFTER">
+			SELECT  issue_seq.currval
+			FROM    dual
+		</selectKey>
 	</insert>
 	
-	<!-- project 참여자 : issue 등록시 select -->
+	<!-- 이슈등록시 이슈ID를 todo테이블의 todo_issue컬럼에 추가(수정) -->
+	<update id="todoIssueUpdate" parameterType="issueVo">
+		UPDATE	todo
+		SET		todo_issue = #{issue_id}
+		WHERE	todo_id = #{todo_id}
+	</update>
+	
+	<!-- project 참여자 : issue 등록시 select option list -->
 	<select id="selGetProjectMember" resultType="issueVo" parameterType="String">
 		SELECT  member_name,
 		        pmember_member
@@ -72,6 +83,11 @@
 		                           FROM    work
 		                           WHERE   work_id = #{work_id}
 		                           )
+	</select>
+	
+	<!-- 이슈 리스트 조회 -->
+	<select id="">
+		
 	</select>
 	
 	<!-- 이슈 수정 -->

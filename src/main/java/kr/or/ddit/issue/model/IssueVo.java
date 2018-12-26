@@ -36,8 +36,10 @@ public class IssueVo {
 	private String format_issue_edate;//이슈해결일시(String)
 	private String issue_color;		//	이슈일시색깔
 	
+	/* 기능단위 */
 	private String member_name;		//	참여자 이름
 	private String pmember_member;	//	참여자 메일
+	private String todo_id;			//	할일의 ID
 
 	/* 기본생성자 */
 	public IssueVo() {}
@@ -46,7 +48,7 @@ public class IssueVo {
 	public IssueVo(String issue_id, String issue_work, String issue_member, String issue_helper, String issue_wc,
 			String issue_level, String issue_title, String issue_content, String issue_solution, int issue_noviews,
 			Date issue_sdate, String format_issue_sdate, Date issue_edate, String format_issue_edate,
-			String issue_color, String member_name, String pmember_member) {
+			String issue_color, String member_name, String pmember_member, String todo_id) {
 		this.issue_id = issue_id;
 		this.issue_work = issue_work;
 		this.issue_member = issue_member;
@@ -64,6 +66,7 @@ public class IssueVo {
 		this.issue_color = issue_color;
 		this.member_name = member_name;
 		this.pmember_member = pmember_member;
+		this.todo_id = todo_id;
 	}
 
 	/* getter & setter */
@@ -157,6 +160,12 @@ public class IssueVo {
 	public void setPmember_member(String pmember_member) {
 		this.pmember_member = pmember_member;
 	}
+	public String getTodo_id() {
+		return todo_id;
+	}
+	public void setTodo_id(String todo_id) {
+		this.todo_id = todo_id;
+	}
 
 	/* 형변환 getter */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -176,7 +185,7 @@ public class IssueVo {
 				+ issue_solution + ", issue_noviews=" + issue_noviews + ", issue_sdate=" + issue_sdate
 				+ ", format_issue_sdate=" + format_issue_sdate + ", issue_edate=" + issue_edate
 				+ ", format_issue_edate=" + format_issue_edate + ", issue_color=" + issue_color 
-				+ ", member_name=" + member_name + ", pmember_member=" + pmember_member + "]";
+				+ ", member_name=" + member_name + ", pmember_member=" + pmember_member + ", todo_id=" + todo_id + "]";
 	}
 	
 }
