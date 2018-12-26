@@ -67,4 +67,50 @@
                 and PROJECT_DELETE = 'N'
                 ORDER by to_number(project_id) desc
     </select>
+
+    <select id="evaluationChart" resultType="evalVo" parameterType="Map">
+      select PROJECT_ID , PROJECT_TITLE,
+        /* 총 이슈 수 */
+               (select count(*) as cnt from member,  PROJECT_MEMBER PM1, PROJECT, WORK, ISSUE
+        where MEMBER_MAIL = PMEMBER_MEMBER
+        and PMEMBER_PROJECT = PROJECT_ID
+        and PROJECT_ID = WORK_PROJECT
+        and WORK_ID = ISSUE_WORK
+        and MEMBER_MAIL = #{member_mail}
+          and PM2.PMEMBER_PROJECT = PM1.PMEMBER_PROJECT
+        and ISSUE_HELPER = #{member_mail} ) issueCnt ,
+        /* 총 업무 수 */
+               (select count(*) as cnt from member,  PROJECT_MEMBER PM3, PROJECT, WORK
+                where MEMBER_MAIL = PMEMBER_MEMBER
+                  and PMEMBER_PROJECT = PROJECT_ID
+                  and PROJECT_ID = WORK_PROJECT
+                  and MEMBER_MAIL = #{member_mail}
+                  and PM2.PMEMBER_PROJECT = PM3.PMEMBER_PROJECT) workCnt ,
+        /* 참여 회원 수 */
+               (select count(*) as cnt from MEMBER, PROJECT_MEMBER PM4, project
+                where MEMBER_MAIL = PMEMBER_MEMBER
+                  and PMEMBER_PROJECT = PROJECT_ID
+                  and PM2.PMEMBER_PROJECT = PM4.PMEMBER_PROJECT) memberCnt,
+        /* 내 업무 수 */
+               (select count(*) from WORK_MEMBER WM, WORK W, PROJECT_MEMBER PM5
+                where WM.PMEMBER_ID = PM5.PMEMBER_ID
+                  and WM.WORK_ID = W.WORK_ID
+                  and PM5.PMEMBER_MEMBER = #{member_mail}
+                  and PM5.PMEMBER_PROJECT = PM2.PMEMBER_PROJECT) as myWorkCnt,
+        /* 사용자가 해결한 이슈 */
+               (select count(*) as cnt from member,  PROJECT_MEMBER PM6, PROJECT, WORK, ISSUE
+                where MEMBER_MAIL = PMEMBER_MEMBER
+                  and PMEMBER_PROJECT = PROJECT_ID
+                  and PROJECT_ID = WORK_PROJECT
+                  and WORK_ID = ISSUE_WORK
+                  and MEMBER_MAIL = #{member_mail}
+                  and ISSUE_HELPER = #{member_mail}
+                  and PM6.PMEMBER_PROJECT = PM2.PMEMBER_PROJECT)as myIssueCnt
+        from MEMBER, PROJECT_MEMBER PM2, project
+        where MEMBER_MAIL = PMEMBER_MEMBER
+          and PMEMBER_PROJECT = PROJECT_ID
+        and MEMBER_MAIL = #{member_mail}
+        and PROJECT_DELETE = 'N'
+        ORDER by to_number(project_id) desc
+    </select>
 </mapper>

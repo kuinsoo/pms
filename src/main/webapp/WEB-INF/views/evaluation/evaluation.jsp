@@ -220,10 +220,16 @@
 	var myChart = new Chart(ctx, {
 		type: 'pie',
 		data: {
-			labels: ["이슈해결" , "업무" , "프로젝트"],
+			labels: ["이슈" , "업무" , "참여자"],
 			datasets: [{
 				label: '${memberVo.member_name} 님의 CURRENT',
-				data: [${evalIssueCnt}, ${evalWorkCnt}, ${evalProjectList.size()}],
+				data: [
+					<c:forEach items="${evalChart}" var="eChart">
+						<c:if test="${eChart.project_id eq '8'}">
+							'${eChart.issueCnt}', '${eChart.workCnt}' , '${eChart.memberCnt}'
+						</c:if>
+					</c:forEach>
+				],
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',
@@ -254,17 +260,17 @@
 		data: {
 			labels:
 			[
-				<c:forEach items="${evalProjectList}" var="evalVo">
-					'${evalVo.project_title}',
-				</c:forEach>
+				'','업무', '이슈',''
 			],
 			datasets: [{
 
 				label: '${memberVo.member_name} 님의 CURRENT',
-				data: [
-					<c:forEach items="${evalProjectIssueCnt}" var="evalVo" >
-						${evalVo.issueCnt},
-					</c:forEach>
+				data: [0,
+					<c:forEach items="${evalChart}" var="eChart">
+						<c:if test="${eChart.project_id eq '8' }">
+							'${eChart.workCnt}', '${eChart.issueCnt}'
+						</c:if>
+					</c:forEach>, 0
 				],
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.2)',

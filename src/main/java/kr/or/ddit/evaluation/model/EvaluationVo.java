@@ -32,6 +32,10 @@ public class EvaluationVo {
 	private String 	work_content;
 
 	private int issueCnt;
+	private int workCnt;
+	private int memberCnt;
+	private int myWorkCnt;
+	private int myIssueCnt;
 
 	public EvaluationVo() {
 	}
@@ -114,5 +118,37 @@ public class EvaluationVo {
 
 	public void setIssueCnt(int issueCnt) {
 		this.issueCnt = issueCnt;
+	}
+
+	public int getWorkCnt() {
+		return workCnt;
+	}
+
+	public void setWorkCnt(int workCnt) {
+		this.workCnt = workCnt;
+	}
+
+	public int getMemberCnt() {
+		return memberCnt;
+	}
+
+	public void setMemberCnt(int memberCnt) {
+		this.memberCnt = memberCnt;
+	}
+
+	public int getMyWorkCnt() {
+		return myWorkCnt;
+	}
+
+	public void setMyWorkCnt(int myWorkCnt) {
+		this.myWorkCnt = myWorkCnt;
+	}
+
+	public int getMyIssueCnt() {
+		return myIssueCnt;
+	}
+
+	public void setMyIssueCnt(int myIssueCnt) {
+		this.myIssueCnt = myIssueCnt;
 	}
 }

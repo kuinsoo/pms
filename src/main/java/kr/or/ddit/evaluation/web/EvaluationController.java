@@ -51,7 +51,7 @@ public class EvaluationController {
 		model.addAttribute("evalWorkCnt", evaluationService.evaluationWorkCnt(evalMap));
 		model.addAttribute("evalIssueCnt", evaluationService.evaluationIssueCnt(evalMap));
 		model.addAttribute("evalProjectIssueCnt", evaluationService.evaluationProjectIssueCnt(evalMap));
-
+		model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
 		return "evaluation/evaluation";
 	}
 

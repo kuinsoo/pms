@@ -65,4 +65,14 @@ public interface EvaluationMapper {
 	 * @return the int
 	 */
 	List<EvaluationVo> evaluationProjectIssueCnt(Map<String, String> evalMap);
+
+	/**
+	 * Evaluation chart list.
+	 * 작성자 : Mr.KKu
+	 * 내용	: 프로젝트 차트 값
+	 *
+	 * @param evalMap the eval map
+	 * @return the list
+	 */
+	List<EvaluationVo> evaluationChart(Map<String, String > evalMap);
 }
