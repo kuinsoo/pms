@@ -9,7 +9,7 @@
     <div class="currentMainContainer">
         <div class="currentMainContainerLeft">
             <%-- report  --%>
-            <div id="tabSubMain">
+            <div id="tabSubMain"> <%-- tab에 hight가 민값만 정해있어 크기가 변경된다. 참고 --%>
                 <ul>
                     <li><a href="#tabSubMain-1">업무 리포트</a></li>
                     <li><a href="#tabSubMain-2">업무 카드</a></li>
