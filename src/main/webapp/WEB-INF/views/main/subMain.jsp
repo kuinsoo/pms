@@ -9,23 +9,33 @@
     <div class="currentMainContainer">
         <div class="currentMainContainerLeft">
             <%-- report  --%>
-            <%@ include file="/WEB-INF/views/main/report.jsp" %>
-            <div class="projectTaskContainer">
-                <div class="projectTaskContainerTitle">
-                    <i class="far fa-sticky-note"></i><span>WORK CARD</span>
+            <div id="tabSubMain">
+                <ul>
+                    <li><a href="#tabSubMain-1">업무 리포트</a></li>
+                    <li><a href="#tabSubMain-2">업무 카드</a></li>
+                </ul>
+                <div id="tabSubMain-1" class="projectList">
+                    <%@ include file="/WEB-INF/views/main/report.jsp" %>
                 </div>
-            </div>
-            <div class="projectTaskContainerDragDrop">
-                <div class="projectTaskDragDrop">
-                    <ul id="titleList">
-                        <li class="titleBox">요청</li>
-                        <li class="titleBox">진행</li>
-                        <li class="titleBox">이슈발생</li>
-                        <li class="titleBox">처리대기</li>
-                        <li class="titleBox">완료</li>
-                    </ul>
-                    <div class="kku-boarder kku-mainPage" id="planList">
-                        <%--<%@include file="/WEB-INF/views/card/cardChart.jsp"%>--%>
+                <div id="tabSubMain-2">
+                    <div class="projectTaskContainer">
+                        <div class="projectTaskContainerTitle">
+                            <i class="far fa-sticky-note"></i><span>WORK CARD</span>
+                        </div>
+                    </div>
+                    <div class="projectTaskContainerDragDrop">
+                        <div class="projectTaskDragDrop">
+                            <ul id="titleList">
+                                <li class="titleBox">요청</li>
+                                <li class="titleBox">진행</li>
+                                <li class="titleBox">이슈발생</li>
+                                <li class="titleBox">처리대기</li>
+                                <li class="titleBox">완료</li>
+                            </ul>
+                            <div class="kku-boarder kku-mainPage" id="planList">
+                                <%--<%@include file="/WEB-INF/views/card/cardChart.jsp"%>--%>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -230,6 +240,9 @@ $("#tabs").tabs();
 
 // 서브 메인 작성 카드 리스트
 $("#tabss").tabs();
+
+// 알림 탭 메뉴
+$("#tabSubMain").tabs();
 
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {

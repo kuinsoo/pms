@@ -6,7 +6,7 @@
 	<div class="currentMainContainer">
 		<div class="myPageContainer">
 			<div class="myPageContainerTitle">
-				<h2>능력 및 평가</h2>
+				<h2>업무수행능력</h2>
 			</div>
 
 			<form action="#" method="post" enctype="multipart/form-data">
@@ -28,10 +28,11 @@
 										<li><input type="text"  value= "${memberVo.member_tel}" readonly /></li>
 									</ul>
 								</div>
-								<%--<div class="userContentsInfoRight_2">
-									<ul>
-									</ul>
-								</div>--%>
+								<%--<div class="userContentsInfoRight_2">--%>
+									<%--<ul>--%>
+										<%--<li> 극혐나진실</li>--%>
+									<%--</ul>--%>
+								<%--</div>--%>
 							</div>
 						</div>
 					</div>
@@ -220,10 +221,16 @@
 	var myChart = new Chart(ctx, {
 		type: 'pie',
 		data: {
-			labels: ["이슈해결" , "참여 프로젝트" , "처리업무"],
+			labels: ["이슈" , "업무" , "참여자"],
 			datasets: [{
 				label: '${memberVo.member_name} 님의 CURRENT',
-				data: [16, 34, 50],
+				data: [
+					<c:forEach items="${evalChart}" var="eChart">
+						<c:if test="${eChart.project_id eq '8'}">
+							'${eChart.issueCnt}', '${eChart.workCnt}' , '${eChart.memberCnt}'
+						</c:if>
+					</c:forEach>
+				],
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',
@@ -252,10 +259,20 @@
 	var myChart2 = new Chart(ctx2, {
 		type: 'line',
 		data: {
-			labels: ["프로젝트명1" , "프로젝트명2" , "프로젝트명3", "프로젝트명4", "프로젝트명5"],
+			labels:
+			[
+				'','업무', '이슈',''
+			],
 			datasets: [{
+
 				label: '${memberVo.member_name} 님의 CURRENT',
-				data: [21, 13, 18, 30, 21],
+				data: [0,
+					<c:forEach items="${evalChart}" var="eChart">
+						<c:if test="${eChart.project_id eq '8' }">
+							'${eChart.workCnt}', '${eChart.issueCnt}'
+						</c:if>
+					</c:forEach>, 0
+				],
 				backgroundColor: [
 					'rgba(255, 99, 132, 0.2)',
 					'rgba(54, 162, 235, 0.2)',
