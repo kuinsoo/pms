@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.ddit.attachment.model.AttachmentVo;
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.commons.util.KISA_SHA256;
@@ -71,8 +72,10 @@ public class MemberDetailController {
 		
 		String member_mail = memberVo.getMember_mail();
 
-		memberservice.selectUser(memberVo.getMember_mail());
+		memberservice.selectUser(memberVo.getMember_mail());		
 		model.addAttribute("memberVo",memberVo);
+	    List<ProjectVo> selectProjectMember =  memberservice.selectProjectMember(memberVo.getMember_mail());
+	    model.addAttribute("selectProjectMember",selectProjectMember);
 
 		// 참여중인 프로젝트 갯수
 		int totalProjectCnt = memberservice.totalProjectCnt(member_mail);
@@ -85,6 +88,7 @@ public class MemberDetailController {
 
 		// 나의 일감 갯수
 		int selectTodoCnt = memberservice.selectTodoCnt(member_mail);
+	
 
 		model.addAttribute("totalProjectCnt",totalProjectCnt);
 		model.addAttribute("totalEndProjectCnt",totalEndProjectCnt);
@@ -364,6 +368,53 @@ public class MemberDetailController {
 		projectTodoMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 	
 		return projectTodoMap;
+	}
+	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// TodoList
+	
+	@ResponseBody
+	@RequestMapping(value ="/myProjectFileListAjax", method = RequestMethod.GET)
+	public Map<String, Object> myProjectFileListAjax (Model model , PageVo pageVo,
+			@SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
+		
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		List<AttachmentVo> myFileList = memberservice.myFileList(pageVo);
+		
+		Map<String , Object> myFileListMap = new HashMap<>();
+		int pageCnt = memberservice.myFileListCnt(memberVo.getMember_mail());
+		myFileListMap.put("myFileList", myFileList);
+		myFileListMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myFileListMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value ="/searchFileListAjax", method = RequestMethod.POST)
+	public Map<String, Object> searchFileListAjax (Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo 
+			, HttpServletRequest request){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		// 검색 부분 
+		if (pageVo.getSearchFileList() == null) {
+			pageVo.setSearchFileList("");
+		}
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		List<AttachmentVo> myFileList = memberservice.myFileList(pageVo);
+		
+		Map<String , Object> myFileListMap = new HashMap<>();
+		int pageCnt = memberservice.myFileListCnt(memberVo.getMember_mail());
+		
+		myFileListMap.put("myFileList", myFileList);
+		myFileListMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myFileListMap;
 	}
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

@@ -9,7 +9,7 @@ public class PageVo {
 	private int pageSize;
 	private String member_mail;
 
-	// 마이페이지 검색부분 
+	// 검색부분 
 	private String searchText;
 	private String searchBookText;
 	private String searchTodoText;
@@ -18,16 +18,25 @@ public class PageVo {
 	private String searchTextFriendList;
 	private String searchTextMySendFriendList;
 	private String searchTextYouGiveFriendList;
+	private String searchFileList;
 	
-
-
 	@Override
 	public String toString() {
 		return "PageVo [page=" + page + ", pageSize=" + pageSize + ", member_mail=" + member_mail + ", searchText="
 				+ searchText + ", searchBookText=" + searchBookText + ", searchTodoText=" + searchTodoText
 				+ ", searchEndText=" + searchEndText + ", searchTextFriend=" + searchTextFriend
 				+ ", searchTextFriendList=" + searchTextFriendList + ", searchTextMySendFriendList="
-				+ searchTextMySendFriendList + ", searchTextYouGiveFriendList=" + searchTextYouGiveFriendList + "]";
+				+ searchTextMySendFriendList + ", searchTextYouGiveFriendList=" + searchTextYouGiveFriendList
+				+ ", searchFileList=" + searchFileList + "]";
+	}
+	
+	public String getSearchFileList() {
+		return searchFileList;
+	}
+	
+	
+	public void setSearchFileList(String searchFileList) {
+		this.searchFileList = searchFileList;
 	}
 	
 	
@@ -47,7 +56,6 @@ public class PageVo {
 	public void setSearchTextMySendFriendList(String searchTextMySendFriendList) {
 		this.searchTextMySendFriendList = searchTextMySendFriendList;
 	}
-
 
 	public String getSearchTextFriendList() {
 		return searchTextFriendList;
