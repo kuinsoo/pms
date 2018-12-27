@@ -1,5 +1,6 @@
 package kr.or.ddit.member.model;
 
+import kr.or.ddit.todo.model.ToDoVo;
 import org.apache.ibatis.type.Alias;
 
 @Alias("memberVo")
@@ -13,9 +14,8 @@ public class MemberVo extends PMemberListVo{
 	private String member_profile;
 	private String member_withdrawal;
 
-	
-	
-	
+	private ToDoVo toDoVo;
+
 	public int getRnum() {
 		return rnum;
 	}
@@ -82,4 +82,11 @@ public class MemberVo extends PMemberListVo{
 	public MemberVo() {
 	}
 
+	public ToDoVo getToDoVo() {
+		return toDoVo;
+	}
+
+	public void setToDoVo(ToDoVo toDoVo) {
+		this.toDoVo = toDoVo;
+	}
 }

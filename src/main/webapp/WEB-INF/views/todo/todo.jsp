@@ -20,7 +20,7 @@ $(document).ready(function(){
 });
 
 //to-do list 등록 ==문의: jerry==
-function insertTodo${work.work_id}() {
+function insertTodo${work.work_id}(work_id) {
     var sdate = $('input[name=non_todo_sdate${work.work_id}]').val(); //UTC형식 Date를 sdate에 담는다.
     var eedate = $('input[name=non_todo_eedate${work.work_id}]').val(); //UTC형식 Date를 eedate에 담는다.
     var repSdate = sdate.replace("T", " "); //Parsing('T' 제거)
@@ -40,11 +40,15 @@ function insertTodo${work.work_id}() {
 	      $('#todoInsertHtmlAjax${work.work_id}').html("");
 	      $('#todoInsertHtmlAjax${work.work_id}').html(data);
 	      getToDoPagination${work.work_id}(1, project_id, work_id);
+		   <%-- workChart 동시 업데이트수행 (구인수) --%>
+		   workChart(work_id);
 	   },
 	   error:function(data) {
 	      console.log("todo.jsp : insertTodo() - error");
 	   }
 	});
+
+
 }
 
 /* popup member list Ajax */
@@ -160,7 +164,7 @@ function enterKey${work.work_id}(e){
 			</div>			
 		</div>
 		<div class="btnPopupCenter">
-			<input type="button" value="등록" class="issueInfoCreate" onclick="insertTodo${work.work_id}();"/>
+			<input type="button" value="등록" class="issueInfoCreate" onclick="insertTodo${work.work_id}('${work.work_id}');"/>
 			<a href="#close" class="issueInfoClose">취소</a>
 		</div>
 	</div>

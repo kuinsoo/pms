@@ -76,4 +76,5 @@
         and PROJECT_DELETE = 'N'
         ORDER by to_number(project_id) desc
     </select>
+
 </mapper>
