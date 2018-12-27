@@ -164,12 +164,25 @@
                       WHERE   member_mail NOT IN (SELECT  friend_member
                                                 FROM    FRIENDSLIST
                                                 WHERE   friend_myemail = #{member_mail}
-                                                AND     friend_accept = 'Y')
+                                                AND     friend_accept = 'N')
                       AND     member_withdrawal = 'N'
                       AND     member_mail NOT IN #{member_mail}
                       ORDER BY member_mail)a) 
             where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
 		<if test="searchTextFriendList!=null and searchTextFriendList!=''">and member_mail like '%'||#{searchTextFriendList}||'%'</if>
+	</select>
+	
+	<select id ="memberListN" resultType="friendVo">
+		  SELECT  member_mail,
+		          member_name
+		  FROM    member
+		  WHERE   member_mail NOT IN (SELECT  friend_member
+		                            FROM    FRIENDSLIST
+		                            WHERE   friend_myemail = #{member_mail}
+		                            AND     friend_accept = 'N')
+		  AND     member_withdrawal = 'N'
+		  AND     member_mail NOT IN #{member_mail}
+		  ORDER BY member_mail
 	</select>
 	
 	<select  id ="mySendFriendList" resultType="friendVo" parameterType="pageVo">
@@ -234,6 +247,11 @@
 		where friend_code = #{friend_code}
 	</update>
 	
+	<!-- 내가 받은 요청에서 수락버튼을 누르면 상대방은 insert -->
+    <insert  id="insertFriendY" parameterType="friendVo"> 
+		insert into FRIENDSLIST values(FRIEND_CODE_SEQ.NEXTVAL, #{friend_myemail},#{friend_member},'Y',sysdate)
+	</insert> 
+
 	<!-- 내가 받은요청에서 거절 버튼을 클릭했을때  -->
 	<update id="updateRefuseFriend" parameterType="String">
 		update  FRIENDSLIST
@@ -241,9 +259,5 @@
 		where friend_code = #{friend_code}
 	</update>
 	
-	<!-- 내가 받은 요청에서 수락버튼을 누르면 상대방은 insert -->
-    <insert  id="insertFriendY" parameterType="friendVo"> >
-		insert into FRIENDSLIST values(FRIEND_CODE_SEQ.NEXTVAL, #{friend_myemail},#{friend_member},'Y',sysdate);
-	</insert> 
 
 </mapper>
