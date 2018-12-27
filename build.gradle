@@ -41,7 +41,9 @@ dependencies {
    // https://mvnrepository.com/artifact/javax.mail/mail
    compile group: 'javax.mail', name: 'mail', version: '1.4.7'
 
-
+	// https://mvnrepository.com/artifact/com.thetransactioncompany/cors-filter
+	//compile group: 'com.thetransactioncompany', name: 'cors-filter', version: '2.6'
+	
     /* JSP Servlet */
     compile('javax.servlet:jstl')
     compile('org.apache.tomcat.embed:tomcat-embed-jasper')

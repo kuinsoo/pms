@@ -21,7 +21,7 @@ iframe{border: 1px solid #dee3eb; width:100%; height:100%}
     background-color:#fff;
     border-radius:100%;vertical-align:middle;}
 .projectTeams > ul > li > .chatList > .projectUserNameList{vertical-align:middle;padding-left:15px;font-size:18px;}
-.projectList{width:100%;background-color:#fff;border:1px solid #dee3eb;float:left;}
+.projectList{width:900px;background-color:#fff;border:1px solid #dee3eb;float:left;}
 .projectList > .projectListTitles{margin:20px 0px 0px 20px;font-size:20px;}
 .projectList > .projectListTitles > i{vertical-align:middle;margin-right:10px;}
 .projectList > .projectListTitles > span{vertical-align:middle;}
@@ -38,13 +38,154 @@ iframe{border: 1px solid #dee3eb; width:100%; height:100%}
 .projectList > .charts > .chartsNumber > ul > li:nth-child(4){color:rgba(75, 192, 192, 1);}
 .projectList > .charts > .chartsNumber > ul > li:last-child{color:rgba(153, 102, 255, 1);margin-bottom:30px;}
 
-.projectTaskContainer{width:100%;background-color:#fff;border:1px solid #dee3eb;float:left;margin-top:10px;height:70px;}
+/*회의목록 찬우20181226*/
+.meetList{width:900px;background-color:#fff;border:1px solid #dee3eb;float:left; 	margin-bottom:10px;}
+.meetList > .meetListTitles{margin:20px 0px 0px 20px;font-size:20px;}
+.meetList > .meetListTitles > i{vertical-align:middle;margin-right:10px;}
+.meetList > .meetListTitles > span{vertical-align:middle;}
+.meetList > .meets{float:left;font-size:20px;margin-bottom:20px;margin-left:90px;}
+.table {
+   width:100%;
+   border: 1px solid #eceeef;
+   border-collapse: collapse;
+ }
+.table th, 
+.table td {
+   border: 1px solid #eceeef;
+ }
+ /*회의목록 레이어팝업 */
+.pop-layerb .pop-containerb {
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.pop-layerb {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: auto;
+    z-index: 10;
+}
+
+.dim-layerb {
+    display: none;
+    position: fixed;
+    _position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+}
+
+.dim-layerb .dimBgb {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: .5;
+    filter: alpha(opacity=50);
+}
+
+.dim-layerb .pop-layerb {
+    display: block;
+    width: 600px;
+}
+
+.pop-layerb .pop-containerb > .pop-contsb > .pop-conts-headerb {
+    width: 100%;
+    height: 50px;
+    background-color: #eee;
+    font-size: 20px;
+    border-radius: 10px 10px 0px 0px;
+}
+
+.pop-layerb .pop-containerb > .pop-contsb > .pop-conts-headerb > p {
+    float: left;
+    padding: 15px;
+}
+
+.pop-layerb .pop-containerb > .pop-contsb > .pop-conts-headerb > a {
+    float: right;
+    padding: 15px;
+    color: #000;
+}
+
+.pop-layerb .pop-containerb > .pop-contsb > .pop-conts-sectionb {
+    width: 100%;
+    height: 350px;
+    font-size: 20px;
+    clear: both;
+}
+
+.pop-layerb .pop-containerb > .pop-contsb > .pop-conts-sectionb > .pop-conts-section-titleb {
+    width: 100%;
+    padding: 20px;
+}
+
+.pop-layerb .pop-containerb > .pop-contsb > .pop-conts-sectionb > .pop-conts-section-titleb > form > span {
+    margin-left: 7px;
+}
+
+.pop-layerb .pop-containerb > .pop-contsb > .pop-conts-sectionb > .pop-conts-section-titleb > form > .projectTitleInputs {
+    margin-top: 7px;
+    font-size: 20px;
+    width: 100%;
+    outline: none;
+    padding: 5px;
+}
+
+.projectContentInputb {
+    margin-top: 7px;
+    font-size: 20px;
+    width: 100%;
+    outline: none;
+    padding: 5px;
+}
+
+.layerPopUpBtnb {
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.createProjectSubmit b{
+    font-size: 20px;
+    background-color: #746fcc;
+    color: #fff;
+    width: 100px;
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    float: left;
+}
+
+.layerPopupCloseb {
+    display: block;
+    border: 1px solid #ccc;
+    width: 100px;
+    height: 50px;
+    border-radius: 5px;
+    float: left;
+    text-align: center;
+    line-height: 50px;
+    margin-left: 20px;
+    color: #000;
+}
+
+.projectTaskContainer{width:900px;background-color:#fff;border:1px solid #dee3eb;float:left;margin-top:10px;height:70px;}
 .projectTaskContainer > .projectTaskContainerTitle{margin:20px 0px 0px 20px;font-weight:normal;font-size:20px;}
 .projectTaskContainer > .projectTaskContainerTitle > i{vertical-align:middle;display:block;float:left;margin-right:10px;}
 .projectTaskContainer > .projectTaskContainerTitle > span{display:block;margin-left:10px;vertical-align:middle;float:left;}
 
-.projectTaskContainerDragDrop{width:100%;height:100%;background-color:transparent;float:left;margin-top:10px;
-	min-height: 582px;}
+.projectTaskContainerDragDrop{width:900px;height:100%;background-color:transparent;float:left;margin-top:10px;}
 .projectTaskDragDrop{clear:left;}
 #titleList{width:798px;height:45px;line-height:45px;font-size:20px;}
 #titleList > li{float:left;}
@@ -299,10 +440,10 @@ iframe{border: 1px solid #dee3eb; width:100%; height:100%}
 	width: 100%;
 	height: 150px;
 }
-.columnCard{width:170px;float:left;padding:10px 0px 30px 0px;}
+.columnCard{width:179.5px;float:left;padding:10px 0px 30px 0px;}
 .portlet{margin:0px;padding:0px;width:100%;position:relative;}
 .portlet-header {
-	width:100%;position:relative;border:1px solid #dee3eb;text-overflow:ellipsis;
+	width:179.5px;position:relative;border:1px solid #dee3eb;text-overflow:ellipsis;
 	overflow:hidden;white-space:nowrap;
 }
 .portlet-toggle {
@@ -315,13 +456,13 @@ iframe{border: 1px solid #dee3eb; width:100%; height:100%}
 #planList{width:898px;}
 #titleList {
 	list-style: none;
-	width: 100%;
+	width: 898px;
 	height: 50px;
 	margin: 0 auto;
 }
 
 .titleBox {
-	width: 170px;
+	width: 179.5px;
 	float: left;
 }
 .portletHover{display:none;}
