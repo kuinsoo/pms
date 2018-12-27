@@ -3,7 +3,6 @@ package kr.or.ddit.commons.config;
 import org.aopalliance.intercept.Joinpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 /**
  * kr.or.ddit.commons.config
