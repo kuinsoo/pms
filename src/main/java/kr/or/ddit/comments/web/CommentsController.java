@@ -4,7 +4,6 @@ import kr.or.ddit.comments.model.CommentsVo;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.work.service.WorkServiceInf;
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
