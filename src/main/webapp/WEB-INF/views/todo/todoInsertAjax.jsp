@@ -51,16 +51,16 @@
 								<c:when test="${todo.todo_issue == null}">
 									<input type="button" value="등록" class="issueCreateBtn" onclick="insertIssue${todo.todo_work}(${todo.todo_id});"/>
 								</c:when>
-								
 								<c:otherwise>
-									<input type="button" value="수정" class="insueUpdateBtn" onclick="updateIssue${todo.todo_work}(${todo.todo_id});"/>
+									<input type="button" value="수정" class="insueUpdateBtn" onclick="updateIssue${todo.todo_work}(${todo.todo_id});"/>  
+									<input type="button" value="등록" class="issueCreateBtn" onclick="insertIssue${todo.todo_work}(${todo.todo_id});"/>  
 								</c:otherwise>
 							</c:choose>
 						</div>
 						<form style="text-align: left;" name="insertIssueForm${todo.todo_id}">
-							<label>Title</label><input type="text" name="issue_title"><br>
+							<label>Title</label><input type="text" id="input_issue_title${todo.todo_id}" name="issue_title"><br>
 							<label>Level</label>
-							<select class="sel_issueLevel" name="issue_level">
+							<select class="sel_issueLevel" id="input_issue_level${todo.todo_id}" name="issue_level">
 								<option value="1">level 1</option>
 								<option value="2">level 2</option>
 								<option value="3">level 3</option>
@@ -70,7 +70,7 @@
 							<label>담당자</label><input type="text" name="issue_member" value="${todo.todo_pmember}" readonly><br>
 							<label>발생일시</label><input type="datetime-local" id="non_issue_sdate${todo.todo_id}" name="non_issue_sdate${todo.todo_id}" value=""><br>
 							<label>이슈내용</label><br>
-							<textarea name="issue_content" placeholder="내용을 입력해주세요."></textarea><br>
+							<textarea id="input_issue_content${todo.todo_id}" name="issue_content" placeholder="내용을 입력해주세요."></textarea><br>
 							<br><hr><br>
 							<c:choose>
 								<c:when test="${todo.todo_issue == null}"></c:when>
@@ -87,7 +87,7 @@
 									<input type="button" value="해결등록" class="insueUpdateBtn" onclick="helperUpdate${todo.todo_work}(${todo.todo_id});"/>
 								</c:otherwise>
 							</c:choose>
-							<input type="hidden" name="issue_id" value="${todo.todo_issue}">
+							<input type="hidden" id="issue_id${todo.todo_id}" name="issue_id" value="">
 							<input type="hidden" name="issue_work" value="${todo.todo_work}">
 							<input type="hidden" name="todo_id" value="${todo.todo_id}">
 							<input type="hidden" id="issue_sdate${todo.todo_id}" name="issue_sdate" value="">
@@ -98,6 +98,7 @@
 							<table>
 								<thead>
 									<tr>
+										<th>선택</th>
 										<th>제목</th>
 										<th>레벨</th>
 										<th>담당자</th>
