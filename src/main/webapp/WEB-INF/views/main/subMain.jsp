@@ -119,7 +119,7 @@
 var project_id = ${projectVo.project_id};
 getMeetingListAjax(project_id);
 function getMeetingListAjax(project_id){
-	(function poll(){
+	//(function poll(){
 		$.ajax({
 		    url : '/meetingList',
 		    type : 'post',
@@ -132,15 +132,15 @@ function getMeetingListAjax(project_id){
 		    	location.href = "/";
 				// alert("error");
 			},
-		    timeout: 3000,
-		    complete: setTimeout(function(){ poll(); }, 6000)
-		 })
-	})();
+		   // timeout: 3000,
+		   // complete: setTimeout(function(){ poll(); }, 6000)
+		 });
+	//})();
 };
 
 
 //DIM POPUP - 회의 목록 
-$('#meetingListAjax').on('click', '.projectCreatePopUpb', function(){
+/* $('#meetingListAjax').on('click', '.projectCreatePopUpb', function(){
 	var $hrefb = $(this).attr('href');
 	layer_popupb($hrefb);
 });
@@ -176,7 +176,7 @@ function layer_popupb(elb){
 		$('.dim-layerb').fadeOut();
 		return false;
 	});
-}
+} */
 
 
 
