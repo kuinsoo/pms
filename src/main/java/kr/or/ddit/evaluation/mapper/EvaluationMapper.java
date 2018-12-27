@@ -36,35 +36,7 @@ public interface EvaluationMapper {
 	 */
 	List<EvaluationVo> evaluationProjectList(Map<String, String> evalMap);
 
-	/**
-	 * Evaluation work cnt int.
-	 * 작성자 : Mr.KKu
-	 * 내용	: 업무 수
-	 *
-	 * @param evalMap the eval map
-	 * @return the int
-	 */
-	int evaluationWorkCnt(Map<String, String> evalMap);
 
-	/**
-	 * Evaluation work cnt int.
-	 * 작성자 : Mr.KKu
-	 * 내용	: 이슈 처리수
-	 *
-	 * @param evalMap the eval map
-	 * @return the int
-	 */
-	int evaluationIssueCnt(Map<String, String> evalMap);
-
-	/**
-	 * Evaluation work cnt int.
-	 * 작성자 : Mr.KKu
-	 * 내용	: 프로젝트 내에 이슈처리 건수
-	 *
-	 * @param evalMap the eval map
-	 * @return the int
-	 */
-	List<EvaluationVo> evaluationProjectIssueCnt(Map<String, String> evalMap);
 
 	/**
 	 * Evaluation chart list.
@@ -72,7 +44,7 @@ public interface EvaluationMapper {
 	 * 내용	: 프로젝트 차트 값
 	 *
 	 * @param evalMap the eval map
-	 * @return the list
+	 * @return the EvaluationVo
 	 */
-	List<EvaluationVo> evaluationChart(Map<String, String > evalMap);
+	EvaluationVo evaluationChart(Map<String, String > evalMap);
 }
