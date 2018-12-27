@@ -3,43 +3,48 @@
 
 <c:forEach items="${meetingList}" var="meetingVo"  varStatus="status">
 	<tr>
-		<td>${status.count}</td>
+		<th rowspan="3">${status.count}</th>
 		<td>${meetingVo.meeting_title}</td>
+		<td>${meetingVo.meeting_overview}</td>
 		<td>${meetingVo.member_name}</td>
-		<td ><a href="#projectCreatePopUpb${status.count}" class="projectCreatePopUpb"> 열람하기 </a></td>
-		<td class="${meetingVo.meeting_founder}">chat</td>
 		<td>${meetingVo.format_meeting_sdate}</td>
 	</tr>
-	
-	<div class="dim-layerb">
-         <div class="dimBgb"></div>
-         <div id="projectCreatePopUpb" class="pop-layerb">
-             <div class="pop-containerb">
-                 <div class="pop-contsb">
-                     <div class="pop-conts-headerb">
-                         <p>회의목록</p>
-                         <a href="#" class="btn-layerCloseb">
-                             <i class="icon-close icons"></i>
-                         </a>
-                     </div>
-                     <div class="pop-conts-sectionb">
-                         <div class="pop-conts-section-titleb">
-							<%-- 컨텐츠 영역 --%>
-							<textarea class="projectContentInputb" name="project_overview" placeholder="프로젝트 개요 입력">
-								${meetingVo.meeting_content}
-							</textarea>
-                            
-                          <div class="layerPopUpBtnb">
-                              <input type="submit" value="초대하기" class="createProjectSubmitb">
-                              <a href="#" class="btn-layerCloses layerPopupCloseb">취소</a>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
+	<tr>
+		<th colspan="3" >회의록  </th>
+		<th>대화록  </th>
+	</tr>
+	<tr>
+		<td colspan="3" style="background-color: #e7e7e7; font-size:7px;">
+			${meetingVo.meeting_content}
+			<c:if test="${meetingVo.meeting_content==null}">작성된 회의록이 없습니다..</c:if>
+		</td>
+		<td style="background-color: #eeeeee; font-size:7px;">논의된 대화 내용이 없습니다..</td>	
+	</tr>
 </c:forEach>
 
+<script>
+$('.click_doc').on('click', function(){
+	$.ajax({
+		url:'/meetDocAjax',
+		type:'post',
+		data:'meetDoc':'meetDoc',
+		success:function(data){
+			$('#docList').html("");
+			$('#docList').html(data);
+		}
+	});
+});
 
+$('.click_chat').on('click', function(){
+	$.ajax({
+		url:'/chatListAjax',
+		type:'post',
+		data:'chat_id':'chat_id',
+		success:function(data){
+			$('#chatList').html("");
+			$('#chatList').html(data);
+		}
+	});
+});
+</script>
 	
