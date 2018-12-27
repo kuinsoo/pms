@@ -44,8 +44,9 @@
 				<%-- 차트 --%>
 				<div class="myPageContainerRightLeftChart evaluationChart1">
 					<div id="evalChartA">
-
+						<%-- chart1 --%>
 					</div>
+					<span>프로젝트</span>
 					<select id="evalProjectList" class="myChartSelect1" onchange="changeSelectEval();" >
 						<c:forEach items="${evalProjectList}" var="evalProject">
 							<option value="${evalProject.project_id}">${evalProject.project_title}</option>
@@ -54,7 +55,7 @@
 				</div>
 				<div class="myPageContainerRightRightChart evaluationChart2">
 					<div id="evalChartB">
-
+						<%-- chart2 --%>
 					</div>
 					<input type="text" class="myChartSelect2" value="이슈 처리 능력" readonly />
 				</div>
