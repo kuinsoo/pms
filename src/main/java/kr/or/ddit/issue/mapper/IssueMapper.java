@@ -82,11 +82,11 @@ public interface IssueMapper {
 	* Method : issueSelectList
 	* 작성자 : jerry
 	* 변경이력 :
-	* @param issueVo
+	* @param todo_id
 	* @return
 	* Method 설명 : 이슈 리스트 조회
 	*/
-	List<IssueVo> issueSelectList(IssueVo issueVo);
+	List<IssueVo> issueSelectList(String todo_id);
 	
 	/**
 	* Method : issueUpdate
@@ -112,10 +112,10 @@ public interface IssueMapper {
 	* Method : helperSelectList
 	* 작성자 : jerry
 	* 변경이력 :
-	* @param issueVo
+	* @param todo_id
 	* @return
 	* Method 설명 : 도움 리스트 조회
 	*/
-	List<IssueVo> helperSelectList(IssueVo issueVo);
+	List<IssueVo> helperSelectList(String todo_id);
 	
 }

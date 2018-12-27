@@ -170,9 +170,15 @@ public class IssueVo {
 	/* 형변환 getter */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	public String getFormat_issue_sdate() {
+		if(issue_sdate == null) {
+			return "";
+		}
 		return sdf.format(issue_sdate);
 	}
 	public String getFormat_issue_edate() {
+		if(issue_edate == null) {
+			return "";
+		}
 		return sdf.format(issue_edate);
 	}
 

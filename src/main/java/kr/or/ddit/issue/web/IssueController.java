@@ -119,7 +119,7 @@ public class IssueController {
 			e.printStackTrace();
 		}
 		
-		List<IssueVo> issueList = issueService.issueSelectList(issueVo);
+		List<IssueVo> issueList = issueService.issueSelectList(issueVo.getTodo_id());
 		
 		model.addAttribute("issueList", issueList);
 		
@@ -137,13 +137,10 @@ public class IssueController {
 	*/
 	@RequestMapping(value="/issueSelectList", method= {RequestMethod.POST, RequestMethod.GET})
 	public String issueSelectList(@RequestParam("todo_id")String todo_id, Model model) {
-		IssueVo issueVo = new IssueVo();
-		issueVo.setTodo_id(todo_id);
-		
-		List<IssueVo> issueList = issueService.issueSelectList(issueVo);
+		List<IssueVo> issueList = issueService.issueSelectList(todo_id);
 		
 		model.addAttribute("issueList", issueList);
-
+		
 		return "issue/issueSelectHtmlAjax";
 	}
 	
@@ -173,17 +170,19 @@ public class IssueController {
 	*/
 	@RequestMapping(value="/helperUpdate", method= {RequestMethod.POST, RequestMethod.GET})
 	public String helperUpdate(IssueVo issueVo, Model model) {
-		List<IssueVo> issueList = new ArrayList<IssueVo>();
+		System.out.println("issueVo : " + issueVo);
+		
+		List<IssueVo> helperList = new ArrayList<IssueVo>();
 		try {
 			int result = issueService.helperUpdate(issueVo);
 			if(result != 0) {
-				issueList = issueService.issueSelectList(issueVo);
+				helperList = issueService.helperSelectList(issueVo.getTodo_id());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		model.addAttribute("issueList", issueList);
+		model.addAttribute("helperList", helperList);
 		
 		return "issue/issueHelperHtmlAjax";
 	}
@@ -199,10 +198,7 @@ public class IssueController {
 	*/
 	@RequestMapping(value="/issueHelperList", method= {RequestMethod.POST, RequestMethod.GET})
 	public String issueHelperList(@RequestParam("todo_id")String todo_id, Model model) {
-		IssueVo issueVo = new IssueVo();
-		issueVo.setTodo_id(todo_id);
-		
-		List<IssueVo> helperList = issueService.helperSelectList(issueVo);
+		List<IssueVo> helperList = issueService.helperSelectList(todo_id);
 		
 		model.addAttribute("helperList", helperList);
 		

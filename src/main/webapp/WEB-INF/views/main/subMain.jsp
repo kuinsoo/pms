@@ -39,10 +39,36 @@
                         </div>
                     </div>
                 </div>
+                <div id="tabSubMain-3" >
+	                <%-- 회의 리스트--%>
+					<div class="meetList">
+					    <div class="meetListTitles">
+					        <i class="far fa-newspaper"></i>
+					        <span>지난 회의목록</span>
+					    </div>
+					    <div class="meets">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>no</th>
+										<th>회의제목</th>
+										<th>개설자</th>
+										<th>회의록</th>
+										<th>대화록</th>
+										<th>등록일</th>
+									</tr>
+								</thead>
+								<tbody id="meetingListAjax">
+									<tr>
+										<td colspan="6">아직 진행된 회의가 없습니다.  |  ${projectVo.project_id}</td>
+									</tr>
+								</tbody>
+							</table>
+					    </div>
+					</div>
+	            </div>
             </div>
-            <div id="tabSubMain-3" >
-                <%-- 회의 리스트를 넣어주시면 됩니다. !!--%>
-            </div>
+            
             <%-- 등록  --%>
             <%@ include file="/WEB-INF/views/main/projectWriter.jsp" %>
 
@@ -89,6 +115,74 @@
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
 <script>
+//회의목록 출력
+var project_id = ${projectVo.project_id};
+getMeetingListAjax(project_id);
+function getMeetingListAjax(project_id){
+	(function poll(){
+		$.ajax({
+		    url : '/meetingList',
+		    type : 'post',
+		    data : {"project_id" : project_id},
+		    success : function (data) {
+				$('#meetingListAjax').html("");
+				$('#meetingListAjax').html(data);
+		    },
+		    error: function (data) {
+		    	location.href = "/";
+				// alert("error");
+			},
+		    timeout: 3000,
+		    complete: setTimeout(function(){ poll(); }, 6000)
+		 })
+	})();
+};
+
+
+//DIM POPUP - 회의 목록 
+$('#meetingListAjax').on('click', '.projectCreatePopUpb', function(){
+	var $hrefb = $(this).attr('href');
+	layer_popupb($hrefb);
+});
+
+function layer_popupb(elb){
+	var $elb = $(elb);        //레이어의 id를 $el 변수에 저장
+	var isDimb = $elb.prev().hasClass("dimBgb");   //dimmed 레이어를 감지하기 위한 boolean 변수
+	//console.log(isDimb);
+
+	isDimb ? $('.dim-layerb').fadeIn() : $elb.fadeIn();
+
+	var $elWidthb = ~~($elb.outerWidth()),
+		$elHeightb = ~~($elb.outerHeight()),
+		docWidthb = $(document).width(),
+		docHeightb = $(document).height();
+
+	// 화면의 중앙에 레이어를 띄운다.
+	if ($elHeightb < docHeightb || $elWidthb < docWidthb) {
+		$elb.css({
+			marginTop: -$elHeightb /2,
+			marginLeft: -$elWidthb /2
+		})
+	} else {
+		$elb.css({top: 0, left: 0});
+	}
+
+	$elb.find('a.btn-layerCloseb').click(function(){
+		isDimb ? $('.dim-layerb').fadeOut() : $elb.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
+		return false;
+	});
+
+	$('.layer .dimBgb').click(function(){
+		$('.dim-layerb').fadeOut();
+		return false;
+	});
+}
+
+
+
+
+
+
 // DIM POPUP - 팀원초대
 $('.projectCreatePopUps').click(function () {
    var $hrefs = $(this).attr('href');

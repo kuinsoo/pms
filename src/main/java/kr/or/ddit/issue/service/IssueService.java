@@ -129,13 +129,13 @@ public class IssueService implements IssueServiceInf{
 	* Method : issueSelectList
 	* 작성자 : jerry
 	* 변경이력 :
-	* @param issueVo
+	* @param todo_id
 	* @return
 	* Method 설명 : 이슈 리스트 조회
 	*/
 	@Override
-	public List<IssueVo> issueSelectList(IssueVo issueVo) {
-		return issueMapper.issueSelectList(issueVo);
+	public List<IssueVo> issueSelectList(String todo_id) {
+		return issueMapper.issueSelectList(todo_id);
 	}
 
 	/**
@@ -168,13 +168,13 @@ public class IssueService implements IssueServiceInf{
 	* Method : helperSelectList
 	* 작성자 : jerry
 	* 변경이력 :
-	* @param issueVo
+	* @param todo_id
 	* @return
 	* Method 설명 : 도움 리스트 조회
 	*/
 	@Override
-	public List<IssueVo> helperSelectList(IssueVo issueVo) {
-		return issueMapper.helperSelectList(issueVo);
+	public List<IssueVo> helperSelectList(String todo_id) {
+		return issueMapper.helperSelectList(todo_id);
 	}
 	
 }
