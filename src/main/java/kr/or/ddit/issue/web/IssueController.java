@@ -206,6 +206,26 @@ public class IssueController {
 	}
 	
 	/**
+	* Method : issueDelete
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issue_id
+	* Method 설명 : TODO-ISSUE 무결성 제약조건 해제 후 ISSUE 삭제
+	*/
+	@RequestMapping(value="/issueDelete", method= {RequestMethod.POST, RequestMethod.GET})
+	@ResponseBody
+	public void issueDelete(@RequestParam("issue_id")String issue_id) {
+		try {
+			int result = issueService.issueDeleteTodoIssue(issue_id);
+			if(result != 0) {
+				issueService.issueDelete(issue_id);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
 	* Method : getPercentList
 	* 작성자 : jerry
 	* 변경이력 :

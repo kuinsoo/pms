@@ -176,5 +176,31 @@ public class IssueService implements IssueServiceInf{
 	public List<IssueVo> helperSelectList(String todo_id) {
 		return issueMapper.helperSelectList(todo_id);
 	}
+
+	/**
+	* Method : issueDeleteTodoIssue
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issue_id
+	* @return
+	* Method 설명 : 이슈 삭제시 무결성 제약조건 해제를 위해 todo_issue컬럼 값을 Null로 수정(UPDATE) 
+	*/
+	@Override
+	public int issueDeleteTodoIssue(String issue_id) {
+		return issueMapper.issueDeleteTodoIssue(issue_id);
+	}
+
+	/**
+	* Method : issueDelete
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issue_id
+	* @return
+	* Method 설명 : (무결성 제약조건 이후) 이슈 삭제
+	*/
+	@Override
+	public int issueDelete(String issue_id) {
+		return issueMapper.issueDelete(issue_id);
+	}
 	
 }

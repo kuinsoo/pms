@@ -140,7 +140,7 @@ function enterKey${work.work_id}(e){
 						<option value="pmember_member">이메일</option>
 					</select>
 					<input type="text" name="memberSearch${work.work_id}" id="memberSearch${work.work_id}" onkeypress="return enterKey${work.work_id}(event)">
-					<input type="button" value="검색" onclick="javascript:popupSearchMember${work.work_id}('${work.work_id}');">
+					<input type="button" value="검색" onclick="popupSearchMember${work.work_id}('${work.work_id}');">
 				</form>
 				<table>
 					<colgroup width="20%" />
