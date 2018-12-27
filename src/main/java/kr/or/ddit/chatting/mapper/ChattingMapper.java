@@ -1,5 +1,9 @@
 package kr.or.ddit.chatting.mapper;
 
+import java.util.List;
+
+import kr.or.ddit.meeting.model.MeetingVo;
+
 /**
  * kr.or.ddit.chatting.mapper
  * null.java
@@ -10,4 +14,6 @@ package kr.or.ddit.chatting.mapper;
  * @Version :
  */
 public interface ChattingMapper {
+	//지난 채팅목록
+	List<MeetingVo> chattingList(String meeting_title);
 }

@@ -4,11 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
         
 <mapper namespace="kr.or.ddit.meeting.mapper.MeetingMapper">
-    <!-- 전체 회의 진행 내역  -->
+    <!-- 프로젝트별 회의 진행 목록  -->
     <select id="meetingList" resultType="meetingVo" parameterType="String">
-		select meeting_title, member_name, meeting_content, meeting_sdate, meeting_founder
-		from    meeting inner join project_member
-		on     	pmember_project = meeting_project inner join member
+		select meeting_title, meeting_overview, member_name, meeting_content, meeting_sdate, meeting_founder
+		from    meeting 
+		inner join project_member
+		on     	pmember_project = meeting_project 
+		inner join member
 		on      	pmember_member = member_mail
 		where  MEETING_PROJECT=#{project_id}
 		order by meeting_sdate desc

@@ -43,7 +43,7 @@ iframe{border: 1px solid #dee3eb; width:100%; height:100%}
 .meetList > .meetListTitles{margin:20px 0px 0px 20px;font-size:20px;}
 .meetList > .meetListTitles > i{vertical-align:middle;margin-right:10px;}
 .meetList > .meetListTitles > span{vertical-align:middle;}
-.meetList > .meets{float:left;font-size:20px;margin-bottom:20px;margin-left:90px;}
+.meetList > .meets{width:830px; margin:20px;}
 .table {
    width:100%;
    border: 1px solid #eceeef;
@@ -53,132 +53,7 @@ iframe{border: 1px solid #dee3eb; width:100%; height:100%}
 .table td {
    border: 1px solid #eceeef;
  }
- /*회의목록 레이어팝업 */
-.pop-layerb .pop-containerb {
-    background-color: #fff;
-    border-radius: 10px;
-}
 
-.pop-layerb {
-    display: none;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 600px;
-    height: auto;
-    z-index: 10;
-}
-
-.dim-layerb {
-    display: none;
-    position: fixed;
-    _position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 100;
-}
-
-.dim-layerb .dimBgb {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #000;
-    opacity: .5;
-    filter: alpha(opacity=50);
-}
-
-.dim-layerb .pop-layerb {
-    display: block;
-    width: 600px;
-}
-
-.pop-layerb .pop-containerb > .pop-contsb > .pop-conts-headerb {
-    width: 100%;
-    height: 50px;
-    background-color: #eee;
-    font-size: 20px;
-    border-radius: 10px 10px 0px 0px;
-}
-
-.pop-layerb .pop-containerb > .pop-contsb > .pop-conts-headerb > p {
-    float: left;
-    padding: 15px;
-}
-
-.pop-layerb .pop-containerb > .pop-contsb > .pop-conts-headerb > a {
-    float: right;
-    padding: 15px;
-    color: #000;
-}
-
-.pop-layerb .pop-containerb > .pop-contsb > .pop-conts-sectionb {
-    width: 100%;
-    height: 350px;
-    font-size: 20px;
-    clear: both;
-}
-
-.pop-layerb .pop-containerb > .pop-contsb > .pop-conts-sectionb > .pop-conts-section-titleb {
-    width: 100%;
-    padding: 20px;
-}
-
-.pop-layerb .pop-containerb > .pop-contsb > .pop-conts-sectionb > .pop-conts-section-titleb > form > span {
-    margin-left: 7px;
-}
-
-.pop-layerb .pop-containerb > .pop-contsb > .pop-conts-sectionb > .pop-conts-section-titleb > form > .projectTitleInputs {
-    margin-top: 7px;
-    font-size: 20px;
-    width: 100%;
-    outline: none;
-    padding: 5px;
-}
-
-.projectContentInputb {
-    margin-top: 7px;
-    font-size: 20px;
-    width: 100%;
-    outline: none;
-    padding: 5px;
-}
-
-.layerPopUpBtnb {
-    width: 100%;
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-}
-
-.createProjectSubmit b{
-    font-size: 20px;
-    background-color: #746fcc;
-    color: #fff;
-    width: 100px;
-    height: 50px;
-    border-radius: 5px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    float: left;
-}
-
-.layerPopupCloseb {
-    display: block;
-    border: 1px solid #ccc;
-    width: 100px;
-    height: 50px;
-    border-radius: 5px;
-    float: left;
-    text-align: center;
-    line-height: 50px;
-    margin-left: 20px;
-    color: #000;
-}
 
 .projectTaskContainer{width:900px;background-color:#fff;border:1px solid #dee3eb;float:left;margin-top:10px;height:70px;}
 .projectTaskContainer > .projectTaskContainerTitle{margin:20px 0px 0px 20px;font-weight:normal;font-size:20px;}

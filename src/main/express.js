@@ -72,7 +72,7 @@ app.post('/test', function (req, res) {
 
 				//	연결.실행 검증(SELECT문) 
 				connection.execute(      
-					"insert into chatting values(seq_CHAT_ID.nextval||'chat', NULL ,'"+username+"',sysdate,'"+chatMessage+"','"+userid+"','"+roomid+"')",
+					"insert into chatting values('chat'||seq_CHAT_ID.nextval, 'meet'||seq_MEETING_ID.currval ,'"+username+"',sysdate,'"+chatMessage+"','"+userid+"','"+roomid+"')",
 					function(err, result){
 						if (err) {
 							console.error(err.message);

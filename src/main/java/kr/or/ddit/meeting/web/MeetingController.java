@@ -12,10 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import kr.or.ddit.meeting.model.MeetingVo;
 import kr.or.ddit.meeting.service.MeetingServiceInf;
 import kr.or.ddit.qna.web.QnAController;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * kr.or.ddit.meeting.web
@@ -43,5 +41,4 @@ public class MeetingController {
 		
 		return "main/meetListAjax";
 	}
-	
 }
