@@ -4,6 +4,12 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.ddit.work.mapper.WorkMapper">
+	<!--<resultMap id="todoVo" type="resultMap">-->
+		<!--<id property="pmember_member" column="pmember_member" />-->
+		<!--<id property="todo_sdate" column="todo_sdate" />-->
+		<!--<id property="todo_eedate" column="todo_eedate" />-->
+
+	<!--</resultMap>-->
 
 	<!-- 업무 전체 일정 -->
 	<select id="workAllSchedule" resultType="workVo" parameterType="scheduleVo">
@@ -90,6 +96,7 @@
 	</insert>
 
 
+	<!--<select id="workChart" parameterType="String" resultType="resultMap"></select>-->
 
 
 </mapper>
