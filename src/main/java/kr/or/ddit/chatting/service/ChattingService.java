@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.ddit.chatting.mapper.ChattingMapper;
-import kr.or.ddit.meeting.model.MeetingVo;
+import kr.or.ddit.chatting.model.ChattingVo;
 
 /**
  * kr.or.ddit.chatting.service
@@ -26,8 +26,8 @@ public class ChattingService implements ChattingServiceInf{
 	private ChattingMapper chattingMapper;
 	
 	@Override
-	public List<MeetingVo> chattingList(String meeting_title) {
-		return chattingMapper.chattingList(meeting_title);
+	public List<ChattingVo> chattingList(String meeting_id) {
+		return chattingMapper.chattingList(meeting_id);
 	}
 	
 }

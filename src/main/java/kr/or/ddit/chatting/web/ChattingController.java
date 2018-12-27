@@ -30,11 +30,11 @@ public class ChattingController {
 	
 	Logger logger = LoggerFactory.getLogger(QnAController.class);
 	
-	@RequestMapping(value= "/chatListAjax", method= {RequestMethod.GET,RequestMethod.POST}) // headers="Accept=application/json"
-	public String meetingListView(@RequestParam("meeting_title")String meeting_title, Model model) {
+	@RequestMapping(value= "/chatListAjax", method= {RequestMethod.GET,RequestMethod.POST}) 
+	public String meetingListView(@RequestParam("meeting_id")String meeting_id, Model model) {
 		
-		model.addAttribute("chatList", chattingService.chattingList(meeting_title));
-		
+		model.addAttribute("chatList", chattingService.chattingList(meeting_id));
+
 		return "main/chatListAjax";
 	}
 	

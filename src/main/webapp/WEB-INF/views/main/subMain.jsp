@@ -115,30 +115,31 @@
 <script type="text/javascript" src="js/classie.js"></script>
 
 
-<script>
 
+<script>
 //회의목록 출력
+getMeetingListAjax();
+
+function getMeetingListAjax(){
 var project_id = ${projectVo.project_id};
-getMeetingListAjax(project_id);
-function getMeetingListAjax(project_id){
 	//(function poll(){
 		$.ajax({
 		    url : '/meetingList',
-		    type : 'post',
-		    data : {"project_id" : project_id},
+		    type : 'POST',
+		    data : {"project_id":project_id},
 		    success : function (data) {
 				$('#meetingListAjax').html("");
 				$('#meetingListAjax').html(data);
 		    },
-		   /*  error: function (data) {
-		    	location.href = "/";
-				alert("error");
-			}, */
+		      error: function (data) {
+		    }
 		   // timeout: 3000,
 		   // complete: setTimeout(function(){ poll(); }, 6000)
 		 });
 	//})();
 };
+
+
 
 
 // DIM POPUP - 팀원초대

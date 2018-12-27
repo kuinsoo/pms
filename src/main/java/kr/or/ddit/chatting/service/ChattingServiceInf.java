@@ -2,7 +2,7 @@ package kr.or.ddit.chatting.service;
 
 import java.util.List;
 
-import kr.or.ddit.meeting.model.MeetingVo;
+import kr.or.ddit.chatting.model.ChattingVo;
 
 /**
  * kr.or.ddit.chatting.service
@@ -15,5 +15,5 @@ import kr.or.ddit.meeting.model.MeetingVo;
  */
 public interface ChattingServiceInf {
 	//지난 채팅목록
-	List<MeetingVo> chattingList(String meeting_title);
+	List<ChattingVo> chattingList(String meeting_id);
 }
