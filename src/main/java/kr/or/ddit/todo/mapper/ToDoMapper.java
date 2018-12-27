@@ -3,6 +3,7 @@ package kr.or.ddit.todo.mapper;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.issue.model.IssueVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.todo.model.ToDoVo;
 

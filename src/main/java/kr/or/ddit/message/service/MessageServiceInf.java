@@ -262,6 +262,15 @@ public interface MessageServiceInf {
 	 */
 	int deleteMsgReceived(String msg_id);
 	
+	/**
+	 * Method : memberListN
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friendVo
+	 * @return
+	 * Method 설명 : 버튼 처리 Y - N
+	 */
+	List<FriendListVo> memberListN(FriendListVo friendVo);
 	
 	/**
 	 * Method : selectMessageReceived
@@ -272,6 +281,16 @@ public interface MessageServiceInf {
 	 * Method 설명 : Detail : 클릭했을때 팝업창에 뿌려주기 위함 
 	 */
 	MessageVo selectMessageReceived(String msg_id);
+	
+	/**
+	 * Method : updateAccept
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friendVo
+	 * @return
+	 * Method 설명 : 수락 시 update와 insert가 동시에 이루어지게 하기위함
+	 */
+	//Map<String, Object> updateAccept(FriendListVo friendVo);
 }
 
 

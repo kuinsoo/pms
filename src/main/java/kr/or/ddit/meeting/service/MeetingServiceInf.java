@@ -1,5 +1,9 @@
 package kr.or.ddit.meeting.service;
 
+import java.util.List;
+
+import kr.or.ddit.meeting.model.MeetingVo;
+
 /**
  * kr.or.ddit.meeting.service
  * null.java
@@ -10,4 +14,6 @@ package kr.or.ddit.meeting.service;
  * @Version :
  */
 public interface MeetingServiceInf {
+	//지난 회의목록
+	List<MeetingVo> meetingList(String project_id);
 }

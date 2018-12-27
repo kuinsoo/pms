@@ -1,7 +1,13 @@
 package kr.or.ddit.meeting.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import kr.or.ddit.meeting.mapper.MeetingMapper;
+import kr.or.ddit.meeting.model.MeetingVo;
 
 /**
  * kr.or.ddit.meeting.service
@@ -14,5 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class MeetingService {
+public class MeetingService implements MeetingServiceInf{
+
+	@Autowired
+	private MeetingMapper meetingMapper;
+
+	@Override
+	public List<MeetingVo> meetingList(String project_id) {
+		return meetingMapper.meetingList(project_id);
+	}
+
 }

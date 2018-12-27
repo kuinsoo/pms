@@ -1,5 +1,6 @@
 package kr.or.ddit.message.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -158,18 +159,35 @@ public class MessageService implements MessageServiceInf{
 
 
 	@Override
+	public int updateRefuseFriend(String friend_code) {
+		return messageMapper.updateRefuseFriend(friend_code);
+	}
+	
+	// 친구 수락 부분 
+	@Override
 	public int updateAcceptFriend(String friend_code) {
 		return messageMapper.updateAcceptFriend(friend_code);
 	}
-
+	
 	@Override
 	public int insertFriendY(FriendListVo friendVo) {
+		System.out.println(friendVo);
 		return messageMapper.insertFriendY(friendVo);
 	}
 
 
 	@Override
-	public int updateRefuseFriend(String friend_code) {
-		return messageMapper.updateRefuseFriend(friend_code);
+	public List<FriendListVo> memberListN(FriendListVo friendVo) {
+		return messageMapper.memberListN(friendVo);
 	}
 }
+
+
+
+
+
+
+
+
+
+
