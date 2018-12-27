@@ -143,7 +143,7 @@ public class IssueController {
 		List<IssueVo> issueList = issueService.issueSelectList(issueVo);
 		
 		model.addAttribute("issueList", issueList);
-		
+
 		return "issue/issueSelectHtmlAjax";
 	}
 	
@@ -169,7 +169,7 @@ public class IssueController {
 	* 작성자 : jerry
 	* 변경이력 :
 	* @param issueVo
-	* Method 설명 : 도움 등록
+	* Method 설명 : 이슈 도움 등록
 	*/
 	@RequestMapping(value="/helperUpdate", method= {RequestMethod.POST, RequestMethod.GET})
 	public String helperUpdate(IssueVo issueVo, Model model) {
@@ -188,12 +188,21 @@ public class IssueController {
 		return "issue/issueHelperHtmlAjax";
 	}
 	
+	/**
+	* Method : issueHelperList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_id
+	* @param model
+	* @return
+	* Method 설명 : 이슈 도움 조회
+	*/
 	@RequestMapping(value="/issueHelperList", method= {RequestMethod.POST, RequestMethod.GET})
 	public String issueHelperList(@RequestParam("todo_id")String todo_id, Model model) {
 		IssueVo issueVo = new IssueVo();
 		issueVo.setTodo_id(todo_id);
 		
-		List<IssueVo> helperList = issueService.issueSelectList(issueVo);
+		List<IssueVo> helperList = issueService.helperSelectList(issueVo);
 		
 		model.addAttribute("helperList", helperList);
 		

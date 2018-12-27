@@ -118,7 +118,7 @@
 	</update>
 	
 	<!-- 이슈 해결(도움) 조회 -->
-	<select id="helperSelectList" parameterType="issueVo">
+	<select id="helperSelectList" resultType="issueVo" parameterType="issueVo">
 		SELECT  issue_id,
 		        issue_helper,
 		        issue_edate,

@@ -193,8 +193,7 @@ function helperUpdate${work.work_id}(todo_id){
 		url: "/helperUpdate",
 		data: param,
 		success: function(data){
-			$('#issueHelperHtmlAjax'+todo_id).html("");
-			$('#issueHelperHtmlAjax'+todo_id).html(data);
+			getHelperList${work.work_id}(todo_id);
 		},
 		error: function(data){
 			console.log("todoList.jsp : helperUpdate() - error");
@@ -202,7 +201,7 @@ function helperUpdate${work.work_id}(todo_id){
 	});
 }
 
-/* helper list 조회 ==문의: jerry== */
+/* 도움 list 조회 ==문의: jerry== */
 function getHelperList${work.work_id}(todo_id) {
 	$.ajax({
 		method: "POST",
