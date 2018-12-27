@@ -9,7 +9,6 @@ package kr.or.ddit.commons.config;
  * @Date : 2018-11-26 / 오후 1:57
  * @Version :
  */
-
 public class AspectJConfigTest {
 
 }
