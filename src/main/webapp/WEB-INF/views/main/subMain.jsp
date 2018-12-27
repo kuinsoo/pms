@@ -125,7 +125,6 @@ function getMeetingListAjax(project_id){
 		    type : 'post',
 		    data : {"project_id" : project_id},
 		    success : function (data) {
-		    	console.log("call~ java ");
 				$('#meetingListAjax').html("");
 				$('#meetingListAjax').html(data);
 		    },
