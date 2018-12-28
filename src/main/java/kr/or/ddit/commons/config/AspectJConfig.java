@@ -1,8 +1,5 @@
 package kr.or.ddit.commons.config;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-
 /**
  * kr.or.ddit.commons.config
  * null.java

@@ -5,6 +5,7 @@ import java.util.Map;
 
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
+import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.work.model.WorkVo;
 
 /**
@@ -97,6 +98,6 @@ public interface WorkServiceInf {
 	 * @param mtMap
 	 * @return
 	 */
-	List<MemberVo> workChart(Map<String, String> mtMap);
+	List<ToDoVo> workChart(Map<String, String> mtMap);
 	
 }

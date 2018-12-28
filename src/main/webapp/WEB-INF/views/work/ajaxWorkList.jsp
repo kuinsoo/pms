@@ -27,8 +27,8 @@
 				<%-- 할일관련 --%>
 			<%@ include file="/WEB-INF/views/todo/todoList.jsp" %>
 		</div>
-		<div class="currentCardContentBottomView" >
-			<div id="container${work.work_id}"></div>
+		<div class="currentCardContentBottomView" id="workCharts" >
+			<%--<div id="container${work.work_id}"></div>--%>
 				<%@ include file="/WEB-INF/views/work/ajaxWorkChart.jsp" %>
 		</div>
 

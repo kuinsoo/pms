@@ -17,7 +17,7 @@
 				<div id="subMaintab1" class="tabcontent current">
 					<%@ include file="/WEB-INF/views/main/report.jsp" %>
 				</div>
-		
+
 				<div id="subMaintab2" class="tabcontent">
 					<div class="projectTaskContainer">
                         <div class="projectTaskContainerTitle">
@@ -39,7 +39,7 @@
                         </div>
                     </div>
 				</div>
-		
+
 				<div id="subMaintab3" class="tabcontent">
 					<%-- 회의 리스트--%>
 					<div class="meetList">
@@ -68,7 +68,7 @@
 					</div>
 				</div>
 			</div>
-			
+
             <%-- 등록  --%>
             <%@ include file="/WEB-INF/views/main/projectWriter.jsp" %>
 
@@ -114,6 +114,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
+
+
+
 <script>
 //회의목록 출력
 getMeetingListAjax();
@@ -136,6 +139,9 @@ var project_id = ${projectVo.project_id};
 		 });
 	//})();
 };
+
+
+
 
 // DIM POPUP - 팀원초대
 $('.projectCreatePopUps').click(function () {
@@ -472,6 +478,7 @@ function updateCmtAjax(cmt_id, work_id, project_id, cmt_content) {
 	});
 }
 
+/* */
 function updateCard(no, group, index) {
 
 	$.ajax({
@@ -488,6 +495,25 @@ function updateCard(no, group, index) {
 	// location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${projectVo.project_id}";
 };
 
+function workChart(work_id) {
+    var parm = "project_id=${projectVo.project_id}&work_id="+ work_id;
+    $.ajax({
+       type: "POST",
+       url:  "/ajaxWorkChart",
+        data: parm,
+        success: function (data) {
+            $('#workCharts').html("")
+            $('#workCharts').html(data)
+        }
+    });
+}
+//submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+// if (submenu.is(":visible")) {
+// submenu.slideUp();
+// } else {
+// submenu.slideDown();
+// }
+
 // 서브메인 탭 메뉴
 $(function() {
 	$('ul.subMaintab li').click(function() {
@@ -499,5 +525,6 @@ $(function() {
 	})
 });
 </script>
+
 </body>
 </html>
