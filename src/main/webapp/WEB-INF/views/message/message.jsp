@@ -502,12 +502,11 @@
 						html += "	<td>"+ "<input type='button' onclick ='deleteMyFriends("+mm.friend_code+");' value='친구삭제'/>"+"</td>";
 						html += "</tr>";
 					});
-					
+
 					console.log(data.myFriendList);
 					
 					$("#myFriendList").html("");
 					$("#myFriendList").html(html);
-					
 					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getMyFriends("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
@@ -543,7 +542,6 @@
 							});
 							
 							console.log(data.myFriendList);
-							
 							$("#myFriendList").html("");
 							$("#myFriendList").html(html);
 							
@@ -577,7 +575,6 @@
 			});
 		}
 		
-		
 		//#########################################################################################
 		// 전체 사용자 뽑아오는 리스트
 		function getAllMember(page){
@@ -590,7 +587,6 @@
 				
 					var html = "";
 					$.each(data.myMemberList,function(idx,mm){
-				
 						html += "<tr>";
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.member_mail +"</td>";
@@ -600,7 +596,6 @@
 					});
 					
 					console.log(data.myMemberList);
-					
 					$("#myMemberList").html("");
 					$("#myMemberList").html(html);
 					

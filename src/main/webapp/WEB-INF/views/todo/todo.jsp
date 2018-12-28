@@ -30,7 +30,7 @@ function insertTodo${work.work_id}(work_id) {
 	var work_id = ${work.work_id};
     var project_id = ${projectVo.project_id};
     var param = $('#todoInsert${work.work_id}').serialize();
-
+    
 	$.ajax({
 	   method: "POST",
 	   url: "/todoInsert",
@@ -39,9 +39,10 @@ function insertTodo${work.work_id}(work_id) {
 	      window.location.href = '#close';
 	      $('#todoInsertHtmlAjax${work.work_id}').html("");
 	      $('#todoInsertHtmlAjax${work.work_id}').html(data);
+	      
 	      getToDoPagination${work.work_id}(1, project_id, work_id);
-		   <%-- workChart 동시 업데이트수행 (구인수) --%>
-		   workChart(work_id);
+		  <%-- workChart 동시 업데이트수행 (구인수) --%>
+		  workChart(work_id);
 	   },
 	   error:function(data) {
 	      console.log("todo.jsp : insertTodo() - error");

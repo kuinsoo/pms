@@ -3,7 +3,6 @@ package kr.or.ddit.work.web;
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.member.model.MemberVo;
-import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.work.model.WorkVo;
 import kr.or.ddit.work.service.WorkServiceInf;
 import org.slf4j.Logger;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

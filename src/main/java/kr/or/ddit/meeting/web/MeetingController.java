@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @Date : 2018-11-27 / 오후 2:59
  * @Version :
  */
+//@CrossOrigin(origins = "127.0.0.1:8443")
 @Controller
 public class MeetingController {
 

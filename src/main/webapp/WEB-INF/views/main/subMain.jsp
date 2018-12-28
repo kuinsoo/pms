@@ -17,7 +17,7 @@
 				<div id="subMaintab1" class="tabcontent current">
 					<%@ include file="/WEB-INF/views/main/report.jsp" %>
 				</div>
-
+		
 				<div id="subMaintab2" class="tabcontent">
 					<div class="projectTaskContainer">
                         <div class="projectTaskContainerTitle">
@@ -39,7 +39,7 @@
                         </div>
                     </div>
 				</div>
-
+		
 				<div id="subMaintab3" class="tabcontent">
 					<%-- 회의 리스트--%>
 					<div class="meetList">
@@ -68,7 +68,7 @@
 					</div>
 				</div>
 			</div>
-
+			
             <%-- 등록  --%>
             <%@ include file="/WEB-INF/views/main/projectWriter.jsp" %>
 
@@ -115,9 +115,50 @@
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
 
-
-
 <script>
+$(function(){
+	
+	$('#meetingListAjax').on('click', '.saveDocFile', function(){
+		var title =$(this).parents('.myPInfo').prev().find('.meeting_title').html();
+		var date =$(this).parents('.myPInfo').prev().find('.format_meeting_sdate').html();
+		
+		var textToSave =$(this).parents('.btnP').find('.saveDoc').html();
+		//console.log($(this).parents('.btnP').find('.btnC').html());
+		
+		var textToSaveAsBlob = new Blob([textToSave], {type:"text/html"});
+	    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+	    var fileNameToSaveAs = title+"_회의록_"+date;
+
+	    var downloadLink = document.createElement("a");
+	    downloadLink.download = fileNameToSaveAs;
+	    downloadLink.innerHTML = "Download File";
+	    downloadLink.href = textToSaveAsURL;
+	    downloadLink.style.display = "none";
+	    document.body.appendChild(downloadLink);
+
+	    downloadLink.click();
+	});
+	$('#meetingListAjax').on('click', '.saveChatFile', function(){
+		var title =$(this).parents('.myPInfo').prev().find('.meeting_title').html();
+		var date =$(this).parents('.myPInfo').prev().find('.format_meeting_sdate').html();
+		
+		var textToSave =$(this).parents('.btnP').find('.saveChat').html();
+
+		var textToSaveAsBlob = new Blob([textToSave], {type:"text/html"});
+	    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+	    var fileNameToSaveAs = title+"_대화록_"+date;
+
+	    var downloadLink = document.createElement("a");
+	    downloadLink.download = fileNameToSaveAs;
+	    downloadLink.innerHTML = "Download File";
+	    downloadLink.href = textToSaveAsURL;
+	    downloadLink.style.display = "none";
+	    document.body.appendChild(downloadLink);
+
+	    downloadLink.click();
+	});
+});
+
 //회의목록 출력
 getMeetingListAjax();
 
@@ -139,9 +180,6 @@ var project_id = ${projectVo.project_id};
 		 });
 	//})();
 };
-
-
-
 
 // DIM POPUP - 팀원초대
 $('.projectCreatePopUps').click(function () {
@@ -478,7 +516,6 @@ function updateCmtAjax(cmt_id, work_id, project_id, cmt_content) {
 	});
 }
 
-/* */
 function updateCard(no, group, index) {
 
 	$.ajax({
@@ -524,7 +561,16 @@ $(function() {
 		$('#' + activeTab).addClass('current');
 	})
 });
-</script>
 
+/* to-do 등록시 초기화 */
+function todoReset(work_id) {
+	document.getElementById('todoInsert' + work_id).reset();
+
+	var date = new Date();
+    date.setHours(date.getHours() + 9);
+    document.getElementById('non_todo_sdate'+work_id).value = date.toISOString().slice(0, 16);
+}
+
+</script>
 </body>
 </html>
