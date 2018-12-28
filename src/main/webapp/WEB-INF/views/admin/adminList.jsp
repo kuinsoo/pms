@@ -5,7 +5,7 @@
 <c:forEach items="${adminMap.adminList}" var="admin">
 	<tr>
 		<td>${admin.labelrn}</td>
-		<td>${admin.post_title}</td>
+		<td><a href="/adminUpdateView?post_id=${admin.post_id}">${admin.post_title}</a></td>
 		<td>
 			<fmt:formatDate value="${admin.post_date}" pattern="yyyy-MM-dd" />
 		</td>

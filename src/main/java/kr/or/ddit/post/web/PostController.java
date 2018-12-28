@@ -44,6 +44,11 @@ public class PostController {
 		return "notice/notice";
 	}
 	
+	@RequestMapping(value="/guide")
+	public String guideView() {
+		return "guide/guide";
+	}
+	
 	/**
 	* Method : noticeList
 	* 작성자 : iks
@@ -93,5 +98,53 @@ public class PostController {
 		return postMap;
 	}
 	
+	/**
+	* Method : guideList
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 가이드 게시글 페이지 리스트 조회
+	*/
+	@RequestMapping(value="/guideList", method=RequestMethod.GET)
+	public String guideList(Model model, PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		List<PostVo> guideList = postService.getPostPageListGuide(pageVo);
+		
+		Map<String, Object> postMapGuide = new HashMap<>();
+		int pageCnt = postService.totalPostCntGuide();
+		
+		postMapGuide.put("guideList", guideList);
+		postMapGuide.put("pageCntGuide", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		model.addAttribute("guideList", guideList);
+		
+		return "guide/guideList";
+	}
+	
+	/**
+	* Method : ajaxGuideList
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 가이드 게시글 페이지 리스트 조회
+	*/
+	@ResponseBody
+	@RequestMapping(value="/ajaxGuide", method=RequestMethod.POST)
+	public Map<String, Object> ajaxGuideList(PageVo pageVo){
+		
+		List<PostVo> guideList = postService.getPostPageListGuide(pageVo);
+		
+		Map<String, Object> postMapGuide = new HashMap<>();
+		int pageCnt = postService.totalPostCntGuide();
+		
+		postMapGuide.put("guideList", guideList);
+		postMapGuide.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return postMapGuide;
+	}
 	
 }

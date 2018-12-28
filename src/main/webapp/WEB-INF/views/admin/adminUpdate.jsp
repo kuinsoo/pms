@@ -77,6 +77,10 @@ ul{list-style-type:none;}
 	width:80px;height:40px;background-color:#fa2828;color:#fff;border:none;cursor:pointer;
 	font-size:17px;float:left;outline:none;text-align:center;line-height:40px;
 }
+.adminCreateLists {
+	width:80px;height:40px;background-color:#fa2828;color:#fff;border:none;cursor:pointer;
+	font-size:17px;float:left;outline:none;text-align:center;line-height:40px;margin-left:10px;
+}
 .adminCreateBtn{width:80px;height:40px;background-color:#fa2828;color:#fff;border:none;cursor:pointer;font-size:17px;float:right;outline:none;}
 
 
@@ -119,30 +123,35 @@ ul{list-style-type:none;}
 			<p>CURRENT ADMIN > 공지사항</p>
 		</div>
 		<div class="adminRightContentInner">
-			<h2>공지사항 정보 관리<span>공지사항 정보를 입력하실 수 있습니다.</span></h2>
-			<form action="/adminInsert" method="post" id="adminInsert">
+			<h2>공지사항 정보 관리<span>공지사항 정보를 변경하실 수 있습니다.</span></h2>
+			<form action="/adminUpdate" method="post" id="adminUpdate">
 				<div class="adminTitleInputContent">
 					<input type="hidden" name="member_mail" value="${memberVo.member_mail}" />
 					<input type="hidden" name="board_id" value="1" />
+					<input type="hidden" name="post_id" value="${postVo.post_id}" />
 					<table>
 						<colgroup width="10%" />
 						<colgroup width="90%" />
 						<tr>
 							<td class="titleTd">제목</td>
-							<td><input type="text" name="post_title" required /></td>
+							<td><input type="text" name="post_title" value="${postVo.post_title}" required /></td>
 						</tr>
 						<tr>
 							<td class="titleTd">게시물 내용</td>
 							<td>
-								<textarea id="smarteditor" name="post_content" required></textarea>
+								<textarea id="smarteditor" name="post_content" required>${postVo.post_content}</textarea>
 							</td>
 						</tr>
 					</table>
 				</div>
 				<div class="adminCreateBtns">
 					<a href="/admin" class="adminCreateList">목록</a>
-					<button type="submit" class="adminCreateBtn">등록</button>
+					<input type="button" value="삭제" class="adminCreateLists" />
+					<button type="submit" class="adminCreateBtn">수정</button>
 				</div>
+			</form>
+			<form action="/adminDelete" method="post" id="adminDelete">
+				<input type="hidden" name="post_id" value="${postVo.post_id}" />
 			</form>
 		</div>
 	</div>
@@ -178,10 +187,14 @@ $(document).ready(function() {
 
 	// 전송버튼 클릭이벤트
 	$("button[type=submit]").click(function(){
-		if(confirm("저장하시겠습니까?")) {
+		if(confirm("수정하시겠습니까?")) {
 			// id가 smarteditor인 textarea에 에디터에서 대입
 			oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
 		}
+	});
+	
+	$(".adminCreateLists").click(function(){
+		$("#adminDelete").submit();
 	});
 });
 </script>
