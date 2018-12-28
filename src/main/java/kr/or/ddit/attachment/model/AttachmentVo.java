@@ -16,6 +16,7 @@ import java.util.Arrays;
 @Alias("attVo")
 public class AttachmentVo {
 
+
 	private String att_id;
 	private String att_work;
 	private String att_name;
@@ -24,6 +25,7 @@ public class AttachmentVo {
 	private byte[] att_file;
 	private int rnum;
 
+	
 	public AttachmentVo() {
 	}
 	

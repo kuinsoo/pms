@@ -433,11 +433,13 @@
 				data: {"page":page, "pageSize":pageSize},
 				success : function(data){
 					var html = "";
+					
 					$.each(data.myFileList, function(idx,mm){
 						html += "<tr>";
 						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.att_id +"</td>";
 						html += "	<td>"+ mm.att_name +"</td>";
-						html += "	<td>"+ "<input type='button' value='파일 다운로드'/>"+"</td>";
+						html += "	<td>"+ "<input type='button' onclick ='getmyProjectFileAttachId("+mm.att_id+");' value='파일 다운로드'/>"+"</td>";
 						html += "</tr>";
 					});
 					$("#myFileList").html("");
@@ -456,7 +458,27 @@
 					}
 				});
 			}
-		// 마이페이지 : 즐겨찾기 프로젝트 목록 검색 Ajax	
+		
+		/* // select 프로젝트 선택한값으로 리스트의값이 변경되는  
+	 	function getmyProjectFileSelect(project_id){
+	 		var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/selectProjectFileListAjax",
+				data :"project_id="+ project_id,
+				success: function(data){
+					console.log(data);
+					getmyProjectFileList(1);
+				}
+			});
+		}  */
+		
+		// select 프로젝트 선택한값으로 리스트의값이 변경되는  
+	 	function getmyProjectFileAttachId(att_id){
+	 	    location.href = '/selectProjectFileAttachIdDownload?att_id='+att_id;
+		} 
+		
+		// 마이페이지 : 파일첨부  프로젝트 목록 검색 Ajax	
 		function getFileSearchProject(){
 		var param = $('form[name=searchFileList]').serialize();
 			$.ajax({
@@ -469,6 +491,7 @@
 					$.each(data.myFileList, function(idx,mm){
 						html += "<tr>";
 						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.att_id +"</td>";
 						html += "	<td>"+ mm.att_name +"</td>";
 						html += "	<td>"+ "<input type='button' value='파일 다운로드'/>"+"</td>";
 						html += "</tr>";
@@ -489,6 +512,7 @@
 				}
 			});
 		}
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 나의 일감 목록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		function getmyTodoProjectList(page){
 			var pageSize = 10;
@@ -796,16 +820,16 @@
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 파일 보관함 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 						<div id="tabs2-4">
 							<div class="projectTable">
+							<%-- 	<select name="selectBox"class="recipientSelect">
+									<option> 프로젝트 명 </option>
+ 									<c:forEach items="${selectProjectMember}" var="mf">
+										<option onchange="javascript:getmyProjectFileSelect(${mf.project_id});">${mf.project_title}</option>
+									</c:forEach> 
+								</select> --%>
 								<div class="projectSearchDiv">　　
 								<button onclick="getmyProjectFileList(1);">목록으로</button>
 									<form name ="searchFileList" method="POST" onsubmit="return false;">
-										<select name="selectBox" onclick="getmyProjectFileList(1);" class="recipientSelect">
-											<option> 프로젝트 명 </option>
-											<c:forEach items="${selectProjectMember }" var="mf">
-												<option>${mf.project_title}</option>
-											</c:forEach>
-										</select>
-										 <input type="text" id="searchFileList" name ="searchFileList" value='${searchFileList}'  placeholder="검색어를 입력해주세요"/>
+										 <input type="text" id="searchFileList" name ="searchFileList" value='${searchFileList}' placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons" onclick="javascript:getFileSearchProject();"></i>  
@@ -813,11 +837,13 @@
 								</div>
 								<table>
 									<colgroup width="10%" />
+									<colgroup width="10%" />
 									<colgroup width="60%" />
 									<colgroup width="30%" />
 									<thead>
 										<tr>
 											<th><span>번호</span></th>
+											<th><span>파일 아이디</span></th>
 											<th><span>파일 명</span></th>
 											<th><span>파일 다운로드</span></th>
 										</tr>

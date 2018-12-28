@@ -366,5 +366,10 @@ public class MemberService implements MemberServiceInf {
 		return memberMapper.selectProjectMember(member_mail);
 	}
 
+	@Override
+	public List<AttachmentVo> myFileListProjectId(PageVo pageVo) {
+		return memberMapper.myFileListProjectId(pageVo);
+	}
+
 	
 }

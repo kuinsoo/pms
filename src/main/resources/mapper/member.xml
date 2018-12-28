@@ -61,7 +61,7 @@
 	                      , PMEMBER_PROJECT as project_id
 	                   FROM   PROJECT_MEMBER
 	                   WHERE  PMEMBER_MEMBER = #{member_mail}
-	                     AND    PMEMBER_POSITION = '2'
+	                     AND    PMEMBER_POSITION = '1'
 	                   UNION
 	                   SELECT  (SELECT PROJECT_TITLE FROM PROJECT WHERE PROJECT_ID = PMEMBER_PROJECT)
 	                       , (SELECT B.PMEMBER_MEMBER FROM PROJECT_MEMBER B WHERE B.PMEMBER_PROJECT = A.PMEMBER_PROJECT AND B.PMEMBER_POSITION = 1)
@@ -119,7 +119,7 @@
 	 <select id="selectTodoCnt" resultType="int" parameterType="String">
 	 	select count(*)
 		from   todo
-		where  todo_pmember = #{member_mail}
+		where  todo_member = #{member_mail}
 	 
 	 </select>
 	 
@@ -174,21 +174,37 @@
 		        (select todo_content
                       , todo_complet
                 from todo
-                where pmember_member = #{member_mail})a)
+                where todo_member = #{member_mail})a)
 		  where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
 		<if test="searchTodoText != null and searchTodoText != ''">and todo_content like '%'||#{searchTodoText}||'%'</if>
 	</select>
 	
 	<select id="myFileList" resultType="attVo" parameterType="pageVo">
-		select * from
-		   (select ROWNUM rnum, a.*
-		    from
-		       (select att_name
+			select * from
+			   (select ROWNUM rnum, a.*
+			    from
+			       (select att_id
+			       		, att_name
 			       from   attachment inner join work on att_work = work_id  
 			              inner join  project on work_project = project_id
 			              inner join  project_member on project_id = pmember_project
 			              inner join  member on pmember_member = member_mail
 			               where  member_mail = #{member_mail})a)
+			        where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize} 
+		        <if test="searchFileList != null and searchFileList != ''">and att_name like '%'||#{searchFileList}||'%'</if>
+	</select>
+	<select id="myFileListProjectId" resultType="attVo" parameterType="pageVo">
+			select * from
+			   (select ROWNUM rnum, a.*
+			    from
+			       (select  att_id
+			               ,att_name
+			       from   attachment inner join work on att_work = work_id  
+			              inner join  project on work_project = project_id
+			              inner join  project_member on project_id = pmember_project
+			              inner join  member on pmember_member = member_mail
+			               where  member_mail = #{member_mail}
+			               and  project_id = #{project_id})a)
 			        where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize} 
 		        <if test="searchFileList != null and searchFileList != ''">and att_name like '%'||#{searchFileList}||'%'</if>
 	</select>
@@ -202,6 +218,7 @@
 	 
 	 <select id="selectProjectMember" resultType="projectVo" parameterType="String">
 		select project_title 
+		     , project_id
 		from project 
 		inner join project_member
 			on project_id = pmember_project inner join member

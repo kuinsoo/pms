@@ -55,6 +55,17 @@ public interface MemberServiceInf {
 	MemberVo selectfindId(MemberVo memberVo);
 
 	/**
+	 * Method : myFileListProjectId
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo 
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 마이페이지 프로젝트 파일  project_id 포함 
+	 */
+	List<AttachmentVo> myFileListProjectId(PageVo pageVo);
+	
+	/**
 	 * Method : selectfindPass 작성자 : pc07 변경이력 :
 	 *
 	 * @param member_mail the member mail
