@@ -438,6 +438,7 @@
 						html += "<tr>";
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.att_id +"</td>";
+						html += "	<td>"+ mm.project_title +"</td>";
 						html += "	<td>"+ mm.att_name +"</td>";
 						html += "	<td>"+ "<input type='button' onclick ='getmyProjectFileAttachId("+mm.att_id+");' value='파일 다운로드'/>"+"</td>";
 						html += "</tr>";
@@ -492,6 +493,7 @@
 						html += "<tr>";
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.att_id +"</td>";
+						html += "	<td>"+ mm.project_title +"</td>";
 						html += "	<td>"+ mm.att_name +"</td>";
 						html += "	<td>"+ "<input type='button' value='파일 다운로드'/>"+"</td>";
 						html += "</tr>";
@@ -838,12 +840,14 @@
 								<table>
 									<colgroup width="10%" />
 									<colgroup width="10%" />
-									<colgroup width="60%" />
-									<colgroup width="30%" />
+									<colgroup width="20%" />
+									<colgroup width="40%" />
+									<colgroup width="10%" />
 									<thead>
 										<tr>
 											<th><span>번호</span></th>
 											<th><span>파일 아이디</span></th>
+											<th><span>프로젝트 명</span></th>
 											<th><span>파일 명</span></th>
 											<th><span>파일 다운로드</span></th>
 										</tr>

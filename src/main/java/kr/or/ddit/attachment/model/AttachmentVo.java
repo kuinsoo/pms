@@ -16,7 +16,7 @@ import java.util.Arrays;
 @Alias("attVo")
 public class AttachmentVo {
 
-
+	private String project_title;
 	private String att_id;
 	private String att_work;
 	private String att_name;
@@ -26,6 +26,16 @@ public class AttachmentVo {
 	private int rnum;
 
 	
+	public String getProject_title() {
+		return project_title;
+	}
+
+
+	public void setProject_title(String project_title) {
+		this.project_title = project_title;
+	}
+
+
 	public AttachmentVo() {
 	}
 	
@@ -51,9 +61,9 @@ public class AttachmentVo {
 
 	@Override
 	public String toString() {
-		return "AttachmentVo [att_id=" + att_id + ", att_work=" + att_work + ", att_name=" + att_name
-				+ ", att_extension=" + att_extension + ", att_path=" + att_path + ", att_file="
-				+ Arrays.toString(att_file) + ", rnum=" + rnum + "]";
+		return "AttachmentVo [project_title=" + project_title + ", att_id=" + att_id + ", att_work=" + att_work
+				+ ", att_name=" + att_name + ", att_extension=" + att_extension + ", att_path=" + att_path
+				+ ", att_file=" + Arrays.toString(att_file) + ", rnum=" + rnum + "]";
 	}
 
 	public String getAtt_id() {
