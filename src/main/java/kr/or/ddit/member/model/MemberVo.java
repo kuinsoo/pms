@@ -14,7 +14,21 @@ public class MemberVo extends PMemberListVo{
 	private String member_profile;
 	private String member_withdrawal;
 
-	private ToDoVo toDoVo;
+	private ToDoVo todoVo;
+
+	@Override
+	public String toString() {
+		return "MemberVo{" +
+				"rnum=" + rnum +
+				", member_mail='" + member_mail + '\'' +
+				", member_name='" + member_name + '\'' +
+				", member_pass='" + member_pass + '\'' +
+				", member_tel='" + member_tel + '\'' +
+				", member_profile='" + member_profile + '\'' +
+				", member_withdrawal='" + member_withdrawal + '\'' +
+				", todoVo=" + todoVo +
+				'}';
+	}
 
 	public int getRnum() {
 		return rnum;
@@ -24,12 +38,7 @@ public class MemberVo extends PMemberListVo{
 		this.rnum = rnum;
 	}
 
-	@Override
-	public String toString() {
-		return "MemberVo [rnum=" + rnum + ", member_mail=" + member_mail + ", member_name=" + member_name
-				+ ", member_pass=" + member_pass + ", member_tel=" + member_tel + ", member_profile=" + member_profile
-				+ ", member_withdrawal=" + member_withdrawal + "]";
-	}
+
 
 	public String getMember_mail() {
 		return member_mail;
@@ -82,11 +91,11 @@ public class MemberVo extends PMemberListVo{
 	public MemberVo() {
 	}
 
-	public ToDoVo getToDoVo() {
-		return toDoVo;
+	public ToDoVo getTodoVo() {
+		return todoVo;
 	}
 
-	public void setToDoVo(ToDoVo toDoVo) {
-		this.toDoVo = toDoVo;
+	public void setTodoVo(ToDoVo todoVo) {
+		this.todoVo = todoVo;
 	}
 }
