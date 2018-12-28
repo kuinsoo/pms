@@ -31,12 +31,13 @@ public class PMemberListVo {
 	private Date project_sdate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date project_eedate;
-
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date project_edate;
 
 	public PMemberListVo() {
 	}
 
-	public PMemberListVo(String member_name, String member_profile, String pmember_member, String pmemberCount, String pmember_position, String project_title, String project_overview, String pmember_bookmark, String project_id, Date project_sdate, Date project_eedate) {
+	public PMemberListVo(String member_name, String member_profile, String pmember_member, String pmemberCount, String pmember_position, String project_title, String project_overview, String pmember_bookmark, String project_id, Date project_sdate, Date project_eedate, Date project_edate) {
 		this.member_name = member_name;
 		this.member_profile = member_profile;
 		this.pmember_member = pmember_member;
@@ -48,22 +49,7 @@ public class PMemberListVo {
 		this.project_id = project_id;
 		this.project_sdate = project_sdate;
 		this.project_eedate = project_eedate;
-	}
-
-	public Date getProject_sdate() {
-		return project_sdate;
-	}
-
-	public void setProject_sdate(Date project_sdate) {
-		this.project_sdate = project_sdate;
-	}
-
-	public Date getProject_eedate() {
-		return project_eedate;
-	}
-
-	public void setProject_eedate(Date project_eedate) {
-		this.project_eedate = project_eedate;
+		this.project_edate = project_edate;
 	}
 
 	public String getMember_name() {
@@ -136,5 +122,29 @@ public class PMemberListVo {
 
 	public void setProject_id(String project_id) {
 		this.project_id = project_id;
+	}
+
+	public Date getProject_sdate() {
+		return project_sdate;
+	}
+
+	public void setProject_sdate(Date project_sdate) {
+		this.project_sdate = project_sdate;
+	}
+
+	public Date getProject_eedate() {
+		return project_eedate;
+	}
+
+	public void setProject_eedate(Date project_eedate) {
+		this.project_eedate = project_eedate;
+	}
+
+	public Date getProject_edate() {
+		return project_edate;
+	}
+
+	public void setProject_edate(Date project_edate) {
+		this.project_edate = project_edate;
 	}
 }

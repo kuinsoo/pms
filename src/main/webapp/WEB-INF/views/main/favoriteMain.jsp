@@ -340,15 +340,19 @@
 
 	/* 프로젝트 삭제 */
 	function projectDelete(project_id) {
-		$.ajax({
-			type: "GET",
-			url:"/deleteProject",
-			data : {'project_id':project_id},
-			success: function(data) {
-				$('.inviteProject').html("");
-				$('.inviteProject').html(data);
-			}
-		});
+		if (confirm("정말 삭제를 진행 하시겠습니까? (데이터 복구 불가능)") == true) {
+			$.ajax({
+				type: "GET",
+				url: "/deleteProject",
+				data: {'project_id': project_id},
+				success: function (data) {
+					$('.bookmarkProject').html("");
+					$('.bookmarkProject').html(data);
+				}
+			});
+		} else {
+			return;
+		}
 	}
 
 	// book mark

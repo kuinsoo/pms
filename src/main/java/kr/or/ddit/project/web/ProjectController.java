@@ -150,6 +150,7 @@ public class ProjectController {
 		}
 
 		model.addAttribute("pMemberList",memberService.selectMainView(memberVo.getMember_mail()));
+		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
 		return "project/ajaxMainProjectList";
 	}
 
@@ -256,7 +257,7 @@ public class ProjectController {
 		}
 		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
-		return "main/main";
+		return "project/ajaxMainProjectList";
 	}
 
 
