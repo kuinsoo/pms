@@ -28,9 +28,9 @@
 
             yAxis: {
                 categories: [
-                    <c:forEach items="${workChart}" var="wChart">
-                    '${wChart.todo_pmember}',
-                    </c:forEach>,''
+                   <c:forEach items="${workCharts}" var="workChart" varStatus="i" >
+                     '${workChart.todo_id}',
+                    </c:forEach>'start'
                 ]
             },
 
@@ -40,39 +40,20 @@
 
             series: [{
                 name: 'Project 1',
-                data: [
+                data:[<c:forEach items="${workCharts}" var="workChart" varStatus="i">
                     {
-                    start: Date.UTC(2018, 11, 1),
-                    end: Date.UTC(2018, 11, 2),
-                    y: 0,
-                    assignee: 'JonArild'
-                }, {
-                    start: Date.UTC(2018, 11, 2),
-                    end: Date.UTC(2018, 11, 5),
-                    y: 1,
-                    assignee: 'Oystein',
-                    fontSymbol: 'exclamation'
-                }, {
-                    start: Date.UTC(2018, 11, 8),
-                    end: Date.UTC(2018, 11, 9),
-                    y: 2,
-                    assignee: 'kimjitae'
-                }, {
-                    start: Date.UTC(2018, 11, 9),
-                    end: Date.UTC(2018, 11, 19),
-                    y: 1,
-                    assignee: '진시리'
-                }, {
-                    start: Date.UTC(2018, 11, 10),
-                    end: Date.UTC(2018, 11, 23),
-                    y: 2,
-                    assignee: '구인수',
-                    fontSymbol: 'smile-o'
-                }],
+                        start: Date.UTC(parseInt('${workChart.format_todo_sdate}'.substr(0,4)), parseInt('${workChart.format_todo_sdate}'.substr(5,2)), parseInt('${workChart.format_todo_sdate}'.substr(8,2))),
+                        end: Date.UTC(parseInt('${workChart.format_todo_eedate}'.substr(0,4)), parseInt('${workChart.format_todo_eedate}'.substr(5,2)), parseInt('${workChart.format_todo_eedate}'.substr(8,2))),
+                        y: ${i.index},
+                        assignee: '${workChart.todo_pmember}'
+                    },
+                    </c:forEach>
+
+                ],
                 dataLabels: [{
                     enabled: true,
                     format: '<div style="width: 20px; height: 20px; overflow: hidden; border-radius: 50%; margin-left: -25px">' +
-                        '<img src="images/{workChart.assignee}.jpg" ' +
+                        '<img src="images/{point.assignee}.jpg" ' +
                         'style="width: 30px; margin-left: -5px; margin-top: -2px"></div>',
                     useHTML: true,
                     align: 'left'

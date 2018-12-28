@@ -1,22 +1,30 @@
 package kr.or.ddit.member.web;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
-
+import kr.or.ddit.card.service.CardServiceInf;
+import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.commons.mail.service.EmailServiceInf;
+import kr.or.ddit.meeting.model.MeetingVo;
+import kr.or.ddit.meeting.service.MeetingServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.project.model.InviteProjectVo;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
+import kr.or.ddit.work.service.WorkServiceInf;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * kr.or.ddit.member.web
@@ -39,10 +47,23 @@ public class MemberController {
 	@Autowired
 	private ProjectServiceInf projectService;
 
+	@Autowired
+	private WorkServiceInf workService;
+
+	@Autowired
+	private CommentsServiceInf commentsService;
+
+	@Autowired
+	private CardServiceInf cardService;
+
+	@Autowired
+	private MeetingServiceInf meetingService;
+
 	@RequestMapping(value = "/inviteTeam" ,method = RequestMethod.POST)
-	public String inviteTeam(@RequestParam("inviteTeam")String[] inviteMails, @RequestParam("project_id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo) throws UnsupportedEncodingException {
+	public String inviteTeam(Model model , @RequestParam("inviteTeam")String[] inviteMails, @RequestParam("project_id")String project_id,
+							 @SessionAttribute("memberVo")MemberVo memberVo) {
 		String subject = "Current Project 초대 알람 입니다.";
-		String content = "프로젝트 주소 : http://127.0.0.1:8081/?teamId="+ project_id + "https://imgur.com/a/GUN203X";
+		String content = "프로젝트 주소 : https://127.0.0.1:8081/?teamId="+ project_id ;//+ "https://imgur.com/a/GUN203X"
 		InviteProjectVo inviteProjectVo = new InviteProjectVo();
 		PMemberVo pMemberVo = new PMemberVo();
 		String project_title = "";
@@ -75,8 +96,31 @@ public class MemberController {
 			e.printStackTrace();
 		}
 		ProjectVo projectVo = projectService.selectProject(project_id);
-		project_title = URLEncoder.encode(projectVo.getProject_title(),"UTF-8");
-		return "redirect:/subMain?project_id=" + project_id + "&project_title=" + project_title;
+		 /* 프로젝트 객체  */
+		model.addAttribute("projectVo", projectVo);
+
+		/* 프로젝트에 포함된 멤버 정보 */
+		model.addAttribute("projectMemberList", memberService.projectMemberList(project_id));
+
+		/* 업무 출력 */
+		model.addAttribute("workList",workService.selectWorks(project_id));
+
+		/* 업무에 달린 댓글 출력 */
+		model.addAttribute("cmtList", commentsService.cmtList(project_id));
+
+		/* 업무 카드 출력 */
+		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
+
+		Map<String, String> mtMap = new HashMap<>();
+		mtMap.put("project_id", project_id);
+		model.addAttribute("workCharts",workService.workChart(mtMap));
+		/* 변찬우(추가 2018.12.26) 프로젝트 목록 출력 */
+		List<MeetingVo> meetingList= meetingService.meetingList(project_id);
+		model.addAttribute("meetingList",meetingList );
+
+		model.addAttribute("member_name",memberService.selectUser(project_id) );
+
+		return "main/subMain";
 	}
 
 }
