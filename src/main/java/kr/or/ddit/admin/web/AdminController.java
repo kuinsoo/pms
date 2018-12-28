@@ -48,6 +48,18 @@ public class AdminController {
 	}
 	
 	/**
+	 * Method : adminGuideView
+	 * 작성자 : iks
+	 * 변경이력 :
+	 *
+	 * @return Method 설명 : 관리자 가이드 VIEW
+	 */
+	@RequestMapping(value="/adminGuide")
+	public String adminGuideView() {
+		return "admin/adminGuide";
+	}
+	
+	/**
 	 * Method : adminCreateView
 	 * 작성자 : iks
 	 * 변경이력 :
@@ -60,7 +72,51 @@ public class AdminController {
 	}
 	
 	/**
-	* Method : noticeList
+	 * Method : adminGuideCreateView
+	 * 작성자 : iks
+	 * 변경이력 :
+	 *
+	 * @return Method 설명 : 관리자 가이드 작성 VIEW
+	 */
+	@RequestMapping(value="/adminGuideCreate")
+	public String adminGuideCreateView() {
+		return "admin/adminGuideCreate";
+	}
+	
+	/**
+	 * Method : adminUpdateView
+	 * 작성자 : iks
+	 * 변경이력 :
+	 *
+	 * @return Method 설명 : 관리자 공지사항 수정 VIEW
+	 */
+	@RequestMapping(value="/adminUpdateView", method={RequestMethod.POST, RequestMethod.GET})
+	public String adminUpdateView(String post_id, Model model) {
+		
+		PostVo postVo = postService.selectAdmin(post_id);
+		model.addAttribute("postVo", postVo);
+		
+		return "admin/adminUpdate";
+	}
+	
+	/**
+	 * Method : adminGuideUpdateView
+	 * 작성자 : iks
+	 * 변경이력 :
+	 *
+	 * @return Method 설명 : 관리자 가이드 수정 VIEW
+	 */
+	@RequestMapping(value="/adminGuideUpdateView", method={RequestMethod.POST, RequestMethod.GET})
+	public String adminGuideUpdateView(String post_id, Model model) {
+		
+		PostVo postVo = postService.selectAdminGuide(post_id);
+		model.addAttribute("postVo", postVo);
+		
+		return "admin/adminGuideUpdate";
+	}
+	
+	/**
+	* Method : adminList
 	* 작성자 : iks
 	* 변경이력 :
 	* @param map
@@ -85,6 +141,14 @@ public class AdminController {
 		return "admin/adminList";
 	}
 	
+	/**
+	* Method : adminPaging
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 게시글 페이징
+	*/
 	@RequestMapping(value="/adminPaging", method={RequestMethod.POST, RequestMethod.GET})
 	public String adminPaging(Model model, PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo) {
 		
@@ -101,5 +165,163 @@ public class AdminController {
 		model.addAttribute("adminMap", adminMap);
 		
 		return "admin/adminPaging";
+	}
+	
+	/**
+	* Method : adminGuideList
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 가이드 게시글 리스트 조회
+	*/
+	@RequestMapping(value="/adminGuideList", method= {RequestMethod.POST, RequestMethod.GET})
+	public String adminGuideList(Model model, PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+
+		List<PostVo> adminGuideList = postService.getPostPageListGuide(pageVo);
+		
+		Map<String, Object> adminMapGuide = new HashMap<>();
+		int pageCnt = postService.totalPostCntGuide();
+		
+		adminMapGuide.put("adminGuideList", adminGuideList);
+		adminMapGuide.put("pageCntGuide", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		model.addAttribute("adminMapGuide", adminMapGuide);
+		
+		return "admin/adminGuideList";
+	}
+	
+	/**
+	* Method : adminGuidePaging
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 가이드 게시글 페이징
+	*/
+	@RequestMapping(value="/adminGuidePaging", method={RequestMethod.POST, RequestMethod.GET})
+	public String adminGuidePaging(Model model, PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo) {
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+
+		List<PostVo> adminGuideList = postService.getPostPageListGuide(pageVo);
+		
+		Map<String, Object> adminMapGuide = new HashMap<>();
+		int pageCnt = postService.totalPostCntGuide();
+		
+		adminMapGuide.put("adminGuideList", adminGuideList);
+		adminMapGuide.put("pageCntGuide", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		model.addAttribute("adminMapGuide", adminMapGuide);
+		
+		return "admin/adminGuidePaging";
+	}
+	
+	/**
+	* Method : adminInsert
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 게시글 등록
+	*/
+	@RequestMapping(value="/adminInsert", method={RequestMethod.POST, RequestMethod.GET})
+	public String adminInsert(PostVo postVo) {
+		
+		Map<String, Object> adminInsert = new HashMap<>();
+		
+		adminInsert.put("post_title", postVo.getPost_title());
+		adminInsert.put("post_content", postVo.getPost_content());
+		
+		postService.insertNotice(postVo);
+		
+		return "redirect:/admin";
+	}
+	
+	/**
+	* Method : adminUpdate
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 게시글 수정
+	*/
+	@RequestMapping(value="/adminUpdate", method={RequestMethod.POST, RequestMethod.GET})
+	public String adminUpdate(PostVo postVo) {
+		
+		postService.updateNotice(postVo);
+		
+		return "redirect:/admin";
+	}
+	
+	/**
+	* Method : adminDelete
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 게시글 삭제
+	*/
+	@RequestMapping(value="/adminDelete", method={RequestMethod.POST, RequestMethod.GET})
+	public String adminDelete(PostVo postVo) {
+		
+		postService.deleteAdmin(postVo.getPost_id());
+		
+		return "redirect:/admin";
+	}
+	
+	/**
+	* Method : adminGuideInsert
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 가이드 게시글 등록
+	*/
+	@RequestMapping(value="/adminInsertGuide", method={RequestMethod.POST, RequestMethod.GET})
+	public String adminGuideInsert(PostVo postVo) {
+		
+		Map<String, Object> adminInsertGuide = new HashMap<>();
+		
+		adminInsertGuide.put("post_title", postVo.getPost_title());
+		adminInsertGuide.put("post_content", postVo.getPost_content());
+		
+		postService.insertNoticeGuide(postVo);
+		
+		return "redirect:/adminGuide";
+	}
+	
+	/**
+	* Method : adminGuideUpdate
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 가이드 게시글 수정
+	*/
+	@RequestMapping(value="/adminUpdateGuide", method={RequestMethod.POST, RequestMethod.GET})
+	public String adminGuideUpdate(PostVo postVo) {
+		
+		postService.updateNoticeGuide(postVo);
+		
+		return "redirect:/adminGuide";
+	}
+	
+	/**
+	* Method : adminGuideDelete
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 가이드 게시글 삭제
+	*/
+	@RequestMapping(value="/adminDeleteGuide", method={RequestMethod.POST, RequestMethod.GET})
+	public String adminGuideDelete(PostVo postVo) {
+		
+		postService.deleteAdminGuide(postVo.getPost_id());
+		
+		return "redirect:/adminGuide";
 	}
 }

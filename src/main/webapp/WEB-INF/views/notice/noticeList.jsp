@@ -2,12 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-<c:forEach items="${adminMap.adminList}" var="admin">
+<c:forEach items="${noticeMap.noticeList}" var="notice">
 	<tr>
-		<td>${admin.labelrn}</td>
-		<td><a href="/adminUpdateView?post_id=${admin.post_id}">${admin.post_title}</a></td>
+		<td>${notice.labelrn}</td>
+		<td><a href="/noticeView?post_id=${notice.post_id}">${notice.post_title}</a></td>
 		<td>
-			<fmt:formatDate value="${admin.post_date}" pattern="yyyy-MM-dd" />
+			<fmt:formatDate value="${notice.post_date}" pattern="yyyy-MM-dd" />
 		</td>
 	</tr>
 </c:forEach>

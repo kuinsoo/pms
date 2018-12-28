@@ -1,9 +1,10 @@
 package kr.or.ddit.work.web;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import kr.or.ddit.card.service.CardServiceInf;
+import kr.or.ddit.comments.service.CommentsServiceInf;
+import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.work.model.WorkVo;
+import kr.or.ddit.work.service.WorkServiceInf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
-import kr.or.ddit.card.service.CardServiceInf;
-import kr.or.ddit.comments.service.CommentsServiceInf;
-import kr.or.ddit.member.model.MemberVo;
-import kr.or.ddit.todo.model.ToDoVo;
-import kr.or.ddit.work.model.WorkVo;
-import kr.or.ddit.work.service.WorkServiceInf;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * kr.or.ddit.work.web
@@ -88,8 +85,7 @@ public class WorkController {
 		Map<String, String> mtMap = new HashMap<>();
 		mtMap.put("project_id", project_id);
 		mtMap.put("work_id", work_id);
-		List<ToDoVo> wList = workService.workChart(mtMap);
-		model.addAttribute("workChart",workService.workChart(mtMap));
+		model.addAttribute("workCharts",workService.workChart(mtMap));
 		model.addAttribute("work",workVo);
 		return "work/ajaxWorkChart";
 	}

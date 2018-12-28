@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%-- left & header--%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 <style type="text/css">
@@ -15,15 +17,14 @@
 }
 .noticeContainerRight > table{width:100%;border-collapse:collapse;}
 .noticeContainerRight > table > thead > tr{border-top:3px solid #333;border-bottom:1px solid #333;}
-.noticeContainerRight > table > thead > tr > th{padding:20px 0px 20px 0px;font-size:17px;}
+.noticeContainerRight > table > thead > tr > th{padding:20px 0px 20px 0px;font-size:20px;}
 .noticeContainerRight > table > tbody > tr{border-bottom:1px solid #333;}
-.noticeContainerRight > table > tbody > tr > td{padding:20px 0px 20px 0px;font-size:17px;}
-.noticeContainerRight > table > tbody > tr > td:nth-child(odd){text-indent:10px;}
-.noticeContainerRight > table > tbody > tr > td:nth-child(odd) > a{color:#000;}
-.noticeContainerRight > table > tbody > tr > td:nth-child(odd):hover > a {
-	text-decoration:underline;font-weight:bold;
+.noticeContainerRight > table > tbody > tr > td{padding:20px 0px 20px 0px;font-size:20px;}
+.noticeContainerRight > table > tbody > tr > td:first-child,
+.noticeContainerRight > table > tbody > tr > td:last-child{text-align:center;}
+.noticeContainerRight > table > tbody > tr > td:nth-child(2):hover > a {
+	text-decoration:underline;font-weight:bold;text-align:left;text-indent:50px;
 }
-.noticeContainerRight > table > tbody > tr > td:nth-child(even){text-align:center;color:#666;}
 .pagination{width:100%;display:flex;justify-content:center;align-items:center;margin-top:30px;}
 .pagination > ul > li{display:inline-block;}
 .pagination > ul > li > i {
@@ -51,72 +52,21 @@
 			</div>
 			<div class="noticeContainerRight">
 				<table>
-					<colgroup width="80%" />
+					<colgroup width="10%" />
+					<colgroup width="70%" />
 					<colgroup width="20%" />
 					<thead>
 						<tr>
+							<th>번호</th>
 							<th>내용</th>
 							<th>등록일</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
-						<tr>
-							<td><a href="#">CURRENT HOMEPAGE OPEN</a></td>
-							<td>2018-12-13</td>
-						</tr>
+					<tbody id="guideList">
 					</tbody>
 				</table>
 				<div class="pagination">
-					<ul>
-						<li><i class="icon-arrow-left"></i></li>
-						<li><a href="#"><span>1</span></a></li>
-						<li><a href="#"><span>2</span></a></li>
-						<li><a href="#"><span>3</span></a></li>
-						<li><a href="#"><span>4</span></a></li>
-						<li><a href="#"><span>5</span></a></li>
-						<li><a href="#"><span>6</span></a></li>
-						<li><a href="#"><span>7</span></a></li>
-						<li><a href="#"><span>8</span></a></li>
-						<li><a href="#"><span>9</span></a></li>
-						<li><a href="#"><span>10</span></a></li>
-						<li><i class="icon-arrow-right"></i></li>
-					</ul>
+					<ul id="guidePaging"></ul>
 				</div>
 				<div class="noticeSearchDiv">
 					<input type="text" class="noticeSearchInput" />
@@ -288,6 +238,44 @@ $(function(){
 
 // 알람 탭 메뉴
 $("#tabs").tabs();
+
+
+
+// 가이드 게시글 조회
+guideList(1);
+function guideList(page){
+	var pageSize = 10;
+	$.ajax({
+		method: "POST",
+		url: "/guideList",
+		data: {"page": page, "pageSize": pageSize},
+		success: function(data){
+			$("#guideList").html("");
+			$("#guideList").html(data);
+		},
+		error: function(data){
+			console.log("list-error : " + data);
+		}
+	});
+};
+
+// 가이드 게시글 페이징
+guidePaging(1);
+function guidePaging(page){
+	var pageSize = 10;
+	$.ajax({
+		method: "POST",
+		url: "/guidePaging",
+		data: {"page": page, "pageSize": pageSize},
+		success: function(data){
+			$("#guidePaging").html("");
+			$("#guidePaging").html(data);
+		},
+		error: function(data){
+			console.log("list-error : " + data);
+		}
+	});
+};
 </script>
 </body>
 </html>

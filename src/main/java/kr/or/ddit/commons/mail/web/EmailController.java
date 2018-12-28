@@ -31,5 +31,11 @@ public class EmailController {
 	}
 
 
+	@RequestMapping(value = "/testtest")
+	public String testtest() {
+
+		return "test/sendMail";
+	}
+
 
 }

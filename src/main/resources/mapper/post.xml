@@ -226,15 +226,16 @@
 		                        SELECT  ROWNUM labelrn,
 		                                A.*
 		                        FROM    (
-		                                SELECT POST_TITLE, POST_CONTENT, POST_DATE
+		                                SELECT POST_TITLE, POST_CONTENT, POST_DATE, POST_ID
 		                                FROM POST
 		                                WHERE BOARD_ID = '1'
+		                                ORDER BY TO_NUMBER(POST_ID)
 		                                ) A
 		                        ) a
 		                order by labelrn desc
 		                ) a
 		        ) B
-		WHERE   rnum BETWEEN #{page} * #{pageSize} - (#{pageSize} - #{page}) AND #{page} * #{pageSize}
+		WHERE   rnum BETWEEN #{page} * #{pageSize} - (#{pageSize} - 1) AND #{page} * #{pageSize}
 		ORDER BY rnum
     </select>
     
@@ -246,6 +247,76 @@
     
     <!-- 공지사항 등록 2018-12-27 임규승 -->
     <insert id="insertNotice" parameterType="postVo">
-    	INSERT INTO POST VALUES(NOTICENO_SEQ.NEXTVAL, '1', '', 'admin@admin.com', '', #{post_title}, #{post_content}, 'n', '', sysdate)
+    	INSERT INTO POST VALUES(NOTICENO_SEQ.NEXTVAL, '1', '', 'admin@admin.com', '', #{post_title}, #{post_content}, 'N', '', sysdate)
     </insert>
+    
+    <!-- 공지사항 수정 2018-12-28 임규승 -->
+    <update id="updateNotice" parameterType="postVo">
+    	UPDATE  POST
+		SET     POST_TITLE = #{post_title}, POST_CONTENT = #{post_content}
+		WHERE   POST_ID = #{post_id}
+    </update>
+    
+    <!-- 공지사항 상세조회 2018-12-28 임규승 -->
+    <select id="selectAdmin" resultType="postVo" parameterType="String">
+    	SELECT * FROM POST WHERE POST_ID = #{post_id}
+    </select>
+    
+    <!-- 공지사항 삭제 2018-12-28 임규승 -->
+    <delete id="deleteAdmin" parameterType="String">
+    	DELETE FROM POST WHERE POST_ID = #{post_id}
+    </delete>
+    
+    <!-- 가이드 게시글 페이징 조회 2018-12-28 임규승 -->
+    <select id="getPostPageListGuide" resultType="postVo" parameterType="map">
+    	SELECT  *
+		FROM    (
+		        select  rownum rnum,
+		                a.*
+		        from    (
+		                select  a.*
+		                from    (
+		                        SELECT  ROWNUM labelrn,
+		                                A.*
+		                        FROM    (
+		                                SELECT POST_TITLE, POST_CONTENT, POST_DATE, POST_ID
+		                                FROM POST
+		                                WHERE BOARD_ID = '2'
+		                                ORDER BY TO_NUMBER(POST_ID)
+		                                ) A
+		                        ) a
+		                order by labelrn desc
+		                ) a
+		        ) B
+		WHERE   rnum BETWEEN #{page} * #{pageSize} - (#{pageSize} - 1) AND #{page} * #{pageSize}
+		ORDER BY rnum
+    </select>
+    
+    <!-- 가이드 총 게시글 갯수 2018-12-28 임규승 -->
+    <select id="totalPostCntGuide" resultType="int">
+    	SELECT	COUNT(*) FROM POST
+    	WHERE	BOARD_ID = '2'
+    </select>
+    
+    <!-- 가이드 등록 2018-12-28 임규승 -->
+    <insert id="insertNoticeGuide" parameterType="postVo">
+    	INSERT INTO POST VALUES(NOTICENO_SEQ.NEXTVAL, '2', '', 'admin@admin.com', '', #{post_title}, #{post_content}, 'N', '', sysdate)
+    </insert>
+    
+    <!-- 가이드 수정 2018-12-28 임규승 -->
+    <update id="updateNoticeGuide" parameterType="postVo">
+    	UPDATE  POST
+		SET     POST_TITLE = #{post_title}, POST_CONTENT = #{post_content}
+		WHERE   POST_ID = #{post_id}
+    </update>
+    
+    <!-- 가이드 상세조회 2018-12-28 임규승 -->
+    <select id="selectAdminGuide" resultType="postVo" parameterType="String">
+    	SELECT * FROM POST WHERE POST_ID = #{post_id}
+    </select>
+    
+    <!-- 가이드 삭제 2018-12-28 임규승 -->
+    <delete id="deleteAdminGuide" parameterType="String">
+    	DELETE FROM POST WHERE POST_ID = #{post_id}
+    </delete>
 </mapper>

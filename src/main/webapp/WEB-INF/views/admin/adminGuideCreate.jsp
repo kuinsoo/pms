@@ -111,19 +111,19 @@ ul{list-style-type:none;}
 		<div class="adminLeftMenuTitle">
 			<i class="icon-settings icons"></i>
 			<br>
-			<p>공지사항</p>
+			<p>가이드</p>
 		</div>
 	</div>
 	<div class="adminRightContent">
 		<div class="adminRightContentTop">
-			<p>CURRENT ADMIN > 공지사항</p>
+			<p>CURRENT ADMIN > 가이드</p>
 		</div>
 		<div class="adminRightContentInner">
-			<h2>공지사항 정보 관리<span>공지사항 정보를 입력하실 수 있습니다.</span></h2>
-			<form action="/adminInsert" method="post" id="adminInsert">
+			<h2>가이드 정보 관리<span>가이드 정보를 입력하실 수 있습니다.</span></h2>
+			<form action="/adminInsertGuide" method="post" id="adminInsertGuide">
 				<div class="adminTitleInputContent">
 					<input type="hidden" name="member_mail" value="${memberVo.member_mail}" />
-					<input type="hidden" name="board_id" value="1" />
+					<input type="hidden" name="board_id" value="2" />
 					<table>
 						<colgroup width="10%" />
 						<colgroup width="90%" />
@@ -140,7 +140,7 @@ ul{list-style-type:none;}
 					</table>
 				</div>
 				<div class="adminCreateBtns">
-					<a href="/admin" class="adminCreateList">목록</a>
+					<a href="/adminGuide" class="adminCreateList">목록</a>
 					<button type="submit" class="adminCreateBtn">등록</button>
 				</div>
 			</form>

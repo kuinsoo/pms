@@ -80,7 +80,6 @@ public class MainController {
 	public String favorites(Model model,@SessionAttribute("memberVo")MemberVo memberVo) {
 
 		model.addAttribute("pMemberList", projectService.bookMarkProjects(memberVo.getMember_mail()));
-		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
 		return "main/favoriteMain";
 	}
 }

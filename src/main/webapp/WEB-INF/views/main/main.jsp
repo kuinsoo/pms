@@ -158,9 +158,9 @@
 		isDim ? $('.dim-layer').fadeIn() : $el.fadeIn();
 
 		var $elWidth = ~~($el.outerWidth()),
-			$elHeight = ~~($el.outerHeight()),
-			docWidth = $(document).width(),
-			docHeight = $(document).height();
+				$elHeight = ~~($el.outerHeight()),
+				docWidth = $(document).width(),
+				docHeight = $(document).height();
 
 		// 화면의 중앙에 레이어를 띄운다.
 		if ($elHeight < docHeight || $elWidth < docWidth) {
@@ -195,9 +195,9 @@
 		isDims ? $('.dim-layers').fadeIn() : $els.fadeIn();
 
 		var $elWidths = ~~($els.outerWidth()),
-			$elHeights = ~~($els.outerHeight()),
-			docWidths = $(document).width(),
-			docHeights = $(document).height();
+				$elHeights = ~~($els.outerHeight()),
+				docWidths = $(document).width(),
+				docHeights = $(document).height();
 
 		// 화면의 중앙에 레이어를 띄운다.
 		if ($elHeights < docHeights || $elWidths < docWidths) {
@@ -221,8 +221,8 @@
 	}
 
 	var menuLeft = document.getElementById('cbp-spmenu-s1'),
-		showLeftPush = document.getElementById('showLeftPush'),
-		body = document.body;
+			showLeftPush = document.getElementById('showLeftPush'),
+			body = document.body;
 
 	$("#showLeftPush").click(function(){
 		classie.toggle( this, 'active' );
@@ -232,8 +232,8 @@
 
 	function dialog(){
 		var dialogBox = $('.dialog'),
-			dialogTrigger = $('.dialog__trigger'),
-			dialogAction = $('.dialog__action');
+				dialogTrigger = $('.dialog__trigger'),
+				dialogAction = $('.dialog__action');
 
 		// Open the dialog
 		dialogTrigger.on('click', function(e){
@@ -264,8 +264,8 @@
 
 	function dialogs(){
 		var dialogBoxs = $('.dialogs'),
-			dialogTriggers = $('.dialog__triggers'),
-			dialogActions = $('.dialog__actions');
+				dialogTriggers = $('.dialog__triggers'),
+				dialogActions = $('.dialog__actions');
 
 		// Open the dialog
 		dialogTriggers.on('click', function(e){
@@ -340,15 +340,19 @@
 
 	/* 프로젝트 삭제 */
 	function projectDelete(project_id) {
-		$.ajax({
-			type: "GET",
-			url:"/deleteProject",
-			data : {'project_id':project_id},
-			success: function(data) {
-				$('.inviteProject').html("");
-				$('.inviteProject').html(data);
-			}
-		});
+		if(confirm("정말 삭제를 진행 하시겠습니까? (데이터 복구 불가능)") == true) {
+			$.ajax({
+				type: "GET",
+				url:"/deleteProject",
+				data : {'project_id':project_id},
+				success: function(data) {
+					$('.bookmarkProject').html("");
+					$('.bookmarkProject').html(data);
+				}
+			});
+		}else {
+			return;
+		}
 	}
 
 	// book mark

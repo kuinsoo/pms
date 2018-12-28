@@ -150,7 +150,8 @@ public class ProjectController {
 		}
 
 		model.addAttribute("pMemberList",memberService.selectMainView(memberVo.getMember_mail()));
-		return "project/ajaxProjectList";
+		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
+		return "project/ajaxMainProjectList";
 	}
 
 
@@ -185,6 +186,9 @@ public class ProjectController {
 		/* 업무 카드 출력 */
 		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
 
+		Map<String, String> mtMap = new HashMap<>();
+		mtMap.put("project_id", project_id);
+		model.addAttribute("workCharts",workService.workChart(mtMap));
 		/* 변찬우(추가 2018.12.26) 프로젝트 목록 출력 */
 		List<MeetingVo> meetingList= meetingService.meetingList(project_id);
 		model.addAttribute("meetingList",meetingList );
@@ -253,7 +257,7 @@ public class ProjectController {
 		}
 		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
-		return "main/main";
+		return "project/ajaxMainProjectList";
 	}
 
 
@@ -268,6 +272,21 @@ public class ProjectController {
 	public String ajaxMainProjectList(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 
 		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
+		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
+		return "project/ajaxMainProjectList";
+	}
+
+	/**
+	 * Ajax main project list string.
+	 *
+	 * @param model    the model
+	 * @param memberVo the member vo
+	 * @return the string
+	 */
+	@RequestMapping(value = "/ajaxBookMarkMainProjectList", method = RequestMethod.GET)
+	public String ajaxBookMarkMainProjectList(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
+
+		model.addAttribute("pMemberList", projectService.bookMarkProjects(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
 		return "project/ajaxMainProjectList";
 	}

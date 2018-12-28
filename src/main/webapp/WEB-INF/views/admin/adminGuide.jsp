@@ -108,15 +108,15 @@ ul{list-style-type:none;}
 		<div class="adminLeftMenuTitle">
 			<i class="icon-settings icons"></i>
 			<br>
-			<p>공지사항</p>
+			<p>가이드</p>
 		</div>
 	</div>
 	<div class="adminRightContent">
 		<div class="adminRightContentTop">
-			<p>CURRENT ADMIN <i class="icon-arrow-right icons"></i> 공지사항</p>
+			<p>CURRENT ADMIN <i class="icon-arrow-right icons"></i> 가이드</p>
 		</div>
 		<div class="adminRightContentInner">
-			<h2>공지사항 관리<span>공지사항 정보를 관리할 수 있습니다.</span></h2>
+			<h2>가이드 관리<span>가이드 정보를 관리할 수 있습니다.</span></h2>
 			<table>
 				<colgroup width="10%" />
 				<colgroup width="70%" />
@@ -151,17 +151,17 @@ ul{list-style-type:none;}
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
 function adminCreateView(){
-	window.location.href='/adminCreate';
+	window.location.href='/adminGuideCreate';
 }
 
 
-// 게시글 조회
-adminList(1);
-function adminList(page){
+// 가이드 게시글 조회
+adminGuideList(1);
+function adminGuideList(page){
 	var pageSize = 10;
 	$.ajax({
 		method: "POST",
-		url: "/adminList",
+		url: "/adminGuideList",
 		data: {"page": page, "pageSize": pageSize},
 		success: function(data){
 			$("#adminList").html("");
@@ -173,13 +173,13 @@ function adminList(page){
 	});
 };
 
-//게시글 페이징
-adminPaging(1);
-function adminPaging(page){
+// 가이드 게시글 페이징
+adminGuidePaging(1);
+function adminGuidePaging(page){
 	var pageSize = 10;
 	$.ajax({
 		method: "POST",
-		url: "/adminPaging",
+		url: "/adminGuidePaging",
 		data: {"page": page, "pageSize": pageSize},
 		success: function(data){
 			$("#adminPaging").html("");
