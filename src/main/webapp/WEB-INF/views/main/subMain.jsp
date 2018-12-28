@@ -114,7 +114,51 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
+
 <script>
+$(function(){
+	
+	$('#meetingListAjax').on('click', '.saveDocFile', function(){
+		var title =$(this).parents('.myPInfo').prev().find('.meeting_title').html();
+		var date =$(this).parents('.myPInfo').prev().find('.format_meeting_sdate').html();
+		
+		var textToSave =$(this).parents('.btnP').find('.saveDoc').html();
+		//console.log($(this).parents('.btnP').find('.btnC').html());
+		
+		var textToSaveAsBlob = new Blob([textToSave], {type:"text/html"});
+	    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+	    var fileNameToSaveAs = title+"_회의록_"+date;
+
+	    var downloadLink = document.createElement("a");
+	    downloadLink.download = fileNameToSaveAs;
+	    downloadLink.innerHTML = "Download File";
+	    downloadLink.href = textToSaveAsURL;
+	    downloadLink.style.display = "none";
+	    document.body.appendChild(downloadLink);
+
+	    downloadLink.click();
+	});
+	$('#meetingListAjax').on('click', '.saveChatFile', function(){
+		var title =$(this).parents('.myPInfo').prev().find('.meeting_title').html();
+		var date =$(this).parents('.myPInfo').prev().find('.format_meeting_sdate').html();
+		
+		var textToSave =$(this).parents('.btnP').find('.saveChat').html();
+
+		var textToSaveAsBlob = new Blob([textToSave], {type:"text/html"});
+	    var textToSaveAsURL = window.URL.createObjectURL(textToSaveAsBlob);
+	    var fileNameToSaveAs = title+"_대화록_"+date;
+
+	    var downloadLink = document.createElement("a");
+	    downloadLink.download = fileNameToSaveAs;
+	    downloadLink.innerHTML = "Download File";
+	    downloadLink.href = textToSaveAsURL;
+	    downloadLink.style.display = "none";
+	    document.body.appendChild(downloadLink);
+
+	    downloadLink.click();
+	});
+});
+
 //회의목록 출력
 getMeetingListAjax();
 
@@ -488,6 +532,25 @@ function updateCard(no, group, index) {
 	// location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${projectVo.project_id}";
 };
 
+function workChart(work_id) {
+    var parm = "project_id=${projectVo.project_id}&work_id="+ work_id;
+    $.ajax({
+       type: "POST",
+       url:  "/ajaxWorkChart",
+        data: parm,
+        success: function (data) {
+            $('#workCharts').html("")
+            $('#workCharts').html(data)
+        }
+    });
+}
+//submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+// if (submenu.is(":visible")) {
+// submenu.slideUp();
+// } else {
+// submenu.slideDown();
+// }
+
 // 서브메인 탭 메뉴
 $(function() {
 	$('ul.subMaintab li').click(function() {
@@ -498,6 +561,16 @@ $(function() {
 		$('#' + activeTab).addClass('current');
 	})
 });
+
+/* to-do 등록시 초기화 */
+function todoReset(work_id) {
+	document.getElementById('todoInsert' + work_id).reset();
+
+	var date = new Date();
+    date.setHours(date.getHours() + 9);
+    document.getElementById('non_todo_sdate'+work_id).value = date.toISOString().slice(0, 16);
+}
+
 </script>
 </body>
 </html>

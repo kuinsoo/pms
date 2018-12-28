@@ -9,6 +9,7 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<div id="container${work.work_id}"></div>
 <script>
         Highcharts.ganttChart('container${work.work_id}', {
 
@@ -28,7 +29,7 @@
             yAxis: {
                 categories: [
                     <c:forEach items="${workChart}" var="wChart">
-                    '1', '2', '${wChart.toDoVo.todo_pmember}'
+                    '${wChart.todo_pmember}',
                     </c:forEach>,''
                 ]
             },
@@ -39,7 +40,8 @@
 
             series: [{
                 name: 'Project 1',
-                data: [{
+                data: [
+                    {
                     start: Date.UTC(2018, 11, 1),
                     end: Date.UTC(2018, 11, 2),
                     y: 0,

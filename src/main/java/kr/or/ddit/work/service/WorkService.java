@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.todo.model.ToDoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -132,7 +133,7 @@ public class WorkService implements WorkServiceInf{
 	 * @return
 	 */
 	@Override
-	public List<MemberVo> workChart(Map<String, String> mtMap) {
+	public List<ToDoVo> workChart(Map<String, String> mtMap) {
 		return workMapper.workChart(mtMap);
 	}
 }

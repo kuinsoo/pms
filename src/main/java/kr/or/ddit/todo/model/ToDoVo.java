@@ -38,10 +38,11 @@ public class ToDoVo {
 	
 	/* 기능단위 */
 	private String member_name;			//	참여자 이름
-	private String pmember_member;		//	참여자 이메일
+	private String todo_member;		//	참여자 이메일
 	private String member_profile;		//	참여자 프로필사진
 	private String issue_id;			//	이슈아이디
 	private String work_project;		//	참여중인 프로젝트 ID
+
 	
 	/* 기본생성자 */
 	public ToDoVo() {}
@@ -50,7 +51,7 @@ public class ToDoVo {
 	public ToDoVo(String todo_id, String todo_work, String todo_pmember, String todo_content, Date todo_sdate,
 			String format_todo_sdate, Date todo_edate, String format_todo_edate, Date todo_eedate,
 			String format_todo_eedate, String todo_complet, String todo_color, int rnum, String todo_issue, 
-			String member_name, String pmember_member, String member_profile, String issue_id, String work_project) {
+			String member_name, String todo_member, String member_profile, String issue_id, String work_project) {
 		super();
 		this.todo_id = todo_id;
 		this.todo_work = todo_work;
@@ -67,7 +68,7 @@ public class ToDoVo {
 		this.rnum = rnum;
 		this.todo_issue = todo_issue;
 		this.member_name = member_name;
-		this.pmember_member = pmember_member;
+		this.todo_member = todo_member;
 		this.member_profile = member_profile;
 		this.issue_id = issue_id;
 		this.work_project = work_project;
@@ -147,10 +148,10 @@ public class ToDoVo {
 		this.member_name = member_name;
 	}
 	public String getPmember_member() {
-		return pmember_member;
+		return todo_member;
 	}
 	public void setPmember_member(String pmember_member) {
-		this.pmember_member = pmember_member;
+		this.todo_member = pmember_member;
 	}
 	public String getMember_profile() {
 		return member_profile;
@@ -193,15 +194,30 @@ public class ToDoVo {
 	}
 
 	/* toString */
+
 	@Override
 	public String toString() {
-		return "ToDoVo [rnum=" + rnum + ", todo_id=" + todo_id + ", todo_work=" + todo_work + ", todo_pmember="
-				+ todo_pmember + ", todo_content=" + todo_content + ", todo_sdate=" + todo_sdate
-				+ ", format_todo_sdate=" + format_todo_sdate + ", todo_edate=" + todo_edate + ", format_todo_edate="
-				+ format_todo_edate + ", todo_eedate=" + todo_eedate + ", format_todo_eedate=" + format_todo_eedate
-				+ ", todo_complet=" + todo_complet + ", todo_color=" + todo_color + ", todo_issue=" + todo_issue
-				+ ", member_name=" + member_name + ", pmember_member=" + pmember_member + ", member_profile=" 
-				+ member_profile + ", issue_id=" + issue_id + ", work_project=" + work_project + "]";
+		return "ToDoVo{" +
+				"rnum=" + rnum +
+				", todo_id='" + todo_id + '\'' +
+				", todo_work='" + todo_work + '\'' +
+				", todo_pmember='" + todo_pmember + '\'' +
+				", todo_content='" + todo_content + '\'' +
+				", todo_sdate=" + todo_sdate +
+				", format_todo_sdate='" + format_todo_sdate + '\'' +
+				", todo_edate=" + todo_edate +
+				", format_todo_edate='" + format_todo_edate + '\'' +
+				", todo_eedate=" + todo_eedate +
+				", format_todo_eedate='" + format_todo_eedate + '\'' +
+				", todo_complet='" + todo_complet + '\'' +
+				", todo_color='" + todo_color + '\'' +
+				", todo_issue='" + todo_issue + '\'' +
+				", member_name='" + member_name + '\'' +
+				", pmember_member='" + todo_member + '\'' +
+				", member_profile='" + member_profile + '\'' +
+				", issue_id='" + issue_id + '\'' +
+				", work_project='" + work_project + '\'' +
+				", sdf=" + sdf +
+				'}';
 	}
-	
 }

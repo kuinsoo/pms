@@ -4,17 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.ddit.work.mapper.WorkMapper">
-	<resultMap id="tResultMap" type="todoVo">
-		<id property="pmember_member" column="pmember_member" />
-		<id property="todo_sdate" column="todo_sdate" />
-		<id property="todo_eedate" column="todo_eedate" />
-		<id property="todo_pmember" column="todo_pmember" />
-	</resultMap>
 
-	<resultMap id="mtResultMap" type="memberVo">
-		<id property="member_profile" column="member_profile" />
-		<collection property="toDoVo" resultMap="tResultMap" />
-	</resultMap>
 
 	<!-- 업무 전체 일정 -->
 	<select id="workAllSchedule" resultType="workVo" parameterType="scheduleVo">
@@ -101,8 +91,8 @@
 	</insert>
 
 
-	<select id="workChart" parameterType="Map" resultMap="mtResultMap">
-		select MP.MEMBER_PROFILE, T.TODO_MEMBER, T.TODO_PMEMBER, T.TODO_SDATE, T.TODO_EEDATE
+	<select id="workChart" parameterType="Map" resultType="todoVo">
+		select T.TODO_ID, MP.MEMBER_PROFILE, T.TODO_MEMBER, T.TODO_PMEMBER, T.TODO_SDATE, T.TODO_EEDATE
 			from todo T,work W, work_member WM,project_member PM , MEMBER M , (select MEMBER_MAIL, MEMBER_PROFILE from member) MP
 			where M.MEMBER_MAIL = PM.PMEMBER_MEMBER
 			and PM.PMEMBER_ID = WM.PMEMBER_ID
