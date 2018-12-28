@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.attachment.model.AttachmentVo;
+import kr.or.ddit.attachment.service.AttachmentServiceInf;
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.commons.util.KISA_SHA256;
@@ -57,6 +58,11 @@ public class MemberDetailController {
 
 	@Autowired
 	private CardServiceInf cardService;
+	
+	@Autowired
+	private AttachmentServiceInf attachmentService;
+	
+	
 
 	/**
 	 * Method : myPage
@@ -396,16 +402,11 @@ public class MemberDetailController {
 	@RequestMapping(value ="/searchFileListAjax", method = RequestMethod.POST)
 	public Map<String, Object> searchFileListAjax (Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo 
 			, HttpServletRequest request){
-		
 		pageVo.setMember_mail(memberVo.getMember_mail());
-		
 		// 검색 부분 
 		if (pageVo.getSearchFileList() == null) {
 			pageVo.setSearchFileList("");
 		}
-		
-		pageVo.setMember_mail(memberVo.getMember_mail());
-		
 		List<AttachmentVo> myFileList = memberservice.myFileList(pageVo);
 		
 		Map<String , Object> myFileListMap = new HashMap<>();
@@ -416,6 +417,36 @@ public class MemberDetailController {
 		
 		return myFileListMap;
 	}
+	
+	/*@ResponseBody
+	@RequestMapping(value ="/selectProjectFileListAjax", method = RequestMethod.POST)
+	public Map<String, Object> selectProjectFileListAjax (Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
+			HttpServletRequest request){
+		
+		String project_id = request.getParameter("project_id");
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		if(project_id == null) {
+			List<AttachmentVo> myFileList = memberservice.myFileList(pageVo);
+		}else {
+			pageVo.setProject_id(project_id);
+			List<AttachmentVo> myFileListProjectId = memberservice.myFileListProjectId(pageVo);
+		}
+		Map<String , Object> myFileListMap = new HashMap<>();
+		int pageCnt = memberservice.myFileListCnt(memberVo.getMember_mail());
+		
+		myFileListMap.put("myFileList", memberservice.myFileList(pageVo));
+		myFileListMap.put("myFileListProjectId",  memberservice.myFileListProjectId(pageVo));
+		myFileListMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myFileListMap;
+	}*/
+	
+	@RequestMapping(value ="/selectProjectFileAttachIdDownload", method = RequestMethod.GET)
+	public String selectProjectFileAttachNameAjax (Model model, @RequestParam("att_id")String att_id, @SessionAttribute("memberVo") MemberVo memberVo){
+			model.addAttribute("attVo",attachmentService.selectAtt(att_id));
+			return "attachment/download";
+		}
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

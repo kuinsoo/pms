@@ -15,32 +15,21 @@
 	width:875px;padding:20px;float:left;margin-left:20px;
 	background-color:#fff;border:1px solid #dee3eb;
 }
-.noticeContainerRight > table{width:100%;border-collapse:collapse;}
-.noticeContainerRight > table > thead > tr{border-top:3px solid #333;border-bottom:1px solid #333;}
-.noticeContainerRight > table > thead > tr > th{padding:20px 0px 20px 0px;font-size:20px;}
+.noticeContainerRight > table {
+	border-collapse:collapse;width:100%;
+}
+.noticeContainerRight > table > tbody > tr:first-child {
+	border-top:2px solid #333;
+}
 .noticeContainerRight > table > tbody > tr{border-bottom:1px solid #333;}
-.noticeContainerRight > table > tbody > tr > td{padding:20px 0px 20px 0px;font-size:20px;}
-.noticeContainerRight > table > tbody > tr > td:first-child,
-.noticeContainerRight > table > tbody > tr > td:last-child{text-align:center;}
-.noticeContainerRight > table > tbody > tr > td:nth-child(2):hover > a {
-	text-decoration:underline;font-weight:bold;text-align:left;text-indent:50px;
-}
-.pagination{width:100%;display:flex;justify-content:center;align-items:center;margin-top:30px;}
-.pagination > ul > li{display:inline-block;}
-.pagination > ul > li > i {
-	text-align:center;line-height:30px;cursor:pointer;font-size:15px;vertical-align:middle;
-	padding:0px 20px 0px 20px;
-}
-.pagination > ul > li > a{color:#000;}
-.pagination > ul > li > a > span{font-size:17px;padding:0px 10px 0px 10px;vertical-align:middle;}
-.noticeSearchDiv{width:425px;height:50px;margin:0 auto;margin-top:10px;}
-.noticeSearchDiv > .noticeSearchInput {
-	width:390px;border:none;border-bottom:1px solid #333;float:left;height:30px;
-	outline:none;font-size:17px;
-}
-.noticeSearchDiv > i {
-	float:left;font-size:20px;font-weight:bold;display:block;width:30px;height:27px;margin-top:3px;
-	border-bottom:1px solid #000;cursor:pointer;
+.noticeContainerRight > table > tbody > tr > td {padding:20px;font-size:17px;}
+.tdColor{background-color:#eaf2ff;}
+.textareaTd{width:100%;}
+
+.noticeListGo{width:100%;height:50px;margin-top:20px;}
+.noticeListGo > a {
+	float:right;width:80px;height:40px;background-color:#eaf2ff;text-align:center;
+	line-height:40px;border:1px solid #333;font-size:17px;
 }
 </style>
 <!-- CURRENT SECTION(MAIN) -->
@@ -52,25 +41,24 @@
 			</div>
 			<div class="noticeContainerRight">
 				<table>
-					<colgroup width="10%" />
-					<colgroup width="70%" />
-					<colgroup width="20%" />
-					<thead>
-						<tr>
-							<th>번호</th>
-							<th>내용</th>
-							<th>등록일</th>
-						</tr>
-					</thead>
-					<tbody id="noticeList">
-					</tbody>
+					<tr>
+						<td class="tdColor">제목</td>
+						<td>${postVo.post_title}</td>
+						<td class="tdColor">작성자</td>
+						<td>${postVo.post_writer}</td>
+					</tr>
+					<tr>
+						<td class="tdColor">등록일</td>
+						<td colspan="3"><fmt:formatDate value="${postVo.post_date}" pattern="yyyy-MM-dd" /></td>
+					</tr>
+					<tr>
+						<td colspan="4" class="textareaTd">
+							${postVo.post_content}
+						</td>
+					</tr>
 				</table>
-				<div class="pagination">
-					<ul id="noticePaging"></ul>
-				</div>
-				<div class="noticeSearchDiv">
-					<input type="text" class="noticeSearchInput" />
-					<i class="icon-magnifier icons"></i>
+				<div class="noticeListGo">
+					<a href="/notice">목록</a>
 				</div>
 			</div>
 		</div>
@@ -238,92 +226,6 @@ $(function(){
 
 // 알람 탭 메뉴
 $("#tabs").tabs();
-
-
-
-//게시글 조회
-noticeList(1);
-function noticeList(page){
-	var pageSize = 10;
-	$.ajax({
-		method: "POST",
-		url: "/noticeList",
-		data: {"page": page, "pageSize": pageSize},
-		success: function(data){
-			$("#noticeList").html("");
-			$("#noticeList").html(data);
-		},
-		error: function(data){
-			console.log("list-error : " + data);
-		}
-	});
-};
-
-//게시글 페이징
-noticePaging(1);
-function noticePaging(page){
-	var pageSize = 10;
-	$.ajax({
-		method: "POST",
-		url: "/noticePaging",
-		data: {"page": page, "pageSize": pageSize},
-		success: function(data){
-			$("#noticePaging").html("");
-			$("#noticePaging").html(data);
-		},
-		error: function(data){
-			console.log("list-error : " + data);
-		}
-	});
-};
-
-
-
-
-
-/*
-$(document).ready(function(){
-	noticeList(1);
-});
-*/
-
-// 공지사항 게시글 페이지 리스트 조회
-/*
-function noticeList(page){
-	var pageSize = 10;
-	
-	$.ajax({
-		type: "POST",
-		url : "/ajaxNotice",
-		data: {"page":page, "pageSize":pageSize},
-		success : function(data){
-			var html ="";
-			$.each(data.noticeList, function (idx,notice){
-				
-				html += "<tr>";
-				html += "	<td><a href='/noticeView'>"+ notice.post_title +"</a></td>";
-				html += "	<td>"+ notice.post_date +"</td>";
-				html += "</tr>";
-			});
-			
-			$("#noticeList").html("");
-			$("#noticeList").html(html);
-		
-			var i = 1;
-			var paging ="";
-				paging +="<li><a href='javascript:noticeList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
-				for(var i= 1; i<=data.pageCnt; i++) {
-					paging += "<li><a href='javascript:noticeList("+ i +");'>"+ i+ "</a></li>";
-				}
-					paging +="<li><a href='javascript:noticeList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
-			$(".paginationNotice").html(paging);
-		},
-		fail : function(xhr){
-			console.log(xhr);
-		}
-	});
-}
-*/
 </script>
 </body>
 </html>

@@ -50,52 +50,72 @@ public class PostController {
 	}
 	
 	/**
-	* Method : noticeList
+	* Method : adminList
 	* 작성자 : iks
 	* 변경이력 :
 	* @param map
 	* @return
-	* Method 설명 : 게시글 페이지 리스트 조회
+	* Method 설명 : 게시글 리스트 조회
 	*/
-	@RequestMapping(value="/noticeList", method=RequestMethod.GET)
+	@RequestMapping(value="/noticeList", method= {RequestMethod.POST, RequestMethod.GET})
 	public String noticeList(Model model, PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo){
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
-		
+
 		List<PostVo> noticeList = postService.getPostPageList(pageVo);
 		
-		Map<String, Object> postMap = new HashMap<>();
+		Map<String, Object> noticeMap = new HashMap<>();
 		int pageCnt = postService.totalPostCnt();
 		
-		postMap.put("noticeList", noticeList);
-		postMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		noticeMap.put("noticeList", noticeList);
+		noticeMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
-		model.addAttribute("noticeList", noticeList);
+		model.addAttribute("noticeMap", noticeMap);
 		
 		return "notice/noticeList";
 	}
 	
 	/**
-	* Method : ajaxNoticeList
+	* Method : adminPaging
 	* 작성자 : iks
 	* 변경이력 :
 	* @param map
 	* @return
-	* Method 설명 : 게시글 페이지 리스트 조회
+	* Method 설명 : 게시글 페이징
 	*/
-	@ResponseBody
-	@RequestMapping(value="/ajaxNotice", method=RequestMethod.POST)
-	public Map<String, Object> ajaxNoticeList(PageVo pageVo){
+	@RequestMapping(value="/noticePaging", method={RequestMethod.POST, RequestMethod.GET})
+	public String noticePaging(Model model, PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo) {
 		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+
 		List<PostVo> noticeList = postService.getPostPageList(pageVo);
 		
-		Map<String, Object> postMap = new HashMap<>();
+		Map<String, Object> noticeMap = new HashMap<>();
 		int pageCnt = postService.totalPostCnt();
 		
-		postMap.put("noticeList", noticeList);
-		postMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		noticeMap.put("noticeList", noticeList);
+		noticeMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
-		return postMap;
+		model.addAttribute("noticeMap", noticeMap);
+		
+		return "notice/noticePaging";
+	}
+	
+	/**
+	* Method : noticeViews
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 공지사항 게시글 상세조회
+	*/
+	@RequestMapping(value="/noticeView", method= {RequestMethod.POST, RequestMethod.GET})
+	public String noticeViews(String post_id, Model model) {
+		
+		PostVo postVo = postService.selectAdmin(post_id);
+		model.addAttribute("postVo", postVo);
+		
+		return "notice/noticeView";
 	}
 	
 	/**
@@ -104,47 +124,66 @@ public class PostController {
 	* 변경이력 :
 	* @param map
 	* @return
-	* Method 설명 : 가이드 게시글 페이지 리스트 조회
+	* Method 설명 : 가이드 게시글 리스트 조회
 	*/
-	@RequestMapping(value="/guideList", method=RequestMethod.GET)
+	@RequestMapping(value="/guideList", method= {RequestMethod.POST, RequestMethod.GET})
 	public String guideList(Model model, PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo){
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
-		
+
 		List<PostVo> guideList = postService.getPostPageListGuide(pageVo);
 		
-		Map<String, Object> postMapGuide = new HashMap<>();
+		Map<String, Object> guideMap = new HashMap<>();
 		int pageCnt = postService.totalPostCntGuide();
 		
-		postMapGuide.put("guideList", guideList);
-		postMapGuide.put("pageCntGuide", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		guideMap.put("guideList", guideList);
+		guideMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
-		model.addAttribute("guideList", guideList);
+		model.addAttribute("guideMap", guideMap);
 		
 		return "guide/guideList";
 	}
 	
 	/**
-	* Method : ajaxGuideList
+	* Method : guidePaging
 	* 작성자 : iks
 	* 변경이력 :
 	* @param map
 	* @return
-	* Method 설명 : 가이드 게시글 페이지 리스트 조회
+	* Method 설명 : 가이드 게시글 페이징
 	*/
-	@ResponseBody
-	@RequestMapping(value="/ajaxGuide", method=RequestMethod.POST)
-	public Map<String, Object> ajaxGuideList(PageVo pageVo){
+	@RequestMapping(value="/guidePaging", method={RequestMethod.POST, RequestMethod.GET})
+	public String guidePaging(Model model, PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo) {
 		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+
 		List<PostVo> guideList = postService.getPostPageListGuide(pageVo);
 		
-		Map<String, Object> postMapGuide = new HashMap<>();
+		Map<String, Object> guideMap = new HashMap<>();
 		int pageCnt = postService.totalPostCntGuide();
 		
-		postMapGuide.put("guideList", guideList);
-		postMapGuide.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		guideMap.put("guideList", guideList);
+		guideMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
-		return postMapGuide;
+		model.addAttribute("guideMap", guideMap);
+		
+		return "guide/guidePaging";
 	}
 	
+	/**
+	* Method : guideViews
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 가이드 게시글 상세조회
+	*/
+	@RequestMapping(value="/guideView", method= {RequestMethod.POST, RequestMethod.GET})
+	public String guideViews(String post_id, Model model) {
+		
+		PostVo postVo = postService.selectAdminGuide(post_id);
+		model.addAttribute("postVo", postVo);
+		
+		return "guide/guideView";
+	}
 }
