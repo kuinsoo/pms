@@ -532,6 +532,25 @@ function updateCard(no, group, index) {
 	// location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${projectVo.project_id}";
 };
 
+function workChart(work_id) {
+    var parm = "project_id=${projectVo.project_id}&work_id="+ work_id;
+    $.ajax({
+       type: "POST",
+       url:  "/ajaxWorkChart",
+        data: parm,
+        success: function (data) {
+            $('#workCharts').html("")
+            $('#workCharts').html(data)
+        }
+    });
+}
+//submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+// if (submenu.is(":visible")) {
+// submenu.slideUp();
+// } else {
+// submenu.slideDown();
+// }
+
 // 서브메인 탭 메뉴
 $(function() {
 	$('ul.subMaintab li').click(function() {
