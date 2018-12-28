@@ -3,7 +3,7 @@
 
 <script>
 $(document).ready(function(){
-	var project_id = $('#todo_project_id').val();
+	var project_id = ${projectVo.project_id};
 	var work_id = ${work.work_id};
 
 	//페이지 접속시 to-do list 조회(Ajax) ==문의: jerry==

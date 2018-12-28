@@ -91,6 +91,7 @@
 							<input type="hidden" name="todo_id" value="${todo.todo_id}">
 							<input type="hidden" id="issue_sdate${todo.todo_id}" name="issue_sdate" value="">
 							<input type="hidden" id="issue_edate${todo.todo_id}" name="issue_edate" value="">
+							<input type="hidden" id="work_project${todo.todo_id}" name="work_project" value="">
 						</form>
 						<br><hr><br>
 						<div>

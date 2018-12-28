@@ -498,6 +498,16 @@ $(function() {
 		$('#' + activeTab).addClass('current');
 	})
 });
+
+/* to-do 등록시 초기화 */
+function todoReset(work_id) {
+	document.getElementById('todoInsert' + work_id).reset();
+
+	var date = new Date();
+    date.setHours(date.getHours() + 9);
+    document.getElementById('non_todo_sdate'+work_id).value = date.toISOString().slice(0, 16);
+}
+
 </script>
 </body>
 </html>
