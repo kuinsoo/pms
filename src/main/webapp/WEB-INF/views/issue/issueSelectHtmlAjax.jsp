@@ -3,7 +3,7 @@
 
 <c:forEach items="${issueList}" var="issue">
 	<tr>
-		<td><input type="radio" id="issueUpdatePick${issue.todo_id}" name="issuePick" onclick="javascript:setIssueUpdate${issue.issue_work}(${issue.todo_id}, ${issue.issue_id});"></td>
+		<td><input type="radio" id="issueUpdatePick${issue.todo_id}" name="issuePick" onclick="setIssueUpdate${issue.issue_work}(${issue.todo_id}, ${issue.issue_id});"></td>
 		<td id="issue_title${issue.issue_id}">${issue.issue_title}</td>
 		<td id="issue_level${issue.issue_id}">${issue.issue_level}</td>
 		<td>${issue.issue_member}</td>

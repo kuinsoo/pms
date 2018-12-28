@@ -41,7 +41,6 @@
 										</ul>
 									</div>
 								</div>
-								<!-- p태그로 변경 시 틀이 깨짐 -->
 								<textarea readonly>${todo.todo_content}</textarea>
 							</form>
 						</div>
@@ -118,6 +117,8 @@
 									<!-- issueHelperHtmlAjax.jsp -->
 								</tbody>
 							</table>
+							<input type="hidden" id="delete_issue_id${todo.todo_id}" value="">
+							<input type="button" value="이슈삭제" class="insueUpdateBtn" onclick="deleteIssue(${todo.todo_id});"/>
 						</div>
 					</div>
 				</div>

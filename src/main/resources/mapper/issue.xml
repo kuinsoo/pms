@@ -59,6 +59,10 @@
 	<insert id="issueInsert" parameterType="issueVo">
 		INSERT INTO issue (issue_id, issue_work, issue_title, issue_level, issue_member, issue_sdate, issue_content, todo_id)
 		VALUES (issue_seq.NEXTVAL, #{issue_work}, #{issue_title}, #{issue_level}, #{issue_member}, #{issue_sdate}, #{issue_content}, #{todo_id})
+		<selectKey keyProperty="issue_id" resultType="String" order="AFTER">
+			SELECT  issue_seq.currval
+			FROM    dual
+		</selectKey>
 	</insert>
 	
 	<!-- 이슈등록시 이슈ID를 todo테이블의 todo_issue컬럼에 추가(수정) -->
@@ -92,6 +96,7 @@
 		FROM    issue sue INNER JOIN todo td
 		ON      sue.todo_id = td.todo_id
 		WHERE   td.todo_id = #{todo_id}
+		ORDER BY sue.issue_sdate
 	</select>
 	
 	<!-- 이슈 수정 -->
@@ -124,5 +129,20 @@
 		FROM    issue sue INNER JOIN todo td
 		ON      sue.todo_id = td.todo_id
 		WHERE   td.todo_id = #{todo_id}
+		ORDER BY sue.issue_edate DESC	
 	</select>
+	
+	<!-- 이슈 삭제시 제약조건 해제를 위한 UPDATE  -->
+	<update id="issueDeleteTodoIssue" parameterType="String">
+		UPDATE	todo
+		SET		todo_issue = ''
+		WHERE	todo_issue = #{issue_id}
+	</update>
+	
+	<!-- 무결성 제약조건 해제 후 이슈 삭제 -->
+	<delete id="issueDelete" parameterType="String">
+		DELETE FROM issue
+		WHERE	issue_id = #{issue_id}
+	</delete>
+	
 </mapper>

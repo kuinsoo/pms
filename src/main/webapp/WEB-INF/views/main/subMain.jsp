@@ -51,10 +51,9 @@
 								<thead>
 									<tr>
 										<th>no</th>
-										<th>회의제목</th>
+										<th>회의 제목</th>
+										<th>회의 개요</th>
 										<th>개설자</th>
-										<th>회의록</th>
-										<th>대화록</th>
 										<th>등록일</th>
 									</tr>
 								</thead>
@@ -114,71 +113,31 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
+
+
+
 <script>
 //회의목록 출력
+getMeetingListAjax();
+
+function getMeetingListAjax(){
 var project_id = ${projectVo.project_id};
-getMeetingListAjax(project_id);
-function getMeetingListAjax(project_id){
-	(function poll(){
+	//(function poll(){
 		$.ajax({
 		    url : '/meetingList',
-		    type : 'post',
-		    data : {"project_id" : project_id},
+		    type : 'POST',
+		    data : {"project_id":project_id},
 		    success : function (data) {
 				$('#meetingListAjax').html("");
 				$('#meetingListAjax').html(data);
 		    },
-		    error: function (data) {
-		    	location.href = "/";
-				// alert("error");
-			},
-		    timeout: 3000,
-		    complete: setTimeout(function(){ poll(); }, 6000)
-		 })
-	})();
+		      error: function (data) {
+		    }
+		   // timeout: 3000,
+		   // complete: setTimeout(function(){ poll(); }, 6000)
+		 });
+	//})();
 };
-
-
-//DIM POPUP - 회의 목록 
-$('#meetingListAjax').on('click', '.projectCreatePopUpb', function(){
-	var $hrefb = $(this).attr('href');
-	layer_popupb($hrefb);
-});
-
-function layer_popupb(elb){
-	var $elb = $(elb);        //레이어의 id를 $el 변수에 저장
-	var isDimb = $elb.prev().hasClass("dimBgb");   //dimmed 레이어를 감지하기 위한 boolean 변수
-	//console.log(isDimb);
-
-	isDimb ? $('.dim-layerb').fadeIn() : $elb.fadeIn();
-
-	var $elWidthb = ~~($elb.outerWidth()),
-		$elHeightb = ~~($elb.outerHeight()),
-		docWidthb = $(document).width(),
-		docHeightb = $(document).height();
-
-	// 화면의 중앙에 레이어를 띄운다.
-	if ($elHeightb < docHeightb || $elWidthb < docWidthb) {
-		$elb.css({
-			marginTop: -$elHeightb /2,
-			marginLeft: -$elWidthb /2
-		})
-	} else {
-		$elb.css({top: 0, left: 0});
-	}
-
-	$elb.find('a.btn-layerCloseb').click(function(){
-		isDimb ? $('.dim-layerb').fadeOut() : $elb.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
-		return false;
-	});
-
-	$('.layer .dimBgb').click(function(){
-		$('.dim-layerb').fadeOut();
-		return false;
-	});
-}
-
-
 
 
 
@@ -537,6 +496,17 @@ function updateCard(no, group, index) {
 
 	// location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${projectVo.project_id}";
 };
+
+function workChart(work_id) {
+    var parm = "project_id=${projectVo.project_id}&work_id="+ work_id;
+    $.ajax({
+       type: "POST",
+       url:  "/ajaxWorkChart",
+        data: parm,
+        success: function (data) {
+        }
+    });
+}
 //submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
 // if (submenu.is(":visible")) {
 // submenu.slideUp();

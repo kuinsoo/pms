@@ -1,5 +1,7 @@
 package kr.or.ddit.member.mapper;
 
+import kr.or.ddit.attachment.model.AttachmentVo;
+import kr.or.ddit.friendslist.model.FriendListVo;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberListVo;
 import kr.or.ddit.member.model.PMemberVo;
@@ -107,6 +109,17 @@ public interface MemberMapper {
 	 */
 	int selectProjectCnt(String member_mail);
 	
+	
+	
+	/**
+	 * Method : myFileListCnt
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 마이페이지 파일 건수 
+	 */
+	int myFileListCnt(String member_mail);
+	
 	/**
 	 * Method : totalEndProjectCnt
 	 * 작성자 : pc07
@@ -124,6 +137,15 @@ public interface MemberMapper {
 	 * Method 설명 : 참여중인 프로젝트  :  클릭했을때  
 	 */
 	ProjectVo selectProjectId(String project_title);
+	
+	/**
+	 * Method : selectProjectMember
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 회원의 프로젝트 가져오기 
+	 */
+	List<ProjectVo> selectProjectMember(String member_mail);
 	
 	/**
 	 * Method : selectTodoCnt
@@ -146,6 +168,17 @@ public interface MemberMapper {
 	 * Method 설명 : 마이페이지 참여중인 프로젝트 
 	 */
 	List<ProjectVo> myprojectselect(PageVo pageVo);
+	
+	/**
+	 * Method : myFileList
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo 
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 마이페이지 프로젝트 파일 
+	 */
+	List<AttachmentVo> myFileList(PageVo pageVo);
 	
 	
 	/**

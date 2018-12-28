@@ -59,7 +59,7 @@
 	</select>
 
     <insert id="createProject" parameterType="projectVo">
-        insert into PROJECT values (SEQ_PROJECT.nextval, #{project_title},#{project_overview}, #{project_sdate}, #{project_edate}, '' ,'#ab2af6','N')
+        insert into PROJECT values (SEQ_PROJECT.nextval, #{project_title},#{project_overview}, #{project_sdate}, '',#{project_eedate},'#ab2af6','N')
     </insert>
 
     <update id="deleteProject" parameterType="String">
