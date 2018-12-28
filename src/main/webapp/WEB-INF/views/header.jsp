@@ -173,6 +173,7 @@
 
 				<div class="updateHeader" style="float:right;">
 					<a href="/message" class="facing"><i class="icon-paper-plane icons"></i></a>
+	              
 	                <%@ include file="/WEB-INF/views/alarm/alarm.jsp" %>
 	                
 	                <!-- CURRENT USER -->
@@ -204,7 +205,28 @@
             </div>
         </div>
     </header>
-
+	<script>
+	// 폴링방법 
+		(function polls(){
+			$.ajax({
+				type: "GET",
+				url : "/messageAlram",
+				data : {"page":page, "pageSize":pageSize},
+				success: function(data){
+					console.log(msg_type);
+					console.log(data.msgReceiveList);
+					
+					$.each(data.msgReceiveList,function(idx,mm){
+						// 쪽지온거확인
+					 	if(mm.msg_type =="Y")
+						alert("쪽지가왔습니다.");
+					});
+				}, 
+			timeout: 3000,
+	    	complete: setTimeout(function(){ polls(); }, 6000)
+		})();
+	})	 
+	</script>
     <script>
 		$('#currentMain').on('click', function () {
 			location.href="/main";

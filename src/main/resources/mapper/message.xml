@@ -18,7 +18,7 @@
 	                        from  MESSAGE A, MESSAGE_MEMBER B
 	                        where A.MSG_ID = B.MSGMEMBER_MSG
 	                         and  B.MSG_RMEMBER= #{member_mail}
-	                         ORDER BY A.MSG_TYPE desc)a)
+	                        ORDER BY  decode(A.MSG_TYPE,'Y',0,'N',1,2) asc, A.MSG_TIME desc)a)
 	 		 where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
 	</select>
 	
