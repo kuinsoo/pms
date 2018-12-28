@@ -39,6 +39,11 @@ public class PostController {
 	@Autowired
 	private PostServiceInf postService;
 	
+	@RequestMapping(value="/notice")
+	public String noticeView() {
+		return "notice/notice";
+	}
+	
 	/**
 	* Method : noticeList
 	* 작성자 : iks
@@ -47,7 +52,7 @@ public class PostController {
 	* @return
 	* Method 설명 : 게시글 페이지 리스트 조회
 	*/
-	@RequestMapping(value="/notice", method=RequestMethod.GET)
+	@RequestMapping(value="/noticeList", method=RequestMethod.GET)
 	public String noticeList(Model model, PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo){
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
@@ -60,7 +65,9 @@ public class PostController {
 		postMap.put("noticeList", noticeList);
 		postMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
-		return "notice/notice";
+		model.addAttribute("noticeList", noticeList);
+		
+		return "notice/noticeList";
 	}
 	
 	/**
@@ -85,4 +92,6 @@ public class PostController {
 		
 		return postMap;
 	}
+	
+	
 }

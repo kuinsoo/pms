@@ -70,4 +70,13 @@ public interface PostServiceInf {
 	*/
 	int totalPostCnt();
 	
+	/**
+	* Method : insertNotice
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 게시글 등록
+	*/
+	int insertNotice(PostVo postVo);
 }

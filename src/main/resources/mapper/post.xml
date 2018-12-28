@@ -238,8 +238,14 @@
 		ORDER BY rnum
     </select>
     
+    <!-- 공지사항 총 게시글 갯수 -->
     <select id="totalPostCnt" resultType="int">
     	SELECT	COUNT(*) FROM POST
     	WHERE	BOARD_ID = '1'
     </select>
+    
+    <!-- 공지사항 등록 2018-12-27 임규승 -->
+    <insert id="insertNotice" parameterType="postVo">
+    	INSERT INTO POST VALUES(NOTICENO_SEQ.NEXTVAL, '1', '', 'admin@admin.com', '', #{post_title}, #{post_content}, 'n', '', sysdate)
+    </insert>
 </mapper>

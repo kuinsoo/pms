@@ -107,4 +107,17 @@ public class PostService implements PostServiceInf {
 	public int totalPostCnt() {
 		return postMapper.totalPostCnt();
 	}
+
+	/**
+	* Method : insertNotice
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 게시글 등록
+	*/
+	@Override
+	public int insertNotice(PostVo postVo) {
+		return postMapper.insertNotice(postVo);
+	}
 }

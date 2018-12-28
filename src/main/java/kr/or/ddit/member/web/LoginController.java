@@ -119,7 +119,19 @@ public class LoginController {
 			model.addAttribute("memberVo", memberVo);
 			model.addAttribute("loginResult", "false");
 			return "/login/login";
-			
+		} else if (member_mail.equals("admin@admin.com")) {
+			model.addAttribute("memberVo", memberVo);
+
+			/*<!--  변찬우(수정 2018.12.09):  쿠키생성 추가 for node page  -->*/
+			Cookie cookMember_mail = new Cookie("member_mail", memberVo.getMember_mail());
+			cookMember_mail.setMaxAge(60 * 60 * 24); // 기간은 하루로 지정
+			response.addCookie(cookMember_mail);
+
+			Cookie cookMember_name = new Cookie("member_name", memberVo.getMember_name());
+			cookMember_name.setMaxAge(60 * 60 * 24); // 기간은 하루로 지정
+			response.addCookie(cookMember_name);
+
+			return "redirect:/admin";
 		} else {
 			model.addAttribute("memberVo", memberVo);
 
@@ -343,6 +355,4 @@ public class LoginController {
 		// sign.jsp ajax로 보내준다.
 		return certificationNumber;
 	}
-	
-	
 }

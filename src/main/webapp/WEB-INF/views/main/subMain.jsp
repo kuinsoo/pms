@@ -8,18 +8,18 @@
 <section class="currentMain">
     <div class="currentMainContainer">
         <div class="currentMainContainerLeft">
-            <%-- report  --%>
-            <div id="tabSubMain"> <%-- tab에 hight가 민값만 정해있어 크기가 변경된다. 참고 --%>
-                <ul>
-                    <li><a href="#tabSubMain-1">업무 리포트</a></li>
-                    <li><a href="#tabSubMain-2">업무 카드</a></li>
-                    <li><a href="#tabSubMain-3">회의 리스트</a></li>
-                </ul>
-                <div id="tabSubMain-1" class="projectList">
-                    <%@ include file="/WEB-INF/views/main/report.jsp" %>
-                </div>
-                <div id="tabSubMain-2">
-                    <div class="projectTaskContainer">
+        	<div id="subMainTabMenu">
+				<ul class="subMaintab">
+					<li class="current" data-tab="subMaintab1"><a href="#">업무 리포트</a></li>
+					<li data-tab="subMaintab2"><a href="#">업무 카드</a></li>
+					<li data-tab="subMaintab3"><a href="#">회의 리스트</a></li>
+				</ul>
+				<div id="subMaintab1" class="tabcontent current">
+					<%@ include file="/WEB-INF/views/main/report.jsp" %>
+				</div>
+		
+				<div id="subMaintab2" class="tabcontent">
+					<div class="projectTaskContainer">
                         <div class="projectTaskContainerTitle">
                             <i class="far fa-sticky-note"></i><span>WORK CARD</span>
                         </div>
@@ -38,11 +38,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div id="tabSubMain-3" >
-                <%-- 회의 리스트를 넣어주시면 됩니다. !!--%>
-            </div>
+				</div>
+		
+				<div id="subMaintab3" class="tabcontent">
+					<%-- 회의 리스트 include --%>
+				</div>
+			</div>
+			
             <%-- 등록  --%>
             <%@ include file="/WEB-INF/views/main/projectWriter.jsp" %>
 
@@ -245,9 +247,6 @@ $("#tabs").tabs();
 // 서브 메인 작성 카드 리스트
 $("#tabss").tabs();
 
-// 알림 탭 메뉴
-$("#tabSubMain").tabs();
-
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
    type: 'pie',
@@ -427,7 +426,6 @@ function updateCmtAjax(cmt_id, work_id, project_id, cmt_content) {
 	});
 }
 
-/* */
 function updateCard(no, group, index) {
 
 	$.ajax({
@@ -443,14 +441,17 @@ function updateCard(no, group, index) {
 
 	// location.href = "/updateCard?wc_id="+no+"&wc_group="+group+"&wc_index="+index+"&project_id=${projectVo.project_id}";
 };
-//submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
-// if (submenu.is(":visible")) {
-// submenu.slideUp();
-// } else {
-// submenu.slideDown();
-// }
 
+// 서브메인 탭 메뉴
+$(function() {
+	$('ul.subMaintab li').click(function() {
+		var activeTab = $(this).attr('data-tab');
+		$('ul.subMaintab li').removeClass('current');
+		$('.tabcontent').removeClass('current');
+		$(this).addClass('current');
+		$('#' + activeTab).addClass('current');
+	})
+});
 </script>
-
 </body>
 </html>

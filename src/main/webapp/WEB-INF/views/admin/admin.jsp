@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -128,57 +129,7 @@ ul{list-style-type:none;}
 						<th>등록일</th>
 					</tr>
 				<thead>
-				<tbody>
-					<tr>
-						<td>10</td>
-						<td>제목</td>
-						<td>2018-12-24</td>
-					</tr>
-					<tr>
-						<td>9</td>
-						<td>제목</td>
-						<td>2018-12-24</td>
-					</tr>
-					<tr>
-						<td>8</td>
-						<td>제목</td>
-						<td>2018-12-24</td>
-					</tr>
-					<tr>
-						<td>7</td>
-						<td>제목</td>
-						<td>2018-12-24</td>
-					</tr>
-					<tr>
-						<td>6</td>
-						<td>제목</td>
-						<td>2018-12-24</td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td>제목</td>
-						<td>2018-12-24</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>제목</td>
-						<td>2018-12-24</td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td>제목</td>
-						<td>2018-12-24</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>제목</td>
-						<td>2018-12-24</td>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td>제목</td>
-						<td>2018-12-24</td>
-					</tr>
+				<tbody id="adminList">
 				</tbody>
 			</table>
 			<div class="adminPagination">
@@ -186,15 +137,7 @@ ul{list-style-type:none;}
 					<input type="button" value="삭제" class="adminDelete" />
 					<input type="button" value="글쓰기" class="adminCreate" onclick="adminCreateView();" />
 				</div>
-				<ul>
-					<li><i class="icon-arrow-left icons"></i></li>
-					<li><a href="#">1</a></li>
-					<li><a href="#">2</a></li>
-					<li><a href="#">3</a></li>
-					<li><a href="#">4</a></li>
-					<li><a href="#">5</a></li>
-					<li><i class="icon-arrow-right icons"></i></li>
-				</ul>
+				<ul id="adminPaging"></ul>
 			</div>
 		</div>
 	</div>
@@ -206,10 +149,49 @@ ul{list-style-type:none;}
         Copyright 2018 <span>DDIT 203 Class, CURRENT</span> All rights reserved.
     </p>
 </div>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script>
 function adminCreateView(){
 	window.location.href='/adminCreate';
 }
+
+
+// 게시글 조회
+adminList(1);
+function adminList(page){
+	var pageSize = 10;
+	$.ajax({
+		method: "POST",
+		url: "/adminList",
+		data: {"page": page, "pageSize": pageSize},
+		success: function(data){
+			$("#adminList").html("");
+			$("#adminList").html(data);
+		},
+		error: function(data){
+			console.log("list-error : " + data);
+		}
+	});
+};
+
+//게시글 페이징
+adminPaging(1);
+function adminPaging(page){
+	var pageSize = 10;
+	$.ajax({
+		method: "POST",
+		url: "/adminPaging",
+		data: {"page": page, "pageSize": pageSize},
+		success: function(data){
+			$("#adminPaging").html("");
+			$("#adminPaging").html(data);
+		},
+		error: function(data){
+			console.log("list-error : " + data);
+			
+		}
+	});
+};
 </script>    
 </body>
 </html>
