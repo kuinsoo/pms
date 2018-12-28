@@ -1,7 +1,5 @@
 package kr.or.ddit.work.web;
 
-import com.sun.corba.se.spi.orbutil.threadpool.Work;
-import kr.or.ddit.card.model.CardVo;
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.member.model.MemberVo;
@@ -89,8 +87,7 @@ public class WorkController {
 		Map<String, String> mtMap = new HashMap<>();
 		mtMap.put("project_id", project_id);
 		mtMap.put("work_id", work_id);
-		List<ToDoVo> wList = workService.workChart(mtMap);
-		model.addAttribute("workChart",workService.workChart(mtMap));
+		model.addAttribute("workCharts",workService.workChart(mtMap));
 		model.addAttribute("work",workVo);
 		return "work/ajaxWorkChart";
 	}
