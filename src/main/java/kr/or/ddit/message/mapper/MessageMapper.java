@@ -18,6 +18,10 @@ import kr.or.ddit.util.model.PageVo;
  * @Date : 2018-11-27 / 오후 3:11
  * @Version :
  */
+/**
+ * @author pc07
+ *
+ */
 public interface MessageMapper {
 	/**
 	 * Method : messageReceived
@@ -40,6 +44,15 @@ public interface MessageMapper {
 	 */
 	List<FriendListVo> mySendFriendList (PageVo pageVo);
 	
+	/**
+	 * Method : memberListN
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friendVo
+	 * @return
+	 * Method 설명 : 버튼 처리 Y - N
+	 */
+	List<FriendListVo> memberListN(FriendListVo friendVo);
 	/**
 	 * Method : MyFriendsList
 	 * 작성자 : pc07
@@ -154,16 +167,6 @@ public interface MessageMapper {
 	
 	
 	/**
-	 * Method : insertFriendY
-	 * 작성자 : pc07
-	 * 변경이력 :
-	 * @param friendVo
-	 * @return
-	 * Method 설명 : 내가 받은 친구요청에서 수락을 눌렀을때 경우 1.업데이트가 되고 2. 생성을 한다
-	 */
-	int insertFriendY(FriendListVo friendVo);
-	
-	/**
 	 * Method : updateMessageReceived
 	 * 작성자 : pc07
 	 * 변경이력 :
@@ -173,13 +176,26 @@ public interface MessageMapper {
 	 */
 	int updateMessageReceived(MessageVo msgVo);
 	
+	/******************************************************************
+	 * Method : insertFriendY
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friendVo
+	 * @return
+	 * Method 설명 : 내가 받은 친구요청에서 수락을 눌렀을때 경우 1.업데이트가 되고 2. 생성을 한다
+	 ******************************************************************
+	 */
+	int insertFriendY(FriendListVo friendVo);
+	
 	/**
+	 *******************************************************************
 	 * Method : updateAcceptFriend
 	 * 작성자 : pc07
 	 * 변경이력 :
 	 * @param friendVo
 	 * @return
 	 * Method 설명 : 내가 받은요청에서 수락 버튼을 클릭했을때
+	 * *****************************************************************
 	 */
 	int updateAcceptFriend(String friend_code);
 	

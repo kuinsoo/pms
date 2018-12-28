@@ -22,9 +22,21 @@ public class AttachmentVo {
 	private String att_extension;
 	private String att_path;
 	private byte[] att_file;
+	private int rnum;
 
 	public AttachmentVo() {
 	}
+	
+
+	public int getRnum() {
+		return rnum;
+	}
+
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
 
 	public AttachmentVo(String att_id, String att_work, String att_name, String att_extension, String att_path, byte[] att_file) {
 		this.att_id = att_id;
@@ -37,14 +49,9 @@ public class AttachmentVo {
 
 	@Override
 	public String toString() {
-		return "AttachmentVo{" +
-				"att_id='" + att_id + '\'' +
-				", att_work='" + att_work + '\'' +
-				", att_name='" + att_name + '\'' +
-				", att_extension='" + att_extension + '\'' +
-				", att_path='" + att_path + '\'' +
-				", att_file=" + Arrays.toString(att_file) +
-				'}';
+		return "AttachmentVo [att_id=" + att_id + ", att_work=" + att_work + ", att_name=" + att_name
+				+ ", att_extension=" + att_extension + ", att_path=" + att_path + ", att_file="
+				+ Arrays.toString(att_file) + ", rnum=" + rnum + "]";
 	}
 
 	public String getAtt_id() {

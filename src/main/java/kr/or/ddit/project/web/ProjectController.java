@@ -2,6 +2,8 @@ package kr.or.ddit.project.web;
 
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
+import kr.or.ddit.meeting.model.MeetingVo;
+import kr.or.ddit.meeting.service.MeetingServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
@@ -26,6 +28,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,6 +62,9 @@ public class ProjectController {
 	@Autowired
 	private CardServiceInf cardService;
 
+	@Autowired
+	private MeetingServiceInf meetingService;
+	
 	/**
 	 * Create project view string.
 	 *
@@ -160,7 +166,7 @@ public class ProjectController {
 	 * @throws UnsupportedEncodingException the unsupported encoding exception
 	 */
 	@RequestMapping(value = "/subMain", method = RequestMethod.POST )
-	public String subMain(Model model, @RequestParam("project_id")String project_id,
+	public String subMain(Model model, @RequestParam("project_id")String project_id, MeetingVo meetingVo,
 						  @SessionAttribute("memberVo")MemberVo memberVo, HttpServletResponse response) throws UnsupportedEncodingException {
 
 		ProjectVo projectVo =  projectService.selectProject(project_id);
@@ -179,6 +185,11 @@ public class ProjectController {
 		/* 업무 카드 출력 */
 		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
 
+		/* 변찬우(추가 2018.12.26) 프로젝트 목록 출력 */
+		List<MeetingVo> meetingList= meetingService.meetingList(project_id);
+		model.addAttribute("meetingList",meetingList );
+
+		model.addAttribute("member_name",memberService.selectUser(project_id) );
 
 		/*<!--  변찬우(수정 2018.12.11):  쿠키생성 추가 for node page  -->*/
 		Cookie cookProject_id= new Cookie("project_id",URLEncoder.encode(project_id, "UTF-8"));

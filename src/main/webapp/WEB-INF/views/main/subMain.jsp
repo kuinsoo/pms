@@ -41,7 +41,31 @@
 				</div>
 		
 				<div id="subMaintab3" class="tabcontent">
-					<%-- 회의 리스트 include --%>
+					<%-- 회의 리스트--%>
+					<div class="meetList">
+					    <div class="meetListTitles">
+					        <i class="far fa-newspaper"></i>
+					        <span>지난 회의목록</span>
+					    </div>
+					    <div class="meets">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>no</th>
+										<th>회의 제목</th>
+										<th>회의 개요</th>
+										<th>개설자</th>
+										<th>등록일</th>
+									</tr>
+								</thead>
+								<tbody id="meetingListAjax">
+									<tr>
+										<td colspan="6">아직 진행된 회의가 없습니다.  |  ${projectVo.project_id}</td>
+									</tr>
+								</tbody>
+							</table>
+					    </div>
+					</div>
 				</div>
 			</div>
 			
@@ -91,6 +115,28 @@
 <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
 <script>
+//회의목록 출력
+getMeetingListAjax();
+
+function getMeetingListAjax(){
+var project_id = ${projectVo.project_id};
+	//(function poll(){
+		$.ajax({
+		    url : '/meetingList',
+		    type : 'POST',
+		    data : {"project_id":project_id},
+		    success : function (data) {
+				$('#meetingListAjax').html("");
+				$('#meetingListAjax').html(data);
+		    },
+		      error: function (data) {
+		    }
+		   // timeout: 3000,
+		   // complete: setTimeout(function(){ poll(); }, 6000)
+		 });
+	//})();
+};
+
 // DIM POPUP - 팀원초대
 $('.projectCreatePopUps').click(function () {
    var $hrefs = $(this).attr('href');

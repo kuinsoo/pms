@@ -36,8 +36,8 @@
 
 <script>
 $(document).ready(function(){
-	workMemberList();
-	noticeMemberList();
+	//workMemberList();
+	//noticeMemberList();
 });
 
 function workMemberList(){

@@ -119,7 +119,7 @@ public class IssueController {
 			e.printStackTrace();
 		}
 		
-		List<IssueVo> issueList = issueService.issueSelectList(issueVo);
+		List<IssueVo> issueList = issueService.issueSelectList(issueVo.getTodo_id());
 		
 		model.addAttribute("issueList", issueList);
 		
@@ -137,10 +137,7 @@ public class IssueController {
 	*/
 	@RequestMapping(value="/issueSelectList", method= {RequestMethod.POST, RequestMethod.GET})
 	public String issueSelectList(@RequestParam("todo_id")String todo_id, Model model) {
-		IssueVo issueVo = new IssueVo();
-		issueVo.setTodo_id(todo_id);
-		
-		List<IssueVo> issueList = issueService.issueSelectList(issueVo);
+		List<IssueVo> issueList = issueService.issueSelectList(todo_id);
 		
 		model.addAttribute("issueList", issueList);
 		
@@ -169,35 +166,63 @@ public class IssueController {
 	* 작성자 : jerry
 	* 변경이력 :
 	* @param issueVo
-	* Method 설명 : 도움 등록
+	* Method 설명 : 이슈 도움 등록
 	*/
 	@RequestMapping(value="/helperUpdate", method= {RequestMethod.POST, RequestMethod.GET})
 	public String helperUpdate(IssueVo issueVo, Model model) {
-		List<IssueVo> issueList = new ArrayList<IssueVo>();
+		System.out.println("issueVo : " + issueVo);
+		
+		List<IssueVo> helperList = new ArrayList<IssueVo>();
 		try {
 			int result = issueService.helperUpdate(issueVo);
 			if(result != 0) {
-				issueList = issueService.issueSelectList(issueVo);
+				helperList = issueService.helperSelectList(issueVo.getTodo_id());
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		model.addAttribute("issueList", issueList);
+		model.addAttribute("helperList", helperList);
 		
 		return "issue/issueHelperHtmlAjax";
 	}
 	
+	/**
+	* Method : issueHelperList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_id
+	* @param model
+	* @return
+	* Method 설명 : 이슈 도움 조회
+	*/
 	@RequestMapping(value="/issueHelperList", method= {RequestMethod.POST, RequestMethod.GET})
 	public String issueHelperList(@RequestParam("todo_id")String todo_id, Model model) {
-		IssueVo issueVo = new IssueVo();
-		issueVo.setTodo_id(todo_id);
-		
-		List<IssueVo> helperList = issueService.issueSelectList(issueVo);
+		List<IssueVo> helperList = issueService.helperSelectList(todo_id);
 		
 		model.addAttribute("helperList", helperList);
 		
 		return "issue/issueHelperHtmlAjax";
+	}
+	
+	/**
+	* Method : issueDelete
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issue_id
+	* Method 설명 : TODO-ISSUE 무결성 제약조건 해제 후 ISSUE 삭제
+	*/
+	@RequestMapping(value="/issueDelete", method= {RequestMethod.POST, RequestMethod.GET})
+	@ResponseBody
+	public void issueDelete(@RequestParam("issue_id")String issue_id) {
+		try {
+			int result = issueService.issueDeleteTodoIssue(issue_id);
+			if(result != 0) {
+				issueService.issueDelete(issue_id);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**

@@ -1,5 +1,7 @@
+
 package kr.or.ddit.member.service;
 
+import kr.or.ddit.attachment.model.AttachmentVo;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberListVo;
 import kr.or.ddit.member.model.PMemberVo;
@@ -155,7 +157,35 @@ public interface MemberServiceInf {
 	 * Method 설명 : 마이페이지 (나의 일감 조회 부분)
 	 */
 	int selectTodoCnt(String member_mail);
+	/**
+	 * Method : myFileList
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo 
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 마이페이지 프로젝트 파일 
+	 */
+	List<AttachmentVo> myFileList(PageVo pageVo);
 	
+	/**
+	 * Method : selectProjectMember
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 회원의 프로젝트 가져오기 
+	 */
+	List<ProjectVo> selectProjectMember(String member_mail);
+	
+	
+	/**
+	 * Method : myFileListCnt
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 마이페이지 파일 건수 
+	 */
+	int myFileListCnt(String member_mail);
 	
 	/**
 	 * Method : updateUserwithDrawal

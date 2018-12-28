@@ -146,14 +146,20 @@ public class MessageController {
 	public Map<String, Object> youGiveNoAjax (@SessionAttribute("memberVo") MemberVo memberVo , FriendListVo friendVo,
 			PageVo pageVo, HttpServletRequest request){
 		
+		
 		pageVo.setMember_mail(memberVo.getMember_mail());
-		
 		friendVo.setFriend_myemail(memberVo.getMember_mail());
-		List<MemberVo> myMemberList = messageservice.totalMemberSearch(pageVo);
 		
+		String member_mail = request.getParameter("member_mail");
+		friendVo.setFriend_member(member_mail);
 		messageservice.insertFriendN(friendVo);
+
+		List<MemberVo> myMemberList = messageservice.totalMemberSearch(pageVo);
 		int pageCnt = messageservice.totalMember(memberVo.getMember_mail());
 		
+		//List<FriendListVo> memberListN = messageservice.memberListN(friendVo);
+		//myMemberMap.put("memberListN", memberListN);
+
 		Map<String, Object> myMemberMap = new HashMap<>();
 		myMemberMap.put("myMemberList", myMemberList);
 		myMemberMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
@@ -488,15 +494,18 @@ public class MessageController {
 	public Map<String, Object> youGiveYesAjax (@SessionAttribute("memberVo") MemberVo memberVo , FriendListVo friendVo,
 							PageVo pageVo, HttpServletRequest request){
 		
-		String friend_code = request.getParameter("friend_code");
+		String friend_myemail = request.getParameter("friend_myemail");
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		friendVo.setMember_name(memberVo.getMember_name());
+		friendVo.setFriend_myemail(memberVo.getMember_mail());
+		friendVo.setFriend_member(friend_myemail);
 		
 		List<FriendListVo> giveFriendList = messageservice.youGiveFriendList(pageVo);
 		
+		String friend_code = request.getParameter("friend_code");
 		messageservice.updateAcceptFriend(friend_code);
-		//messageservice.insertFriendY(friendVo);
+		messageservice.insertFriendY(friendVo);
 		
 		int pageCnt = messageservice.totalyouGiveFriendList(memberVo.getMember_mail());
 		
@@ -508,7 +517,7 @@ public class MessageController {
 	}
 	
 	
-	// 친구 수락 버튼을 클릭했을때 
+	// 친구 거절 버튼을 클릭했을때 
 	@ResponseBody
 	@RequestMapping(value="/youGiveXXXAjax", method= RequestMethod.GET)
 	public Map<String, Object> youGiveXXXAjax (@SessionAttribute("memberVo") MemberVo memberVo , FriendListVo friendVo,

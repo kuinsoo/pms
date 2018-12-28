@@ -3,6 +3,7 @@ package kr.or.ddit.work.mapper;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.work.model.WorkVo;
 
@@ -82,9 +83,18 @@ public interface WorkMapper {
 	* Method : workMember
 	* 작성자 : 임규승
 	* 변경이력 :
-	* @param work_project
+	* @param member_mail
 	* @return
 	* Method 설명 : 해당 회원의 진행중인 프로젝트 명 검색
 	*/
 	List<WorkVo> workMember(String member_mail);
+
+	/**
+	 * Method : workChart
+	 * 작성자 : Mr.kku
+	 * 내용 : 업무 차트
+	 * @param mtMap
+	 * @return
+	 */
+	List<MemberVo> workChart(Map<String, String> mtMap);
 }

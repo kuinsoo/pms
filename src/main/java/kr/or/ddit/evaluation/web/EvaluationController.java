@@ -6,13 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import kr.or.ddit.member.model.MemberVo;
-import kr.or.ddit.member.service.MemberServiceInf;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,16 +43,38 @@ public class EvaluationController {
 		Map<String, String> evalMap = new HashMap<>();
 		evalMap.put("member_mail", memberVo.getMember_mail());
 		evalMap.put("member_name", memberVo.getMember_name());
+		evalMap.put("project_id", "0");
 		model.addAttribute("evalProjectList", evaluationService.evaluationProjectList(evalMap));
-		model.addAttribute("evalWorkCnt", evaluationService.evaluationWorkCnt(evalMap));
-		model.addAttribute("evalIssueCnt", evaluationService.evaluationIssueCnt(evalMap));
-		model.addAttribute("evalProjectIssueCnt", evaluationService.evaluationProjectIssueCnt(evalMap));
 		model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
 		return "evaluation/evaluation";
 	}
 
+    @RequestMapping(value= "/ajaxEvaluationChartA", method=RequestMethod.POST)
+    public String ajaxEvaluationChartA(Model model, @SessionAttribute("memberVo") MemberVo memberVo,
+                                 @RequestParam("project_id")String project_id) {
+								  //@RequestBody String project_id) {
+        Map<String, String> evalMap = new HashMap<>();
+        evalMap.put("member_mail", memberVo.getMember_mail());
+        evalMap.put("member_name", memberVo.getMember_name());
+        evalMap.put("project_id", project_id);
+        model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
+        return "evaluation/ajaxEvaluationChartA";
+    }
+
+	@RequestMapping(value= "/ajaxEvaluationChartB", method=RequestMethod.POST)
+	public String ajaxEvaluationChartB(Model model, @SessionAttribute("memberVo") MemberVo memberVo,
+								  @RequestParam("project_id")String project_id) {
+		//@RequestBody String project_id) {
+		Map<String, String> evalMap = new HashMap<>();
+		evalMap.put("member_mail", memberVo.getMember_mail());
+		evalMap.put("member_name", memberVo.getMember_name());
+		evalMap.put("project_id", project_id);
+		model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
+		return "evaluation/ajaxEvaluationChartB";
+	}
+
 	@RequestMapping(value= "/ajaxEvaluation", method=RequestMethod.GET)
-	public String evaluationView(Model model, @SessionAttribute("memberVo") MemberVo memberVo,
+	public String ajaxEvaluation(Model model, @SessionAttribute("memberVo") MemberVo memberVo,
 								 @RequestParam("project_id")String project_id) {
 
 		model.addAttribute("memberVo",memberVo);

@@ -1,7 +1,13 @@
 package kr.or.ddit.chatting.service;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import kr.or.ddit.chatting.mapper.ChattingMapper;
+import kr.or.ddit.chatting.model.ChattingVo;
 
 /**
  * kr.or.ddit.chatting.service
@@ -14,5 +20,14 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class ChattingService {
+public class ChattingService implements ChattingServiceInf{
+
+	@Autowired
+	private ChattingMapper chattingMapper;
+	
+	@Override
+	public List<ChattingVo> chattingList(String meeting_id) {
+		return chattingMapper.chattingList(meeting_id);
+	}
+	
 }

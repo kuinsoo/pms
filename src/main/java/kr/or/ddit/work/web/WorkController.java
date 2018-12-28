@@ -6,6 +6,8 @@ import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.work.model.WorkVo;
 import kr.or.ddit.work.service.WorkServiceInf;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +31,7 @@ import java.util.Map;
 @Controller
 public class WorkController {
 
+	Logger logger = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private WorkServiceInf workService;
 
@@ -72,5 +75,19 @@ public class WorkController {
 	@RequestMapping(value = "/testGantt2", method=RequestMethod.GET)
 	public String testGantt2() {
 		return "work/2222";
+	}
+
+	@RequestMapping(value = "/ajaxWorkChart", method=RequestMethod.POST)
+	public String ajaxWorkChart(Model model, @RequestParam("project_id")String project_id,
+								@RequestParam("work_id")String work_id) {
+
+		WorkVo workVo = new WorkVo();
+		workVo.setWork_id(work_id);
+		Map<String, String> mtMap = new HashMap<>();
+		mtMap.put("project_id", project_id);
+		mtMap.put("work_id", work_id);
+		model.addAttribute("workChart",workService.workChart(mtMap));
+		model.addAttribute("work",workVo);
+		return "work/ajaxWorkChart";
 	}
 }

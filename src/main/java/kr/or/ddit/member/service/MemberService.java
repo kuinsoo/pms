@@ -1,5 +1,6 @@
 package kr.or.ddit.member.service;
 
+import kr.or.ddit.attachment.model.AttachmentVo;
 import kr.or.ddit.member.mapper.MemberMapper;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberListVo;
@@ -348,6 +349,21 @@ public class MemberService implements MemberServiceInf {
 	@Override
 	public int totalEndProjectCnt(String member_mail) {
 		return memberMapper.totalEndProjectCnt(member_mail);
+	}
+
+	@Override
+	public List<AttachmentVo> myFileList(PageVo pageVo) {
+		return memberMapper.myFileList(pageVo);
+	}
+
+	@Override
+	public int myFileListCnt(String member_mail) {
+		return memberMapper.myFileListCnt(member_mail);
+	}
+
+	@Override
+	public List<ProjectVo> selectProjectMember(String member_mail) {
+		return memberMapper.selectProjectMember(member_mail);
 	}
 
 	

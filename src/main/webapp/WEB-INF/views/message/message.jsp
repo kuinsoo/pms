@@ -580,12 +580,6 @@
 		
 		//#########################################################################################
 		// 전체 사용자 뽑아오는 리스트
-		///* onclick ='insertMyFriendN("+mm.member_mail+");' */
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
 		function getAllMember(page){
 			var pageSize = 10;
 			$.ajax({
@@ -593,16 +587,15 @@
 				url : "/AllMemberListAjax",
 				data : {"page" : page, "pageSize":pageSize},
 				success: function(data){
-					
+				
 					var html = "";
 					$.each(data.myMemberList,function(idx,mm){
-					//var member_mail = encodeURIComponent(mm.member_mail);
-					//console.log(member_mail);
+				
 						html += "<tr>";
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.member_mail +"</td>";
 						html += "	<td>"+ mm.member_name +"</td>";
-						html += "	<td>"+ "<input type='button' onclick ='getyouGiveNoAjax("+mm.member_mail+");' value='친구 등록'/>"+"</td>";
+						html += "<td>"+ "<input type='button' onclick ='getyouGiveNoAjax(\""+mm.member_mail+"\")'; value='친구 등록'/>"+"</td>";
 						html += "</tr>";
 					});
 					
@@ -632,19 +625,13 @@
 			$.ajax({
 				type: "GET",
 				url : "/youGiveNoAjax",
-				data : "friend_member="+ member_mail,
+				data : "member_mail="+ member_mail,
 				success: function(data){
-					console.log(data.member_mail);
-					console.log(data);
 					getAllMember(1);
+					getMySendFriendList(1);
 				}
 			});
 		}
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
-		////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////					
 		
 		function getAllMemberSearch(){
 			var param = $('form[name=searchTextFriendList]').serialize();
@@ -656,7 +643,6 @@
 				success: function(data){
 					
 					console.log(data);
-					
 					var html = "";
 					$.each(data.myMemberList,function(idx,mm){
 						html += "<tr>";
@@ -671,7 +657,6 @@
 					
 					$("#myMemberList").html("");
 					$("#myMemberList").html(html);
-					
 					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getAllMember("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
@@ -800,7 +785,7 @@
 						html += "	<td>"+ mm.friend_code +"</td>";
 						html += "	<td>"+ mm.friend_myemail +"</td>";
 						html += "	<td>"+ mm.member_name +"</td>";
-						html += "	<td>"+ "<input type='button'onclick ='getyouGiveYesAjax("+mm.friend_code+");' value='수락'/>"+"</td>";
+						html += "	<td>"+ "<input type='button'onclick ='getyouGiveYesAjax(\""+mm.friend_myemail+"\","+ mm.friend_code +");' value='수락'/>"+"</td>";
 						html += "	<td>"+ "<input type='button'onclick ='getyouGiveXXXAjax("+mm.friend_code+");' value='거절'/>"+"</td>";
 						html += "</tr>";
 					});
@@ -826,16 +811,18 @@
 		}
 		
 		// 수락버튼 클릭시 
-		function getyouGiveYesAjax(friend_code){
+		function getyouGiveYesAjax(friend_myemail,friend_code){
 			var pageSize = 10;
+			
 			$.ajax({
 				type: "GET",
 				url : "/youGiveYesAjax",
-				data : "friend_code="+friend_code,
+				data : "friend_myemail="+friend_myemail+"&friend_code="+friend_code,
 				success: function(data){
 					console.log(data.friend_code);
 					console.log(data);
 					getYouGiveFriendList(1);
+					getMyFriends(1);
 				}
 			});
 		}		

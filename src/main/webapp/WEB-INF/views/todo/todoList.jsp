@@ -67,17 +67,21 @@ function todoComplet(todo_id, todo_issue){
 				console.log("todoList.jsp : todoComplet() - Y, error");
 			}
 		});
+		
 	/* 체크를 풀었으면 N으로 변경 */
-	}else if(checked == false && todo_issue == null){
+	}else if(checked == false){
 		chk = "N";
 		$.ajax({
 			method: "POST",
 			url: "/todoCompletY",
 			data: {"todo_id" : todo_id, "chk" : chk},
 			success: function(data){
+				/* 체크를 풀었으면 삭제버튼 출력 */
+				if(checked == false && todo_issue == null){
 					var html = "<i class='fas fa-minus' style='color: red; cursor: pointer;' id='todoDelete${todo.todo_id}'></i>";
 					$("#minusBtn"+todo_id).html("");
 					$("#minusBtn"+todo_id).html(html);
+				}
 			},
 			error: function(data){
 				console.log("todoList.jsp : todoComplet() - N, error");
@@ -110,7 +114,7 @@ function initialization${work.work_id}(todo_id){
 	/* issue 등록시 발생일자를 현재 일시로 default 셋팅 설정  ==문의: jerry== */
     var date = new Date();
     date.setHours(date.getHours() + 9);
-
+	
     document.getElementById('non_issue_sdate'+todo_id).value = date.toISOString().slice(0, 16);
     document.getElementById('non_issue_edate'+todo_id).value = date.toISOString().slice(0, 16);
     
@@ -145,6 +149,7 @@ function insertIssue${work.work_id}(todo_id) {
 
 /* issue list 조회 ==문의: jerry== */
 function getIssueList${work.work_id}(todo_id) {
+	console.log('issue-todo_id : ' + todo_id);
 	$.ajax({
 		method: "POST",
 		url: "/issueSelectList",
@@ -157,6 +162,19 @@ function getIssueList${work.work_id}(todo_id) {
 			console.log("todoList.jsp : getIssueList() - error");
 		}
 	});
+}
+
+/* issue 체크 후 수정 ==문의: jerry== */
+function setIssueUpdate${work.work_id}(todo_id, issue_id){
+	var issue_title = document.getElementById('issue_title'+issue_id).innerText;
+	var issue_level = document.getElementById('issue_level'+issue_id).innerText;
+	var issue_content = document.getElementById('issue_content'+issue_id).innerText;
+	
+	$('#input_issue_title'+todo_id).val(issue_title);
+	$('#input_issue_level'+todo_id + ' option[value=' + issue_level + ']').attr('selected', 'selected');
+	$('#input_issue_content'+todo_id).val(issue_content);
+	$('#issue_id'+todo_id).val(issue_id);
+	$('#delete_issue_id'+todo_id).val(issue_id);
 }
 
 /* 등록된 issue 수정 ==문의: jerry== */
@@ -193,8 +211,7 @@ function helperUpdate${work.work_id}(todo_id){
 		url: "/helperUpdate",
 		data: param,
 		success: function(data){
-			$('#issueHelperHtmlAjax'+todo_id).html("");
-			$('#issueHelperHtmlAjax'+todo_id).html(data);
+			getHelperList${work.work_id}(todo_id);
 		},
 		error: function(data){
 			console.log("todoList.jsp : helperUpdate() - error");
@@ -202,8 +219,9 @@ function helperUpdate${work.work_id}(todo_id){
 	});
 }
 
-/* helper list 조회 ==문의: jerry== */
+/* 도움 list 조회 ==문의: jerry== */
 function getHelperList${work.work_id}(todo_id) {
+	console.log('helper-todo_id : ' + todo_id);
 	$.ajax({
 		method: "POST",
 		url: "/issueHelperList",
@@ -214,6 +232,23 @@ function getHelperList${work.work_id}(todo_id) {
 		},
 		error: function(data){
 			console.log("todoList.jsp : getIssueList() - error");
+		}
+	});
+}
+
+/* 이슈 삭제 ==문의: jerry== */
+function deleteIssue(todo_id){
+	var issue_id = $('#delete_issue_id'+todo_id).val();
+	
+	$.ajax({
+		method: "POST",
+		url: "/issueDelete",
+		data: {"issue_id" : issue_id},
+		success: function(data){
+			alert(":)");
+		},
+		error: function(data){
+			console.log("todoList.jsp : deleteIssue() - error");
 		}
 	});
 }

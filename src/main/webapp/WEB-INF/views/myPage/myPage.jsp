@@ -26,6 +26,7 @@
 			getmybookMarkProjectList(1);
 			getmyTodoProjectList(1);
 			getMyEndPageList(1);
+			getmyProjectFileList(1);
 			
 			// 참여중인 프로젝트 클릭
 			$("#projectList").on("click", ".projectClick" ,function(){
@@ -422,6 +423,72 @@
 				}
 			});
 		}
+		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	    // 파일 보관함 
+		function getmyProjectFileList(page){
+			var pageSize = 10;
+			$.ajax({
+				type: "GET",
+				url : "/myProjectFileListAjax",
+				data: {"page":page, "pageSize":pageSize},
+				success : function(data){
+					var html = "";
+					$.each(data.myFileList, function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.att_name +"</td>";
+						html += "	<td>"+ "<input type='button' value='파일 다운로드'/>"+"</td>";
+						html += "</tr>";
+					});
+					$("#myFileList").html("");
+					$("#myFileList").html(html);
+					var i  = 1;
+					var paging ="";
+						paging +="<li><a href='javascript:getmyProjectFileList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						for(var i= 1; i<=data.pageCnt; i++) {
+							paging += "<li><a href='javascript:getmyProjectFileList("+ i +");'>"+ i+ "</a></li>";
+						}
+							paging +="<li><a href='javascript:getmyProjectFileList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+						$(".paginationfile").html(paging);
+					},	
+					fail : function(data){
+						console.log(data);
+					}
+				});
+			}
+		// 마이페이지 : 즐겨찾기 프로젝트 목록 검색 Ajax	
+		function getFileSearchProject(){
+		var param = $('form[name=searchFileList]').serialize();
+			$.ajax({
+				type: "POST",
+				url : "/searchFileListAjax",
+				data: param,
+				success : function(data){
+					console.log("data : " + data);
+					var html = "";
+					$.each(data.myFileList, function(idx,mm){
+						html += "<tr>";
+						html += "	<td>"+ mm.rnum +"</td>";
+						html += "	<td>"+ mm.att_name +"</td>";
+						html += "	<td>"+ "<input type='button' value='파일 다운로드'/>"+"</td>";
+						html += "</tr>";
+					});
+					$("#myFileList").html("");
+					$("#myFileList").html(html);
+					var i  = 1;
+					var paging ="";
+					paging +="<li><a href='javascript:getmyProjectFileList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<=data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getmyProjectFileList("+ i +");'>"+ i+ "</a></li>";
+					}
+						paging +="<li><a href='javascript:getmyProjectFileList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".paginationfile").html(paging);
+				},	
+				fail : function(xhr){
+					console.log(xhr);
+				}
+			});
+		}
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 나의 일감 목록 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		function getmyTodoProjectList(page){
 			var pageSize = 10;
@@ -730,13 +797,19 @@
 						<div id="tabs2-4">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-								<a href="/myPage#tabs2-4">목록으로</a>
-									<%--  <form name ="searchProject" method="POST" onsubmit="return false;">
-										 <input type="text" id="searchText" name ="searchText" value='${searchText}'  placeholder="검색어를 입력해주세요"/>
+								<button onclick="getmyProjectFileList(1);">목록으로</button>
+									<form name ="searchFileList" method="POST" onsubmit="return false;">
+										<select name="selectBox" onclick="getmyProjectFileList(1);" class="recipientSelect">
+											<option> 프로젝트 명 </option>
+											<c:forEach items="${selectProjectMember }" var="mf">
+												<option>${mf.project_title}</option>
+											</c:forEach>
+										</select>
+										 <input type="text" id="searchFileList" name ="searchFileList" value='${searchFileList}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
-										<i class="icon-magnifier icons" onclick="javascript:getSearchProject();"></i>  
-									</form>  --%>
+										<i class="icon-magnifier icons" onclick="javascript:getFileSearchProject();"></i>  
+									</form> 
 								</div>
 								<table>
 									<colgroup width="10%" />
@@ -749,11 +822,11 @@
 											<th><span>파일 다운로드</span></th>
 										</tr>
 									</thead>
-									<tbody id ="아직미구현">
+									<tbody id ="myFileList">
 									</tbody>
 								</table>
 								<div class="text-center">
-									 <ul class="pagination"></ul>
+									 <ul class="paginationfile"></ul>
 								</div>
 							</div>
 						</div>
