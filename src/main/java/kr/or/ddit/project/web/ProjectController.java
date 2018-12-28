@@ -150,7 +150,7 @@ public class ProjectController {
 		}
 
 		model.addAttribute("pMemberList",memberService.selectMainView(memberVo.getMember_mail()));
-		return "project/ajaxProjectList";
+		return "project/ajaxMainProjectList";
 	}
 
 
@@ -271,6 +271,21 @@ public class ProjectController {
 	public String ajaxMainProjectList(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 
 		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
+		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
+		return "project/ajaxMainProjectList";
+	}
+
+	/**
+	 * Ajax main project list string.
+	 *
+	 * @param model    the model
+	 * @param memberVo the member vo
+	 * @return the string
+	 */
+	@RequestMapping(value = "/ajaxBookMarkMainProjectList", method = RequestMethod.GET)
+	public String ajaxBookMarkMainProjectList(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
+
+		model.addAttribute("pMemberList", projectService.bookMarkProjects(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
 		return "project/ajaxMainProjectList";
 	}

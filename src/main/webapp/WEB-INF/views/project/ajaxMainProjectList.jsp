@@ -47,7 +47,7 @@
                                 </div>
                                 <div class="projectStartEndDivp">
                                     <span class="projectStartp">프로젝트 시작일</span>
-                                    <input type="date" name="project_sdate" class="projectStartInputp" value="<12fmt:formatDate value='${pMemberListVo.project_sdate}' pattern='yyyy-MM-dd'/>"  />
+                                    <input type="date" name="project_sdate" class="projectStartInputp" value="<fmt:formatDate value='${pMemberListVo.project_sdate}' pattern='yyyy-MM-dd'/>"  />
                                     <span class="projectEndp">프로젝트 마감일</span>
                                     <input type="date" name="project_eedate" class="projectEndInputp" value="<fmt:formatDate value='${pMemberListVo.project_eedate}' pattern='yyyy-MM-dd'/>" />
                                     <input type="hidden" name="project_id" value="${pMemberListVo.project_id}" />
