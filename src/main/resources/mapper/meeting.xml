@@ -13,6 +13,7 @@
 		inner join member
 		on      	pmember_member = member_mail
 		where  MEETING_PROJECT=#{project_id}
+		and    MEETING_FOUNDER = pmember_member
 		order by meeting_sdate desc
     </select>
     
