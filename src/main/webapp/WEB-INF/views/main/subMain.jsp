@@ -447,9 +447,11 @@ function updateCard(no, group, index){
 
 function createWork() {
    var param = $('form[name=workfrm1]').serialize();
+
    $.ajax({
       method: "POST",
       url: "/ajaxCreateWork",
+      enctype: 'multipart/form-data',
       data: param,
       success: function (data) {
          $('#submain_work').html("");

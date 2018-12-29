@@ -2,6 +2,7 @@ package kr.or.ddit.card.service;
 
 import kr.or.ddit.card.model.CardVo;
 import kr.or.ddit.work.model.WorkVo;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,7 @@ public interface CardServiceInf {
 
 	CardVo selectCard(String cardNo);
 
-	int createCard( Map<String, String> wmMap , WorkVo workVo);
+	int createCard(Map<String, String> wmMap , WorkVo workVo , MultipartFile[] files);
 
 	int updateCard(CardVo cardVo);
 

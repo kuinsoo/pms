@@ -10,6 +10,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div id="container${work.work_id}"></div>
+
 <script>
         Highcharts.ganttChart('container${work.work_id}', {
 
@@ -28,9 +29,11 @@
 
             yAxis: {
                 categories: [
-                   <c:forEach items="${workCharts}" var="workChart" varStatus="i" >
-                     '${workChart.todo_id}',
-                    </c:forEach>'start'
+                    <c:forEach items="${workCharts}" var="workChart" varStatus="i" >
+                        <c:if test="${workChart.todo_work eq work.work_id}" >
+                             '${workChart.todo_id}',
+                        </c:if>
+                    </c:forEach>
                 ]
             },
 
@@ -39,17 +42,18 @@
             },
 
             series: [{
-                name: 'Project 1',
-                data:[<c:forEach items="${workCharts}" var="workChart" varStatus="i">
-                    {
-                        start: Date.UTC(parseInt('${workChart.format_todo_sdate}'.substr(0,4)), parseInt('${workChart.format_todo_sdate}'.substr(5,2)), parseInt('${workChart.format_todo_sdate}'.substr(8,2))),
-                        end: Date.UTC(parseInt('${workChart.format_todo_eedate}'.substr(0,4)), parseInt('${workChart.format_todo_eedate}'.substr(5,2)), parseInt('${workChart.format_todo_eedate}'.substr(8,2))),
-                        y: ${i.index},
-                        assignee: '${workChart.todo_pmember}'
-                    },
-                    </c:forEach>
-
-                ],
+                name: 'Project ${projectVo.project_id}',
+                data:[
+                    <c:forEach items="${workCharts}" var="workChart" varStatus="i">
+                        <c:if test="${workChart.todo_work eq work.work_id}" >
+                            {
+                                start: Date.UTC(parseInt('${workChart.format_todo_sdate}'.substr(0,4)), parseInt('${workChart.format_todo_sdate}'.substr(5,2)), parseInt('${workChart.format_todo_sdate}'.substr(8,2))),
+                                end: Date.UTC(parseInt('${workChart.format_todo_eedate}'.substr(0,4)), parseInt('${workChart.format_todo_eedate}'.substr(5,2)), parseInt('${workChart.format_todo_eedate}'.substr(8,2))),
+                                y: ${i.index},
+                                assignee: '${workChart.todo_pmember}'
+                            }
+                        </c:if>
+                    </c:forEach>],
                 dataLabels: [{
                     enabled: true,
                     format: '<div style="width: 20px; height: 20px; overflow: hidden; border-radius: 50%; margin-left: -25px">' +
