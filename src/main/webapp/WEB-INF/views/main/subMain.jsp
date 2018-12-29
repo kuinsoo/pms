@@ -116,8 +116,30 @@
 <script type="text/javascript" src="js/classie.js"></script>
 
 <script>
+//회의목록 출력
+getMeetingListAjax();
+
+function getMeetingListAjax(){
+var project_id = ${projectVo.project_id};
+	//(function poll(){
+		$.ajax({
+		    url : '/meetingList',
+		    type : 'POST',
+		    data : {"project_id":project_id},
+		    success : function (data) {
+				$('#meetingListAjax').html("");
+				$('#meetingListAjax').html(data);
+		    },
+		      error: function (data) {
+		    }
+		   // timeout: 3000,
+		   // complete: setTimeout(function(){ poll(); }, 6000)
+		 });
+	//})();
+};
+
+//회의록,대화록 다운로드
 $(function(){
-	
 	$('#meetingListAjax').on('click', '.saveDocFile', function(){
 		var title =$(this).parents('.myPInfo').prev().find('.meeting_title').html();
 		var date =$(this).parents('.myPInfo').prev().find('.format_meeting_sdate').html();
@@ -159,27 +181,6 @@ $(function(){
 	});
 });
 
-//회의목록 출력
-getMeetingListAjax();
-
-function getMeetingListAjax(){
-var project_id = ${projectVo.project_id};
-	//(function poll(){
-		$.ajax({
-		    url : '/meetingList',
-		    type : 'POST',
-		    data : {"project_id":project_id},
-		    success : function (data) {
-				$('#meetingListAjax').html("");
-				$('#meetingListAjax').html(data);
-		    },
-		      error: function (data) {
-		    }
-		   // timeout: 3000,
-		   // complete: setTimeout(function(){ poll(); }, 6000)
-		 });
-	//})();
-};
 
 // DIM POPUP - 팀원초대
 $('.projectCreatePopUps').click(function () {
