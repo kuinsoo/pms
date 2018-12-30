@@ -51,11 +51,13 @@ public class ToDoController {
 	 * @return Method  설명 : to-do list 등록(Ajax적용)
 	 */
 	@RequestMapping(value="/todoInsert", method= {RequestMethod.POST, RequestMethod.GET})
-	public String ajaxInsertTodo(HttpServletRequest request, PageVo pageVo, ToDoVo todoVo, Model model) {
+	public String ajaxInsertTodo(ToDoVo todoVo, HttpServletRequest request, PageVo pageVo, Model model) {
 		WorkVo workVo = new WorkVo();
 		workVo.setWork_project(request.getParameter("work_project"));
 		workVo.setWork_id(request.getParameter("todo_work"));
 
+		System.out.println("todoVo : " + todoVo);
+		
 		/* to-do insert */
 		try {
 			todoService.todoInsert(todoVo);

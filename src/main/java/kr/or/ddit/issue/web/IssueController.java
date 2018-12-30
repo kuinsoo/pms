@@ -215,11 +215,10 @@ public class IssueController {
 	@RequestMapping(value="/issueDelete", method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
 	public void issueDelete(@RequestParam("issue_id")String issue_id) {
+		System.out.println("issue_id : " + issue_id);
 		try {
-			int result = issueService.issueDeleteTodoIssue(issue_id);
-			if(result != 0) {
-				issueService.issueDelete(issue_id);
-			}
+			issueService.issueDeleteTodoIssue(issue_id);
+			issueService.issueDelete(issue_id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

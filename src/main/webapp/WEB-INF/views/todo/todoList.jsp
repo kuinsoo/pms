@@ -17,6 +17,7 @@ $(document).ready(function(){
 /* 페이지 접속시 to-do list 조회(Ajax) ==문의: jerry== */
 function getToDoList${work.work_id}(page, project_id, work_id){
 	var pageSize = 5;
+	
 	$.ajax({
 		method: "POST",
 		url: "/todoSelect",
@@ -149,7 +150,7 @@ function insertIssue${work.work_id}(todo_id) {
 
 /* issue list 조회 ==문의: jerry== */
 function getIssueList${work.work_id}(todo_id) {
-	console.log('issue-todo_id : ' + todo_id);
+	
 	$.ajax({
 		method: "POST",
 		url: "/issueSelectList",
@@ -174,7 +175,6 @@ function setIssueUpdate${work.work_id}(todo_id, issue_id){
 	$('#input_issue_level'+todo_id + ' option[value=' + issue_level + ']').attr('selected', 'selected');
 	$('#input_issue_content'+todo_id).val(issue_content);
 	$('#issue_id'+todo_id).val(issue_id);
-	$('#delete_issue_id'+todo_id).val(issue_id);
 }
 
 /* 등록된 issue 수정 ==문의: jerry== */
@@ -221,7 +221,7 @@ function helperUpdate${work.work_id}(todo_id){
 
 /* 도움 list 조회 ==문의: jerry== */
 function getHelperList${work.work_id}(todo_id) {
-	console.log('helper-todo_id : ' + todo_id);
+	
 	$.ajax({
 		method: "POST",
 		url: "/issueHelperList",
@@ -237,15 +237,15 @@ function getHelperList${work.work_id}(todo_id) {
 }
 
 /* 이슈 삭제 ==문의: jerry== */
-function deleteIssue(todo_id){
-	var issue_id = $('#delete_issue_id'+todo_id).val();
-	
+function deleteIssue${work.work_id}(todo_id){
+	var issue_id = $('#issue_id'+todo_id).val();
+	console.log(issue_id);
 	$.ajax({
 		method: "POST",
 		url: "/issueDelete",
 		data: {"issue_id" : issue_id},
 		success: function(data){
-			alert(":)");
+			getIssueList${work.work_id}(todo_id);
 		},
 		error: function(data){
 			console.log("todoList.jsp : deleteIssue() - error");
@@ -276,4 +276,5 @@ function deleteIssue(todo_id){
 	<div class="pagination" id="pagination${work.work_id}">
 		<!-- todoPageinationHtml.jsp -->
 	</div>
+	
 </div>

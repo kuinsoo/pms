@@ -38,11 +38,10 @@ public class ToDoVo {
 	
 	/* 기능단위 */
 	private String member_name;			//	참여자 이름
-	private String todo_member;		//	참여자 이메일
+	private String todo_member;			//	참여자 이메일
 	private String member_profile;		//	참여자 프로필사진
 	private String issue_id;			//	이슈아이디
 	private String work_project;		//	참여중인 프로젝트 ID
-
 	
 	/* 기본생성자 */
 	public ToDoVo() {}
@@ -194,7 +193,6 @@ public class ToDoVo {
 	}
 
 	/* toString */
-
 	@Override
 	public String toString() {
 		return "ToDoVo{" +
@@ -213,7 +211,7 @@ public class ToDoVo {
 				", todo_color='" + todo_color + '\'' +
 				", todo_issue='" + todo_issue + '\'' +
 				", member_name='" + member_name + '\'' +
-				", pmember_member='" + todo_member + '\'' +
+				", todo_member='" + todo_member + '\'' +
 				", member_profile='" + member_profile + '\'' +
 				", issue_id='" + issue_id + '\'' +
 				", work_project='" + work_project + '\'' +
