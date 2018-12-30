@@ -94,4 +94,13 @@
 		WHERE	todo_id = #{todo_id}
 	</delete>
 	
+	<!-- to-do수정시 담당자 select option 값 조회 -->
+	<select id="selectOptionProjectMember" resultType="todoVo" parameterType="String">
+		SELECT  member_name,
+		        pmember_member
+		FROM    project_member INNER JOIN member
+		ON      pmember_member = member_mail
+		WHERE   pmember_project = #{project_id}
+	</select>
+	
 </mapper>

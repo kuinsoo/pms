@@ -34,14 +34,16 @@
 									</div>
 									<div class="issuesRight">
 										<ul>
-											<li><input type="text" value="${todo.todo_pmember}" /></li>
+											<li><input type="text" id="todo_pmember${todo.todo_id}" value="${todo.todo_pmember}" /></li>
+											<li><select style="display:none" id="pmember_member" name="pmember_member"></select></li>
 											<li><input type="text" value="${todo.format_todo_sdate}" /></li>
-											<li><input type="text" value="${todo.format_todo_eedate}" /></li>
+											<li><input type="text" id="todo_eedate${todo.todo_id}" value="${todo.format_todo_eedate}" /></li>
 											<li><input type="text" value="${todo.todo_complet}" /></li>
 										</ul>
 									</div>
 								</div>
-								<textarea readonly>${todo.todo_content}</textarea>
+								<textarea id="todo_content${todo.todo_id}" readonly>${todo.todo_content}</textarea>
+								<input type="button" value="수정" class="issueCreateBtn" onclick="attrChangeUpdate${todo.todo_work}(${todo.todo_id});">
 							</form>
 						</div>
 						<div class="issueSelectPageRight">

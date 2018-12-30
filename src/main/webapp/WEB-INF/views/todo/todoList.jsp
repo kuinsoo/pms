@@ -11,7 +11,7 @@ $(document).ready(function(){
 
 	//to-do list의 pagination(Ajax) ==문의: jerry==
 	getToDoPagination${work.work_id}(1, project_id, work_id);
-
+	
 });
 
 /* 페이지 접속시 to-do list 조회(Ajax) ==문의: jerry== */
@@ -239,7 +239,7 @@ function getHelperList${work.work_id}(todo_id) {
 /* 이슈 삭제 ==문의: jerry== */
 function deleteIssue${work.work_id}(todo_id){
 	var issue_id = $('#issue_id'+todo_id).val();
-	console.log(issue_id);
+	
 	$.ajax({
 		method: "POST",
 		url: "/issueDelete",
@@ -249,6 +249,36 @@ function deleteIssue${work.work_id}(todo_id){
 		},
 		error: function(data){
 			console.log("todoList.jsp : deleteIssue() - error");
+		}
+	});
+}
+
+/* to-do 수정시 input type 속성 변경 */
+function attrChangeUpdate${work.work_id}(todo_id) {
+	var project_id = ${projectVo.project_id};
+	
+	var edate = $('#todo_eedate'+ todo_id).val();
+	var repEdate = edate.replace(" ", "T");
+	
+	$('#todo_eedate'+todo_id).attr('type', 'datetime-local');
+	$('#todo_eedate'+ todo_id).val(repEdate);
+	
+	$('#todo_content'+todo_id).removeAttr('readonly');
+	
+	$.ajax({
+		method: "POST",
+		url: "/optionMember",
+		data: {"project_id" : project_id},
+		success: function(data){
+			$('#todo_pmember'+todo_id).hide();
+			$('#pmember_member').show();
+			for(var i = 0; i < data.length; i++){
+				var option = $("<option>"+data[i].member_name+'('+data[i].pmember_member+')'+"</option>");
+				$('#pmember_member').append(option);
+			}
+		},
+		error: function(data){
+			console.log("todoList.jsp : attrChangeUpdate() - error");
 		}
 	});
 }

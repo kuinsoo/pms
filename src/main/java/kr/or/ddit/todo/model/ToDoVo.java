@@ -42,6 +42,7 @@ public class ToDoVo {
 	private String member_profile;		//	참여자 프로필사진
 	private String issue_id;			//	이슈아이디
 	private String work_project;		//	참여중인 프로젝트 ID
+	private String pmember_member;		//	참여자 이메일
 	
 	/* 기본생성자 */
 	public ToDoVo() {}
@@ -50,7 +51,7 @@ public class ToDoVo {
 	public ToDoVo(String todo_id, String todo_work, String todo_pmember, String todo_content, Date todo_sdate,
 			String format_todo_sdate, Date todo_edate, String format_todo_edate, Date todo_eedate,
 			String format_todo_eedate, String todo_complet, String todo_color, int rnum, String todo_issue, 
-			String member_name, String todo_member, String member_profile, String issue_id, String work_project) {
+			String member_name, String todo_member, String member_profile, String issue_id, String work_project, String pmember_member) {
 		super();
 		this.todo_id = todo_id;
 		this.todo_work = todo_work;
@@ -71,6 +72,7 @@ public class ToDoVo {
 		this.member_profile = member_profile;
 		this.issue_id = issue_id;
 		this.work_project = work_project;
+		this.pmember_member = pmember_member;
 	}
 
 	/* getter & setter */
@@ -146,11 +148,11 @@ public class ToDoVo {
 	public void setMember_name(String member_name) {
 		this.member_name = member_name;
 	}
-	public String getPmember_member() {
+	public String getTodo_member() {
 		return todo_member;
 	}
-	public void setPmember_member(String pmember_member) {
-		this.todo_member = pmember_member;
+	public void setTodo_member(String todo_member) {
+		this.todo_member = todo_member;
 	}
 	public String getMember_profile() {
 		return member_profile;
@@ -170,6 +172,12 @@ public class ToDoVo {
 	public void setWork_project(String work_project) {
 		this.work_project = work_project;
 	}
+	public String getPmember_member() {
+		return pmember_member;
+	}
+	public void setPmember_member(String pmember_member) {
+		this.pmember_member = pmember_member;
+	}
 
 	/* 형변환 getter */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -180,13 +188,13 @@ public class ToDoVo {
 		return sdf.format(todo_sdate);
 	}
 	public String getFormat_todo_eedate() {
-		if(todo_sdate == null) {
+		if(todo_eedate == null) {
 			return "";
 		}
 		return sdf.format(todo_eedate);
 	}
 	public String getFormat_todo_edate() {
-		if(todo_sdate == null) {
+		if(todo_edate == null) {
 			return "";
 		}
 		return sdf.format(todo_edate);
@@ -212,6 +220,7 @@ public class ToDoVo {
 				", todo_issue='" + todo_issue + '\'' +
 				", member_name='" + member_name + '\'' +
 				", todo_member='" + todo_member + '\'' +
+				", pmember_member='" + pmember_member + '\'' +
 				", member_profile='" + member_profile + '\'' +
 				", issue_id='" + issue_id + '\'' +
 				", work_project='" + work_project + '\'' +

@@ -170,7 +170,6 @@ public class IssueController {
 	*/
 	@RequestMapping(value="/helperUpdate", method= {RequestMethod.POST, RequestMethod.GET})
 	public String helperUpdate(IssueVo issueVo, Model model) {
-		System.out.println("issueVo : " + issueVo);
 		
 		List<IssueVo> helperList = new ArrayList<IssueVo>();
 		try {
@@ -215,7 +214,7 @@ public class IssueController {
 	@RequestMapping(value="/issueDelete", method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
 	public void issueDelete(@RequestParam("issue_id")String issue_id) {
-		System.out.println("issue_id : " + issue_id);
+		
 		try {
 			issueService.issueDeleteTodoIssue(issue_id);
 			issueService.issueDelete(issue_id);
