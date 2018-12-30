@@ -98,4 +98,13 @@ public interface WorkMapper {
 	 * @return
 	 */
 	List<ToDoVo> workChart(Map<String, String> mtMap);
+
+	/**
+	 * Method : selectWorkChart
+	 * 작성자 : Mr.kku
+	 * 내용 : 개별 업무 차트
+	 * @param mtMap
+	 * @return
+	 */
+	List<ToDoVo> selectWorkChart(Map<String, String> mtMap);
 }

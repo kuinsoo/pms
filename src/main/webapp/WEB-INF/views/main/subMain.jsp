@@ -381,6 +381,8 @@ $(document).ready(function () {
 
    updateCard('0', '0', 0, '${projectVo.project_id}');
 
+
+
    // html dom 이 다 로딩된 후 실행된다.
    $(document).ready(function () {
       // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
@@ -446,6 +448,7 @@ function updateCard(no, group, index){
 }; */
 
 
+/* work cart  현재 미사용 중  */
 function createWork() {
    var param = $('form[name=workfrm1]').serialize();
 
@@ -542,8 +545,8 @@ function workChart(work_id) {
        url:  "/ajaxWorkChart",
         data: parm,
         success: function (data) {
-            $('#workCharts').html("")
-            $('#workCharts').html(data)
+            $('#workChart'+work_id).html("")
+            $('#workCharts'+work_id).html(data)
         }
     });
 }
