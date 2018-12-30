@@ -51,7 +51,7 @@
                                 end: Date.UTC(parseInt('${workChart.format_todo_eedate}'.substr(0,4)), parseInt('${workChart.format_todo_eedate}'.substr(5,2)), parseInt('${workChart.format_todo_eedate}'.substr(8,2))),
                                 y: ${i.index},
                                 assignee: '${workChart.todo_pmember}'
-                            }
+                            },
                         </c:if>
                     </c:forEach>],
                 dataLabels: [{

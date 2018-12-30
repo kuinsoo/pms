@@ -163,7 +163,7 @@ public class WorkController {
 		Map<String, String> mtMap = new HashMap<>();
 		mtMap.put("project_id", project_id);
 		mtMap.put("work_id", work_id);
-		model.addAttribute("workCharts",workService.selectWorkChart(mtMap));
+		model.addAttribute("workCharts",workService.workChart(mtMap));
 		model.addAttribute("work",workVo);
 		return "work/ajaxWorkChart";
 	}
