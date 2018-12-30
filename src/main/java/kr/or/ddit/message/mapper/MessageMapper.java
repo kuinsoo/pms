@@ -102,6 +102,16 @@ public interface MessageMapper {
 	 * Method 설명 : 받은 쪽지 갯수 
 	 */
 	int totalMsgReceived(String msg_rmember);
+	
+	/**
+	 * Method : totalmessageSizeCheck
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param msg_smember
+	 * @return
+	 * Method 설명 : Y 쪽지 개수 
+	 */
+	int totalmessageSizeCheck(String member_mail);
 
 	/**
 	 * Method : totalyouGiveFriendListt

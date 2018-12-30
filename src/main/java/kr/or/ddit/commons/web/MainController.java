@@ -46,24 +46,22 @@ public class MainController {
 		return "main/main";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value= "/messageAlram" , method= RequestMethod.GET)
-	public Map<String ,Object>  ajaxMessageAlarm(@SessionAttribute("memberVo") MemberVo memberVo ,PageVo pageVo) {
-		
-		pageVo.setMember_mail(memberVo.getMember_mail());
-		
+	public Map<String ,Object>  messageAlram(@SessionAttribute("memberVo") MemberVo memberVo) {
+			
 		MessageVo messageVo = new MessageVo();
 		messageVo.setMsg_rmember(memberVo.getMember_mail());
 		
-		List<MessageVo> msgReceiveList = messageservice.messageReceived(pageVo);	
-		int pageCnt = messageservice.totalMsgReceived(memberVo.getMember_mail());
+		int totalmessageY = messageservice.totalmessageSizeCheck(memberVo.getMember_mail());
+		
+		System.out.println(totalmessageY);
 		
 		Map<String, Object> msgReceiveMap = new HashMap<>();
-		msgReceiveMap.put("msgReceiveList", msgReceiveList);
-		msgReceiveMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		msgReceiveMap.put("totalmessageY", totalmessageY);
 		
 		return msgReceiveMap;
 	}	
-	
 	
 	@RequestMapping(value="/inviteProject", method=RequestMethod.GET)
 	public String inviteProject(Model model, @SessionAttribute("memberVo")MemberVo memberVo, @RequestParam("project_id")String project_id) {
