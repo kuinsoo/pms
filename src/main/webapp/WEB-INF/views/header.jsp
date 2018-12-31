@@ -223,11 +223,8 @@
 					
 				console.log(data.totalmessageY);
 				// 쪽지온거확인
-			 	if(data.totalmessageY > 0){
+			 	if(data.totalmessageY > 0)
 					alert("쪽지가왔습니다.");
-			 	}else{
-					alert("쪽ㅈㅣ 없음..");
-			 	}
 				}, 
 			timeout: 3000,
 	    	complete: setTimeout(function(){ polls(); }, 6000)
