@@ -28,6 +28,9 @@ public class MainController {
 	
 	@Autowired
 	private PostServiceInf postService;
+	
+	@Autowired
+	private MessageServiceInf messageservice;
 
 	/**
 	 * Main string.
@@ -53,7 +56,6 @@ public class MainController {
 		return "main/main";
 	}
 	
-<<<<<<< HEAD
 	@ResponseBody
 	@RequestMapping(value= "/messageAlram" , method= RequestMethod.GET)
 	public Map<String ,Object>  messageAlram(@SessionAttribute("memberVo") MemberVo memberVo) {
@@ -69,11 +71,8 @@ public class MainController {
 		return msgReceiveMap;
 	}	
 	
-=======
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms.git
 	@RequestMapping(value="/inviteProject", method=RequestMethod.GET)
 	public String inviteProject(Model model, @SessionAttribute("memberVo")MemberVo memberVo, @RequestParam("project_id")String project_id) {
-		
 		Map<String, String > inviteMap = new HashMap<>();
 		model.addAttribute("project_id", project_id);
 		inviteMap.put("project_id",project_id);
