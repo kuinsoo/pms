@@ -174,7 +174,7 @@
 				<div class="updateHeader" style="float:right;">
 						<a href="/friendView"  class="facing">
 							<i class="icon-user icons" id="friendSendIcon"></i>
-							<div class="messageCounterDiv">
+							<div class="friendCounterDiv">
 								<span class = "friendCounterSpan"></span>
 							</div>
 						</a>
@@ -226,7 +226,7 @@
 	});
 	
 	function message(){
-		(function polls(){
+		(function pollsmessage(){
 			$.ajax({
 				type: "GET",
 				url : "/messageAlram",
@@ -244,12 +244,12 @@
 				 	}
 				}, 
 			timeout: 3000,
-	    	complete: setTimeout(function(){ polls(); }, 6000)
+	    	complete: setTimeout(function(){ pollsmessage(); }, 6000)
 			})
 		})();	 
 	}
-	function friend(){
-		(function pollss(){
+	 function friend(){
+		(function pollsfriend(){
 			$.ajax({
 				type: "GET",
 				url : "/friendAlram",
@@ -258,16 +258,16 @@
 				console.log(data.totalFriendSize);
 				// 쪽지온거확인
 				 	if(data.totalFriendSize > 0){
-				 		$(".messageCounterDiv").show();
+				 		$(".friendCounterDiv").show();
 						$(".friendCounterSpan").html(data.totalFriendSize);
 						$("#friendSendIcon").css("color","#f00");
 				 	}else{
 				 		$("#friendSendIcon").css("color","#000");
-						$(".messageCounterDiv").hide();
+						$(".friendCounterDiv").hide();
 				 	}
 				}, 
 			timeout: 3000,
-	    	complete: setTimeout(function(){ pollss(); }, 6000)
+	    	complete: setTimeout(function(){ pollsfriend(); }, 6000)
 			})
 		})();	 
 	}
