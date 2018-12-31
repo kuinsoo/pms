@@ -37,7 +37,6 @@ import kr.or.ddit.util.model.PageVo;
 @Controller
 public class IssueController {
 	Logger logger = LoggerFactory.getLogger(IssueController.class);
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
 	
 	@Autowired
 	private IssueServiceInf issueService;
@@ -232,32 +231,35 @@ public class IssueController {
 	* Method 설명 : 프로젝트의 지난 기간을 percent로 구하는 메서드
 	*/
 	List<Integer> getPercentList(List<ProjectVo> history_myProjectList){
-		String sdate = "";	//시작일 선언 및 초기화
-		String edate = "";	//종료일 선언 및 초기화
-		int current = Integer.parseInt(sdf.format(new Date()));	//현재날짜
-		int pjtPeriod = -1;		//프로젝트 총기간 선언 및 초기화
-		int currentPeriod = -1;	//지난 기간 선언 및 초기화
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date sdate = null;	//시작일 선언 및 초기화
+		Date edate = null;	//종료일 선언 및 초기화
+		Date current = new Date();	//현재날짜
+		long pjtPeriod = -1;		//프로젝트 총기간 선언 및 초기화
+		long currentPeriod = -1;	//지난 기간 선언 및 초기화
 		List<Integer> percentList = new ArrayList<Integer>();	//지난 기간 퍼센트 리스트
 		
 		/* 예상종료일과 실종료일의 null 유무를 체크해서 원하는 패턴("yyyyMMdd")으로 값 변환 */
 		for(ProjectVo pjtvo : history_myProjectList) {
 			
-			sdate = sdf.format(pjtvo.getProject_sdate());
+			sdate = pjtvo.getProject_sdate();
 			
 			if(pjtvo.getProject_eedate() != null) {
-				edate = sdf.format(pjtvo.getProject_eedate());
+				edate = pjtvo.getProject_eedate();
 			} else if(pjtvo.getProject_edate() != null) {
-				edate = sdf.format(pjtvo.getProject_edate());
+				edate = pjtvo.getProject_edate();
 			}
 			
 			/* 프로젝트 총 기간 : 종료일 - 시작일 */
-			pjtPeriod = (Integer.parseInt(edate) - Integer.parseInt(sdate));
+			long totalDays = edate.getTime() - sdate.getTime();
+			pjtPeriod = totalDays / (24 * 60 * 60 * 1000);
 
 			/* 지난 기간 : 현재날짜 - 시작일 */
-			currentPeriod = (current - (Integer.parseInt(sdate)));
+			long currentDays = current.getTime() - sdate.getTime();
+			currentPeriod = currentDays / (24 * 60 * 60 * 1000);
 			
 			/* 지난 기간 퍼센트 : (지난 기간 * 100) / 총 기간 */
-			percentList.add((currentPeriod * 100) / pjtPeriod);
+			percentList.add((int)((currentPeriod * 100) / pjtPeriod));
 
 		}
 		return percentList;
