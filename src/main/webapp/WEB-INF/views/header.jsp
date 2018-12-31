@@ -174,11 +174,20 @@
 				<div class="updateHeader" style="float:right;">
 					<a href="/message" class="facing">
 						<i class="icon-paper-plane icons" id="messageSendIcon"></i>
-						<div class="messageCounterDiv">
-							<span>10</span>
-						</div>
+						
+						<c:choose>
+							<c:when test="${messageCnt}>0">
+								<div class="messageCounterDiv">
+									<span>${messageCnt}</span>
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div class="messageCounterDiv" style="display:none">
+								</div>
+							</c:otherwise>
+							
+						</c:choose>
 					</a>
-	              
 	                <%@ include file="/WEB-INF/views/alarm/alarm.jsp" %>
 	                
 	                <!-- CURRENT USER -->
