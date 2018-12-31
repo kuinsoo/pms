@@ -16,10 +16,10 @@
 						<img src="../images/slide1.png">
 					</div>
 					<div class="swiper-slide">
-						<img src="http://placehold.it/1400x500">
+						<img src="https://placehold.it/1400x500">
 					</div>
 					<div class="swiper-slide">
-						<img src="http://placehold.it/1400x500">
+						<img src="https://placehold.it/1400x500">
 					</div>
 				</div>
 

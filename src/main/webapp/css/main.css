@@ -520,7 +520,7 @@ header {
 	position:relative;padding-left:10px;
 }
 .messageCounterDiv {
-	position:absolute;right:7px;bottom:7px;z-index:5;width:20px;height:20px;
+	position:absolute;right:0px;bottom:7px;z-index:5;width:20px;height:20px;
 	border-radius:100%;background-color:#f00;
 }
 .messageCounterDiv > span {
