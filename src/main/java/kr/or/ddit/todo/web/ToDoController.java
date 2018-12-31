@@ -56,8 +56,6 @@ public class ToDoController {
 		workVo.setWork_project(request.getParameter("work_project"));
 		workVo.setWork_id(request.getParameter("todo_work"));
 
-		System.out.println("todoVo : " + todoVo);
-		
 		/* to-do insert */
 		try {
 			todoService.todoInsert(todoVo);
@@ -244,14 +242,28 @@ public class ToDoController {
 	@RequestMapping(value="/optionMember", method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
 	public List<ToDoVo> selectOptionProjectMember(@RequestParam("project_id")String project_id){
-		System.out.println("project_id : " + project_id);
 		
 		List<ToDoVo> optionMemberList = todoService.selectOptionProjectMember(project_id);
-		
-		System.out.println("projectMemberList : " + optionMemberList);
 		
 		return optionMemberList;
 	}
 	
+	/**
+	* Method : todoUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todoVo
+	* @return
+	* Method 설명 : to-do 수정
+	*/
+	@RequestMapping(value="/todoUpdate", method= {RequestMethod.POST, RequestMethod.GET})
+	@ResponseBody
+	public void todoUpdate(ToDoVo todoVo) {
+		try {
+			todoService.todoUpdate(todoVo);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

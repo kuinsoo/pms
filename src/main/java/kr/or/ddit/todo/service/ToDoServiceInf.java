@@ -97,4 +97,14 @@ public interface ToDoServiceInf {
 	*/
 	List<ToDoVo> selectOptionProjectMember(String project_id);
 	
+	/**
+	* Method : todoUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todoVo
+	* @return
+	* Method 설명 : to-do 수정
+	*/
+	int todoUpdate(ToDoVo todoVo);
+	
 }

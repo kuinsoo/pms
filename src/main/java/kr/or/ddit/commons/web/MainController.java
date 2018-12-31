@@ -27,8 +27,7 @@ public class MainController {
 	private ProjectServiceInf projectService;
 	
 	@Autowired
-	private PostServiceInf postService;
-	
+	private PostServiceInf postService;	
 	
 	@Autowired
 	private MessageServiceInf messageService;
@@ -58,6 +57,21 @@ public class MainController {
 		// model.addAttribute("workMemberList", workService.workMember(memberVo.getMember_mail()));
 		return "main/main";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value= "/messageAlram" , method= RequestMethod.GET)
+	public Map<String ,Object>  messageAlram(@SessionAttribute("memberVo") MemberVo memberVo) {
+			
+		MessageVo messageVo = new MessageVo();
+		messageVo.setMsg_rmember(memberVo.getMember_mail());
+		
+		int totalmessageY = messageservice.totalmessageSizeCheck(memberVo.getMember_mail());
+		
+		Map<String, Object> msgReceiveMap = new HashMap<>();
+		msgReceiveMap.put("totalmessageY", totalmessageY);
+		
+		return msgReceiveMap;
+	}	
 	
 	@RequestMapping(value="/inviteProject", method=RequestMethod.GET)
 	public String inviteProject(Model model, @SessionAttribute("memberVo")MemberVo memberVo, @RequestParam("project_id")String project_id) {
