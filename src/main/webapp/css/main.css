@@ -521,7 +521,7 @@ header {
 }
 .messageCounterDiv {
 	position:absolute;right:0px;bottom:7px;z-index:5;width:20px;height:20px;
-	border-radius:100%;background-color:#f00;
+	border-radius:100%;background-color:#f00;display:none;
 }
 .messageCounterDiv > span {
 	padding-top:1px;
@@ -529,7 +529,7 @@ header {
 }
 .friendCounterDiv {
 	position:absolute;right:0px;bottom:7px;z-index:5;width:20px;height:20px;
-	border-radius:100%;background-color:#f00;
+	border-radius:100%;background-color:#f00;display:none;
 }
 .friendCounterDiv > span {
 	padding-top:1px;
