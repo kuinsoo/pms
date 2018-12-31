@@ -2,6 +2,7 @@ package kr.or.ddit.commons.web;
 
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.project.service.ProjectServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,9 @@ public class MainController {
 
 	@Autowired
 	private ProjectServiceInf projectService;
+	
+	@Autowired
+	private PostServiceInf postService;
 
 	/**
 	 * Main string.
@@ -33,14 +37,20 @@ public class MainController {
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 
+		int pageCnt = postService.totalPostCnt();
+		
 		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
+		
+		model.addAttribute("pageCnt", pageCnt);
+		
 		// model.addAttribute("workMemberList", workService.workMember(memberVo.getMember_mail()));
 		return "main/main";
 	}
 	
 	@RequestMapping(value="/inviteProject", method=RequestMethod.GET)
 	public String inviteProject(Model model, @SessionAttribute("memberVo")MemberVo memberVo, @RequestParam("project_id")String project_id) {
+		
 		Map<String, String > inviteMap = new HashMap<>();
 		model.addAttribute("project_id", project_id);
 		inviteMap.put("project_id",project_id);
