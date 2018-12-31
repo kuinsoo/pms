@@ -174,19 +174,9 @@
 				<div class="updateHeader" style="float:right;">
 					<a href="/message" class="facing">
 						<i class="icon-paper-plane icons" id="messageSendIcon"></i>
-						
-						<c:choose>
-							<c:when test="${messageCnt}>0">
-								<div class="messageCounterDiv">
-									<span>${messageCnt}</span>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<div class="messageCounterDiv" style="display:none">
-								</div>
-							</c:otherwise>
-							
-						</c:choose>
+						<div class="messageCounterDiv">
+							<span class = "messageCounterSpan">${messageCnt}</span>
+						</div>
 					</a>
 	                <%@ include file="/WEB-INF/views/alarm/alarm.jsp" %>
 	                
@@ -234,13 +224,15 @@
 				url : "/messageAlram",
 				data : "member_mail="+ '${memberVo.member_mail}',
 				success: function(data){
-					
 				console.log(data.totalmessageY);
 				// 쪽지온거확인
 				 	if(data.totalmessageY > 0){
+				 		$(".messageCounterDiv").show();
+						$(".messageCounterSpan").html(data.totalmessageY);
 						$("#messageSendIcon").css("color","#f00");
 				 	}else{
-						$("#messageSendIcon").css("color","#000");
+				 		$("#messageSendIcon").css("color","#000");
+						$(".messageCounterDiv").hide();
 				 	}
 				}, 
 			timeout: 3000,
