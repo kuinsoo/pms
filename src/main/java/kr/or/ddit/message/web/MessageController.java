@@ -237,8 +237,6 @@ public class MessageController {
 			pageVo.setSearchTextFriend("");
 		}
 		
-		System.out.println(pageVo.getSearchTextFriend()+  " 친구 리스트에서 ");
-		
 		FriendListVo friendListVo = new FriendListVo();
 		friendListVo.setFriend_myemail(memberVo.getMember_mail());
 		
@@ -568,11 +566,3 @@ public class MessageController {
 		return yougiveListMap;
 	}
 }
-
-
-
-
-
-
-
-

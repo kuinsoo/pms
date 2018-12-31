@@ -44,6 +44,7 @@
 								</div>
 								<textarea id="todo_content${todo.todo_id}" readonly>${todo.todo_content}</textarea>
 								<input type="button" value="수정" class="issueCreateBtn" onclick="attrChangeUpdate${todo.todo_work}(${todo.todo_id});">
+								<input type="button" value="등록" class="issueCreateBtn" onclick="updateTodo${todo.todo_work}(${todo.todo_id}, ${todo.todo_work});">
 							</form>
 						</div>
 						<div class="issueSelectPageRight">

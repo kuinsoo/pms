@@ -55,8 +55,6 @@ public class MainController {
 		
 		int totalmessageY = messageservice.totalmessageSizeCheck(memberVo.getMember_mail());
 		
-		System.out.println(totalmessageY);
-		
 		Map<String, Object> msgReceiveMap = new HashMap<>();
 		msgReceiveMap.put("totalmessageY", totalmessageY);
 		

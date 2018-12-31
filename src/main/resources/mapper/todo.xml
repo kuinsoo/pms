@@ -103,4 +103,14 @@
 		WHERE   pmember_project = #{project_id}
 	</select>
 	
+	<!-- to-do 수정 -->
+	<update id="todoUpdate" parameterType="todoVo">
+		UPDATE  todo
+		SET     todo_pmember = #{member_name},
+		        todo_member = #{pmember_member},
+		        todo_eedate = #{todo_eedate},
+		        todo_content = #{todo_content}
+		WHERE   todo_id = #{todo_id}
+	</update>
+	
 </mapper>

@@ -253,7 +253,7 @@ function deleteIssue${work.work_id}(todo_id){
 	});
 }
 
-/* to-do 수정시 input type 속성 변경 */
+/* to-do 수정시 input type 속성 변경 ==문의: jerry== */
 function attrChangeUpdate${work.work_id}(todo_id) {
 	var project_id = ${projectVo.project_id};
 	
@@ -279,6 +279,34 @@ function attrChangeUpdate${work.work_id}(todo_id) {
 		},
 		error: function(data){
 			console.log("todoList.jsp : attrChangeUpdate() - error");
+		}
+	});
+}
+
+/* to-do 수정 ==문의: jerry== */
+function updateTodo${work.work_id}(todo_id, work_id) {
+	var project_id = ${projectVo.project_id};
+	
+	var option = $('#pmember_member option:selected').val();
+	var optionSplit = option.split("(");
+	var member_name = optionSplit[0];
+	var pmember_member = optionSplit[1];
+	pmember_member = pmember_member.replace(")", "");
+	var todo_eedate = $('#todo_eedate'+todo_id).val();
+	todo_eedate = todo_eedate.replace("T", " "); 
+	var todo_content = $('#todo_content'+todo_id).val();
+	
+	$.ajax({
+		method: "POST",
+		url: "/todoUpdate",
+		data: {"todo_id" : todo_id, "member_name" : member_name, "pmember_member" : pmember_member, "todo_eedate" : todo_eedate, "todo_content" : todo_content},
+		success: function(data){
+			window.location.href = '#close';
+			getToDoList${work.work_id}(1, project_id, work_id);
+			initialization${work.work_id}(todo_id);
+		},
+		error: function(data){
+			console.log("todoList.jsp : updateTodo() - error");
 		}
 	});
 }

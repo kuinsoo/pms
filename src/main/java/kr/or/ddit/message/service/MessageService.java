@@ -171,7 +171,6 @@ public class MessageService implements MessageServiceInf{
 	
 	@Override
 	public int insertFriendY(FriendListVo friendVo) {
-		System.out.println(friendVo);
 		return messageMapper.insertFriendY(friendVo);
 	}
 
