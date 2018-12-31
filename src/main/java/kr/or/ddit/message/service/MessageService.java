@@ -185,6 +185,12 @@ public class MessageService implements MessageServiceInf{
 	public int totalmessageSizeCheck(String member_mail) {
 		return messageMapper.totalmessageSizeCheck(member_mail);
 	}
+
+
+	@Override
+	public int totalFriendSizeCheck(String member_mail) {
+		return messageMapper.totalFriendSizeCheck(member_mail);
+	}
 }
 
 

@@ -172,19 +172,19 @@
 			</c:if>
                 
 				<div class="updateHeader" style="float:right;">
-					<a href="/message" class="facing">
-						<i class="icon-user icons" id="messageSendIcon"></i>
-						<div class="messageCounterDiv">
-							<span class = "messageCounterSpan">${messageCnt}</span>
-						</div>
-					</a>
+						<a href="/friendView"  class="facing">
+							<i class="icon-user icons" id="friendSendIcon"></i>
+							<div class="messageCounterDiv">
+								<span class = "friendCounterSpan"></span>
+							</div>
+						</a>
+						<a href="/message" class="facing">
+							<i class="icon-paper-plane icons" id="messageSendIcon"></i>
+							<div class="messageCounterDiv">
+								<span class = "messageCounterSpan"></span>
+							</div>
+						</a>
 					
-					<a href="/message" class="facing">
-						<i class="icon-paper-plane icons" id="messageSendIcon"></i>
-						<div class="messageCounterDiv">
-							<span class = "messageCounterSpan">${messageCnt}</span>
-						</div>
-					</a>
 	                <%@ include file="/WEB-INF/views/alarm/alarm.jsp" %>
 	                
 	                <!-- CURRENT USER -->
@@ -222,6 +222,7 @@
 		$('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
 
 		message();
+		friend();
 	});
 	
 	function message(){
@@ -244,6 +245,29 @@
 				}, 
 			timeout: 3000,
 	    	complete: setTimeout(function(){ polls(); }, 6000)
+			})
+		})();	 
+	}
+	function friend(){
+		(function pollss(){
+			$.ajax({
+				type: "GET",
+				url : "/friendAlram",
+				data : "member_mail="+ '${memberVo.member_mail}',
+				success: function(data){
+				console.log(data.totalFriendSize);
+				// 쪽지온거확인
+				 	if(data.totalFriendSize > 0){
+				 		$(".messageCounterDiv").show();
+						$(".friendCounterSpan").html(data.totalFriendSize);
+						$("#friendSendIcon").css("color","#f00");
+				 	}else{
+				 		$("#friendSendIcon").css("color","#000");
+						$(".messageCounterDiv").hide();
+				 	}
+				}, 
+			timeout: 3000,
+	    	complete: setTimeout(function(){ pollss(); }, 6000)
 			})
 		})();	 
 	}

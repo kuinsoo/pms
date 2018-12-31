@@ -4,7 +4,7 @@
 	<section class="currentMain">
 		<div class="currentMainContainer">
 			<div class="facingTitle">
-				<h2><i class="icon-paper-plane icons"></i>쪽지</h2>
+				<h2><i class="icon-user icons"></i>친구</h2>
 			</div>
 			<div class="facingContainer">
 				<div id="tabs2">

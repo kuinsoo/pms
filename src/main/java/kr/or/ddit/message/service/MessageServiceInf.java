@@ -32,6 +32,16 @@ public interface MessageServiceInf {
 	int totalmessageSizeCheck(String member_mail);
 	
 	/**
+	 * Method : totalFriendSizeCheck
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param member_mail
+	 * @return
+	 * Method 설명 : 내가 받은 친구 요청 개수 
+	 */
+	int totalFriendSizeCheck(String member_mail); 
+	
+	/**
 	 * Method : totalMember
 	 * 작성자 : pc07
 	 * 변경이력 :

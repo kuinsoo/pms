@@ -22,6 +22,10 @@ import kr.or.ddit.util.model.PageVo;
  * @author pc07
  *
  */
+/**
+ * @author pc07
+ *
+ */
 public interface MessageMapper {
 	/**
 	 * Method : messageReceived
@@ -102,6 +106,17 @@ public interface MessageMapper {
 	 * Method 설명 : 받은 쪽지 갯수 
 	 */
 	int totalMsgReceived(String msg_rmember);
+	
+	
+	/**
+	 * Method : totalFriendSizeCheck
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param member_mail
+	 * @return
+	 * Method 설명 : 내가 받은 친구 요청 개수 
+	 */
+	int totalFriendSizeCheck(String member_mail); 
 	
 	/**
 	 * Method : totalmessageSizeCheck
