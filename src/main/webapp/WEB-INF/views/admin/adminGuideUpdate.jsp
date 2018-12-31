@@ -99,7 +99,7 @@ ul{list-style-type:none;}
 			CURRENT ADMIN
 		</div>
 		<div class="adminInfo">
-			전체관리자<span>님</span> (admin@admin.com)
+			${memberVo.member_name}<span>님</span> (${memberVo.member_mail})
 			<a href="/logout">로그아웃</a>
 		</div>
 	</div>
@@ -115,15 +115,15 @@ ul{list-style-type:none;}
 		<div class="adminLeftMenuTitle">
 			<i class="icon-settings icons"></i>
 			<br>
-			<p>공지사항</p>
+			<p>가이드</p>
 		</div>
 	</div>
 	<div class="adminRightContent">
 		<div class="adminRightContentTop">
-			<p>CURRENT ADMIN > 공지사항</p>
+			<p>CURRENT ADMIN > 가이드</p>
 		</div>
 		<div class="adminRightContentInner">
-			<h2>공지사항 정보 관리<span>공지사항 정보를 변경하실 수 있습니다.</span></h2>
+			<h2>가이드 정보 관리<span>가이드 정보를 변경하실 수 있습니다.</span></h2>
 			<form action="/adminUpdateGuide" method="post" id="adminUpdateGuide">
 				<div class="adminTitleInputContent">
 					<input type="hidden" name="member_mail" value="${memberVo.member_mail}" />

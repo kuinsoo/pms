@@ -43,7 +43,7 @@
 <script>
 $(document).ready(function(){
 	//workMemberList();
-	//noticeMemberList();
+	noticeMemberList();
 });
 
 function workMemberList(){
@@ -68,16 +68,42 @@ function workMemberList(){
 	
 };
 
-function noticeMemberList(){
+function noticeMemberList(){	
+	
+	var listCnt = ${pageCnt};
+	
+	 $.ajax({
+		  type: "GET",
+		  url: "/ajaxNoticeAlarm",
+		  data: {"page" : 1, "pageSize" : 10},
+		  success: function (data){
+			  $("#noticeMemberList").html();
+			  $("#noticeMemberList").html(data);
+		  }
+	   });
 	
 	(function polls(){
 		$.ajax({
 		    type: "GET",
-		    url: "/ajaxNoticeAlarm",
-		    data: {"page" : 1, "pageSize" : 10},
-		    success: function (data) {
-		       $('#noticeMemberList').html("");
-		       $('#noticeMemberList').html(data);
+		    url: "/alarm",
+		    // data: {"page" : 1, "pageSize" : 10},
+		    success: function (pageCnt) {
+		       
+		       if(listCnt < pageCnt){
+		    	   
+		    	   $.ajax({
+		    		  type: "GET",
+		    		  url: "/ajaxNoticeAlarm",
+		    		  data: {"page" : 1, "pageSize" : 10},
+		    		  success: function (data){
+		    			  $("#noticeMemberList").html();
+		    			  $("#noticeMemberList").html(data);
+		    		  }
+		    	   });
+		    	   
+		    	   alert("새로운 공지사항이 등록되었습니다!");
+		       }
+		       listCnt = pageCnt;
 		    },
 		    error: function (data) {
 			    location.href = "/";

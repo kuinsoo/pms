@@ -92,7 +92,7 @@ ul{list-style-type:none;}
 			CURRENT ADMIN
 		</div>
 		<div class="adminInfo">
-			전체관리자<span>님</span> (admin@admin.com)
+			${memberVo.member_name}<span>님</span> (${memberVo.member_mail})
 			<a href="/logout">로그아웃</a>
 		</div>
 	</div>
