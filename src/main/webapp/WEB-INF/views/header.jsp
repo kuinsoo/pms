@@ -113,6 +113,7 @@
             </div>
 
             <!-- CURRENT ALL SEARCH -->
+            <!--
             <div class="currentAllSearch">
                 <select>
                     <option>ALL</option>
@@ -122,6 +123,7 @@
                 <input type="text" placeholder="전체에서 검색" class="headerSearchInputText" />
                 <i class="icon-magnifier icons"></i>
             </div>
+            -->
 
             <div class="headerRightContent">
             	<!-- 팀원 초대 -->

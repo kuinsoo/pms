@@ -14,8 +14,7 @@
 				<div class="swiper-slide">
 					<img src="../images/slide1.png">
 				</div>
-				<div class="swiper-slide">
-					<img src="https://placehold.it/1920x500">
+				<div class="swiper-slide" style="background-image:url(../images/kimjitae.jpg);background-repeat:no-repeat;background-size:cover;background-position:10% 30%;">
 				</div>
 				<div class="swiper-slide">
 					<img src="https://placehold.it/1920x500">
@@ -132,6 +131,7 @@
 <script>
 	var swiper = new Swiper('.swiper-container', {
 		loop: true,
+		effect: 'fade',
 		pagination: {
 			el: '.swiper-pagination',
 			type: 'progressbar',
