@@ -8,154 +8,129 @@
 			</div>
 			<div class="facingContainer">
 				<div id="tabs2">
-					<ul>							
-						<li><a href="#tabs2-1">쪽지 보내기</a></li>
-						<li><a href="#tabs2-2">받은쪽지</a></li>
-						<li><a href="#tabs2-3">보낸쪽지</a></li>
+					<ul>
+						<li><a href="#tabs2-4">친구리스트</a></li>
+						<li><a href="#tabs2-5">친구요청</a></li>
 					</ul>
-
-					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 쪽지 보내기  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-					<div id="tabs2-1">
-						<div class="facingSend">
-							<form action="/insertMessageSend" method="post">
-								<div class="facingSendTitle">
-									<input type="text" class="recipient" name="textValue" placeholder="받는사람을 입력해주세요" />
-									<select name="selectBox" onChange="getSelectValue(this.form);" class="recipientSelect">
-										<option> 친구등록 리스트 </option>
-										<c:forEach items="${selctMyFriend }" var="mf">
-											<option>${mf.friend_member}</option>
-										</c:forEach>
-									</select>
-									<!-- option으로 선택한 갑이 input에 넣어진다 -->
-									<script>
-									function getSelectValue(frm){
-									 	frm.textValue.value = frm.selectBox.options[frm.selectBox.selectedIndex].text;
-									}
-									</script>
-								</div>
-								<textarea class="facingContent" name = "textArea"></textarea>
-								<div class="facingBtn">
-									<input type = "hidden" name = "msg_smember" />
-									<input type="submit" class="facingSendBtn" value="보내기" />
-									<input type="button" class="facingSendReset" value="취소" />
-								</div>
-							</form>
-						</div>
-					</div>
-					
-					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 받은쪽지 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-					
-					<input type="hidden" id ="msg_type" name ="msg_type"/> 
-					<div id="tabs2-2">
-						<div class="receivedNoteContainer">
-							<form action="#" method="post">
-								<table>						
-									<colgroup width="10%" />
-									<colgroup width="10%" />
-									<colgroup width="30%" />
-									<colgroup width="15%" />
-									<colgroup width="20%" />
-									<colgroup width="10%" />
-									<thead>
-										<tr class="msgClick1"> 
-											<th>번호</th>
-											<th>아이디</th>
-											<th>받은 쪽지 내용</th>
-											<th>쪽지 보낸 사람</th>
-											<th>받은 날짜</th>
-											<th>읽음 확인</th>
-										</tr>
-									</thead>
+					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+					<div id="tabs2-4">
+						<div class="friendContainer">
+						 	<div class="friendLeft">
+						      <h2>친구찾기</h2>
+								<form name ="searchTextFriendList" method="POST" onsubmit="return false;">
+										<input type="text" id="searchTextFriendList" name="searchTextFriendList" class="friendSearchInput" placeholder="찾으시는 분의 이메일을 입력해주세요" />
+										<input type="hidden" name="page" value='1'/>
+										<input type="hidden" name="pageSize" value='10' />
+										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getAllMemberSearch();"/>
+										<button onclick="getAllMember(1);">목록으로</button>
+								</form>
 									
-									<tbody id="msgReceiveList">
-									</tbody>
-								</table>
-							</form>
-							<ul class="pagination receivePaging"></ul>
+									<table class="friendCreateTable">
+										<thead>
+											<tr>
+												<th>번호</th>
+												<th>회원이메일</th>
+												<th>회원이름</th>
+												<th>등록</th>
+											</tr>
+										</thead>
+										<tbody id = "myMemberList">
+										</tbody>
+									</table>
+									<ul class="paginationMember">
+									</ul>
+							</div>
 							
-							<!-- 팝업 시작 부분 -->
-							<div class="white_content2" id="open2">
-								<div>
- 									<a href="#close"><i class="icon-close icons"></i></a>
-									<div class="sentNoteContainer">
-										<div class="recipientFacing">
-											<span>보낸사람</span>
-											<input type="text" id = "reInput1" value="" readonly />
-										</div>
-										<div class="sendDate">
-											<span>받은 날짜</span>
-											<input type="text" value=""  id = "reInput2" readonly />
-											<!-- <i class="icon-ban icons"></i>
-											<span>차단</span>
-											<i class="icon-energy icons"></i>
-											<span>신고</span> -->
-										</div>							
-										<textarea class="sentNoteTextArea" id="reInput3"></textarea>
-										<div class="facingDeleteBtnDiv">
-											<form method="post" action="/deleteMessageReceived">
-												<input type="submit" value="삭제" class="sentNoteDeleteBtn"/>
-												<input type="hidden" id ="reInput" name ="msg_id" />
-											</form>
-											<a onclick="getFriendsListGo();" href="#close" class="sentNoteCloseBtn"> 취소 </a>
-										</div>
-									</div>
-								</div>
-						    </div>
-							<!-- 팝업 끝나는 부분 -->
-						</div>
-					</div>
-					
-					<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 보낸쪽지 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-					
-					
-					<div id="tabs2-3">
-						<div class="sentNoteContainer">
-							<form action="#" method="post">
-								<table>
-									<colgroup width="10%" />
-									<colgroup width="10%" />
-									<colgroup width="40%" />
-									<colgroup width="15%" />
-									<colgroup width="30%" />
+							<div class="friendRight">
+							<h2>나의친구목록</h2>
+								<form name ="searchTextFriend" method="POST" onsubmit="return false;">
+										<input type="text" id="searchTextFriend" name="searchTextFriend" class="friendSearchInput" placeholder="찾으시는 친구의 이메일을 입력해주세요" />
+										<input type="hidden" name="page" value='1'/>
+										<input type="hidden" name="pageSize" value='10' />
+										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getSearchFriendProject();"/>
+										<button onclick="getMyFriends(1);">목록으로</button>
+										
+								</form>
+								<table class="friendCreateTable">
 									<thead>
-										<tr class = "msgClick2">
+										<tr>
 											<th>번호</th>
-											<th>아이디</th>
-											<th>보낸 쪽지 내용</th>
-											<th>받는 사람</th>
-											<th>보낸 날짜</th>
+											<th>친구 번호</th>
+											<th>이메일</th>
+											<th>삭제</th>
 										</tr>
 									</thead>
-									<tbody id="msgSendList">
+									<tbody id ="myFriendList">
+										<tr>
+											<!-- <td><input type="button" value="친구삭제" /> -->
+										</tr>
 									</tbody>
 								</table>
-							</form>
-							<div>
-								<ul class="pagination2"></ul>
+								<ul class="paginationFriends">
+								</ul>
 							</div>
-							<!-- 팝업  -->
-							<div class="white_content1" id="open1">
-								<div>
-									<a href="#close"><i class="icon-close icons"></i></a>
-									<div class="sentNoteContainer">
-										<div class="recipientFacing">
-											<span>받는 사람</span>
-											<input type="text" id="sendInput3"readonly />
-										</div>
-										<div class="sendDate">
-											<span>보낸 날짜</span>
-											<input type="text" id="sendInput4" readonly />
-										</div>							
-										<textarea class="sentNoteTextArea" id = "sendInput2"></textarea>
-										<div class="facingDeleteBtnDiv">
-											<form method="post" action="/deleteMessageSend">
-												<input type="submit" value="삭제" class="sentNoteDeleteBtn"/>
-												<input type="hidden" id ="sendInput1" name ="msgmember_msg" />
-											</form>
-										</div>
-									</div>
-								</div>
-						    </div>
+						</div>
+					</div>
+					<!-- ################################################################################################################################# -->
+					<!-- 요청 부분  -->
+					<div id="tabs2-5">
+						<div class="friendContainer">
+						 	<div class="friendLeft">
+						      <h2>내가 보낸 친구요청</h2>
+								<form name ="searchTextMySendFriendList" method="POST" onsubmit="return false;">
+										<input type="text" id="searchTextMySendFriendList" name="searchTextMySendFriendList" class="friendSearchInput" placeholder= "찾으시는 친구의 이메일을 입력하세요"/>
+										<input type="hidden" name="page" value='1'/>
+										<input type="hidden" name="pageSize" value='10' />
+										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getMySendFriendListSearch();"/>
+										<button onclick="getMySendFriendList(1);">목록으로</button>
+								</form>
+									<table class="friendCreateTable">
+										<thead>
+											<tr>
+												<th>번호</th>
+												<th>회원 코드</th>
+												<th>회원이메일</th>
+												<th>회원이름</th>
+												<th>요청취소</th>
+											</tr>
+										</thead>
+										<tbody id = "sendFriendList">
+										</tbody>
+									</table>
+									<ul class="paginationMySendFriends">
+									</ul>
+							</div>
+						
+							<!-- ################################################################################################################### -->
+						
+							<div class="friendRight">
+							<h2>내가 받은 친구 요청</h2>
+								<form name ="searchTextYouGiveFriendList" method="POST" onsubmit="return false;">
+										<input type="text" id="searchTextYouGiveFriendList" name="searchTextYouGiveFriendList" class="friendSearchInput" placeholder="찾으시는 친구의 이메일을 입력해주세요" />
+										<input type="hidden" name="page" value='1'/>
+										<input type="hidden" name="pageSize" value='10' />
+										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getYouGiveFriendListSearch();"/>
+										<button onclick="getYouGiveFriendList(1);">목록으로</button>
+								</form>
+								<table class="friendCreateTable">
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>회원 코드</th>
+											<th>회원이메일</th>
+											<th>회원이름</th>
+											<th>수락</th>
+											<th>거절</th>
+										</tr>
+									</thead>
+									<tbody id ="giveFriendList">
+										<tr>
+										</tr>
+									</tbody>
+								</table>
+								<ul class="paginationYouGiveFriends">
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>

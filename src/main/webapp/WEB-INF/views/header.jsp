@@ -170,8 +170,15 @@
                     </div>
                 </div>
 			</c:if>
-		
+                
 				<div class="updateHeader" style="float:right;">
+					<a href="/message" class="facing">
+						<i class="icon-user icons" id="messageSendIcon"></i>
+						<div class="messageCounterDiv">
+							<span class = "messageCounterSpan">${messageCnt}</span>
+						</div>
+					</a>
+					
 					<a href="/message" class="facing">
 						<i class="icon-paper-plane icons" id="messageSendIcon"></i>
 						<div class="messageCounterDiv">

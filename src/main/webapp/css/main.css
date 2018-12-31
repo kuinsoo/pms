@@ -517,7 +517,7 @@ header {
 .facing {
 	display:block;width:40px;height:40px;cursor:pointer;
 	margin-top:13px;float:left;color:#000;font-size:25px;
-	position:relative;
+	position:relative;padding-left:10px;
 }
 .messageCounterDiv {
 	position:absolute;right:7px;bottom:7px;z-index:5;width:20px;height:20px;
