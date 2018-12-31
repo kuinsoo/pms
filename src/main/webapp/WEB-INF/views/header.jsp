@@ -109,7 +109,7 @@
 
             <!-- CURRENT LOGO -->
             <div class="currentLogo" id="currentMain">
-                <img src="http://placehold.it/200x45">
+                <img src="https://placehold.it/200x45">
             </div>
 
             <!-- CURRENT ALL SEARCH -->
