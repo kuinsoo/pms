@@ -89,15 +89,20 @@
 											<span>차단</span>
 											<i class="icon-energy icons"></i>
 											<span>신고</span> -->
-										</div>							
+										</div>
+												
 										<textarea class="sentNoteTextArea" id="reInput3"></textarea>
 										<div class="facingDeleteBtnDiv">
 											<form method="post" action="/deleteMessageReceived">
 												<input type="submit" value="삭제" class="sentNoteDeleteBtn"/>
 												<input type="hidden" id ="reInput" name ="msg_id" />
 											</form>
+											
 											<a onclick="getFriendsListGo();" href="#close" class="sentNoteCloseBtn"> 취소 </a>
 										</div>
+											<form method="post"  action = "/sendYouMessageUpdate">
+												<input type="submit" class="sentNoteDeleteBtn" value ="답장하기"/> 				
+											</form>	
 									</div>
 								</div>
 						    </div>
@@ -881,6 +886,8 @@ $("#tabs").tabs();
 
 //마이페이지 하단 탭 메뉴
 $("#tabs2").tabs();
+
+
 </script>
 </body>
 </html>
