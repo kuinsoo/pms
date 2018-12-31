@@ -21,6 +21,7 @@ import kr.or.ddit.friendslist.service.FriendsListServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.message.model.MessageVo;
 import kr.or.ddit.message.service.MessageServiceInf;
+import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.util.model.PageVo;
 import oracle.net.aso.f;
 
@@ -42,6 +43,9 @@ public class MessageController {
 	@Autowired
 	private MessageServiceInf messageservice;
 	
+	@Autowired
+	private PostServiceInf postService;
+	
 	
 	/**
 	 * Method : message
@@ -57,6 +61,9 @@ public class MessageController {
 	
 		List<FriendListVo> selctMyFriend = friendservice.selectMyFriends(memberVo.getMember_mail());
 		model.addAttribute("selctMyFriend",selctMyFriend);
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		
+		
 		return "message/message";
 	}
 	
@@ -351,9 +358,8 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="/sendYouMessageUpdate" , method= RequestMethod.POST)
-	public String sendYouMessageUpdate() {
-		
-		return "redirect:message#tabs2-1";
+	public String sendYouMessageUpdate(@RequestParam("msg_person")String msg_person) {
+		return "redirect:message#tabs2-1?msg_person="+msg_person;
 	}
 	
 	/**
