@@ -6,8 +6,9 @@ html, body {
 }
 
 .wraps {
-
+	background-color:#000;
+	/*
 	background-image: url(http://placehold.it/1920x1280);background-repeat:no-repeat;
 	background-size:cover;background-position:50% 50%;
-
+	*/
 }
