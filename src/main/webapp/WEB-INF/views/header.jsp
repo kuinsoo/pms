@@ -170,9 +170,14 @@
                     </div>
                 </div>
 			</c:if>
-
+		
 				<div class="updateHeader" style="float:right;">
-					<a href="/message" class="facing"><i class="icon-paper-plane icons"></i></a>
+					<a href="/message" class="facing">
+						<i class="icon-paper-plane icons" id="messageSendIcon"></i>
+						<div class="messageCounterDiv">
+							<span>10</span>
+						</div>
+					</a>
 	              
 	                <%@ include file="/WEB-INF/views/alarm/alarm.jsp" %>
 	                
@@ -223,8 +228,11 @@
 					
 				console.log(data.totalmessageY);
 				// 쪽지온거확인
-			 	if(data.totalmessageY > 0)
-					alert("쪽지가왔습니다.");
+				 	if(data.totalmessageY > 0){
+						$("#messageSendIcon").css("color","#f00");
+				 	}else{
+						$("#messageSendIcon").css("color","#000");
+				 	}
 				}, 
 			timeout: 3000,
 	    	complete: setTimeout(function(){ polls(); }, 6000)

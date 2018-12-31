@@ -50,7 +50,7 @@ public class PostController {
 	}
 	
 	/**
-	* Method : adminList
+	* Method : noticeList
 	* 작성자 : iks
 	* 변경이력 :
 	* @param map
@@ -76,7 +76,7 @@ public class PostController {
 	}
 	
 	/**
-	* Method : adminPaging
+	* Method : noticePaging
 	* 작성자 : iks
 	* 변경이력 :
 	* @param map

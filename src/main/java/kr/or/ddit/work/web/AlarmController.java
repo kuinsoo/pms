@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.ddit.member.model.MemberVo;
@@ -50,21 +51,39 @@ public class AlarmController {
 		return "alarm/ajaxAlarm";
 	}
 	
+	/**
+	* Method : ajaxNoticeAlarm
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 공지 알림 조회
+	*/
 	@RequestMapping(value="/ajaxNoticeAlarm", method=RequestMethod.GET)
 	public String ajaxNoticeAlarm(Model model, PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo){		
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
-		
+
 		List<PostVo> noticeList = postService.getPostPageList(pageVo);
 		
-		Map<String, Object> postMap = new HashMap<>();
+		Map<String, Object> noticeMap = new HashMap<>();
 		int pageCnt = postService.totalPostCnt();
 		
-		postMap.put("noticeList", noticeList);
-		postMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
-
-		model.addAttribute("noticeList", noticeList);
+		noticeMap.put("noticeList", noticeList);
+		noticeMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		model.addAttribute("noticeMap", noticeMap);
+		model.addAttribute("pageCnt", pageCnt);
 		
 		return "alarm/ajaxNoticeAlarm";
+	}
+	
+	@RequestMapping(value="/alarm", method=RequestMethod.GET)
+	@ResponseBody
+	public int alarm(Model model) {
+		
+		int pageCnt = postService.totalPostCnt();		
+		
+		return pageCnt;
 	}
 }

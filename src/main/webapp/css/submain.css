@@ -10,7 +10,7 @@ iframe{border: 1px solid #dee3eb; width:100%; height:100%}
 .projectTeams{position:fixed;width:487px;overflow-y:scroll;background-color:#fff;border:1px solid #dee3eb;top:664px;}
 .projectTeams > h2{font-weight:normal;line-height:70px;margin-left:20px;cursor:pointer;}
 .projectTeams > h2 > i{display:block;float:right;line-height:70px;margin-right:10px;}
-.projectTeams > ul{display:none;width:100%;height:119px;}
+.projectTeams > ul{display:none;width:100%;height:132px;}
 .projectTeams > ul > li{padding:10px 0px 10px 0px;}
 .projectTeams > ul > li:first-child{border-bottom:1px solid #dee3eb;padding-bottom:10px;}
 .projectTeams > ul > li > .projectPositionName{margin-left:20px;font-size:18px;}
@@ -220,7 +220,7 @@ ul.subMaintab li.current > a{color:#fff;}
 
 .issueSelectPage{width:100%;overflow:hidden;clear:both;height:95%;padding-top:20px;}
 .issueSelectPageLeft{float:left;width:566px;}
-.issueSelectPageLeft > form > textarea{width:100%;font-size:20px;height:480px;outline:none;padding:20px;margin-top:10px;}
+.issueSelectPageLeft > form > textarea{width:100%;font-size:20px;height:300px;outline:none;padding:20px;margin-top:10px;}
 .issueSelectPageRight{float:left;width:376px;margin-left:10px;}
 .issueSelectPageRight > h2{text-align:left;padding:15px;float:left;}
 .issueSelectPageRight > form > textarea{width:100%;font-size:20px;height:630px;outline:none;padding:20px;}
