@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import kr.or.ddit.friendslist.model.FriendListVo;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.message.model.MessageVo;
@@ -49,14 +50,13 @@ public class MainController {
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String main(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 
-		int pageCnt = postService.totalPostCnt();
 		int messageCnt = messageService.totalmessageSizeCheck(memberVo.getMember_mail());
 		
 		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
 		model.addAttribute("messageCnt", messageCnt);
 		
-		model.addAttribute("pageCnt", pageCnt);
+		model.addAttribute("pageCnt", postService.totalPostCnt());
 		
 		// model.addAttribute("workMemberList", workService.workMember(memberVo.getMember_mail()));
 		return "main/main";
@@ -73,6 +73,21 @@ public class MainController {
 		
 		Map<String, Object> msgReceiveMap = new HashMap<>();
 		msgReceiveMap.put("totalmessageY", totalmessageY);
+		
+		return msgReceiveMap;
+	}	
+	
+	@ResponseBody
+	@RequestMapping(value= "/friendAlram" , method= RequestMethod.GET)
+	public Map<String ,Object>  friendAlram(@SessionAttribute("memberVo") MemberVo memberVo) {
+		
+		FriendListVo friendVo = new FriendListVo();
+		friendVo.setFriend_member(memberVo.getMember_mail());
+		
+		int totalFriendSize = messageService.totalFriendSizeCheck(memberVo.getMember_mail());
+		
+		Map<String, Object> msgReceiveMap = new HashMap<>();
+		msgReceiveMap.put("totalFriendSize",totalFriendSize);
 		
 		return msgReceiveMap;
 	}	

@@ -266,4 +266,12 @@
 		 and  B.MSG_RMEMBER= #{member_mail}
 		 and  A.msg_type = 'Y'
 	</select>
+	
+	<select  id="totalFriendSizeCheck" resultType="int" parameterType="String">
+		select count(*)
+		from   FRIENDSLIST
+		where  friend_member  = #{member_mail}
+		and    friend_accept  = 'N'
+	
+	</select>
 </mapper>
