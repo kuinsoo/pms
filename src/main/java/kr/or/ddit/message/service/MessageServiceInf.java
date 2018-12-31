@@ -22,6 +22,16 @@ public interface MessageServiceInf {
 
 
 	/**
+	 * Method : totalmessageSizeCheck
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param msg_smember
+	 * @return
+	 * Method 설명 : Y 쪽지 개수 
+	 */
+	int totalmessageSizeCheck(String member_mail);
+	
+	/**
 	 * Method : totalMember
 	 * 작성자 : pc07
 	 * 변경이력 :

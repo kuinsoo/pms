@@ -116,8 +116,30 @@
 <script type="text/javascript" src="js/classie.js"></script>
 
 <script>
+//회의목록 출력
+getMeetingListAjax();
+
+function getMeetingListAjax(){
+var project_id = ${projectVo.project_id};
+	//(function poll(){
+		$.ajax({
+		    url : '/meetingList',
+		    type : 'POST',
+		    data : {"project_id":project_id},
+		    success : function (data) {
+				$('#meetingListAjax').html("");
+				$('#meetingListAjax').html(data);
+		    },
+		      error: function (data) {
+		    }
+		   // timeout: 3000,
+		   // complete: setTimeout(function(){ poll(); }, 6000)
+		 });
+	//})();
+};
+
+//회의록,대화록 다운로드
 $(function(){
-	
 	$('#meetingListAjax').on('click', '.saveDocFile', function(){
 		var title =$(this).parents('.myPInfo').prev().find('.meeting_title').html();
 		var date =$(this).parents('.myPInfo').prev().find('.format_meeting_sdate').html();
@@ -159,27 +181,6 @@ $(function(){
 	});
 });
 
-//회의목록 출력
-getMeetingListAjax();
-
-function getMeetingListAjax(){
-var project_id = ${projectVo.project_id};
-	//(function poll(){
-		$.ajax({
-		    url : '/meetingList',
-		    type : 'POST',
-		    data : {"project_id":project_id},
-		    success : function (data) {
-				$('#meetingListAjax').html("");
-				$('#meetingListAjax').html(data);
-		    },
-		      error: function (data) {
-		    }
-		   // timeout: 3000,
-		   // complete: setTimeout(function(){ poll(); }, 6000)
-		 });
-	//})();
-};
 
 // DIM POPUP - 팀원초대
 $('.projectCreatePopUps').click(function () {
@@ -380,6 +381,8 @@ $(document).ready(function () {
 
    updateCard('0', '0', 0, '${projectVo.project_id}');
 
+
+
    // html dom 이 다 로딩된 후 실행된다.
    $(document).ready(function () {
       // menu 클래스 바로 하위에 있는 a 태그를 클릭했을때
@@ -445,11 +448,14 @@ function updateCard(no, group, index){
 }; */
 
 
+/* work cart  현재 미사용 중  */
 function createWork() {
    var param = $('form[name=workfrm1]').serialize();
+
    $.ajax({
       method: "POST",
       url: "/ajaxCreateWork",
+      enctype: 'multipart/form-data',
       data: param,
       success: function (data) {
          $('#submain_work').html("");
@@ -539,8 +545,8 @@ function workChart(work_id) {
        url:  "/ajaxWorkChart",
         data: parm,
         success: function (data) {
-            $('#workCharts').html("")
-            $('#workCharts').html(data)
+            $('#workChart'+work_id).html("")
+            $('#workCharts'+work_id).html(data)
         }
     });
 }

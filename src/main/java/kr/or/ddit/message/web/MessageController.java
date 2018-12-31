@@ -93,6 +93,8 @@ public class MessageController {
 	}	
 	
 	
+	
+	
 
 	/**
 	 * Method : myfriendListAjax

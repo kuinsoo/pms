@@ -34,14 +34,16 @@
 									</div>
 									<div class="issuesRight">
 										<ul>
-											<li><input type="text" value="${todo.todo_pmember}" /></li>
+											<li><input type="text" id="todo_pmember${todo.todo_id}" value="${todo.todo_pmember}" /></li>
+											<li><select style="display:none" id="pmember_member" name="pmember_member"></select></li>
 											<li><input type="text" value="${todo.format_todo_sdate}" /></li>
-											<li><input type="text" value="${todo.format_todo_eedate}" /></li>
+											<li><input type="text" id="todo_eedate${todo.todo_id}" value="${todo.format_todo_eedate}" /></li>
 											<li><input type="text" value="${todo.todo_complet}" /></li>
 										</ul>
 									</div>
 								</div>
-								<textarea readonly>${todo.todo_content}</textarea>
+								<textarea id="todo_content${todo.todo_id}" readonly>${todo.todo_content}</textarea>
+								<input type="button" value="수정" class="issueCreateBtn" onclick="attrChangeUpdate${todo.todo_work}(${todo.todo_id});">
 							</form>
 						</div>
 						<div class="issueSelectPageRight">
@@ -52,7 +54,8 @@
 								</c:when>
 								<c:otherwise>
 									<input type="button" value="수정" class="insueUpdateBtn" onclick="updateIssue${todo.todo_work}(${todo.todo_id});"/>  
-									<input type="button" value="등록" class="issueCreateBtn" onclick="insertIssue${todo.todo_work}(${todo.todo_id});"/>  
+									<input type="button" value="등록" class="issueCreateBtn" onclick="insertIssue${todo.todo_work}(${todo.todo_id});"/>
+									<input type="button" value="삭제" class="insueUpdateBtn" onclick="deleteIssue${todo.todo_work}(${todo.todo_id});"/>  
 								</c:otherwise>
 							</c:choose>
 						</div>
@@ -88,7 +91,7 @@
 							</c:choose>
 							<input type="hidden" id="issue_id${todo.todo_id}" name="issue_id" value="">
 							<input type="hidden" name="issue_work" value="${todo.todo_work}">
-							<input type="hidden" name="todo_id" value="${todo.todo_id}">
+							<input type="hidden" id="todo_id${todo.todo_id}" name="todo_id" value="${todo.todo_id}">
 							<input type="hidden" id="issue_sdate${todo.todo_id}" name="issue_sdate" value="">
 							<input type="hidden" id="issue_edate${todo.todo_id}" name="issue_edate" value="">
 							<input type="hidden" id="work_project${todo.todo_id}" name="work_project" value="">
@@ -118,12 +121,11 @@
 									<!-- issueHelperHtmlAjax.jsp -->
 								</tbody>
 							</table>
-							<input type="hidden" id="delete_issue_id${todo.todo_id}" value="">
-							<input type="button" value="이슈삭제" class="insueUpdateBtn" onclick="deleteIssue(${todo.todo_id});"/>
 						</div>
 					</div>
 				</div>
-			</div></td>
+			</div>
+		</td>
 		<td>${todo.todo_pmember}</td>
 		<td>${todo.format_todo_sdate}</td>
 		<td>${todo.format_todo_eedate}</td>

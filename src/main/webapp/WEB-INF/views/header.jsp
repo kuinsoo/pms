@@ -173,6 +173,7 @@
 
 				<div class="updateHeader" style="float:right;">
 					<a href="/message" class="facing"><i class="icon-paper-plane icons"></i></a>
+	              
 	                <%@ include file="/WEB-INF/views/alarm/alarm.jsp" %>
 	                
 	                <!-- CURRENT USER -->
@@ -204,7 +205,33 @@
             </div>
         </div>
     </header>
+	<script>
+	// 폴링방법 
+	$(document).ready(function(){
+		$('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
 
+		message();
+	});
+	
+	function message(){
+		(function polls(){
+			$.ajax({
+				type: "GET",
+				url : "/messageAlram",
+				data : "member_mail="+ '${memberVo.member_mail}',
+				success: function(data){
+					
+				console.log(data.totalmessageY);
+				// 쪽지온거확인
+			 	if(data.totalmessageY > 0)
+					alert("쪽지가왔습니다.");
+				}, 
+			timeout: 3000,
+	    	complete: setTimeout(function(){ polls(); }, 6000)
+			})
+		})();	 
+	}
+	</script>
     <script>
 		$('#currentMain').on('click', function () {
 			location.href="/main";
@@ -223,17 +250,13 @@
 		});
     </script>
 
-    <script type="text/javascript" language="javascript">
-
-		$(document).ready(function(){
-
-			$('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
-		});
+   <!--  <script type="text/javascript">
+	
        /* .ajaxStart(function(){
             $('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
         })
         .ajaxStop(function(){
             $('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
-        });*/
-    </script>
+        });*/ 
+    </script>-->
 

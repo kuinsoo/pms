@@ -180,6 +180,12 @@ public class MessageService implements MessageServiceInf{
 	public List<FriendListVo> memberListN(FriendListVo friendVo) {
 		return messageMapper.memberListN(friendVo);
 	}
+
+
+	@Override
+	public int totalmessageSizeCheck(String member_mail) {
+		return messageMapper.totalmessageSizeCheck(member_mail);
+	}
 }
 
 

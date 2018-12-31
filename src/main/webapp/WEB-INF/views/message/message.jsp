@@ -87,10 +87,10 @@
 										<div class="sendDate">
 											<span>받은 날짜</span>
 											<input type="text" value=""  id = "reInput2" readonly />
-											<i class="icon-ban icons"></i>
+											<!-- <i class="icon-ban icons"></i>
 											<span>차단</span>
 											<i class="icon-energy icons"></i>
-											<span>신고</span>
+											<span>신고</span> -->
 										</div>							
 										<textarea class="sentNoteTextArea" id="reInput3"></textarea>
 										<div class="facingDeleteBtnDiv">
@@ -315,8 +315,7 @@
 		getAllMember(1);
 		getMySendFriendList(1);
 		getYouGiveFriendList(1);
-		
-		
+				
 		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
 			console.log("msgReceiveList");
 			var msg_id = $(this).children()[1].innerHTML;
@@ -339,8 +338,8 @@
 		getMessageReceived(1);
 	};	
 		
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		function getMessageReceived(page){
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	function getMessageReceived(page){
 			var pageSize = 10;
 			$.ajax({
 				type: "GET",
@@ -388,7 +387,7 @@
 				}
 			});
 		}
-		
+
 		function updateMessageReceivedAjax(msg_id){
 			$.ajax({
 				type:"GET",

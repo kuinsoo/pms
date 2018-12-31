@@ -124,5 +124,18 @@ public class ToDoService implements ToDoServiceInf{
 	public int todoDelete(String todo_id) {
 		return todoMapper.todoDelete(todo_id);
 	}
+
+	/**
+	* Method : selectOptionProjectMember
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param project_id
+	* @return
+	* Method 설명 : to-do 수정시 담당자 select option 값 조회
+	*/
+	@Override
+	public List<ToDoVo> selectOptionProjectMember(String project_id) {
+		return todoMapper.selectOptionProjectMember(project_id);
+	}
 	
 }

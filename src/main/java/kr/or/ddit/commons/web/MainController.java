@@ -3,13 +3,18 @@ package kr.or.ddit.commons.web;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
+import kr.or.ddit.message.model.MessageVo;
+import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.project.service.ProjectServiceInf;
+import kr.or.ddit.util.model.PageVo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller

@@ -92,7 +92,7 @@
 
 
 	<select id="workChart" parameterType="Map" resultType="todoVo">
-		select T.TODO_ID, MP.MEMBER_PROFILE, T.TODO_MEMBER, T.TODO_PMEMBER, T.TODO_SDATE, T.TODO_EEDATE, T.TODO_COMPLET
+		select T.TODO_ID, MP.MEMBER_PROFILE, T.TODO_MEMBER, T.TODO_PMEMBER, T.TODO_SDATE, T.TODO_EEDATE, T.TODO_COMPLET,T.TODO_WORK
 			from todo T,work W, work_member WM,project_member PM , MEMBER M , (select MEMBER_MAIL, MEMBER_PROFILE from member) MP
 			where M.MEMBER_MAIL = PM.PMEMBER_MEMBER
 			and PM.PMEMBER_ID = WM.PMEMBER_ID
@@ -100,6 +100,21 @@
 			and W.WORK_ID = T.TODO_WORK
 			and T.TODO_MEMBER = MP.MEMBER_MAIL
 			and PM.PMEMBER_PROJECT = #{project_id}
+			order by TODO_ID
+	</select>
+
+
+	<select id="selectWorkChart" parameterType="Map" resultType="todoVo">
+		select T.TODO_ID, MP.MEMBER_PROFILE, T.TODO_MEMBER, T.TODO_PMEMBER, T.TODO_SDATE, T.TODO_EEDATE, T.TODO_COMPLET,T.TODO_WORK
+			from todo T,work W, work_member WM,project_member PM , MEMBER M , (select MEMBER_MAIL, MEMBER_PROFILE from member) MP
+			where M.MEMBER_MAIL = PM.PMEMBER_MEMBER
+			and PM.PMEMBER_ID = WM.PMEMBER_ID
+			and WM.WORK_ID = W.WORK_ID
+			and W.WORK_ID = T.TODO_WORK
+			and T.TODO_MEMBER = MP.MEMBER_MAIL
+			and PM.PMEMBER_PROJECT = #{project_id}
+			and W.work_id = #{work_id}
+			order by TODO_ID
 	</select>
 
 

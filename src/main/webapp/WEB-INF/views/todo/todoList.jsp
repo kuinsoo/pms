@@ -11,12 +11,13 @@ $(document).ready(function(){
 
 	//to-do list의 pagination(Ajax) ==문의: jerry==
 	getToDoPagination${work.work_id}(1, project_id, work_id);
-
+	
 });
 
 /* 페이지 접속시 to-do list 조회(Ajax) ==문의: jerry== */
 function getToDoList${work.work_id}(page, project_id, work_id){
 	var pageSize = 5;
+	
 	$.ajax({
 		method: "POST",
 		url: "/todoSelect",
@@ -149,7 +150,7 @@ function insertIssue${work.work_id}(todo_id) {
 
 /* issue list 조회 ==문의: jerry== */
 function getIssueList${work.work_id}(todo_id) {
-	console.log('issue-todo_id : ' + todo_id);
+	
 	$.ajax({
 		method: "POST",
 		url: "/issueSelectList",
@@ -174,7 +175,6 @@ function setIssueUpdate${work.work_id}(todo_id, issue_id){
 	$('#input_issue_level'+todo_id + ' option[value=' + issue_level + ']').attr('selected', 'selected');
 	$('#input_issue_content'+todo_id).val(issue_content);
 	$('#issue_id'+todo_id).val(issue_id);
-	$('#delete_issue_id'+todo_id).val(issue_id);
 }
 
 /* 등록된 issue 수정 ==문의: jerry== */
@@ -221,7 +221,7 @@ function helperUpdate${work.work_id}(todo_id){
 
 /* 도움 list 조회 ==문의: jerry== */
 function getHelperList${work.work_id}(todo_id) {
-	console.log('helper-todo_id : ' + todo_id);
+	
 	$.ajax({
 		method: "POST",
 		url: "/issueHelperList",
@@ -237,18 +237,48 @@ function getHelperList${work.work_id}(todo_id) {
 }
 
 /* 이슈 삭제 ==문의: jerry== */
-function deleteIssue(todo_id){
-	var issue_id = $('#delete_issue_id'+todo_id).val();
+function deleteIssue${work.work_id}(todo_id){
+	var issue_id = $('#issue_id'+todo_id).val();
 	
 	$.ajax({
 		method: "POST",
 		url: "/issueDelete",
 		data: {"issue_id" : issue_id},
 		success: function(data){
-			alert(":)");
+			getIssueList${work.work_id}(todo_id);
 		},
 		error: function(data){
 			console.log("todoList.jsp : deleteIssue() - error");
+		}
+	});
+}
+
+/* to-do 수정시 input type 속성 변경 */
+function attrChangeUpdate${work.work_id}(todo_id) {
+	var project_id = ${projectVo.project_id};
+	
+	var edate = $('#todo_eedate'+ todo_id).val();
+	var repEdate = edate.replace(" ", "T");
+	
+	$('#todo_eedate'+todo_id).attr('type', 'datetime-local');
+	$('#todo_eedate'+ todo_id).val(repEdate);
+	
+	$('#todo_content'+todo_id).removeAttr('readonly');
+	
+	$.ajax({
+		method: "POST",
+		url: "/optionMember",
+		data: {"project_id" : project_id},
+		success: function(data){
+			$('#todo_pmember'+todo_id).hide();
+			$('#pmember_member').show();
+			for(var i = 0; i < data.length; i++){
+				var option = $("<option>"+data[i].member_name+'('+data[i].pmember_member+')'+"</option>");
+				$('#pmember_member').append(option);
+			}
+		},
+		error: function(data){
+			console.log("todoList.jsp : attrChangeUpdate() - error");
 		}
 	});
 }
@@ -276,4 +306,5 @@ function deleteIssue(todo_id){
 	<div class="pagination" id="pagination${work.work_id}">
 		<!-- todoPageinationHtml.jsp -->
 	</div>
+	
 </div>

@@ -23,6 +23,12 @@
 		<div class="currentCardContentView">
 			<div class="currentCardContentViewLeft">
 				<textarea readonly>${work.work_content}</textarea>
+				<%-- 첨부파일 목록
+				<div>
+					<c:forEach items="attList" var="att">
+					<a> </a>
+					</c:forEach>
+				</div> --%>
 			</div>
 				<%-- 할일관련 --%>
 			<%@ include file="/WEB-INF/views/todo/todoList.jsp" %>

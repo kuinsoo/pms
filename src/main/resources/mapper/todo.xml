@@ -29,8 +29,8 @@
 	
 	<!-- to-do insert -->
 	<insert id="todoInsert" parameterType="todoVo">
-		INSERT INTO todo (todo_id, todo_work, todo_pmember, todo_content, todo_sdate, todo_edate, todo_complet, todo_eedate, todo_color)
-		VALUES (todo_id_seq.NEXTVAL, #{todo_work}, #{todo_pmember}, #{todo_content}, #{todo_sdate}, null, 'N', #{todo_eedate}, '#F78181')
+		INSERT INTO todo (todo_id, todo_work, todo_pmember, todo_content, todo_sdate, todo_edate, todo_complet, todo_eedate, todo_color, todo_member)
+		VALUES (todo_id_seq.NEXTVAL, #{todo_work}, #{todo_pmember}, #{todo_content}, #{todo_sdate}, null, 'N', #{todo_eedate}, '#F78181', #{todo_member})
 	</insert>
 	
 	<!-- to-do select + paging -->
@@ -93,5 +93,14 @@
 		FROM	todo
 		WHERE	todo_id = #{todo_id}
 	</delete>
+	
+	<!-- to-do수정시 담당자 select option 값 조회 -->
+	<select id="selectOptionProjectMember" resultType="todoVo" parameterType="String">
+		SELECT  member_name,
+		        pmember_member
+		FROM    project_member INNER JOIN member
+		ON      pmember_member = member_mail
+		WHERE   pmember_project = #{project_id}
+	</select>
 	
 </mapper>

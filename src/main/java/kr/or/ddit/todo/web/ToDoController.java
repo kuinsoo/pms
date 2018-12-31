@@ -51,11 +51,13 @@ public class ToDoController {
 	 * @return Method  설명 : to-do list 등록(Ajax적용)
 	 */
 	@RequestMapping(value="/todoInsert", method= {RequestMethod.POST, RequestMethod.GET})
-	public String ajaxInsertTodo(HttpServletRequest request, PageVo pageVo, ToDoVo todoVo, Model model) {
+	public String ajaxInsertTodo(ToDoVo todoVo, HttpServletRequest request, PageVo pageVo, Model model) {
 		WorkVo workVo = new WorkVo();
 		workVo.setWork_project(request.getParameter("work_project"));
 		workVo.setWork_id(request.getParameter("todo_work"));
 
+		System.out.println("todoVo : " + todoVo);
+		
 		/* to-do insert */
 		try {
 			todoService.todoInsert(todoVo);
@@ -191,15 +193,17 @@ public class ToDoController {
 	}
 
 	/**
-	 * Todo delete string.
-	 *
-	 * @param todo_id    the todo id
-	 * @param project_id the project id
-	 * @param work_id    the work id
-	 * @param pageVo     the page vo
-	 * @param model      the model
-	 * @return the string
-	 */
+	* Method : todoDelete
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_id
+	* @param project_id
+	* @param work_id
+	* @param pageVo
+	* @param model
+	* @return
+	* Method 설명 : to-do 삭제
+	*/
 	@RequestMapping(value="/todoDelete", method= {RequestMethod.POST, RequestMethod.GET})
 	public String todoDelete(@RequestParam("todo_id")String todo_id, @RequestParam("project_id")String project_id,
 							@RequestParam("work_id")String work_id, PageVo pageVo, Model model) {
@@ -228,4 +232,26 @@ public class ToDoController {
 		
 		return "todo/todoInsertAjax";
 	}
+	
+	/**
+	* Method : selectOptionProjectMember
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param project_id
+	* @return
+	* Method 설명 : to-do 수정시 담당자 select option 값 조회
+	*/
+	@RequestMapping(value="/optionMember", method= {RequestMethod.POST, RequestMethod.GET})
+	@ResponseBody
+	public List<ToDoVo> selectOptionProjectMember(@RequestParam("project_id")String project_id){
+		System.out.println("project_id : " + project_id);
+		
+		List<ToDoVo> optionMemberList = todoService.selectOptionProjectMember(project_id);
+		
+		System.out.println("projectMemberList : " + optionMemberList);
+		
+		return optionMemberList;
+	}
+	
+	
 }

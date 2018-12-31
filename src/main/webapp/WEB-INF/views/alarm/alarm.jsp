@@ -11,6 +11,7 @@
 	            <li><a href="#tabs-2">업무 알림</a></li>
 	            <li><a href="#tabs-3">쪽지 알림</a></li>
 	            <li><a href="#tabs-4">공지 알림</a></li>
+	            <li><a href="#tabs-5">친구 알림</a></li>
 	        </ul>
 	        <div id="tabs-1">
 	            <i class="icon-bell icons"></i>
@@ -24,6 +25,11 @@
 	        <div id="tabs-3">
 	            <i class="icon-bell icons"></i>
 	            <p>새 프로젝트 및 새 글이 등록되었을 때,<br>Push 메시지로 알려드려요!</p>
+	        </div>
+	        <div id="tabs-4">
+	            <ul id="noticeMemberList">
+	            	<%-- ajaxNoticeAlarm jsp --%>
+	            </ul>
 	        </div>
 	        <div id="tabs-4">
 	            <ul id="noticeMemberList">

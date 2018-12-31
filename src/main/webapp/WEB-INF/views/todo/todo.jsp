@@ -29,6 +29,7 @@ function insertTodo${work.work_id}(work_id) {
     $("#todo_eedate${work.work_id}").attr('value', repEedate); //Controller에 보낼 hidden에 값을 세팅
 	var work_id = ${work.work_id};
     var project_id = ${projectVo.project_id};
+    
     var param = $('#todoInsert${work.work_id}').serialize();
     
 	$.ajax({
@@ -41,7 +42,8 @@ function insertTodo${work.work_id}(work_id) {
 	      $('#todoInsertHtmlAjax${work.work_id}').html(data);
 	      
 	      getToDoPagination${work.work_id}(1, project_id, work_id);
-		  <%-- workChart 동시 업데이트수행 (구인수) --%>
+		  
+	      <%-- workChart 동시 업데이트수행 (구인수) --%>
 		  workChart(work_id);
 	   },
 	   error:function(data) {
@@ -73,7 +75,7 @@ function setMemberName${work.work_id}(name, mail){
 	$('#todo_pmember${work.work_id}').val('');
 	$('#pmember_member${work.work_id}').val('');
 	$('#todo_pmember${work.work_id}').val(name);
-	$('#pmember_member${work.work_id}').val(mail);
+	$('#todo_member${work.work_id}').val(mail);
 }
 
 /* to-do 등록시 참여자 이름/이메일 검색 */
@@ -95,7 +97,6 @@ function popupSearchMember${work.work_id}(work_id){
 			console.log("todo.jsp : popupSearchMember() - error");
 		}
 	});
-	
 }
 
 /* to-do 등록시 검색창에 ENTER KEY event */
@@ -128,7 +129,7 @@ function enterKey${work.work_id}(e){
 						<input type="hidden" name="todo_eedate" id="todo_eedate${work.work_id}" value=""/>
 						<input type="hidden" name="work_project" id="todo_project_id" value="${projectVo.project_id}" />
 						<input type="hidden" name="todo_work" id="todo_work" value="${work.work_id}" />
-						<input type="hidden" name="pmember_member" id="pmember_member${work.work_id}" value="">
+						<input type="hidden" name="todo_member" id="todo_member${work.work_id}" value=""/>
 						<ul>
 							<li><input type="text" name="todo_pmember" id="todo_pmember${work.work_id}" placeholder="담당자를 입력하세요." /></li>
 							<li><textarea name="todo_content" placeholder="내용을 입력하세요."></textarea></li>

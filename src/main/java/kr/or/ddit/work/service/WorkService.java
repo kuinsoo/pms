@@ -136,4 +136,16 @@ public class WorkService implements WorkServiceInf{
 	public List<ToDoVo> workChart(Map<String, String> mtMap) {
 		return workMapper.workChart(mtMap);
 	}
+
+	/**
+	 * Method : selectWorkChart
+	 * 작성자 : Mr.kku
+	 * 내용 : 개별 업무 차트
+	 * @param mtMap
+	 * @return
+	 */
+	@Override
+	public List<ToDoVo> selectWorkChart(Map<String, String> mtMap) {
+		return selectWorkChart(mtMap);
+	}
 }

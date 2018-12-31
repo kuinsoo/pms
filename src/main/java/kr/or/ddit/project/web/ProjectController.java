@@ -1,5 +1,6 @@
 package kr.or.ddit.project.web;
 
+import kr.or.ddit.attachment.service.AttachmentServiceInf;
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.meeting.model.MeetingVo;
@@ -22,11 +23,8 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +62,8 @@ public class ProjectController {
 
 	@Autowired
 	private MeetingServiceInf meetingService;
-	
+
+
 	/**
 	 * Create project view string.
 	 *
@@ -150,6 +149,7 @@ public class ProjectController {
 		}
 
 		model.addAttribute("pMemberList",memberService.selectMainView(memberVo.getMember_mail()));
+		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
 		return "project/ajaxMainProjectList";
 	}
 
@@ -184,6 +184,9 @@ public class ProjectController {
 
 		/* 업무 카드 출력 */
 		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
+
+		/* 첨부파일 목록 */
+
 
 		Map<String, String> mtMap = new HashMap<>();
 		mtMap.put("project_id", project_id);
@@ -256,7 +259,7 @@ public class ProjectController {
 		}
 		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
-		return "main/main";
+		return "project/ajaxMainProjectList";
 	}
 
 
