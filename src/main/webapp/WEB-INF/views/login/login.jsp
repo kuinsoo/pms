@@ -62,20 +62,27 @@ div.well input[type="submit"]{width:100%;height:50px}
 	filter: alpha(opacity=50);
 }
 .dim-layers .pop-layers{display:block;width:500px;}
-.error{color: red; }
+.error{color:red;}
 .signBtn{width:100%;height:50px;line-height:35px;}
-#naver_id_login > a > img{display:block;margin:0 auto;}
-#msg{ color : red;}
+#naver_id_login > a > img{display:block;margin:0 auto;width:100%;margin-top:10px;}
+#msg{color:red;}
+
+/* video background */
+.videoBgs{width:100%;height:100%;position:absolute;top:0px;left:0px;}
+.videoBgs > video{width:100%;}
 </style>
 </head>
 
 <body>
 <div class="wraps">
+	<div class="videoBgs">
+		<video src="../video/currentVideo.mp4" muted autoplay="true" loop="true"></video>
+	</div>
 	<div class="container">
 		<div class="well box">
 			<form action="/loginProcess" method="post">
 				<h1>CURRENT 로그인</h1>
-				<h3 id = "msg">${msg}</h3>
+				<h3 id="msg">${msg}</h3>
 				<br>
 				<div class="form-group label-floating">
 					<label class="control-label">이메일</label>
@@ -90,15 +97,15 @@ div.well input[type="submit"]{width:100%;height:50px}
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호</label>
-					<input type="password" name="member_pass"  onkeyup="onkeyup_event2();"  id ="pass" class="form-control" required />
+					<input type="password" name="member_pass" onkeyup="onkeyup_event2();" id="pass" class="form-control" required />
 					<span id="passError"> 영문 숫자 포함 6글자 이상 다시 입력해주세요..</span>
 					<c:if test="${loginResult == 'false'}">
 						<span class="error"> 일치하는 회원이 없습니다..다시 로그인 해주세요.</span>
 					</c:if>
 				</div>
 				<br> <input type="submit" value="로그인" class="btn btn-primary btn-raised" /><br>
-				<a href="/signView" class="btn btn-primary btn-raised signBtn">회원가입</a>				
-			</form>			
+				<a href="/signView" class="btn btn-primary btn-raised signBtn">회원가입</a>
+			</form>
 			
 			<div id="naver_id_login" style="text-align:center"><a href="${url}">
 			<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
