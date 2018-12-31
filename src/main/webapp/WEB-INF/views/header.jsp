@@ -172,7 +172,12 @@
 			</c:if>
 		
 				<div class="updateHeader" style="float:right;">
-					<a href="/message" class="facing"><i class="icon-paper-plane icons" id = "messageSendIcon"></i></a>
+					<a href="/message" class="facing">
+						<i class="icon-paper-plane icons" id="messageSendIcon"></i>
+						<div class="messageCounterDiv">
+							<span>10</span>
+						</div>
+					</a>
 	              
 	                <%@ include file="/WEB-INF/views/alarm/alarm.jsp" %>
 	                
