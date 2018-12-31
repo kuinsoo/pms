@@ -7,30 +7,30 @@
 
 <!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
-	<div class="currentMainContainer">
-		<div class="currentMainSlide">
-			<!-- Swiper -->
-			<div class="swiper-container">
-				<div class="swiper-wrapper">
-					<div class="swiper-slide">
-						<img src="../images/slide1.png">
-					</div>
-					<div class="swiper-slide">
-						<img src="https://placehold.it/1400x500">
-					</div>
-					<div class="swiper-slide">
-						<img src="https://placehold.it/1400x500">
-					</div>
+	<div class="currentMainSlide">
+		<!-- Swiper -->
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="../images/slide1.png">
 				</div>
-
-				<!-- Add Pagination -->
-				<div class="swiper-pagination"></div>
-
-				<!-- Add Arrows -->
-				<div class="swiper-button-next"></div>
-				<div class="swiper-button-prev"></div>
+				<div class="swiper-slide">
+					<img src="https://placehold.it/1920x500">
+				</div>
+				<div class="swiper-slide">
+					<img src="https://placehold.it/1920x500">
+				</div>
 			</div>
+
+			<!-- Add Pagination -->
+			<div class="swiper-pagination"></div>
+
+			<!-- Add Arrows -->
+			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
 		</div>
+	</div>
+	<div class="currentMainContainer">
 		<div class="currentMainProjectCreate">
 			<h1>진행중인 프로젝트</h1>
 			<ul class="projectCreateULS">
