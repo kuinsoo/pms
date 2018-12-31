@@ -350,6 +350,12 @@ public class MessageController {
 		return "redirect:message#tabs2-2";
 	}
 	
+	@RequestMapping(value="/sendYouMessageUpdate" , method= RequestMethod.POST)
+	public String sendYouMessageUpdate() {
+		
+		return "redirect:message#tabs2-1";
+	}
+	
 	/**
 	 * Method : deleteMessageSend
 	 * 작성자 : pc07
