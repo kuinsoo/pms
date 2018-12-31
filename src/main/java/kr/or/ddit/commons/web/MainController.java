@@ -28,6 +28,10 @@ public class MainController {
 	
 	@Autowired
 	private PostServiceInf postService;
+	
+	
+	@Autowired
+	private MessageServiceInf messageService;
 
 	/**
 	 * Main string.
@@ -43,9 +47,11 @@ public class MainController {
 	public String main(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 
 		int pageCnt = postService.totalPostCnt();
+		int messageCnt = messageService.totalmessageSizeCheck(memberVo.getMember_mail());
 		
 		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
+		model.addAttribute("messageCnt", messageCnt);
 		
 		model.addAttribute("pageCnt", pageCnt);
 		
