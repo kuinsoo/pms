@@ -100,7 +100,7 @@
 			and W.WORK_ID = T.TODO_WORK
 			and T.TODO_MEMBER = MP.MEMBER_MAIL
 			and PM.PMEMBER_PROJECT = #{project_id}
-			order by TODO_ID
+			order by to_number(T.TODO_WORK) desc
 	</select>
 
 

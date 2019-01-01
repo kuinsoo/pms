@@ -33,10 +33,12 @@
 				<%-- 할일관련 --%>
 			<%@ include file="/WEB-INF/views/todo/todoList.jsp" %>
 		</div>
-		<div class="currentCardContentBottomView" id="workCharts${work.work_id}" >
-			<%--<div id="container${work.work_id}"></div> --%>
-				<%@ include file="/WEB-INF/views/work/ajaxWorkChart.jsp" %>
-		</div>
+            <%--<div class="currentCardContentBottomView" id="workCharts${work.work_id}" >
+                <div id="container${work.work_id}"></div>
+                <%@ include file="/WEB-INF/views/work/ajaxWorkChart.jsp" %>
+
+
+		</div>--%>
 
 		<!-- 댓글  -->
 		<div class="cardContentComment">

@@ -45,14 +45,16 @@
                 name: 'Project ${projectVo.project_id}',
                 data:[
                     <c:forEach items="${workCharts}" var="workChart" varStatus="i">
-                        <c:if test="${workChart.todo_work eq work.work_id}" >
+                       <c:choose>
+                        <c:when test="${workChart.todo_work eq work.work_id}" >
                             {
                                 start: Date.UTC(parseInt('${workChart.format_todo_sdate}'.substr(0,4)), parseInt('${workChart.format_todo_sdate}'.substr(5,2)), parseInt('${workChart.format_todo_sdate}'.substr(8,2))),
                                 end: Date.UTC(parseInt('${workChart.format_todo_eedate}'.substr(0,4)), parseInt('${workChart.format_todo_eedate}'.substr(5,2)), parseInt('${workChart.format_todo_eedate}'.substr(8,2))),
                                 y: ${i.index},
                                 assignee: '${workChart.todo_pmember}'
                             },
-                        </c:if>
+                        </c:when>
+                    </c:choose>
                     </c:forEach>],
                 dataLabels: [{
                     enabled: true,

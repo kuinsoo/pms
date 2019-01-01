@@ -191,6 +191,7 @@ public class ProjectController {
 		Map<String, String> mtMap = new HashMap<>();
 		mtMap.put("project_id", project_id);
 		model.addAttribute("workCharts",workService.workChart(mtMap));
+
 		/* 변찬우(추가 2018.12.26) 프로젝트 목록 출력 */
 		List<MeetingVo> meetingList= meetingService.meetingList(project_id);
 		model.addAttribute("meetingList",meetingList );
