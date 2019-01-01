@@ -157,14 +157,10 @@ public class WorkController {
 	@RequestMapping(value = "/ajaxWorkChart", method=RequestMethod.POST)
 	public String ajaxWorkChart(Model model, @RequestParam("project_id")String project_id,
 								@RequestParam("work_id")String work_id) {
-
-		WorkVo workVo = new WorkVo();
-		workVo.setWork_id(work_id);
 		Map<String, String> mtMap = new HashMap<>();
 		mtMap.put("project_id", project_id);
 		mtMap.put("work_id", work_id);
-		model.addAttribute("workCharts",workService.workChart(mtMap));
-		model.addAttribute("work",workVo);
+		model.addAttribute("workCharts",workService.selectWorkChart(mtMap));
 		return "work/ajaxWorkChart";
 	}
 }
