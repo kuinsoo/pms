@@ -38,6 +38,9 @@
 		.error{color: red;}
 		#telerror{color: red;}
 		#passError{color: red;}
+		/* video background */
+		.videoBgs{width:100%;height:100%;position:absolute;top:0px;left:0px;}
+		.videoBgs > video{width:100%;}
 	</style>
 <script type="text/javascript">
 
@@ -94,6 +97,9 @@
 </head>
 <body>
 <div class="wraps">
+	<div class="videoBgs">
+		<video src="../video/currentVideo.mp4" muted autoplay="true" loop="true"></video>
+	</div>
 	<div class="container">
 		<div class="well box">
 			<form action="/signProcess" method="post">

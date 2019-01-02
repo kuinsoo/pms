@@ -8,6 +8,7 @@ import kr.or.ddit.meeting.service.MeetingServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
 import kr.or.ddit.work.service.WorkServiceInf;
@@ -62,6 +63,9 @@ public class ProjectController {
 
 	@Autowired
 	private MeetingServiceInf meetingService;
+	
+	@Autowired
+	private PostServiceInf postService;
 
 
 	/**
@@ -208,6 +212,9 @@ public class ProjectController {
 		Cookie cookProject_title= new Cookie("project_title",URLEncoder.encode(project_title, "UTF-8").replace("+", "%20")); 
 		cookProject_title.setMaxAge(6); 
 		response.addCookie(cookProject_title);
+		
+		/* 공지사항 알림 */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
 
 		return "main/subMain";
 	}

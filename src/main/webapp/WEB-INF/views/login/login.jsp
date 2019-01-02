@@ -48,6 +48,8 @@ div.well input[type="submit"]{width:100%;height:50px}
 	filter: alpha(opacity=50);
 }
 .dim-layer .pop-layer{display:block;width:500px;}
+.findEmail{font-weight:bold;}
+.findPassword{font-weight:bold;}
 .findEmailBtn{width:100%;}
 .btn-layerClose{width:100%;}
 

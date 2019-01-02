@@ -1039,7 +1039,7 @@ header {
     width: 100%;
     outline: none;
     padding: 5px;
-    height:100px;
+    height:200px;
 }
 
 .projectStartEndDiv {
@@ -1298,8 +1298,8 @@ header {
 }
 .white_content:target{opacity:1;pointer-events:auto;}
 .white_content > div {
-	position:absolute;top:50%;left:50%;margin-top:-250px;margin-left:-300px;
-	width:600px;height:500px;border:1px solid #dee3eb;border-radius:10px;
+	position:absolute;top:50%;left:50%;margin-top:-300px;margin-left:-300px;
+	width:600px;height:600px;border:1px solid #dee3eb;border-radius:10px;
 	background-color:white;overflow:hidden;
 }
 .white_content > div > .mainCloseBtns {

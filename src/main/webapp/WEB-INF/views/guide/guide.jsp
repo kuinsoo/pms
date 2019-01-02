@@ -19,9 +19,11 @@
 .noticeContainerRight > table > thead > tr{border-top:3px solid #333;border-bottom:1px solid #333;}
 .noticeContainerRight > table > thead > tr > th{padding:20px 0px 20px 0px;font-size:20px;}
 .noticeContainerRight > table > tbody > tr{border-bottom:1px solid #333;}
+.noticeContainerRight > table > tbody > tr:hover{border:1px solid #333;box-shadow:1px 3px 5px #333;}
 .noticeContainerRight > table > tbody > tr > td{padding:20px 0px 20px 0px;font-size:20px;}
 .noticeContainerRight > table > tbody > tr > td:first-child,
 .noticeContainerRight > table > tbody > tr > td:last-child{text-align:center;}
+.noticeContainerRight > table > tbody > tr > td:nth-child(2) > a{color:#000;}
 .noticeContainerRight > table > tbody > tr > td:nth-child(2):hover > a {
 	text-decoration:underline;font-weight:bold;text-align:left;text-indent:50px;
 }
