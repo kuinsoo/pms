@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%-- left & header--%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 <style type="text/css">
@@ -13,33 +14,34 @@
 	width:875px;padding:20px;float:left;margin-left:20px;
 	background-color:#fff;border:1px solid #dee3eb;
 }
-.noticeContainerRight > table{width:100%;border-collapse:collapse;}
-.noticeContainerRight > table > thead > tr{border-top:3px solid #333;border-bottom:1px solid #333;}
-.noticeContainerRight > table > thead > tr > th{padding:20px 0px 20px 0px;font-size:17px;}
+.noticeContainerRight > table {
+	border-collapse:collapse;width:100%;
+}
+.noticeContainerRight > table > tbody > tr:first-child {
+	border-top:2px solid #333;
+}
 .noticeContainerRight > table > tbody > tr{border-bottom:1px solid #333;}
-.noticeContainerRight > table > tbody > tr > td{padding:20px 0px 20px 0px;font-size:17px;}
-.noticeContainerRight > table > tbody > tr > td:nth-child(odd){text-indent:10px;}
-.noticeContainerRight > table > tbody > tr > td:nth-child(odd) > a{color:#000;}
-.noticeContainerRight > table > tbody > tr > td:nth-child(odd):hover > a {
-	text-decoration:underline;font-weight:bold;
+.noticeContainerRight > table > tbody > tr > td {padding:20px;font-size:17px;}
+.tdColor{background-color:#eaf2ff;}
+.textareaTd{width:100%;}
+
+.noticeListGo{width:100%;height:50px;margin-top:20px;}
+.noticeListGo > a {
+	float:right;width:80px;height:40px;background-color:#eaf2ff;text-align:center;
+	line-height:40px;border:1px solid #333;font-size:17px;
 }
-.noticeContainerRight > table > tbody > tr > td:nth-child(even){text-align:center;color:#666;}
-.pagination{width:100%;display:flex;justify-content:center;align-items:center;margin-top:30px;}
-.pagination > ul > li{display:inline-block;}
-.pagination > ul > li > i {
-	text-align:center;line-height:30px;cursor:pointer;font-size:15px;vertical-align:middle;
-	padding:0px 20px 0px 20px;
+#qnaMody {
+	float:left;width:80px;height:40px;background-color:#eaf2ff;text-align:center;
+	line-height:40px;border:1px solid #333;font-size:17px;cursor:pointer;
 }
-.pagination > ul > li > a{color:#000;}
-.pagination > ul > li > a > span{font-size:17px;padding:0px 10px 0px 10px;vertical-align:middle;}
-.noticeSearchDiv{width:425px;height:50px;margin:0 auto;margin-top:10px;}
-.noticeSearchDiv > .noticeSearchInput {
-	width:390px;border:none;border-bottom:1px solid #333;float:left;height:30px;
-	outline:none;font-size:17px;
+#delPost {
+	float:left;width:80px;height:40px;background-color:#eaf2ff;text-align:center;
+	line-height:40px;border:1px solid #333;font-size:17px;cursor:pointer;
+	margin-left:10px;
 }
-.noticeSearchDiv > i {
-	float:left;font-size:20px;font-weight:bold;display:block;width:30px;height:27px;margin-top:3px;
-	border-bottom:1px solid #000;cursor:pointer;
+#qnaReply {
+	float:left;width:80px;height:40px;background-color:#eaf2ff;text-align:center;
+	line-height:40px;border:1px solid #333;font-size:17px;cursor:pointer;
 }
 </style>
 <script>
@@ -68,26 +70,37 @@ $(document).ready(function(){
 	<div class="currentMainContainer">
 		<div class="noticeContainer">
 			<div class="noticeContainerLeft">
-				<h2>CURRENT SERVICE<br>Q & A <br> 내용 </h2>
+				<h2>CURRENT SERVICE<br>Q&A</h2>
 			</div>
 			<div class="noticeContainerRight">
-				
-				<a href="/qnaList">질의 목록보기</a><br/><br/>
-				
-				<label id="post_writer">질의 작성자 : ${postVo.post_writer }</label><br/>
-				<label id="post_date">질의 작성일 : ${postVo.post_date }</label><br/>
-				
-				<c:if test="${memberVo.member_mail==postVo.post_writer}">
-					<button id="qnaMody">수정</button>
-					<button id="delPost">삭제</button>
-				</c:if>
-				<c:if test="${memberVo.member_mail=='admin@admin.com'}">
-					<button id="qnaReply">답글</button>
-				</c:if><br/>
-				
-				제목 : <label id="post_title">${postVo.post_title}</label><br/>
-				내용 : <label id="post_content">${postVo.post_content} </label><br/>
-				
+				<table>
+					<tr>
+						<td class="tdColor">제목</td>
+						<td>${postVo.post_title}</td>
+						<td class="tdColor">질의 작성자</td>
+						<td>${postVo.post_writer}</td>
+					</tr>
+					<tr>
+						<td class="tdColor">질의 작성일</td>
+						<td colspan="3"><fmt:formatDate value="${postVo.post_date}" pattern="yyyy-MM-dd" /></td>
+					</tr>
+					<tr>
+						<td colspan="4" class="textareaTd">
+							${postVo.post_content}
+						</td>
+					</tr>
+				</table>
+				<div class="noticeListGo">
+					<c:if test="${memberVo.member_mail==postVo.post_writer}">
+						<button id="qnaMody">수정</button>
+						<button id="delPost">삭제</button>
+					</c:if>
+					<c:if test="${memberVo.member_mail=='admin@admin.com'}">
+						<button id="qnaReply">답글</button>
+					</c:if>
+					
+					<a href="/qnaList">목록</a>
+				</div>
 			</div>
 		</div>
 	</div>
