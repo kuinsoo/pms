@@ -5,13 +5,13 @@
 <head>
 <meta charset="utf-8">
 <title></title>
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 <script src="https://code.jquery.com/jquery-3.1.1.min.js" charset="utf-8"></script>
 <script type="text/javascript">
 var curPage = 1;
 
 $(document).ready(function(){	//페이지가 로드되면 데이터를 가져오고 page를 증가시킨다. == $(document).ready(function(){});
 	getList(curPage);
-	pjtAllIssueHistory();
 	//page++;
 });
 
@@ -68,19 +68,6 @@ $(window).on('beforeunload', function() {
 	return $(window).scrollTop(0);
 });
 
-/* 프로젝트별 이슈 조회 ==문의: jerry== */
-function pjtAllIssueHistory() {
-	$.ajax({
-		method: "POST",
-		url: "/pjtAllIssueHistory",
-		success: function(data){
-			$("#myProgress").append(data);
-		},
-		error: function(data){
-			console.log("issueHistory.jsp : pjtAllIssueHistory() - error");
-		}
-	});
-}
 </script>
 <style media="screen">
 .scroll{
@@ -105,11 +92,19 @@ function pjtAllIssueHistory() {
 	background-color: #64FE2E;
 }
 
-.issueStick {
-	width: 10px;
+.issuePin {
+	width: 100%;
 	height: 15px;
-	background-color: #FE2E2E;
+	background-color: #FFFFFF;
 }
+
+.pin{
+	position: relative;
+	width: 9px;
+	height: 17px;
+	float: left;
+}
+
 </style>
 </head>
 <body>

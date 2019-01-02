@@ -41,6 +41,16 @@ public class IssueVo {
 	private String pmember_member;	//	참여자 메일
 	private String todo_id;			//	할일의 ID
 	private String project_id;		//	이슈의 소속 프로젝트 아이디
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	private Date   project_sdate;	//	프로젝트 시작일
+	private String format_project_sdate; // 프로젝트 시작일(String)
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	private Date   project_eedate;	//	프로젝트 예상종료일
+	private String format_project_eedate; // 프로젝트 시작일(String)
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	private Date   project_edate;	//	프로젝트 종료일
+	private String format_project_edate; // 프로젝트 시작일(String)
+	private int rnum;
 
 	/* 기본생성자 */
 	public IssueVo() {}
@@ -49,7 +59,9 @@ public class IssueVo {
 	public IssueVo(String issue_id, String issue_work, String issue_member, String issue_helper, String issue_wc,
 			String issue_level, String issue_title, String issue_content, String issue_solution, int issue_noviews,
 			Date issue_sdate, String format_issue_sdate, Date issue_edate, String format_issue_edate,
-			String issue_color, String member_name, String pmember_member, String todo_id, String project_id) {
+			String issue_color, String member_name, String pmember_member, String todo_id, String project_id,
+			Date project_sdate, String format_project_sdate, Date project_eedate, String format_project_eedate,
+			Date project_edate, String format_project_edate, int rnum) {
 		this.issue_id = issue_id;
 		this.issue_work = issue_work;
 		this.issue_member = issue_member;
@@ -69,6 +81,13 @@ public class IssueVo {
 		this.pmember_member = pmember_member;
 		this.todo_id = todo_id;
 		this.project_id = project_id;
+		this.project_sdate = project_sdate;
+		this.format_project_sdate = format_project_sdate;
+		this.project_eedate = project_eedate;
+		this.format_project_eedate = format_project_eedate;
+		this.project_edate = project_edate;
+		this.format_project_edate = format_project_edate;
+		this.rnum = rnum;
 	}
 
 	/* getter & setter */
@@ -174,6 +193,30 @@ public class IssueVo {
 	public void setProject_id(String project_id) {
 		this.project_id = project_id;
 	}
+	public Date getProject_sdate() {
+		return project_sdate;
+	}
+	public void setProject_sdate(Date project_sdate) {
+		this.project_sdate = project_sdate;
+	}
+	public Date getProject_eedate() {
+		return project_eedate;
+	}
+	public void setProject_eedate(Date project_eedate) {
+		this.project_eedate = project_eedate;
+	}
+	public Date getProject_edate() {
+		return project_edate;
+	}
+	public void setProject_edate(Date project_edate) {
+		this.project_edate = project_edate;
+	}
+	public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
 
 	/* 형변환 getter */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -189,7 +232,25 @@ public class IssueVo {
 		}
 		return sdf.format(issue_edate);
 	}
-
+	public String getFormat_project_sdate() {
+		if(project_sdate == null) {
+			return "";
+		}
+		return sdf.format(project_sdate);
+	}
+	public String getFormat_project_eedate() {
+		if(project_eedate == null) {
+			return "";
+		}
+		return sdf.format(project_eedate);
+	}
+	public String getFormat_project_edate() {
+		if(project_edate == null) {
+			return "";
+		}
+		return sdf.format(project_edate);
+	}
+	
 	/* toString */
 	@Override
 	public String toString() {
@@ -199,8 +260,10 @@ public class IssueVo {
 				+ issue_solution + ", issue_noviews=" + issue_noviews + ", issue_sdate=" + issue_sdate
 				+ ", format_issue_sdate=" + format_issue_sdate + ", issue_edate=" + issue_edate
 				+ ", format_issue_edate=" + format_issue_edate + ", issue_color=" + issue_color 
-				+ ", member_name=" + member_name + ", pmember_member=" + pmember_member + ", todo_id=" + todo_id + ", project_id=" + project_id + "]";
+				+ ", member_name=" + member_name + ", pmember_member=" + pmember_member + ", todo_id=" + todo_id
+				+ ", project_id=" + project_id + ", project_sdate=" + project_sdate + ", format_project_sdate=" 
+				+ format_project_sdate + ", project_eedate=" + project_eedate + ", format_project_eedate=" 
+				+ format_project_eedate + ", project_edate=" + project_edate + ", format_project_edate=" 
+				+ format_project_edate + ", rnum=" + rnum + "]";
 	}
-	
 }
-

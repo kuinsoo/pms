@@ -57,14 +57,24 @@
 
 	<!-- 프로젝트별 이슈 조회 -->
 	<select id="pjtAllIssueHistory" resultType="issueVo" parameterType="String">
-		SELECT  project_id,
-		        issue_title,
-		        issue_sdate
-		FROM    project INNER JOIN project_member
-		ON      project_id = pmember_project INNER JOIN work
-		ON      project_id = work_project INNER JOIN issue
-		ON      work_id = issue_work
-		WHERE   pmember_member = #{sid}
+		SELECT  ROWNUM rnum,
+		        A.*
+		FROM    (
+		        SELECT  project_id,
+		                project_sdate,
+		                project_eedate,
+		                project_edate,
+		                issue_id,
+		                issue_title,
+		                issue_sdate
+		        FROM    project INNER JOIN project_member
+		        ON      project_id = pmember_project INNER JOIN work
+		        ON      project_id = work_project INNER JOIN issue
+		        ON      work_id = issue_work
+		        WHERE   pmember_member = #{sid}
+		        ORDER BY project_id, TO_NUMBER(issue_id)
+		        ) A
+		ORDER BY rnum
 	</select>
 
 	<!-- 이슈 발생 등록 -->
