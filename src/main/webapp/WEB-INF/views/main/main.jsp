@@ -14,7 +14,7 @@
 				<div class="swiper-slide">
 					<img src="../images/slide1.png">
 				</div>
-				<div class="swiper-slide" style="background-image:url(../images/kimjitae.jpg);background-repeat:no-repeat;background-size:cover;background-position:10% 30%;">
+				<div class="swiper-slide" style="background-image:url(../images/noimage.png);background-repeat:no-repeat;background-size:cover;background-position:10% 30%;">
 				</div>
 				<div class="swiper-slide">
 					<img src="https://placehold.it/1920x500">

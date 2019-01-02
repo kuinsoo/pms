@@ -1,4 +1,4 @@
- package kr.or.ddit.member.web;
+package kr.or.ddit.member.web;
 
 import java.io.File;
 import java.io.IOException;
@@ -444,7 +444,10 @@ public class MemberDetailController {
 	
 	@RequestMapping(value ="/selectProjectFileAttachIdDownload", method = RequestMethod.GET)
 	public String selectProjectFileAttachNameAjax (Model model, @RequestParam("att_id")String att_id, @SessionAttribute("memberVo") MemberVo memberVo){
-			model.addAttribute("attVo",attachmentService.selectAtt(att_id));
+			
+			AttachmentVo attVo = attachmentService.selectAtt(att_id);
+			attVo.setAtt_path("a");
+			model.addAttribute("attVo", attVo);
 			return "attachment/download";
 		}
 	
