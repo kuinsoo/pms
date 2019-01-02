@@ -103,8 +103,9 @@ function getQnaPagingAjax(pageNum, board_id){
 			</div>
 			<div class="noticeContainerRight">
 				<table>
-					<colgroup width="80%" />
-					<colgroup width="20%" />
+					<colgroup width="75%" />
+					<colgroup width="10%" />
+					<colgroup width="15%" />
 					<thead>
 						<tr>
 							<th>제목</th>
@@ -123,7 +124,7 @@ function getQnaPagingAjax(pageNum, board_id){
 					<button id="newPost" >새 질문</button>
 				</div>
 				<div class="noticeSearchDiv">
-					<input type="text" class="noticeSearchInput" value=""/>
+					<input type="text" class="noticeSearchInput" value="" />
 					<i id="searching" class="icon-magnifier icons"></i>
 				</div>
 			</div>

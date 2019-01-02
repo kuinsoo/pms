@@ -27,6 +27,7 @@ import kr.or.ddit.post.service.PostServiceInf;
  */
 @Controller
 public class QnAController {
+	
 	@Autowired
 	private PostServiceInf postService;
 	
@@ -41,7 +42,10 @@ public class QnAController {
 	* Method 설명 : 질의응답 게시판 목록 
 	*/
 	@RequestMapping(value= "/qnaList") 
-	public String qnaView() {
+	public String qnaView(Model model) {
+		
+		/* 알림 임규승 2019-01-02 */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
 		
 		return "qna/qnaList";
 	}
@@ -111,6 +115,9 @@ public class QnAController {
 		
 		model.addAttribute("postVo", postVo);
 		
+		/* 알림 임규승 2019-01-02 */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		
 		return "qna/qnaDetail";
 	}
 	
@@ -128,6 +135,8 @@ public class QnAController {
 		postVo = postService.selectQnaPost(postVo.getPost_id());
 		
 		model.addAttribute("postVoDetail", postVo);
+		/* 알림 임규승 2019-01-02 */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
 		
 		return "qna/qnaMody";
 	}	
@@ -160,9 +169,11 @@ public class QnAController {
 	 * @return Method 설명 : Q&A  글 삭제 
 	 */
 	@RequestMapping(value= "/qnaDel", method= RequestMethod.GET)
-	public String qnaDelView(PostVo postVo) {
+	public String qnaDelView(PostVo postVo, Model model) {
 		
 		postService.deleteQnaPost(postVo.getPost_id());
+		/* 알림 임규승 2019-01-02 */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
 		
 		return "qna/qnaList";
 	}
@@ -183,7 +194,10 @@ public class QnAController {
 		// ??? (String)
 		
 		model.addAttribute("postVo", postVo);
-		//파라미터로 받은, 아직 등록되지않은 변수를 저장하기위해 
+		//파라미터로 받은, 아직 등록되지않은 변수를 저장하기위해
+		
+		/* 알림 임규승 2019-01-02 */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
 		
 		return "qna/qnaForm";
 	}
@@ -218,6 +232,9 @@ public class QnAController {
 
 		model.addAttribute("postVo", postVo);
 		//파라미터로 받은, 아직 등록되지않은 변수를 저장하기위해 (글 내용 -> 답글)
+		
+		/* 알림 임규승 2019-01-02 */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
 		
 		return "qna/qnaForm";
 	}

@@ -16,26 +16,26 @@
 							<div id="imgs">
 								<div class="scale"><img src="${memberVo.member_profile}"/></div>
 							</div>
-							<div class="myPageContainerRightUser">
-								<div class="userContentsInfoRight_1">
-									<ul id="test">
-										<li>사용자 이메일</li>
-										<li><input type="text" value= "${memberVo.member_mail}" readonly /></li>
-										<li>사용자 이름 </li>
-										<li><input type="text" value= "${memberVo.member_name}" readonly /></li>
-										<li>휴대폰 번호</li>
-										<li><input type="text"  value= "${memberVo.member_tel}" readonly /></li>
-									</ul>
-								</div>
-							</div>
+						</div>
+						<div class="userContentsInfoLeft_1">
+							<ul id="test">
+								<li class="marginPaddingUi">사용자 이메일</li>
+								<li><input type="text" value= "${memberVo.member_mail}" readonly /></li>
+								<li class="marginPaddingUi">사용자 이름 </li>
+								<li><input type="text" value= "${memberVo.member_name}" readonly /></li>
+								<li class="marginPaddingUi">휴대폰 번호</li>
+								<li><input type="text"  value= "${memberVo.member_tel}" readonly /></li>
+							</ul>
 						</div>
 					</div>
-					<div class="userContentsInfoRight_2">
-						<ul>
-							<li>프로젝트 참여 수 : ${evalProjectList.size()}</li>
-							<li>프로젝트 업무 수행능력 : 인텔리제이</li>
-							<li>프로젝트 이슈 처리능력 : 인텔리제이</li>
-						</ul>
+					<div class="evaluationContainerRightUser">
+						<div class="evaluationInfoRight_1">
+							<ul>
+								<li>프로젝트 참여 수 : ${evalProjectList.size()}</li>
+								<li>프로젝트 업무 수행능력 : 인텔리제이</li>
+								<li>프로젝트 이슈 처리능력 : 인텔리제이</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 

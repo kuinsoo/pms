@@ -30,6 +30,7 @@ import kr.or.ddit.commons.util.KISA_SHA256;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.util.model.PageVo;
@@ -61,6 +62,9 @@ public class MemberDetailController {
 	
 	@Autowired
 	private AttachmentServiceInf attachmentService;
+	
+	@Autowired
+	private PostServiceInf postService;
 	
 	
 
@@ -100,6 +104,9 @@ public class MemberDetailController {
 		model.addAttribute("totalEndProjectCnt",totalEndProjectCnt);
 		model.addAttribute("selectProjectCnt",selectProjectCnt);
 		model.addAttribute("selectTodoCnt",selectTodoCnt);
+		
+		/* 알림 임규승 2019-01-02 */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
 
 
 		return "myPage/myPage";

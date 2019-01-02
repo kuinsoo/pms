@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/header.jsp"%>
 <!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
@@ -23,14 +23,14 @@
 						<form action="/insertMessageSend" method="post">
 							<div class="facingSendTitle">
 								<input type="text" class="recipient" id="sendMessageInput"
-									name="textValue" placeholder="받는사람을 입력해주세요" /> <select
+									   name="textValue" placeholder="받는사람을 입력해주세요" /> <select
 									name="selectBox" onChange="getSelectValue(this.form);"
 									class="recipientSelect">
-									<option>친구등록 리스트</option>
-									<c:forEach items="${selctMyFriend }" var="mf">
-										<option>${mf.friend_member}</option>
-									</c:forEach>
-								</select>
+								<option>친구등록 리스트</option>
+								<c:forEach items="${selctMyFriend }" var="mf">
+									<option>${mf.friend_member}</option>
+								</c:forEach>
+							</select>
 								<!-- option으로 선택한 갑이 input에 넣어진다 -->
 								<script>
 									function getSelectValue(frm) {
@@ -41,8 +41,8 @@
 							<textarea class="facingContent" name="textArea"></textarea>
 							<div class="facingBtn">
 								<input type="hidden" name="msg_smember" /> <input type="submit"
-									class="facingSendBtn" value="보내기" /> <input type="button"
-									class="facingSendReset" value="취소" />
+																				  class="facingSendBtn" value="보내기" /> <input type="button"
+																															  class="facingSendReset" value="취소" />
 							</div>
 						</form>
 					</div>
@@ -62,14 +62,14 @@
 								<colgroup width="20%" />
 								<colgroup width="10%" />
 								<thead>
-									<tr class="msgClick1">
-										<th>번호</th>
-										<th>아이디</th>
-										<th>받은 쪽지 내용</th>
-										<th>쪽지 보낸 사람</th>
-										<th>받은 날짜</th>
-										<th>읽음 확인</th>
-									</tr>
+								<tr class="msgClick1">
+									<th>번호</th>
+									<th>아이디</th>
+									<th>받은 쪽지 내용</th>
+									<th>쪽지 보낸 사람</th>
+									<th>받은 날짜</th>
+									<th>읽음 확인</th>
+								</tr>
 								</thead>
 
 								<tbody id="msgReceiveList">
@@ -85,11 +85,11 @@
 								<div class="sentNoteContainer">
 									<div class="recipientFacing">
 										<span>보낸사람</span> <input type="text" id="reInput1" value=""
-											readonly />
+																 readonly />
 									</div>
 									<div class="sendDate">
 										<span>받은 날짜</span> <input type="text" value="" id="reInput2"
-											readonly />
+																  readonly />
 										<!-- <i class="icon-ban icons"></i>
 											<span>차단</span>
 											<i class="icon-energy icons"></i>
@@ -104,10 +104,10 @@
 										</form>
 
 										<a onclick="getFriendsListGo();" href="#close"
-											class="sentNoteCloseBtn"> 취소 </a>
+										   class="sentNoteCloseBtn"> 취소 </a>
 
 										<form method="post" action="/sendYouMessageUpdate"
-											id="sendMessageForm">
+											  id="sendMessageForm">
 											<input type="hidden" name="msg_person" id="sendPerson" /> <input
 												type="button" class="sentNoteDeleteBtn" id="sendMessage"
 												value="답장하기" />
@@ -133,13 +133,13 @@
 								<colgroup width="15%" />
 								<colgroup width="30%" />
 								<thead>
-									<tr class="msgClick2">
-										<th>번호</th>
-										<th>아이디</th>
-										<th>보낸 쪽지 내용</th>
-										<th>받는 사람</th>
-										<th>보낸 날짜</th>
-									</tr>
+								<tr class="msgClick2">
+									<th>번호</th>
+									<th>아이디</th>
+									<th>보낸 쪽지 내용</th>
+									<th>받는 사람</th>
+									<th>보낸 날짜</th>
+								</tr>
 								</thead>
 								<tbody id="msgSendList">
 								</tbody>
@@ -190,15 +190,15 @@
 	<input type = "hidden" id = "msg_id" name ="msg_id" value="${msg_id}"/>	
  </form>  --%>
 <script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 
 <style>
-#read {
-	background-color: #fcfcfc;
-	color: #ccc;
-}
+	#read {
+		background-color: #fcfcfc;
+		color: #ccc;
+	}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {

@@ -11,13 +11,13 @@ $(document).ready(function(){
 
 	//to-do list의 pagination(Ajax) ==문의: jerry==
 	getToDoPagination${work.work_id}(1, project_id, work_id);
-	
+
 });
 
 /* 페이지 접속시 to-do list 조회(Ajax) ==문의: jerry== */
 function getToDoList${work.work_id}(page, project_id, work_id){
 	var pageSize = 5;
-	
+
 	$.ajax({
 		method: "POST",
 		url: "/todoSelect",
@@ -68,7 +68,7 @@ function todoComplet(todo_id, todo_issue){
 				console.log("todoList.jsp : todoComplet() - Y, error");
 			}
 		});
-		
+
 	/* 체크를 풀었으면 N으로 변경 */
 	}else if(checked == false){
 		chk = "N";
@@ -115,10 +115,10 @@ function initialization${work.work_id}(todo_id){
 	/* issue 등록시 발생일자를 현재 일시로 default 셋팅 설정  ==문의: jerry== */
     var date = new Date();
     date.setHours(date.getHours() + 9);
-	
+
     document.getElementById('non_issue_sdate'+todo_id).value = date.toISOString().slice(0, 16);
     document.getElementById('non_issue_edate'+todo_id).value = date.toISOString().slice(0, 16);
-    
+
     /* issue 조회 함수 호출 ==문의: jerry== */
     getIssueList${work.work_id}(todo_id);
 
@@ -131,9 +131,9 @@ function insertIssue${work.work_id}(todo_id) {
 	var sdate = $('input[name=non_issue_sdate'+ todo_id +']').val();
 	var repSdate = sdate.replace("T", " ");
 	$("#issue_sdate"+todo_id).val(repSdate);
-	
+
 	var param = $('form[name=insertIssueForm'+ todo_id +']').serialize();
-	
+
 	$.ajax({
 		method: "POST",
 		url: "/issueInsert",
@@ -150,7 +150,7 @@ function insertIssue${work.work_id}(todo_id) {
 
 /* issue list 조회 ==문의: jerry== */
 function getIssueList${work.work_id}(todo_id) {
-	
+
 	$.ajax({
 		method: "POST",
 		url: "/issueSelectList",
@@ -170,7 +170,7 @@ function setIssueUpdate${work.work_id}(todo_id, issue_id){
 	var issue_title = document.getElementById('issue_title'+issue_id).innerText;
 	var issue_level = document.getElementById('issue_level'+issue_id).innerText;
 	var issue_content = document.getElementById('issue_content'+issue_id).innerText;
-	
+
 	$('#input_issue_title'+todo_id).val(issue_title);
 	$('#input_issue_level'+todo_id + ' option[value=' + issue_level + ']').attr('selected', 'selected');
 	$('#input_issue_content'+todo_id).val(issue_content);
@@ -182,9 +182,9 @@ function updateIssue${work.work_id}(todo_id){
 	var sdate = $('input[name=non_issue_sdate'+ todo_id +']').val();
 	var repSdate = sdate.replace("T", " ");
 	$("#issue_sdate"+todo_id).val(repSdate);
-	
+
 	var param = $('form[name=insertIssueForm'+ todo_id +']').serialize();
-	
+
 	$.ajax({
 		method: "POST",
 		url: "/issueUpdate",
@@ -203,9 +203,9 @@ function helperUpdate${work.work_id}(todo_id){
 	var edate = $('input[name=non_issue_edate'+ todo_id +']').val();
 	var repEdate = edate.replace("T", " ");
 	$("#issue_edate"+todo_id).val(repEdate);
-	
+
 	var param = $('form[name=insertIssueForm'+ todo_id +']').serialize();
-	
+
 	$.ajax({
 		method: "POST",
 		url: "/helperUpdate",
@@ -221,7 +221,7 @@ function helperUpdate${work.work_id}(todo_id){
 
 /* 도움 list 조회 ==문의: jerry== */
 function getHelperList${work.work_id}(todo_id) {
-	
+
 	$.ajax({
 		method: "POST",
 		url: "/issueHelperList",
@@ -239,7 +239,7 @@ function getHelperList${work.work_id}(todo_id) {
 /* 이슈 삭제 ==문의: jerry== */
 function deleteIssue${work.work_id}(todo_id){
 	var issue_id = $('#issue_id'+todo_id).val();
-	
+
 	$.ajax({
 		method: "POST",
 		url: "/issueDelete",
@@ -256,19 +256,19 @@ function deleteIssue${work.work_id}(todo_id){
 /* to-do 수정시 input type 속성 변경 ==문의: jerry== */
 function attrChangeUpdate${work.work_id}(todo_id) {
 	var project_id = ${projectVo.project_id};
-	
+
 	var edate = $('#todo_eedate'+ todo_id).val();
 	var repEdate = edate.replace(" ", "T");
-	
+
 	$('#todo_eedate'+todo_id).attr('type', 'datetime-local');
 	$('#todo_eedate'+ todo_id).val(repEdate);
-	
+
 	$('#todo_content'+todo_id).removeAttr('readonly');
 	$('#todo_eedate'+todo_id).removeAttr('readonly');
-	
+
 	$('#todoUpdateBtn').hide();
 	$('#todoUpdateSaveBtn').show();
-	
+
 	$.ajax({
 		method: "POST",
 		url: "/optionMember",
@@ -290,16 +290,16 @@ function attrChangeUpdate${work.work_id}(todo_id) {
 /* to-do 수정 ==문의: jerry== */
 function updateTodo${work.work_id}(todo_id, work_id) {
 	var project_id = ${projectVo.project_id};
-	
+
 	var option = $('#pmember_member option:selected').val();
 	var optionSplit = option.split("(");
 	var member_name = optionSplit[0];
 	var pmember_member = optionSplit[1];
 	pmember_member = pmember_member.replace(")", "");
 	var todo_eedate = $('#todo_eedate'+todo_id).val();
-	todo_eedate = todo_eedate.replace("T", " "); 
+	todo_eedate = todo_eedate.replace("T", " ");
 	var todo_content = $('#todo_content'+todo_id).val();
-	
+
 	$.ajax({
 		method: "POST",
 		url: "/todoUpdate",
@@ -319,6 +319,11 @@ function updateTodo${work.work_id}(todo_id, work_id) {
 
 <!-- to-do list 조회 -->
 <div class="currentCardContentViewRight">
+	<p>현재진행상황</p>
+    <div class="w3-light-grey">
+        <div id="myBar" class="w3-container w3-green" style="width:20%" onclick="move(10, 25)">20%</div>
+    </div>
+
 	<table>
 		<thead>
 			<tr>
@@ -338,5 +343,23 @@ function updateTodo${work.work_id}(todo_id, work_id) {
 	<div class="pagination" id="pagination${work.work_id}">
 		<!-- todoPageinationHtml.jsp -->
 	</div>
-	
+
 </div>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<script>
+    function move(curVal, totalVal) {
+        var elem = document.getElementById("myBar");
+        var width = curVal;
+        var id = setInterval(frame, 10);
+        function frame() {
+            if (width >= totalVal) {
+                clearInterval(id);
+            } else {
+                width++;
+                elem.style.width = width + '%';
+                elem.innerHTML = width * 1  + '%';
+            }
+        }
+    }
+</script>
