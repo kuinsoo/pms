@@ -28,10 +28,10 @@
 	text-decoration:underline;font-weight:bold;text-align:left;text-indent:50px;
 }
 .pagination{width:100%;display:flex;justify-content:center;align-items:center;margin-top:30px;}
-.pagination > ul > li{display:inline-block;}
+.pagination > ul > li{display:inline-block;font-size:17px;padding:0px 10px 0px 10px;}
 .pagination > ul > li > i {
 	text-align:center;line-height:30px;cursor:pointer;font-size:15px;vertical-align:middle;
-	padding:0px 20px 0px 20px;
+	padding:0px 10px 0px 10px;
 }
 .pagination > ul > li > a{color:#000;}
 .pagination > ul > li > a > span{font-size:17px;padding:0px 10px 0px 10px;vertical-align:middle;}

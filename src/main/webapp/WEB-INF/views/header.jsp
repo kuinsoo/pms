@@ -300,3 +300,6 @@
         });*/ 
     </script>-->
 
+	<!-- 변찬우 : 음성인식 네비게이션 VUI  -->
+	<script src="/js/annyang.js"></script>
+	<script src="/js/annyangCurrent.js"></script>
