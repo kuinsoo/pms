@@ -265,6 +265,11 @@ function attrChangeUpdate${work.work_id}(todo_id) {
 	
 	$('#todo_content'+todo_id).removeAttr('readonly');
 	
+	$('#todo_eedate'+todo_id).removeAttr('readonly');
+	
+	$('#todoUpdateBtn').hide();
+	$('#todoUpdateSaveBtn').show();
+	
 	$.ajax({
 		method: "POST",
 		url: "/optionMember",
