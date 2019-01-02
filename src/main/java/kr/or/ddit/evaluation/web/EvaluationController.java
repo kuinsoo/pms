@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.post.service.PostServiceInf;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,6 +31,9 @@ public class EvaluationController {
 	@Autowired
 	private EvaluationServiceInf evaluationService;
 	
+	@Autowired
+	private PostServiceInf postService;
+	
 	/**
 	 * Method : evaluationView
 	 * 작성자 : iks
@@ -46,6 +50,8 @@ public class EvaluationController {
 		evalMap.put("project_id", "0");
 		model.addAttribute("evalProjectList", evaluationService.evaluationProjectList(evalMap));
 		model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
+		/* 알림 임규승 2019-01-02 */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
 		return "evaluation/evaluation";
 	}
 

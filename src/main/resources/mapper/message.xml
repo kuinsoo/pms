@@ -118,11 +118,13 @@
        select * from(
   			 select rownum rnum ,a.*
             from
-                 (select friend_member,
-                 		 friend_code
-                         from   FRIENDSLIST
-                         where  friend_myemail = #{member_mail} 
-                         and    friend_accept = 'Y')a) 
+				(select friend_member,
+			   		    friend_code,
+			            member_name
+				 from   FRIENDSLIST inner join member
+				 on     friend_member = member_mail
+				 where  friend_myemail = #{member_mail}
+				 and    friend_accept = 'Y')a) 
             where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
             <if test="searchTextFriend!=null and searchTextFriend!=''">and friend_member like '%'||#{searchTextFriend}||'%'</if>
 	</select> 
@@ -132,6 +134,7 @@
 		select count(*)
 		from   FRIENDSLIST 
 		where  friend_myemail = #{member_mail}
+		and    friend_accept = 'Y'
 	</select>
 	
 	<!-- 전체 사용자 total -->
@@ -153,7 +156,7 @@
 		where friend_code=  #{friend_code}
 	</delete>
 	
-	<!-- 전체사용자 리스트+ 페이징 처리  -->
+	<!-- 전체사용자 리스트 단, 내 친구는 안나와야함.+ 페이징 처리  -->
 	<select id ="totalMemberSearch" resultType="memberVo" parameterType="pageVo">
 		 select * from(
   			 select rownum rnum ,a.*
@@ -164,7 +167,7 @@
                       WHERE   member_mail NOT IN (SELECT  friend_member
                                                 FROM    FRIENDSLIST
                                                 WHERE   friend_myemail = #{member_mail}
-                                                AND     friend_accept = 'N')
+                                                AND     friend_accept = 'Y')
                       AND     member_withdrawal = 'N'
                       AND     member_mail NOT IN #{member_mail}
                       ORDER BY member_mail)a) 

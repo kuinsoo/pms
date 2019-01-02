@@ -47,6 +47,7 @@ public class MessageController {
 	private PostServiceInf postService;
 	
 	
+	
 	/**
 	 * Method : message
 	 * 작성자 : pc07
@@ -137,9 +138,7 @@ public class MessageController {
 	public Map<String, Object>AllMemberListAjax (@SessionAttribute("memberVo") MemberVo memberVo , PageVo pageVo){
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
-		
 		List<MemberVo> myMemberList = messageservice.totalMemberSearch(pageVo);
-		
 		int pageCnt = messageservice.totalMember(memberVo.getMember_mail());
 		
 		Map<String, Object> myMemberMap = new HashMap<>();
@@ -562,7 +561,6 @@ public class MessageController {
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		friendVo.setMember_name(memberVo.getMember_name());
-
 		
 		if(pageVo.getSearchTextYouGiveFriendList()==null) {
 			pageVo.setSearchTextYouGiveFriendList("");
@@ -580,7 +578,9 @@ public class MessageController {
 	}
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	@RequestMapping(value="/friendView")
-	public String friendView() {
+	public String friendView(Model model) {
+		
+		model.addAttribute("pageCnt", postService.totalPostCnt());
 		return "friend/friend";
 	}
 	

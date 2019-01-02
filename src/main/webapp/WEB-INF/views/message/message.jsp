@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+		 pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/header.jsp"%>
 <!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
@@ -23,14 +23,14 @@
 						<form action="/insertMessageSend" method="post">
 							<div class="facingSendTitle">
 								<input type="text" class="recipient" id="sendMessageInput"
-									name="textValue" placeholder="받는사람을 입력해주세요" /> <select
+									   name="textValue" placeholder="받는사람을 입력해주세요" /> <select
 									name="selectBox" onChange="getSelectValue(this.form);"
 									class="recipientSelect">
-									<option>친구등록 리스트</option>
-									<c:forEach items="${selctMyFriend }" var="mf">
-										<option>${mf.friend_member}</option>
-									</c:forEach>
-								</select>
+								<option>친구등록 리스트</option>
+								<c:forEach items="${selctMyFriend }" var="mf">
+									<option>${mf.friend_member}</option>
+								</c:forEach>
+							</select>
 								<!-- option으로 선택한 갑이 input에 넣어진다 -->
 								<script>
 									function getSelectValue(frm) {
@@ -41,8 +41,8 @@
 							<textarea class="facingContent" name="textArea"></textarea>
 							<div class="facingBtn">
 								<input type="hidden" name="msg_smember" /> <input type="submit"
-									class="facingSendBtn" value="보내기" /> <input type="button"
-									class="facingSendReset" value="취소" />
+																				  class="facingSendBtn" value="보내기" /> <input type="button"
+																															  class="facingSendReset" value="취소" />
 							</div>
 						</form>
 					</div>
@@ -62,14 +62,14 @@
 								<colgroup width="20%" />
 								<colgroup width="10%" />
 								<thead>
-									<tr class="msgClick1">
-										<th>번호</th>
-										<th>아이디</th>
-										<th>받은 쪽지 내용</th>
-										<th>쪽지 보낸 사람</th>
-										<th>받은 날짜</th>
-										<th>읽음 확인</th>
-									</tr>
+								<tr class="msgClick1">
+									<th>번호</th>
+									<th>아이디</th>
+									<th>받은 쪽지 내용</th>
+									<th>쪽지 보낸 사람</th>
+									<th>받은 날짜</th>
+									<th>읽음 확인</th>
+								</tr>
 								</thead>
 
 								<tbody id="msgReceiveList">
@@ -85,11 +85,11 @@
 								<div class="sentNoteContainer">
 									<div class="recipientFacing">
 										<span>보낸사람</span> <input type="text" id="reInput1" value=""
-											readonly />
+																 readonly />
 									</div>
 									<div class="sendDate">
 										<span>받은 날짜</span> <input type="text" value="" id="reInput2"
-											readonly />
+																  readonly />
 										<!-- <i class="icon-ban icons"></i>
 											<span>차단</span>
 											<i class="icon-energy icons"></i>
@@ -104,10 +104,10 @@
 										</form>
 
 										<a onclick="getFriendsListGo();" href="#close"
-											class="sentNoteCloseBtn"> 취소 </a>
+										   class="sentNoteCloseBtn"> 취소 </a>
 
 										<form method="post" action="/sendYouMessageUpdate"
-											id="sendMessageForm">
+											  id="sendMessageForm">
 											<input type="hidden" name="msg_person" id="sendPerson" /> <input
 												type="button" class="sentNoteDeleteBtn" id="sendMessage"
 												value="답장하기" />
@@ -133,13 +133,13 @@
 								<colgroup width="15%" />
 								<colgroup width="30%" />
 								<thead>
-									<tr class="msgClick2">
-										<th>번호</th>
-										<th>아이디</th>
-										<th>보낸 쪽지 내용</th>
-										<th>받는 사람</th>
-										<th>보낸 날짜</th>
-									</tr>
+								<tr class="msgClick2">
+									<th>번호</th>
+									<th>아이디</th>
+									<th>보낸 쪽지 내용</th>
+									<th>받는 사람</th>
+									<th>보낸 날짜</th>
+								</tr>
 								</thead>
 								<tbody id="msgSendList">
 								</tbody>
@@ -190,15 +190,15 @@
 	<input type = "hidden" id = "msg_id" name ="msg_id" value="${msg_id}"/>	
  </form>  --%>
 <script type="text/javascript"
-	src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="js/classie.js"></script>
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 
 <style>
-#read {
-	background-color: #fcfcfc;
-	color: #ccc;
-}
+	#read {
+		background-color: #fcfcfc;
+		color: #ccc;
+	}
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -207,11 +207,11 @@
 		// 			$("#sendMessageInput").val('${param.msg_person}');
 
 		getMessageReceived(1);
-		getMessageSend(1);
+		getMessageSend(1);/* 
 		getMyFriends(1);
 		getAllMember(1);
 		getMySendFriendList(1);
-		getYouGiveFriendList(1);
+		getYouGiveFriendList(1); */
 
 		$("#msgReceiveList").on("click", ".msgClick1", function() {
 			console.log("msgReceiveList");
@@ -230,45 +230,42 @@
 			window.location = "#open1";
 		});
 	});
-
+/* 
 	function getFriendsListGo() {
 		getMessageReceived(1);
-	};
+	}; */
 
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	function getMessageReceived(page) {
 		var pageSize = 10;
-		$
-				.ajax({
-					type : "GET",
-					url : "/messageReceivedAjax",
-					data : {
-						"page" : page,
-						"pageSize" : pageSize
-					},
-					success : function(data) {
-						console.log(msg_type);
-						console.log(data.msgReceiveList);
+		$.ajax({
+				type : "GET",
+				url : "/messageReceivedAjax",
+				data : {
+					"page" : page,
+					"pageSize" : pageSize
+				},
+				success : function(data) {
 
-						var html = "";
-						$.each(data.msgReceiveList, function(idx, mm) {
-							if (mm.msg_type == "N")
-								html += "<tr class = 'msgClick1' id = 'read'>";
-							else if (mm.msg_type == "Y")
-								html += "<tr class = 'msgClick1'>";
+					var html = "";
+					$.each(data.msgReceiveList, function(idx, mm) {
+						if (mm.msg_type == "N")
+							html += "<tr class = 'msgClick1' id = 'read'>";
+						else if (mm.msg_type == "Y")
+							html += "<tr class = 'msgClick1'>";
 
-							html += "	<td>" + mm.rnum + "</td>";
-							html += "	<td>" + mm.msg_id + "</td>";
-							html += "	<td>" + mm.msg_content + "</td>";
-							html += "	<td>" + mm.msg_smember + "</td>";
-							html += "	<td>" + mm.msg_time + "</td>";
-							if (mm.msg_type == 'Y') {
-								html += "<td>" + '읽지않음' + "</td>";
-							} else {
-								html += "<td>" + '읽음' + "</td>";
-							}
-							html += "</tr>";
-						});
+						html += "	<td>" + mm.rnum + "</td>";
+						html += "	<td>" + mm.msg_id + "</td>";
+						html += "	<td>" + mm.msg_content + "</td>";
+						html += "	<td>" + mm.msg_smember + "</td>";
+						html += "	<td>" + mm.msg_time + "</td>";
+						if (mm.msg_type == 'Y') {
+							html += "<td>" + '읽지않음' + "</td>";
+						} else {
+							html += "<td>" + '읽음' + "</td>";
+						}
+						html += "</tr>";
+					});
 
 						console.log(data.msgReceiveList);
 
@@ -316,8 +313,6 @@
 				$("#reInput").val(msg_id);
 				$("#msg_type").val(msg_type);
 
-				console.log(msg_type);
-
 			}
 		});
 	}
@@ -326,28 +321,27 @@
 
 	function getMessageSend(page) {
 		var pageSize = 10;
-		$
-				.ajax({
-					type : "GET",
-					url : "/messageSendAjax",
-					data : {
-						"page" : page,
-						"pageSize" : pageSize
-					},
-					success : function(data) {
+			$.ajax({
+				type : "GET",
+				url : "/messageSendAjax",
+				data : {
+					"page" : page,
+					"pageSize" : pageSize
+				},
+				success : function(data) {
 
-						console.log(data.msgSendList);
-						var html = "";
-						$.each(data.msgSendList, function(idx, mm) {
-							html += "<tr class= msgClick2>";
-							html += "	<td>" + mm.rnum + "</td>";
-							html += "	<td>" + mm.msgmember_msg + "</td>";
-							html += "	<td>" + mm.msg_content + "</td>";
-							html += "	<td>" + mm.msg_rmember + "</td>";
-							html += "	<td>" + mm.msg_rdate + "</td>";
-							html += "</tr>";
-						});
-						console.log(data.msgSendList);
+					console.log(data.msgSendList);
+					var html = "";
+					$.each(data.msgSendList, function(idx, mm) {
+						html += "<tr class= msgClick2>";
+						html += "	<td>" + mm.rnum + "</td>";
+						html += "	<td>" + mm.msgmember_msg + "</td>";
+						html += "	<td>" + mm.msg_content + "</td>";
+						html += "	<td>" + mm.msg_rmember + "</td>";
+						html += "	<td>" + mm.msg_rdate + "</td>";
+						html += "</tr>";
+					});
+					console.log(data.msgSendList);
 
 						$("#msgSendList").html("");
 						$("#msgSendList").html(html);
@@ -395,39 +389,30 @@
 			}
 		});
 	}
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	/* //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	// 친구 리스트 뽑아오는 Ajax
 
 	function getMyFriends(page) {
 		var pageSize = 10;
-		$
-				.ajax({
-					type : "GET",
-					url : "/myfriendListAjax",
-					data : {
-						"page" : page,
-						"pageSize" : pageSize
-					},
-					success : function(data) {
-
-						var html = "";
-						$
-								.each(
-										data.myFriendList,
-										function(idx, mm) {
-											html += "<tr class =friends>";
-											html += "	<td>" + mm.rnum + "</td>";
-											html += "	<td>" + mm.friend_code
-													+ "</td>";
-											html += "	<td>" + mm.friend_member
-													+ "</td>";
-											html += "	<td>"
-													+ "<input type='button' onclick ='deleteMyFriends("
-													+ mm.friend_code
-													+ ");' value='친구삭제'/>"
-													+ "</td>";
-											html += "</tr>";
-										});
+			$.ajax({
+				type : "GET",
+				url : "/myfriendListAjax",
+				data : {
+					"page" : page,
+					"pageSize" : pageSize
+				},
+				success : function(data) {
+					var html = "";
+					$.each(
+					data.myFriendList,
+					function(idx, mm) {
+						html += "<tr class =friends>";
+						html += "	<td>" + mm.rnum + "</td>";
+						html += "	<td>" + mm.friend_code + "</td>";
+						html += "	<td>" + mm.friend_member + "</td>";
+						html += "	<td>"+ "<input type='button' onclick ='deleteMyFriends("+ mm.friend_code+ ");' value='친구삭제'/>"+ "</td>";
+						html += "</tr>";
+					});
 
 						console.log(data.myFriendList);
 
@@ -456,8 +441,7 @@
 	function getSearchFriendProject() {
 		var param = $('form[name=searchTextFriend]').serialize();
 		var pageSize = 10;
-		$
-				.ajax({
+				$.ajax({
 					type : "POST",
 					url : "/searchTextFriendAjax",
 					data : param,
@@ -469,9 +453,7 @@
 							html += "	<td>" + mm.rnum + "</td>";
 							html += "	<td>" + mm.friend_code + "</td>";
 							html += "	<td>" + mm.friend_member + "</td>";
-							html += "	<td>"
-									+ "<input type='button' value='친구삭제'/>"
-									+ "</td>";
+							html += "	<td>"+ "<input type='button' value='친구삭제'/>"+ "</td>";
 							html += "</tr>";
 						});
 
@@ -518,34 +500,26 @@
 	// 전체 사용자 뽑아오는 리스트
 	function getAllMember(page) {
 		var pageSize = 10;
-		$
-				.ajax({
-					type : "GET",
-					url : "/AllMemberListAjax",
-					data : {
-						"page" : page,
-						"pageSize" : pageSize
-					},
-					success : function(data) {
+			$.ajax({
+				type : "GET",
+				url : "/AllMemberListAjax",
+				data : {
+					"page" : page,
+					"pageSize" : pageSize
+				},
+				success : function(data) {
 
 						var html = "";
-						$
-								.each(
-										data.myMemberList,
-										function(idx, mm) {
-											html += "<tr>";
-											html += "	<td>" + mm.rnum + "</td>";
-											html += "	<td>" + mm.member_mail
-													+ "</td>";
-											html += "	<td>" + mm.member_name
-													+ "</td>";
-											html += "<td>"
-													+ "<input type='button' onclick ='getyouGiveNoAjax(\""
-													+ mm.member_mail
-													+ "\")'; value='친구 등록'/>"
-													+ "</td>";
-											html += "</tr>";
-										});
+						$.each(
+							data.myMemberList,
+							function(idx, mm) {
+								html += "<tr>";
+								html += "	<td>" + mm.rnum + "</td>";
+								html += "	<td>" + mm.member_mail+ "</td>";
+								html += "	<td>" + mm.member_name+ "</td>";
+								html += "	<td>"+ "<input type='button' onclick ='getyouGiveNoAjax(\""+ mm.member_mail+ "\")'; value='친구 등록'/>"+ "</td>";
+								html += "</tr>";
+							});
 
 						console.log(data.myMemberList);
 						$("#myMemberList").html("");
@@ -588,13 +562,11 @@
 	function getAllMemberSearch() {
 		var param = $('form[name=searchTextFriendList]').serialize();
 		var pageSize = 10;
-		$
-				.ajax({
+				$.ajax({
 					type : "POST",
 					url : "/AllMemberListSearchAjax",
 					data : param,
 					success : function(data) {
-
 						console.log(data);
 						var html = "";
 						$.each(data.myMemberList, function(idx, mm) {
@@ -602,9 +574,7 @@
 							html += "	<td>" + mm.rnum + "</td>";
 							html += "	<td>" + mm.member_mail + "</td>";
 							html += "	<td>" + mm.member_name + "</td>";
-							html += "	<td>"
-									+ "<input type='button' value='친구 등록'/>"
-									+ "</td>";
+							html += "	<td>"+ "<input type='button' value='친구 등록'/>"+ "</td>";
 							html += "</tr>";
 						});
 
@@ -636,8 +606,7 @@
 	// 내가보낸 친구 요청 부분 
 	function getMySendFriendList(page) {
 		var pageSize = 10;
-		$
-				.ajax({
+				$.ajax({
 					type : "GET",
 					url : "/myFriendSendListAjax",
 					data : {
@@ -645,27 +614,18 @@
 						"pageSize" : pageSize
 					},
 					success : function(data) {
-
 						var html = "";
-						$
-								.each(
-										data.sendFriendList,
-										function(idx, mm) {
-											html += "<tr>";
-											html += "	<td>" + mm.rnum + "</td>";
-											html += "	<td>" + mm.friend_code
-													+ "</td>";
-											html += "	<td>" + mm.friend_member
-													+ "</td>";
-											html += "	<td>" + mm.member_name
-													+ "</td>";
-											html += "	<td>"
-													+ "<input type='button' onclick ='deletemySendFriend("
-													+ mm.friend_code
-													+ ");' value='요청 취소 '/>"
-													+ "</td>";
-											html += "</tr>";
-										});
+						$.each(
+							data.sendFriendList,
+							function(idx, mm) {
+								html += "<tr>";
+								html += "	<td>" + mm.rnum + "</td>";
+								html += "	<td>" + mm.friend_code+ "</td>";
+								html += "	<td>" + mm.friend_member+ "</td>";
+								html += "	<td>" + mm.member_name+ "</td>";
+								html += "	<td>"+ "<input type='button' onclick ='deletemySendFriend("+ mm.friend_code+ ");' value='요청 취소 '/>"+ "</td>";
+								html += "</tr>";
+							});
 
 						console.log(data.sendFriendList);
 
@@ -710,8 +670,7 @@
 	function getMySendFriendListSearch() {
 		var param = $('form[name=searchTextMySendFriendList]').serialize();
 		var pageSize = 10;
-		$
-				.ajax({
+				$.ajax({
 					type : "POST",
 					url : "/myFriendSendListSearchAjax",
 					data : param,
@@ -724,13 +683,9 @@
 							html += "	<td>" + mm.friend_code + "</td>";
 							html += "	<td>" + mm.friend_member + "</td>";
 							html += "	<td>" + mm.member_name + "</td>";
-							html += "	<td>"
-									+ "<input type='button' value='요청 취소 '/>"
-									+ "</td>";
+							html += "	<td>"+ "<input type='button' value='요청 취소 '/>"+ "</td>";
 							html += "</tr>";
 						});
-
-						console.log(data.sendFriendList);
 
 						$("#sendFriendList").html("");
 						$("#sendFriendList").html(html);
@@ -758,8 +713,7 @@
 	// 내가 받은 친구 요청 
 	function getYouGiveFriendList(page) {
 		var pageSize = 10;
-		$
-				.ajax({
+				$.ajax({
 					type : "GET",
 					url : "/youGiveFriendListAjax",
 					data : {
@@ -769,31 +723,18 @@
 					success : function(data) {
 
 						var html = "";
-						$
-								.each(
-										data.giveFriendList,
-										function(idx, mm) {
-											html += "<tr>";
-											html += "	<td>" + mm.rnum + "</td>";
-											html += "	<td>" + mm.friend_code
-													+ "</td>";
-											html += "	<td>" + mm.friend_myemail
-													+ "</td>";
-											html += "	<td>" + mm.member_name
-													+ "</td>";
-											html += "	<td>"
-													+ "<input type='button'onclick ='getyouGiveYesAjax(\""
-													+ mm.friend_myemail + "\","
-													+ mm.friend_code
-													+ ");' value='수락'/>"
-													+ "</td>";
-											html += "	<td>"
-													+ "<input type='button'onclick ='getyouGiveXXXAjax("
-													+ mm.friend_code
-													+ ");' value='거절'/>"
-													+ "</td>";
-											html += "</tr>";
-										});
+							$.each(
+								data.giveFriendList,
+								function(idx, mm) {
+									html += "<tr>";
+									html += "	<td>" + mm.rnum + "</td>";
+									html += "	<td>" + mm.friend_code + "</td>";
+									html += "	<td>" + mm.friend_myemai + "</td>";
+									html += "	<td>" + mm.member_name + "</td>";
+									html += "	<td>" + "<input type='button'onclick ='getyouGiveYesAjax(\"" + mm.friend_myemail + "\","+ mm.friend_code+ ");' value='수락'/>"+ "</td>";
+									html += "	<td>"+ "<input type='button'onclick ='getyouGiveXXXAjax("+ mm.friend_code+ ");' value='거절'/>"+ "</td>";
+									html += "</tr>";
+								});
 
 						console.log(data.giveFriendList);
 
@@ -857,14 +798,11 @@
 	function getYouGiveFriendListSearch() {
 		var param = $('form[name=searchTextYouGiveFriendList]').serialize();
 		var pageSize = 10;
-		$
-				.ajax({
+			$.ajax({
 					type : "POST",
 					url : "/youGiveFriendListSearchAjax",
 					data : param,
 					success : function(data) {
-
-						console.log(data);
 
 						var html = "";
 						$.each(data.giveFriendList, function(idx, mm) {
@@ -873,12 +811,8 @@
 							html += "	<td>" + mm.friend_code + "</td>";
 							html += "	<td>" + mm.friend_myemail + "</td>";
 							html += "	<td>" + mm.member_name + "</td>";
-							html += "	<td>"
-									+ "<input type='button' value='수락'/>"
-									+ "</td>";
-							html += "	<td>"
-									+ "<input type='button' value='거절'/>"
-									+ "</td>";
+							html += "	<td>" + "<input type='button' value='수락'/>"+ "</td>";
+							html += "	<td>" + "<input type='button' value='거절'/>"+ "</td>";
 							html += "</tr>";
 						});
 
@@ -905,7 +839,7 @@
 						console.log(xhr);
 					}
 				});
-	}
+	} */
 
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

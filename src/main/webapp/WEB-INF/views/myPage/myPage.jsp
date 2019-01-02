@@ -420,6 +420,7 @@
 				}
 			});
 		}
+			
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	    // 파일 보관함 
 		function getmyProjectFileList(page){
@@ -492,7 +493,7 @@
 						html += "	<td>"+ mm.att_id +"</td>";
 						html += "	<td>"+ mm.project_title +"</td>";
 						html += "	<td>"+ mm.att_name +"</td>";
-						html += "	<td>"+ "<input type='button' value='파일 다운로드'/>"+"</td>";
+						html += "	<td>"+ "<input type='button' value='파일 다운로드' class='fileDownLoads' />"+"</td>";
 						html += "</tr>";
 					});
 					$("#myFileList").html("");
@@ -587,6 +588,8 @@
 				});
 			}
 	</script>
+
+
 <form  id = "frm" action="/projectClickDetail" method = "get">
 	<input type = "hidden" id = "project_title" name = "project_title"/>
 	<input type = "hidden" id = "project_id" name = "project_id"/>
@@ -632,10 +635,10 @@
 								<li>사용자 이메일</li>
 								<li>사용자 이름 </li>
 								<li>휴대폰 번호</li>
-								<li id = "telnumLi">인증번호 입력</li>
-								<li id= "inpupass1">현재 비밀번호</li>
-								<li id ="inpupass2">새 비밀번호</li>
-								<li id = "inpupass3">새 비밀번호 확인</li> 
+								<li id="telnumLi">인증번호 입력</li>
+								<li id="inpupass1">현재 비밀번호</li>
+								<li id="inpupass2">새 비밀번호</li>
+								<li id="inpupass3">새 비밀번호 확인</li>
 							</ul>
 						</div>
 						<div class="userContentsInfoRight_2">
@@ -697,6 +700,7 @@
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchProject();"></i>  
 									</form>
+									<button onclick="getMyPageList(1);" class="getMyPageList">목록으로</button>
 								</div>
 								<table>
 									<colgroup width="10%" />
@@ -789,13 +793,13 @@
 						<div id="tabs2-3">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-								<button onclick="getmyTodoProjectList(1);">목록으로</button>
 								 <form name ="searchTodoProject" id ="searchTodoProject" method="POST" onsubmit="return false;">
 										 <input type="text" id="searchTodoText" name ="searchTodoText" value='${searchTodoText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons" onclick="javascript:getSearchTodoProject();"></i>  
 									</form> 
+								<button onclick="getmyTodoProjectList(1);" class="getMyPageList">목록으로</button>
 								</div>
 								<table>
 									<colgroup width="10%" />
@@ -833,13 +837,14 @@
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons" onclick="javascript:getFileSearchProject();"></i>  
 									</form> 
+								<button onclick="getmyProjectFileList(1);" class="getMyPageList">목록으로</button>
 								</div>
 								<table>
 									<colgroup width="10%" />
 									<colgroup width="10%" />
 									<colgroup width="20%" />
-									<colgroup width="40%" />
-									<colgroup width="10%" />
+									<colgroup width="30%" />
+									<colgroup width="20%" />
 									<thead>
 										<tr>
 											<th><span>번호</span></th>
