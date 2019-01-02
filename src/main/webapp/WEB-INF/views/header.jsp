@@ -234,7 +234,6 @@
 				url : "/messageAlram",
 				data : "member_mail="+ '${memberVo.member_mail}',
 				success: function(data){
-				console.log(data.totalmessageY);
 				// 쪽지온거확인
 				 	if(data.totalmessageY > 0){
 				 		$(".messageCounterDiv").show();
@@ -257,7 +256,6 @@
 				url : "/friendAlram",
 				data : "member_mail="+ '${memberVo.member_mail}',
 				success: function(data){
-				console.log(data.totalFriendSize);
 				// 쪽지온거확인
 				 	if(data.totalFriendSize > 0){
 				 		$(".friendCounterDiv").show();

@@ -400,8 +400,7 @@
 
 	function getMyFriends(page) {
 		var pageSize = 10;
-		$
-				.ajax({
+			$.ajax({
 					type : "GET",
 					url : "/myfriendListAjax",
 					data : {
@@ -409,25 +408,23 @@
 						"pageSize" : pageSize
 					},
 					success : function(data) {
-
 						var html = "";
-						$
-								.each(
-										data.myFriendList,
-										function(idx, mm) {
-											html += "<tr class =friends>";
-											html += "	<td>" + mm.rnum + "</td>";
-											html += "	<td>" + mm.friend_code
-													+ "</td>";
-											html += "	<td>" + mm.friend_member
-													+ "</td>";
-											html += "	<td>"
-													+ "<input type='button' onclick ='deleteMyFriends("
-													+ mm.friend_code
-													+ ");' value='친구삭제'/>"
-													+ "</td>";
-											html += "</tr>";
-										});
+						$.each(
+						data.myFriendList,
+						function(idx, mm) {
+							html += "<tr class =friends>";
+							html += "	<td>" + mm.rnum + "</td>";
+							html += "	<td>" + mm.friend_code
+									+ "</td>";
+							html += "	<td>" + mm.friend_member
+									+ "</td>";
+							html += "	<td>"
+									+ "<input type='button' onclick ='deleteMyFriends("
+									+ mm.friend_code
+									+ ");' value='친구삭제'/>"
+									+ "</td>";
+							html += "</tr>";
+						});
 
 						console.log(data.myFriendList);
 
@@ -456,8 +453,7 @@
 	function getSearchFriendProject() {
 		var param = $('form[name=searchTextFriend]').serialize();
 		var pageSize = 10;
-		$
-				.ajax({
+				$.ajax({
 					type : "POST",
 					url : "/searchTextFriendAjax",
 					data : param,
@@ -518,34 +514,32 @@
 	// 전체 사용자 뽑아오는 리스트
 	function getAllMember(page) {
 		var pageSize = 10;
-		$
-				.ajax({
-					type : "GET",
-					url : "/AllMemberListAjax",
-					data : {
-						"page" : page,
-						"pageSize" : pageSize
-					},
-					success : function(data) {
+			$.ajax({
+				type : "GET",
+				url : "/AllMemberListAjax",
+				data : {
+					"page" : page,
+					"pageSize" : pageSize
+				},
+				success : function(data) {
 
 						var html = "";
-						$
-								.each(
-										data.myMemberList,
-										function(idx, mm) {
-											html += "<tr>";
-											html += "	<td>" + mm.rnum + "</td>";
-											html += "	<td>" + mm.member_mail
-													+ "</td>";
-											html += "	<td>" + mm.member_name
-													+ "</td>";
-											html += "<td>"
-													+ "<input type='button' onclick ='getyouGiveNoAjax(\""
-													+ mm.member_mail
-													+ "\")'; value='친구 등록'/>"
-													+ "</td>";
-											html += "</tr>";
-										});
+						$.each(
+							data.myMemberList,
+							function(idx, mm) {
+								html += "<tr>";
+								html += "	<td>" + mm.rnum + "</td>";
+								html += "	<td>" + mm.member_mail
+										+ "</td>";
+								html += "	<td>" + mm.member_name
+										+ "</td>";
+								html += "<td>"
+										+ "<input type='button' onclick ='getyouGiveNoAjax(\""
+										+ mm.member_mail
+										+ "\")'; value='친구 등록'/>"
+										+ "</td>";
+								html += "</tr>";
+							});
 
 						console.log(data.myMemberList);
 						$("#myMemberList").html("");
@@ -588,13 +582,11 @@
 	function getAllMemberSearch() {
 		var param = $('form[name=searchTextFriendList]').serialize();
 		var pageSize = 10;
-		$
-				.ajax({
+				$.ajax({
 					type : "POST",
 					url : "/AllMemberListSearchAjax",
 					data : param,
 					success : function(data) {
-
 						console.log(data);
 						var html = "";
 						$.each(data.myMemberList, function(idx, mm) {
@@ -636,8 +628,7 @@
 	// 내가보낸 친구 요청 부분 
 	function getMySendFriendList(page) {
 		var pageSize = 10;
-		$
-				.ajax({
+				$.ajax({
 					type : "GET",
 					url : "/myFriendSendListAjax",
 					data : {
@@ -645,27 +636,25 @@
 						"pageSize" : pageSize
 					},
 					success : function(data) {
-
 						var html = "";
-						$
-								.each(
-										data.sendFriendList,
-										function(idx, mm) {
-											html += "<tr>";
-											html += "	<td>" + mm.rnum + "</td>";
-											html += "	<td>" + mm.friend_code
-													+ "</td>";
-											html += "	<td>" + mm.friend_member
-													+ "</td>";
-											html += "	<td>" + mm.member_name
-													+ "</td>";
-											html += "	<td>"
-													+ "<input type='button' onclick ='deletemySendFriend("
-													+ mm.friend_code
-													+ ");' value='요청 취소 '/>"
-													+ "</td>";
-											html += "</tr>";
-										});
+						$.each(
+							data.sendFriendList,
+							function(idx, mm) {
+								html += "<tr>";
+								html += "	<td>" + mm.rnum + "</td>";
+								html += "	<td>" + mm.friend_code
+										+ "</td>";
+								html += "	<td>" + mm.friend_member
+										+ "</td>";
+								html += "	<td>" + mm.member_name
+										+ "</td>";
+								html += "	<td>"
+										+ "<input type='button' onclick ='deletemySendFriend("
+										+ mm.friend_code
+										+ ");' value='요청 취소 '/>"
+										+ "</td>";
+								html += "</tr>";
+							});
 
 						console.log(data.sendFriendList);
 
@@ -710,8 +699,7 @@
 	function getMySendFriendListSearch() {
 		var param = $('form[name=searchTextMySendFriendList]').serialize();
 		var pageSize = 10;
-		$
-				.ajax({
+				$.ajax({
 					type : "POST",
 					url : "/myFriendSendListSearchAjax",
 					data : param,
@@ -758,8 +746,7 @@
 	// 내가 받은 친구 요청 
 	function getYouGiveFriendList(page) {
 		var pageSize = 10;
-		$
-				.ajax({
+				$.ajax({
 					type : "GET",
 					url : "/youGiveFriendListAjax",
 					data : {
@@ -769,31 +756,25 @@
 					success : function(data) {
 
 						var html = "";
-						$
-								.each(
-										data.giveFriendList,
-										function(idx, mm) {
-											html += "<tr>";
-											html += "	<td>" + mm.rnum + "</td>";
-											html += "	<td>" + mm.friend_code
-													+ "</td>";
-											html += "	<td>" + mm.friend_myemail
-													+ "</td>";
-											html += "	<td>" + mm.member_name
-													+ "</td>";
-											html += "	<td>"
-													+ "<input type='button'onclick ='getyouGiveYesAjax(\""
-													+ mm.friend_myemail + "\","
-													+ mm.friend_code
-													+ ");' value='수락'/>"
-													+ "</td>";
-											html += "	<td>"
-													+ "<input type='button'onclick ='getyouGiveXXXAjax("
-													+ mm.friend_code
-													+ ");' value='거절'/>"
-													+ "</td>";
-											html += "</tr>";
-										});
+							$.each(
+								data.giveFriendList,
+								function(idx, mm) {
+									html += "<tr>";
+									html += "	<td>" + mm.rnum + "</td>";
+									html += "	<td>" + mm.friend_code + "</td>";
+									html += "	<td>" + mm.friend_myemai + "</td>";
+									html += "	<td>" + mm.member_name + "</td>";
+									html += "	<td>" + "<input type='button'onclick ='getyouGiveYesAjax(\"" + mm.friend_myemail + "\","
+											+ mm.friend_code
+											+ ");' value='수락'/>"
+											+ "</td>";
+									html += "	<td>"
+											+ "<input type='button'onclick ='getyouGiveXXXAjax("
+											+ mm.friend_code
+											+ ");' value='거절'/>"
+											+ "</td>";
+									html += "</tr>";
+								});
 
 						console.log(data.giveFriendList);
 
@@ -857,8 +838,7 @@
 	function getYouGiveFriendListSearch() {
 		var param = $('form[name=searchTextYouGiveFriendList]').serialize();
 		var pageSize = 10;
-		$
-				.ajax({
+			$.ajax({
 					type : "POST",
 					url : "/youGiveFriendListSearchAjax",
 					data : param,

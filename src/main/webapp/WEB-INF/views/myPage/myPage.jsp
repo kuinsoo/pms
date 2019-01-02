@@ -420,6 +420,7 @@
 				}
 			});
 		}
+			
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	    // 파일 보관함 
 		function getmyProjectFileList(page){
@@ -587,6 +588,8 @@
 				});
 			}
 	</script>
+
+
 <form  id = "frm" action="/projectClickDetail" method = "get">
 	<input type = "hidden" id = "project_title" name = "project_title"/>
 	<input type = "hidden" id = "project_id" name = "project_id"/>

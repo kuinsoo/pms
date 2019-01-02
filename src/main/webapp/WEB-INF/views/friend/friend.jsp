@@ -169,7 +169,6 @@
 		getYouGiveFriendList(1);
 				
 		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
-			console.log("msgReceiveList");
 			var msg_id = $(this).children()[1].innerHTML;
 			updateMessageReceivedAjax(msg_id);
 			window.location = "#open2";
@@ -180,7 +179,6 @@
 			console.log("msgSendList");
 			var msgmember_msg = $(this).children()[1].innerHTML;
 			
-			console.log(msgmember_msg);
 			updateMessageSendAjax(msgmember_msg);
 			 window.location = "#open1";
 		});
@@ -246,9 +244,6 @@
 				url : "/updateMessageReceivedAjax",
 				data : "msg_id=" + msg_id, 
 				success : function(data){
-			
-				console.log(data);
-				console.log(data.msg_type);
 					
 			  	var msg_id = data.msg_id; 
 			 	var msg_smember = data.msg_smember ;
@@ -289,7 +284,6 @@
 						html += "	<td>"+ mm.msg_rdate +"</td>";
 						html += "</tr>";
 					});
-					console.log(data.msgSendList);
 					
 					$("#msgSendList").html("");
 					$("#msgSendList").html(html);
@@ -315,9 +309,6 @@
 				url : "/updateMessageSendAjax",
 				data : "msg_id=" + msgmember_msg, 
 				success : function(data){
-			
-				console.log(data);
-				console.log(data.msg_content);
 			  	
 				var msgmember_msg = data.msgmember_msg; 
 			 	var msg_content = data.msg_content ;
@@ -354,8 +345,6 @@
 						html += "</tr>";
 					});
 
-					console.log(data.myFriendList);
-					
 					$("#myFriendList").html("");
 					$("#myFriendList").html(html);
 					var i  = 1;
@@ -392,7 +381,6 @@
 								html += "</tr>";
 							});
 							
-							console.log(data.myFriendList);
 							$("#myFriendList").html("");
 							$("#myFriendList").html(html);
 							
@@ -419,8 +407,6 @@
 				url : "/myFriendsDelete",
 				data : "friend_code="+friend_code,
 				success: function(data){
-					console.log(data.friend_code);
-					console.log(data);
 					getMyFriends(1);
 				}
 			});
@@ -446,7 +432,6 @@
 						html += "</tr>";
 					});
 					
-					console.log(data.myMemberList);
 					$("#myMemberList").html("");
 					$("#myMemberList").html(html);
 					
@@ -488,7 +473,6 @@
 				data : param,
 				success: function(data){
 					
-					console.log(data);
 					var html = "";
 					$.each(data.myMemberList,function(idx,mm){
 						html += "<tr>";
@@ -498,8 +482,6 @@
 						html += "	<td>"+ "<input type='button' value='친구 등록'/>"+"</td>";
 						html += "</tr>";
 					});
-					
-					console.log(data.myMemberList);
 					
 					$("#myMemberList").html("");
 					$("#myMemberList").html(html);
@@ -540,8 +522,6 @@
 						html += "</tr>";
 					});
 					
-					console.log(data.sendFriendList);
-					
 					$("#sendFriendList").html("");
 					$("#sendFriendList").html(html);
 					
@@ -568,8 +548,6 @@
 				url : "/deletemySendFriendAjax",
 				data : "friend_code="+friend_code,
 				success: function(data){
-					console.log(data.friend_code);
-					console.log(data);
 					getMySendFriendList(1);
 				}
 			});
@@ -594,8 +572,6 @@
 						html += "	<td>"+ "<input type='button' value='요청 취소 '/>"+"</td>";
 						html += "</tr>";
 					});
-					
-					console.log(data.sendFriendList);
 					
 					$("#sendFriendList").html("");
 					$("#sendFriendList").html(html);
@@ -636,8 +612,6 @@
 						html += "</tr>";
 					});
 					
-					console.log(data.giveFriendList);
-					
 					$("#giveFriendList").html("");
 					$("#giveFriendList").html(html);
 					
@@ -665,8 +639,6 @@
 				url : "/youGiveYesAjax",
 				data : "friend_myemail="+friend_myemail+"&friend_code="+friend_code,
 				success: function(data){
-					console.log(data.friend_code);
-					console.log(data);
 					getYouGiveFriendList(1);
 					getMyFriends(1);
 				}
@@ -682,8 +654,6 @@
 				url : "/youGiveXXXAjax",
 				data : "friend_code="+friend_code,
 				success: function(data){
-					console.log(data.friend_code);
-					console.log(data);
 					getYouGiveFriendList(1);
 				}
 			});
@@ -701,8 +671,6 @@
 				data : param,
 				success: function(data){
 					
-					console.log(data);
-					
 					var html = "";
 					$.each(data.giveFriendList,function(idx,mm){
 						html += "<tr>";
@@ -714,8 +682,6 @@
 						html += "	<td>"+ "<input type='button' value='거절'/>"+"</td>";
 						html += "</tr>";
 					});
-					
-					console.log(data.giveFriendList);
 					
 					$("#giveFriendList").html("");
 					$("#giveFriendList").html(html);
