@@ -72,6 +72,9 @@ public class PostController {
 		
 		model.addAttribute("noticeMap", noticeMap);
 		
+		/* 알림 임규승 2019-01-02 */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		
 		return "notice/noticeList";
 	}
 	
@@ -115,6 +118,9 @@ public class PostController {
 		PostVo postVo = postService.selectAdmin(post_id);
 		model.addAttribute("postVo", postVo);
 		
+		/* 알림 임규승 2019-01-02 */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		
 		return "notice/noticeView";
 	}
 	
@@ -140,6 +146,9 @@ public class PostController {
 		guideMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
 		model.addAttribute("guideMap", guideMap);
+		
+		/* 알림 임규승 2019-01-02 */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
 		
 		return "guide/guideList";
 	}
@@ -183,6 +192,9 @@ public class PostController {
 		
 		PostVo postVo = postService.selectAdminGuide(post_id);
 		model.addAttribute("postVo", postVo);
+		
+		/* 알림 임규승 2019-01-02 */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
 		
 		return "guide/guideView";
 	}

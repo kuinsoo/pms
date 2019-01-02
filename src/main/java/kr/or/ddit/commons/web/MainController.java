@@ -19,6 +19,7 @@ import kr.or.ddit.message.model.MessageVo;
 import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.project.service.ProjectServiceInf;
+import kr.or.ddit.work.service.WorkServiceInf;
 
 @Controller
 public class MainController {
@@ -32,6 +33,8 @@ public class MainController {
 	@Autowired
 	private PostServiceInf postService;
 	
+	@Autowired
+	private WorkServiceInf workService;
 	
 	@Autowired
 	private MessageServiceInf messageService;
@@ -56,9 +59,11 @@ public class MainController {
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
 		model.addAttribute("messageCnt", messageCnt);
 		
+		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
-		// model.addAttribute("workMemberList", workService.workMember(memberVo.getMember_mail()));
 		return "main/main";
 	}
 	
@@ -100,6 +105,10 @@ public class MainController {
 		inviteMap.put("member_mail", memberVo.getMember_mail());
 		
 		model.addAttribute("inviteProjectList", memberService.selectInviteProjectMap(inviteMap));
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		return "main/inviteProject";
 	}
 
@@ -107,6 +116,11 @@ public class MainController {
 	public String favorites(Model model,@SessionAttribute("memberVo")MemberVo memberVo) {
 
 		model.addAttribute("pMemberList", projectService.bookMarkProjects(memberVo.getMember_mail()));
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		
 		return "main/favoriteMain";
 	}
 }

@@ -3,6 +3,7 @@ package kr.or.ddit.work.service;
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.todo.service.ToDoServiceInf;
+import kr.or.ddit.util.model.PageVo;
 import kr.or.ddit.work.mapper.WorkMapper;
 import kr.or.ddit.work.model.WorkVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -162,6 +163,31 @@ public class WorkService implements WorkServiceInf{
 	@Override
 	public List<ToDoVo> selectWorkChart(Map<String, String> mtMap) {
 		return selectWorkChart(mtMap);
+	}
+
+	/**
+	 * Method : workMemberTotalCnt
+	 * 작성자 : iks
+	 * 내용 : 자신이 등록한 업무 총 갯수
+	 * @param
+	 * @return
+	 */
+	@Override
+	public int workMemberTotalCnt(String member_mail) {
+		return workMapper.workMemberTotalCnt(member_mail);
+	}
+
+	/**
+	* Method : getWorkPageList
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 알림을 위한 업무 페이지 리스트 조회
+	*/
+	@Override
+	public List<WorkVo> getWorkPageList(PageVo pageVo) {
+		return workMapper.getWorkPageList(pageVo);
 	}
 
 	@Override

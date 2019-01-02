@@ -6,6 +6,7 @@ import java.util.Map;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.todo.model.ToDoVo;
+import kr.or.ddit.util.model.PageVo;
 import kr.or.ddit.work.model.WorkVo;
 
 /**
@@ -128,5 +129,24 @@ public interface WorkServiceInf {
 	 * @return
 	 */
 	WorkVo selectWork(String work_id);
+	
+	/**
+	 * Method : workMemberTotalCnt
+	 * 작성자 : iks
+	 * 내용 : 자신이 등록한 업무 총 갯수
+	 * @param member_mail
+	 * @return
+	 */
+	int workMemberTotalCnt(String member_mail);
+	
+	/**
+	* Method : getWorkPageList
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 알림을 위한 업무 페이지 리스트 조회
+	*/
+	List<WorkVo> getWorkPageList(PageVo pageVo);
 	
 }

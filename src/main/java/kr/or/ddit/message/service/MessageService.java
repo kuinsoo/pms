@@ -191,6 +191,12 @@ public class MessageService implements MessageServiceInf{
 	public int totalFriendSizeCheck(String member_mail) {
 		return messageMapper.totalFriendSizeCheck(member_mail);
 	}
+
+
+	@Override
+	public int totalMemberListSearch(PageVo pageVo) {
+		return messageMapper.totalMemberListSearch(pageVo);
+	}
 }
 
 
