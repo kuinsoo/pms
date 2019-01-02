@@ -194,4 +194,9 @@ public class WorkService implements WorkServiceInf{
 	public WorkVo selectWork(String work_id) {
 		return workMapper.selectWork(work_id);
 	}
+
+	@Override
+	public WorkVo selectWorkMap(Map<String, String> workMap) {
+		return workMapper.selectWorkMap(workMap);
+	}
 }

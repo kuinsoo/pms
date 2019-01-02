@@ -575,6 +575,7 @@
         document.getElementById('non_todo_sdate'+work_id).value = date.toISOString().slice(0, 16);
     }
 
+
 </script>
 </body>
 </html>

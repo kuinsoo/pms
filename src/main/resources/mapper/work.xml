@@ -161,4 +161,9 @@
 		where work_id = #{work_id}
 	</select>
 
+	<select id="selectWorkMap" resultType="workVo" parameterType="Map">
+		select * from work
+		where WORK_PROJECT = #{project_id}
+		and work_id = #{work_id}
+	</select>
 </mapper>

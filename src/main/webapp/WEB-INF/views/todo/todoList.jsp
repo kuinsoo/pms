@@ -50,9 +50,10 @@
 	}
 
 	/* todoComplet을 Y로 변경 ==문의: jerry== */
-	function todoComplet(todo_id, todo_issue){
+	function todoComplet${work.work_id}(todo_id, todo_issue, work_id){
 		var chk = "";
 		var checked = document.getElementById("todoListCheck"+todo_id).checked;
+
 
 		/* 체크를 했으면 Y로 변경 */
 		if(checked == true){
@@ -63,7 +64,7 @@
 				data: {"todo_id" : todo_id, "chk" : chk},
 				success: function(data){
 					$("#minusBtn"+todo_id).html("");
-
+					movebar${work.work_id}(work_id);
 				},
 				error: function(data){
 					console.log("todoList.jsp : todoComplet() - Y, error");
@@ -84,14 +85,13 @@
 						$("#minusBtn"+todo_id).html("");
 						$("#minusBtn"+todo_id).html(html);
 					}
+					movebar${work.work_id}(work_id);
 				},
 				error: function(data){
 					console.log("todoList.jsp : todoComplet() - N, error");
 				}
 			});
 		}
-
-		movebar(${work.work_id});
 	}
 
 	/* todo delete ==문의: jerry== */
@@ -323,7 +323,7 @@
 <!-- to-do list 조회 -->
 <div class="currentCardContentViewRight">
 	<p>현재진행상황</p>
-	<div class="w3-light-grey" id="workProgress${work.work_id}">
+	<div class="w3-light-grey" >
 		<div id="myBar${work.work_id}" class="w3-container w3-green" style="width:${work.work_progress}%" >${work.work_progress}%</div>
 	</div>
 
@@ -351,21 +351,31 @@
 <link rel="stylesheet" href="../css/w3.css">
 
 <script>
-	function movebar(work_id) {
+	function movebar${work.work_id}(work_id) {
+		$.ajax({
+			type: "GET",
+			url: "/ajaxWorkProgress",
+			data: "project_id=${projectVo.project_id}&work_id="+work_id,
+			success: function (data) {
+				var elem = document.getElementById("myBar"+work_id);
+				var width = 0;
+				var id = setInterval(frame, 10);
+				if(data.work_progress == 0){
+					elem.style.width = 0 + '%';
+					elem.innerHTML = 0  + '%';
+				}
+				function frame() {
+					if (width+1 >= data.work_progress) {
+						clearInterval(id);
+					} else {
+						width++;
+						elem.style.width = width + '%';
+						elem.innerHTML = width + 1  + '%';
+					}
 
-		var elem = document.getElementById("myBar"+work_id);
-		var width = 0;
-		var id = setInterval(frame, 10);
-		function frame() {
-			if (width+1 >= ${work.work_progress}) {
-				clearInterval(id);
-			} else {
-				width++;
-				elem.style.width = width + '%';
-				elem.innerHTML = width + 1  + '%';
+				}
 			}
+		});
 
-		}
 	}
 </script>
---%>

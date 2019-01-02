@@ -140,4 +140,13 @@ public interface WorkMapper {
 	 * @return
 	 */
 	WorkVo selectWork(String work_id);
+
+	/**
+	 * Method : selectWorkChart
+	 * 작성자 : Mr.kku
+	 * 내용 : 개별 워크(맵이용)
+	 * @param workMap
+	 * @return
+	 */
+	WorkVo selectWorkMap(Map<String,String>workMap);
 }

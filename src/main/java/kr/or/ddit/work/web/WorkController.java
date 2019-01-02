@@ -166,12 +166,16 @@ public class WorkController {
 		return "work/ajaxWorkChart";
 	}
 
-	@RequestMapping(value = "/moveBar", method = RequestMethod.GET)
+	@RequestMapping(value = "/ajaxWorkProgress", method = RequestMethod.GET)
 	@ResponseBody
-	public Integer moveBar(@RequestParam("work_id")String work_id, @RequestParam("project_id")String project_id) {
-		Map<String, String> todoMap = new HashMap<>();
-		todoMap.put("work_id", work_id);
-		todoMap.put("project_id", project_id);
-		return todoService.todoComplete(todoMap);
+	public WorkVo ajaxWorkProgress(@RequestParam("project_id")String project_id,
+										 @RequestParam("work_id")String work_id) {
+		Map<String,String> workMap = new HashMap<>();
+		workMap.put("project_id",project_id);
+		workMap.put("work_id",work_id);
+		WorkVo workVo = workService.selectWorkMap(workMap) ;
+		return workVo;
 	}
+
+
 }

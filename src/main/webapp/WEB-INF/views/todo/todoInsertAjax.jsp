@@ -6,10 +6,10 @@
 		<td>
 			<c:choose>
 				<c:when test="${todo.todo_complet == 'Y'}">
-					<input type="checkbox" class="todoListCheck" name="todoListCheck" id="todoListCheck${todo.todo_id}" onclick="todoComplet(${todo.todo_id}, ${todo.todo_issue});" checked="checked"/>
+					<input type="checkbox" class="todoListCheck" name="todoListCheck" id="todoListCheck${todo.todo_id}" onclick="todoComplet${todo.todo_work}('${todo.todo_id}', '${todo.todo_issue}', '${todo.todo_work}');" checked="checked"/>
 				</c:when>
 				<c:when test="${todo.todo_complet == 'N'}">
-					<input type="checkbox" class="todoListCheck" name="todoListCheck" id="todoListCheck${todo.todo_id}" onclick="todoComplet(${todo.todo_id}, ${todo.todo_issue});"/>
+					<input type="checkbox" class="todoListCheck" name="todoListCheck" id="todoListCheck${todo.todo_id}" onclick="todoComplet${todo.todo_work}('${todo.todo_id}', '${todo.todo_issue}', '${todo.todo_work}');"/>
 				</c:when>
 			</c:choose>
 		</td>

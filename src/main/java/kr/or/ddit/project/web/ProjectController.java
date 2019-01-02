@@ -166,7 +166,7 @@ public class ProjectController {
 	 *
 	 * @throws UnsupportedEncodingException the unsupported encoding exception
 	 */
-	@RequestMapping(value = "/subMain", method = RequestMethod.POST )
+	@RequestMapping(value = "/subMain", method = RequestMethod.POST)
 	public String subMain(Model model, @RequestParam("project_id")String project_id, MeetingVo meetingVo,
 						  @SessionAttribute("memberVo")MemberVo memberVo, HttpServletResponse response) throws UnsupportedEncodingException {
 

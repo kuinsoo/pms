@@ -129,6 +129,16 @@ public interface WorkServiceInf {
 	 * @return
 	 */
 	WorkVo selectWork(String work_id);
+
+
+	/**
+	 * Method : selectWorkChart
+	 * 작성자 : Mr.kku
+	 * 내용 : 개별 워크(맵이용)
+	 * @param workMap
+	 * @return
+	 */
+	WorkVo selectWorkMap(Map<String,String>workMap);
 	
 	/**
 	 * Method : workMemberTotalCnt
@@ -148,5 +158,6 @@ public interface WorkServiceInf {
 	* Method 설명 : 알림을 위한 업무 페이지 리스트 조회
 	*/
 	List<WorkVo> getWorkPageList(PageVo pageVo);
-	
+
+
 }
