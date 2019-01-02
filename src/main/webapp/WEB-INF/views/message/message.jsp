@@ -238,37 +238,36 @@
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	function getMessageReceived(page) {
 		var pageSize = 10;
-		$
-				.ajax({
-					type : "GET",
-					url : "/messageReceivedAjax",
-					data : {
-						"page" : page,
-						"pageSize" : pageSize
-					},
-					success : function(data) {
-						console.log(msg_type);
-						console.log(data.msgReceiveList);
+		$.ajax({
+				type : "GET",
+				url : "/messageReceivedAjax",
+				data : {
+					"page" : page,
+					"pageSize" : pageSize
+				},
+				success : function(data) {
+					console.log(msg_type);
+					console.log(data.msgReceiveList);
 
-						var html = "";
-						$.each(data.msgReceiveList, function(idx, mm) {
-							if (mm.msg_type == "N")
-								html += "<tr class = 'msgClick1' id = 'read'>";
-							else if (mm.msg_type == "Y")
-								html += "<tr class = 'msgClick1'>";
+					var html = "";
+					$.each(data.msgReceiveList, function(idx, mm) {
+						if (mm.msg_type == "N")
+							html += "<tr class = 'msgClick1' id = 'read'>";
+						else if (mm.msg_type == "Y")
+							html += "<tr class = 'msgClick1'>";
 
-							html += "	<td>" + mm.rnum + "</td>";
-							html += "	<td>" + mm.msg_id + "</td>";
-							html += "	<td>" + mm.msg_content + "</td>";
-							html += "	<td>" + mm.msg_smember + "</td>";
-							html += "	<td>" + mm.msg_time + "</td>";
-							if (mm.msg_type == 'Y') {
-								html += "<td>" + '읽지않음' + "</td>";
-							} else {
-								html += "<td>" + '읽음' + "</td>";
-							}
-							html += "</tr>";
-						});
+						html += "	<td>" + mm.rnum + "</td>";
+						html += "	<td>" + mm.msg_id + "</td>";
+						html += "	<td>" + mm.msg_content + "</td>";
+						html += "	<td>" + mm.msg_smember + "</td>";
+						html += "	<td>" + mm.msg_time + "</td>";
+						if (mm.msg_type == 'Y') {
+							html += "<td>" + '읽지않음' + "</td>";
+						} else {
+							html += "<td>" + '읽음' + "</td>";
+						}
+						html += "</tr>";
+					});
 
 						console.log(data.msgReceiveList);
 
@@ -326,28 +325,27 @@
 
 	function getMessageSend(page) {
 		var pageSize = 10;
-		$
-				.ajax({
-					type : "GET",
-					url : "/messageSendAjax",
-					data : {
-						"page" : page,
-						"pageSize" : pageSize
-					},
-					success : function(data) {
+			$.ajax({
+				type : "GET",
+				url : "/messageSendAjax",
+				data : {
+					"page" : page,
+					"pageSize" : pageSize
+				},
+				success : function(data) {
 
-						console.log(data.msgSendList);
-						var html = "";
-						$.each(data.msgSendList, function(idx, mm) {
-							html += "<tr class= msgClick2>";
-							html += "	<td>" + mm.rnum + "</td>";
-							html += "	<td>" + mm.msgmember_msg + "</td>";
-							html += "	<td>" + mm.msg_content + "</td>";
-							html += "	<td>" + mm.msg_rmember + "</td>";
-							html += "	<td>" + mm.msg_rdate + "</td>";
-							html += "</tr>";
-						});
-						console.log(data.msgSendList);
+					console.log(data.msgSendList);
+					var html = "";
+					$.each(data.msgSendList, function(idx, mm) {
+						html += "<tr class= msgClick2>";
+						html += "	<td>" + mm.rnum + "</td>";
+						html += "	<td>" + mm.msgmember_msg + "</td>";
+						html += "	<td>" + mm.msg_content + "</td>";
+						html += "	<td>" + mm.msg_rmember + "</td>";
+						html += "	<td>" + mm.msg_rdate + "</td>";
+						html += "</tr>";
+					});
+					console.log(data.msgSendList);
 
 						$("#msgSendList").html("");
 						$("#msgSendList").html(html);
@@ -401,30 +399,24 @@
 	function getMyFriends(page) {
 		var pageSize = 10;
 			$.ajax({
-					type : "GET",
-					url : "/myfriendListAjax",
-					data : {
-						"page" : page,
-						"pageSize" : pageSize
-					},
-					success : function(data) {
-						var html = "";
-						$.each(
-						data.myFriendList,
-						function(idx, mm) {
-							html += "<tr class =friends>";
-							html += "	<td>" + mm.rnum + "</td>";
-							html += "	<td>" + mm.friend_code
-									+ "</td>";
-							html += "	<td>" + mm.friend_member
-									+ "</td>";
-							html += "	<td>"
-									+ "<input type='button' onclick ='deleteMyFriends("
-									+ mm.friend_code
-									+ ");' value='친구삭제'/>"
-									+ "</td>";
-							html += "</tr>";
-						});
+				type : "GET",
+				url : "/myfriendListAjax",
+				data : {
+					"page" : page,
+					"pageSize" : pageSize
+				},
+				success : function(data) {
+					var html = "";
+					$.each(
+					data.myFriendList,
+					function(idx, mm) {
+						html += "<tr class =friends>";
+						html += "	<td>" + mm.rnum + "</td>";
+						html += "	<td>" + mm.friend_code + "</td>";
+						html += "	<td>" + mm.friend_member + "</td>";
+						html += "	<td>"+ "<input type='button' onclick ='deleteMyFriends("+ mm.friend_code+ ");' value='친구삭제'/>"+ "</td>";
+						html += "</tr>";
+					});
 
 						console.log(data.myFriendList);
 
@@ -465,9 +457,7 @@
 							html += "	<td>" + mm.rnum + "</td>";
 							html += "	<td>" + mm.friend_code + "</td>";
 							html += "	<td>" + mm.friend_member + "</td>";
-							html += "	<td>"
-									+ "<input type='button' value='친구삭제'/>"
-									+ "</td>";
+							html += "	<td>"+ "<input type='button' value='친구삭제'/>"+ "</td>";
 							html += "</tr>";
 						});
 
@@ -529,15 +519,9 @@
 							function(idx, mm) {
 								html += "<tr>";
 								html += "	<td>" + mm.rnum + "</td>";
-								html += "	<td>" + mm.member_mail
-										+ "</td>";
-								html += "	<td>" + mm.member_name
-										+ "</td>";
-								html += "<td>"
-										+ "<input type='button' onclick ='getyouGiveNoAjax(\""
-										+ mm.member_mail
-										+ "\")'; value='친구 등록'/>"
-										+ "</td>";
+								html += "	<td>" + mm.member_mail+ "</td>";
+								html += "	<td>" + mm.member_name+ "</td>";
+								html += "	<td>"+ "<input type='button' onclick ='getyouGiveNoAjax(\""+ mm.member_mail+ "\")'; value='친구 등록'/>"+ "</td>";
 								html += "</tr>";
 							});
 
@@ -594,9 +578,7 @@
 							html += "	<td>" + mm.rnum + "</td>";
 							html += "	<td>" + mm.member_mail + "</td>";
 							html += "	<td>" + mm.member_name + "</td>";
-							html += "	<td>"
-									+ "<input type='button' value='친구 등록'/>"
-									+ "</td>";
+							html += "	<td>"+ "<input type='button' value='친구 등록'/>"+ "</td>";
 							html += "</tr>";
 						});
 
@@ -642,17 +624,10 @@
 							function(idx, mm) {
 								html += "<tr>";
 								html += "	<td>" + mm.rnum + "</td>";
-								html += "	<td>" + mm.friend_code
-										+ "</td>";
-								html += "	<td>" + mm.friend_member
-										+ "</td>";
-								html += "	<td>" + mm.member_name
-										+ "</td>";
-								html += "	<td>"
-										+ "<input type='button' onclick ='deletemySendFriend("
-										+ mm.friend_code
-										+ ");' value='요청 취소 '/>"
-										+ "</td>";
+								html += "	<td>" + mm.friend_code+ "</td>";
+								html += "	<td>" + mm.friend_member+ "</td>";
+								html += "	<td>" + mm.member_name+ "</td>";
+								html += "	<td>"+ "<input type='button' onclick ='deletemySendFriend("+ mm.friend_code+ ");' value='요청 취소 '/>"+ "</td>";
 								html += "</tr>";
 							});
 
@@ -712,9 +687,7 @@
 							html += "	<td>" + mm.friend_code + "</td>";
 							html += "	<td>" + mm.friend_member + "</td>";
 							html += "	<td>" + mm.member_name + "</td>";
-							html += "	<td>"
-									+ "<input type='button' value='요청 취소 '/>"
-									+ "</td>";
+							html += "	<td>"+ "<input type='button' value='요청 취소 '/>"+ "</td>";
 							html += "</tr>";
 						});
 
@@ -764,15 +737,8 @@
 									html += "	<td>" + mm.friend_code + "</td>";
 									html += "	<td>" + mm.friend_myemai + "</td>";
 									html += "	<td>" + mm.member_name + "</td>";
-									html += "	<td>" + "<input type='button'onclick ='getyouGiveYesAjax(\"" + mm.friend_myemail + "\","
-											+ mm.friend_code
-											+ ");' value='수락'/>"
-											+ "</td>";
-									html += "	<td>"
-											+ "<input type='button'onclick ='getyouGiveXXXAjax("
-											+ mm.friend_code
-											+ ");' value='거절'/>"
-											+ "</td>";
+									html += "	<td>" + "<input type='button'onclick ='getyouGiveYesAjax(\"" + mm.friend_myemail + "\","+ mm.friend_code+ ");' value='수락'/>"+ "</td>";
+									html += "	<td>"+ "<input type='button'onclick ='getyouGiveXXXAjax("+ mm.friend_code+ ");' value='거절'/>"+ "</td>";
 									html += "</tr>";
 								});
 
@@ -853,12 +819,8 @@
 							html += "	<td>" + mm.friend_code + "</td>";
 							html += "	<td>" + mm.friend_myemail + "</td>";
 							html += "	<td>" + mm.member_name + "</td>";
-							html += "	<td>"
-									+ "<input type='button' value='수락'/>"
-									+ "</td>";
-							html += "	<td>"
-									+ "<input type='button' value='거절'/>"
-									+ "</td>";
+							html += "	<td>" + "<input type='button' value='수락'/>"+ "</td>";
+							html += "	<td>" + "<input type='button' value='거절'/>"+ "</td>";
 							html += "</tr>";
 						});
 

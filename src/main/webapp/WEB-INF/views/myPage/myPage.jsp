@@ -437,8 +437,8 @@
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.att_id +"</td>";
 						html += "	<td>"+ mm.project_title +"</td>";
-						html += "	<td>"+ mm.att_name +"</td>";
-						html += "	<td>"+ "<input type='button' onclick ='getmyProjectFileAttachId("+mm.att_id+");' value='파일 다운로드'/>"+"</td>";
+						html += "	<td><div class='fileNameDiv'>"+ mm.att_name +"</div></td>";
+						html += "	<td>"+ "<input type='button' onclick ='getmyProjectFileAttachId("+mm.att_id+");' value='파일 다운로드' class='fileDownLoads' />"+"</td>";
 						html += "</tr>";
 					});
 					$("#myFileList").html("");
@@ -493,7 +493,7 @@
 						html += "	<td>"+ mm.att_id +"</td>";
 						html += "	<td>"+ mm.project_title +"</td>";
 						html += "	<td>"+ mm.att_name +"</td>";
-						html += "	<td>"+ "<input type='button' value='파일 다운로드'/>"+"</td>";
+						html += "	<td>"+ "<input type='button' value='파일 다운로드' class='fileDownLoads' />"+"</td>";
 						html += "</tr>";
 					});
 					$("#myFileList").html("");
@@ -635,10 +635,10 @@
 								<li>사용자 이메일</li>
 								<li>사용자 이름 </li>
 								<li>휴대폰 번호</li>
-								<li id = "telnumLi">인증번호 입력</li>
-								<li id= "inpupass1">현재 비밀번호</li>
-								<li id ="inpupass2">새 비밀번호</li>
-								<li id = "inpupass3">새 비밀번호 확인</li> 
+								<li id="telnumLi">인증번호 입력</li>
+								<li id="inpupass1">현재 비밀번호</li>
+								<li id="inpupass2">새 비밀번호</li>
+								<li id="inpupass3">새 비밀번호 확인</li>
 							</ul>
 						</div>
 						<div class="userContentsInfoRight_2">
@@ -693,13 +693,13 @@
 						<div id="tabs2-1">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-									<button onclick="getMyPageList(1);">목록으로</button>
 									<form name ="searchProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchText" name="searchText" value="${searchText}" placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchProject();"></i>  
 									</form>
+									<button onclick="getMyPageList(1);" class="getMyPageList">목록으로</button>
 								</div>
 								<table>
 									<colgroup width="10%" />
@@ -726,13 +726,13 @@
 						<div id="tabs2-1-1">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-								<button onclick="getMyEndPageList(1);">목록으로</button>
 									<form name ="searchEndProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchEndText" name="searchEndText" value="${searchEndText}" placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchEndProject();"></i>  
 									</form>
+									<button onclick="getMyEndPageList(1);" class="getMyPageList">목록으로</button>
 								</div>
 								<table>
 									<colgroup width="10%" />
@@ -759,13 +759,13 @@
 						<div id="tabs2-2">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-									<button onclick="getmybookMarkProjectList(1);">목록으로</button>
 									<form name ="searchBookProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchBookText" name ="searchBookText" value='${searchBookText}' placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchBookProject();"></i>  
 									</form>
+									<button onclick="getmybookMarkProjectList(1);" class="getMyPageList">목록으로</button>
 								</div>
 								<table>
 									<colgroup width="10%" />
@@ -792,13 +792,13 @@
 						<div id="tabs2-3">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-								<button onclick="getmyTodoProjectList(1);">목록으로</button>
 								 <form name ="searchTodoProject" id ="searchTodoProject" method="POST" onsubmit="return false;">
 										 <input type="text" id="searchTodoText" name ="searchTodoText" value='${searchTodoText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons" onclick="javascript:getSearchTodoProject();"></i>  
 									</form> 
+								<button onclick="getmyTodoProjectList(1);" class="getMyPageList">목록으로</button>
 								</div>
 								<table>
 									<colgroup width="10%" />
@@ -829,20 +829,20 @@
 									</c:forEach> 
 								</select> --%>
 								<div class="projectSearchDiv">　　
-								<button onclick="getmyProjectFileList(1);">목록으로</button>
 									<form name ="searchFileList" method="POST" onsubmit="return false;">
 										 <input type="text" id="searchFileList" name ="searchFileList" value='${searchFileList}' placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons" onclick="javascript:getFileSearchProject();"></i>  
 									</form> 
+								<button onclick="getmyProjectFileList(1);" class="getMyPageList">목록으로</button>
 								</div>
 								<table>
 									<colgroup width="10%" />
 									<colgroup width="10%" />
 									<colgroup width="20%" />
-									<colgroup width="40%" />
-									<colgroup width="10%" />
+									<colgroup width="30%" />
+									<colgroup width="20%" />
 									<thead>
 										<tr>
 											<th><span>번호</span></th>
@@ -863,11 +863,10 @@
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 						<div id="tabs2-5">
 							<div class="tabs2-5center">
-							<h2>회원 탈퇴 </h2>
-								<p> 회원 확인을 위하여 비밀번호를 입력해주세요. </p>
-								<input id ="member_pass" id = "member_pass" placeholder ="비밀번호를 입력해주세요.." type="password" />
-								<input type="button" class= "goodbyeBtn" value= "확인"/>
-								<span id = "passError"> 비밀번호가 일치하지 않습니다. </span>
+								<p>회원 확인을 위하여 비밀번호를 입력해주세요.</p>
+								<input type="password" id="member_pass" placeholder="비밀번호를 입력해주세요.." />
+								<input type="button" class="goodbyeBtn" value="확인"/>
+								<span id="passError">비밀번호가 일치하지 않습니다.</span>
 							</div>
 						</div>
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
