@@ -55,6 +55,18 @@
 		WHERE   pm.pmember_member = #{member_mail}
 	</select>
 
+	<!-- 프로젝트별 이슈 조회 -->
+	<select id="pjtAllIssueHistory" resultType="issueVo" parameterType="String">
+		SELECT  project_id,
+		        issue_title,
+		        issue_sdate
+		FROM    project INNER JOIN project_member
+		ON      project_id = pmember_project INNER JOIN work
+		ON      project_id = work_project INNER JOIN issue
+		ON      work_id = issue_work
+		WHERE   pmember_member = #{sid}
+	</select>
+
 	<!-- 이슈 발생 등록 -->
 	<insert id="issueInsert" parameterType="issueVo">
 		INSERT INTO issue (issue_id, issue_work, issue_title, issue_level, issue_member, issue_sdate, issue_content, todo_id)

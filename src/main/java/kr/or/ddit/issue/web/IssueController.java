@@ -82,7 +82,7 @@ public class IssueController {
 	* Method 설명 : 이슈히스토리 메뉴에 프로젝트 list 조회(Ajax 적용)
 	*/
 	@RequestMapping(value="/issueHistoryAjax", method=RequestMethod.POST)
-	public String issueHistoryAjax(@SessionAttribute("memberVo") MemberVo memberVo, PageVo pageVo, Model model) {
+	public String issueHistoryAjax(@SessionAttribute("memberVo")MemberVo memberVo, PageVo pageVo, Model model) {
 		
 		List<ProjectVo> history_myProjectList = issueService.issueHistoryPagination(pageVo);
 		int projectCnt = issueService.projectCnt(pageVo);
@@ -96,6 +96,24 @@ public class IssueController {
 		model.addAttribute("myProjectList", myProjectList);
 		
 		return "history/issueHistoryAjax";
+	}
+	
+	/**
+	* Method : pjtAllIssueHistory
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param memberVo
+	* @param model
+	* @return
+	* Method 설명 : 프로젝트별 전체 이슈 조회
+	*/
+	@RequestMapping(value="/pjtAllIssueHistory", method= {RequestMethod.POST, RequestMethod.GET})
+	public String pjtAllIssueHistory(@SessionAttribute("memberVo")MemberVo memberVo, Model model) {
+		List<IssueVo> pjtAllIssueHistory = issueService.pjtAllIssueHistory(memberVo.getMember_mail());
+		
+		model.addAttribute("pjtAllIssueHistory", pjtAllIssueHistory);
+		
+		return "history/issueAllCountHtmlAjax";
 	}
 	
 	/**

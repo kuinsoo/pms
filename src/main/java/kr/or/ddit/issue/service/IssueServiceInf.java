@@ -148,4 +148,14 @@ public interface IssueServiceInf {
 	*/
 	int issueDelete(String issue_id);
 	
+	/**
+	* Method : pjtAllIssueHistory
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param sid
+	* @return
+	* Method 설명 : 프로젝트별 이슈 조회
+	*/
+	List<IssueVo> pjtAllIssueHistory(String sid);
+	
 }

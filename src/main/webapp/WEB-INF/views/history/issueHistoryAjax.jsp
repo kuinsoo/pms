@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
 <c:forEach items="${myProjectList.percentList}" var="percent" varStatus="status">
@@ -16,6 +15,9 @@
 <c:forEach items="${myProjectList.history_myProjectList}" var="history">
 	<span>${history.project_title}(${history.project_id})</span>
 	<div id="myProgress">
+		<div class="issueStick" id="issueStick">
+			<!-- issueAllCountHtmlAjax.jsp -->
+		</div>
 		<div class="myBar" id="myBar${history.rnum}"></div>
 	</div>
 	<span class="sdate">sdate : ${history.format_project_sdate}</span>
