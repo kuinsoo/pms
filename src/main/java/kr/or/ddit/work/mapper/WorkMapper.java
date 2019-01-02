@@ -59,7 +59,7 @@ public interface WorkMapper {
 	* Method 설명 : 업무 삭제
 	*/
 	int deleteWork(String work_id);
-	
+
 	/**
 	* Method : updateWork
 	* 작성자 : Mr.kku
@@ -69,6 +69,7 @@ public interface WorkMapper {
 	* Method 설명 : 업무 수정
 	*/
 	int updateWork(WorkVo workVo);
+
 
 	/**
 	 * Method : updateWork
@@ -107,4 +108,13 @@ public interface WorkMapper {
 	 * @return
 	 */
 	List<ToDoVo> selectWorkChart(Map<String, String> mtMap);
+
+	/**
+	 * Method : selectWorkChart
+	 * 작성자 : Mr.kku
+	 * 내용 : 개별 워크
+	 * @param work_id
+	 * @return
+	 */
+	WorkVo selectWork(String work_id);
 }

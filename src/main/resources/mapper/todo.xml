@@ -123,4 +123,20 @@
 			and work_id = #{work_id}
 			and TODO_COMPLET = 'Y'
 	</select>
+
+	<select id="selectTodo" resultType="todoVo" parameterType="String">
+		select * from todo
+		where TODO_ID = #{todo_id}
+	</select>
+
+	<select id="selectCntTodoList" resultType="todoVo" parameterType="String">
+		select * from todo
+		where TODO_WORK = #{work_id}
+	</select>
+
+	<select id="selectCntTodoComplete" resultType="todoVo" parameterType="String">
+		select * from todo
+		where TODO_WORK = #{work_id}
+		and TODO_COMPLET = 'Y'
+	</select>
 </mapper>

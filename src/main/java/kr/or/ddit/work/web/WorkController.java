@@ -57,7 +57,7 @@ public class WorkController {
 	private MeetingServiceInf meetingService;
 
 	@Autowired
-	private ToDoServiceInf toDoService;
+	private ToDoServiceInf todoService;
 
 	@RequestMapping(value="/ajaxCreateWork",method=RequestMethod.POST)
 	public String ajaxCreateWork(Model model, WorkVo workVo, @RequestParam("project_id")String project_id,
@@ -172,6 +172,6 @@ public class WorkController {
 		Map<String, String> todoMap = new HashMap<>();
 		todoMap.put("work_id", work_id);
 		todoMap.put("project_id", project_id);
-		return toDoService.todoComplete(todoMap);
+		return todoService.todoComplete(todoMap);
 	}
 }

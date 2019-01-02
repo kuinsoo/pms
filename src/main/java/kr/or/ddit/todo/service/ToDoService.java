@@ -109,6 +109,7 @@ public class ToDoService implements ToDoServiceInf{
 	*/
 	@Override
 	public int todoCompletYN(Map todoUpdateMap) {
+
 		return todoMapper.todoCompletYN(todoUpdateMap);
 	}
 
@@ -162,5 +163,44 @@ public class ToDoService implements ToDoServiceInf{
 	@Override
 	public Integer todoComplete(Map<String, String> todoMap) {
 		return todoMapper.todoComplete(todoMap);
+	}
+
+	/**
+	 * Method : todoUpdate
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param todo_id
+	 * @return
+	 * Method 설명 : to-do 객체 검색
+	 */
+	@Override
+	public ToDoVo selectTodo(String todo_id) {
+		return todoMapper.selectTodo(todo_id);
+	}
+
+	/**
+	 * Method : todoUpdate
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param work_id
+	 * @return
+	 * Method 설명 : to-do 객체 검색
+	 */
+	@Override
+	public List<ToDoVo> selectCntTodoList(String work_id) {
+		return todoMapper.selectCntTodoList(work_id);
+	}
+
+	/**
+	 * Method : todoUpdate
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param work_id
+	 * @return
+	 * Method 설명 : to-do 완료 객체 검색
+	 */
+	@Override
+	public List<ToDoVo> selectCntTodoComplete(String work_id) {
+		return todoMapper.selectCntTodoComplete(work_id);
 	}
 }

@@ -69,6 +69,16 @@ public interface WorkServiceInf {
 	*/
 	int updateWork(WorkVo workVo);
 
+	/**
+	 * Method : updateWork
+	 * 작성자 : Mr.kku
+	 * 변경이력 :
+	 * @param workVo
+	 * @return
+	 * Method 설명 : 업무 수정
+	 */
+	int updateWork(WorkVo workVo, Map<String,Object>todoMap, String work_id);
+
 
 	/**
 	 * Method : updateWork
@@ -109,5 +119,14 @@ public interface WorkServiceInf {
 	 * @return
 	 */
 	List<ToDoVo> selectWorkChart(Map<String, String> mtMap);
+
+	/**
+	 * Method : selectWorkChart
+	 * 작성자 : Mr.kku
+	 * 내용 : 개별 워크
+	 * @param work_id
+	 * @return
+	 */
+	WorkVo selectWork(String work_id);
 	
 }
