@@ -9,6 +9,8 @@ import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
+import kr.or.ddit.todo.model.ToDoVo;
+import kr.or.ddit.todo.service.ToDoServiceInf;
 import kr.or.ddit.work.model.WorkVo;
 import kr.or.ddit.work.service.WorkServiceInf;
 import org.slf4j.Logger;
@@ -16,10 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
@@ -56,6 +55,9 @@ public class WorkController {
 
 	@Autowired
 	private MeetingServiceInf meetingService;
+
+	@Autowired
+	private ToDoServiceInf toDoService;
 
 	@RequestMapping(value="/ajaxCreateWork",method=RequestMethod.POST)
 	public String ajaxCreateWork(Model model, WorkVo workVo, @RequestParam("project_id")String project_id,
@@ -162,5 +164,14 @@ public class WorkController {
 		mtMap.put("work_id", work_id);
 		model.addAttribute("workCharts",workService.selectWorkChart(mtMap));
 		return "work/ajaxWorkChart";
+	}
+
+	@RequestMapping(value = "/moveBar", method = RequestMethod.GET)
+	@ResponseBody
+	public Integer moveBar(@RequestParam("work_id")String work_id, @RequestParam("project_id")String project_id) {
+		Map<String, String> todoMap = new HashMap<>();
+		todoMap.put("work_id", work_id);
+		todoMap.put("project_id", project_id);
+		return toDoService.todoComplete(todoMap);
 	}
 }

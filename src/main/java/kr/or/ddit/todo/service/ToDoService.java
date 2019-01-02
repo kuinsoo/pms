@@ -150,5 +150,17 @@ public class ToDoService implements ToDoServiceInf{
 	public int todoUpdate(ToDoVo todoVo) {
 		return todoMapper.todoUpdate(todoVo);
 	}
-	
+
+	/**
+	 * Method : todoUpdate
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param todoMap
+	 * @return
+	 * Method 설명 : to-do 진행상황 표시
+	 */
+	@Override
+	public Integer todoComplete(Map<String, String> todoMap) {
+		return todoMapper.todoComplete(todoMap);
+	}
 }

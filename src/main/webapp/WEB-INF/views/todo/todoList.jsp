@@ -89,6 +89,7 @@ function todoComplet(todo_id, todo_issue){
 			}
 		});
 	}
+	movebar('${work.work_id}', ${projectVo.project_id});
 }
 
 /* todo delete ==문의: jerry== */
@@ -321,7 +322,7 @@ function updateTodo${work.work_id}(todo_id, work_id) {
 <div class="currentCardContentViewRight">
 	<p>현재진행상황</p>
     <div class="w3-light-grey">
-        <div id="myBar" class="w3-container w3-green" style="width:20%" onclick="move(10, 25)">20%</div>
+        <div id="myBar${work.work_id}" class="w3-container w3-green" style="width:0%" >0%</div>
     </div>
 
 	<table>
@@ -345,21 +346,29 @@ function updateTodo${work.work_id}(todo_id, work_id) {
 	</div>
 
 </div>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="../css/w3.css">
 
 <script>
-    function move(curVal, totalVal) {
-        var elem = document.getElementById("myBar");
-        var width = curVal;
-        var id = setInterval(frame, 10);
-        function frame() {
-            if (width >= totalVal) {
-                clearInterval(id);
-            } else {
-                width++;
-                elem.style.width = width + '%';
-                elem.innerHTML = width * 1  + '%';
-            }
-        }
+    function movebar(work_id, project_id) {
+		$.ajax({
+			type: "GET",
+			url: "/moveBar",
+			data : 'work_id='+work_id+'&project_id='+project_id,
+			success : function (data) {
+				var elem = document.getElementById("myBar"+work_id);
+				var width = data;
+				var id = setInterval(frame, 10);
+				function frame() {
+					if (width >= data) {
+						clearInterval(id);
+					} else {
+						width++;
+						elem.style.width = width + '%';
+						elem.innerHTML = width + 1  + '%';
+					}
+				}
+			}
+		});
+
     }
 </script>

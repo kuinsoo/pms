@@ -61,11 +61,11 @@
 											<form action="/createProject" method="post">
 												<span>프로젝트명</span>
 												<br>
-												<input type="text"  class="projectTitleInput" name="project_title" placeholder="프로젝트명 입력(최대 50자)" />
+												<input type="text"  class="projectTitleInput" name="project_title" placeholder="프로젝트명 입력(최대 50자)" required />
 												<br><br>
 												<span>프로젝트 개요</span>
 												<br>
-												<textarea class="projectContentInput" name="project_overview" placeholder="프로젝트 개요 입력"></textarea>
+												<textarea class="projectContentInput" name="project_overview" placeholder="프로젝트 개요 입력" required></textarea>
 
 												<div class="projectStartEndDiv">
 													<span class="projectStart">프로젝트 시작일</span>
