@@ -8,6 +8,11 @@
 .myPageContainerLeft > .myPageContainerLeftUser{width:250px;height:500px;border-right:1px solid #dee3eb;float:left;}
 .myPageContainerLeft > .myPageContainerLeftUser > h2{margin:20px 0px 0px 20px;font-weight:normal;font-size:18px;}
 .myPageContainerLeft > .myPageContainerLeftUser > .profileImg {width:150px;height:150px;margin-top:20px;position:relative;border-radius:100%;margin-left:50px;}
+.myPageContainerLeft > .myPageContainerLeftUser > .userContentsInfoLeft_1{padding:20px;font-size:17px;}
+.myPageContainerLeft > .myPageContainerLeftUser > .userContentsInfoLeft_1 > ul > li:first-chlid{margin-top:20px;}
+.myPageContainerLeft > .myPageContainerLeftUser > .userContentsInfoLeft_1 > ul > li:nth-child(3){margin-top:20px;}
+.myPageContainerLeft > .myPageContainerLeftUser > .userContentsInfoLeft_1 > ul > li:nth-child(5){margin-top:20px;}
+.myPageContainerLeft > .myPageContainerLeftUser > .userContentsInfoLeft_1 > ul > li > input[type="text"]{border:none;font-size:17px;border-bottom:1px solid #333;outline:none;margin-top:5px;}
 .profileImg > #fileList{width:150px;height:150px;border:1px solid #dee3eb;border-radius:100%;}
 .profileImg > #fileList > div > img{width:150px;height:150px;border-radius:100%;box-shadow:0px 0px 1px #000;}
 .profileImg > .profileUploadImg {
@@ -286,6 +291,10 @@
 /* 회원탈퇴 */
 #member_pass{width:400px;height:30px;font-size:17px;outline:none;margin:0 auto;margin-top:20px;}
 
+/* 능력 및 평가 */
+.evaluationContainerRightUser{width:300px;float:left;}
+.evaluationInfoRight_1{width:100%;padding:70px 20px 20px 20px;}
+.evaluationInfoRight_1 > ul > li{font-size:17px;margin:10px 0px 10px 0px;}
 
 
 
