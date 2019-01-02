@@ -175,8 +175,7 @@ public class MessageController {
 		return myMemberMap;
 	}
 	
-	
-	
+	// 전체 사용자 검색 부분 
 	@ResponseBody
 	@RequestMapping(value="/AllMemberListSearchAjax", method= RequestMethod.POST)
 	public Map<String, Object> AllMemberListSearchAjax (@SessionAttribute("memberVo") MemberVo memberVo , PageVo pageVo){
@@ -188,16 +187,14 @@ public class MessageController {
 		}
 		List<MemberVo> myMemberList = messageservice.totalMemberSearch(pageVo);
 		
-		int pageCnt = messageservice.totalMember(memberVo.getMember_mail());
+		int searchCnt = messageservice.totalMemberListSearch(pageVo);
 		
 		Map<String, Object> myMemberMap = new HashMap<>();
 		myMemberMap.put("myMemberList", myMemberList);
-		myMemberMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		myMemberMap.put("searchCnt", (int)Math.ceil((double)searchCnt/pageVo.getPageSize()));
 		
 		return myMemberMap;
 	}
-	
-	
 	
 	@ResponseBody
 	@RequestMapping(value="/myFriendsDelete", method = RequestMethod.GET)
