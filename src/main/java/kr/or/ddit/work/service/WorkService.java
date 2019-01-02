@@ -5,6 +5,8 @@ import java.util.Map;
 
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.todo.model.ToDoVo;
+import kr.or.ddit.util.model.PageVo;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -147,5 +149,30 @@ public class WorkService implements WorkServiceInf{
 	@Override
 	public List<ToDoVo> selectWorkChart(Map<String, String> mtMap) {
 		return selectWorkChart(mtMap);
+	}
+
+	/**
+	 * Method : workMemberTotalCnt
+	 * 작성자 : iks
+	 * 내용 : 자신이 등록한 업무 총 갯수
+	 * @param
+	 * @return
+	 */
+	@Override
+	public int workMemberTotalCnt(String member_mail) {
+		return workMapper.workMemberTotalCnt(member_mail);
+	}
+
+	/**
+	* Method : getWorkPageList
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 알림을 위한 업무 페이지 리스트 조회
+	*/
+	@Override
+	public List<WorkVo> getWorkPageList(PageVo pageVo) {
+		return workMapper.getWorkPageList(pageVo);
 	}
 }
