@@ -268,7 +268,8 @@
 .friendCreateTablePaging2 > li{display:inline-block;padding:0px 10px 0px 10px;cursor:pointer;}
 
 
-
+/* 마이페이지 추가 css */
+.getMyPageList{width:70px;height:40px;background-color:#007fff;color:#fff;outline:none;border:none;}
 
 
 
