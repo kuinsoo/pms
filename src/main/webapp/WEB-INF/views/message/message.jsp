@@ -207,11 +207,11 @@
 		// 			$("#sendMessageInput").val('${param.msg_person}');
 
 		getMessageReceived(1);
-		getMessageSend(1);
+		getMessageSend(1);/* 
 		getMyFriends(1);
 		getAllMember(1);
 		getMySendFriendList(1);
-		getYouGiveFriendList(1);
+		getYouGiveFriendList(1); */
 
 		$("#msgReceiveList").on("click", ".msgClick1", function() {
 			console.log("msgReceiveList");
@@ -230,10 +230,10 @@
 			window.location = "#open1";
 		});
 	});
-
+/* 
 	function getFriendsListGo() {
 		getMessageReceived(1);
-	};
+	}; */
 
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	function getMessageReceived(page) {
@@ -246,8 +246,6 @@
 					"pageSize" : pageSize
 				},
 				success : function(data) {
-					console.log(msg_type);
-					console.log(data.msgReceiveList);
 
 					var html = "";
 					$.each(data.msgReceiveList, function(idx, mm) {
@@ -314,8 +312,6 @@
 				$("#reInput3").val(msg_content);
 				$("#reInput").val(msg_id);
 				$("#msg_type").val(msg_type);
-
-				console.log(msg_type);
 
 			}
 		});
@@ -393,7 +389,7 @@
 			}
 		});
 	}
-	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	/* //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	// 친구 리스트 뽑아오는 Ajax
 
 	function getMyFriends(page) {
@@ -691,8 +687,6 @@
 							html += "</tr>";
 						});
 
-						console.log(data.sendFriendList);
-
 						$("#sendFriendList").html("");
 						$("#sendFriendList").html(html);
 
@@ -810,8 +804,6 @@
 					data : param,
 					success : function(data) {
 
-						console.log(data);
-
 						var html = "";
 						$.each(data.giveFriendList, function(idx, mm) {
 							html += "<tr>";
@@ -847,7 +839,7 @@
 						console.log(xhr);
 					}
 				});
-	}
+	} */
 
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

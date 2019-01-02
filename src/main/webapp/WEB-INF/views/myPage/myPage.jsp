@@ -420,7 +420,6 @@
 				}
 			});
 		}
-			
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	    // 파일 보관함 
 		function getmyProjectFileList(page){
@@ -588,8 +587,6 @@
 				});
 			}
 	</script>
-
-
 <form  id = "frm" action="/projectClickDetail" method = "get">
 	<input type = "hidden" id = "project_title" name = "project_title"/>
 	<input type = "hidden" id = "project_id" name = "project_id"/>
@@ -638,7 +635,7 @@
 								<li id = "telnumLi">인증번호 입력</li>
 								<li id= "inpupass1">현재 비밀번호</li>
 								<li id ="inpupass2">새 비밀번호</li>
-								<li id = "inpupass3">새 비밀번호 확인</li>
+								<li id = "inpupass3">새 비밀번호 확인</li> 
 							</ul>
 						</div>
 						<div class="userContentsInfoRight_2">
@@ -693,7 +690,7 @@
 						<div id="tabs2-1">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-									<button onclick="getMyPageList(1);" class="getMyPageList">목록으로</button>
+									<button onclick="getMyPageList(1);">목록으로</button>
 									<form name ="searchProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchText" name="searchText" value="${searchText}" placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />

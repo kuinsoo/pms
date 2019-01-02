@@ -57,6 +57,7 @@
 											<th>번호</th>
 											<th>친구 번호</th>
 											<th>이메일</th>
+											<th>친구 이름</th>
 											<th>삭제</th>
 										</tr>
 									</thead>
@@ -161,13 +162,13 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		
-		getMessageReceived(1);
-		getMessageSend(1);
+		/* getMessageReceived(1);
+		getMessageSend(1); */
 		getMyFriends(1);
 		getAllMember(1);
 		getMySendFriendList(1);
 		getYouGiveFriendList(1);
-				
+		/* 		
 		$("#msgReceiveList").on("click", ".msgClick1" ,function(){
 			var msg_id = $(this).children()[1].innerHTML;
 			updateMessageReceivedAjax(msg_id);
@@ -181,7 +182,7 @@
 			
 			updateMessageSendAjax(msgmember_msg);
 			 window.location = "#open1";
-		});
+		}); */
 	});
 	
 	function getFriendsListGo(){
@@ -189,15 +190,13 @@
 	};	
 		
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	function getMessageReceived(page){
+/* 	function getMessageReceived(page){
 			var pageSize = 10;
 			$.ajax({
 				type: "GET",
 				url : "/messageReceivedAjax",
 				data : {"page":page, "pageSize":pageSize},
 				success: function(data){
-					console.log(msg_type);
-					console.log(data.msgReceiveList);
 					
 					var html = "";
 					$.each(data.msgReceiveList,function(idx,mm){
@@ -322,7 +321,7 @@
 				
 				}
 			});
-		}
+		} */
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		// 친구 리스트 뽑아오는 Ajax
 		
@@ -341,6 +340,7 @@
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.friend_code +"</td>";
 						html += "	<td>"+ mm.friend_member +"</td>";
+						html += "	<td>"+ mm.member_name +"</td>";
 						html += "	<td>"+ "<input type='button' onclick ='deleteMyFriends("+mm.friend_code+");' value='친구삭제'/>"+"</td>";
 						html += "</tr>";
 					});
@@ -377,6 +377,7 @@
 								html += "	<td>"+ mm.rnum +"</td>";
 								html += "	<td>"+ mm.friend_code +"</td>";
 								html += "	<td>"+ mm.friend_member +"</td>";
+								html += "	<td>"+ mm.member_name +"</td>";
 								html += "	<td>"+ "<input type='button' value='친구삭제'/>"+"</td>";
 								html += "</tr>";
 							});
@@ -428,7 +429,11 @@
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.member_mail +"</td>";
 						html += "	<td>"+ mm.member_name +"</td>";
-						html += "<td>"+ "<input type='button' onclick ='getyouGiveNoAjax(\""+mm.member_mail+"\")'; value='친구 등록'/>"+"</td>";
+						/* if(){
+							html += "	<td>"+ "<input type='button' onclick ='getyouGiveNoAjax(\""+mm.member_mail+"\")'; value='요청보냄'/>"+"</td>";
+						}else{ */
+							html += "	<td>"+ "<input type='button' onclick ='getyouGiveNoAjax(\""+mm.member_mail+"\")'; value='친구 등록'/>"+"</td>";
+						/* } */
 						html += "</tr>";
 					});
 					
