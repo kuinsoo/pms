@@ -299,15 +299,17 @@ public class LoginController {
 	 * @return Method  설명 : sign.jsp에서 회원가입 버튼을 눌렀을때
 	 */
 	@RequestMapping(value = "/signProcess", method = RequestMethod.POST)
-	public String signProcess(@RequestParam("member_mail") String member_mail, MemberVo member, HttpServletRequest request) {
+	public String signProcess(@RequestParam("member_mail") String member_mail, MemberVo memberVo, HttpServletRequest request) {
 		
 		String member_pass = request.getParameter("member_pass");
-		String kisa = KISA_SHA256.encrypt(member_pass).toLowerCase();
 		
-		member.setMember_pass(kisa);
+		String kisa = KISA_SHA256.encrypt(member_pass).toLowerCase(); //toLowerCase :  다 소문자로 DB에 입력 
+		
+		memberVo.setMember_pass(kisa);
 		// 값이 다르면..
+		// 인터페이스에 들어가고 그 후 service 
 		if (memberService.selectUser(member_mail) == null) {
-			memberService.insertUser(member);
+			memberService.insertUser(memberVo);
 			return "/login/login";
 			// 값이 같으면
 		} else {

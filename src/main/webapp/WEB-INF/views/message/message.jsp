@@ -40,9 +40,9 @@
 							</div>
 							<textarea class="facingContent" name="textArea"></textarea>
 							<div class="facingBtn">
-								<input type="hidden" name="msg_smember" /> <input type="submit"
-																				  class="facingSendBtn" value="보내기" /> <input type="button"
-																															  class="facingSendReset" value="취소" />
+								<input type="hidden" name="msg_smember" /> 
+								<input type="submit" class="facingSendBtn" value="보내기" /> 
+								<input type="button" class="facingSendReset" value="취소" />
 							</div>
 						</form>
 					</div>
@@ -84,12 +84,12 @@
 								<a href="#close"><i class="icon-close icons"></i></a>
 								<div class="sentNoteContainer">
 									<div class="recipientFacing">
-										<span>보낸사람</span> <input type="text" id="reInput1" value=""
-																 readonly />
+										<span>보낸사람</span> 
+										<input type="text" id="reInput1" value="" readonly />
 									</div>
 									<div class="sendDate">
-										<span>받은 날짜</span> <input type="text" value="" id="reInput2"
-																  readonly />
+										<span>받은 날짜</span> 
+										<input type="text" value="" id="reInput2" readonly />
 										<!-- <i class="icon-ban icons"></i>
 											<span>차단</span>
 											<i class="icon-energy icons"></i>
@@ -103,14 +103,12 @@
 											<input type="hidden" id="reInput" name="msg_id" />
 										</form>
 
-										<a onclick="getFriendsListGo();" href="#close"
-										   class="sentNoteCloseBtn"> 취소 </a>
+										<a onclick="getFriendsListGo();" href="#close" class="sentNoteCloseBtn"> 취소 </a>
 
 										<form method="post" action="/sendYouMessageUpdate"
 											  id="sendMessageForm">
-											<input type="hidden" name="msg_person" id="sendPerson" /> <input
-												type="button" class="sentNoteDeleteBtn" id="sendMessage"
-												value="답장하기" />
+											<input type="hidden" name="msg_person" id="sendPerson" /> 
+											<input type="button" class="sentNoteDeleteBtn" id="sendMessage" value="답장하기" />
 										</form>
 									</div>
 								</div>

@@ -197,6 +197,24 @@ public class MessageService implements MessageServiceInf{
 	public int totalMemberListSearch(PageVo pageVo) {
 		return messageMapper.totalMemberListSearch(pageVo);
 	}
+
+
+	@Override
+	public int totalmySendFriendListSearch(PageVo pageVo) {
+		return messageMapper.totalmySendFriendListSearch(pageVo);
+	}
+
+
+	@Override
+	public int totalyouGiveFriendListSearch(PageVo pageVo) {
+		return messageMapper.totalyouGiveFriendListSearch(pageVo);
+	}
+
+
+	@Override
+	public int totalFriendsSearch(PageVo pageVo) {
+		return messageMapper.totalFriendsSearch(pageVo);
+	}
 }
 
 
