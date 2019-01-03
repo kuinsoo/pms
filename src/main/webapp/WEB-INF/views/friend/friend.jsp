@@ -468,8 +468,15 @@
 		
 		// 전체 사용자 검색 부분 
 		function getAllMemberSearch(){
+			
+			//<input type="hidden" name="page" value='1'/>
+
+			//$('form[name=searchTextFriendList]') 하위 input name=page의 값을 함수 파라미터로 설정 
+			//var page = $('form[name=searchTextFriendList]').
 			var param = $('form[name=searchTextFriendList]').serialize();
-			var pageSize = 10;
+			//var pageSize = 10;
+			
+			return false;
 			$.ajax({
 				type: "POST",
 				url : "/AllMemberListSearchAjax",
