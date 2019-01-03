@@ -14,9 +14,10 @@
 				<span>${work.work_wdate}</span>
 			</div>
 			<div class="updateDeleteIcon">
-				<i class="icon-wrench icons"></i>
+				<a href="#openCardUpdate"><i class="icon-wrench icons"></i></a>
+				<%@ include file="/WEB-INF/views/card/cardUpdate.jsp" %>
 				<a href="#opens${work.work_id}" onclick="todoReset(${work.work_id});"><i class="icon-bulb icons"></i></a>
-					<%-- 할일관련 --%>
+				<%-- 할일관련 --%>
 				<%@ include file="/WEB-INF/views/todo/todo.jsp" %>
 			</div>
 		</div>

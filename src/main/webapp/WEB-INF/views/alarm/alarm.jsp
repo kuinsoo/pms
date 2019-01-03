@@ -82,7 +82,7 @@ function messageMemberList(){
 		    },
 		    error: function (data) {
 			    // location.href = "/";
-				alert("error");
+				// alert("error");
 			},
 		    timeout: 3000,
 		    complete: setTimeout(function(){ messagePoll(); }, 6000)
