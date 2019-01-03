@@ -1,6 +1,22 @@
 package kr.or.ddit.work.web;
 
-import kr.or.ddit.attachment.service.AttachmentServiceInf;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.multipart.MultipartFile;
+
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.meeting.model.MeetingVo;
@@ -11,21 +27,9 @@ import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
-import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.todo.service.ToDoServiceInf;
 import kr.or.ddit.work.model.WorkVo;
 import kr.or.ddit.work.service.WorkServiceInf;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * kr.or.ddit.work.web
@@ -196,13 +200,41 @@ public class WorkController {
 	@RequestMapping(value = "/ajaxWorkProgress", method = RequestMethod.GET)
 	@ResponseBody
 	public WorkVo ajaxWorkProgress(@RequestParam("project_id")String project_id,
-										 @RequestParam("work_id")String work_id) {
+								   @RequestParam("work_id")String work_id) {
 		Map<String,String> workMap = new HashMap<>();
 		workMap.put("project_id",project_id);
 		workMap.put("work_id",work_id);
 		WorkVo workVo = workService.selectWorkMap(workMap) ;
 		return workVo;
 	}
+	
+	/**
+	* Method : myWorkList
+	* 작성자 : bhuanchanwoo
+	* 변경이력 : 20190101
+	* @param project_id
+	* @param member_mail
+	* @param workVo
+	* @param model
+	* @return
+	* Method 설명 : cors 적용, 회의실에서 나의 업무 목록 출력 용
+	*/
+	@CrossOrigin
+	@RequestMapping(value="/myWorkList", 
+									method= {RequestMethod.GET,RequestMethod.POST}, 
+									headers="Accept=application/json")
+	@ResponseBody
+	public List<WorkVo> myWorkList( @RequestParam("project_id")String project_id,
+													  		 @RequestParam("member_mail")String member_mail,
+													  		WorkVo workVo, Model model) {
 
-
+		System.out.println("from js about data : "+project_id+" ; "+member_mail);
+		workVo.setMember_mail(member_mail);
+		workVo.setWork_project(project_id);
+		
+		List<WorkVo> myWorkList = workService.myWorkList(workVo);
+		System.out.println(" **myWorkList : "+ myWorkList);
+		
+		return myWorkList;
+	}
 }

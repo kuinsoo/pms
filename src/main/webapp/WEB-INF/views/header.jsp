@@ -23,9 +23,11 @@
     <link rel="stylesheet" href="/css/jquery-ui.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/myPage.css">
-    <link rel="stylesheet" type="text/css" href="/css/submain.css">
+    <link rel="stylesheet" href="/css/submain.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
+	<script type="text/javascript" src="/js/annyang.js"></script>
+	<script type="text/javascript" src="/js/current_vui.js"></script>
 
 </head>
 
@@ -90,7 +92,7 @@
     </div>
 </nav>
 
-<div id="wrap">
+<div id="wrap">recipientSelect
     <div id = "Progress_Loading"><!-- 로딩바 -->
         <img src="/images/Progress_Loading.gif"/>
     </div>
@@ -200,12 +202,16 @@
 	                        </div>
 	                        <ul>
 	                            <li>
-	                                <i class="icon-settings icons"></i>
+	                                <i class="icon-user icons"></i>
 	                                <a href="/myPage">마이페이지</a>
 	                            </li>
 	                            <li>
 	                                <i class="icon-badge icons"></i>
 	                                <a href="/evaluation">능력 및 평가</a>
+	                            </li>
+	                            <li>
+	                                <i class="icon-settings icons"></i>
+	                                <a href="/admin">관리자 모드</a>
 	                            </li>
 	                            <li>
 	                                <i class="icon-power icons"></i>
@@ -300,6 +306,3 @@
         });*/ 
     </script>-->
 
-	<!-- 변찬우 : 음성인식 네비게이션 VUI  -->
-	<script src="/js/annyang.js"></script>
-	<script src="/js/annyangCurrent.js"></script>

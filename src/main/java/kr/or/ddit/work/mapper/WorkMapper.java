@@ -110,7 +110,6 @@ public interface WorkMapper {
 	 * @return
 	 */
 	List<ToDoVo> selectWorkChart(Map<String, String> mtMap);
-
 	/**
 	 * Method : workMemberTotalCnt
 	 * 작성자 : iks
@@ -121,13 +120,13 @@ public interface WorkMapper {
 	int workMemberTotalCnt(String member_mail);
 
 	/**
-	* Method : getWorkPageList
-	* 작성자 : iks
-	* 변경이력 :
-	* @param map
-	* @return
-	* Method 설명 : 알림을 위한 업무 페이지 리스트 조회
-	*/
+	 * Method : getWorkPageList
+	 * 작성자 : iks
+	 * 변경이력 :
+	 * @param map
+	 * @return
+	 * Method 설명 : 알림을 위한 업무 페이지 리스트 조회
+	 */
 	List<WorkVo> getWorkPageList(PageVo pageVo);
 
 
@@ -149,4 +148,14 @@ public interface WorkMapper {
 	 * @return
 	 */
 	WorkVo selectWorkMap(Map<String,String>workMap);
+
+	/**
+	* Method : workAllSchedule
+	* 작성자 : bhuanchanwoo
+	* 변경이력 :
+	* @param workVo
+	* @return
+	* Method 설명 : 프로젝트 & 해당 구성원에게 할당된 업무 리스트 출력
+	*/
+	List<WorkVo> myWorkList(WorkVo workVo);
 }

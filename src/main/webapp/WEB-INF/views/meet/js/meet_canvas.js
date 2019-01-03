@@ -24,7 +24,6 @@ if(mm<10) {
 today = yyyy+'-'+mm+'-'+dd;
 
 function saveFormAsTextFile(){
-	
     var textToSave =
       'date: ' + today + '\n' +
       $('#editor').children().html(); // =content;
@@ -217,7 +216,7 @@ function overTime() {
     //console.log("나 i : ", overT); //접속 후  null , 시간은 들어옮 
 }
 
-//타이머 선언
+// 타이머 선언
 var syncTimer = new syncTimerWrite();
 
 syncTimer.widgetJsURL = '/webapp/WEB-INF/views/meet/js/syncTimer.js'	
@@ -244,6 +243,19 @@ editorInput.addEventListener("keydown", function(event) {
 		subText : mySubText
 	});
 });
+
+// 내 일감목록 선언
+var coWorkList = new coWorkListLoader();
+
+coWorkList.widgetJsURL = '/webapp/WEB-INF/views/meet/js/coWorkList.js'	
+	coWorkList.addSyncListener(function(data) {
+    connection.send(data);
+});
+
+
+
+
+
 
 //여기서부턴 RTCMultiConnection
 connection.chunkSize = 16000;
@@ -308,6 +320,13 @@ connection.onopen = function(event) {
 			 connection.send('syncDoc'); 
 	    }, 1000);
 	 }; 
+	 
+ 	// 일감목록   
+	 if(workListBtnCnt<=0){
+	    setTimeout(function() {
+			 connection.send('syncWorkList'); 
+	    }, 1000);
+	 }; 
 };
 
 //연결(사용자가 접속)이 '종료' 되었을때 
@@ -350,7 +369,7 @@ connection.onmessage = function(event) {
     
 	// 에디터 동기화 
 	if(event.data === 'syncDoc'){
-    	var mySubText = $('#editor').children().html();
+		var mySubText = $('#editor').children().html();
 		var myTextLength =  mySubText.length;	
 		
 		 connection.send({
@@ -363,7 +382,7 @@ connection.onmessage = function(event) {
 		 $('#editor').children().html(event.data.subText);
 		 return;
 	 } 
- 
+	 
 	//타이머 동기화 _시간 초과 전 
     var setMeetTitle;
     var setTimer;
@@ -394,6 +413,31 @@ connection.onmessage = function(event) {
 		overT=event.data.overT;
 		memT++;
     };
+    
+	 
+	// 일감목록 동기화 
+	if(event.data === 'syncWorkList'){		
+		var mySubWorkList= $('#myWorkList').html();	 //*** 밖으로 빼면 전역과 지역이 혼선발생
+		var myWorkListBtnCnt =  workListBtnCnt;	
+		
+		console.log("connection 받는 mySubWorkList : ",mySubWorkList);
+		console.log("connection 받는 myWorkListBtnCnt : ",myWorkListBtnCnt);
+		connection.send({
+			 	subWorkList : mySubWorkList,
+			 	workListBtnCnt : myWorkListBtnCnt
+			});
+		 return;
+	 };
+
+	 othersWorkListBtnCnt=event.data.workListBtnCnt;
+	 if(workListBtnCnt <= othersWorkListBtnCnt){	//*** 새로 변수를 선언하면 혼선 예상.. 그냥 초기화 값과 연결된 값을 바로? 비교 
+		 console.log("받은 workListBtnCnt : ",othersWorkListBtnCnt);
+		 console.log("받은 myWorkListBtnCnt : ",workListBtnCnt);
+		 
+		 $('#myWorkList').html(event.data.subWorkList);
+		 return;
+	 }
+		 
 };
 
 // extra code
@@ -727,3 +771,98 @@ designer.appendTo(document.getElementById('widget-container'), function() {
         });
     }
 });
+
+
+// 내 일감 목록 불러오기
+$('#myWorkListBtn').on('click', function(){	  
+	console.log("project_id",params.todayProject_id);
+	console.log("member_mail",member_mail);
+	
+	  $.ajax({
+		    url : 'https://127.0.0.1:8081/myWorkList',
+		    type : 'POST',
+		    data : {
+		    	"project_id" : params.todayProject_id,
+		    	"member_mail": member_mail
+		    },
+		    success : function (data) {
+		    	console.log("call~ node js : ", data);
+		    	
+		    	var tableClassName;
+		    	if(data.length==0){
+		    		tableClassName=member_mail.substring( 0, member_mail.indexOf("@") );
+		    	}else{		    		
+		    		tableClassName="wList"+data[0]["work_id"];
+		    	}
+		    	console.log("tableClassName : ", tableClassName);
+
+		    	$("<span> ' >" + params.userFullName + " ' 님의 일감들 </span> " +
+		    			"<button class='listedWorksClose'> [ 접기 ]</button> ").appendTo("#myWorkList"); // 이것을 테이블에붙임
+				$("<table class='workTable' id='"+tableClassName+"' />").css({
+					margin: "5px auto 15px",
+					width:"100%",
+					border : "1px solid #ccc",
+					background:"#e7e7e7",
+					display:"block"
+				}).appendTo("#myWorkList"); // 테이블을 생성하고 그 테이블을 div에 추가함
+				
+				if(data.length==0){
+					$("<tr><td> 아직  배정된 일감이 없습니다~ </td></tr>").appendTo("#"+tableClassName);
+				}else{	
+					var works = JSON.stringify(data);
+
+					$.each(data, function(index, works) { // 이치를 써서 모든 데이터들을 배열에 넣음
+						var items = [];
+						items.push("<td>" + (index+1) + "</td>");
+						items.push("<td>" + works.work_title + "</td>"); // 여기에 id pw addr tel의 값을 배열에 넣은뒤
+						items.push("<td>" + works.work_content + "</td>");
+						items.push("<td>" + works.work_progress + " %</td>");
+						
+						$("<tr/>", {
+							html : items // 티알에 붙임,
+						}).addClass('tr'+(index+1)).appendTo("#"+tableClassName); // 그리고 그 tr을 테이블에 붙임
+						
+						// 업무를 마친 경우(todo 100%)
+						if(works.work_progress==100){
+							$('.tr'+(index+1)).css('text-decoration', 'line-through');	
+						}
+						// 마감일이 오늘을 넘겼을 경우  
+						console.log("today : ", today);
+						console.log("예상 마감일 : ", works.format_work_eedate);
+						if(today>works.format_work_eedate){
+							$('.tr'+(index+1)).css('color', 'red');	
+						}
+							
+					});//each끝 
+					
+				};
+				
+				// 커넥션 
+		  		var mySubWorkList= $('#myWorkList').html();
+		  		workListBtnCnt++;
+		  		myWorkListBtnCnt = workListBtnCnt;
+				//var myWorkListBtnCnt ++;	
+				//othersWorkListBtnCnt=myWorkListBtnCnt+1;
+				console.log("click mySubWorkList : ",mySubWorkList);
+				console.log("click myWorkListBtnCnt : ",myWorkListBtnCnt);
+				
+				connection.send({
+				 	subWorkList : mySubWorkList,
+				 	workListBtnCnt : myWorkListBtnCnt
+				});
+
+				$("#myWorkListBtn").attr("disabled","disabled");
+		    },
+		    error : function (err) {
+		    	console.log(err);
+		    } 
+		});
+});
+
+//내 일감 목록 닫기(미정/ 지우기 말고 접기?)
+$(document).ready(function(){
+	$('#myWorkList').on('click', '.listedWorksClose', function(){	// 동적 on event :상위 selector에 이벤트 걸기 
+		$(this).next().toggle();
+	});
+});
+

@@ -612,10 +612,11 @@
 	<!-- CURRENT SECTION(MAIN) -->	
 	<section class="currentMain">
 		<div class="currentMainContainer">
+			<div class="myPageContainerTitle">
+				<h2>사용자 기본 정보</h2>
+			</div>
+				
 			<div class="myPageContainer">
-				<div class="myPageContainerTitle">
-					<h2>사용자 기본 정보</h2>
-				</div>
 				<!-- 마이페이지 사용자 정보 수정 부분  -->
 				<form action="/myPageUpdate" method="post" enctype="multipart/form-data">
 				<div class="myPageContainerLeft">
@@ -682,13 +683,14 @@
 			</form>				
 				<div class="myPageContainerRight">
 					<div class="myPageContainerRightLeftChart">
-						<canvas id="myChart" width="349" height="500"></canvas>
+						<canvas id="myChart" width="349" height="560"></canvas>
 					</div>
 					<div class="myPageContainerRightRightChart">
-						<canvas id="myChart2" width="349" height="500"></canvas>
+						<canvas id="myChart2" width="349" height="560"></canvas>
 					</div>
 				</div>
-				<div class="myPageBottomContainer">
+			</div>
+			<div class="myPageBottomContainer">
 					<div id="tabs2">
 						<ul>							
 							<li><a href="#tabs2-1">참여중인 프로젝트</a></li>
@@ -883,7 +885,6 @@
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 					</div>
 				</div>
-			</div>
 		</div>
 	</section>
 	<footer class="currentFooter">
