@@ -19,6 +19,7 @@ ul{list-style-type:none;}
 .header{width:100%;height:85px;position:fixed;z-index:1;}
 .topHeader{width:100%;height:50px;background-color:#333;}
 .adminLogo{float:left;margin-left:20px;color:red;font-size:20px;line-height:50px;}
+.adminLogo > a{color:red;}
 .adminInfo{float:right;color:#fff;font-size:17px;line-height:50px;margin-right:20px;}
 .adminInfo > a{color:#f00;margin-left:20px;}
 .adminInfo > span{color:#ccc;}
@@ -92,7 +93,7 @@ ul{list-style-type:none;}
 <div class="header">
 	<div class="topHeader">
 		<div class="adminLogo">
-			CURRENT ADMIN
+			<a href="/main">CURRENT ADMIN</a>
 		</div>
 		<div class="adminInfo">
 			${memberVo.member_name}<span>님</span> (${memberVo.member_mail})
@@ -129,7 +130,7 @@ ul{list-style-type:none;}
 						<colgroup width="90%" />
 						<tr>
 							<td class="titleTd">제목</td>
-							<td><input type="text" name="post_title" required /></td>
+							<td><input type="text" name="post_title" /></td>
 						</tr>
 						<tr>
 							<td class="titleTd">게시물 내용</td>

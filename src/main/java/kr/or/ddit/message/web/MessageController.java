@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.friendslist.model.FriendListVo;
 import kr.or.ddit.friendslist.service.FriendsListServiceInf;
@@ -42,15 +43,13 @@ public class MessageController {
 	private FriendsListServiceInf friendservice;
 	
 	@Autowired
-	private MessageServiceInf messageservice;
-	
-	@Autowired
 	private PostServiceInf postService;
 	
 	@Autowired
 	private WorkServiceInf workService;
 	
-	
+	@Autowired
+	private MessageServiceInf messageService;	
 	
 	
 	/**
@@ -68,6 +67,11 @@ public class MessageController {
 		List<FriendListVo> selctMyFriend = friendservice.selectMyFriends(memberVo.getMember_mail());
 		model.addAttribute("selctMyFriend",selctMyFriend);
 		model.addAttribute("pageCnt", postService.totalPostCnt());
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		
 		return "message/message";
@@ -95,8 +99,8 @@ public class MessageController {
 		MessageVo messageVo = new MessageVo();
 		messageVo.setMsg_rmember(memberVo.getMember_mail());
 		
-		List<MessageVo> msgReceiveList = messageservice.messageReceived(pageVo);	
-		int pageCnt = messageservice.totalMsgReceived(memberVo.getMember_mail());
+		List<MessageVo> msgReceiveList = messageService.messageReceived(pageVo);	
+		int pageCnt = messageService.totalMsgReceived(memberVo.getMember_mail());
 
 		Map<String, Object> msgReceiveMap = new HashMap<>();
 		msgReceiveMap.put("msgReceiveList", msgReceiveList);
@@ -127,9 +131,9 @@ public class MessageController {
 		FriendListVo freidListVo = new FriendListVo();
 		freidListVo.setFriend_myemail(memberVo.getMember_mail());
 		
-		List<FriendListVo> myFriendList = messageservice.MyFriendsList(pageVo);
+		List<FriendListVo> myFriendList = messageService.MyFriendsList(pageVo);
 		
-		int pageCnt = messageservice.totalFriends(memberVo.getMember_mail());
+		int pageCnt = messageService.totalFriends(memberVo.getMember_mail());
 		
 		Map<String, Object> myFriendMap = new HashMap<>();
 		myFriendMap.put("myFriendList", myFriendList);
@@ -143,8 +147,8 @@ public class MessageController {
 	public Map<String, Object>AllMemberListAjax (@SessionAttribute("memberVo") MemberVo memberVo , PageVo pageVo){
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
-		List<MemberVo> myMemberList = messageservice.totalMemberSearch(pageVo);
-		int pageCnt = messageservice.totalMember(memberVo.getMember_mail());
+		List<MemberVo> myMemberList = messageService.totalMemberSearch(pageVo);
+		int pageCnt = messageService.totalMember(memberVo.getMember_mail());
 		
 		Map<String, Object> myMemberMap = new HashMap<>();
 		myMemberMap.put("myMemberList", myMemberList);
@@ -165,10 +169,10 @@ public class MessageController {
 		
 		String member_mail = request.getParameter("member_mail");
 		friendVo.setFriend_member(member_mail);
-		messageservice.insertFriendN(friendVo);
+		messageService.insertFriendN(friendVo);
 
-		List<MemberVo> myMemberList = messageservice.totalMemberSearch(pageVo);
-		int pageCnt = messageservice.totalMember(memberVo.getMember_mail());
+		List<MemberVo> myMemberList = messageService.totalMemberSearch(pageVo);
+		int pageCnt = messageService.totalMember(memberVo.getMember_mail());
 		
 		//List<FriendListVo> memberListN = messageservice.memberListN(friendVo);
 		//myMemberMap.put("memberListN", memberListN);
@@ -190,9 +194,9 @@ public class MessageController {
 		if(pageVo.getSearchTextFriendList() == null) {
 			pageVo.setSearchTextFriendList("");
 		}
-		List<MemberVo> myMemberList = messageservice.totalMemberSearch(pageVo);
+		List<MemberVo> myMemberList = messageService.totalMemberSearch(pageVo);
 		
-		int searchCnt = messageservice.totalMemberListSearch(pageVo);
+		int searchCnt = messageService.totalMemberListSearch(pageVo);
 		
 		Map<String, Object> myMemberMap = new HashMap<>();
 		myMemberMap.put("myMemberList", myMemberList);
@@ -212,11 +216,11 @@ public class MessageController {
 		FriendListVo freidListVo = new FriendListVo();
 		freidListVo.setFriend_myemail(memberVo.getMember_mail());
 		
-		messageservice.deleteMyfriend(friend_code);
+		messageService.deleteMyfriend(friend_code);
 		
-		List<FriendListVo> myFriendList = messageservice.MyFriendsList(pageVo);
+		List<FriendListVo> myFriendList = messageService.MyFriendsList(pageVo);
 		
-		int pageCnt = messageservice.totalFriends(memberVo.getMember_mail());
+		int pageCnt = messageService.totalFriends(memberVo.getMember_mail());
 		
 		Map<String, Object> myFriendDeleteMap = new HashMap<>();
 		myFriendDeleteMap.put("myFriendList", myFriendList);
@@ -248,9 +252,9 @@ public class MessageController {
 		FriendListVo friendListVo = new FriendListVo();
 		friendListVo.setFriend_myemail(memberVo.getMember_mail());
 		
-		List<FriendListVo> myFriendList = messageservice.MyFriendsList(pageVo);
+		List<FriendListVo> myFriendList = messageService.MyFriendsList(pageVo);
 		
-		int pageCnt = messageservice.totalFriendsSearch(pageVo);
+		int pageCnt = messageService.totalFriendsSearch(pageVo);
 		
 		Map<String, Object> myFriendMap = new HashMap<>();
 		myFriendMap.put("myFriendList", myFriendList);
@@ -274,10 +278,10 @@ public class MessageController {
 							, @RequestParam("msg_id")String msg_id, Model model, MessageVo msgVo, PageVo pageVo) {
 		model.addAttribute("msg_id", msg_id);
 		
-		int updateMessage = messageservice.updateMessageReceived(msgVo);
+		int updateMessage = messageService.updateMessageReceived(msgVo);
 		model.addAttribute("updateMessage", updateMessage);
 		
-		MessageVo messageVo = messageservice.selectOneMessageReceived(msg_id);
+		MessageVo messageVo = messageService.selectOneMessageReceived(msg_id);
 		model.addAttribute("messageVo", msgVo);
 		
 		return messageVo;
@@ -305,8 +309,8 @@ public class MessageController {
 		
 		MessageVo messageVo = new MessageVo();
 		messageVo.setMsg_smember(memberVo.getMember_mail());
-		List<MessageVo> msgSendList = messageservice.messageSend(pageVo);	
-		int pageCnt = messageservice.totalMsgSend(messageVo.getMsg_smember());
+		List<MessageVo> msgSendList = messageService.messageSend(pageVo);	
+		int pageCnt = messageService.totalMsgSend(messageVo.getMsg_smember());
 
 		Map<String, Object> msgSendMap = new HashMap<>();
 		msgSendMap.put("msgSendList", msgSendList);
@@ -335,7 +339,7 @@ public class MessageController {
 		MessageVo messageVo = new MessageVo();
 		messageVo.setMsg_id(msg_id);
 		messageVo.setMsg_smember(memberVo.getMember_mail());
-		MessageVo msgVo = messageservice.selectOneMessageSend(messageVo);
+		MessageVo msgVo = messageService.selectOneMessageSend(messageVo);
 
 		return msgVo;
 	}
@@ -353,13 +357,26 @@ public class MessageController {
 	 * Method 설명 : 받는거 삭제  
 	 */
 	@RequestMapping(value= "/deleteMessageReceived", method= RequestMethod.POST)
-	public  String deleteMessageReceived(@SessionAttribute("memberVo") MemberVo memberVo , MessageVo msgVo , @RequestParam("msg_id") String msg_id) {
-		messageservice.deleteMsgReceived(msg_id);
+	public  String deleteMessageReceived(@SessionAttribute("memberVo") MemberVo memberVo , MessageVo msgVo , @RequestParam("msg_id") String msg_id, Model model) {
+		messageService.deleteMsgReceived(msg_id);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "redirect:message#tabs2-2";
 	}
 	
 	@RequestMapping(value="/sendYouMessageUpdate" , method= RequestMethod.POST)
-	public String sendYouMessageUpdate(@RequestParam("msg_person")String msg_person) {
+	public String sendYouMessageUpdate(@RequestParam("msg_person")String msg_person, RedirectAttributes redirectAttributes, Model model, MemberVo memberVo) {
+		redirectAttributes.addAttribute("msg_person", msg_person);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "redirect:message#tabs2-1?msg_person="+msg_person;
 	}
 	
@@ -374,8 +391,14 @@ public class MessageController {
 	 * Method 설명 : 보낸거 삭제 
 	 */
 	@RequestMapping(value= "/deleteMessageSend", method= RequestMethod.POST)
-	public  String deleteMessageSend(@SessionAttribute("memberVo") MemberVo memberVo , MessageVo msgVo , @RequestParam("msgmember_msg") String msg_id) {
-		messageservice.deleteMsgReceived(msg_id);
+	public  String deleteMessageSend(@SessionAttribute("memberVo") MemberVo memberVo , MessageVo msgVo , @RequestParam("msgmember_msg") String msg_id, Model model) {
+		messageService.deleteMsgReceived(msg_id);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "redirect:message#tabs2-3";
 	}
 
@@ -391,7 +414,7 @@ public class MessageController {
 	 */
 	@RequestMapping(value= "/insertMessageSend" , method= RequestMethod.POST)
 	public String insertMessageSend(@SessionAttribute("memberVo") MemberVo memberVo,
-				HttpServletRequest request ,MessageVo msgVo) {
+				HttpServletRequest request ,MessageVo msgVo, Model model) {
 		
 		String msg_rmember = request.getParameter("textValue");
 		String msg_content = request.getParameter("textArea");
@@ -401,7 +424,12 @@ public class MessageController {
 		msgVo.setMsg_smember(memberVo.getMember_mail());
 		msgVo.setMsg_rmember(msg_rmember);
 		
-		int insertMessage = messageservice.insertMessageSend(msgVo);
+		int insertMessage = messageService.insertMessageSend(msgVo);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "message/message";
 	}
@@ -417,9 +445,9 @@ public class MessageController {
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		friendVo.setMember_name(memberVo.getMember_name());
 		
-		List<FriendListVo> sendFriendList = messageservice.mySendFriendList(pageVo);
+		List<FriendListVo> sendFriendList = messageService.mySendFriendList(pageVo);
 		
-		int pageCnt = messageservice.totalmySendFriendList(memberVo.getMember_mail());
+		int pageCnt = messageService.totalmySendFriendList(memberVo.getMember_mail());
 		
 		Map<String, Object> myFriendsListMap = new HashMap<>();
 		myFriendsListMap.put("sendFriendList", sendFriendList);
@@ -443,9 +471,9 @@ public class MessageController {
 			pageVo.setSearchTextMySendFriendList("");
 		}
 		
-		List<FriendListVo> sendFriendList = messageservice.mySendFriendList(pageVo);
+		List<FriendListVo> sendFriendList = messageService.mySendFriendList(pageVo);
 		
-		int tatalCnt = messageservice.totalmySendFriendListSearch(pageVo);
+		int tatalCnt = messageService.totalmySendFriendListSearch(pageVo);
 		
 		Map<String, Object> myFriendsListMap = new HashMap<>();
 		myFriendsListMap.put("sendFriendList", sendFriendList);
@@ -466,11 +494,11 @@ public class MessageController {
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		friendVo.setMember_name(memberVo.getMember_name());
 		
-		List<FriendListVo> sendFriendList = messageservice.mySendFriendList(pageVo);
+		List<FriendListVo> sendFriendList = messageService.mySendFriendList(pageVo);
 		
-		messageservice.deletemySendFriendList(friend_code);
+		messageService.deletemySendFriendList(friend_code);
 		
-		int pageCnt = messageservice.totalmySendFriendList(memberVo.getMember_mail());
+		int pageCnt = messageService.totalmySendFriendList(memberVo.getMember_mail());
 		
 		Map<String, Object> myFriendsListMap = new HashMap<>();
 		myFriendsListMap.put("sendFriendList", sendFriendList);
@@ -489,9 +517,9 @@ public class MessageController {
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		friendVo.setMember_name(memberVo.getMember_name());
 		
-		List<FriendListVo> giveFriendList = messageservice.youGiveFriendList(pageVo);
+		List<FriendListVo> giveFriendList = messageService.youGiveFriendList(pageVo);
 		
-		int pageCnt = messageservice.totalyouGiveFriendList(memberVo.getMember_mail());
+		int pageCnt = messageService.totalyouGiveFriendList(memberVo.getMember_mail());
 		
 		Map<String, Object> yougiveListMap = new HashMap<>();
 		yougiveListMap.put("giveFriendList", giveFriendList);
@@ -515,13 +543,13 @@ public class MessageController {
 		friendVo.setFriend_myemail(memberVo.getMember_mail());
 		friendVo.setFriend_member(friend_myemail);
 		
-		List<FriendListVo> giveFriendList = messageservice.youGiveFriendList(pageVo);
+		List<FriendListVo> giveFriendList = messageService.youGiveFriendList(pageVo);
 		
 		String friend_code = request.getParameter("friend_code");
-		messageservice.updateAcceptFriend(friend_code);
-		messageservice.insertFriendY(friendVo);
+		messageService.updateAcceptFriend(friend_code);
+		messageService.insertFriendY(friendVo);
 		
-		int pageCnt = messageservice.totalyouGiveFriendList(memberVo.getMember_mail());
+		int pageCnt = messageService.totalyouGiveFriendList(memberVo.getMember_mail());
 		
 		Map<String, Object> yougiveListMap = new HashMap<>();
 		yougiveListMap.put("giveFriendList", giveFriendList);
@@ -542,11 +570,11 @@ public class MessageController {
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		friendVo.setMember_name(memberVo.getMember_name());
 		
-		List<FriendListVo> giveFriendList = messageservice.youGiveFriendList(pageVo);
+		List<FriendListVo> giveFriendList = messageService.youGiveFriendList(pageVo);
 		
-		messageservice.updateRefuseFriend(friend_code);
+		messageService.updateRefuseFriend(friend_code);
 		
-		int pageCnt = messageservice.totalyouGiveFriendList(memberVo.getMember_mail());
+		int pageCnt = messageService.totalyouGiveFriendList(memberVo.getMember_mail());
 		
 		Map<String, Object> yougiveListMap = new HashMap<>();
 		yougiveListMap.put("giveFriendList", giveFriendList);
@@ -568,9 +596,9 @@ public class MessageController {
 			pageVo.setSearchTextYouGiveFriendList("");
 		}
 		
-		List<FriendListVo> giveFriendList = messageservice.youGiveFriendList(pageVo);
+		List<FriendListVo> giveFriendList = messageService.youGiveFriendList(pageVo);
 		
-		int giveCnt = messageservice.totalyouGiveFriendListSearch(pageVo);
+		int giveCnt = messageService.totalyouGiveFriendListSearch(pageVo);
 		
 		Map<String, Object> yougiveListMap = new HashMap<>();
 		yougiveListMap.put("giveFriendList", giveFriendList);
@@ -582,10 +610,10 @@ public class MessageController {
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	@RequestMapping(value="/friendView")
 	public String friendView(Model model,@SessionAttribute("memberVo") MemberVo memberVo) {
+		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
-		model.addAttribute("totalMsgReceived", messageservice.totalMsgReceived(memberVo.getMember_mail()));
-		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		return "friend/friend";
 	}
 	

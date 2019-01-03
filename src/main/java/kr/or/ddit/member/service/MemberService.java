@@ -373,5 +373,30 @@ public class MemberService implements MemberServiceInf {
         return memberMapper.myFileListProjectId(pageVo);
     }
 
+	@Override
+	public int totalProjectCntSearch(PageVo pageVo) {
+		return memberMapper.totalProjectCntSearch(pageVo);
+	}
+
+	@Override
+	public int totalEndProjectCntSearch(PageVo pageVo) {
+		return memberMapper.totalEndProjectCntSearch(pageVo);
+	}
+
+	@Override
+	public int selectProjectCntSearch(PageVo pageVo) {
+		return memberMapper.selectProjectCntSearch(pageVo);
+	}
+
+	@Override
+	public int selectTodoCntSearch(PageVo pageVo) {
+		return memberMapper.selectTodoCntSearch(pageVo);
+	}
+
+	@Override
+	public int totalmyFileListCntSearch(PageVo pageVo) {
+		return memberMapper.totalmyFileListCntSearch(pageVo);
+	}
+
 
 }

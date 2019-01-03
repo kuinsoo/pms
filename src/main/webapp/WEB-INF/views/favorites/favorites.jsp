@@ -4,30 +4,30 @@
 <%@ include file="/WEB-INF/views/header.jsp" %>
 <!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
-	<div class="currentMainContainer">
-		<div class="currentMainSlide">
-			<!-- Swiper -->
-			<div class="swiper-container">
-				<div class="swiper-wrapper">
-					<div class="swiper-slide">
-						<img src="../images/slide1.png">
-					</div>
-					<div class="swiper-slide">
-						<img src="http://placehold.it/1400x500">
-					</div>
-					<div class="swiper-slide">
-						<img src="http://placehold.it/1400x500">
-					</div>
+	<div class="currentMainSlide">
+		<!-- Swiper -->
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="../images/slide1.png">
 				</div>
-
-				<!-- Add Pagination -->
-				<div class="swiper-pagination"></div>
-
-				<!-- Add Arrows -->
-				<div class="swiper-button-next"></div>
-				<div class="swiper-button-prev"></div>
+				<div class="swiper-slide">
+					<img src="https://placehold.it/1400x500">
+				</div>
+				<div class="swiper-slide">
+					<img src="https://placehold.it/1400x500">
+				</div>
 			</div>
+
+			<!-- Add Pagination -->
+			<div class="swiper-pagination"></div>
+
+			<!-- Add Arrows -->
+			<div class="swiper-button-next"></div>
+			<div class="swiper-button-prev"></div>
 		</div>
+	</div>
+	<div class="currentMainContainer">
 		<div class="currentMainProjectCreates">
 			<h1>즐겨찾기 한 프로젝트</h1>
 			<ul class="inviteProject">

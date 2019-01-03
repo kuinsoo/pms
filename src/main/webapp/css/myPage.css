@@ -1,11 +1,11 @@
 /* SECTION */
-.myPageContainer{width:1400px;height:1200px;background-color:#fff;border:1px solid #dee3eb;margin-top:20px;margin-bottom:20px;}
+.myPageContainer{width:1400px;height:561px;background-color:#fff;border:1px solid #dee3eb;margin-top:20px;}
 
-.myPageContainerTitle{width:100%;height:60px;border-bottom:1px solid #dee3eb;line-height:60px;text-indent:20px;}
+.myPageContainerTitle{width:1400px;height:60px;margin:0 auto;border:1px solid #dee3eb;line-height:60px;text-indent:20px;background-color:#fff;margin-top:20px;}
 .myPageContainerTitle > h2{font-weight:normal;}
 
-.myPageContainerLeft {width:700px;height:500px;border-right:1px solid #dee3eb;float:left;border-bottom:1px solid #dee3eb;}
-.myPageContainerLeft > .myPageContainerLeftUser{width:250px;height:500px;border-right:1px solid #dee3eb;float:left;}
+.myPageContainerLeft {width:700px;height:560px;border-right:1px solid #dee3eb;float:left;border-bottom:1px solid #dee3eb;}
+.myPageContainerLeft > .myPageContainerLeftUser{width:250px;height:560px;border-right:1px solid #dee3eb;float:left;}
 .myPageContainerLeft > .myPageContainerLeftUser > h2{margin:20px 0px 0px 20px;font-weight:normal;font-size:18px;}
 .myPageContainerLeft > .myPageContainerLeftUser > .profileImg {width:150px;height:150px;margin-top:20px;position:relative;border-radius:100%;margin-left:50px;}
 .myPageContainerLeft > .myPageContainerLeftUser > .userContentsInfoLeft_1{padding:20px;font-size:17px;}
@@ -23,7 +23,7 @@
 .profileImg > .profileUploadImg > .fileInputCSS{opacity:0;position:relative;width:70px;height:70px;cursor:pointer;}
 .profileImg > .profileUploadImg > #fileSelect{display:block;width:70px;height:70px;}
 
-.myPageContainerLeft > .myPageContainerRightUser{width:449px;height:500px;float:left;}
+.myPageContainerLeft > .myPageContainerRightUser{width:449px;height:560px;float:left;}
 .myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_1{width:130px;margin-top:60px;float:left;}
 .userContentsInfoRight_1 > ul > li{font-size:18px;margin:20px 0px 20px 10px;}
 .myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2{width:299px;margin-top:70px;float:left;}
@@ -50,12 +50,12 @@
 	width:70px;height:40px;background-color:#746fcc;color:#fff;border:none;font-size:18px;cursor:pointer;outline:none;margin-top:10px;
 }
 
-.myPageContainerRight{float:left;width:698px;height:500px;border-bottom:1px solid #dee3eb;}
-.myPageContainerRight > .myPageContainerRightLeftChart{width:348px;height:500px;float:left;}
-.myPageContainerRight > .myPageContainerRightRightChart{width:348px;height:500px;float:left;}
-.myPageBottomContainer{width:1400px;height:500px;clear:both;padding-top:20px;}
-.myPageBottomContainerLeft{float:left;width:700px;height:500px;}
-.myPageBottomContainerRight{float:left;width:700px;height:500px;}
+.myPageContainerRight{float:left;width:698px;height:560px;border-bottom:1px solid #dee3eb;}
+.myPageContainerRight > .myPageContainerRightLeftChart{width:348px;height:560px;float:left;}
+.myPageContainerRight > .myPageContainerRightRightChart{width:348px;height:560px;float:left;}
+.myPageBottomContainer{width:1400px;margin-top:20px;border:1px solid #dee3db;margin-bottom:20px;}
+.myPageBottomContainerLeft{float:left;width:700px;height:560px;}
+.myPageBottomContainerRight{float:left;width:700px;height:560px;}
 
 .myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 > ul > li:nth-child(3){display:flex;justify-content:center;align-items:center;}
 .myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 > ul > li:nth-child(3) > .phoneBtns {
@@ -63,7 +63,6 @@
 }
 .profileUploadImg{display: none;}
 /* MY PAGE BOTTOM */
-.myPageBottomContainer{width:1400px;height:500px;clear:both;padding-top:20px;}
 .myPageBottomContainer > #tabs2{width:1398px;}
 
 /* 첫번째 Tab */
@@ -226,8 +225,8 @@
 .myChartSelect2{width:80%;height:30px;font-size:20px;outline:none;martgin:0 auto;margin-top:10px;}
 
 .abilityContainer {
-	width:1200px;height:600px;margin:0 auto;overflow:hidden;padding:20px;
-	margin-top:50px;
+	width:1400px;margin:0 auto;overflow:hidden;padding:20px;
+	margin-top:20px;background-color:#fff;margin-bottom:20px;
 }
 .abilityLeft{width:100px;float:left;}
 .abilityLeft > ul > li {padding:10px 0px 10px 0px}

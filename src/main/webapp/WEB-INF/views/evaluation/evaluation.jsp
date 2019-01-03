@@ -4,41 +4,40 @@
 <!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
 	<div class="currentMainContainer">
+		<div class="myPageContainerTitle">
+			<h2>업무수행능력</h2>
+		</div>
+		
 		<div class="myPageContainer">
-			<div class="myPageContainerTitle">
-				<h2>업무수행능력</h2>
-			</div>
-
-				<div class="myPageContainerLeft">
-					<div class="myPageContainerLeftUser">
-						<h2>${memberVo.member_name}님의 프로필</h2>
-						<div class="profileImg">
-							<div id="imgs">
-								<div class="scale"><img src="${memberVo.member_profile}"/></div>
-							</div>
-						</div>
-						<div class="userContentsInfoLeft_1">
-							<ul id="test">
-								<li class="marginPaddingUi">사용자 이메일</li>
-								<li><input type="text" value= "${memberVo.member_mail}" readonly /></li>
-								<li class="marginPaddingUi">사용자 이름 </li>
-								<li><input type="text" value= "${memberVo.member_name}" readonly /></li>
-								<li class="marginPaddingUi">휴대폰 번호</li>
-								<li><input type="text"  value= "${memberVo.member_tel}" readonly /></li>
-							</ul>
+			<div class="myPageContainerLeft">
+				<div class="myPageContainerLeftUser">
+					<h2>${memberVo.member_name}님의 프로필</h2>
+					<div class="profileImg">
+						<div id="imgs">
+							<div class="scale"><img src="${memberVo.member_profile}"/></div>
 						</div>
 					</div>
-					<div class="evaluationContainerRightUser">
-						<div class="evaluationInfoRight_1">
-							<ul>
-								<li>프로젝트 참여 수 : ${evalProjectList.size()}</li>
-								<li>프로젝트 업무 수행능력 : 인텔리제이</li>
-								<li>프로젝트 이슈 처리능력 : 인텔리제이</li>
-							</ul>
-						</div>
+					<div class="userContentsInfoLeft_1">
+						<ul id="test">
+							<li class="marginPaddingUi">사용자 이메일</li>
+							<li><input type="text" value= "${memberVo.member_mail}" readonly /></li>
+							<li class="marginPaddingUi">사용자 이름 </li>
+							<li><input type="text" value= "${memberVo.member_name}" readonly /></li>
+							<li class="marginPaddingUi">휴대폰 번호</li>
+							<li><input type="text"  value= "${memberVo.member_tel}" readonly /></li>
+						</ul>
 					</div>
 				</div>
-
+				<div class="evaluationContainerRightUser">
+					<div class="evaluationInfoRight_1">
+						<ul>
+							<li>프로젝트 참여 수 : ${evalProjectList.size()}</li>
+							<li>프로젝트 업무 수행능력 : 인텔리제이</li>
+							<li>프로젝트 이슈 처리능력 : 인텔리제이</li>
+						</ul>
+					</div>
+				</div>
+			</div>
 
 			<div class="myPageContainerRight">
 				<%-- 차트 --%>
@@ -60,13 +59,11 @@
 					<input type="text" class="myChartSelect2" value="이슈 처리 능력" readonly />
 				</div>
 			</div>
-
-			<div class="myPageBottomContainer abilityContainer">
-				<div  id="evalDetail" >
-					<%-- evalDetail ajaxEvaluation.jsp --%>
-				</div>
+		</div>
+		<div class="myPageBottomContainer abilityContainer">
+			<div id="evalDetail">
+				<%-- evalDetail ajaxEvaluation.jsp --%>
 			</div>
-
 		</div>
 	</div>
 </section>

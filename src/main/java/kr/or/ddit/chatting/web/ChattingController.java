@@ -11,7 +11,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.ddit.chatting.service.ChattingService;
+import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.message.service.MessageServiceInf;
+import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.qna.web.QnAController;
+import kr.or.ddit.work.service.WorkServiceInf;
 
 /**
  * kr.or.ddit.chatting.web
@@ -28,12 +32,26 @@ public class ChattingController {
 	@Autowired
 	private ChattingService chattingService;
 	
+	@Autowired
+	private PostServiceInf postService;
+	
+	@Autowired
+	private WorkServiceInf workService;
+	
+	@Autowired
+	private MessageServiceInf messageService;
+	
 	Logger logger = LoggerFactory.getLogger(QnAController.class);
 	
 	@RequestMapping(value= "/chatListAjax", method= {RequestMethod.GET,RequestMethod.POST}) 
-	public String meetingListView(@RequestParam("meeting_id")String meeting_id, Model model) {
+	public String meetingListView(@RequestParam("meeting_id")String meeting_id, Model model, MemberVo memberVo) {
 		
 		model.addAttribute("chatList", chattingService.chattingList(meeting_id));
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 		return "main/chatListAjax";
 	}

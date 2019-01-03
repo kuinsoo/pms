@@ -92,7 +92,7 @@
     </div>
 </nav>
 
-<div id="wrap">recipientSelect
+<div id="wrap">
     <div id = "Progress_Loading"><!-- 로딩바 -->
         <img src="/images/Progress_Loading.gif"/>
     </div>
@@ -202,12 +202,16 @@
 	                        </div>
 	                        <ul>
 	                            <li>
-	                                <i class="icon-settings icons"></i>
+	                                <i class="icon-user icons"></i>
 	                                <a href="/myPage">마이페이지</a>
 	                            </li>
 	                            <li>
 	                                <i class="icon-badge icons"></i>
 	                                <a href="/evaluation">능력 및 평가</a>
+	                            </li>
+	                            <li>
+	                                <i class="icon-settings icons"></i>
+	                                <a href="/admin">관리자 모드</a>
 	                            </li>
 	                            <li>
 	                                <i class="icon-power icons"></i>

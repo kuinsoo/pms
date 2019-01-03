@@ -14,8 +14,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.message.service.MessageServiceInf;
+import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.schedule.service.ScheduleServiceInf;
+import kr.or.ddit.work.service.WorkServiceInf;
 import kr.or.ddit.work.web.WorkController;
 
 /**
@@ -32,6 +35,15 @@ public class ScheduleController {
 	Logger logger = LoggerFactory.getLogger(WorkController.class);
 	
 	@Autowired
+	private PostServiceInf postService;
+	
+	@Autowired
+	private WorkServiceInf workService;
+	
+	@Autowired
+	private MessageServiceInf messageService;
+	
+	@Autowired
 	private ScheduleServiceInf scheduleService;
 	
 	@RequestMapping(value="/allSchedule", method={RequestMethod.POST, RequestMethod.GET})
@@ -46,6 +58,12 @@ public class ScheduleController {
 		model.addAttribute("allScheduleList", allScheduleList);
 		model.addAttribute("myProjectList", scheduleService.myProjectList(sid));
 		logger.debug("****allScheduleList.projectScheduleList : {}", allScheduleList);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "schedule/schedule";
 	}
 	

@@ -11,8 +11,7 @@
 		<!-- Swiper -->
 		<div class="swiper-container">
 			<div class="swiper-wrapper">
-				<div class="swiper-slide">
-					<img src="../images/slide1.png">
+				<div class="swiper-slide" style="background-image:url('../images/slide1.png');background-repeat:no-repeat;background-size:cover;">
 				</div>
 				<div class="swiper-slide">
 					<img src="https://placehold.it/1920x500">

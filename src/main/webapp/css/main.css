@@ -830,6 +830,7 @@ header {
 /* SECTION */
 .currentMain {
     width: 100%;
+    min-height:100%;
     background-color: #f2f4f7;
     padding-top: 60px;
     float: left;

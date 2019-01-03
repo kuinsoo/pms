@@ -242,8 +242,10 @@
 			});
 		}
 			
-		// 마이페이지 : 참여중인 프로젝트 목록 검색 Ajax	
-		function getSearchProject(){
+	// 마이페이지 : 참여중인 프로젝트 목록 검색 Ajax	
+	function getSearchProject(page){
+			
+		$("#projectSearchPage").attr("value",page);	
 		var param = $('form[name=searchProject]').serialize();
 			
 			$.ajax({
@@ -251,7 +253,6 @@
 				url : "/searchProjectAjax",
 				data: param,
 				success : function(data){
-						console.log("data : " + data);
 					var html ="";
 					$.each(data.projectList, function (idx,my){
 						html += "<tr class = projectClick >";
@@ -265,11 +266,11 @@
 					$("#projectList").html(html);
 					var i  = 1;
 					var paging ="";
-						paging +="<li><a href='javascript:getMyPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						paging +="<li><a href='javascript:getSearchProject("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 						for(var i= 1; i<=data.pageCnt; i++) {
-							paging += "<li><a href='javascript:getMyPageList("+ i +");'>"+ i+ "</a></li>";
+							paging += "<li><a href='javascript:getSearchProject("+ i +");'>"+ i+ "</a></li>";
 						}
-							paging +="<li><a href='javascript:getMyPageList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+							paging +="<li><a href='javascript:getSearchProject("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 					$(".pagination").html(paging);
 				},
 				// 실패시 
@@ -317,8 +318,10 @@
 		}
 			
 		// 마이페이지 : 참여했던 프로젝트 목록 검색 Ajax	
-		function getSearchEndProject(){
-		var param = $('form[name=searchEndProject]').serialize();
+		function getSearchEndProject(page){
+			
+			$("#projectEndSearchPage").attr("value",page);	
+			var param = $('form[name=searchEndProject]').serialize();
 			
 			$.ajax({
 				type: "POST",
@@ -339,11 +342,11 @@
 					$("#projectEndList").html(html);
 					var i  = 1;
 					var paging ="";
-						paging +="<li><a href='javascript:getMyEndPageList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						paging +="<li><a href='javascript:getSearchEndProject("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 						for(var i= 1; i<=data.pageCnt; i++) {
-							paging += "<li><a href='javascript:getMyEndPageList("+ i +");'>"+ i+ "</a></li>";
+							paging += "<li><a href='javascript:getSearchEndProject("+ i +");'>"+ i+ "</a></li>";
 						}
-							paging +="<li><a href='javascript:getMyEndPageList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+							paging +="<li><a href='javascript:getSearchEndProject("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 					$(".pagination1").html(paging);
 				},
 				// 실패시 
@@ -387,7 +390,9 @@
 				});
 			}
 		// 마이페이지 : 즐겨찾기 프로젝트 목록 검색 Ajax	
-		function getSearchBookProject(){
+		function getSearchBookProject(page){
+			
+		$("#searchBookProjectPage").attr("value",page);	
 		var param = $('form[name=searchBookProject]').serialize();
 			$.ajax({
 				type: "POST",
@@ -408,11 +413,11 @@
 					$("#projectBookList").html(html);
 					var i  = 1;
 					var paging ="";
-					paging +="<li><a href='javascript:getmybookMarkProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					paging +="<li><a href='javascript:getSearchBookProject("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 					for(var i= 1; i<=data.pageCnt; i++) {
-						paging += "<li><a href='javascript:getmybookMarkProjectList("+ i +");'>"+ i+ "</a></li>";
+						paging += "<li><a href='javascript:getSearchBookProject("+ i +");'>"+ i+ "</a></li>";
 					}
-						paging +="<li><a href='javascript:getmybookMarkProjectList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+						paging +="<li><a href='javascript:getSearchBookProject("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 					$(".pagination2").html(paging);
 				},	
 				fail : function(xhr){
@@ -478,7 +483,10 @@
 		} 
 		
 		// 마이페이지 : 파일첨부  프로젝트 목록 검색 Ajax	
-		function getFileSearchProject(){
+		function getFileSearchProject(page){
+		
+		$("#projectsearchFileListPage").attr("value",page);	
+
 		var param = $('form[name=searchFileList]').serialize();
 			$.ajax({
 				type: "POST",
@@ -500,11 +508,11 @@
 					$("#myFileList").html(html);
 					var i  = 1;
 					var paging ="";
-					paging +="<li><a href='javascript:getmyProjectFileList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					paging +="<li><a href='javascript:getFileSearchProject("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 					for(var i= 1; i<=data.pageCnt; i++) {
-						paging += "<li><a href='javascript:getmyProjectFileList("+ i +");'>"+ i+ "</a></li>";
+						paging += "<li><a href='javascript:getFileSearchProject("+ i +");'>"+ i+ "</a></li>";
 					}
-						paging +="<li><a href='javascript:getmyProjectFileList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+						paging +="<li><a href='javascript:getFileSearchProject("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 					$(".paginationfile").html(paging);
 				},	
 				fail : function(xhr){
@@ -551,7 +559,9 @@
 				}
 			});
 		}
-		function getSearchTodoProject(){
+		function getSearchTodoProject(page){
+			
+			$("#searchTodoProjectPage").attr("value",page);	
 			var param = $('#searchTodoProject').serialize();
 				$.ajax({
 					type: "POST",
@@ -575,11 +585,11 @@
 						$("#projectTodoList").html(html);
 						var i  = 1;
 						var paging ="";
-						paging +="<li><a href='javascript:getmyTodoProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						paging +="<li><a href='javascript:getSearchTodoProject("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 						for(var i= 1; i<=data.pageCnt; i++) {
-							paging += "<li><a href='javascript:getmyTodoProjectList("+ i +");'>"+ i+ "</a></li>";
+							paging += "<li><a href='javascript:getSearchTodoProject("+ i +");'>"+ i+ "</a></li>";
 						}
-							paging +="<li><a href='javascript:getmyTodoProjectList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+							paging +="<li><a href='javascript:getSearchTodoProject("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 						$(".pagination3").html(paging);
 					},	
 					fail : function(data){
@@ -602,10 +612,11 @@
 	<!-- CURRENT SECTION(MAIN) -->	
 	<section class="currentMain">
 		<div class="currentMainContainer">
+			<div class="myPageContainerTitle">
+				<h2>사용자 기본 정보</h2>
+			</div>
+				
 			<div class="myPageContainer">
-				<div class="myPageContainerTitle">
-					<h2>사용자 기본 정보</h2>
-				</div>
 				<!-- 마이페이지 사용자 정보 수정 부분  -->
 				<form action="/myPageUpdate" method="post" enctype="multipart/form-data">
 				<div class="myPageContainerLeft">
@@ -672,13 +683,14 @@
 			</form>				
 				<div class="myPageContainerRight">
 					<div class="myPageContainerRightLeftChart">
-						<canvas id="myChart" width="349" height="500"></canvas>
+						<canvas id="myChart" width="349" height="560"></canvas>
 					</div>
 					<div class="myPageContainerRightRightChart">
-						<canvas id="myChart2" width="349" height="500"></canvas>
+						<canvas id="myChart2" width="349" height="560"></canvas>
 					</div>
 				</div>
-				<div class="myPageBottomContainer">
+			</div>
+			<div class="myPageBottomContainer">
 					<div id="tabs2">
 						<ul>							
 							<li><a href="#tabs2-1">참여중인 프로젝트</a></li>
@@ -695,7 +707,7 @@
 								<div class="projectSearchDiv">
 									<form name ="searchProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchText" name="searchText" value="${searchText}" placeholder="검색어를 입력해주세요"/>
-										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="page" id="projectSearchPage" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchProject();"></i>  
 									</form>
@@ -728,7 +740,7 @@
 								<div class="projectSearchDiv">　　
 									<form name ="searchEndProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchEndText" name="searchEndText" value="${searchEndText}" placeholder="검색어를 입력해주세요"/>
-										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="page" id="projectEndSearchPage" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchEndProject();"></i>  
 									</form>
@@ -761,7 +773,7 @@
 								<div class="projectSearchDiv">　　
 									<form name ="searchBookProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchBookText" name ="searchBookText" value='${searchBookText}' placeholder="검색어를 입력해주세요"/>
-										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="page" id="searchBookProjectPage" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchBookProject();"></i>  
 									</form>
@@ -794,7 +806,7 @@
 								<div class="projectSearchDiv">　　
 								 <form name ="searchTodoProject" id ="searchTodoProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchTodoText" name ="searchTodoText" value='${searchTodoText}'  placeholder="검색어를 입력해주세요"/>
-										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="page" id="searchTodoProjectPage" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons" onclick="javascript:getSearchTodoProject();"></i>  
 									</form> 
@@ -831,7 +843,7 @@
 								<div class="projectSearchDiv">
 									<form name ="searchFileList" method="POST" onsubmit="return false;">
 										 <input type="text" id="searchFileList" name ="searchFileList" value='${searchFileList}' placeholder="검색어를 입력해주세요"/>
-										<input type="hidden" name="page" value='1' />
+										<input type="hidden" name="page" id ="projectsearchFileListPage" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons" onclick="javascript:getFileSearchProject();"></i>  
 									</form> 
@@ -873,7 +885,6 @@
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 					</div>
 				</div>
-			</div>
 		</div>
 	</section>
 	<footer class="currentFooter">

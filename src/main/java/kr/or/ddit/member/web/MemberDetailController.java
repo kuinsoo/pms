@@ -170,15 +170,18 @@ public class MemberDetailController {
 							ProjectVo projectVo, HttpServletRequest request) {
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
+		projectVo.setPmember_member(memberVo.getMember_mail());
 		
 		// 검색 부분 
 		if (pageVo.getSearchText() == null) {
 			pageVo.setSearchText("");
 		}
+		System.out.println(pageVo.getSearchText() + "의 값은? ????");
+		System.out.println("Controller에서 값이 들어오나 확인중 ");
 		
 		List<ProjectVo> projectList = memberservice.myprojectselect(pageVo);
 		Map<String, Object> projectMap = new HashMap<>();
-		int pageCnt = memberservice.totalProjectCnt(memberVo.getMember_mail());
+		int pageCnt = memberservice.totalProjectCntSearch(pageVo);
 		
 		projectMap.put("projectList", projectList);		
 		projectMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
@@ -223,7 +226,7 @@ public class MemberDetailController {
 		List<ProjectVo> projectEndList = memberservice.myprojectEndselect(pageVo);
 		Map<String, Object> projectMap = new HashMap<>();
 
-		int pageCnt = memberservice.totalEndProjectCnt(memberVo.getMember_mail());
+		int pageCnt = memberservice.totalEndProjectCntSearch(pageVo);
 
 		projectMap.put("projectEndList", projectEndList);
 		projectMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
@@ -345,7 +348,7 @@ public class MemberDetailController {
 		List<ProjectVo> projectBookList = memberservice.mybookmarkselect(pageVo);
 	
 		Map<String , Object> projectBookMap = new HashMap<>();
-		int pageCnt = memberservice.selectProjectCnt(memberVo.getMember_mail());
+		int pageCnt = memberservice.selectProjectCntSearch(pageVo);
 		projectBookMap.put("projectBookList", projectBookList);
 		
 		projectBookMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
@@ -390,7 +393,7 @@ public class MemberDetailController {
 		List<ToDoVo> projectTodoList = memberservice.myTodoselect(pageVo);
 	
 		Map<String , Object> projectTodoMap = new HashMap<>();
-		int pageCnt = memberservice.selectTodoCnt(memberVo.getMember_mail());
+		int pageCnt = memberservice.selectTodoCntSearch(pageVo);
 	
 		projectTodoMap.put("projectTodoList", projectTodoList);
 		
@@ -408,9 +411,7 @@ public class MemberDetailController {
 	public Map<String, Object> myProjectFileListAjax (Model model , PageVo pageVo,
 			@SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
 		
-		
 		pageVo.setMember_mail(memberVo.getMember_mail());
-		
 		List<AttachmentVo> myFileList = memberservice.myFileList(pageVo);
 		
 		Map<String , Object> myFileListMap = new HashMap<>();
@@ -433,7 +434,7 @@ public class MemberDetailController {
 		List<AttachmentVo> myFileList = memberservice.myFileList(pageVo);
 		
 		Map<String , Object> myFileListMap = new HashMap<>();
-		int pageCnt = memberservice.myFileListCnt(memberVo.getMember_mail());
+		int pageCnt = memberservice.totalmyFileListCntSearch(pageVo);
 		
 		myFileListMap.put("myFileList", myFileList);
 		myFileListMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
@@ -607,7 +608,7 @@ public class MemberDetailController {
 			
 			memberservice.updateUserwithDrawal(memberVo);
 			
-			return "redirect:/";				
+			return "redirect:/";
 			
 		}
 
