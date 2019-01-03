@@ -278,54 +278,6 @@ function noticePaging(page){
 		}
 	});
 };
-
-
-
-
-
-/*
-$(document).ready(function(){
-	noticeList(1);
-});
-*/
-
-// 공지사항 게시글 페이지 리스트 조회
-/*
-function noticeList(page){
-	var pageSize = 10;
-	
-	$.ajax({
-		type: "POST",
-		url : "/ajaxNotice",
-		data: {"page":page, "pageSize":pageSize},
-		success : function(data){
-			var html ="";
-			$.each(data.noticeList, function (idx,notice){
-				
-				html += "<tr>";
-				html += "	<td><a href='/noticeView'>"+ notice.post_title +"</a></td>";
-				html += "	<td>"+ notice.post_date +"</td>";
-				html += "</tr>";
-			});
-			
-			$("#noticeList").html("");
-			$("#noticeList").html(html);
-		
-			var i = 1;
-			var paging ="";
-				paging +="<li><a href='javascript:noticeList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
-				for(var i= 1; i<=data.pageCnt; i++) {
-					paging += "<li><a href='javascript:noticeList("+ i +");'>"+ i+ "</a></li>";
-				}
-					paging +="<li><a href='javascript:noticeList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
-			$(".paginationNotice").html(paging);
-		},
-		fail : function(xhr){
-			console.log(xhr);
-		}
-	});
-}
-*/
 </script>
 </body>
 </html>

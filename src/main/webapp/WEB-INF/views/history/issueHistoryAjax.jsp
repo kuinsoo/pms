@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<link rel="stylesheet" type="text/css" href="../css/issue.css" />
 <script>
 <%-- 프로젝트 총 기간 퍼센트 --%>
 <c:forEach items="${myProjectList.percentList}" var="percent" varStatus="status">
@@ -42,6 +43,9 @@
 								${issueCnt.format_issue_sdate}
 								${history.project_id}
 							</p>
+							<div class="fa-map-pin-hover">
+								지태뿌잉뿌잉♡
+							</div>
 						</div>
 					</c:when>
 				</c:choose>
