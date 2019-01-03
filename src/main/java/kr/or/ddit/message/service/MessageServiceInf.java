@@ -22,6 +22,38 @@ public interface MessageServiceInf {
 
 
 	/**
+	 * Method : totalFriendSizeCheckSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 나의 친구 목록 검색 전체 
+	 */
+	int totalFriendsSearch(PageVo pageVo);
+	
+	
+	/**
+	 * Method : totalyouGiveFriendListSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 내가 받은 친구요청 검색 전체 total값
+	 */
+	int totalyouGiveFriendListSearch(PageVo pageVo);
+	
+
+	/**
+	 * Method : totalmySendFriendListSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 내가 보낸 친구요청 검색 total값 
+	 */
+	int totalmySendFriendListSearch(PageVo pageVo);
+
+	/**
 	 * Method : totalmessageSizeCheck
 	 * 작성자 : pc07
 	 * 변경이력 :

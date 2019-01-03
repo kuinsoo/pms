@@ -117,6 +117,43 @@ public interface MessageMapper {
 	 * Method 설명 : 전체 리스트 뽑아오고 (검색 부분  : 전체 값 )
 	 */
 	int totalMemberListSearch(PageVo pageVo);
+
+	
+	
+	/**
+	 * Method : totalmySendFriendListSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 내가 보낸 친구요청 검색 total값 
+	 */
+	int totalmySendFriendListSearch(PageVo pageVo);
+
+	
+	/**
+	 * Method : totalyouGiveFriendListSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 내가 받은 친구요청 검색 전체 total값
+	 */
+	int totalyouGiveFriendListSearch(PageVo pageVo);
+	
+	
+	
+	
+	
+	/**
+	 * Method : totalFriendSizeCheckSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 나의 친구 목록 검색 전체 
+	 */
+	int totalFriendsSearch(PageVo pageVo);
 	
 	
 	/**
@@ -129,6 +166,8 @@ public interface MessageMapper {
 	 */
 	int totalFriendSizeCheck(String member_mail); 
 	
+	
+	
 	/**
 	 * Method : totalmessageSizeCheck
 	 * 작성자 : pc07
@@ -138,6 +177,9 @@ public interface MessageMapper {
 	 * Method 설명 : Y 쪽지 개수 
 	 */
 	int totalmessageSizeCheck(String member_mail);
+	
+	
+	
 
 	/**
 	 * Method : totalyouGiveFriendListt
