@@ -1,6 +1,7 @@
 package kr.or.ddit.member.mapper;
 
 import kr.or.ddit.attachment.model.AttachmentVo;
+import kr.or.ddit.authority.model.AuthorityVo;
 import kr.or.ddit.friendslist.model.FriendListVo;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberListVo;
@@ -44,6 +45,9 @@ public interface MemberMapper {
 	 * @return Method 설명 : 회원가입
 	 */
 	public int insertUser(MemberVo memberVo);
+	
+	
+
 	
 	/**
 	 * Method : updateUser

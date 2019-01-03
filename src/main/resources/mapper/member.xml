@@ -2,270 +2,323 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  
+
 <mapper namespace="kr.or.ddit.member.mapper.MemberMapper">
 	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 로그인 및 회원가입 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-	
-	<!--  로그인  -->  
-	<select id="selectUser" resultType="memberVo" parameterType="String">
+
+	<!-- 로그인 -->
+	<select id="selectUser" resultType="memberVo"
+		parameterType="String">
 		select *
-		from member 
+		from member
 		where member_mail = #{member_mail}
 	</select>
-	
-	<!-- 회원가입  -->
-	<insert id="insertUser" parameterType="memberVo">    
-		insert into 
+
+	<!-- 회원가입 -->
+	<insert id="insertUser" parameterType="memberVo">
+		insert into
 		member
-		values (#{member_mail},#{member_name},#{member_pass},#{member_tel},'/images/basic.png','N')
+		values
+		(#{member_mail},#{member_name},#{member_pass},#{member_tel},'/images/basic.png','N')
 	</insert>
 	
-	<update id="updateUser" parameterType="memberVo">    
+	<!-- 관리자는 임의로 만들기 때문에 필요없다. 권한부여 // 1 : 관리자 <insert id="insertUserAdmin" 
+		parameterType="memberVo"> insert into AUTHORITY values (auth_id_SEQ.NEXTVAL,'#{member_mail}','1') 
+		</insert> -->
+	<!-- 권한부여 // 2 : 회원 -->
+
+
+	<update id="updateUser" parameterType="memberVo">
 		update member
-		set member_pass = #{member_pass}, member_tel = #{member_tel} , member_name = #{member_name}
-		<if test="member_profile != null">, member_profile = #{member_profile, jdbcType=VARCHAR} </if>
+		set member_pass = #{member_pass}, member_tel =
+		#{member_tel} , member_name = #{member_name}
+		<if test="member_profile != null">, member_profile = #{member_profile, jdbcType=VARCHAR}
+		</if>
 		where member_mail = #{member_mail}
 	</update>
-	
+
 	<!-- 아이디 찾기 -->
-	<select id="selectfindId" resultType="memberVo" parameterType="String">
+	<select id="selectfindId" resultType="memberVo"
+		parameterType="String">
 		select *
-		from member 
+		from member
 		where member_tel = #{member_tel}
 		and member_name = #{member_name}
 	</select>
-	
+
 	<!-- 비밀번호 찾기 -->
-	<select id="selectfindPass" parameterType="String" resultType="memberVo">
+	<select id="selectfindPass" parameterType="String"
+		resultType="memberVo">
 		select *
-		from member 
+		from member
 		where member_mail=#{member_mail}
 	</select>
 
 	<!-- 비밀번호 변경 -->
 	<update id="updatePass" parameterType="memberVo">
 		update member
-		set member_pass = #{member_pass}
+		set
+		member_pass = #{member_pass}
 		where member_mail = #{member_mail}
 	</update>
-	
-	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@  마이페이지 부분  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-	<!--  참여중인 프로젝트  -->
-	<select id="myprojectselect" resultType="projectVo" parameterType="pageVo">
-	 SELECT c.rnum, c.*
-				FROM (
-				 select rownum rnum, b.* from(
-				     select a.*
-				         from
-				             (SELECT (SELECT PROJECT_TITLE  FROM PROJECT  WHERE PROJECT_ID = PMEMBER_PROJECT) as project_title
-		                       , PMEMBER_MEMBER as pmember_member
-		                      , PMEMBER_PROJECT as project_id
-		                   FROM   PROJECT_MEMBER
-		                   WHERE  PMEMBER_MEMBER = #{member_mail}
-		                     AND    PMEMBER_POSITION = '1'
-		                   UNION
-		                   SELECT  (SELECT PROJECT_TITLE FROM PROJECT WHERE PROJECT_ID = PMEMBER_PROJECT)
-		                       , (SELECT B.PMEMBER_MEMBER FROM PROJECT_MEMBER B WHERE B.PMEMBER_PROJECT = A.PMEMBER_PROJECT AND B.PMEMBER_POSITION = 1)
-		                     , PMEMBER_PROJECT
-		                   FROM   PROJECT_MEMBER A
-		                   WHERE  A.PMEMBER_MEMBER = #{member_mail}
-		                     AND    A.PMEMBER_POSITION = '2')a) b 
-	     <if test="searchText!=null and searchText!=''">where project_title like '%'||#{searchText}||'%'</if> )c
-	 	where rnum between ${page}*${pageSize}-(${pageSize}-1) 
-	 and ${page}*${pageSize}
-	</select>
-	
-	<!-- 참여했던 프로젝트  -->
-	<select id="myprojectEndselect" resultType="projectVo" parameterType="pageVo">
-		 SELECT c.rnum, c.*
-			FROM (
-			 select rownum rnum, b.* from(
-			     select a.*
-			         from
-			             (SELECT (SELECT PROJECT_TITLE  FROM PROJECT  WHERE PROJECT_ID = PMEMBER_PROJECT) as project_title
-	                       , PMEMBER_MEMBER as pmember_member
-	                      , PMEMBER_PROJECT as project_id
-	                     FROM   PROJECT_MEMBER A , PROJECT B
-                      where B.project_id = A.pmember_project 
-	                   AND  PMEMBER_MEMBER = #{member_mail}
-                            AND    PMEMBER_POSITION = '1'
-                        AND   project_eedate is not null
-	                   UNION
-	                   SELECT  (SELECT PROJECT_TITLE FROM PROJECT WHERE PROJECT_ID = PMEMBER_PROJECT)
-	                       , (SELECT B.PMEMBER_MEMBER FROM PROJECT_MEMBER B WHERE B.PMEMBER_PROJECT = A.PMEMBER_PROJECT AND B.PMEMBER_POSITION = 1)
-	                     , PMEMBER_PROJECT
-	                   FROM   PROJECT_MEMBER A , PROJECT B
-                      where B.project_id = A.pmember_project 
-	                   AND  A.PMEMBER_MEMBER = #{member_mail}
-	                     AND    A.PMEMBER_POSITION = '2'
-                          AND    B.project_eedate is not null)a) b 
-                  		<if test="searchEndText!=null and searchEndText!=''">where project_title like '%'||#{searchEndText}||'%'</if> )c
- 				 where rnum between ${page}*${pageSize}-(${pageSize}-1) 
-	   and ${page}*${pageSize}
-	</select>
-	
-	<!-- 프로젝트 전체 개수 가져오기  -->	
-	<select id="totalProjectCnt" resultType="int" parameterType="String">
-		select count(*)
-		from   project_member
-		where  pmember_member = #{member_mail}
-		
-	 </select>
-	 
-	<!-- 프로젝트 전체 * 검색 개수 가져오기  -->	
-	<select id="totalProjectCntSearch" resultType="int" parameterType="pageVo">
-		select count(*)
-		from   project_member A inner join project B
-		ON     B.project_id = A.pmember_project
-		where  A.pmember_member =  #{member_mail}
-		and    project_title like '%'||#{searchText}||'%'
-	 </select>
-	 
-	 <!-- 즐겨찾기한 개수 가져오기  -->
-	 <select id="selectProjectCnt" resultType="int" parameterType="String">
-	 	SELECT  count(*)
-		FROM    project_member
-		WHERE   pmember_member = #{member_mail}
-		AND     pmember_bookmark = 'Y'
-	 </select>
-	 
-	 
-	  <!-- 즐겨찾기한 검색 * 개수 가져오기  -->
-	 <select id="selectProjectCntSearch" resultType="int" parameterType="pageVo">
-	 	SELECT  count(*)
-        from   project_member A inner join project B
-        ON     B.project_id = A.pmember_project
-		WHERE   A.pmember_member =  #{member_mail}
-		AND     A.pmember_bookmark = 'Y'
-		and     B.project_title like '%'||#{searchBookText}||'%'
-	 </select>
-	 
-	 <!-- 나의 일감 전체 개수  -->
-	 <select id="selectTodoCnt" resultType="int" parameterType="String">
-	 	select count(*)
-		from   todo
-		where  todo_member = #{member_mail}
-	 </select>
-	 
-	 <!--  나의일감 전체 검색* 개수  -->
-	  <select id="selectTodoCntSearch" resultType="int" parameterType="pageVo">
-	 	select count(*)
-		from   todo
-		where  todo_member = #{member_mail}
-		and    todo_content like '%'||#{searchTodoText}||'%'
-		
-	 </select>
-	 
-	 <!--  참여했던 프로젝트 전체 개수  -->
-	 <select id="totalEndProjectCnt" resultType="int" parameterType="String">
-	 	select count(*) from project
-		where project_eedate is not null
-	 </select>
-	 
-	 <!--  참여했던 프로젝트 전체 *검색 개수  -->
-	 <select id="totalEndProjectCntSearch" resultType="int" parameterType="pageVo">
-	 	select count(*) from project
-		where  project_eedate is not null
-		and    project_title like '%'||#{searchEndText}||'%'
-	 </select>
-	 
-	 <!-- 참여중인 프로젝트 : project_tile 값으로 project_id 얻어오기  -->
-	 <select id="selectProjectId" resultType="projectVo" parameterType="String">
-	  select project_id 
-	  from   project 
-	  where  project_title = #{project_title}	
-	 </select>
-	 
 
-	<!--  즐겨찾기한 프로젝트  -->
-	<select id = "mybookmarkselect" resultType="projectVo" parameterType="pageVo">
-		
-		 SELECT c.rnum, c.*
-			FROM (
-			 select rownum rnum, b.* from(
-			     select a.*
-			         from
-                             (SELECT  p.project_title  as project_title,
-                                         p.project_id as project_id,
-                                        pmem.pmember_member as pmember_member
-                                FROM    project p INNER JOIN project_member pm
-                                ON      p.project_id = pm.pmember_project LEFT JOIN (SELECT pmember_project,
-                                                                                              pmember_member
-                                                                                     FROM   project_member
-                                                                                     WHERE  pmember_position = 1) pmem
-                  				ON      p.project_id = pmem.pmember_project
-                  				WHERE   pm.pmember_member = #{member_mail}
-                                AND     pm.pmember_bookmark = 'Y')a) b 
-       <if test="searchBookText!=null and searchBookText!=''">where project_title like '%'||#{searchBookText}||'%'</if> )c
-			 	where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
-  
+	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 마이페이지 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+	<!-- 참여중인 프로젝트 -->
+	<select id="myprojectselect" resultType="projectVo"
+		parameterType="pageVo">
+		SELECT c.rnum, c.*
+		FROM (
+		select rownum rnum, b.* from(
+		select a.*
+		from
+		(SELECT (SELECT PROJECT_TITLE FROM PROJECT WHERE PROJECT_ID =
+		PMEMBER_PROJECT) as project_title
+		, PMEMBER_MEMBER as pmember_member
+		, PMEMBER_PROJECT as project_id
+		FROM PROJECT_MEMBER
+		WHERE PMEMBER_MEMBER = #{member_mail}
+		AND PMEMBER_POSITION = '1'
+		UNION
+		SELECT (SELECT PROJECT_TITLE FROM PROJECT WHERE PROJECT_ID =
+		PMEMBER_PROJECT)
+		, (SELECT B.PMEMBER_MEMBER FROM PROJECT_MEMBER B WHERE
+		B.PMEMBER_PROJECT = A.PMEMBER_PROJECT AND B.PMEMBER_POSITION = 1)
+		, PMEMBER_PROJECT
+		FROM PROJECT_MEMBER A
+		WHERE A.PMEMBER_MEMBER = #{member_mail}
+		AND A.PMEMBER_POSITION = '2')a) b
+		<if test="searchText!=null and searchText!=''">where project_title like '%'||#{searchText}||'%'</if>
+		)c
+		where rnum between ${page}*${pageSize}-(${pageSize}-1)
+		and ${page}*${pageSize}
 	</select>
-	
-	<!-- 회원탈퇴 update  -->
-	<update id="updateUserwithDrawal" parameterType="projectVo">	
+
+	<!-- 참여했던 프로젝트 -->
+	<select id="myprojectEndselect" resultType="projectVo"
+		parameterType="pageVo">
+		SELECT c.rnum, c.*
+		FROM (
+		select rownum rnum, b.* from(
+		select a.*
+		from
+		(SELECT (SELECT PROJECT_TITLE FROM PROJECT WHERE PROJECT_ID =
+		PMEMBER_PROJECT) as project_title
+		, PMEMBER_MEMBER as pmember_member
+		, PMEMBER_PROJECT as project_id
+		FROM PROJECT_MEMBER A , PROJECT B
+		where B.project_id = A.pmember_project
+		AND PMEMBER_MEMBER = #{member_mail}
+		AND PMEMBER_POSITION = '1'
+		AND project_eedate is not null
+		UNION
+		SELECT (SELECT PROJECT_TITLE FROM PROJECT WHERE PROJECT_ID =
+		PMEMBER_PROJECT)
+		, (SELECT B.PMEMBER_MEMBER FROM PROJECT_MEMBER B WHERE
+		B.PMEMBER_PROJECT = A.PMEMBER_PROJECT AND B.PMEMBER_POSITION = 1)
+		, PMEMBER_PROJECT
+		FROM PROJECT_MEMBER A , PROJECT B
+		where B.project_id = A.pmember_project
+		AND A.PMEMBER_MEMBER = #{member_mail}
+		AND A.PMEMBER_POSITION = '2'
+		AND B.project_eedate is not null)a) b
+		<if test="searchEndText!=null and searchEndText!=''">where project_title like '%'||#{searchEndText}||'%'</if>
+		)c
+		where rnum between ${page}*${pageSize}-(${pageSize}-1)
+		and ${page}*${pageSize}
+	</select>
+
+	<!-- 프로젝트 전체 개수 가져오기 -->
+	<select id="totalProjectCnt" resultType="int"
+		parameterType="String">
+		select count(*)
+		from project_member
+		where pmember_member =
+		#{member_mail}
+
+	</select>
+
+	<!-- 프로젝트 전체 * 검색 개수 가져오기 -->
+	<select id="totalProjectCntSearch" resultType="int"
+		parameterType="pageVo">
+		select count(*)
+		from project_member A inner join project
+		B
+		ON B.project_id = A.pmember_project
+		where A.pmember_member =
+		#{member_mail}
+		and project_title like '%'||#{searchText}||'%'
+	</select>
+
+	<!-- 즐겨찾기한 개수 가져오기 -->
+	<select id="selectProjectCnt" resultType="int"
+		parameterType="String">
+		SELECT count(*)
+		FROM project_member
+		WHERE pmember_member = #{member_mail}
+		AND
+		pmember_bookmark = 'Y'
+	</select>
+
+
+	<!-- 즐겨찾기한 검색 * 개수 가져오기 -->
+	<select id="selectProjectCntSearch" resultType="int"
+		parameterType="pageVo">
+		SELECT count(*)
+		from project_member A inner join project B
+		ON B.project_id = A.pmember_project
+		WHERE A.pmember_member =
+		#{member_mail}
+		AND A.pmember_bookmark = 'Y'
+		and B.project_title like
+		'%'||#{searchBookText}||'%'
+	</select>
+
+	<!-- 나의 일감 전체 개수 -->
+	<select id="selectTodoCnt" resultType="int"
+		parameterType="String">
+		select count(*)
+		from todo
+		where todo_member = #{member_mail}
+	</select>
+
+	<!-- 나의일감 전체 검색* 개수 -->
+	<select id="selectTodoCntSearch" resultType="int"
+		parameterType="pageVo">
+		select count(*)
+		from todo
+		where todo_member = #{member_mail}
+		and todo_content
+		like '%'||#{searchTodoText}||'%'
+
+	</select>
+
+	<!-- 참여했던 프로젝트 전체 개수 -->
+	<select id="totalEndProjectCnt" resultType="int"
+		parameterType="String">
+		select count(*) from project
+		where project_eedate is not null
+	</select>
+
+	<!-- 참여했던 프로젝트 전체 *검색 개수 -->
+	<select id="totalEndProjectCntSearch" resultType="int"
+		parameterType="pageVo">
+		select count(*) from project
+		where project_eedate is not null
+		and
+		project_title like '%'||#{searchEndText}||'%'
+	</select>
+
+	<!-- 참여중인 프로젝트 : project_tile 값으로 project_id 얻어오기 -->
+	<select id="selectProjectId" resultType="projectVo"
+		parameterType="String">
+		select project_id
+		from project
+		where project_title = #{project_title}
+	</select>
+
+
+	<!-- 즐겨찾기한 프로젝트 -->
+	<select id="mybookmarkselect" resultType="projectVo"
+		parameterType="pageVo">
+
+		SELECT c.rnum, c.*
+		FROM (
+		select rownum rnum, b.* from(
+		select a.*
+		from
+		(SELECT p.project_title as project_title,
+		p.project_id as project_id,
+		pmem.pmember_member as pmember_member
+		FROM project p INNER JOIN project_member pm
+		ON p.project_id = pm.pmember_project LEFT JOIN (SELECT pmember_project,
+		pmember_member
+		FROM project_member
+		WHERE pmember_position = 1) pmem
+		ON p.project_id = pmem.pmember_project
+		WHERE pm.pmember_member = #{member_mail}
+		AND pm.pmember_bookmark = 'Y')a) b
+		<if test="searchBookText!=null and searchBookText!=''">where project_title like '%'||#{searchBookText}||'%'</if>
+		)c
+		where rnum between ${page}*${pageSize}-(${pageSize}-1) AND
+		${page}*${pageSize}
+
+	</select>
+
+	<!-- 회원탈퇴 update -->
+	<update id="updateUserwithDrawal" parameterType="projectVo">
 		update member
 		set member_withdrawal = 'Y'
-		where member_mail  = #{member_mail}
-	</update>
-	
-	<!-- 나의일감 리스트  -->
-	<select id="myTodoselect" resultType="todoVo" parameterType="pageVo">
-		  SELECT c.rnum, c.*
-			FROM (
-			 select rownum rnum, b.* from(
-			     select a.*
-			         from
-                         (select todo_content
-                                , todo_complet
-                           from   todo
-                           where todo_member = #{member_mail})a) b 
-             <if test="searchTodoText != null and searchTodoText != ''">where todo_content like '%'||#{searchTodoText}||'%'</if> )c
-		 where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
-	</select>
-	
-	<!-- 내 파일 리스트  -->
-	<select id="myFileList" resultType="attVo" parameterType="pageVo">
-		 SELECT c.rnum, c.*
-					FROM (
-					 select rownum rnum, b.* from(
-					     select a.*
-					         from
-	                             (select att_id
-	                                    , att_name
-	                                    , project_title
-	                               from   attachment inner join work on att_work = work_id  
-	                                      inner join  project on work_project = project_id
-	                                      inner join  project_member on project_id = pmember_project
-	                                      inner join  member on pmember_member = member_mail
-	                               where  member_mail =  #{member_mail})a) b 
-		                <if test="searchFileList != null and searchFileList != ''">where att_name like '%'||#{searchFileList}||'%'</if> )c
-		 where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize} 
-  
-	</select>
-	
-	 <select id="myFileListCnt" resultType="int" parameterType="String">
-		select count(*)
-		from   attachment, member
-		where  member_mail = #{member_mail}
-	 </select>
-	 
-	 <select id="totalmyFileListCntSearch" resultType="int" parameterType="pageVo">
-		select count(*)
-		from   attachment, member
-        where  member_mail = #{member_mail}
-        and    att_name like '%'||#{searchFileList}||'%'
-	 </select>
-	 
-	 <select id="selectProjectMember" resultType="projectVo" parameterType="String">
-		select project_title 
-		     , project_id
-		from project 
-		inner join project_member
-			on project_id = pmember_project inner join member
-			on pmember_member = member_mail
 		where member_mail = #{member_mail}
-	 </select>
-	
-	 
+	</update>
+
+	<!-- 나의일감 리스트 -->
+	<select id="myTodoselect" resultType="todoVo"
+		parameterType="pageVo">
+		SELECT c.rnum, c.*
+		FROM (
+		select rownum rnum, b.* from(
+		select a.*
+		from
+		(select todo_content
+		, todo_complet
+		from todo
+		where todo_member = #{member_mail})a) b
+		<if test="searchTodoText != null and searchTodoText != ''">where todo_content like '%'||#{searchTodoText}||'%'</if>
+		)c
+		where rnum between ${page}*${pageSize}-(${pageSize}-1) AND
+		${page}*${pageSize}
+	</select>
+
+	<!-- 내 파일 리스트 -->
+	<select id="myFileList" resultType="attVo"
+		parameterType="pageVo">
+		SELECT c.rnum, c.*
+		FROM (
+		select rownum rnum, b.* from(
+		select a.*
+		from
+		(select att_id
+		, att_name
+		, project_title
+		from attachment inner join work on att_work = work_id
+		inner join project on work_project = project_id
+		inner join project_member on project_id = pmember_project
+		inner join member on pmember_member = member_mail
+		where member_mail = #{member_mail})a) b
+		<if test="searchFileList != null and searchFileList != ''">where att_name like '%'||#{searchFileList}||'%'</if>
+		)c
+		where rnum between ${page}*${pageSize}-(${pageSize}-1) AND
+		${page}*${pageSize}
+
+	</select>
+
+	<select id="myFileListCnt" resultType="int"
+		parameterType="String">
+		select count(*)
+		from attachment, member
+		where member_mail
+		= #{member_mail}
+	</select>
+
+	<select id="totalmyFileListCntSearch" resultType="int"
+		parameterType="pageVo">
+		select count(*)
+		from attachment, member
+		where member_mail = #{member_mail}
+		and att_name like '%'||#{searchFileList}||'%'
+	</select>
+
+	<select id="selectProjectMember" resultType="projectVo"
+		parameterType="String">
+		select project_title
+		, project_id
+		from project
+		inner join project_member
+		on project_id = pmember_project inner join member
+		on pmember_member = member_mail
+		where member_mail = #{member_mail}
+	</select>
+
+
 </mapper>
 

@@ -2,6 +2,8 @@ package kr.or.ddit.member.web;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
+import kr.or.ddit.authority.model.AuthorityVo;
+import kr.or.ddit.authority.service.AuthorityServiceInf;
 import kr.or.ddit.commons.util.KISA_SHA256;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
@@ -46,6 +48,9 @@ public class LoginController {
 	
 	@Autowired
 	private WorkServiceInf workService;
+	
+	@Autowired
+	private AuthorityServiceInf authorityService;
 
 	//NaverLoginBO 
 	@Autowired
@@ -286,7 +291,7 @@ public class LoginController {
 	 * @return Method  설명 : sign.jsp에서 회원가입 버튼을 눌렀을때
 	 */
 	@RequestMapping(value = "/signProcess", method = RequestMethod.POST)
-	public String signProcess(@RequestParam("member_mail") String member_mail, MemberVo memberVo, HttpServletRequest request) {
+	public String signProcess(@RequestParam("member_mail") String member_mail, AuthorityVo authVo, MemberVo memberVo, HttpServletRequest request) {
 		
 		String member_pass = request.getParameter("member_pass");
 		
@@ -296,7 +301,13 @@ public class LoginController {
 		// 값이 다르면..
 		// 인터페이스에 들어가고 그 후 service 
 		if (memberService.selectUser(member_mail) == null) {
-			memberService.insertUser(memberVo);
+			
+			authVo.setAuth_member(memberVo.getMember_mail());
+			System.out.println("aaaaaaaaaaaasdmember_mail" + member_mail);
+			System.out.println("aaaaaaaaaaaawawauthVo" + authVo);
+			
+			//memberService.insertUser(memberVo);
+			authorityService.insertUserMember(authVo, memberVo);
 			return "/login/login";
 			// 값이 같으면
 		} else {
