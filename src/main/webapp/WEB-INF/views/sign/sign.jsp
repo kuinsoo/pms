@@ -45,7 +45,7 @@
 <script type="text/javascript">
 
 	// document.ready에는 var를 넣으면 안된당.!!!
-	var passwordRules = /^[A-Za-z0-9]{6,12}$/;
+	//var passwordRules = /^[0-9a-z]+$/;
 
 	//숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
 	var certificationNumber;
@@ -86,11 +86,19 @@
 				$("#telerror").show();
 			}
 		}
+		
+		/*
+		if(!/^[a-zA-Z0-9]{10,15}$/.test(password)){
+
+출처: http://hee-kkk.tistory.com/22 [개발, 개발 누가 말했나]
+		*/
 		function onkeyup_event2(){
-			if(passwordRules.test($("#password").val())){
-				$("#passError").hide();
-			}else {
+			if(!/^[a-zA-Z0-9]{6,10}$/.test($("#password").val())){
 				$("#passError").show();
+				
+				return false;
+			}else {
+				$("#passError").hide();
 			}
 		}
 	</script>
@@ -116,7 +124,7 @@
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호</label>
 					<input type="password" name="member_pass" id ="password" onkeyup="onkeyup_event2();" class="form-control" required />
-					<span id="passError"> 영문 숫자 포함 6글자 이상 다시 입력해주세요..</span>
+					<span id="passError"> 총 6~10 글자로 다시 입력해주세요.. (영문이나 숫자로) </span>
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호 확인</label>
