@@ -5,7 +5,7 @@
 <%-- left & header--%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 <style type="text/css">
-.noticeContainer{width:1200px;margin:0 auto;margin-top:40px;overflow:hidden;}
+.noticeContainer{width:1200px;margin:0 auto;margin-top:20px;margin-bottom:20px;overflow:hidden;}
 .noticeContainerLeft {
 	width:300px;height:300px;padding:20px;float:left;
 	display:flex;justify-content:center;align-items:center;background-color:#fff;

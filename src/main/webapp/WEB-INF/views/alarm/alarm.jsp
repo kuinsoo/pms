@@ -131,7 +131,7 @@ function workMemberList(){
 		    },
 		    error: function (data) {
 			    // location.href = "/";
-				alert("error");
+				
 			},
 		    timeout: 3000,
 		    complete: setTimeout(function(){ workPoll(); }, 6000)
