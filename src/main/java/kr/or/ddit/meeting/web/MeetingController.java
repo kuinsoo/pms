@@ -7,8 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import kr.or.ddit.meeting.model.MeetingVo;
 import kr.or.ddit.meeting.service.MeetingServiceInf;
@@ -17,11 +16,6 @@ import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.qna.web.QnAController;
 import kr.or.ddit.work.service.WorkServiceInf;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * kr.or.ddit.meeting.web
@@ -53,12 +47,9 @@ public class MeetingController {
 	@RequestMapping(value= "/meetingList", 
 									method= {RequestMethod.GET,RequestMethod.POST},
 									headers="Accept=application/json") 
-	public String meetingListView(@RequestParam("project_id")String project_id, MeetingVo meetingVo, Model model, MemberVo memberVo) {
-		System.out.println("hello java~");
-		System.out.println("project_id : " + project_id);
+	public String meetingListView(@RequestParam("project_id")String project_id, MeetingVo meetingVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		
 		List<MeetingVo> meetingList= meetingService.meetingList(project_id);
-		System.out.println("meetingList : " + meetingList);
 
 		model.addAttribute("meetingList", meetingList );
 		
@@ -69,19 +60,4 @@ public class MeetingController {
 
 		return "main/meetListAjax";
 	}
-	
-//	@GetMapping(value= "/meetingList" )
-//	@ResponseBody
-//	public List<MeetingVo> meetingListView(@RequestParam("project_id")String project_id, MeetingVo meetingVo, Model model) {
-//		System.out.println("hello java~");
-//		System.out.println("project_id : " + project_id);
-//		
-//		List<MeetingVo> meetingList= meetingService.meetingList(project_id);
-//		System.out.println("meetingList : " + meetingList);
-//
-//		model.addAttribute("meetingList", meetingList );
-//
-//		return meetingList;
-//	}
-	
 }

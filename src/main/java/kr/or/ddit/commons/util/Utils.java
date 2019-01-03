@@ -96,7 +96,7 @@ public class Utils {
 	}
 
 	public static AttachmentVo multiFiles(MultipartFile[] files) {
-		System.out.println("filse Size = " + files.length);
+		//System.out.println("filse Size = " + files.length);
 		AttachmentVo attVo = new AttachmentVo();
 		if (files != null && files.length > 0) {
 			for (int i = 0; i < files.length; i++) {

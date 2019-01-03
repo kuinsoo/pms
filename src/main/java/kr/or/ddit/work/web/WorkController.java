@@ -228,12 +228,10 @@ public class WorkController {
 													  		 @RequestParam("member_mail")String member_mail,
 													  		WorkVo workVo, Model model) {
 
-		System.out.println("from js about data : "+project_id+" ; "+member_mail);
 		workVo.setMember_mail(member_mail);
 		workVo.setWork_project(project_id);
 		
 		List<WorkVo> myWorkList = workService.myWorkList(workVo);
-		System.out.println(" **myWorkList : "+ myWorkList);
 		
 		return myWorkList;
 	}

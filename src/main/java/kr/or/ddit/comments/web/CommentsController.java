@@ -9,10 +9,7 @@ import kr.or.ddit.work.service.WorkServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,10 +31,10 @@ public class CommentsController {
 
 	@Autowired
 	private WorkServiceInf workService;
-	
+
 	@Autowired
 	private PostServiceInf postService;
-	
+
 	@Autowired
 	private MessageServiceInf messageService;
 
@@ -56,12 +53,12 @@ public class CommentsController {
 		commentsService.insertCmt(cmtVo);
 		model.addAttribute("workList",workService.selectWorks(project_id));
 		model.addAttribute("cmtList", commentsService.ajaxCmtList(cmtMap));
-		
+
 		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
-		
+
 	return "work/ajaxCmtList";
 	}
 
@@ -77,33 +74,34 @@ public class CommentsController {
 
 		model.addAttribute("workList",workService.selectWorks(project_id));
 		model.addAttribute("cmtList", commentsService.ajaxCmtList(cmtMap));
-		
+
 		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
-		
+
 		return "work/ajaxCmtList";
 	}
 
 	@RequestMapping(value = "/updateCmt", method = RequestMethod.GET)
-	public String updateCmt(Model model, @RequestParam("project_id")String project_id,
+	@ResponseBody
+	public CommentsVo updateCmt(Model model, @RequestParam("project_id")String project_id,
 								CommentsVo cmtVo,
-								@RequestParam("work_id")String work_id, MemberVo memberVo){
+								@RequestParam("work_id")String work_id, @SessionAttribute("memberVo")MemberVo memberVo){
 		commentsService.updateCmt(cmtVo);
-
-		Map<String,String> cmtMap = new HashMap<>();
+/*		Map<String,String> cmtMap = new HashMap<>();
 		cmtMap.put("work_project", project_id);
 		cmtMap.put("cmt_work", work_id);
 		model.addAttribute("workList",workService.selectWorks(project_id));
-		model.addAttribute("cmtList", commentsService.ajaxCmtList(cmtMap));
-		
-		/* 알림기능 - IKS */
-		model.addAttribute("pageCnt", postService.totalPostCnt());
-		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
-		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
-		
-		return  "work/ajaxCmtList";
+		model.addAttribute("cmtList", commentsService.ajaxCmtList(cmtMap));*/
+        /* 알림기능 - IKS */
+        model.addAttribute("pageCnt", postService.totalPostCnt());
+        model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+        model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+        return  cmtVo;
+
+
+
 	}
 
 

@@ -50,7 +50,7 @@ public class EvaluationController {
 	 * @return Method 설명 : 능력 및 평가 화면단
 	 */
 	@RequestMapping(value= "/evaluation", method=RequestMethod.GET)
-	public String evaluationView(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
+	public String evaluationView(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		model.addAttribute("memberVo",memberVo);
 		Map<String, String> evalMap = new HashMap<>();
 		evalMap.put("member_mail", memberVo.getMember_mail());
