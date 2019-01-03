@@ -19,7 +19,7 @@
 						      <h2>친구찾기</h2>
 								<form name ="searchTextFriendList" method="POST" onsubmit="return false;">
 										<input type="text" id="searchTextFriendList" name="searchTextFriendList" class="friendSearchInput" placeholder="찾으시는 분의 이메일을 입력해주세요" />
-										<input type="hidden" name="page" value='1'/>
+										<input type="hidden" name="page" id= "friendListPage" value='1'/>
 										<input type="hidden" name="pageSize" value='10' />
 										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getAllMemberSearch();"/>
 										<button onclick="getAllMember(1);">목록으로</button>
@@ -467,16 +467,16 @@
 		}
 		
 		// 전체 사용자 검색 부분 
-		function getAllMemberSearch(){
-			
 			//<input type="hidden" name="page" value='1'/>
 
 			//$('form[name=searchTextFriendList]') 하위 input name=page의 값을 함수 파라미터로 설정 
 			//var page = $('form[name=searchTextFriendList]').
-			var param = $('form[name=searchTextFriendList]').serialize();
 			//var pageSize = 10;
+		
+		function getAllMemberSearch(page){
 			
-			return false;
+			$("#friendListPage").attr("value",page);
+			var param = $('form[name=searchTextFriendList]').serialize();
 			$.ajax({
 				type: "POST",
 				url : "/AllMemberListSearchAjax",
