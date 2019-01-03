@@ -20,11 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
@@ -195,6 +191,17 @@ public class WorkController {
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "work/ajaxWorkChart";
+	}
+
+	@RequestMapping(value = "/ajaxWorkProgress", method = RequestMethod.GET)
+	@ResponseBody
+	public WorkVo ajaxWorkProgress(@RequestParam("project_id")String project_id,
+								   @RequestParam("work_id")String work_id) {
+		Map<String,String> workMap = new HashMap<>();
+		workMap.put("project_id",project_id);
+		workMap.put("work_id",work_id);
+		WorkVo workVo = workService.selectWorkMap(workMap) ;
+		return workVo;
 	}
 	
 	/**

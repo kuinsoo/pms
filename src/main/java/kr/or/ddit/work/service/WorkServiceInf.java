@@ -121,6 +121,25 @@ public interface WorkServiceInf {
 	 */
 	List<ToDoVo> selectWorkChart(Map<String, String> mtMap);
 
+	/**
+	 * Method : selectWorkChart
+	 * 작성자 : Mr.kku
+	 * 내용 : 개별 워크
+	 * @param work_id
+	 * @return
+	 */
+	WorkVo selectWork(String work_id);
+
+
+	/**
+	 * Method : selectWorkChart
+	 * 작성자 : Mr.kku
+	 * 내용 : 개별 워크(맵이용)
+	 * @param workMap
+	 * @return
+	 */
+	WorkVo selectWorkMap(Map<String,String>workMap);
+
 	
 	/**
 	* Method : workAllSchedule
@@ -150,6 +169,9 @@ public interface WorkServiceInf {
 	* Method 설명 : 알림을 위한 업무 페이지 리스트 조회
 	*/
 	List<WorkVo> getWorkPageList(PageVo pageVo);
+
+
+
 
 
 }
