@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
+import kr.or.ddit.work.service.WorkServiceInf;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +36,12 @@ public class EvaluationController {
 	@Autowired
 	private PostServiceInf postService;
 	
+	@Autowired
+	private WorkServiceInf workService;
+	
+	@Autowired
+	private MessageServiceInf messageService;
+	
 	/**
 	 * Method : evaluationView
 	 * 작성자 : iks
@@ -50,8 +58,12 @@ public class EvaluationController {
 		evalMap.put("project_id", "0");
 		model.addAttribute("evalProjectList", evaluationService.evaluationProjectList(evalMap));
 		model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
-		/* 알림 임규승 2019-01-02 */
+		
+		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));		
+		
 		return "evaluation/evaluation";
 	}
 
@@ -64,6 +76,12 @@ public class EvaluationController {
         evalMap.put("member_name", memberVo.getMember_name());
         evalMap.put("project_id", project_id);
         model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
+        
+        /* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
         return "evaluation/ajaxEvaluationChartA";
     }
 
@@ -76,6 +94,12 @@ public class EvaluationController {
 		evalMap.put("member_name", memberVo.getMember_name());
 		evalMap.put("project_id", project_id);
 		model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "evaluation/ajaxEvaluationChartB";
 	}
 
@@ -88,8 +112,12 @@ public class EvaluationController {
 		evalMap.put("member_mail", memberVo.getMember_mail());
 		evalMap.put("project_id", project_id);
 		model.addAttribute("evalView", evaluationService.evaluationView(evalMap));
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 		return "evaluation/ajaxEvaluation";
 	}
-
 }

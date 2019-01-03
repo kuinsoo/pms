@@ -17,6 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.ddit.issue.model.IssueVo;
 import kr.or.ddit.issue.service.IssueServiceInf;
+import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.message.service.MessageServiceInf;
+import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.todo.service.ToDoServiceInf;
 import kr.or.ddit.util.model.PageVo;
@@ -41,7 +44,13 @@ public class ToDoController {
 	private IssueServiceInf issueService;
 
 	@Autowired
+	private PostServiceInf postService;
+	
+	@Autowired
 	private WorkServiceInf workService;
+	
+	@Autowired
+	private MessageServiceInf messageService;
 
 	/**
 	 * Method : ajaxInsertTodo
@@ -55,7 +64,7 @@ public class ToDoController {
 	 * @return Method  설명 : to-do list 등록(Ajax적용)
 	 */
 	@RequestMapping(value="/todoInsert", method= {RequestMethod.POST, RequestMethod.GET})
-	public String ajaxInsertTodo(ToDoVo todoVo, HttpServletRequest request, PageVo pageVo, Model model) {
+	public String ajaxInsertTodo(ToDoVo todoVo, HttpServletRequest request, PageVo pageVo, Model model, MemberVo memberVo) {
 		WorkVo workVo = new WorkVo();
 		workVo.setWork_project(request.getParameter("work_project"));
 		workVo.setWork_id(request.getParameter("todo_work"));
@@ -78,6 +87,11 @@ public class ToDoController {
 		
 		model.addAttribute("todoListMap", todoListMap);
 		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "todo/todoInsertAjax";
 	}
 
@@ -92,7 +106,7 @@ public class ToDoController {
 	 * @return Method  설명 : to-do list 조회
 	 */
 	@RequestMapping(value="/todoSelect", method= {RequestMethod.POST, RequestMethod.GET})
-	public String ajaxSelectTodo(HttpServletRequest request, PageVo pageVo, Model model) {
+	public String ajaxSelectTodo(HttpServletRequest request, PageVo pageVo, Model model, MemberVo memberVo) {
 		String work_id = request.getParameter("work_id");
 		
 		WorkVo workVo = new WorkVo();
@@ -114,6 +128,11 @@ public class ToDoController {
 		model.addAttribute("todoListMap", todoListMap);
 		model.addAttribute("issueMemberList", issueMemberList);
 		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "todo/todoInsertAjax";
 	}
 
@@ -129,7 +148,7 @@ public class ToDoController {
 	 * @return Method  설명 : to-do list 페이징처리
 	 */
 	@RequestMapping(value="todoPagination", method= {RequestMethod.POST, RequestMethod.GET})
-	public String ajaxPaginationTodo(@RequestParam("project_id")String project_id, @RequestParam("work_id")String work_id, PageVo pageVo, Model model) {
+	public String ajaxPaginationTodo(@RequestParam("project_id")String project_id, @RequestParam("work_id")String work_id, PageVo pageVo, Model model, MemberVo memberVo) {
 		int todoCnt = todoService.todoCnt(work_id);
 		
 		model.addAttribute("todoCnt", (int)Math.ceil((double)todoCnt / pageVo.getPageSize()));
@@ -137,6 +156,11 @@ public class ToDoController {
 		model.addAttribute("work_id", work_id);
 		model.addAttribute("project_id", project_id);
 		model.addAttribute("pageVo", pageVo);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "todo/todoPaginationHtml";
 	}
@@ -155,7 +179,7 @@ public class ToDoController {
 	 */
 	@RequestMapping(value="/popupMemberList", method= {RequestMethod.POST, RequestMethod.GET})
 	public String ajaxPopupMember(Model model, @RequestParam("project_id")String project_id, @RequestParam("work_id")String work_id, 
-									@RequestParam("searchOption")String searchOption, @RequestParam("searchMember")String searchMember) {
+									@RequestParam("searchOption")String searchOption, @RequestParam("searchMember")String searchMember, MemberVo memberVo) {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("project_id", project_id);
 		searchMap.put("searchOption", searchOption);
@@ -168,6 +192,11 @@ public class ToDoController {
 		popupMap.put("popup_work_id", work_id);
 
 		model.addAttribute("popupMap", popupMap);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "todo/popupMemberList";
 	}
@@ -211,7 +240,7 @@ public class ToDoController {
 	*/
 	@RequestMapping(value="/todoDelete", method= {RequestMethod.POST, RequestMethod.GET})
 	public String todoDelete(@RequestParam("todo_id")String todo_id, @RequestParam("project_id")String project_id,
-							@RequestParam("work_id")String work_id, PageVo pageVo, Model model) {
+							@RequestParam("work_id")String work_id, PageVo pageVo, Model model, MemberVo memberVo) {
 		WorkVo workVo = new WorkVo();
 		workVo.setWork_project(project_id);
 		workVo.setWork_id(work_id);
@@ -234,6 +263,11 @@ public class ToDoController {
 		Map<String, Object> todoListMap = todoService.workToDoSelect(todoMap);
 		
 		model.addAttribute("todoListMap", todoListMap);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "todo/todoInsertAjax";
 	}

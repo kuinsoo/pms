@@ -608,7 +608,7 @@ public class MemberDetailController {
 			
 			memberservice.updateUserwithDrawal(memberVo);
 			
-			return "redirect:/";				
+			return "redirect:/";
 			
 		}
 

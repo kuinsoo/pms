@@ -5,6 +5,11 @@ import kr.or.ddit.attachment.model.AttachmentVo;
 import kr.or.ddit.attachment.service.AttachmentServiceInf;
 import kr.or.ddit.commons.util.UUID;
 import kr.or.ddit.commons.util.Utils;
+import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.message.service.MessageServiceInf;
+import kr.or.ddit.post.service.PostServiceInf;
+import kr.or.ddit.work.service.WorkServiceInf;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +45,15 @@ public class AttachmentController {
 
 	@Autowired
 	private AttachmentServiceInf attachmentService;
+	
+	@Autowired
+	private PostServiceInf postService;
+	
+	@Autowired
+	private WorkServiceInf workService;
+	
+	@Autowired
+	private MessageServiceInf messageService;
 
 	/**
 	 * Provide upload info string.
@@ -50,7 +64,7 @@ public class AttachmentController {
 	 * @return the string
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/files")
-	public String provideUploadInfo(Model model) {
+	public String provideUploadInfo(Model model, MemberVo memberVo) {
 		File rootFolder = new File(Application.UPLOAD_DIR);
 
 		List<String> fileNames = Arrays.stream(rootFolder.listFiles())
@@ -62,6 +76,11 @@ public class AttachmentController {
 				.map(file -> file.getName())
 				.collect(Collectors.toList())
 		);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 		return "attachment/upload_result";
 	}
@@ -76,7 +95,13 @@ public class AttachmentController {
 	 */
 	/* single file upload */
 	@RequestMapping(value = "/single_upload_form", method = RequestMethod.GET)
-	public String singleUploadForm() {
+	public String singleUploadForm(Model model, MemberVo memberVo) {
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "attachment/single_upload_form";
 	}
 
@@ -88,7 +113,7 @@ public class AttachmentController {
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/single_upload")
 	public String fileUpload(@RequestParam("file") MultipartFile file, @RequestParam("work_id") String work_id,
-							 @RequestParam("downUrl")String downUrl) throws IOException {
+							 @RequestParam("downUrl")String downUrl, MemberVo memberVo, Model model) throws IOException {
 
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -107,6 +132,11 @@ public class AttachmentController {
 			/* 파일 첨부가 되지 않았을 경우 */
 			return "Unable to upload. File is empty";
 		}
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 
 
@@ -125,7 +155,13 @@ public class AttachmentController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/multi_upload_form", method = RequestMethod.GET)
-	public String showMultiUploadForm() {
+	public String showMultiUploadForm(Model model, MemberVo memberVo) {
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "attachment/multi_upload_form";
 	}
 
@@ -138,7 +174,7 @@ public class AttachmentController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/multi_upload", method = RequestMethod.POST)
-	public String multipleSave(@RequestParam("file") MultipartFile[] files,@RequestParam("work_id")String work_id) {
+	public String multipleSave(@RequestParam("file") MultipartFile[] files,@RequestParam("work_id")String work_id, Model model, MemberVo memberVo) {
 		String fileName = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		AttachmentVo attVo = new AttachmentVo();
@@ -176,12 +212,24 @@ public class AttachmentController {
 		}
 
 		/*return "success file upload ";*/
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "redirect:/files";
 	}
 
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
-	public String download(@RequestParam("att_id")String att_id, Model model) {
+	public String download(@RequestParam("att_id")String att_id, Model model, MemberVo memberVo) {
 		model.addAttribute("attVo",attachmentService.selectAtt(att_id));
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "attachment/download";
 	}
 }

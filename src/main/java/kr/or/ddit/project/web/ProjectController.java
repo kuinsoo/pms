@@ -75,7 +75,13 @@ public class ProjectController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/createProject",method = RequestMethod.GET)
-	public String createProjectView() {
+	public String createProjectView(Model model, MemberVo memberVo) {
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "project/createProject";
 	}
 
@@ -88,13 +94,18 @@ public class ProjectController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/createProject",method = RequestMethod.POST)
-	public String createProject(ProjectVo projectVo, @SessionAttribute("memberVo")MemberVo memberVo) {
+	public String createProject(ProjectVo projectVo, @SessionAttribute("memberVo")MemberVo memberVo, Model model) {
 		if(projectVo.getProject_title() != null){
 			Map<String,String> mapPMember = new HashMap<>();
 			mapPMember.put("member_email", memberVo.getMember_mail());
 			mapPMember.put("pmember_position", "1");
 			memberService.setTeamLeader(mapPMember, projectVo);
 		}
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		return "redirect:/main";
 	}
 
@@ -105,9 +116,14 @@ public class ProjectController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/ajaxUpdateProject", method = RequestMethod.POST)
-	public String updateProject(ProjectVo projectVo) {
+	public String updateProject(ProjectVo projectVo, Model model, MemberVo memberVo) {
 
 		projectService.updateProject(projectVo);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 		return "redirect:/main";
 	}
@@ -120,8 +136,13 @@ public class ProjectController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/projectList" ,method = RequestMethod.GET)
-	public String projectList(Model model) {
+	public String projectList(Model model, MemberVo memberVo) {
 		model.addAttribute("projectList",projectService.selectAllProject());
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 		return "project/projectList";
 	}
@@ -155,6 +176,12 @@ public class ProjectController {
 
 		model.addAttribute("pMemberList",memberService.selectMainView(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "project/ajaxMainProjectList";
 	}
 
@@ -249,6 +276,12 @@ public class ProjectController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "project/ajaxInviteProject";
 	}
 
@@ -270,6 +303,12 @@ public class ProjectController {
 		}
 		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "project/ajaxMainProjectList";
 	}
 
@@ -286,6 +325,12 @@ public class ProjectController {
 
 		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "project/ajaxMainProjectList";
 	}
 
@@ -301,8 +346,12 @@ public class ProjectController {
 
 		model.addAttribute("pMemberList", projectService.bookMarkProjects(memberVo.getMember_mail()));
 		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "project/ajaxMainProjectList";
 	}
-
-
 }

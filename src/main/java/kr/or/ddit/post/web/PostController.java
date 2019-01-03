@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.model.PostVo;
 import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.util.model.PageVo;
+import kr.or.ddit.work.service.WorkServiceInf;
 
 /**
  * kr.or.ddit.post.web
@@ -38,6 +40,12 @@ public class PostController {
 	
 	@Autowired
 	private PostServiceInf postService;
+	
+	@Autowired
+	private WorkServiceInf workService;
+	
+	@Autowired
+	private MessageServiceInf messageService;
 	
 	@RequestMapping(value="/notice")
 	public String noticeView() {
@@ -72,8 +80,10 @@ public class PostController {
 		
 		model.addAttribute("noticeMap", noticeMap);
 		
-		/* 알림 임규승 2019-01-02 */
+		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "notice/noticeList";
 	}
@@ -101,6 +111,11 @@ public class PostController {
 		
 		model.addAttribute("noticeMap", noticeMap);
 		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "notice/noticePaging";
 	}
 	
@@ -113,13 +128,15 @@ public class PostController {
 	* Method 설명 : 공지사항 게시글 상세조회
 	*/
 	@RequestMapping(value="/noticeView", method= {RequestMethod.POST, RequestMethod.GET})
-	public String noticeViews(String post_id, Model model) {
+	public String noticeViews(String post_id, Model model, MemberVo memberVo) {
 		
 		PostVo postVo = postService.selectAdmin(post_id);
 		model.addAttribute("postVo", postVo);
 		
-		/* 알림 임규승 2019-01-02 */
+		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "notice/noticeView";
 	}
@@ -147,8 +164,10 @@ public class PostController {
 		
 		model.addAttribute("guideMap", guideMap);
 		
-		/* 알림 임규승 2019-01-02 */
+		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "guide/guideList";
 	}
@@ -176,6 +195,11 @@ public class PostController {
 		
 		model.addAttribute("guideMap", guideMap);
 		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "guide/guidePaging";
 	}
 	
@@ -188,13 +212,15 @@ public class PostController {
 	* Method 설명 : 가이드 게시글 상세조회
 	*/
 	@RequestMapping(value="/guideView", method= {RequestMethod.POST, RequestMethod.GET})
-	public String guideViews(String post_id, Model model) {
+	public String guideViews(String post_id, Model model, MemberVo memberVo) {
 		
 		PostVo postVo = postService.selectAdminGuide(post_id);
 		model.addAttribute("postVo", postVo);
 		
-		/* 알림 임규승 2019-01-02 */
+		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "guide/guideView";
 	}
