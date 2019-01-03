@@ -99,7 +99,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호</label>
-					<input type="password" name="member_pass" onkeyup="onkeyup_event2();" id="pass" class="form-control" required />
+					<input type="password" name="member_pass" id="pass" class="form-control" required />
 					<span id="passError"> 영문 숫자 포함 6글자 이상 다시 입력해주세요..</span>
 					<c:if test="${loginResult == 'false'}">
 						<span class="error"> 일치하는 회원이 없습니다..다시 로그인 해주세요.</span>

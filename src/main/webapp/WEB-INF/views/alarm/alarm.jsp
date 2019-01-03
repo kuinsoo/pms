@@ -45,7 +45,7 @@ $(document).ready(function(){
 // 쪽지 알림 - 2019-01-02 임규승
 function messageMemberList(){
 	
-	var listCntMessage = ${totalMsgReceived};
+	var listCntMessage = "${totalMsgReceived}";
 	
 	 $.ajax({
 		  type: "GET",

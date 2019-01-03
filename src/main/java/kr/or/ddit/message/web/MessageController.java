@@ -23,6 +23,7 @@ import kr.or.ddit.message.model.MessageVo;
 import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.util.model.PageVo;
+import kr.or.ddit.work.service.WorkServiceInf;
 import oracle.net.aso.f;
 
 /**
@@ -45,6 +46,10 @@ public class MessageController {
 	
 	@Autowired
 	private PostServiceInf postService;
+	
+	@Autowired
+	private WorkServiceInf workService;
+	
 	
 	
 	
@@ -575,8 +580,10 @@ public class MessageController {
 	}
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	@RequestMapping(value="/friendView")
-	public String friendView(Model model) {
-		
+	public String friendView(Model model,@SessionAttribute("memberVo") MemberVo memberVo) {
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageservice.totalMsgReceived(memberVo.getMember_mail()));
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		return "friend/friend";
 	}
