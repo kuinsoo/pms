@@ -372,7 +372,10 @@ public class MessageController {
 	public String sendYouMessageUpdate(@RequestParam("msg_person")String msg_person, RedirectAttributes redirectAttributes,
 									Model model, @SessionAttribute("memberVo") MemberVo memberVo ) {
 		
-		redirectAttributes.addAttribute("msg_person", msg_person);
+		//redirectAttributes.addAttribute("msg_person", msg_person);
+		
+		/* addFlashAttribute : 리다이렉트 직전 플래시에 저장하는 메소드다. 리다이렉트 이후에는 소멸한다. */
+		redirectAttributes.addFlashAttribute("msg_person", msg_person);
 		
 		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
