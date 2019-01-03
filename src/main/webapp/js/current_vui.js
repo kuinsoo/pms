@@ -7,16 +7,14 @@ if (annyang) {
 	};
 	var selectCnt=0;
 	var otherSelectBox = function(){
-		console.log($(".recipientSelect option").length);
-		$('.recipientSelect').trigger( "click" ); 
+		$('.recipientSelect').trigger( "click" );
+		$('.recipientSelect').css("display","none");
 		var optionCnt = $(".recipientSelect").length;
 		if(selectCnt<=optionCnt){
 			selectCnt++;
-			console.log(selectCnt);
 			$(".recipientSelect option:eq("+selectCnt+")").prop("selected", true);
 		}else{
 			selectCnt--;
-			console.log(selectCnt);
 			$(".recipientSelect option:eq("+selectCnt+")").prop("selected", true);
 		}
 	};
@@ -75,7 +73,7 @@ if (annyang) {
 		'선택': selectBox,
 		'보내기': sendMsg,
 		'취소': historyBack,
-	    '홈페이지': homePage,
+	    '메인': homePage,
 	    '메뉴': showLeftPush,
 	    '친구': mainFriends,
 	    '쪽지': mainMsg,

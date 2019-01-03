@@ -43,7 +43,7 @@ public class MessageController {
 	private FriendsListServiceInf friendservice;
 	
 	@Autowired
-	private MessageServiceInf messageservice;
+	private MessageServiceInf messageService;
 	
 	@Autowired
 	private PostServiceInf postService;
@@ -69,6 +69,11 @@ public class MessageController {
 		List<FriendListVo> selctMyFriend = friendservice.selectMyFriends(memberVo.getMember_mail());
 		model.addAttribute("selctMyFriend",selctMyFriend);
 		model.addAttribute("pageCnt", postService.totalPostCnt());
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		
 		return "message/message";
