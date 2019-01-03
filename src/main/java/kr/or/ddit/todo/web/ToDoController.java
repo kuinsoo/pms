@@ -10,10 +10,7 @@ import kr.or.ddit.work.service.WorkServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import kr.or.ddit.issue.model.IssueVo;
 import kr.or.ddit.issue.service.IssueServiceInf;
@@ -179,7 +176,7 @@ public class ToDoController {
 	 */
 	@RequestMapping(value="/popupMemberList", method= {RequestMethod.POST, RequestMethod.GET})
 	public String ajaxPopupMember(Model model, @RequestParam("project_id")String project_id, @RequestParam("work_id")String work_id, 
-									@RequestParam("searchOption")String searchOption, @RequestParam("searchMember")String searchMember, MemberVo memberVo) {
+									@RequestParam("searchOption")String searchOption, @RequestParam("searchMember")String searchMember, @SessionAttribute("memberVo")MemberVo memberVo) {
 		Map<String, Object> searchMap = new HashMap<String, Object>();
 		searchMap.put("project_id", project_id);
 		searchMap.put("searchOption", searchOption);
@@ -240,7 +237,7 @@ public class ToDoController {
 	*/
 	@RequestMapping(value="/todoDelete", method= {RequestMethod.POST, RequestMethod.GET})
 	public String todoDelete(@RequestParam("todo_id")String todo_id, @RequestParam("project_id")String project_id,
-							@RequestParam("work_id")String work_id, PageVo pageVo, Model model, MemberVo memberVo) {
+							@RequestParam("work_id")String work_id, PageVo pageVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		WorkVo workVo = new WorkVo();
 		workVo.setWork_project(project_id);
 		workVo.setWork_id(work_id);

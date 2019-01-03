@@ -87,7 +87,7 @@ public class CommentsController {
 	@ResponseBody
 	public CommentsVo updateCmt(Model model, @RequestParam("project_id")String project_id,
 								CommentsVo cmtVo,
-								@RequestParam("work_id")String work_id, MemberVo memberVo){
+								@RequestParam("work_id")String work_id, @SessionAttribute("memberVo")MemberVo memberVo){
 		commentsService.updateCmt(cmtVo);
 /*		Map<String,String> cmtMap = new HashMap<>();
 		cmtMap.put("work_project", project_id);

@@ -16,6 +16,7 @@ import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.qna.web.QnAController;
 import kr.or.ddit.work.service.WorkServiceInf;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 /**
  * kr.or.ddit.chatting.web
@@ -44,7 +45,7 @@ public class ChattingController {
 	Logger logger = LoggerFactory.getLogger(QnAController.class);
 	
 	@RequestMapping(value= "/chatListAjax", method= {RequestMethod.GET,RequestMethod.POST}) 
-	public String meetingListView(@RequestParam("meeting_id")String meeting_id, Model model, MemberVo memberVo) {
+	public String meetingListView(@RequestParam("meeting_id")String meeting_id, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		
 		model.addAttribute("chatList", chattingService.chattingList(meeting_id));
 		

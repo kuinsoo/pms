@@ -18,6 +18,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedOutputStream;
@@ -95,7 +96,7 @@ public class AttachmentController {
 	 */
 	/* single file upload */
 	@RequestMapping(value = "/single_upload_form", method = RequestMethod.GET)
-	public String singleUploadForm(Model model, MemberVo memberVo) {
+	public String singleUploadForm(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		
 		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
@@ -113,7 +114,7 @@ public class AttachmentController {
 	 */
 	@RequestMapping(method = RequestMethod.POST, value = "/single_upload")
 	public String fileUpload(@RequestParam("file") MultipartFile file, @RequestParam("work_id") String work_id,
-							 @RequestParam("downUrl")String downUrl, MemberVo memberVo, Model model) throws IOException {
+							 @RequestParam("downUrl")String downUrl, @SessionAttribute("memberVo")MemberVo memberVo, Model model) throws IOException {
 
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -155,7 +156,7 @@ public class AttachmentController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/multi_upload_form", method = RequestMethod.GET)
-	public String showMultiUploadForm(Model model, MemberVo memberVo) {
+	public String showMultiUploadForm(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		
 		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
@@ -222,7 +223,7 @@ public class AttachmentController {
 	}
 
 	@RequestMapping(value = "/download", method = RequestMethod.GET)
-	public String download(@RequestParam("att_id")String att_id, Model model, MemberVo memberVo) {
+	public String download(@RequestParam("att_id")String att_id, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		model.addAttribute("attVo",attachmentService.selectAtt(att_id));
 		
 		/* 알림기능 - IKS */

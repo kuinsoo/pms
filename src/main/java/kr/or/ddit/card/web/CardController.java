@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 /**
  * kr.or.ddit.card.web
@@ -49,7 +50,7 @@ public class CardController {
 	public String updateCard(Model model, @RequestParam("wc_id")String wc_id,
 							 @RequestParam("wc_group")String wc_group,
 							 @RequestParam("wc_index")float wc_index,
-							 @RequestParam("project_id")String project_id, MemberVo memberVo){
+							 @RequestParam("project_id")String project_id, @SessionAttribute("memberVo")MemberVo memberVo){
 		if(wc_id.equals('0') || wc_group.equals('0') || wc_index == 0) {
 
 		} else {
