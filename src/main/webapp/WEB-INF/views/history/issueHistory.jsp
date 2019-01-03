@@ -70,6 +70,7 @@ $(window).on('beforeunload', function() {
 	width:100%;
 	height:1000px;
 	padding-top:40px;
+	margin-bottom:70px;
 }
 
 .container{
