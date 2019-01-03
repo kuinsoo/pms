@@ -176,8 +176,8 @@ public class MemberDetailController {
 		if (pageVo.getSearchText() == null) {
 			pageVo.setSearchText("");
 		}
-		System.out.println(pageVo.getSearchText() + "의 값은? ????");
-		System.out.println("Controller에서 값이 들어오나 확인중 ");
+		//System.out.println(pageVo.getSearchText() + "의 값은? ????");
+		//System.out.println("Controller에서 값이 들어오나 확인중 ");
 		
 		List<ProjectVo> projectList = memberservice.myprojectselect(pageVo);
 		Map<String, Object> projectMap = new HashMap<>();

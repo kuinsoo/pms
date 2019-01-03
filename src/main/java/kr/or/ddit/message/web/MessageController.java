@@ -369,15 +369,20 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="/sendYouMessageUpdate" , method= RequestMethod.POST)
-	public String sendYouMessageUpdate(@RequestParam("msg_person")String msg_person, RedirectAttributes redirectAttributes, Model model, MemberVo memberVo) {
-		redirectAttributes.addAttribute("msg_person", msg_person);
+	public String sendYouMessageUpdate(@RequestParam("msg_person")String msg_person, RedirectAttributes redirectAttributes,
+									Model model, @SessionAttribute("memberVo") MemberVo memberVo ) {
+		
+		//redirectAttributes.addAttribute("msg_person", msg_person);
+		
+		/* addFlashAttribute : 리다이렉트 직전 플래시에 저장하는 메소드다. 리다이렉트 이후에는 소멸한다. */
+		redirectAttributes.addFlashAttribute("msg_person", msg_person);
 		
 		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
-		return "redirect:message#tabs2-1?msg_person="+msg_person;
+		return "redirect:message#tabs2-1";
 	}
 	
 	/**
