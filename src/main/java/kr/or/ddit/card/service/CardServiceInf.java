@@ -26,6 +26,8 @@ public interface CardServiceInf {
 
 	int createCard(Map<String, String> wmMap , WorkVo workVo , MultipartFile[] files);
 
+	int createCard(Map<String, String> wmMap , WorkVo workVo );
+
 	int updateCard(CardVo cardVo);
 
 	int deleteCard(int cardNo);

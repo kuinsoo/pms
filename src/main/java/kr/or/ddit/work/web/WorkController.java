@@ -100,8 +100,11 @@ public class WorkController {
 			workVo.setWork_project(project_id);
 			if(workVo.getWork_public() == null )
 				workVo.setWork_public("N");
-
-			cardService.createCard( mapWM , workVo, files);
+			if (files != null && files.length > 0) {
+				cardService.createCard(mapWM, workVo, files);
+			}else {
+				cardService.createCard(mapWM, workVo);
+			}
 		} catch (Exception e){
 			e.printStackTrace();
 		}
