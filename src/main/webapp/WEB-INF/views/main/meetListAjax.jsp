@@ -41,7 +41,7 @@ $.ajax({
 		$('#chatList${status.count}').html(data)
 	}
 });
-console.log("el : ${meetingVo.meeting_id}");
+//console.log("el : ${meetingVo.meeting_id}");
 
  $(".meetMore${status.count}").on("click",function(){
 	 if ( $( ".meetHidden${status.count}" ).is( ":hidden" ) ) {
@@ -51,7 +51,7 @@ console.log("el : ${meetingVo.meeting_id}");
 	    $( ".meetHidden${status.count}"  ).slideUp();
 	  }
  });
- console.log("el : ${meetingVo.meeting_id}");
+ //console.log("el : ${meetingVo.meeting_id}");
 </script>
 </c:forEach>
 	

@@ -16,9 +16,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -162,5 +164,35 @@ public class WorkController {
 		mtMap.put("work_id", work_id);
 		model.addAttribute("workCharts",workService.selectWorkChart(mtMap));
 		return "work/ajaxWorkChart";
+	}
+	
+	/**
+	* Method : myWorkList
+	* 작성자 : bhuanchanwoo
+	* 변경이력 : 20190101
+	* @param project_id
+	* @param member_mail
+	* @param workVo
+	* @param model
+	* @return
+	* Method 설명 : cors 적용, 회의실에서 나의 업무 목록 출력 용
+	*/
+	@CrossOrigin
+	@RequestMapping(value="/myWorkList", 
+									method= {RequestMethod.GET,RequestMethod.POST}, 
+									headers="Accept=application/json")
+	@ResponseBody
+	public List<WorkVo> myWorkList( @RequestParam("project_id")String project_id,
+													  		 @RequestParam("member_mail")String member_mail,
+													  		WorkVo workVo, Model model) {
+
+		System.out.println("from js about data : "+project_id+" ; "+member_mail);
+		workVo.setMember_mail(member_mail);
+		workVo.setWork_project(project_id);
+		
+		List<WorkVo> myWorkList = workService.myWorkList(workVo);
+		System.out.println(" **myWorkList : "+ myWorkList);
+		
+		return myWorkList;
 	}
 }

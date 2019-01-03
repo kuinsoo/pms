@@ -25,7 +25,7 @@
                 <form id="pageSubMain${pMemberListVo.project_id}" action="/subMain" method="post">
                     <input type="hidden" name="project_id" value="${pMemberListVo.project_id}" />
                 </form>
-                <a onclick="pageSub('${pMemberListVo.project_id}');" class="ajaxProjectTitle" > ${pMemberListVo.project_title} </a>
+                <a onclick="pageSub('${pMemberListVo.project_id}');" class="ajaxProjectTitle" id="a${pMemberListVo.project_id}" project_id="${pMemberListVo.project_id}"> ${pMemberListVo.project_title} </a>
                     <%--  <a href="/subMain?project_id=${pMemberListVo.project_id}" class="ajaxProjectTitle"> ${pMemberListVo.project_title}</a>
             <a href='#' onclick="javascript:page_move('/subMain','${pMemberListVo.project_id}')" class="ajaxProjectTitle" >${pMemberListVo.project_title}</a>--%>
                 <c:if test="${pMemberListVo.pmember_position eq '1'}">
@@ -72,5 +72,19 @@
     </li>
 </c:forEach>
 
+
+<%-- 프로젝트 별 VUI --%>
+<script>
+	$('ul .bookmarkProject').each(function (index, item) {
+		var indexProjectName = $(item).children().children().find('.ajaxProjectTitle').html();
+		var indexProjectId = $(item).children().children().find('.ajaxProjectTitle').prev().children().val();
+		
+		if (annyang) {
+			eval("var projectSubMain"+indexProjectId+" = function(){ $('"+"#a"+indexProjectId+"').trigger( 'click' ); };");
+			eval("var commands = {'"+$.trim(indexProjectName)+"': projectSubMain"+indexProjectId+"};");
+			annyang.addCommands(commands);
+		};
+	});
+</script>
 
 <%-- book end --%>

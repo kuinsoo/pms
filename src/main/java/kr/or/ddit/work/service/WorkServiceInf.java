@@ -109,5 +109,16 @@ public interface WorkServiceInf {
 	 * @return
 	 */
 	List<ToDoVo> selectWorkChart(Map<String, String> mtMap);
+
+	
+	/**
+	* Method : workAllSchedule
+	* 작성자 : bhuanchanwoo
+	* 변경이력 :
+	* @param workVo
+	* @return
+	* Method 설명 : 프로젝트 & 해당 구성원에게 할당된 업무 리스트 출력
+	*/
+	List<WorkVo> myWorkList(WorkVo workVo);
 	
 }

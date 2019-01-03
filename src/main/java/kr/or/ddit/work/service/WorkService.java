@@ -148,4 +148,9 @@ public class WorkService implements WorkServiceInf{
 	public List<ToDoVo> selectWorkChart(Map<String, String> mtMap) {
 		return selectWorkChart(mtMap);
 	}
+
+	@Override
+	public List<WorkVo> myWorkList(WorkVo workVo) {
+		return workMapper.myWorkList(workVo);
+	}
 }
