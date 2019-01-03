@@ -48,11 +48,8 @@ public class MeetingController {
 									method= {RequestMethod.GET,RequestMethod.POST},
 									headers="Accept=application/json") 
 	public String meetingListView(@RequestParam("project_id")String project_id, MeetingVo meetingVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
-		System.out.println("hello java~");
-		System.out.println("project_id : " + project_id);
 		
 		List<MeetingVo> meetingList= meetingService.meetingList(project_id);
-		System.out.println("meetingList : " + meetingList);
 
 		model.addAttribute("meetingList", meetingList );
 		
@@ -63,19 +60,4 @@ public class MeetingController {
 
 		return "main/meetListAjax";
 	}
-	
-//	@GetMapping(value= "/meetingList" )
-//	@ResponseBody
-//	public List<MeetingVo> meetingListView(@RequestParam("project_id")String project_id, MeetingVo meetingVo, Model model) {
-//		System.out.println("hello java~");
-//		System.out.println("project_id : " + project_id);
-//		
-//		List<MeetingVo> meetingList= meetingService.meetingList(project_id);
-//		System.out.println("meetingList : " + meetingList);
-//
-//		model.addAttribute("meetingList", meetingList );
-//
-//		return meetingList;
-//	}
-	
 }
