@@ -1,5 +1,6 @@
 package kr.or.ddit.message.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.ddit.friendslist.model.FriendListVo;
+import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.message.mapper.MessageMapper;
 import kr.or.ddit.message.model.MessageVo;
 import kr.or.ddit.util.model.PageVo;
@@ -101,5 +103,126 @@ public class MessageService implements MessageServiceInf{
 	}
 
 
+	@Override
+	public int deleteMyfriend(String friend_code) {
+		return messageMapper.deleteMyfriend(friend_code);
+	}
 
+
+	@Override
+	public List<MemberVo> totalMemberSearch(PageVo pageVo) {
+		return messageMapper.totalMemberSearch(pageVo);
+	}
+
+
+	@Override
+	public int totalMember(String member_mail) {
+		return messageMapper.totalMember(member_mail);
+	}
+
+	
+
+	@Override
+	public int insertFriendN(FriendListVo friendVo) {
+		return messageMapper.insertFriendN(friendVo);
+	}
+
+
+	@Override
+	public List<FriendListVo> mySendFriendList(PageVo pageVo) {
+		return messageMapper.mySendFriendList(pageVo);
+	}
+
+
+	@Override
+	public int totalmySendFriendList(String member_mail) {
+		return messageMapper.totalmySendFriendList(member_mail);
+	}
+
+
+	@Override
+	public int deletemySendFriendList(String friend_code) {
+		return messageMapper.deletemySendFriendList(friend_code);
+	}
+
+
+	@Override
+	public List<FriendListVo> youGiveFriendList(PageVo pageVo) {
+		return messageMapper.youGiveFriendList(pageVo);
+	}
+
+
+	@Override
+	public int totalyouGiveFriendList(String member_mail) {
+		return messageMapper.totalyouGiveFriendList(member_mail);
+	}
+
+
+	@Override
+	public int updateRefuseFriend(String friend_code) {
+		return messageMapper.updateRefuseFriend(friend_code);
+	}
+	
+	// 친구 수락 부분 
+	@Override
+	public int updateAcceptFriend(String friend_code) {
+		return messageMapper.updateAcceptFriend(friend_code);
+	}
+	
+	@Override
+	public int insertFriendY(FriendListVo friendVo) {
+		return messageMapper.insertFriendY(friendVo);
+	}
+
+
+	@Override
+	public List<FriendListVo> memberListN(FriendListVo friendVo) {
+		return messageMapper.memberListN(friendVo);
+	}
+
+
+	@Override
+	public int totalmessageSizeCheck(String member_mail) {
+		return messageMapper.totalmessageSizeCheck(member_mail);
+	}
+
+
+	@Override
+	public int totalFriendSizeCheck(String member_mail) {
+		return messageMapper.totalFriendSizeCheck(member_mail);
+	}
+
+
+	@Override
+	public int totalMemberListSearch(PageVo pageVo) {
+		return messageMapper.totalMemberListSearch(pageVo);
+	}
+
+
+	@Override
+	public int totalmySendFriendListSearch(PageVo pageVo) {
+		return messageMapper.totalmySendFriendListSearch(pageVo);
+	}
+
+
+	@Override
+	public int totalyouGiveFriendListSearch(PageVo pageVo) {
+		return messageMapper.totalyouGiveFriendListSearch(pageVo);
+	}
+
+
+	@Override
+	public int totalFriendsSearch(PageVo pageVo) {
+		return messageMapper.totalFriendsSearch(pageVo);
+	}
 }
+
+
+
+
+
+
+
+
+
+

@@ -1,9 +1,12 @@
 package kr.or.ddit.member.model;
 
+import kr.or.ddit.todo.model.ToDoVo;
 import org.apache.ibatis.type.Alias;
 
 @Alias("memberVo")
 public class MemberVo extends PMemberListVo{
+	
+	private int rnum;
 	private String member_mail;
 	private String member_name;
 	private String member_pass;
@@ -11,12 +14,31 @@ public class MemberVo extends PMemberListVo{
 	private String member_profile;
 	private String member_withdrawal;
 
+	private ToDoVo todoVo;
+
 	@Override
 	public String toString() {
-		return "MemberVo [member_mail=" + member_mail + ", member_name=" + member_name + ", member_pass=" + member_pass
-				+ ", member_tel=" + member_tel + ", member_profile=" + member_profile + ", member_withdrawal="
-				+ member_withdrawal + "]";
+		return "MemberVo{" +
+				"rnum=" + rnum +
+				", member_mail='" + member_mail + '\'' +
+				", member_name='" + member_name + '\'' +
+				", member_pass='" + member_pass + '\'' +
+				", member_tel='" + member_tel + '\'' +
+				", member_profile='" + member_profile + '\'' +
+				", member_withdrawal='" + member_withdrawal + '\'' +
+				", todoVo=" + todoVo +
+				'}';
 	}
+
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
+
 
 	public String getMember_mail() {
 		return member_mail;
@@ -69,4 +91,11 @@ public class MemberVo extends PMemberListVo{
 	public MemberVo() {
 	}
 
+	public ToDoVo getTodoVo() {
+		return todoVo;
+	}
+
+	public void setTodoVo(ToDoVo todoVo) {
+		this.todoVo = todoVo;
+	}
 }

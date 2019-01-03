@@ -6,7 +6,7 @@
 		<c:choose>
 			<%-- to-do list에 값이 없을 땐 꺽새 미출력 --%>
 			<c:when test="${todoCnt == 0}"></c:when>
-			<c:when test="${page > 1}">
+			<c:when test="${pageVo.page > 1}">
 				<a href="javascript:getToDoList${work_id}(${pageVo.page - 1}, ${project_id}, ${work_id});"
 					aria-label="Previous"><span aria-hidden="true">&lt;</span></a>
 			</c:when>
@@ -32,7 +32,7 @@
 		<c:choose>
 			<%-- to-do list에 값이 없을 땐 꺽새 미출력 --%>
 			<c:when test="${todoCnt == 0}"></c:when>
-			<c:when test="${page eq todoCnt}">
+			<c:when test="${pageVo.page eq todoCnt}">
 				<a href="javascript:getToDoList${work_id}(${todoCnt}, ${project_id}, ${work_id});"
 					aria-label="Next" id="disabled"><span aria-hidden="true">&gt;</span></a>
 			</c:when>

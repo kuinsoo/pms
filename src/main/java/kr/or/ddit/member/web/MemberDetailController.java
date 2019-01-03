@@ -1,4 +1,4 @@
- package kr.or.ddit.member.web;
+package kr.or.ddit.member.web;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,11 +22,16 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.ddit.attachment.model.AttachmentVo;
+import kr.or.ddit.attachment.service.AttachmentServiceInf;
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
+import kr.or.ddit.commons.util.KISA_SHA256;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.message.service.MessageServiceInf;
+import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.util.model.PageVo;
@@ -55,6 +60,17 @@ public class MemberDetailController {
 
 	@Autowired
 	private CardServiceInf cardService;
+	
+	@Autowired
+	private AttachmentServiceInf attachmentService;
+	
+	@Autowired
+	private PostServiceInf postService;
+	
+	@Autowired
+	private MessageServiceInf messageService;
+	
+	
 
 	/**
 	 * Method : myPage
@@ -70,8 +86,10 @@ public class MemberDetailController {
 		
 		String member_mail = memberVo.getMember_mail();
 
-		memberservice.selectUser(memberVo.getMember_mail());
+		memberservice.selectUser(memberVo.getMember_mail());		
 		model.addAttribute("memberVo",memberVo);
+	    List<ProjectVo> selectProjectMember =  memberservice.selectProjectMember(memberVo.getMember_mail());
+	    model.addAttribute("selectProjectMember",selectProjectMember);
 
 		// 참여중인 프로젝트 갯수
 		int totalProjectCnt = memberservice.totalProjectCnt(member_mail);
@@ -84,11 +102,17 @@ public class MemberDetailController {
 
 		// 나의 일감 갯수
 		int selectTodoCnt = memberservice.selectTodoCnt(member_mail);
+	
 
 		model.addAttribute("totalProjectCnt",totalProjectCnt);
 		model.addAttribute("totalEndProjectCnt",totalEndProjectCnt);
 		model.addAttribute("selectProjectCnt",selectProjectCnt);
 		model.addAttribute("selectTodoCnt",selectTodoCnt);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 
 		return "myPage/myPage";
@@ -146,23 +170,24 @@ public class MemberDetailController {
 							ProjectVo projectVo, HttpServletRequest request) {
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
+		projectVo.setPmember_member(memberVo.getMember_mail());
 		
 		// 검색 부분 
 		if (pageVo.getSearchText() == null) {
 			pageVo.setSearchText("");
 		}
+		//System.out.println(pageVo.getSearchText() + "의 값은? ????");
+		//System.out.println("Controller에서 값이 들어오나 확인중 ");
 		
 		List<ProjectVo> projectList = memberservice.myprojectselect(pageVo);
 		Map<String, Object> projectMap = new HashMap<>();
-		int pageCnt = memberservice.totalProjectCnt(memberVo.getMember_mail());
+		int pageCnt = memberservice.totalProjectCntSearch(pageVo);
 		
 		projectMap.put("projectList", projectList);		
 		projectMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
 		
 		return projectMap;
 	}
-	//**********************************************************************************************************************
-	//**********************************************************************************************************************
 	//**********************************************************************************************************************
 
 
@@ -201,7 +226,7 @@ public class MemberDetailController {
 		List<ProjectVo> projectEndList = memberservice.myprojectEndselect(pageVo);
 		Map<String, Object> projectMap = new HashMap<>();
 
-		int pageCnt = memberservice.totalEndProjectCnt(memberVo.getMember_mail());
+		int pageCnt = memberservice.totalEndProjectCntSearch(pageVo);
 
 		projectMap.put("projectEndList", projectEndList);
 		projectMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
@@ -230,6 +255,11 @@ public class MemberDetailController {
 		/* 업무 카드 출력 */
 		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
 		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "/main/subMain";
 	}
 	
@@ -254,6 +284,11 @@ public class MemberDetailController {
 
 		/* 업무 카드 출력 */
 		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "/main/subMain";
 	}
@@ -313,7 +348,7 @@ public class MemberDetailController {
 		List<ProjectVo> projectBookList = memberservice.mybookmarkselect(pageVo);
 	
 		Map<String , Object> projectBookMap = new HashMap<>();
-		int pageCnt = memberservice.selectProjectCnt(memberVo.getMember_mail());
+		int pageCnt = memberservice.selectProjectCntSearch(pageVo);
 		projectBookMap.put("projectBookList", projectBookList);
 		
 		projectBookMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
@@ -358,7 +393,7 @@ public class MemberDetailController {
 		List<ToDoVo> projectTodoList = memberservice.myTodoselect(pageVo);
 	
 		Map<String , Object> projectTodoMap = new HashMap<>();
-		int pageCnt = memberservice.selectTodoCnt(memberVo.getMember_mail());
+		int pageCnt = memberservice.selectTodoCntSearch(pageVo);
 	
 		projectTodoMap.put("projectTodoList", projectTodoList);
 		
@@ -366,6 +401,85 @@ public class MemberDetailController {
 	
 		return projectTodoMap;
 	}
+	
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// TodoList
+	
+	@ResponseBody
+	@RequestMapping(value ="/myProjectFileListAjax", method = RequestMethod.GET)
+	public Map<String, Object> myProjectFileListAjax (Model model , PageVo pageVo,
+			@SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		List<AttachmentVo> myFileList = memberservice.myFileList(pageVo);
+		
+		Map<String , Object> myFileListMap = new HashMap<>();
+		int pageCnt = memberservice.myFileListCnt(memberVo.getMember_mail());
+		myFileListMap.put("myFileList", myFileList);
+		myFileListMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myFileListMap;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value ="/searchFileListAjax", method = RequestMethod.POST)
+	public Map<String, Object> searchFileListAjax (Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo 
+			, HttpServletRequest request){
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		// 검색 부분 
+		if (pageVo.getSearchFileList() == null) {
+			pageVo.setSearchFileList("");
+		}
+		List<AttachmentVo> myFileList = memberservice.myFileList(pageVo);
+		
+		Map<String , Object> myFileListMap = new HashMap<>();
+		int pageCnt = memberservice.totalmyFileListCntSearch(pageVo);
+		
+		myFileListMap.put("myFileList", myFileList);
+		myFileListMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myFileListMap;
+	}
+	
+	/*@ResponseBody
+	@RequestMapping(value ="/selectProjectFileListAjax", method = RequestMethod.POST)
+	public Map<String, Object> selectProjectFileListAjax (Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
+			HttpServletRequest request){
+		
+		String project_id = request.getParameter("project_id");
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		if(project_id == null) {
+			List<AttachmentVo> myFileList = memberservice.myFileList(pageVo);
+		}else {
+			pageVo.setProject_id(project_id);
+			List<AttachmentVo> myFileListProjectId = memberservice.myFileListProjectId(pageVo);
+		}
+		Map<String , Object> myFileListMap = new HashMap<>();
+		int pageCnt = memberservice.myFileListCnt(memberVo.getMember_mail());
+		
+		myFileListMap.put("myFileList", memberservice.myFileList(pageVo));
+		myFileListMap.put("myFileListProjectId",  memberservice.myFileListProjectId(pageVo));
+		myFileListMap.put("pageCnt",(int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		
+		return myFileListMap;
+	}*/
+	
+	@RequestMapping(value ="/selectProjectFileAttachIdDownload", method = RequestMethod.GET)
+	public String selectProjectFileAttachNameAjax (Model model, @RequestParam("att_id")String att_id, @SessionAttribute("memberVo") MemberVo memberVo){
+			
+			AttachmentVo attVo = attachmentService.selectAtt(att_id);
+			attVo.setAtt_path("a");
+			model.addAttribute("attVo", attVo);
+			
+			/* 알림기능 - IKS */
+			model.addAttribute("pageCnt", postService.totalPostCnt());
+			model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+			model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+			
+			return "attachment/download";
+		}
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
@@ -390,7 +504,15 @@ public class MemberDetailController {
 			
 			memberVo.setMember_name(member_name);
 			memberVo.setMember_tel(member_tel);
-			memberVo.setMember_pass(member_pass);
+			
+//			// 암호화로 비교한다. 입력된값이랑 
+//			if(memberVo.getMember_pass().equals(KISA_SHA256.encrypt(member_pass))) {
+//				model.addAttribute("memberVo",memberVo);
+//			}
+			
+			String kisa = KISA_SHA256.encrypt(member_pass).toLowerCase();
+			memberVo.setMember_pass(kisa);
+			
 			
 			try {
 				if(part.getSize()>0) {
@@ -410,10 +532,28 @@ public class MemberDetailController {
 			int updateUser = memberservice.updateUser(memberVo);
 			model.addAttribute("memberVo",memberVo);
 			
+			/* 알림기능 - IKS */
+			model.addAttribute("pageCnt", postService.totalPostCnt());
+			model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+			model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+			
 			return "redirect:/myPage?member_mail=" + memberVo.getMember_mail();
 		}
 	
-	
+		@ResponseBody
+		@RequestMapping(value="/myPageSHA256Ajax", method=RequestMethod.GET)
+		public Map<String , String> myPageSHA256Ajax(HttpServletRequest request,Model model) {
+			
+			String pass1 = request.getParameter("pass1").toLowerCase();
+			
+			String kisa256 = KISA_SHA256.encrypt(pass1);
+			
+			Map<String, String> passMap = new HashMap<>();
+			passMap.put("kisa256", kisa256);
+			
+			return passMap;
+		}
+		
 		/**
 		 * Method : myPageAjax
 		 * 작성자 : 나진실
@@ -468,7 +608,7 @@ public class MemberDetailController {
 			
 			memberservice.updateUserwithDrawal(memberVo);
 			
-			return "redirect:/";				
+			return "redirect:/";
 			
 		}
 

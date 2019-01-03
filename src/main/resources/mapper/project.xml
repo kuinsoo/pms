@@ -12,7 +12,7 @@
 	<id property="pmember_position" column="pmember_position" />
 	<id property="project_title" column="project_title" />
 	<id property="project_overview" column="project_overview" />
-	<id property="project_bookmark" column="project_bookmark" />
+	<id property="pmember_bookmark" column="pmember_bookmark" />
 	<id property="project_id" column="project_id" />
 	</resultMap>
 
@@ -29,6 +29,9 @@
 		SELECT  p.project_id,
 				p.project_title,
 				p.project_overview,
+				p.project_sdate,
+				p.project_eedate,
+				p.project_edate,
 				pm.pmember_position,
 				pm.pmember_bookmark,
 				mail.pmember_member,
@@ -53,22 +56,25 @@
 																				  GROUP BY pmember_project) pCount
 						ON      pm.pmember_project = pCount.pmember_project
 		WHERE   pm.pmember_member = #{member_mail}
+		and p.PROJECT_DELETE = 'N'
 		and pm.PMEMBER_BOOKMARK = 'Y'
 		order by to_number(PROJECT_ID) desc
 	</select>
 
     <insert id="createProject" parameterType="projectVo">
-        insert into PROJECT values (SEQ_PROJECT.nextval, #{project_title},#{project_overview}, #{project_sdate}, #{project_edate}, '' ,'#ab2af6' )
+        insert into PROJECT values (SEQ_PROJECT.nextval, #{project_title},#{project_overview}, #{project_sdate}, '',#{project_eedate},'#ab2af6','N')
     </insert>
 
-    <delete id="deleteProject" parameterType="String">
-        delete from PROJECT where PROJECT_ID
-    </delete>
+    <update id="deleteProject" parameterType="String">
+        update PROJECT
+        set  project_delete = 'Y'
+        where project_id = #{project_id}
+    </update>
 
     <update id="updateProject" parameterType="projectVo">
         update PROJECT
         set PROJECT_TITLE = #{project_title}, PROJECT_OVERVIEW = #{project_overview},
-         PROJECT_EDATE = #{project_edate}
+         PROJECT_SDATE = #{project_sdate}, PROJECT_EEDATE = #{project_eedate}
         where PROJECT_ID = #{project_id}
     </update>
     

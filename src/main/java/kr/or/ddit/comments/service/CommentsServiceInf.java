@@ -3,6 +3,7 @@ package kr.or.ddit.comments.service;
 import kr.or.ddit.comments.model.CommentsVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * kr.or.ddit.comments.service
@@ -18,10 +19,21 @@ public interface CommentsServiceInf {
 	 * Cmt list list.
 	 * 작성자 : Mr.KKu
 	 * 내용 : 댓글 조회
+	 *
 	 * @param project_id the cmt work
 	 * @return the list
 	 */
 	List<CommentsVo> cmtList(String project_id);
+
+	/**
+	 * Ajax cmt list list.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 댓글 조회
+	 *
+	 * @param mapCmtList the map cmt list
+	 * @return the list
+	 */
+	List<CommentsVo> ajaxCmtList(Map<String, String> mapCmtList);
 
 	/**
 	 * Insert cmt int.
@@ -32,6 +44,17 @@ public interface CommentsServiceInf {
 	 * @return the int
 	 */
 	int insertCmt(CommentsVo cmtVo);
+
+
+	/**
+	 * Select cmt comments vo.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 댓글 찾기
+	 *
+	 * @param cmt_id the cmt id
+	 * @return the comments vo
+	 */
+	CommentsVo selectCmt(String cmt_id);
 
 	/**
 	 * Update cmt int.

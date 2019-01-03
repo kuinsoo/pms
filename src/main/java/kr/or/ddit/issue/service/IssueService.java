@@ -85,5 +85,135 @@ public class IssueService implements IssueServiceInf{
 	public int projectCnt(PageVo pageVo) {
 		return issueMapper.projectCnt(pageVo);
 	}
+
+	/**
+	* Method : issueInsert
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 이슈 등록
+	*/
+	@Override
+	public int issueInsert(IssueVo issueVo) {
+		return issueMapper.issueInsert(issueVo);
+	}
+
+	/**
+	* Method : selGetProjectMember
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param work_id
+	* @return
+	* Method 설명 : issue 등록시 select-option에 프로젝트 참여자 리스트
+	*/
+	@Override
+	public List<IssueVo> selGetProjectMember(String work_id) {
+		return issueMapper.selGetProjectMember(work_id);
+	}
+
+	/**
+	* Method : todoIssueUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : issue 등록시 todo테이블의 todo_issue컬럼 추가(수정)
+	*/
+	@Override
+	public int todoIssueUpdate(IssueVo issueVo) {
+		return issueMapper.todoIssueUpdate(issueVo);
+	}
+
+	/**
+	* Method : issueSelectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_id
+	* @return
+	* Method 설명 : 이슈 리스트 조회
+	*/
+	@Override
+	public List<IssueVo> issueSelectList(String todo_id) {
+		return issueMapper.issueSelectList(todo_id);
+	}
+
+	/**
+	* Method : issueUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 이슈 수정
+	*/
+	@Override
+	public int issueUpdate(IssueVo issueVo) {
+		return issueMapper.issueUpdate(issueVo);
+	}
+
+	/**
+	* Method : helperUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 도움 등록
+	*/
+	@Override
+	public int helperUpdate(IssueVo issueVo) {
+		return issueMapper.helperUpdate(issueVo);
+	}
+
+	/**
+	* Method : helperSelectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_id
+	* @return
+	* Method 설명 : 도움 리스트 조회
+	*/
+	@Override
+	public List<IssueVo> helperSelectList(String todo_id) {
+		return issueMapper.helperSelectList(todo_id);
+	}
+
+	/**
+	* Method : issueDeleteTodoIssue
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issue_id
+	* @return
+	* Method 설명 : 이슈 삭제시 무결성 제약조건 해제를 위해 todo_issue컬럼 값을 Null로 수정(UPDATE) 
+	*/
+	@Override
+	public int issueDeleteTodoIssue(String issue_id) {
+		return issueMapper.issueDeleteTodoIssue(issue_id);
+	}
+
+	/**
+	* Method : issueDelete
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issue_id
+	* @return
+	* Method 설명 : (무결성 제약조건 이후) 이슈 삭제
+	*/
+	@Override
+	public int issueDelete(String issue_id) {
+		return issueMapper.issueDelete(issue_id);
+	}
+
+	/**
+	* Method : pjtAllIssueHistory
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param sid
+	* @return
+	* Method 설명 : 프로젝트별 이슈 조회
+	*/
+	@Override
+	public List<IssueVo> pjtAllIssueHistory(String sid) {
+		return issueMapper.pjtAllIssueHistory(sid);
+	}
 	
 }

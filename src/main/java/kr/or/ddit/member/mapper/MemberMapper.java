@@ -1,5 +1,8 @@
 package kr.or.ddit.member.mapper;
 
+import kr.or.ddit.attachment.model.AttachmentVo;
+import kr.or.ddit.authority.model.AuthorityVo;
+import kr.or.ddit.friendslist.model.FriendListVo;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberListVo;
 import kr.or.ddit.member.model.PMemberVo;
@@ -28,7 +31,6 @@ public interface MemberMapper {
 	 * Method : seletUser
 	 * 작성자 : 나진실
 	 * 변경이력 :
-	 *
 	 * @param member_mail the member mail
 	 * @return Method 설명 : 로그인
 	 */
@@ -43,7 +45,10 @@ public interface MemberMapper {
 	 * @return Method 설명 : 회원가입
 	 */
 	public int insertUser(MemberVo memberVo);
+	
+	
 
+	
 	/**
 	 * Method : updateUser
 	 * 작성자 : 나진실
@@ -87,6 +92,15 @@ public interface MemberMapper {
 	 */
 	int updatePass(MemberVo memberVo);
 	
+	/**
+	 * Method : totalProjectCntSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 참여중인 프로젝트 검색 개수 가져오기 
+	 */
+	int totalProjectCntSearch(PageVo pageVo);
 	
 	/**
 	 * Method : totalProjectCnt
@@ -97,6 +111,48 @@ public interface MemberMapper {
 	 */
 	int totalProjectCnt(String member_mail);
 	
+	/**
+	 * Method : totalmyFileListCntSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 파일 부분 전체 검색 전체값
+	 */
+	int totalmyFileListCntSearch(PageVo pageVo);
+	
+	/**
+	 * Method : selectTodoCntSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 나의 일감 검색 개수 
+	 */
+	int selectTodoCntSearch(PageVo pageVo);
+	
+	
+	/**
+	 * Method : selectProjectCntSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 즐겨찾기한 검색 개수 가져오기 
+	 */
+	int selectProjectCntSearch(PageVo pageVo);
+	
+	
+	/**
+	 * Method : totalEndProjectCntSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 참여했던 프로젝트 전체 개수 가져오기 
+	 */
+	int totalEndProjectCntSearch(PageVo pageVo);
+	
 	
 	/**
 	 * Method : selectProjectCnt
@@ -106,6 +162,17 @@ public interface MemberMapper {
 	 * Method 설명 : 프로젝트 건수(회원아이디로)조회 
 	 */
 	int selectProjectCnt(String member_mail);
+	
+	
+	
+	/**
+	 * Method : myFileListCnt
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 마이페이지 파일 건수 
+	 */
+	int myFileListCnt(String member_mail);
 	
 	/**
 	 * Method : totalEndProjectCnt
@@ -124,6 +191,15 @@ public interface MemberMapper {
 	 * Method 설명 : 참여중인 프로젝트  :  클릭했을때  
 	 */
 	ProjectVo selectProjectId(String project_title);
+	
+	/**
+	 * Method : selectProjectMember
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @return
+	 * Method 설명 : 회원의 프로젝트 가져오기 
+	 */
+	List<ProjectVo> selectProjectMember(String member_mail);
 	
 	/**
 	 * Method : selectTodoCnt
@@ -146,6 +222,28 @@ public interface MemberMapper {
 	 * Method 설명 : 마이페이지 참여중인 프로젝트 
 	 */
 	List<ProjectVo> myprojectselect(PageVo pageVo);
+	
+	/**
+	 * Method : myFileList
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo 
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 마이페이지 프로젝트 파일 
+	 */
+	List<AttachmentVo> myFileList(PageVo pageVo);
+	
+	/**
+	 * Method : myFileListProjectId
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo 
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 마이페이지 프로젝트 파일  project_id 포함 
+	 */
+	List<AttachmentVo> myFileListProjectId(PageVo pageVo);
 	
 	
 	/**

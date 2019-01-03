@@ -27,10 +27,11 @@ public class PostVo {
 	private String post_content;
 	private String post_public;
 	private String post_group;
+	private String labelrn;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	private Date post_date;
-	private String format_todo_sdate;	
+	private String format_post_date;	
 	
 	private String title;		//게시글 목록용 
 
@@ -120,7 +121,7 @@ public class PostVo {
 	
 	/* 형변환 getter */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-	public String getFormat_todo_sdate() {
+	public String getFormat_post_date() {
 		if(post_date == null) {
 			return "";
 		}
@@ -134,7 +135,21 @@ public class PostVo {
 	public void setTitle(String title) {
 		this.title = title;
 	}	
-	
-	
 
+	public String getLabelrn() {
+		return labelrn;
+	}
+
+	public void setLabelrn(String labelrn) {
+		this.labelrn = labelrn;
+	}
+
+	@Override
+	public String toString() {
+		return "PostVo [post_id=" + post_id + ", board_id=" + board_id + ", post_hierarchy=" + post_hierarchy
+				+ ", post_writer=" + post_writer + ", post_pass=" + post_pass + ", post_title=" + post_title
+				+ ", post_content=" + post_content + ", post_public=" + post_public + ", post_group=" + post_group
+				+ ", labelrn=" + labelrn + ", post_date=" + post_date + ", format_post_date=" + format_post_date
+				+ ", title=" + title + "]";
+	}
 }

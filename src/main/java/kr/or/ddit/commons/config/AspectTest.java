@@ -1,10 +1,8 @@
 package kr.or.ddit.commons.config;
 
-import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aopalliance.intercept.Joinpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 /**
  * kr.or.ddit.commons.config
@@ -15,31 +13,31 @@ import org.springframework.stereotype.Component;
  * @Date : 2018-11-26 / 오후 1:58
  * @Version :
  */
-@Aspect
-@Component
+
+
 public class AspectTest {
 	private static final Logger logger = LoggerFactory.getLogger(AspectTest.class);
 
 
 //	@Before("execution(* kr.or.ddit.card.service.*.*(..))")
-	public void onBeforeHandler(JoinPoint joinPoint) {
-		System.out.println("=======================  onBeforeThing");
+	public void onBeforeHandler(Joinpoint joinPoint) {
+		logger.debug("=======================  onBeforeThing");
 	}
 
 //	@After("execution(* kr.or.ddit.member.service.*.*Aop(..))")
-	public void onAfterHandler(JoinPoint joinPoint) {
-		logger.info("=============== onAfterHandler");
+	public void onAfterHandler(Joinpoint joinPoint) {
+		logger.debug("=============== onAfterHandler");
 	}
 
 //	@AfterReturning(pointcut = "execution(* kr.or.ddit.member.service.*.*Aop(..))", returning = "str")
-	public void onAfterReturningHandler(JoinPoint joinPoint, Object str) {
-		logger.info("@AfterReturning : " + str);
-		logger.info("=============== onAfterReturningHandler");
+	public void onAfterReturningHandler(Joinpoint joinPoint, Object str) {
+		logger.debug("@AfterReturning : " + str);
+		logger.debug("=============== onAfterReturningHandler");
 	}
 
 //	@Pointcut("execution(* kr.or.ddit.member.service.*.*Aop(..))")
-	public void onPointcut(JoinPoint joinPoint) {
-		logger.info("=============== onPointcut");
+	public void onPointcut(Joinpoint joinPoint) {
+		logger.debug("=============== onPointcut");
 	}
 	}
 

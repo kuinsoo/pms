@@ -13,34 +13,42 @@
 	width:875px;padding:20px;float:left;margin-left:20px;
 	background-color:#fff;border:1px solid #dee3eb;
 }
-.noticeContainerRight > table{width:100%;border-collapse:collapse;}
-.noticeContainerRight > table > thead > tr{border-top:3px solid #333;border-bottom:1px solid #333;}
-.noticeContainerRight > table > thead > tr > th{padding:20px 0px 20px 0px;font-size:17px;}
-.noticeContainerRight > table > tbody > tr{border-bottom:1px solid #333;}
-.noticeContainerRight > table > tbody > tr > td{padding:20px 0px 20px 0px;font-size:17px;}
-.noticeContainerRight > table > tbody > tr > td:nth-child(odd){text-indent:10px;}
-.noticeContainerRight > table > tbody > tr > td:nth-child(odd) > a{color:#000;}
-.noticeContainerRight > table > tbody > tr > td:nth-child(odd):hover > a {
-	text-decoration:underline;font-weight:bold;
+.noticeContainerRight > form > table {
+	border-collapse:collapse;width:100%;
 }
-.noticeContainerRight > table > tbody > tr > td:nth-child(even){text-align:center;color:#666;}
-.pagination{width:100%;display:flex;justify-content:center;align-items:center;margin-top:30px;}
-.pagination > ul > li{display:inline-block;}
-.pagination > ul > li > i {
-	text-align:center;line-height:30px;cursor:pointer;font-size:15px;vertical-align:middle;
-	padding:0px 20px 0px 20px;
+.noticeContainerRight > form > table > tbody > tr:first-child {
+	border-top:2px solid #333;
 }
-.pagination > ul > li > a{color:#000;}
-.pagination > ul > li > a > span{font-size:17px;padding:0px 10px 0px 10px;vertical-align:middle;}
-.noticeSearchDiv{width:425px;height:50px;margin:0 auto;margin-top:10px;}
-.noticeSearchDiv > .noticeSearchInput {
-	width:390px;border:none;border-bottom:1px solid #333;float:left;height:30px;
-	outline:none;font-size:17px;
+.noticeContainerRight > form > table > tbody > tr{border-bottom:1px solid #333;}
+.noticeContainerRight > form > table > tbody > tr > td {padding:20px;font-size:17px;}
+.tdColor{background-color:#eaf2ff;}
+.textareaTd{width:100%;}
+.noticeListGo{width:100%;height:50px;margin-top:20px;}
+.noticeListGo > a {
+	width:80px;height:40px;background-color:#eaf2ff;text-align:center;
+	line-height:40px;border:1px solid #333;font-size:17px;
 }
-.noticeSearchDiv > i {
-	float:left;font-size:20px;font-weight:bold;display:block;width:30px;height:27px;margin-top:3px;
-	border-bottom:1px solid #000;cursor:pointer;
+#qnaMody {
+	float:left;width:80px;height:40px;background-color:#eaf2ff;text-align:center;
+	line-height:40px;border:1px solid #333;font-size:17px;cursor:pointer;
 }
+#delPost {
+	float:left;width:80px;height:40px;background-color:#eaf2ff;text-align:center;
+	line-height:40px;border:1px solid #333;font-size:17px;cursor:pointer;
+	margin-left:10px;
+}
+#qnaReply {
+	float:left;width:80px;height:40px;background-color:#eaf2ff;text-align:center;
+	line-height:40px;border:1px solid #333;font-size:17px;cursor:pointer;
+}
+.qnaCreateList{float:left;}
+.qnaCreateBtns{float:right;}
+#cecret{cursor:pointer;}
+.qnaCreateInputTitle {
+	border:none;font-size:17px;width:100%;outline:none;
+}
+.textareaTd > textarea{width:100%;height:300px;font-size:17px;border:none;outline:none;}
+.secretGoGoYeah{width:100%;margin-top:10px;border:none;font-size:18px;border-bottom:1px solid #333;outline:none;}
 </style>
 <script>
 $(document).ready(function(){	
@@ -72,21 +80,36 @@ function savePost(){
 	<div class="currentMainContainer">
 		<div class="noticeContainer">
 			<div class="noticeContainerLeft">
-				<h2>CURRENT SERVICE<br>Q & A <br> 수정하기 </h2>
+				<h2>CURRENT SERVICE<br>Q & A</h2>
 			</div>
 			<div class="noticeContainerRight">
-				<a href="/qnaList">질의 목록보기</a><br/><br/>
-				
-				<form name="formValue" >
-				    수정하기 <input type="hidden" name="post_id" value="${postVoDetail.post_id }"><br/>
-					제목 : <input type="text" name="post_title" value="${postVoDetail.post_title }" placeholder="제목을 입력하세요" ><br/>
-					내용 : <input type="text" name="post_content" value="${postVoDetail.post_content }" placeholder="내용을 입력하세요" ><br/>
-					<br/>
-					<span id="cecret" >[비밀글로 작성(클릭)] </span>
-					<input type="text" style="display:none" id="post_pass"  value="" name="post_pass" placeholder="비밀번호를 입력하세요" ><br/>				
+				<form name="formValue">
+					<input type="hidden" name="post_id" value="${postVoDetail.post_id }">
+					<table>
+						<tr>
+							<td class="tdColor">제목</td>
+							<td><input type="text" name="post_title" value="${postVoDetail.post_title}" placeholder="제목을 입력하세요" class="qnaCreateInputTitle"></td>
+							<td class="tdColor">질의 작성자</td>
+							<td>${memberVo.member_name}</td>
+						</tr>
+						<tr>
+							<td class="tdColor">비밀글 여부</td>
+							<td colspan="4">
+								<span id="cecret">[비밀글로 작성(클릭)]</span>
+								<input type="text" id="post_pass" name="post_pass" style="display:none;" placeholder="비밀번호를 입력하세요" class="secretGoGoYeah" />
+							</td>
+						</tr>
+						<tr>
+							<td colspan="4" class="textareaTd">
+								<textarea name="post_content">${postVoDetail.post_content }</textarea>
+							</td>
+						</tr>
+					</table>
+					<div class="noticeListGo">
+						<a href="/qnaList" class="qnaCreateList">목록</a>
+						<a href="#" onclick="savePost();" class="qnaCreateBtns">저장</a>
+					</div>
 				</form>
-				
-				<input type="button" onclick="savePost();" value="저장하기">
 			</div>
 		</div>
 	</div>

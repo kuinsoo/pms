@@ -1,15 +1,17 @@
 package kr.or.ddit.work.service;
 
-import java.util.List;
-import java.util.Map;
-
+import kr.or.ddit.schedule.model.ScheduleVo;
+import kr.or.ddit.todo.model.ToDoVo;
+import kr.or.ddit.todo.service.ToDoServiceInf;
+import kr.or.ddit.util.model.PageVo;
+import kr.or.ddit.work.mapper.WorkMapper;
+import kr.or.ddit.work.model.WorkVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.or.ddit.schedule.model.ScheduleVo;
-import kr.or.ddit.work.mapper.WorkMapper;
-import kr.or.ddit.work.model.WorkVo;
+import java.util.List;
+import java.util.Map;
 
 /**
  * kr.or.ddit.work.service
@@ -27,7 +29,9 @@ public class WorkService implements WorkServiceInf{
 
 	@Autowired
 	private WorkMapper workMapper;
-	
+
+	@Autowired
+	private ToDoServiceInf todoService;
 	/**
 	* Method : workAllSchedule
 	* 작성자 : jerry
@@ -53,7 +57,7 @@ public class WorkService implements WorkServiceInf{
 	public List<WorkVo> selectWorks(String work_project ) {
 		return workMapper.selectWorks(work_project);
 	}
-	
+
 	/**
 	* Method : createWork
 	* 작성자 : Mr.kku
@@ -95,6 +99,20 @@ public class WorkService implements WorkServiceInf{
 		return workMapper.updateWork(workVo);
 	}
 
+	@Override
+	public int updateWork(WorkVo workVo, Map<String, Object> todoMap, String work_id) {
+		todoService.todoCompletYN(todoMap);
+
+		List<ToDoVo> todoList = (List<ToDoVo>) todoService.selectCntTodoList(work_id);
+		int todoListCnt = todoList.size();
+		List<ToDoVo> todoListCpt = (List<ToDoVo>) todoService.selectCntTodoComplete(work_id);
+		int todoListCCnt = todoListCpt.size();
+		int totalP = 100/todoListCnt;
+		int currentP = todoListCCnt * totalP;
+		workVo.setWork_progress(currentP);
+		return workMapper.updateWork(workVo);
+	}
+
 
 	/**
 	 * Method : updateWork
@@ -114,7 +132,7 @@ public class WorkService implements WorkServiceInf{
 	* Method : workMember
 	* 작성자 : 임규승
 	* 변경이력 :
-	* @param work_project
+	* @param member_mail
 	* @return
 	* Method 설명 : 해당 회원의 진행중인 프로젝트 명 검색
 	*/
@@ -122,4 +140,71 @@ public class WorkService implements WorkServiceInf{
 	public List<WorkVo> workMember(String member_mail) {
 		return workMapper.workMember(member_mail);
 	}
+
+	/**
+	 * Method : workChart
+	 * 작성자 : Mr.kku
+	 * 내용 : 업무 차트
+	 * @param mtMap
+	 * @return
+	 */
+	@Override
+	public List<ToDoVo> workChart(Map<String, String> mtMap) {
+		return workMapper.workChart(mtMap);
+	}
+
+	/**
+	 * Method : selectWorkChart
+	 * 작성자 : Mr.kku
+	 * 내용 : 개별 업무 차트
+	 * @param mtMap
+	 * @return
+	 */
+	@Override
+	public List<ToDoVo> selectWorkChart(Map<String, String> mtMap) {
+		return selectWorkChart(mtMap);
+	}
+
+	/**
+	 * Method : workMemberTotalCnt
+	 * 작성자 : iks
+	 * 내용 : 자신이 등록한 업무 총 갯수
+	 * @param
+	 * @return
+	 */
+	@Override
+	public int workMemberTotalCnt(String member_mail) {
+		return workMapper.workMemberTotalCnt(member_mail);
+	}
+
+	/**
+	 * Method : getWorkPageList
+	 * 작성자 : iks
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 알림을 위한 업무 페이지 리스트 조회
+	 */
+	@Override
+	public List<WorkVo> getWorkPageList(PageVo pageVo) {
+		return workMapper.getWorkPageList(pageVo);
+	}
+
+
+	@Override
+	public WorkVo selectWork(String work_id) {
+		return workMapper.selectWork(work_id);
+	}
+
+	@Override
+	public WorkVo selectWorkMap(Map<String, String> workMap) {
+		return workMapper.selectWorkMap(workMap);
+	}
+
+	@Override
+	public List<WorkVo> myWorkList(WorkVo workVo) {
+		return workMapper.myWorkList(workVo);
+	}
+
+
 }

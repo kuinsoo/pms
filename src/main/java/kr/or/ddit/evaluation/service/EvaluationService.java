@@ -39,6 +39,8 @@ public class EvaluationService  implements EvaluationServiceInf {
 	}
 
 
+
+
 	/**
 	 * Evaluation project list list.
 	 * 작성자 : Mr.KKu
@@ -50,5 +52,19 @@ public class EvaluationService  implements EvaluationServiceInf {
 	@Override
 	public List<EvaluationVo> evaluationProjectList(Map<String, String> evalMap) {
 		return evaluationMapper.evaluationProjectList(evalMap);
+	}
+
+
+	/**
+	 * Evaluation chart list.
+	 * 작성자 : Mr.KKu
+	 * 내용	: 프로젝트 차트 값
+	 *
+	 * @param evalMap the eval map
+	 * @return the EvaluationVo
+	 */
+	@Override
+	public EvaluationVo evaluationChart(Map<String, String> evalMap) {
+		return evaluationMapper.evaluationChart(evalMap);
 	}
 }

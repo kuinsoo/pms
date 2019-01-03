@@ -37,8 +37,12 @@ public class ToDoVo {
 	private String todo_issue;			//	할일이슈번호(fk)
 	
 	/* 기능단위 */
-	private String member_name;			//	참여자이름
-	private String pmember_member;		//	참여자이메일
+	private String member_name;			//	참여자 이름
+	private String todo_member;			//	참여자 이메일
+	private String member_profile;		//	참여자 프로필사진
+	private String issue_id;			//	이슈아이디
+	private String work_project;		//	참여중인 프로젝트 ID
+	private String pmember_member;		//	참여자 이메일
 	
 	/* 기본생성자 */
 	public ToDoVo() {}
@@ -46,7 +50,8 @@ public class ToDoVo {
 	/* 생성자 */
 	public ToDoVo(String todo_id, String todo_work, String todo_pmember, String todo_content, Date todo_sdate,
 			String format_todo_sdate, Date todo_edate, String format_todo_edate, Date todo_eedate,
-			String format_todo_eedate, String todo_complet, String todo_color, int rnum, String todo_issue, String member_name, String pmember_member) {
+			String format_todo_eedate, String todo_complet, String todo_color, int rnum, String todo_issue, 
+			String member_name, String todo_member, String member_profile, String issue_id, String work_project, String pmember_member) {
 		super();
 		this.todo_id = todo_id;
 		this.todo_work = todo_work;
@@ -63,19 +68,20 @@ public class ToDoVo {
 		this.rnum = rnum;
 		this.todo_issue = todo_issue;
 		this.member_name = member_name;
+		this.todo_member = todo_member;
+		this.member_profile = member_profile;
+		this.issue_id = issue_id;
+		this.work_project = work_project;
 		this.pmember_member = pmember_member;
 	}
 
-	
+	/* getter & setter */
 	public int getRnum() {
 		return rnum;
 	}
-
 	public void setRnum(int rnum) {
 		this.rnum = rnum;
 	}
-
-	/* getter & setter */
 	public String getTodo_id() {
 		return todo_id;
 	}
@@ -142,6 +148,30 @@ public class ToDoVo {
 	public void setMember_name(String member_name) {
 		this.member_name = member_name;
 	}
+	public String getTodo_member() {
+		return todo_member;
+	}
+	public void setTodo_member(String todo_member) {
+		this.todo_member = todo_member;
+	}
+	public String getMember_profile() {
+		return member_profile;
+	}
+	public void setMember_profile(String member_profile) {
+		this.member_profile = member_profile;
+	}
+	public String getIssue_id() {
+		return issue_id;
+	}
+	public void setIssue_id(String issue_id) {
+		this.issue_id = issue_id;
+	}
+	public String getWork_project() {
+		return work_project;
+	}
+	public void setWork_project(String work_project) {
+		this.work_project = work_project;
+	}
 	public String getPmember_member() {
 		return pmember_member;
 	}
@@ -158,13 +188,13 @@ public class ToDoVo {
 		return sdf.format(todo_sdate);
 	}
 	public String getFormat_todo_eedate() {
-		if(todo_sdate == null) {
+		if(todo_eedate == null) {
 			return "";
 		}
 		return sdf.format(todo_eedate);
 	}
 	public String getFormat_todo_edate() {
-		if(todo_sdate == null) {
+		if(todo_edate == null) {
 			return "";
 		}
 		return sdf.format(todo_edate);
@@ -173,12 +203,28 @@ public class ToDoVo {
 	/* toString */
 	@Override
 	public String toString() {
-		return "ToDoVo [rnum=" + rnum + ", todo_id=" + todo_id + ", todo_work=" + todo_work + ", todo_pmember="
-				+ todo_pmember + ", todo_content=" + todo_content + ", todo_sdate=" + todo_sdate
-				+ ", format_todo_sdate=" + format_todo_sdate + ", todo_edate=" + todo_edate + ", format_todo_edate="
-				+ format_todo_edate + ", todo_eedate=" + todo_eedate + ", format_todo_eedate=" + format_todo_eedate
-				+ ", todo_complet=" + todo_complet + ", todo_color=" + todo_color + ", todo_issue=" + todo_issue
-				+ ", member_name=" + member_name + ", pmember_member=" + pmember_member + "]";
+		return "ToDoVo{" +
+				"rnum=" + rnum +
+				", todo_id='" + todo_id + '\'' +
+				", todo_work='" + todo_work + '\'' +
+				", todo_pmember='" + todo_pmember + '\'' +
+				", todo_content='" + todo_content + '\'' +
+				", todo_sdate=" + todo_sdate +
+				", format_todo_sdate='" + format_todo_sdate + '\'' +
+				", todo_edate=" + todo_edate +
+				", format_todo_edate='" + format_todo_edate + '\'' +
+				", todo_eedate=" + todo_eedate +
+				", format_todo_eedate='" + format_todo_eedate + '\'' +
+				", todo_complet='" + todo_complet + '\'' +
+				", todo_color='" + todo_color + '\'' +
+				", todo_issue='" + todo_issue + '\'' +
+				", member_name='" + member_name + '\'' +
+				", todo_member='" + todo_member + '\'' +
+				", pmember_member='" + pmember_member + '\'' +
+				", member_profile='" + member_profile + '\'' +
+				", issue_id='" + issue_id + '\'' +
+				", work_project='" + work_project + '\'' +
+				", sdf=" + sdf +
+				'}';
 	}
-	
 }

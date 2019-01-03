@@ -3,6 +3,8 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="kr.or.ddit.card.mapper.AuthorityMapper">
-
+<mapper namespace="kr.or.ddit.authority.mapper.AuthorityMapper">
+	<insert id="insertUserMember" parameterType="authVo">
+		insert into AUTHORITY values (auth_id_SEQ.NEXTVAL,#{auth_member},'2')
+	</insert>
 </mapper>

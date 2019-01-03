@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%-- left & header--%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 <style type="text/css">
-.noticeContainer{width:1200px;margin:0 auto;margin-top:40px;overflow:hidden;}
+.noticeContainer{width:1200px;margin:0 auto;margin-top:20px;margin-bottom:20px;overflow:hidden;}
 .noticeContainerLeft {
 	width:300px;height:300px;padding:20px;float:left;
 	display:flex;justify-content:center;align-items:center;background-color:#fff;
@@ -17,18 +19,19 @@
 .noticeContainerRight > table > thead > tr{border-top:3px solid #333;border-bottom:1px solid #333;}
 .noticeContainerRight > table > thead > tr > th{padding:20px 0px 20px 0px;font-size:20px;}
 .noticeContainerRight > table > tbody > tr{border-bottom:1px solid #333;}
+.noticeContainerRight > table > tbody > tr:hover{border:1px solid #333;box-shadow:1px 3px 5px #333;}
 .noticeContainerRight > table > tbody > tr > td{padding:20px 0px 20px 0px;font-size:20px;}
-.noticeContainerRight > table > tbody > tr > td:nth-child(odd){text-indent:10px;}
-.noticeContainerRight > table > tbody > tr > td:nth-child(odd) > a{color:#000;}
-.noticeContainerRight > table > tbody > tr > td:nth-child(odd):hover > a {
-	text-decoration:underline;font-weight:bold;
+.noticeContainerRight > table > tbody > tr > td:first-child,
+.noticeContainerRight > table > tbody > tr > td:last-child{text-align:center;}
+.noticeContainerRight > table > tbody > tr > td:nth-child(2) > a{color:#000;}
+.noticeContainerRight > table > tbody > tr > td:nth-child(2):hover > a {
+	text-decoration:underline;font-weight:bold;text-align:left;text-indent:50px;color:#000;
 }
-.noticeContainerRight > table > tbody > tr > td:nth-child(even){text-align:center;color:#666;}
 .pagination{width:100%;display:flex;justify-content:center;align-items:center;margin-top:30px;}
-.pagination > ul > li{display:inline-block;}
+.pagination > ul > li{display:inline-block;font-size:17px;padding:0px 10px 0px 10px;}
 .pagination > ul > li > i {
 	text-align:center;line-height:30px;cursor:pointer;font-size:15px;vertical-align:middle;
-	padding:0px 20px 0px 20px;
+	padding:0px 10px 0px 10px;
 }
 .pagination > ul > li > a{color:#000;}
 .pagination > ul > li > a > span{font-size:17px;padding:0px 10px 0px 10px;vertical-align:middle;}
@@ -51,10 +54,12 @@
 			</div>
 			<div class="noticeContainerRight">
 				<table>
-					<colgroup width="80%" />
+					<colgroup width="10%" />
+					<colgroup width="70%" />
 					<colgroup width="20%" />
 					<thead>
 						<tr>
+							<th>번호</th>
 							<th>내용</th>
 							<th>등록일</th>
 						</tr>
@@ -63,7 +68,7 @@
 					</tbody>
 				</table>
 				<div class="pagination">
-					<ul class="paginationNotice"></ul>
+					<ul id="noticePaging"></ul>
 				</div>
 				<div class="noticeSearchDiv">
 					<input type="text" class="noticeSearchInput" />
@@ -236,45 +241,43 @@ $(function(){
 // 알람 탭 메뉴
 $("#tabs").tabs();
 
-$(document).ready(function(){
-	noticeList(1);
-});
 
-// 공지사항 게시글 페이지 리스트 조회
+
+//게시글 조회
+noticeList(1);
 function noticeList(page){
 	var pageSize = 10;
-	
 	$.ajax({
-		type: "POST",
-		url : "/ajaxNotice",
-		data: {"page":page, "pageSize":pageSize},
-		success : function(data){
-			var html ="";
-			$.each(data.noticeList, function (idx,notice){
-				
-				html += "<tr>";
-				html += "	<td>"+ notice.post_title +"</td>";
-				html += "	<td>"+ notice.post_date +"</td>";
-				html += "</tr>";
-			});
-			
+		method: "POST",
+		url: "/noticeList",
+		data: {"page": page, "pageSize": pageSize},
+		success: function(data){
 			$("#noticeList").html("");
-			$("#noticeList").html(html);
-		
-			var i = 1;
-			var paging ="";
-				paging +="<li><a href='javascript:noticeList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
-				for(var i= 1; i<=data.pageCnt; i++) {
-					paging += "<li><a href='javascript:noticeList("+ i +");'>"+ i+ "</a></li>";
-				}
-					paging +="<li><a href='javascript:noticeList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
-			$(".paginationNotice").html(paging);
+			$("#noticeList").html(data);
 		},
-		fail : function(xhr){
-			console.log(xhr);
+		error: function(data){
+			console.log("list-error : " + data);
 		}
 	});
-}
+};
+
+//게시글 페이징
+noticePaging(1);
+function noticePaging(page){
+	var pageSize = 10;
+	$.ajax({
+		method: "POST",
+		url: "/noticePaging",
+		data: {"page": page, "pageSize": pageSize},
+		success: function(data){
+			$("#noticePaging").html("");
+			$("#noticePaging").html(data);
+		},
+		error: function(data){
+			console.log("list-error : " + data);
+		}
+	});
+};
 </script>
 </body>
 </html>

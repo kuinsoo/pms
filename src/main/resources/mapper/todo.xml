@@ -29,8 +29,8 @@
 	
 	<!-- to-do insert -->
 	<insert id="todoInsert" parameterType="todoVo">
-		INSERT INTO todo (todo_id, todo_work, todo_pmember, todo_content, todo_sdate, todo_edate, todo_complet, todo_eedate, todo_color)
-		VALUES (todo_id_seq.NEXTVAL, #{todo_work}, #{todo_pmember}, #{todo_content}, #{todo_sdate}, null, 'N', #{todo_eedate}, '#F78181')
+		INSERT INTO todo (todo_id, todo_work, todo_pmember, todo_content, todo_sdate, todo_edate, todo_complet, todo_eedate, todo_color, todo_member)
+		VALUES (todo_id_seq.NEXTVAL, #{todo_work}, #{todo_pmember}, #{todo_content}, #{todo_sdate}, null, 'N', #{todo_eedate}, '#F78181', #{todo_member})
 	</insert>
 	
 	<!-- to-do select + paging -->
@@ -43,11 +43,15 @@
 		                SELECT  todo_id,
 		                		todo_content,
 		                        todo_pmember,
+		                        (SELECT	 m.member_profile
+		                         FROM	 member m
+		                         WHERE   member_name = todo_pmember) member_profile,
 		                        todo_sdate,
 		                        todo_eedate,
 		                        todo_complet,
 		                        todo_issue,
-		                        todo_work
+		                        todo_work,
+		                        work_project
 		                FROM    todo INNER JOIN work
 		                ON      todo_work = work_id
 		                WHERE   work_project = ${workVo.work_project}
@@ -76,4 +80,63 @@
 		AND     ${searchOption} LIKE '%'||#{searchMember}||'%'
 	</select>
 	
+	<!-- todoComplet(완료여부) 변경 -->
+	<update id="todoCompletYN" parameterType="Map">
+		UPDATE	todo
+		SET		todo_complet = #{chk}
+		WHERE	todo_id = #{todo_id}
+	</update>
+	
+	<!-- to-do delete -->
+	<delete id="todoDelete" parameterType="String">
+		DELETE
+		FROM	todo
+		WHERE	todo_id = #{todo_id}
+	</delete>
+	
+	<!-- to-do수정시 담당자 select option 값 조회 -->
+	<select id="selectOptionProjectMember" resultType="todoVo" parameterType="String">
+		SELECT  member_name,
+		        pmember_member
+		FROM    project_member INNER JOIN member
+		ON      pmember_member = member_mail
+		WHERE   pmember_project = #{project_id}
+	</select>
+	
+	<!-- to-do 수정 -->
+	<update id="todoUpdate" parameterType="todoVo">
+		UPDATE  todo
+		SET     todo_pmember = #{member_name},
+		        todo_member = #{pmember_member},
+		        todo_eedate = #{todo_eedate},
+		        todo_content = #{todo_content}
+		WHERE   todo_id = #{todo_id}
+	</update>
+
+
+	<!-- todolist count 개수 필요 -->
+	<select id="todoComplete" resultType="int" parameterType="Map">
+			select count(*) from todo, work, PROJECT
+			  where project_id = WORK_PROJECT
+				and work_id = todo.TODO_WORK
+			and project_id = #{project_id}
+			and work_id = #{work_id}
+			and TODO_COMPLET = 'Y'
+	</select>
+
+	<select id="selectTodo" resultType="todoVo" parameterType="String">
+		select * from todo
+		where TODO_ID = #{todo_id}
+	</select>
+
+	<select id="selectCntTodoList" resultType="todoVo" parameterType="String">
+		select * from todo
+		where TODO_WORK = #{work_id}
+	</select>
+
+	<select id="selectCntTodoComplete" resultType="todoVo" parameterType="String">
+		select * from todo
+		where TODO_WORK = #{work_id}
+		and TODO_COMPLET = 'Y'
+	</select>
 </mapper>

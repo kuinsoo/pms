@@ -11,7 +11,7 @@
         </ul>
         <!-- tap1 업무 -->
         <div id="tabss-1">
-            <form action="/ajaxCreateWork" method="POST" name="workfrm1">
+            <form action="/createWork" method="post" name="workfrm1" enctype="multipart/form-data" >
                 <div class="workContainerInput">
                     <input type="text" name="work_title" placeholder="업무제목을 입력해주세요" class="workTitle"/>
 
@@ -49,9 +49,12 @@
                         <input type="checkbox" name="work_public" value="Y" class="workVisibilityCheck"/>
                         <span>WORK_PUBLIC</span>
                     </div>
+                    <div>
+                        <input type="file" name="file" />
+                        <input type="file" name="file" />
+                    </div>
                     <div class="workSubmit">
-                        <input type="button" class="tabssTextAreaSubmit" value="올리기"
-                               onclick="createWork();"/>
+                        <input type="submit" class="tabssTextAreaSubmit" value="올리기" <%-- onclick="createWork();" --%> />
                     </div>
                 </div>
             </form>

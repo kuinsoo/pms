@@ -70,4 +70,103 @@ public interface PostServiceInf {
 	*/
 	int totalPostCnt();
 	
+	/**
+	* Method : insertNotice
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 게시글 등록
+	*/
+	int insertNotice(PostVo postVo);
+	
+	/**
+	* Method : updateNotice
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 게시글 수정
+	*/
+	int updateNotice(PostVo postVo);
+	
+	/**
+	* Method : selectAdmin
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 게시글 상세조회
+	*/
+	PostVo selectAdmin(String post_id);
+	
+	/**
+	* Method : deleteAdmin
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 게시글 삭제
+	*/
+	int deleteAdmin(String post_id);
+	
+	/**
+	* Method : getPostPageListGuide
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 게시글 페이지 리스트 조회
+	*/
+	List<PostVo> getPostPageListGuide(PageVo pageVo);
+	
+	/**
+	* Method : totalPostCntGuide
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 게시글 건수 조회
+	*/
+	int totalPostCntGuide();
+	
+	/**
+	* Method : insertNoticeGuide
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 게시글 등록
+	*/
+	int insertNoticeGuide(PostVo postVo);
+	
+	/**
+	* Method : updateNoticeGuide
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 게시글 수정
+	*/
+	int updateNoticeGuide(PostVo postVo);
+	
+	/**
+	* Method : selectAdminGuide
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 게시글 상세조회
+	*/
+	PostVo selectAdminGuide(String post_id);
+	
+	/**
+	* Method : deleteAdminGuide
+	* 작성자 : iks
+	* 변경이력 :
+	* @param postVo
+	* @return
+	* Method 설명 : 게시글 삭제
+	*/
+	int deleteAdminGuide(String post_id);
 }

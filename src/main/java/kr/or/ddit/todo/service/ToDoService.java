@@ -98,5 +98,109 @@ public class ToDoService implements ToDoServiceInf{
 	public List<ToDoVo> getProjectMember(Map searchMap) {
 		return todoMapper.getProjectMember(searchMap);
 	}
-	
+
+	/**
+	* Method : todoCompletYN
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todoUpdateMap
+	* @return
+	* Method 설명 : to-do의 완료여부 변경
+	*/
+	@Override
+	public int todoCompletYN(Map todoUpdateMap) {
+
+		return todoMapper.todoCompletYN(todoUpdateMap);
+	}
+
+	/**
+	* Method : todoDelete
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_id
+	* @return
+	* Method 설명 : to-do를 삭제
+	*/
+	@Override
+	public int todoDelete(String todo_id) {
+		return todoMapper.todoDelete(todo_id);
+	}
+
+	/**
+	* Method : selectOptionProjectMember
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param project_id
+	* @return
+	* Method 설명 : to-do 수정시 담당자 select option 값 조회
+	*/
+	@Override
+	public List<ToDoVo> selectOptionProjectMember(String project_id) {
+		return todoMapper.selectOptionProjectMember(project_id);
+	}
+
+	/**
+	* Method : todoUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todoVo
+	* @return
+	* Method 설명 : to-do 수정
+	*/
+	@Override
+	public int todoUpdate(ToDoVo todoVo) {
+		return todoMapper.todoUpdate(todoVo);
+	}
+
+	/**
+	 * Method : todoUpdate
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param todoMap
+	 * @return
+	 * Method 설명 : to-do 진행상황 표시
+	 */
+	@Override
+	public Integer todoComplete(Map<String, String> todoMap) {
+		return todoMapper.todoComplete(todoMap);
+	}
+
+	/**
+	 * Method : todoUpdate
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param todo_id
+	 * @return
+	 * Method 설명 : to-do 객체 검색
+	 */
+	@Override
+	public ToDoVo selectTodo(String todo_id) {
+		return todoMapper.selectTodo(todo_id);
+	}
+
+	/**
+	 * Method : todoUpdate
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param work_id
+	 * @return
+	 * Method 설명 : to-do 객체 검색
+	 */
+	@Override
+	public List<ToDoVo> selectCntTodoList(String work_id) {
+		return todoMapper.selectCntTodoList(work_id);
+	}
+
+	/**
+	 * Method : todoUpdate
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param work_id
+	 * @return
+	 * Method 설명 : to-do 완료 객체 검색
+	 */
+	@Override
+	public List<ToDoVo> selectCntTodoComplete(String work_id) {
+		return todoMapper.selectCntTodoComplete(work_id);
+	}
 }

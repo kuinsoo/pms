@@ -3,6 +3,7 @@ package kr.or.ddit.comments.mapper;
 import kr.or.ddit.comments.model.CommentsVo;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * kr.or.ddit.comments.mapper
@@ -24,6 +25,16 @@ public interface CommentsMapper {
 	 */
 	List<CommentsVo> cmtList(String project_id);
 
+
+	/**
+	 * Ajax cmt list list.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 댓글 조회
+	 *
+	 * @param mapCmtList the map cmt list
+	 * @return the list
+	 */
+	List<CommentsVo> ajaxCmtList(Map<String, String> mapCmtList);
 	/**
 	 * Insert cmt int.
 	 * 작성자 : Mr.KKu
@@ -33,6 +44,16 @@ public interface CommentsMapper {
 	 * @return the int
 	 */
 	int insertCmt(CommentsVo cmtVo);
+
+	/**
+	 * Select cmt comments vo.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 댓글 찾기
+	 *
+	 * @param cmt_id the cmt id
+	 * @return the comments vo
+	 */
+	CommentsVo selectCmt(String cmt_id);
 
 	/**
 	 * Update cmt int.

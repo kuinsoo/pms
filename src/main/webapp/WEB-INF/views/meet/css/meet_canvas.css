@@ -1,0 +1,147 @@
+@charset "UTF-8";
+html, body, section, ul, li, nav, a, h1, h2 {
+    padding: 0;
+    margin: 0;
+    outline: none;
+    text-shadow: none;
+    box-shadow: none;
+    border-radius: 0;
+    text-decoration: none;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 17px;
+    line-height: 1.5em;
+}
+
+input[disabled], button[disabled] {
+  background: transparent!important;
+  color: #dcd7d7!important;
+  border: 1px solid #dcd7d7!important;
+  cursor: not-allowed!important;
+  text-shadow: none!important;
+  box-shadow: none!important;
+  text-decoration: none!important;
+  outline: none!important;
+}
+</style>
+</head>
+<body>
+
+<style>
+.extra-controls {
+    position: absolute;
+    right: 21%;
+}
+
+#btn-comments {
+  color: red;
+  margin-top: 5px;
+  font-size: 24px;
+  text-shadow: 1px 1px white;
+}
+
+#other-videos {
+    margin-top: 5px;
+}
+
+#other-videos video {
+    width: 29%;
+    margin: 5px;
+    border: 1px solid black;
+    padding: 1px;
+    border-radius: 3px;
+}
+
+#txt-chat-message {
+    width: 100%;
+    resize: vertical;
+    margin: 5px;
+    margin-right: 0;
+    min-height: 30px;
+}
+
+#btn-chat-message {
+    margin: 5px;
+}
+
+#conversation-panel {
+    text-align: left;
+    overflow: auto;
+    border-top: 1px solid #E5E5E5;
+    width: 99%;
+}
+
+#conversation-panel .message {
+    border-bottom: 1px solid #E5E5E5;
+    padding: 5px 10px;
+}
+
+#conversation-panel .message img, #conversation-panel .message video, #conversation-panel .message iframe {
+    max-width: 100%;
+}
+
+#main-video {
+    width: 100%;
+    margin-top: -9px;
+    border-bottom: 1px solid #121010;
+    display: none;
+    padding-bottom: 1px;
+}
+
+hr {
+    height: 1px;
+    border: 0;
+    background: #E5E5E5;
+}
+
+#btn-attach-file {
+    width: 25px;
+    vertical-align: middle;
+    cursor: pointer;
+    display: none;
+}
+
+.checkmark {
+    display:none;
+    width: 15px;
+    vertical-align: middle;
+}
+
+
+/* 그림 저장 */ 
+.white_content {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index:1002;
+}
+
+.white_content select {
+    font-size: 1.2em;
+    border: 1px solid;
+    padding: 0;
+    outline: none!important;
+    border: 1px solid black !important;
+    float: left;
+}
+.white_content select option {
+    padding: 2px 5px;
+    border-bottom: 1px solid black;
+}
+.white_content select option:last-child {
+    border-bottom: 0;
+}
+
+.white_content option:checked, .white_content option[selected] {
+    background-color: #06CDFF!important;
+    background:linear-gradient(#06CDFF, #06CDFF)!important;
+    color: white!important;
+}
+
+.white_content select[disabled] {
+    background-color: rgba(232, 229, 229, 0.17);
+    color: rgb(84, 82, 82);
+}
+#saveDoc { display: none; }

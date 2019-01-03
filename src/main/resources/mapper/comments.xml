@@ -5,10 +5,10 @@
 
 <mapper namespace="kr.or.ddit.comments.mapper.CommentsMapper">
 
+    <!-- 댓글 출력 -->
     <select id="cmtList" parameterType="String" resultType="cmtVo">
-
-select  MEMBER_PROFILE, MEMBER_NAME, CMT_CONTENT, CMT_DATE, CMT_WORK
-from COMMENTS C INNER JOIN  WORK W on (C.CMT_WORK = W.WORK_ID)
+        select  MEMBER_PROFILE, MEMBER_NAME, CMT_CONTENT, CMT_DATE, CMT_WORK,CMT_ID
+        from COMMENTS C INNER JOIN  WORK W on (C.CMT_WORK = W.WORK_ID)
                 inner join WORK_MEMBER WM on (W.WORK_ID = WM.WORK_ID)
                 inner join PROJECT_MEMBER PM on (WM.PMEMBER_ID = PM.PMEMBER_ID)
                 inner join member M on (CMT_MEMBER= M.MEMBER_MAIL)
@@ -16,16 +16,33 @@ from COMMENTS C INNER JOIN  WORK W on (C.CMT_WORK = W.WORK_ID)
           order by to_number(CMT_ID) desc
     </select>
 
+
+    <select id="ajaxCmtList" parameterType="Map" resultType="cmtVo">
+        select  MEMBER_PROFILE, MEMBER_NAME, CMT_CONTENT, CMT_DATE, CMT_WORK,CMT_ID
+        from COMMENTS C INNER JOIN  WORK W on (C.CMT_WORK = W.WORK_ID)
+                inner join WORK_MEMBER WM on (W.WORK_ID = WM.WORK_ID)
+                inner join PROJECT_MEMBER PM on (WM.PMEMBER_ID = PM.PMEMBER_ID)
+                inner join member M on (CMT_MEMBER= M.MEMBER_MAIL)
+          where W.WORK_PROJECT = #{work_project}
+          and CMT_WORK = #{cmt_work}
+          order by to_number(CMT_ID) desc
+    </select>
+
     <insert id="insertCmt" parameterType="cmtVo">
         insert into comments values(seq_comments.nextval, #{cmt_work}, #{cmt_member}, #{cmt_content}, sysdate)
     </insert>
+
+
+    <select id="selectCmt" parameterType="String" resultType="cmtVo">
+        select * from COMMENTS where CMT_ID = #{cmt_id}
+    </select>
 
     <update id="updateCmt" parameterType="cmtVo">
         update COMMENTS
         set CMT_CONTENT = #{cmt_content}
         where CMT_ID = #{cmt_id}
     </update>
-    
+
     <delete id="deleteCmt" parameterType="String">
         delete from COMMENTS where CMT_ID = #{cmt_id}
     </delete>

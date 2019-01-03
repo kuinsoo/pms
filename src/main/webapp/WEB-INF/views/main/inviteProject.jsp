@@ -49,7 +49,7 @@
 	</c:forEach>
 	<div class="inviteProjectFooter">
 		<input type="button" class="inviteProjectY" value="수락"/>
-		<input type="button" class="inviteProjectN" value="취소" />
+		<input type="button" class="inviteProjectN" value="거절" />
 	</div>
 </div>
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

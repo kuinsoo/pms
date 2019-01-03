@@ -42,9 +42,10 @@
 		                FROM    project p INNER JOIN project_member pm
 		                ON      pm.pmember_project = p.project_id
 		                WHERE   pm.pmember_member = #{member_mail}
+		                AND		p.project_delete = 'N'
 		                ) A
 		        )
-		WHERE   rnum BETWEEN ${page} * ${pageSize} - (${pageSize} - 1) AND ${page} * ${pageSize}	
+		WHERE   rnum BETWEEN ${page} * ${pageSize} - (${pageSize} - 1) AND ${page} * ${pageSize}
 	</select>
 	
 	<!-- 프로젝트 총 갯수 -->
@@ -55,4 +56,116 @@
 		WHERE   pm.pmember_member = #{member_mail}
 	</select>
 
+	<!-- 프로젝트별 이슈 조회 -->
+	<select id="pjtAllIssueHistory" resultType="issueVo" parameterType="String">
+		SELECT  ROWNUM rnum,
+		        A.*
+		FROM    (
+		        SELECT  project_id,
+		                project_sdate,
+		                project_eedate,
+		                project_edate,
+		                issue_id,
+		                issue_title,
+		                issue_sdate
+		        FROM    project INNER JOIN project_member
+		        ON      project_id = pmember_project INNER JOIN work
+		        ON      project_id = work_project INNER JOIN issue
+		        ON      work_id = issue_work
+		        WHERE   pmember_member = #{sid}
+		        ORDER BY project_id, TO_NUMBER(issue_id)
+		        ) A
+		ORDER BY rnum
+	</select>
+
+	<!-- 이슈 발생 등록 -->
+	<insert id="issueInsert" parameterType="issueVo">
+		INSERT INTO issue (issue_id, issue_work, issue_title, issue_level, issue_member, issue_sdate, issue_content, todo_id)
+		VALUES (issue_seq.NEXTVAL, #{issue_work}, #{issue_title}, #{issue_level}, #{issue_member}, #{issue_sdate}, #{issue_content}, #{todo_id})
+		<selectKey keyProperty="issue_id" resultType="String" order="AFTER">
+			SELECT  issue_seq.currval
+			FROM    dual
+		</selectKey>
+	</insert>
+	
+	<!-- 이슈등록시 이슈ID를 todo테이블의 todo_issue컬럼에 추가(수정) -->
+	<update id="todoIssueUpdate" parameterType="issueVo">
+		UPDATE	todo
+		SET		todo_issue = #{issue_id}
+		WHERE	todo_id = #{todo_id}
+	</update>
+	
+	<!-- project 참여자 : issue 등록시 select option list -->
+	<select id="selGetProjectMember" resultType="issueVo" parameterType="String">
+		SELECT  member_name,
+		        pmember_member
+		FROM    project_member INNER JOIN member
+		ON      pmember_member = member_mail
+		WHERE   pmember_project = (SELECT  work_project
+		                           FROM    work
+		                           WHERE   work_id = #{work_id})
+	</select>
+	
+	<!-- 이슈 리스트 조회 -->
+	<select id="issueSelectList" resultType="issueVo" parameterType="String">
+		SELECT  sue.issue_id,
+				sue.todo_id,
+				sue.issue_work,
+		        sue.issue_title,
+		        sue.issue_level,
+		        sue.issue_member,
+		        sue.issue_sdate,
+		        sue.issue_content
+		FROM    issue sue INNER JOIN todo td
+		ON      sue.todo_id = td.todo_id
+		WHERE   td.todo_id = #{todo_id}
+		ORDER BY sue.issue_sdate
+	</select>
+	
+	<!-- 이슈 수정 -->
+	<update id="issueUpdate" parameterType="issueVo">
+		UPDATE	issue
+		SET		issue_title = #{issue_title},
+				issue_level = #{issue_level},
+				issue_sdate = #{issue_sdate},
+				issue_content = #{issue_content}
+		WHERE	issue_id = #{issue_id}
+	</update>
+	
+	<!-- 이슈 해결(도움) 등록 -->
+	<update id="helperUpdate" parameterType="issueVo">
+		UPDATE	issue
+		SET		issue_helper = #{issue_helper},
+				issue_edate = #{issue_edate},
+				issue_solution = #{issue_solution}
+		WHERE	issue_id = #{issue_id}
+	</update>
+	
+	<!-- 이슈 해결(도움) 조회 -->
+	<select id="helperSelectList" resultType="issueVo" parameterType="String">
+		SELECT  sue.issue_id,
+				sue.todo_id,
+				sue.issue_work,
+		        sue.issue_helper,
+		        sue.issue_edate,
+		        sue.issue_solution
+		FROM    issue sue INNER JOIN todo td
+		ON      sue.todo_id = td.todo_id
+		WHERE   td.todo_id = #{todo_id}
+		ORDER BY sue.issue_edate DESC	
+	</select>
+	
+	<!-- 이슈 삭제시 제약조건 해제를 위한 UPDATE  -->
+	<update id="issueDeleteTodoIssue" parameterType="String">
+		UPDATE	todo
+		SET		todo_issue = ''
+		WHERE	todo_issue = #{issue_id}
+	</update>
+	
+	<!-- 무결성 제약조건 해제 후 이슈 삭제 -->
+	<delete id="issueDelete" parameterType="String">
+		DELETE FROM issue
+		WHERE	issue_id = #{issue_id}
+	</delete>
+	
 </mapper>

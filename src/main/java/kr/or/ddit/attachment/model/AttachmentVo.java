@@ -16,15 +16,39 @@ import java.util.Arrays;
 @Alias("attVo")
 public class AttachmentVo {
 
+	private String project_title;
 	private String att_id;
 	private String att_work;
 	private String att_name;
 	private String att_extension;
 	private String att_path;
 	private byte[] att_file;
+	private int rnum;
+
+	
+	public String getProject_title() {
+		return project_title;
+	}
+
+
+	public void setProject_title(String project_title) {
+		this.project_title = project_title;
+	}
+
 
 	public AttachmentVo() {
 	}
+	
+
+	public int getRnum() {
+		return rnum;
+	}
+
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+
 
 	public AttachmentVo(String att_id, String att_work, String att_name, String att_extension, String att_path, byte[] att_file) {
 		this.att_id = att_id;
@@ -37,14 +61,9 @@ public class AttachmentVo {
 
 	@Override
 	public String toString() {
-		return "AttachmentVo{" +
-				"att_id='" + att_id + '\'' +
-				", att_work='" + att_work + '\'' +
-				", att_name='" + att_name + '\'' +
-				", att_extension='" + att_extension + '\'' +
-				", att_path='" + att_path + '\'' +
-				", att_file=" + Arrays.toString(att_file) +
-				'}';
+		return "AttachmentVo [project_title=" + project_title + ", att_id=" + att_id + ", att_work=" + att_work
+				+ ", att_name=" + att_name + ", att_extension=" + att_extension + ", att_path=" + att_path
+				+ ", att_file=" + Arrays.toString(att_file) + ", rnum=" + rnum + "]";
 	}
 
 	public String getAtt_id() {

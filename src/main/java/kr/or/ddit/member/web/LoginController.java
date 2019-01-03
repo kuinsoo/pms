@@ -1,6 +1,10 @@
 package kr.or.ddit.member.web;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
+
+import kr.or.ddit.authority.model.AuthorityVo;
+import kr.or.ddit.authority.service.AuthorityServiceInf;
+import kr.or.ddit.commons.util.KISA_SHA256;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.oauth.bo.JsonParser;
@@ -44,6 +48,9 @@ public class LoginController {
 	
 	@Autowired
 	private WorkServiceInf workService;
+	
+	@Autowired
+	private AuthorityServiceInf authorityService;
 
 	//NaverLoginBO 
 	@Autowired
@@ -109,9 +116,8 @@ public class LoginController {
 			return "/login/login";
 		}
 
-
 		if (memberVo == null || !member_mail.equals(memberVo.getMember_mail()) ||
-				!member_pass.equals(memberVo.getMember_pass())) {
+				!memberVo.getMember_pass().equals(KISA_SHA256.encrypt(member_pass))) {
 
 			//model.addAttribute("member_mail",member_mail);
 			//model.addAttribute("member_pass",member_pass);
@@ -139,9 +145,7 @@ public class LoginController {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
 
 		JsonParser json = new JsonParser();
-
 		OAuth2AccessToken oauthToken = naverLoginBO.getAccessToken(session, code, state);
-
 		logger.debug("naverLoginBO : {}", oauthToken.getAccessToken());
 
 
@@ -152,7 +156,8 @@ public class LoginController {
 		// 값이 다르면..
 		if (memberService.selectUser(member_mail) == null) {
 			memberService.insertUser(memberVo);
-			return "/";
+			// 이부분 수정함 PL님이랑 상의할것.
+			return "login/login";
 			// 값이 같으면
 		} else {
 			model.addAttribute("memberVo", memberVo);
@@ -161,28 +166,21 @@ public class LoginController {
 	}
 
 
-	/**
-	 * Main string.
-	 * 작성자: Mr.KKu
-	 * 변경이력:
-	 *
-	 * @param model    the model
-	 * @param memberVo the member vo
-	 * @return the string
-	 * 설명: 메인화면에 프로젝트리스트를 출력해준다. (Member / Project / project_member  Join)
-	 */
-	@RequestMapping(value = "/main", method = RequestMethod.GET)
-	public String main(Model model, @ModelAttribute("memberVo") MemberVo memberVo) {
 
-		model.addAttribute("pMemberList", memberService.selectMainView(memberVo.getMember_mail()));
-		model.addAttribute("inviteProjectList", memberService.selectInviteProject(memberVo.getMember_mail()));
-		// model.addAttribute("workMemberList", workService.workMember(memberVo.getMember_mail()));
-		return "main/main";
-	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(SessionStatus status) {
+	/*<!--  변찬우(수정 2018.12.21):  리스판스 추가 for node page -->*/
+	public String logout(SessionStatus status, HttpServletResponse response) {
 		status.setComplete();
+
+		/*<!--  변찬우(수정 2018.12.21):  쿠키삭제 코추가 for node page -->*/
+		Cookie cookieMember_mail = new Cookie("member_mail", null); 
+		cookieMember_mail.setMaxAge(0); 
+		response.addCookie(cookieMember_mail); 
+		Cookie cookieMember_name = new Cookie("member_name", null); 
+		cookieMember_name.setMaxAge(0); 
+		response.addCookie(cookieMember_name); 
+
 		return "redirect:/";
 	}
 
@@ -214,8 +212,7 @@ public class LoginController {
 
 		if (memberService.selectfindId(memberVo) != null) {
 			// 내용
-			message.setText(member_name + "님이 찾으시는 아이디는  [  " + memberService.selectfindId(memberVo).getMember_mail() + "  ]  입니다.");
-
+			message.setText(member_name + "님이 찾으시는 아이디는  [ " + memberService.selectfindId(memberVo).getMember_mail() + "  ]  입니다.");
 			emailSender.send(message);
 
 			return "/login/login";
@@ -294,11 +291,23 @@ public class LoginController {
 	 * @return Method  설명 : sign.jsp에서 회원가입 버튼을 눌렀을때
 	 */
 	@RequestMapping(value = "/signProcess", method = RequestMethod.POST)
-	public String signProcess(@RequestParam("member_mail") String member_mail, MemberVo member, HttpServletRequest request) {
-
+	public String signProcess(@RequestParam("member_mail") String member_mail, AuthorityVo authVo, MemberVo memberVo, HttpServletRequest request) {
+		
+		String member_pass = request.getParameter("member_pass");
+		
+		String kisa = KISA_SHA256.encrypt(member_pass).toLowerCase(); //toLowerCase :  다 소문자로 DB에 입력 
+		
+		memberVo.setMember_pass(kisa);
 		// 값이 다르면..
+		// 인터페이스에 들어가고 그 후 service 
 		if (memberService.selectUser(member_mail) == null) {
-			memberService.insertUser(member);
+			
+			authVo.setAuth_member(memberVo.getMember_mail());
+			System.out.println("aaaaaaaaaaaasdmember_mail" + member_mail);
+			System.out.println("aaaaaaaaaaaawawauthVo" + authVo);
+			
+			//memberService.insertUser(memberVo);
+			authorityService.insertUserMember(authVo, memberVo);
 			return "/login/login";
 			// 값이 같으면
 		} else {
@@ -346,6 +355,4 @@ public class LoginController {
 		// sign.jsp ajax로 보내준다.
 		return certificationNumber;
 	}
-	
-	
 }

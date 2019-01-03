@@ -1,12 +1,15 @@
 package kr.or.ddit.card.service;
 
+import kr.or.ddit.attachment.service.AttachmentServiceInf;
 import kr.or.ddit.card.mapper.CardMapper;
 import kr.or.ddit.card.model.CardVo;
+import kr.or.ddit.commons.util.Utils;
 import kr.or.ddit.work.model.WorkVo;
 import kr.or.ddit.work.service.WorkServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -30,6 +33,9 @@ public class CardService implements CardServiceInf {
 	@Autowired
 	private WorkServiceInf workService;
 
+	@Autowired
+	private AttachmentServiceInf attachmentService;
+
 	@Override
 	public List<CardVo> selectWorkCard(String pmember_project) {
 		return cardMapper.selectWorkCard(pmember_project) ;
@@ -48,8 +54,15 @@ public class CardService implements CardServiceInf {
 	}
 
 	@Override
-	public int createCard(Map<String, String> wmMap ,WorkVo workVo) {
+	public int createCard(Map<String, String> wmMap , WorkVo workVo, MultipartFile[] files) {
 
+		workService.insertWorkMember(wmMap , workVo);
+			attachmentService.insertAtt(Utils.multiFiles(files));
+		return cardMapper.createCard();
+	}
+
+	@Override
+	public int createCard(Map<String, String> wmMap, WorkVo workVo) {
 		workService.insertWorkMember(wmMap , workVo);
 		return cardMapper.createCard();
 	}

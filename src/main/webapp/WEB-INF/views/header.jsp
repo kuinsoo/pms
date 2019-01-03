@@ -23,9 +23,11 @@
     <link rel="stylesheet" href="/css/jquery-ui.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/myPage.css">
-    <link rel="stylesheet" type="text/css" href="/css/submain.css">
+    <link rel="stylesheet" href="/css/submain.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
+	<script type="text/javascript" src="/js/annyang.js"></script>
+	<script type="text/javascript" src="/js/current_vui.js"></script>
 
 </head>
 
@@ -109,10 +111,11 @@
 
             <!-- CURRENT LOGO -->
             <div class="currentLogo" id="currentMain">
-                <img src="http://placehold.it/200x45">
+                <img src="https://placehold.it/200x45">
             </div>
 
             <!-- CURRENT ALL SEARCH -->
+            <!--
             <div class="currentAllSearch">
                 <select>
                     <option>ALL</option>
@@ -122,6 +125,7 @@
                 <input type="text" placeholder="전체에서 검색" class="headerSearchInputText" />
                 <i class="icon-magnifier icons"></i>
             </div>
+            -->
 
             <div class="headerRightContent">
             	<!-- 팀원 초대 -->
@@ -170,9 +174,21 @@
                     </div>
                 </div>
 			</c:if>
-
+                
 				<div class="updateHeader" style="float:right;">
-					<a href="/message" class="facing"><i class="icon-paper-plane icons"></i></a>
+						<a href="/friendView"  class="facing">
+							<i class="icon-user icons" id="friendSendIcon"></i>
+							<div class="friendCounterDiv">
+								<span class = "friendCounterSpan"></span>
+							</div>
+						</a>
+						<a href="/message" class="facing">
+							<i class="icon-paper-plane icons" id="messageSendIcon"></i>
+							<div class="messageCounterDiv">
+								<span class = "messageCounterSpan"></span>
+							</div>
+						</a>
+					
 	                <%@ include file="/WEB-INF/views/alarm/alarm.jsp" %>
 	                
 	                <!-- CURRENT USER -->
@@ -186,12 +202,16 @@
 	                        </div>
 	                        <ul>
 	                            <li>
-	                                <i class="icon-settings icons"></i>
+	                                <i class="icon-user icons"></i>
 	                                <a href="/myPage">마이페이지</a>
 	                            </li>
 	                            <li>
 	                                <i class="icon-badge icons"></i>
 	                                <a href="/evaluation">능력 및 평가</a>
+	                            </li>
+	                            <li>
+	                                <i class="icon-settings icons"></i>
+	                                <a href="/admin">관리자 모드</a>
 	                            </li>
 	                            <li>
 	                                <i class="icon-power icons"></i>
@@ -204,7 +224,60 @@
             </div>
         </div>
     </header>
+	<script>
+	// 폴링방법 
+	$(document).ready(function(){
+		$('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
 
+		message();
+		friend();
+	});
+	
+	function message(){
+		(function pollsmessage(){
+			$.ajax({
+				type: "GET",
+				url : "/messageAlram",
+				data : "member_mail="+ '${memberVo.member_mail}',
+				success: function(data){
+				// 쪽지온거확인
+				 	if(data.totalmessageY > 0){
+				 		$(".messageCounterDiv").show();
+						$(".messageCounterSpan").html(data.totalmessageY);
+						$("#messageSendIcon").css("color","#f00");
+				 	}else{
+				 		$("#messageSendIcon").css("color","#000");
+						$(".messageCounterDiv").hide();
+				 	}
+				}, 
+			timeout: 3000,
+	    	complete: setTimeout(function(){ pollsmessage(); }, 6000)
+			})
+		})();	 
+	}
+	 function friend(){
+		(function pollsfriend(){
+			$.ajax({
+				type: "GET",
+				url : "/friendAlram",
+				data : "member_mail="+ '${memberVo.member_mail}',
+				success: function(data){
+				// 쪽지온거확인
+				 	if(data.totalFriendSize > 0){
+				 		$(".friendCounterDiv").show();
+						$(".friendCounterSpan").html(data.totalFriendSize);
+						$("#friendSendIcon").css("color","#f00");
+				 	}else{
+				 		$("#friendSendIcon").css("color","#000");
+						$(".friendCounterDiv").hide();
+				 	}
+				}, 
+			timeout: 3000,
+	    	complete: setTimeout(function(){ pollsfriend(); }, 6000)
+			})
+		})();	 
+	}
+	</script>
     <script>
 		$('#currentMain').on('click', function () {
 			location.href="/main";
@@ -223,17 +296,13 @@
 		});
     </script>
 
-    <script type="text/javascript" language="javascript">
-
-		$(document).ready(function(){
-
-			$('#Progress_Loading').hide(); //첫 시작시 로딩바를 숨겨준다.
-		});
+   <!--  <script type="text/javascript">
+	
        /* .ajaxStart(function(){
             $('#Progress_Loading').show(); //ajax실행시 로딩바를 보여준다.
         })
         .ajaxStop(function(){
             $('#Progress_Loading').hide(); //ajax종료시 로딩바를 숨겨준다.
-        });*/
-    </script>
+        });*/ 
+    </script>-->
 

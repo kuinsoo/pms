@@ -9,5 +9,12 @@
 		select friend_member
 		from   FRIENDSLIST
 		where  friend_myemail =  #{member_mail}
+		and    friend_accept = 'Y'
+		
 </select> 
+
+ <delete id="deleteFriends" parameterType="friendVo">
+		delete from FRIENDSLIST where friend_myemail= #{member_mail}
+		and friend_member = #{friend_member}
+</delete> 
 </mapper>

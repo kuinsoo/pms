@@ -58,4 +58,104 @@ public interface IssueServiceInf {
 	*/
 	int projectCnt(PageVo pageVo);
 	
+	/**
+	* Method : issueInsert
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 이슈 등록
+	*/
+	int issueInsert(IssueVo issueVo);
+	
+	/**
+	* Method : todoIssueUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : issue 등록시 todo테이블의 todo_issue컬럼 추가(수정)
+	*/
+	int todoIssueUpdate(IssueVo issueVo);
+	
+	/**
+	* Method : selGetProjectMember
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param work_id
+	* @return
+	* Method 설명 : issue 등록시 select-option에 프로젝트 참여자 리스트
+	*/
+	List<IssueVo> selGetProjectMember(String work_id);
+	
+	/**
+	* Method : issueSelectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_id
+	* @return
+	* Method 설명 : 이슈 리스트 조회
+	*/
+	List<IssueVo> issueSelectList(String todo_id);
+	
+	/**
+	* Method : issueUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 이슈 수정
+	*/
+	int issueUpdate(IssueVo issueVo);
+	
+	/**
+	* Method : helperUpdate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 도움 등록
+	*/
+	int helperUpdate(IssueVo issueVo);
+	
+	/**
+	* Method : helperSelectList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todo_id
+	* @return
+	* Method 설명 : 도움 리스트 조회
+	*/
+	List<IssueVo> helperSelectList(String todo_id);
+	
+	/**
+	* Method : issueDeleteTodoIssue
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issue_id
+	* @return
+	* Method 설명 : 이슈 삭제시 무결성 제약조건 해제를 위해 todo_issue컬럼 값을 Null로 수정(UPDATE) 
+	*/
+	int issueDeleteTodoIssue(String issue_id);
+	
+	/**
+	* Method : issueDelete
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issue_id
+	* @return
+	* Method 설명 : (무결성 제약조건 이후) 이슈 삭제
+	*/
+	int issueDelete(String issue_id);
+	
+	/**
+	* Method : pjtAllIssueHistory
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param sid
+	* @return
+	* Method 설명 : 프로젝트별 이슈 조회
+	*/
+	List<IssueVo> pjtAllIssueHistory(String sid);
+	
 }

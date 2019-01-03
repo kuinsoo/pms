@@ -3,7 +3,7 @@
 <%-- left & header--%>
 <%@ include file="/WEB-INF/views/header.jsp" %>
 <style type="text/css">
-.noticeContainer{width:1200px;margin:0 auto;margin-top:40px;overflow:hidden;}
+.noticeContainer{width:1200px;margin:0 auto;margin-top:20px;margin-bottom:20px;overflow:hidden;}
 .noticeContainerLeft {
 	width:300px;height:300px;padding:20px;float:left;
 	display:flex;justify-content:center;align-items:center;background-color:#fff;
@@ -17,6 +17,7 @@
 .noticeContainerRight > table > thead > tr{border-top:3px solid #333;border-bottom:1px solid #333;}
 .noticeContainerRight > table > thead > tr > th{padding:20px 0px 20px 0px;font-size:17px;}
 .noticeContainerRight > table > tbody > tr{border-bottom:1px solid #333;}
+.noticeContainerRight > table > tbody > tr:hover{border:1px solid #333;box-shadow:1px 3px 5px #333;}
 .noticeContainerRight > table > tbody > tr > td{padding:20px 0px 20px 0px;font-size:17px;}
 .noticeContainerRight > table > tbody > tr > td:nth-child(odd){text-indent:10px;}
 .noticeContainerRight > table > tbody > tr > td:nth-child(odd) > a{color:#000;}
@@ -25,10 +26,10 @@
 }
 .noticeContainerRight > table > tbody > tr > td:nth-child(even){text-align:center;color:#666;}
 .pagination{width:100%;display:flex;justify-content:center;align-items:center;margin-top:30px;}
-.pagination > ul > li{display:inline-block;}
+.pagination > ul > li{display:inline-block;font-size:17px;padding:0px 10px 0px 10px;}
 .pagination > ul > li > i {
 	text-align:center;line-height:30px;cursor:pointer;font-size:15px;vertical-align:middle;
-	padding:0px 20px 0px 20px;
+	padding:0px 10px 0px 10px;
 }
 .pagination > ul > li > a{color:#000;}
 .pagination > ul > li > a > span{font-size:17px;padding:0px 10px 0px 10px;vertical-align:middle;}
@@ -41,6 +42,7 @@
 	float:left;font-size:20px;font-weight:bold;display:block;width:30px;height:27px;margin-top:3px;
 	border-bottom:1px solid #000;cursor:pointer;
 }
+#newPost{width:70px;height:40px;background-color:#007fff;color:#fff;font-size:17px;border:none;cursor:pointer;float:right;}
 </style>
 <script>
 $(document).ready(function(){
@@ -56,6 +58,7 @@ $(document).ready(function(){
  	$("#searching").click(function(){
 		getQnaListAjax(1,board_id);
 		getQnaPagingAjax(1,board_id);
+		$('#searching').after("<a href='/qnaList'>[-> 목록가기]</a> ");
 	}); 
 	
 });
@@ -102,8 +105,9 @@ function getQnaPagingAjax(pageNum, board_id){
 			</div>
 			<div class="noticeContainerRight">
 				<table>
-					<colgroup width="80%" />
-					<colgroup width="20%" />
+					<colgroup width="75%" />
+					<colgroup width="10%" />
+					<colgroup width="15%" />
 					<thead>
 						<tr>
 							<th>제목</th>
@@ -119,10 +123,10 @@ function getQnaPagingAjax(pageNum, board_id){
 					<!-- qnaPagingAjax.jsp -->
 				</div>
 				<div>
-					<button id="newPost" >새 질문</button>
+					<button id="newPost">새 질문</button>
 				</div>
 				<div class="noticeSearchDiv">
-					<input type="text" class="noticeSearchInput" value=""/>
+					<input type="text" class="noticeSearchInput" />
 					<i id="searching" class="icon-magnifier icons"></i>
 				</div>
 			</div>

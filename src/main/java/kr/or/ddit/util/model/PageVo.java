@@ -8,20 +8,75 @@ public class PageVo {
 	private int page;
 	private int pageSize;
 	private String member_mail;
+	private String project_id;
+	
+	public String getProject_id() {
+		return project_id;
+	}
 
-	// 마이페이지 검색부분 
+
+	public void setProject_id(String project_id) {
+		this.project_id = project_id;
+	}
+
+
+
+	// 검색부분 
 	private String searchText;
 	private String searchBookText;
 	private String searchTodoText;
 	private String searchEndText;
 	private String searchTextFriend;
-
+	private String searchTextFriendList;
+	private String searchTextMySendFriendList;
+	private String searchTextYouGiveFriendList;
+	private String searchFileList;
 	
+	
+
 	@Override
 	public String toString() {
-		return "PageVo [page=" + page + ", pageSize=" + pageSize + ", member_mail=" + member_mail + ", searchText="
-				+ searchText + ", searchBookText=" + searchBookText + ", searchTodoText=" + searchTodoText
-				+ ", searchEndText=" + searchEndText + ", searchTextFriend=" + searchTextFriend + "]";
+		return "PageVo [page=" + page + ", pageSize=" + pageSize + ", member_mail=" + member_mail + ", project_id="
+				+ project_id + ", searchText=" + searchText + ", searchBookText=" + searchBookText + ", searchTodoText="
+				+ searchTodoText + ", searchEndText=" + searchEndText + ", searchTextFriend=" + searchTextFriend
+				+ ", searchTextFriendList=" + searchTextFriendList + ", searchTextMySendFriendList="
+				+ searchTextMySendFriendList + ", searchTextYouGiveFriendList=" + searchTextYouGiveFriendList
+				+ ", searchFileList=" + searchFileList + "]";
+	}
+
+
+	public String getSearchFileList() {
+		return searchFileList;
+	}
+	
+	
+	public void setSearchFileList(String searchFileList) {
+		this.searchFileList = searchFileList;
+	}
+	
+	
+	public String getSearchTextYouGiveFriendList() {
+		return searchTextYouGiveFriendList;
+	}
+
+	public void setSearchTextYouGiveFriendList(String searchTextYouGiveFriendList) {
+		this.searchTextYouGiveFriendList = searchTextYouGiveFriendList;
+	}
+
+	public String getSearchTextMySendFriendList() {
+		return searchTextMySendFriendList;
+	}
+
+
+	public void setSearchTextMySendFriendList(String searchTextMySendFriendList) {
+		this.searchTextMySendFriendList = searchTextMySendFriendList;
+	}
+
+	public String getSearchTextFriendList() {
+		return searchTextFriendList;
+	}
+	public void setSearchTextFriendList(String searchTextFriendList) {
+		this.searchTextFriendList = searchTextFriendList;
 	}
 	public String getSearchTextFriend() {
 		return searchTextFriend;

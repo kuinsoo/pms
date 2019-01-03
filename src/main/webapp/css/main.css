@@ -174,7 +174,7 @@ header {
 }
 
 .headerContainer > .headerRightContent {
-    width:320px;
+    width:340px;
     height: 45px;
     margin-top: 5px;
     float: right;
@@ -517,6 +517,23 @@ header {
 .facing {
 	display:block;width:40px;height:40px;cursor:pointer;
 	margin-top:13px;float:left;color:#000;font-size:25px;
+	position:relative;padding-left:10px;
+}
+.messageCounterDiv {
+	position:absolute;right:0px;bottom:7px;z-index:5;width:20px;height:20px;
+	border-radius:100%;background-color:#f00;display:none;
+}
+.messageCounterDiv > span {
+	padding-top:1px;
+	display:block;font-size:15px;vertical-align:middle;color:#fff;font-weight:bold;text-align:center;
+}
+.friendCounterDiv {
+	position:absolute;right:0px;bottom:7px;z-index:5;width:20px;height:20px;
+	border-radius:100%;background-color:#f00;display:none;
+}
+.friendCounterDiv > span {
+	padding-top:1px;
+	display:block;font-size:15px;vertical-align:middle;color:#fff;font-weight:bold;text-align:center;
 }
 
 .dialog__trigger, .dialog__action {
@@ -813,8 +830,7 @@ header {
 /* SECTION */
 .currentMain {
     width: 100%;
-    min-height: 100%;
-    height: auto;
+    min-height:100%;
     background-color: #f2f4f7;
     padding-top: 60px;
     float: left;
@@ -826,9 +842,8 @@ header {
 }
 
 /* MAIN SLIDE */
-.currentMain > .currentMainContainer > .currentMainSlide {
-    margin-top: 20px;
-    width: 1400px;
+.currentMainSlide {
+    width: 100%;
     height: 500px;
     background-color: #fff;
     border: 1px solid #dee3eb;
@@ -1023,6 +1038,7 @@ header {
     width: 100%;
     outline: none;
     padding: 5px;
+    height:200px;
 }
 
 .projectStartEndDiv {
@@ -1281,8 +1297,8 @@ header {
 }
 .white_content:target{opacity:1;pointer-events:auto;}
 .white_content > div {
-	position:absolute;top:50%;left:50%;margin-top:-150px;margin-left:-150px;
-	width:300px;height:300px;padding:20px;border:1px solid #dee3eb;
+	position:absolute;top:50%;left:50%;margin-top:-300px;margin-left:-300px;
+	width:600px;height:600px;border:1px solid #dee3eb;border-radius:10px;
 	background-color:white;overflow:hidden;
 }
 .white_content > div > .mainCloseBtns {
@@ -1297,6 +1313,27 @@ header {
 .projectUpdateSettings{border:none;cursor:pointer;width:100%;height:30px;background-color:#746fcc;color:#fff;font-size:20px;outline:none;}
 .projectDeleteSettings{border:none;cursor:pointer;width:100%;height:30px;background-color:#746fcc;color:#fff;font-size:20px;outline:none;}
 
+/* 프로젝트 수정 및 삭제 */
+.projectUDTitle {
+	width:100%;height:50px;background-color:#eee;border-radius:10px 10px 0px 0px;
+	line-height:50px;
+}
+.projectUDTitle > h2{display:block;float:left;color:#000;font-size:20px;text-indent:20px;}
+.projectUDTitle > a{display:block;float:right;margin-top:3px;}
+.projectUDTitle > a > i{color:#000;margin-right:20px;}
+.projectUDContent{width:100%;line-height:20px;padding:20px;}
+.projectUDContent > span {
+	display:block;width:100%;color:#000;text-align:left;
+}
+.projectUDContent > .projectSpan{margin-top:20px;}
+.projectUDTitleInput{width:100%;height:30px;font-size:20px;margin-top:10px;outline:none;}
+.projectStartEndDivp{line-height:20px;}
+.projectStartEndDivp > span{color:#000;text-indent:20px;}
+.projectStartEndDivp{margin-top:20px;}
+.projectStartp{float:left;padding-top:3px;}
+.projectStartInputp{float:left;font-size:20px;margin-left:15px;}
+.projectEndp{clear:left;float:left;padding-top:3px;margin-top:15px;}
+.projectEndInputp{float:left;font-size:20px;margin-left:15px;margin-top:15px;}
 
 
 /* 쪽지 기능 */

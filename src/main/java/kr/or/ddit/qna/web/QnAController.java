@@ -12,9 +12,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.model.PostPageVo;
 import kr.or.ddit.post.model.PostVo;
 import kr.or.ddit.post.service.PostServiceInf;
+import kr.or.ddit.work.service.WorkServiceInf;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 /**
  * kr.or.ddit.qna.web
@@ -27,8 +31,15 @@ import kr.or.ddit.post.service.PostServiceInf;
  */
 @Controller
 public class QnAController {
+	
 	@Autowired
 	private PostServiceInf postService;
+	
+	@Autowired
+	private WorkServiceInf workService;
+	
+	@Autowired
+	private MessageServiceInf messageService;
 	
 	Logger logger = LoggerFactory.getLogger(QnAController.class);
 	
@@ -41,7 +52,12 @@ public class QnAController {
 	* Method 설명 : 질의응답 게시판 목록 
 	*/
 	@RequestMapping(value= "/qnaList") 
-	public String qnaView() {
+	public String qnaView(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "qna/qnaList";
 	}
@@ -57,7 +73,7 @@ public class QnAController {
 	* Method 설명 : qnaList에서 ajax를 통해 qnaListAjax(글 목록) jsp 호출 
 	*/
 	@RequestMapping(value= "/qnaListAjax", method= {RequestMethod.GET,RequestMethod.POST})
-	public String qnaListAjax(PostPageVo postPageVo, Model model) {
+	public String qnaListAjax(PostPageVo postPageVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		
 		List<PostVo> postVoList;
 		if(postPageVo.getSearchText().equals("")) {
@@ -67,6 +83,11 @@ public class QnAController {
 		}
 		
 		model.addAttribute("postVoList", postVoList);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 		return "qna/qnaListAjax";
 	}
@@ -82,7 +103,7 @@ public class QnAController {
 	* Method 설명 : qnaList에서 ajax를 통해 qnaPagingAjax(페이지 네비게이션) jsp 호출 
 	*/
 	@RequestMapping(value= "/qnaPagingAjax", method= {RequestMethod.GET,RequestMethod.POST})
-	public String qnaPagingAjax(PostPageVo postPageVo, Model model) {
+	public String qnaPagingAjax(PostPageVo postPageVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		
 		int postListCnt = postService.postListCnt(postPageVo);
 		
@@ -90,6 +111,11 @@ public class QnAController {
 		
 		model.addAttribute("postListCnt", (int)Math.ceil((double)postListCnt/ postPageVo.getPostCnt()));
 		model.addAttribute("postVoList", postVoList);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 		return "qna/qnaPagingAjax";
 	}
@@ -104,12 +130,17 @@ public class QnAController {
 	* Method 설명 : 글 상세 
 	*/
 	@RequestMapping(value= "/qnaDetail", method= RequestMethod.GET)
-	public String qnaDtailView(PostVo postVo, Model model) {
+	public String qnaDtailView(PostVo postVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 
 		postVo = postService.selectQnaPost(postVo.getPost_id());
 		// *** null이 나오는 까닭은 list를 출력하는 sql에 select문에 id가 없었기 때문 
 		
 		model.addAttribute("postVo", postVo);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "qna/qnaDetail";
 	}
@@ -123,11 +154,16 @@ public class QnAController {
 	 * @return Method 설명 : Q&A 글 수정 
 	 */
 	@RequestMapping(value= "/qnaMody", method= RequestMethod.GET)
-	public String qnaModyView(PostVo postVo, Model model) {
+	public String qnaModyView(PostVo postVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 
 		postVo = postService.selectQnaPost(postVo.getPost_id());
 		
 		model.addAttribute("postVoDetail", postVo);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "qna/qnaMody";
 	}	
@@ -141,13 +177,19 @@ public class QnAController {
 	* Method 설명 : 작성(수정)한 글 저장 
 	*/
 	@RequestMapping(value= "/qnaPostSave", method= {RequestMethod.GET, RequestMethod.POST})
-	public String qnaPostSave(PostVo postVo, Model model) {
+	public String qnaPostSave(PostVo postVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		
 		postService.updateQnaPost(postVo);
 		//set하지 않아도 form에서 전달하는 순간, public String qnaPostSave(Vo vo)에 선언한 vo 중 name이 같으면 vo에 저장한다
 		
 		//return "qna/qnaList";
 		//return "redirect:/qnaDetail?post_id="+postVo.getPost_id();
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "qna/alert";
 	}
 	
@@ -160,9 +202,14 @@ public class QnAController {
 	 * @return Method 설명 : Q&A  글 삭제 
 	 */
 	@RequestMapping(value= "/qnaDel", method= RequestMethod.GET)
-	public String qnaDelView(PostVo postVo) {
+	public String qnaDelView(PostVo postVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		
 		postService.deleteQnaPost(postVo.getPost_id());
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "qna/qnaList";
 	}
@@ -176,14 +223,19 @@ public class QnAController {
 	 * @return Method 설명 : Q&A 글 작성 
 	 */
 	@RequestMapping(value= "/qnaForm", method= RequestMethod.GET)
-	public String qnaFormView(PostVo postVo, HttpServletRequest req, Model model) {  
+	public String qnaFormView(PostVo postVo, HttpServletRequest req, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		// ??? @RequestParam("userId") String userId
 				
 		//postVo.setBoard_id((String)req.getAttribute("board_id"));
 		// ??? (String)
 		
 		model.addAttribute("postVo", postVo);
-		//파라미터로 받은, 아직 등록되지않은 변수를 저장하기위해 
+		//파라미터로 받은, 아직 등록되지않은 변수를 저장하기위해
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "qna/qnaForm";
 	}
@@ -197,9 +249,14 @@ public class QnAController {
 	* Method 설명 : 새 질문 글 저장
 	*/
 	@RequestMapping(value= "/newPost", method={RequestMethod.GET, RequestMethod.POST})
-	public String qnaIndert(PostVo postVo) {
+	public String qnaIndert(PostVo postVo, @SessionAttribute("memberVo")MemberVo memberVo, Model model) {
 		
 		postService.insertQnaPost(postVo);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "qna/alert";	
 	}
@@ -214,10 +271,15 @@ public class QnAController {
 	 * @return Method 설명 : Q&A  답글  
 	 */
 	@RequestMapping(value= "/qnaReply")
-	public String qnaReplyView(PostVo postVo, Model model) {
+	public String qnaReplyView(PostVo postVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 
 		model.addAttribute("postVo", postVo);
 		//파라미터로 받은, 아직 등록되지않은 변수를 저장하기위해 (글 내용 -> 답글)
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "qna/qnaForm";
 	}
