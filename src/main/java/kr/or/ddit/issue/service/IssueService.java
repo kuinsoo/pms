@@ -202,5 +202,18 @@ public class IssueService implements IssueServiceInf{
 	public int issueDelete(String issue_id) {
 		return issueMapper.issueDelete(issue_id);
 	}
+
+	/**
+	* Method : pjtAllIssueHistory
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param sid
+	* @return
+	* Method 설명 : 프로젝트별 이슈 조회
+	*/
+	@Override
+	public List<IssueVo> pjtAllIssueHistory(String sid) {
+		return issueMapper.pjtAllIssueHistory(sid);
+	}
 	
 }

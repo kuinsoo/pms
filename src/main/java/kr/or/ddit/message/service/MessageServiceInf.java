@@ -32,6 +32,18 @@ public interface MessageServiceInf {
 	int totalmessageSizeCheck(String member_mail);
 	
 	/**
+	 * Method : totalMemberSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param searchTextFriendList
+	 * @return
+	 * Method 설명 : 전체 리스트 뽑아오고 (검색 부분  : 전체 값 )
+	 */
+	int totalMemberListSearch(PageVo pageVo);
+	
+	
+	
+	/**
 	 * Method : totalFriendSizeCheck
 	 * 작성자 : pc07
 	 * 변경이력 :

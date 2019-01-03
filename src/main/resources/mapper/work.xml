@@ -40,6 +40,45 @@
 	AND     D.MEMBER_MAIL		= #{member_mail}
 	ORDER	BY A.WORK_ID DESC
 	</select>
+	
+	<!-- 로그인 한 회원의 업무 총 갯수 뽑아오기 2019-01-02 임규승 -->
+	<select id="workMemberTotalCnt" resultType="int" parameterType="String">
+		SELECT  COUNT(*)
+		FROM    WORK A, WORK_MEMBER B, PROJECT_MEMBER C, MEMBER D
+		WHERE   A.WORK_ID			= B.WORK_ID
+		AND     B.PMEMBER_ID		= C.PMEMBER_ID
+		AND     C.PMEMBER_MEMBER	= D.MEMBER_MAIL
+		AND     D.MEMBER_MAIL		= #{member_mail}
+		ORDER	BY A.WORK_ID DESC
+	</select>
+	
+	<!-- 알림을 위한 업무 게시글 페이징 조회 2019-01-02 -->
+	<select id="getWorkPageList" resultType="workVo" parameterType="map">
+		SELECT  *
+		FROM    (
+		        select  rownum rnum,
+		                a.*
+		        from    (
+		                select  a.*
+		                from    (
+		                        SELECT  ROWNUM labelrn,
+		                                A.*
+		                        FROM    (
+		                                SELECT  WORK_TITLE
+		                                FROM    WORK A, WORK_MEMBER B, PROJECT_MEMBER C, MEMBER D
+		                                WHERE   A.WORK_ID			= B.WORK_ID
+		                                AND     B.PMEMBER_ID		= C.PMEMBER_ID
+		                                AND     C.PMEMBER_MEMBER	= D.MEMBER_MAIL
+		                                AND     D.MEMBER_MAIL		= #{member_mail}
+		                                ) A
+		                        ) a
+		                order by labelrn desc
+		                ) a
+		        ) B
+		WHERE   rnum BETWEEN #{page} * #{pageSize} - (#{pageSize} - 1) AND #{page} * #{pageSize}
+		ORDER BY rnum
+	</select>
+	
 
 	<select id="selectWorks" resultType="workVo" parameterType="String">
 		select W.WORK_ID,
@@ -78,7 +117,7 @@
 		UPDATE WORK
 		SET WORK_TITLE = #{work_title}, WORK_CONTENT = #{work_content}, WORK_TYPE = #{work_type},
 		 WORK_IMPORTANCE = ${work_importance},  WORK_SDATE = #{work_sdate}, WORK_EEDATE = #{work_eedate},
-		 WORK_PROGRESS = #{work_progress}, WORK_EDATE = #{work_edate} , WORK_PUBLIC = #{work_public},
+		 WORK_PROGRESS = #{work_progress}, WORK_PUBLIC = #{work_public},
 		 WORK_COLOR = #{work_color}
 		WHERE work_id = #{work_id}
 	</update>
@@ -117,6 +156,10 @@
 			order by TODO_ID
 	</select>
 
+	<select id="selectWork" resultType="workVo" parameterType="String">
+		select * from work
+		where work_id = #{work_id}
+	</select>
 
 	<!-- 변찬우_20190102 : 회의실에서 나의업무목록 출력 -->
 	<select id="myWorkList" parameterType="workVo" resultType="workVo">

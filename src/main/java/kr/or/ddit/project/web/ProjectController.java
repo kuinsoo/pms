@@ -8,6 +8,7 @@ import kr.or.ddit.meeting.service.MeetingServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
@@ -17,10 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -66,6 +64,9 @@ public class ProjectController {
 	
 	@Autowired
 	private PostServiceInf postService;
+	
+	@Autowired
+	private MessageServiceInf messageService;
 
 
 	/**
@@ -169,7 +170,7 @@ public class ProjectController {
 	 *
 	 * @throws UnsupportedEncodingException the unsupported encoding exception
 	 */
-	@RequestMapping(value = "/subMain", method = RequestMethod.POST )
+	@RequestMapping(value = "/subMain", method = RequestMethod.POST)
 	public String subMain(Model model, @RequestParam("project_id")String project_id, MeetingVo meetingVo,
 						  @SessionAttribute("memberVo")MemberVo memberVo, HttpServletResponse response) throws UnsupportedEncodingException {
 
@@ -213,8 +214,10 @@ public class ProjectController {
 		cookProject_title.setMaxAge(6); 
 		response.addCookie(cookProject_title);
 		
-		/* 공지사항 알림 */
+		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 		return "main/subMain";
 	}

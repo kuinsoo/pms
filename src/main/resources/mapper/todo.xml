@@ -112,5 +112,31 @@
 		        todo_content = #{todo_content}
 		WHERE   todo_id = #{todo_id}
 	</update>
-	
+
+
+	<!-- todolist count 개수 필요 -->
+	<select id="todoComplete" resultType="int" parameterType="Map">
+			select count(*) from todo, work, PROJECT
+			  where project_id = WORK_PROJECT
+				and work_id = todo.TODO_WORK
+			and project_id = #{project_id}
+			and work_id = #{work_id}
+			and TODO_COMPLET = 'Y'
+	</select>
+
+	<select id="selectTodo" resultType="todoVo" parameterType="String">
+		select * from todo
+		where TODO_ID = #{todo_id}
+	</select>
+
+	<select id="selectCntTodoList" resultType="todoVo" parameterType="String">
+		select * from todo
+		where TODO_WORK = #{work_id}
+	</select>
+
+	<select id="selectCntTodoComplete" resultType="todoVo" parameterType="String">
+		select * from todo
+		where TODO_WORK = #{work_id}
+		and TODO_COMPLET = 'Y'
+	</select>
 </mapper>

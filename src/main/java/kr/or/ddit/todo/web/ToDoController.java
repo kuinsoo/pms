@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import kr.or.ddit.work.service.WorkServiceInf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +39,9 @@ public class ToDoController {
 	
 	@Autowired
 	private IssueServiceInf issueService;
+
+	@Autowired
+	private WorkServiceInf workService;
 
 	/**
 	 * Method : ajaxInsertTodo
@@ -179,11 +183,14 @@ public class ToDoController {
 	@RequestMapping(value="/todoCompletY", method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
 	public void todoCompletY(@RequestParam("todo_id")String todo_id, @RequestParam("chk")String chk) {
+		ToDoVo todoVo = todoService.selectTodo(todo_id);
+		WorkVo workVo = workService.selectWork(todoVo.getTodo_work());
 		Map<String, Object> todoUpdateMap = new HashMap<String, Object>();
 		todoUpdateMap.put("todo_id", todo_id);
 		todoUpdateMap.put("chk", chk);
 		try {
-			todoService.todoCompletYN(todoUpdateMap);
+			/*todoService.todoCompletYN(todoUpdateMap);*/
+			workService.updateWork(workVo, todoUpdateMap, todoVo.getTodo_work());
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

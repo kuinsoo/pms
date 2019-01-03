@@ -8,6 +8,8 @@ import kr.or.ddit.meeting.service.MeetingServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.message.service.MessageServiceInf;
+import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.project.model.InviteProjectVo;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
@@ -58,6 +60,12 @@ public class MemberController {
 
 	@Autowired
 	private MeetingServiceInf meetingService;
+	
+	@Autowired
+	private MessageServiceInf messageService;
+	
+	@Autowired
+	private PostServiceInf postService;
 
 	@RequestMapping(value = "/inviteTeam" ,method = RequestMethod.POST)
 	public String inviteTeam(Model model , @RequestParam("inviteTeam")String[] inviteMails, @RequestParam("project_id")String project_id,
@@ -119,6 +127,11 @@ public class MemberController {
 		model.addAttribute("meetingList",meetingList );
 
 		model.addAttribute("member_name",memberService.selectUser(project_id) );
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 		return "main/subMain";
 	}

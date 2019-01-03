@@ -1,17 +1,17 @@
 package kr.or.ddit.work.service;
 
-import java.util.List;
-import java.util.Map;
-
-import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.todo.model.ToDoVo;
+import kr.or.ddit.todo.service.ToDoServiceInf;
+import kr.or.ddit.util.model.PageVo;
+import kr.or.ddit.work.mapper.WorkMapper;
+import kr.or.ddit.work.model.WorkVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.or.ddit.schedule.model.ScheduleVo;
-import kr.or.ddit.work.mapper.WorkMapper;
-import kr.or.ddit.work.model.WorkVo;
+import java.util.List;
+import java.util.Map;
 
 /**
  * kr.or.ddit.work.service
@@ -29,7 +29,9 @@ public class WorkService implements WorkServiceInf{
 
 	@Autowired
 	private WorkMapper workMapper;
-	
+
+	@Autowired
+	private ToDoServiceInf todoService;
 	/**
 	* Method : workAllSchedule
 	* 작성자 : jerry
@@ -94,6 +96,20 @@ public class WorkService implements WorkServiceInf{
 	*/
 	@Override
 	public int updateWork(WorkVo workVo) {
+		return workMapper.updateWork(workVo);
+	}
+
+	@Override
+	public int updateWork(WorkVo workVo, Map<String, Object> todoMap, String work_id) {
+		todoService.todoCompletYN(todoMap);
+
+		List<ToDoVo> todoList = (List<ToDoVo>) todoService.selectCntTodoList(work_id);
+		int todoListCnt = todoList.size();
+		List<ToDoVo> todoListCpt = (List<ToDoVo>) todoService.selectCntTodoComplete(work_id);
+		int todoListCCnt = todoListCpt.size();
+		int totalP = 100/todoListCnt;
+		int currentP = todoListCCnt * totalP;
+		workVo.setWork_progress(currentP);
 		return workMapper.updateWork(workVo);
 	}
 

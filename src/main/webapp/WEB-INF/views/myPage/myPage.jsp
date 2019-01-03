@@ -438,7 +438,7 @@
 						html += "	<td>"+ mm.att_id +"</td>";
 						html += "	<td>"+ mm.project_title +"</td>";
 						html += "	<td>"+ mm.att_name +"</td>";
-						html += "	<td>"+ "<input type='button' onclick ='getmyProjectFileAttachId("+mm.att_id+");' value='파일 다운로드'/>"+"</td>";
+						html += "	<td>"+ "<input type='button' onclick ='getmyProjectFileAttachId("+mm.att_id+");' value='파일 다운로드' class='fileDownLoads' />"+"</td>";
 						html += "</tr>";
 					});
 					$("#myFileList").html("");
@@ -692,8 +692,7 @@
 						<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 참여중인 목록  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 						<div id="tabs2-1">
 							<div class="projectTable">
-								<div class="projectSearchDiv">　　
-									<button onclick="getMyPageList(1);">목록으로</button>
+								<div class="projectSearchDiv">
 									<form name ="searchProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchText" name="searchText" value="${searchText}" placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
@@ -727,13 +726,13 @@
 						<div id="tabs2-1-1">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-								<button onclick="getMyEndPageList(1);">목록으로</button>
 									<form name ="searchEndProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchEndText" name="searchEndText" value="${searchEndText}" placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchEndProject();"></i>  
 									</form>
+									<button onclick="getMyEndPageList(1);" class="getMyPageList">목록으로</button>
 								</div>
 								<table>
 									<colgroup width="10%" />
@@ -760,13 +759,13 @@
 						<div id="tabs2-2">
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
-									<button onclick="getmybookMarkProjectList(1);">목록으로</button>
 									<form name ="searchBookProject" method="POST" onsubmit="return false;">
 										<input type="text" id="searchBookText" name ="searchBookText" value='${searchBookText}' placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons searchBtn" onclick="javascript:getSearchBookProject();"></i>  
 									</form>
+									<button onclick="getmybookMarkProjectList(1);" class="getMyPageList">목록으로</button>
 								</div>
 								<table>
 									<colgroup width="10%" />
@@ -794,7 +793,7 @@
 							<div class="projectTable">
 								<div class="projectSearchDiv">　　
 								 <form name ="searchTodoProject" id ="searchTodoProject" method="POST" onsubmit="return false;">
-										 <input type="text" id="searchTodoText" name ="searchTodoText" value='${searchTodoText}'  placeholder="검색어를 입력해주세요"/>
+										<input type="text" id="searchTodoText" name ="searchTodoText" value='${searchTodoText}'  placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />
 										<input type="hidden" name="pageSize" value='10' />
 										<i class="icon-magnifier icons" onclick="javascript:getSearchTodoProject();"></i>  
@@ -829,8 +828,7 @@
 										<option onchange="javascript:getmyProjectFileSelect(${mf.project_id});">${mf.project_title}</option>
 									</c:forEach> 
 								</select> --%>
-								<div class="projectSearchDiv">　　
-								<button onclick="getmyProjectFileList(1);">목록으로</button>
+								<div class="projectSearchDiv">
 									<form name ="searchFileList" method="POST" onsubmit="return false;">
 										 <input type="text" id="searchFileList" name ="searchFileList" value='${searchFileList}' placeholder="검색어를 입력해주세요"/>
 										<input type="hidden" name="page" value='1' />

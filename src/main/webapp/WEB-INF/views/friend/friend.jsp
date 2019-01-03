@@ -19,7 +19,7 @@
 						      <h2>친구찾기</h2>
 								<form name ="searchTextFriendList" method="POST" onsubmit="return false;">
 										<input type="text" id="searchTextFriendList" name="searchTextFriendList" class="friendSearchInput" placeholder="찾으시는 분의 이메일을 입력해주세요" />
-										<input type="hidden" name="page" value='1'/>
+										<input type="hidden" name="page" id= "friendListPage" value='1'/>
 										<input type="hidden" name="pageSize" value='10' />
 										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getAllMemberSearch();"/>
 										<button onclick="getAllMember(1);">목록으로</button>
@@ -429,11 +429,7 @@
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.member_mail +"</td>";
 						html += "	<td>"+ mm.member_name +"</td>";
-						/* if(){
-							html += "	<td>"+ "<input type='button' onclick ='getyouGiveNoAjax(\""+mm.member_mail+"\")'; value='요청보냄'/>"+"</td>";
-						}else{ */
-							html += "	<td>"+ "<input type='button' onclick ='getyouGiveNoAjax(\""+mm.member_mail+"\")'; value='친구 등록'/>"+"</td>";
-						/* } */
+						html += "	<td>"+ "<input type='button' id ='myMemberListBtn' onclick ='getyouGiveNoAjax(\""+mm.member_mail+"\")'; value='친구 등록'/>"+"</td>";
 						html += "</tr>";
 					});
 					
@@ -457,6 +453,7 @@
 		
 		// 친구 추가 버튼을 클릭할때  
 		function getyouGiveNoAjax(member_mail){
+			$("#myMemberListBtn").attr("value","요청보냄");
 			var pageSize = 10;
 			$.ajax({
 				type: "GET",
@@ -469,9 +466,17 @@
 			});
 		}
 		
-		function getAllMemberSearch(){
+		// 전체 사용자 검색 부분 
+			//<input type="hidden" name="page" value='1'/>
+
+			//$('form[name=searchTextFriendList]') 하위 input name=page의 값을 함수 파라미터로 설정 
+			//var page = $('form[name=searchTextFriendList]').
+			//var pageSize = 10;
+		
+		function getAllMemberSearch(page){
+			
+			$("#friendListPage").attr("value",page);
 			var param = $('form[name=searchTextFriendList]').serialize();
-			var pageSize = 10;
 			$.ajax({
 				type: "POST",
 				url : "/AllMemberListSearchAjax",
@@ -484,7 +489,7 @@
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.member_mail +"</td>";
 						html += "	<td>"+ mm.member_name +"</td>";
-						html += "	<td>"+ "<input type='button' value='친구 등록'/>"+"</td>";
+						html += "	<td>"+ "<input type='button' id ='myMemberListBtn' onclick ='getyouGiveNoAjax(\""+mm.member_mail+"\")'; value='친구 등록'/>"+"</td>";
 						html += "</tr>";
 					});
 					
@@ -492,11 +497,11 @@
 					$("#myMemberList").html(html);
 					var i  = 1;
 					var paging ="";
-						paging +="<li><a href='javascript:getAllMember("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
-					for(var i= 1; i<= data.pageCnt; i++) {
-						paging += "<li><a href='javascript:getAllMember("+ i +");'>"+ i+ "</a></li>";
+						paging +="<li><a href='javascript:getAllMemberSearch("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<= data.searchCnt; i++) {
+						paging += "<li><a href='javascript:getAllMemberSearch("+ i +");'>"+ i + "</a></li>";
 					}
-						paging +="<li><a href='javascript:getAllMember("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+						paging +="<li><a href='javascript:getAllMemberSearch("+ data.searchCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 					$(".paginationMember").html(paging);
 				},
 				fail : function(xhr){

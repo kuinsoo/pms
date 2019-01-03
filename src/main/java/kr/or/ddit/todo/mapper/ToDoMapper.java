@@ -107,5 +107,44 @@ public interface ToDoMapper {
 	* Method 설명 : to-do 수정
 	*/
 	int todoUpdate(ToDoVo todoVo);
-	
+
+	/**
+	 * Method : todoUpdate
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param todoMap
+	 * @return
+	 * Method 설명 : to-do 수정
+	 */
+	Integer todoComplete(Map<String, String> todoMap);
+
+	/**
+	 * Method : todoUpdate
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param todo_id
+	 * @return
+	 * Method 설명 : to-do 객체 검색
+	 */
+	ToDoVo selectTodo(String todo_id);
+
+	/**
+	 * Method : todoUpdate
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param work_id
+	 * @return
+	 * Method 설명 : to-do 객체 검색
+	 */
+	List<ToDoVo> selectCntTodoList(String work_id);
+
+	/**
+	 * Method : todoUpdate
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param work_id
+	 * @return
+	 * Method 설명 : to-do 완료 객체 검색
+	 */
+	List<ToDoVo> selectCntTodoComplete(String work_id);
 }

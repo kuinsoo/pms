@@ -23,6 +23,7 @@ import kr.or.ddit.message.model.MessageVo;
 import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.util.model.PageVo;
+import kr.or.ddit.work.service.WorkServiceInf;
 import oracle.net.aso.f;
 
 /**
@@ -45,6 +46,10 @@ public class MessageController {
 	
 	@Autowired
 	private PostServiceInf postService;
+	
+	@Autowired
+	private WorkServiceInf workService;
+	
 	
 	
 	
@@ -175,8 +180,7 @@ public class MessageController {
 		return myMemberMap;
 	}
 	
-	
-	
+	// 전체 사용자 검색 부분 
 	@ResponseBody
 	@RequestMapping(value="/AllMemberListSearchAjax", method= RequestMethod.POST)
 	public Map<String, Object> AllMemberListSearchAjax (@SessionAttribute("memberVo") MemberVo memberVo , PageVo pageVo){
@@ -188,16 +192,14 @@ public class MessageController {
 		}
 		List<MemberVo> myMemberList = messageservice.totalMemberSearch(pageVo);
 		
-		int pageCnt = messageservice.totalMember(memberVo.getMember_mail());
+		int searchCnt = messageservice.totalMemberListSearch(pageVo);
 		
 		Map<String, Object> myMemberMap = new HashMap<>();
 		myMemberMap.put("myMemberList", myMemberList);
-		myMemberMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		myMemberMap.put("searchCnt", (int)Math.ceil((double)searchCnt/pageVo.getPageSize()));
 		
 		return myMemberMap;
 	}
-	
-	
 	
 	@ResponseBody
 	@RequestMapping(value="/myFriendsDelete", method = RequestMethod.GET)
@@ -578,8 +580,10 @@ public class MessageController {
 	}
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	@RequestMapping(value="/friendView")
-	public String friendView(Model model) {
-		
+	public String friendView(Model model,@SessionAttribute("memberVo") MemberVo memberVo) {
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageservice.totalMsgReceived(memberVo.getMember_mail()));
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		return "friend/friend";
 	}

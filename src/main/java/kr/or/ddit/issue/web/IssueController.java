@@ -22,8 +22,11 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import kr.or.ddit.issue.model.IssueVo;
 import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.message.service.MessageServiceInf;
+import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.util.model.PageVo;
+import kr.or.ddit.work.service.WorkServiceInf;
 
 /**
  * kr.or.ddit.issue.web
@@ -40,6 +43,15 @@ public class IssueController {
 	
 	@Autowired
 	private IssueServiceInf issueService;
+	
+	@Autowired
+	private PostServiceInf postService;
+	
+	@Autowired
+	private WorkServiceInf workService;
+	
+	@Autowired
+	private MessageServiceInf messageService;
 	
 	/**
 	* Method : issueHistory
@@ -68,6 +80,11 @@ public class IssueController {
 		
 		model.addAttribute("myProjectList", myProjectList);
 		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "history/issueHistory";
 	}
 	
@@ -81,19 +98,25 @@ public class IssueController {
 	* @return
 	* Method 설명 : 이슈히스토리 메뉴에 프로젝트 list 조회(Ajax 적용)
 	*/
-	@RequestMapping(value="/issueHistoryAjax", method=RequestMethod.POST)
-	public String issueHistoryAjax(@SessionAttribute("memberVo") MemberVo memberVo, PageVo pageVo, Model model) {
-		
+	@RequestMapping(value="/issueHistoryAjax", method= {RequestMethod.POST, RequestMethod.GET})
+	public String issueHistoryAjax(@SessionAttribute("memberVo")MemberVo memberVo, PageVo pageVo, Model model) {
 		List<ProjectVo> history_myProjectList = issueService.issueHistoryPagination(pageVo);
 		int projectCnt = issueService.projectCnt(pageVo);
+		List<IssueVo> pjtAllIssueHistory = issueService.pjtAllIssueHistory(memberVo.getMember_mail());
 		
 		Map<String, Object> myProjectList = new HashMap<String, Object>();
 		myProjectList.put("percentList", getPercentList(history_myProjectList));
+		myProjectList.put("issueSdateList", getIssueSdateList(pjtAllIssueHistory));
 		myProjectList.put("history_myProjectList", history_myProjectList);
+		myProjectList.put("pjtAllIssueHistory", pjtAllIssueHistory);
 		
 		model.addAttribute("projectCnt", (int)Math.ceil((double)projectCnt / pageVo.getPageSize()));
-		
 		model.addAttribute("myProjectList", myProjectList);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "history/issueHistoryAjax";
 	}
@@ -108,7 +131,7 @@ public class IssueController {
 	* Method 설명 : 이슈 등록 / TODO_ISSUE 컬럼 값 추가 / 이슈 list 조회
 	*/
 	@RequestMapping(value="/issueInsert", method= {RequestMethod.POST, RequestMethod.GET})
-	public String issueInsert(IssueVo issueVo, Model model) {
+	public String issueInsert(IssueVo issueVo, Model model, MemberVo memberVo) {
 		try {
 			int result = issueService.issueInsert(issueVo);
 			if(result != 0) {
@@ -121,6 +144,11 @@ public class IssueController {
 		List<IssueVo> issueList = issueService.issueSelectList(issueVo.getTodo_id());
 		
 		model.addAttribute("issueList", issueList);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "issue/issueSelectHtmlAjax";
 	}
@@ -135,10 +163,15 @@ public class IssueController {
 	* Method 설명 : 이슈 list 조회
 	*/
 	@RequestMapping(value="/issueSelectList", method= {RequestMethod.POST, RequestMethod.GET})
-	public String issueSelectList(@RequestParam("todo_id")String todo_id, Model model) {
+	public String issueSelectList(@RequestParam("todo_id")String todo_id, Model model, MemberVo memberVo) {
 		List<IssueVo> issueList = issueService.issueSelectList(todo_id);
 		
 		model.addAttribute("issueList", issueList);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "issue/issueSelectHtmlAjax";
 	}
@@ -168,7 +201,7 @@ public class IssueController {
 	* Method 설명 : 이슈 도움 등록
 	*/
 	@RequestMapping(value="/helperUpdate", method= {RequestMethod.POST, RequestMethod.GET})
-	public String helperUpdate(IssueVo issueVo, Model model) {
+	public String helperUpdate(IssueVo issueVo, Model model, MemberVo memberVo) {
 		
 		List<IssueVo> helperList = new ArrayList<IssueVo>();
 		try {
@@ -181,6 +214,11 @@ public class IssueController {
 		}
 		
 		model.addAttribute("helperList", helperList);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "issue/issueHelperHtmlAjax";
 	}
@@ -195,10 +233,15 @@ public class IssueController {
 	* Method 설명 : 이슈 도움 조회
 	*/
 	@RequestMapping(value="/issueHelperList", method= {RequestMethod.POST, RequestMethod.GET})
-	public String issueHelperList(@RequestParam("todo_id")String todo_id, Model model) {
+	public String issueHelperList(@RequestParam("todo_id")String todo_id, Model model, MemberVo memberVo) {
 		List<IssueVo> helperList = issueService.helperSelectList(todo_id);
 		
 		model.addAttribute("helperList", helperList);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "issue/issueHelperHtmlAjax";
 	}
@@ -265,5 +308,50 @@ public class IssueController {
 		return percentList;
 		
 	}//getPercentList()
+	
+	/**
+	* Method : getIssueSdateList
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param pjtAllIssueHistory
+	* @return
+	* Method 설명 : 프로젝트의 총 기간과 이슈 발생일자의 위치를 구하는 메서드
+	*/
+	List<Integer> getIssueSdateList(List<IssueVo> pjtAllIssueHistory){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date pjtSdate = null;		//프로젝트 시작일 선언 및 초기화
+		Date pjtEdate = null;		//프로젝트 종료일 선언 및 초기화
+		Date issueSdate = null;		//이슈발생일자
+		long pjtPeriod = -1;		//프로젝트 총기간 선언 및 초기화
+		long issuePeriod = -1;		//시작일-이슈발생일 선언 및 초기화
+		List<Integer> issueSdateList = new ArrayList<Integer>();	//시작일-이슈발생일 리스트
+		
+		/* 예상종료일과 실종료일의 null 유무를 체크해서 원하는 패턴("yyyyMMdd")으로 값 변환 */
+		for(IssueVo issueVo : pjtAllIssueHistory) {
+			
+			pjtSdate = issueVo.getProject_sdate();
+			issueSdate = issueVo.getIssue_sdate();
+			
+			if(issueVo.getProject_eedate() != null) {
+				pjtEdate = issueVo.getProject_eedate();
+			} else if(issueVo.getProject_edate() != null) {
+				pjtEdate = issueVo.getProject_edate();
+			}
+			
+			/* 프로젝트 총 기간 : 종료일 - 시작일 */
+			long totalDays = pjtEdate.getTime() - pjtSdate.getTime();
+			pjtPeriod = totalDays / (24 * 60 * 60 * 1000);
+
+			/* 지난 기간 : 이슈발생일 - 시작일 */
+			long issueSDates = issueSdate.getTime() - pjtSdate.getTime();
+			issuePeriod = issueSDates / (24 * 60 * 60 * 1000);
+			
+			/* 지난 기간 퍼센트 : (지난 기간 * 100) / 총 기간 */
+			issueSdateList.add((int)((issuePeriod * 100) / pjtPeriod));
+
+		}
+		return issueSdateList;
+		
+	}//getIssueSdateList()
 	
 }

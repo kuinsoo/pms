@@ -4,8 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import kr.or.ddit.member.model.MemberVo;
+import kr.or.ddit.post.model.PostVo;
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.todo.model.ToDoVo;
+import kr.or.ddit.util.model.PageVo;
 import kr.or.ddit.work.model.WorkVo;
 
 /**
@@ -69,6 +71,7 @@ public interface WorkMapper {
 	* Method 설명 : 업무 수정
 	*/
 	int updateWork(WorkVo workVo);
+
 
 	/**
 	 * Method : updateWork
