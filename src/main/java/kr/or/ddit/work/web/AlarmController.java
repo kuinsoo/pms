@@ -34,15 +34,15 @@ import kr.or.ddit.work.service.WorkServiceInf;
  */
 @Controller
 public class AlarmController {
-	
+
 	Logger logger = LoggerFactory.getLogger(AlarmController.class);
 	
 	@Autowired
 	private WorkServiceInf workService;
-	
+
 	@Autowired
 	private PostServiceInf postService;
-	
+
 	@Autowired
 	private MessageServiceInf messageService;
 	
@@ -111,7 +111,7 @@ public class AlarmController {
 	*/
 	@RequestMapping(value="/ajaxNoticeAlarm", method=RequestMethod.GET)
 	public String ajaxNoticeAlarm(Model model, PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo){		
-		
+
 		pageVo.setMember_mail(memberVo.getMember_mail());
 
 		List<PostVo> noticeList = postService.getPostPageList(pageVo);

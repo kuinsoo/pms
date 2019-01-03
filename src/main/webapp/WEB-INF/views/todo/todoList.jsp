@@ -80,7 +80,7 @@
 				data: {"todo_id" : todo_id, "chk" : chk},
 				success: function(data){
 					/* 체크를 풀었으면 삭제버튼 출력 */
-					if(checked == false && todo_issue == null){
+					if(checked == false && todo_issue == ''){
 						var html = "<i class='fas fa-minus' style='color: red; cursor: pointer;' id='todoDelete${todo.todo_id}'></i>";
 						$("#minusBtn"+todo_id).html("");
 						$("#minusBtn"+todo_id).html(html);
