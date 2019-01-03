@@ -37,14 +37,9 @@
 					<c:when test="${history.project_id eq issueCnt.project_id}">
 						<div class="pin" id="pin${issueCnt.rnum}">
 							<i class="fas fa-map-pin" id="issuePin${issueCnt.rnum}" style="position: relative; cursor: pointer;"></i>
-							<p class="arrow_box" style="display: none;">
-								${issueCnt.project_id}
-								${issueCnt.issue_title}
-								${issueCnt.format_issue_sdate}
-								${history.project_id}
-							</p>
 							<div class="fa-map-pin-hover">
-								지태뿌잉뿌잉♡
+								이슈 제목 : ${issueCnt.issue_title}<br>
+								이슈 발생일 : ${issueCnt.format_issue_sdate}<br>
 							</div>
 						</div>
 					</c:when>
@@ -53,5 +48,13 @@
 		</div>
 		<div class="myBar" id="myBar${history.rnum}"></div>
 	</div>
+	<c:choose>
+		<c:when test="${history.project_edate != null && history.project_edate != ''}">
+			<span>프로젝트 시작일 : ${history.format_project_sdate} / 종료일 : ${history.format_project_edate}</span><br>
+		</c:when>
+		<c:otherwise>
+			<span>프로젝트 시작일 : ${history.format_project_sdate} / 종료일 : ${history.format_project_eedate}</span><br>
+		</c:otherwise>
+	</c:choose><br>
 	<span class="historyPercent" id="percent${history.rnum}"></span><br>
 </c:forEach>

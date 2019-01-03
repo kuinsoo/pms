@@ -42,9 +42,10 @@
 		                FROM    project p INNER JOIN project_member pm
 		                ON      pm.pmember_project = p.project_id
 		                WHERE   pm.pmember_member = #{member_mail}
+		                AND		p.project_delete = 'N'
 		                ) A
 		        )
-		WHERE   rnum BETWEEN ${page} * ${pageSize} - (${pageSize} - 1) AND ${page} * ${pageSize}	
+		WHERE   rnum BETWEEN ${page} * ${pageSize} - (${pageSize} - 1) AND ${page} * ${pageSize}
 	</select>
 	
 	<!-- 프로젝트 총 갯수 -->
