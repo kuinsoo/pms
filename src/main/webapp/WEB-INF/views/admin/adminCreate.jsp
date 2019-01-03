@@ -130,7 +130,7 @@ ul{list-style-type:none;}
 						<colgroup width="90%" />
 						<tr>
 							<td class="titleTd">제목</td>
-							<td><input type="text" name="post_title" pattern="<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>" required /></td>
+							<td><input type="text" name="post_title" /></td>
 						</tr>
 						<tr>
 							<td class="titleTd">게시물 내용</td>

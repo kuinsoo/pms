@@ -92,7 +92,7 @@
     </div>
 </nav>
 
-<div id="wrap">recipientSelect
+<div id="wrap">
     <div id = "Progress_Loading"><!-- 로딩바 -->
         <img src="/images/Progress_Loading.gif"/>
     </div>
