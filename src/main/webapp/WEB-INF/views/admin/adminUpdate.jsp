@@ -134,7 +134,7 @@ ul{list-style-type:none;}
 						<colgroup width="90%" />
 						<tr>
 							<td class="titleTd">제목</td>
-							<td><input type="text" name="post_title" value="${postVo.post_title}" required /></td>
+							<td><input type="text" id="noticeTitles" name="post_title" value="${postVo.post_title}" contenteditable="false" required /></td>
 						</tr>
 						<tr>
 							<td class="titleTd">게시물 내용</td>

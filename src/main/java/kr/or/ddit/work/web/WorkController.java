@@ -7,6 +7,8 @@ import kr.or.ddit.meeting.model.MeetingVo;
 import kr.or.ddit.meeting.service.MeetingServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.message.service.MessageServiceInf;
+import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
 import kr.or.ddit.todo.model.ToDoVo;
@@ -58,6 +60,12 @@ public class WorkController {
 
 	@Autowired
 	private ToDoServiceInf todoService;
+	
+	@Autowired
+	private PostServiceInf postService;
+	
+	@Autowired
+	private MessageServiceInf messageService;
 
 	@RequestMapping(value="/ajaxCreateWork",method=RequestMethod.POST)
 	public String ajaxCreateWork(Model model, WorkVo workVo, @RequestParam("project_id")String project_id,
@@ -83,6 +91,11 @@ public class WorkController {
 
 		model.addAttribute("workList",workService.selectWorks(project_id));
 		model.addAttribute("cmtList", commentsService.cmtList(project_id));
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 
 		return "main/ajaxWorkList";
@@ -100,8 +113,11 @@ public class WorkController {
 			workVo.setWork_project(project_id);
 			if(workVo.getWork_public() == null )
 				workVo.setWork_public("N");
-
-			cardService.createCard( mapWM , workVo, files);
+			if (files != null && files.length > 0) {
+				cardService.createCard(mapWM, workVo, files);
+			}else {
+				cardService.createCard(mapWM, workVo);
+			}
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -140,6 +156,11 @@ public class WorkController {
 		model.addAttribute("meetingList",meetingList );
 
 		model.addAttribute("member_name",memberService.selectUser(project_id) );
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 		return "main/subMain";
 	}
@@ -158,11 +179,17 @@ public class WorkController {
 
 	@RequestMapping(value = "/ajaxWorkChart", method=RequestMethod.POST)
 	public String ajaxWorkChart(Model model, @RequestParam("project_id")String project_id,
-								@RequestParam("work_id")String work_id) {
+								@RequestParam("work_id")String work_id, MemberVo memberVo) {
 		Map<String, String> mtMap = new HashMap<>();
 		mtMap.put("project_id", project_id);
 		mtMap.put("work_id", work_id);
 		model.addAttribute("workCharts",workService.selectWorkChart(mtMap));
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "work/ajaxWorkChart";
 	}
 

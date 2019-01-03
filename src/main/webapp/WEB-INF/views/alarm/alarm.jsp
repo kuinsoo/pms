@@ -82,7 +82,7 @@ function messageMemberList(){
 		    },
 		    error: function (data) {
 			    // location.href = "/";
-				alert("error");
+				// alert("error");
 			},
 		    timeout: 3000,
 		    complete: setTimeout(function(){ messagePoll(); }, 6000)
@@ -142,9 +142,9 @@ function workMemberList(){
 
 // 공지 알림 - 2019-01-02 임규승
 function noticeMemberList(){	
-	
+
 	var listCnt = ${pageCnt};
-	
+
 	 $.ajax({
 		  type: "GET",
 		  url: "/ajaxNoticeAlarm",
