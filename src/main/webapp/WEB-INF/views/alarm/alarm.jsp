@@ -142,9 +142,9 @@ function workMemberList(){
 
 // 공지 알림 - 2019-01-02 임규승
 function noticeMemberList(){	
-	
+
 	var listCnt = ${pageCnt};
-	
+
 	 $.ajax({
 		  type: "GET",
 		  url: "/ajaxNoticeAlarm",

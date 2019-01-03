@@ -57,7 +57,13 @@ public class CardService implements CardServiceInf {
 	public int createCard(Map<String, String> wmMap , WorkVo workVo, MultipartFile[] files) {
 
 		workService.insertWorkMember(wmMap , workVo);
-		attachmentService.insertAtt(Utils.multiFiles(files));
+			attachmentService.insertAtt(Utils.multiFiles(files));
+		return cardMapper.createCard();
+	}
+
+	@Override
+	public int createCard(Map<String, String> wmMap, WorkVo workVo) {
+		workService.insertWorkMember(wmMap , workVo);
 		return cardMapper.createCard();
 	}
 
