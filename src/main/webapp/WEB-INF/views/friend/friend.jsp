@@ -45,7 +45,7 @@
 							<h2>나의친구목록</h2>
 								<form name ="searchTextFriend" method="POST" onsubmit="return false;">
 										<input type="text" id="searchTextFriend" name="searchTextFriend" class="friendSearchInput" placeholder="찾으시는 친구의 이메일을 입력해주세요" />
-										<input type="hidden" name="page" value='1'/>
+										<input type="hidden" name="page" id="myFriendsListPage" value='1'/>
 										<input type="hidden" name="pageSize" value='10' />
 										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getSearchFriendProject();"/>
 										<button onclick="getMyFriends(1);">목록으로</button>
@@ -80,7 +80,7 @@
 						      <h2>내가 보낸 친구요청</h2>
 								<form name ="searchTextMySendFriendList" method="POST" onsubmit="return false;">
 										<input type="text" id="searchTextMySendFriendList" name="searchTextMySendFriendList" class="friendSearchInput" placeholder= "찾으시는 친구의 이메일을 입력하세요"/>
-										<input type="hidden" name="page" value='1'/>
+										<input type="hidden" name="page" id ="MySendFriendListPage"  value='1'/>
 										<input type="hidden" name="pageSize" value='10' />
 										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getMySendFriendListSearch();"/>
 										<button onclick="getMySendFriendList(1);">목록으로</button>
@@ -108,7 +108,7 @@
 							<h2>내가 받은 친구 요청</h2>
 								<form name ="searchTextYouGiveFriendList" method="POST" onsubmit="return false;">
 										<input type="text" id="searchTextYouGiveFriendList" name="searchTextYouGiveFriendList" class="friendSearchInput" placeholder="찾으시는 친구의 이메일을 입력해주세요" />
-										<input type="hidden" name="page" value='1'/>
+										<input type="hidden" name="page" id="giveSearchPage" value='1'/>
 										<input type="hidden" name="pageSize" value='10' />
 										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getYouGiveFriendListSearch();"/>
 										<button onclick="getYouGiveFriendList(1);">목록으로</button>
@@ -362,9 +362,10 @@
 			});
 		}
 
-		function getSearchFriendProject(){
+			
+			function getSearchFriendProject(page){
+				$("#myFriendsListPage").attr("value",page);
 				var param = $('form[name=searchTextFriend]').serialize();
-				var pageSize = 10;
 					$.ajax({
 						type: "POST",
 						url : "/searchTextFriendAjax",
@@ -387,11 +388,11 @@
 							
 							var i  = 1;
 							var paging ="";
-								paging +="<li><a href='javascript:getMyFriends("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+								paging +="<li><a href='javascript:getSearchFriendProject("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 							for(var i= 1; i<= data.pageCnt; i++) {
-								paging += "<li><a href='javascript:getMyFriends("+ i +");'>"+ i+ "</a></li>";
+								paging += "<li><a href='javascript:getSearchFriendProject("+ i +");'>"+ i+ "</a></li>";
 							}
-								paging +="<li><a href='javascript:getMyFriends("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+								paging +="<li><a href='javascript:getSearchFriendProject("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 							$(".paginationFriends").html(paging);
 						},
 						fail : function(xhr){
@@ -453,7 +454,7 @@
 		
 		// 친구 추가 버튼을 클릭할때  
 		function getyouGiveNoAjax(member_mail){
-			$("#myMemberListBtn").attr("value","요청보냄");
+			//$("#myMemberListBtn").attr("value","요청보냄");
 			var pageSize = 10;
 			$.ajax({
 				type: "GET",
@@ -563,9 +564,11 @@
 			});
 		}
 		
-		function getMySendFriendListSearch(){
+		// 내가 보낸 친구요청 검색 부분
+		function getMySendFriendListSearch(page){
+			
+			$("#MySendFriendListPage").attr("value",page);
 			var param = $('form[name=searchTextMySendFriendList]').serialize();
-			var pageSize = 10;
 			$.ajax({
 				type: "POST",
 				url : "/myFriendSendListSearchAjax",
@@ -588,11 +591,11 @@
 					
 					var i  = 1;
 					var paging ="";
-						paging +="<li><a href='javascript:getMySendFriendList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
-					for(var i= 1; i<= data.pageCnt; i++) {
-						paging += "<li><a href='javascript:getMySendFriendList("+ i +");'>"+ i+ "</a></li>";
+						paging +="<li><a href='javascript:getMySendFriendListSearch("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<= data.tatalCnt; i++) {
+						paging += "<li><a href='javascript:getMySendFriendListSearch("+ i +");'>"+ i+ "</a></li>";
 					}
-						paging +="<li><a href='javascript:getMySendFriendList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+						paging +="<li><a href='javascript:getMySendFriendListSearch("+ data.tatalCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 					$(".paginationMySendFriends").html(paging);
 				},
 				fail : function(xhr){
@@ -669,12 +672,10 @@
 			});
 		}		
 		
-		
-		
 		// 검색 부분 
-		function getYouGiveFriendListSearch(){
+		function getYouGiveFriendListSearch(page){
+			$("#giveSearchPage").attr("value",page);
 			var param = $('form[name=searchTextYouGiveFriendList]').serialize(); 
-			var pageSize = 10;
 			$.ajax({
 				type: "POST",
 				url : "/youGiveFriendListSearchAjax",
@@ -698,11 +699,11 @@
 					
 					var i  = 1;
 					var paging ="";
-						paging +="<li><a href='javascript:getYouGiveFriendList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
-					for(var i= 1; i<= data.pageCnt; i++) {
-						paging += "<li><a href='javascript:getYouGiveFriendList("+ i +");'>"+ i+ "</a></li>";
+						paging +="<li><a href='javascript:getYouGiveFriendListSearch("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for(var i= 1; i<= data.giveCnt; i++) {
+						paging += "<li><a href='javascript:getYouGiveFriendListSearch("+ i +");'>"+ i+ "</a></li>";
 					}
-						paging +="<li><a href='javascript:getYouGiveFriendList("+ data.pageCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+						paging +="<li><a href='javascript:getYouGiveFriendListSearch("+ data.giveCnt +");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 					$(".paginationYouGiveFriends").html(paging);
 				},
 				fail : function(xhr){

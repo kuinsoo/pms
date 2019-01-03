@@ -526,8 +526,7 @@
         });
     }
 
-    function updateCard(no, group, index) {
-
+    function updateCard(no, group, index){
         $.ajax({
             type: "GET",
             url: "/ajaxUpdateCard",

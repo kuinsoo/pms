@@ -6,6 +6,8 @@ import java.util.Date;
 import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 /**
  * kr.or.ddit.work.model
  * null.java
@@ -15,6 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * @Date : 2018-11-27 / 오후 3:32
  * @Version :
  */
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Alias("workVo")
 public class WorkVo {
 	
@@ -185,7 +188,7 @@ public class WorkVo {
 		return sdf.format(work_eedate);
 	}
 	public String getFormat_work_edate() {
-		return sdf.format(work_edate);
+		return work_edate != null ? sdf.format(work_edate) : null;
 	}
 
 	/* toString */

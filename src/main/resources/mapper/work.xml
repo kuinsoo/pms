@@ -166,4 +166,17 @@
 		where WORK_PROJECT = #{project_id}
 		and work_id = #{work_id}
 	</select>
+
+	<!-- 변찬우_20190102 : 회의실에서 나의업무목록 출력 -->
+	<select id="myWorkList" parameterType="workVo" resultType="workVo">
+			select 	*
+			from    work w
+			inner join 	work_member wm
+			on        w.work_id = wm.work_id
+			inner join 	project_member pm
+			on        pm.PMEMBER_ID = wm.PMEMBER_ID
+			where 	pm.pmember_project = #{work_project}
+			and 		pm.pmember_member = #{member_mail}
+	</select>
+	
 </mapper>

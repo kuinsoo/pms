@@ -57,7 +57,7 @@ public class WorkService implements WorkServiceInf{
 	public List<WorkVo> selectWorks(String work_project ) {
 		return workMapper.selectWorks(work_project);
 	}
-	
+
 	/**
 	* Method : createWork
 	* 작성자 : Mr.kku
@@ -178,17 +178,18 @@ public class WorkService implements WorkServiceInf{
 	}
 
 	/**
-	* Method : getWorkPageList
-	* 작성자 : iks
-	* 변경이력 :
-	* @param map
-	* @return
-	* Method 설명 : 알림을 위한 업무 페이지 리스트 조회
-	*/
+	 * Method : getWorkPageList
+	 * 작성자 : iks
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 알림을 위한 업무 페이지 리스트 조회
+	 */
 	@Override
 	public List<WorkVo> getWorkPageList(PageVo pageVo) {
 		return workMapper.getWorkPageList(pageVo);
 	}
+
 
 	@Override
 	public WorkVo selectWork(String work_id) {
@@ -199,4 +200,11 @@ public class WorkService implements WorkServiceInf{
 	public WorkVo selectWorkMap(Map<String, String> workMap) {
 		return workMapper.selectWorkMap(workMap);
 	}
+
+	@Override
+	public List<WorkVo> myWorkList(WorkVo workVo) {
+		return workMapper.myWorkList(workVo);
+	}
+
+
 }

@@ -59,6 +59,8 @@ function updateListOfRooms(rooms) {
     }
     
     rooms.forEach(function(room, idx) {
+    	var userFullName= room.extra.userFullName;
+    	console.log("userFullName : ", userFullName);
         var memNum = 0;
     	room.participants.forEach(function(pid) {
     		memNum +=1;
@@ -279,7 +281,7 @@ function confirmBox(message, callback) {
     });
 }
 
-//회의 개설하기(팝업 띄우기)
+//value 세팅 시기 : 회의 개설하기(팝업 띄우기) 버튼 클릭
 $("#openPop").on("click", function(){
 	console.log("openPop");
 	$("#txt-user-name").val(member_name); //쿠키, 전역
@@ -287,99 +289,99 @@ $("#openPop").on("click", function(){
 
 //개설(실제 개설)
 $('#btn-create-room').click(function() {
-    var roomid = $('#txt-roomid').val().toString();
-    if (!roomid || !roomid.replace(/ /g, '').length) {
-        alertBox('Please enter room-id.', 'Room ID Is Required');
-        return;
-    }
-    
-   var fullName = $('#txt-user-name').val().toString();
-   if (!fullName || !fullName.replace(/ /g, '').length) {
-        alertBox('Please enter your name.', 'Your Name Is Required');
-        return;
-    } 
-    connection.extra.userFullName = fullName;
-    
-    var roomTitle = $('#txt-roomTitle').val().toString();
-    if (!roomTitle || !roomTitle.replace(/ /g, '').length) {
-         alertBox('Please enter your roomTitle.', 'Your Name Is roomTitle');
-         return;
-     } 
-    connection.extra.todayRoomTitle = roomTitle;
-    
-    // $$$
-    connection.extra.todayProject_id = project_id;
-      
-    if($('#chk-room-password').prop('checked') === true){
-      var roomPassword = $('#txt-room-password').val().toString();
-      if (!roomPassword || !roomPassword.replace(/ /g, '').length) {
-          alertBox('Please enter room password.', 'Password Box Is Empty');
-          return;
-      }
-
-      connection.password = roomPassword;
-    }    
-
-    var initialHTML = $('#btn-create-room').html();
-
-    $('#btn-create-room').html('Please wait...').prop('disabled', true);
-
-    connection.checkPresence(roomid, function(isRoomExist) {
-        if (isRoomExist === true) {
-            alertBox('작성하신 방이름은 이미 등록되어 있는 이름입니다. 다른 이름을 입력해주세요', '이미 사용중인 방 이름이네요');
-            return;
-        }
-
-        // 유니크 방이름 publicRoomIdentifier 
-        if ($('#chk-hidden-room').prop('checked') === true) {
-            connection.publicRoomIdentifier = '';
-        }
-
-        connection.sessionid = roomid;
-        connection.isInitiator = true;
-        openCanvasDesigner();
-        $('#btn-create-room').html(initialHTML).prop('disabled', false);
-    });
-    
-    //***
-	// oracle 오라클 DB 회의 테이블에 저장  
-    var meetProjObj = {
-    		"project_id" : project_id, 	//프로젝트 id 
-    		"projectTitle" : project_title, 	//프로젝트제목
-    		"roomid" : roomid,	//회의제목 
-    		"roomTitle" : roomTitle, 	//방개요
-    		"member_name" : member_name,	//참가자이름 
-    		"member_mail" : member_mail	//참가자email  
-    };
-    console.log("before ajax  : ",JSON.stringify(meetProjObj));
-    
-    // json 만들기  to oracle
-   $.ajax({
-	    url : 'https://127.0.0.1:8089/meetProjObj',
-	    type : 'post',
-	    data : meetProjObj,
-	    success : function (data) {
-	    	console.log(JSON.stringify(meetProjObj));
-	    },
-	    error : function (err) {
-	    	alert(err.toString());
-	    }
-	});
-   
-//** 자바 컨트롤러로 접근해서 해당 메서드 실행까지 가능.. 단, 돌아오질 못함 cors 설정이 안 먹는듯..
-//   $.ajax({
-//	    url : 'https://127.0.0.1:8081/meetingList',
-//	    type : 'post',
-//	    data : {"project_id" : project_id},
-//	    success : function (data) {
-//	    	console.log("call~ node js ", data);
-//			$('#meetingListAjax').html("");
-//			$('#meetingListAjax').html(data);
-//	    }/* ,
-//	    error : function (err) {
-//	    	alert(err.toString());
-//	    } */
-//	});
+		    var roomid = $('#txt-roomid').val().toString();
+		    if (!roomid || !roomid.replace(/ /g, '').length) {
+		        alertBox('Please enter room-id.', 'Room ID Is Required');
+		        return;
+		    }
+		    
+		   var fullName = $('#txt-user-name').val().toString();
+		   if (!fullName || !fullName.replace(/ /g, '').length) {
+		        alertBox('Please enter your name.', 'Your Name Is Required');
+		        return;
+		    } 
+		    connection.extra.userFullName = fullName;
+		    
+		    var roomTitle = $('#txt-roomTitle').val().toString();
+		    if (!roomTitle || !roomTitle.replace(/ /g, '').length) {
+		         alertBox('Please enter your roomTitle.', 'Your Name Is roomTitle');
+		         return;
+		     } 
+		    connection.extra.todayRoomTitle = roomTitle;
+		    
+		    // $$$
+		    connection.extra.todayProject_id = project_id;
+		      
+		    if($('#chk-room-password').prop('checked') === true){
+		      var roomPassword = $('#txt-room-password').val().toString();
+		      if (!roomPassword || !roomPassword.replace(/ /g, '').length) {
+		          alertBox('Please enter room password.', 'Password Box Is Empty');
+		          return;
+		      }
+		
+		      connection.password = roomPassword;
+		    }    
+		
+		    var initialHTML = $('#btn-create-room').html();
+		
+		    $('#btn-create-room').html('Please wait...').prop('disabled', true);
+		
+		    connection.checkPresence(roomid, function(isRoomExist) {
+		        if (isRoomExist === true) {
+		            alertBox('작성하신 방이름은 이미 등록되어 있는 이름입니다. 다른 이름을 입력해주세요', '이미 사용중인 방 이름이네요');
+		            return;
+		        }
+		
+		        // 유니크 방이름 publicRoomIdentifier 
+		        if ($('#chk-hidden-room').prop('checked') === true) {
+		            connection.publicRoomIdentifier = '';
+		        }
+		
+		        connection.sessionid = roomid;
+		        connection.isInitiator = true;
+		        openCanvasDesigner();
+		        $('#btn-create-room').html(initialHTML).prop('disabled', false);
+		    });
+		    
+			// oracle 오라클 DB 회의 테이블에 저장  
+		    var meetProjObj = {
+		    		"project_id" : project_id, 	//프로젝트 id 
+		    		"projectTitle" : project_title, 	//프로젝트제목
+		    		"roomid" : roomid,	//회의제목 
+		    		"roomTitle" : roomTitle, 	//방개요
+		    		"member_name" : member_name,	//참가자이름 
+		    		"member_mail" : member_mail	//참가자email  
+		    };
+		    console.log("before ajax  : ",JSON.stringify(meetProjObj));
+		    
+		    // json 만들기  to oracle
+		   $.ajax({
+			    url : 'https://127.0.0.1:8089/meetProjObj',
+			    type : 'post',
+			    data : meetProjObj,
+			    success : function (data) {
+			    	console.log(JSON.stringify(meetProjObj));
+			    },
+			    error : function (err) {
+			    	console.log("node to oracle issue : 미팅목록");
+			    }
+			});
+		    
+//		//** 자바 컨트롤러로 접근해서 해당 메서드 실행까지 가능.. 단, 돌아오질 못함 cors 설정이 안 먹는듯..
+//		   $.ajax({
+//			    url : 'https://127.0.0.1:8081/meetingList',
+//			    type : 'post',
+//			    data : {"project_id" : project_id},
+//			    success : function (data) {
+//			    	console.log("call~ node js : ", data);
+//					$('#meetingListAjax').html("");
+//					$('#meetingListAjax').html(data);
+//			    },
+//			    error : function (err) {
+//			    	alert(err.toString());
+//			    } 
+//			});
+		   
 });
 
 $('#chk-room-password').change(function() {

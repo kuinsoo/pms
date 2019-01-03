@@ -30,7 +30,6 @@ public interface MemberMapper {
 	 * Method : seletUser
 	 * 작성자 : 나진실
 	 * 변경이력 :
-	 *
 	 * @param member_mail the member mail
 	 * @return Method 설명 : 로그인
 	 */

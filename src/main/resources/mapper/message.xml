@@ -115,18 +115,22 @@
 	<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 	<!-- 내 친구 리스트  -->
 	<select id="MyFriendsList"  resultType= "friendVo" parameterType="pageVo">
-       select * from(
-  			 select rownum rnum ,a.*
-            from
-				(select friend_member,
-			   		    friend_code,
-			            member_name
-				 from   FRIENDSLIST inner join member
-				 on     friend_member = member_mail
-				 where  friend_myemail = #{member_mail}
-				 and    friend_accept = 'Y')a) 
-        where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
-        <if test="searchTextFriend!=null and searchTextFriend!=''">and friend_member like '%'||#{searchTextFriend}||'%'</if>
+	   SELECT c.rnum, c.*
+			FROM (
+			 select rownum rnum, b.* from(
+			     select a.*
+			         from
+			             (select friend_member,
+                                friend_code,
+                                member_name
+                         from   FRIENDSLIST inner join member
+                         on     friend_member = member_mail
+                         where  friend_myemail = #{member_mail}
+                         and    friend_accept = 'Y'
+                         ORDER BY friend_member  desc )a ) b
+           <if test="searchTextFriend!=null and searchTextFriend!=''">where friend_member like '%'||#{searchTextFriend}||'%'</if> ) c
+      where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
+	
 	</select> 
 
 	<!-- 친구목록 부분 -->
@@ -135,6 +139,14 @@
 		from   FRIENDSLIST 
 		where  friend_myemail = #{member_mail}
 		and    friend_accept = 'Y'
+	</select>
+
+	<select id="totalFriendsSearch" resultType="int" parameterType="pageVo">
+		select count(*)
+		from   FRIENDSLIST 
+		where  friend_myemail = #{member_mail}
+		and    friend_accept = 'Y'
+		and    friend_member like '%'||#{searchTextFriend}||'%'
 	</select>
 	
 	<!-- 전체 사용자 total 검색 부분 -->
@@ -189,8 +201,8 @@
 			              AND     member_withdrawal = 'N'
 			              AND     member_mail NOT IN #{member_mail}
 			              ORDER BY member_mail desc)a) b
-			    <if test="searchTextFriendList!=null and searchTextFriendList!=''">where member_mail like '%'||#{searchTextFriendList}||'%'</if> ) c
-			   	WHERE  rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
+	    <if test="searchTextFriendList!=null and searchTextFriendList!=''">where member_mail like '%'||#{searchTextFriendList}||'%'</if> ) c
+	   	WHERE  rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
 		
 					 
 		 <!-- select * from(
@@ -223,27 +235,42 @@
 		  ORDER BY member_mail
 	</select>
 	
+	<!-- 내가 보낸친구요청 리스트  -->
 	<select  id ="mySendFriendList" resultType="friendVo" parameterType="pageVo">
-		 select * from(
-  			 select rownum rnum ,a.*
-           		 from
-                	 (SELECT  friend_code,  
-                	 		  friend_member, 
-                              member_name
-					  FROM    FRIENDSLIST inner join member
-                      ON      friend_member = member_mail
-					  WHERE   friend_myemail = #{member_mail}
-					  AND     friend_accept = 'N')a) 
-            where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
-		<if test="searchTextMySendFriendList!=null and searchTextMySendFriendList!=''">and friend_member like '%'||#{searchTextMySendFriendList}||'%'</if>
+		 SELECT c.rnum, c.*
+			FROM (
+			 select rownum rnum, b.* from(
+			     select a.*
+			         from
+			             (SELECT  friend_code,  
+                	 		      friend_member, 
+                                  member_name
+                          FROM    FRIENDSLIST inner join member
+                          ON      friend_member = member_mail
+                          WHERE   friend_myemail = #{member_mail}
+                          AND     friend_accept = 'N'
+                          ORDER BY friend_member  desc )a) b 
+        <if test="searchTextMySendFriendList!=null and searchTextMySendFriendList!=''"> where friend_member like '%'||#{searchTextMySendFriendList}||'%'</if> )c
+         WHERE  rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
+		     
 	</select>
-
+	<!-- 내가 보낸 친구 요청 전체 total값 -->
 	<select id="totalmySendFriendList" resultType="int" parameterType="String">
 		SELECT  count(*) 
 		FROM    FRIENDSLIST 
 	    WHERE   friend_myemail = #{member_mail}
 	    AND     friend_accept = 'N'
 	</select>
+	
+	<!-- 내가 보낸 친구 요청 검색 total값 -->
+	<select id="totalmySendFriendListSearch" resultType="int" parameterType="pageVo">
+		SELECT  count(*) 
+		FROM    FRIENDSLIST 
+	    WHERE   friend_myemail = #{member_mail}
+	    AND     friend_accept = 'N'
+	    AND     friend_member like '%'||#{searchTextMySendFriendList}||'%'
+	</select>
+	
 	
 	
 	<delete  id="deletemySendFriendList" parameterType="String">
@@ -252,24 +279,37 @@
 	
 	<!-- 내가 받은 요청  -->
 	<select id ="youGiveFriendList" resultType="friendVo" parameterType="pageVo">
-		 select * from(
-  			 select rownum rnum ,a.*
-           		 from
-                	(select friend_myemail
-                	 	  , friend_code
-					      , (select member_name from member where member_mail = friend_myemail) as member_name
-					from   FRIENDSLIST
-					where  friend_member  = #{member_mail}
-					and    friend_accept  = 'N')a) 
-            where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
-		<if test="searchTextYouGiveFriendList!=null and searchTextYouGiveFriendList!=''">and friend_myemail like '%'||#{searchTextYouGiveFriendList}||'%'</if>
+		 SELECT c.rnum, c.*
+					FROM (
+					 select rownum rnum, b.* from(
+					     select a.*
+					         from
+					             (select friend_myemail
+		                                  , friend_code
+		                                  , (select member_name from member where member_mail = friend_myemail) as member_name
+		                            from   FRIENDSLIST
+		                            where  friend_member  = #{member_mail}
+		                            and    friend_accept  = 'N'
+		                            ORDER BY friend_myemail  desc )a) b 
+		 <if test="searchTextYouGiveFriendList!=null and searchTextYouGiveFriendList!=''"> where friend_myemail like '%'||#{searchTextYouGiveFriendList}||'%'</if> )c
+		 where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
 	</select>
 	
+	<!-- 내가 받은 친구요청 전체 total값 -->
 	<select id="totalyouGiveFriendList" resultType="int" parameterType="String">
 		select count(*) 
 		from   FRIENDSLIST
 		where  friend_member  = #{member_mail}
 		and    friend_accept  = 'N'
+	</select>
+	
+	<!-- 내가 받은 친구요청 검색 전체 total값 -->
+	<select id="totalyouGiveFriendListSearch" resultType="int" parameterType="pageVo">
+		select count(*) 
+		from   FRIENDSLIST
+		where  friend_member  = #{member_mail}
+		and    friend_accept  = 'N'
+		and    friend_myemail like '%'||#{searchTextYouGiveFriendList}||'%'
 	</select>
 	
 	
@@ -304,7 +344,7 @@
 		 and  B.MSG_RMEMBER= #{member_mail}
 		 and  A.msg_type = 'Y'
 	</select>
-	
+
 	<select  id="totalFriendSizeCheck" resultType="int" parameterType="String">
 		select count(*)
 		from   FRIENDSLIST

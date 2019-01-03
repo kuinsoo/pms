@@ -250,7 +250,7 @@ public class MessageController {
 		
 		List<FriendListVo> myFriendList = messageservice.MyFriendsList(pageVo);
 		
-		int pageCnt = messageservice.totalFriends(memberVo.getMember_mail());
+		int pageCnt = messageservice.totalFriendsSearch(pageVo);
 		
 		Map<String, Object> myFriendMap = new HashMap<>();
 		myFriendMap.put("myFriendList", myFriendList);
@@ -445,11 +445,11 @@ public class MessageController {
 		
 		List<FriendListVo> sendFriendList = messageservice.mySendFriendList(pageVo);
 		
-		int pageCnt = messageservice.totalmySendFriendList(memberVo.getMember_mail());
+		int tatalCnt = messageservice.totalmySendFriendListSearch(pageVo);
 		
 		Map<String, Object> myFriendsListMap = new HashMap<>();
 		myFriendsListMap.put("sendFriendList", sendFriendList);
-		myFriendsListMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		myFriendsListMap.put("tatalCnt", (int)Math.ceil((double)tatalCnt/pageVo.getPageSize()));
 		
 		return myFriendsListMap;
 		
@@ -570,14 +570,15 @@ public class MessageController {
 		
 		List<FriendListVo> giveFriendList = messageservice.youGiveFriendList(pageVo);
 		
-		int pageCnt = messageservice.totalyouGiveFriendList(memberVo.getMember_mail());
+		int giveCnt = messageservice.totalyouGiveFriendListSearch(pageVo);
 		
 		Map<String, Object> yougiveListMap = new HashMap<>();
 		yougiveListMap.put("giveFriendList", giveFriendList);
-		yougiveListMap.put("pageCnt", (int)Math.ceil((double)pageCnt/pageVo.getPageSize()));
+		yougiveListMap.put("giveCnt", (int)Math.ceil((double)giveCnt/pageVo.getPageSize()));
 		
 		return yougiveListMap;
 	}
+	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	@RequestMapping(value="/friendView")
 	public String friendView(Model model,@SessionAttribute("memberVo") MemberVo memberVo) {

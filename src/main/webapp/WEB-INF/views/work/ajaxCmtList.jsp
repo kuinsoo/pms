@@ -11,7 +11,7 @@
                         </div>
                         <div class="cardContentCommentUserName">
                             <b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
-                            <input type="button" value="수정" class="commentUpdateBtn"/>
+                            <input type="button" value="수정" class="commentUpdateBtn" onclick="updateCmt('${cmt.cmt_id}', '${cmt.cmt_work}');" />
                             <input type="button" value="삭제" class="commentDeleteBtn" onclick="deleteCmt('${cmt.cmt_id}', '${cmt.cmt_work}');" />
                             <br>
                             <span>${cmt.cmt_content}</span>

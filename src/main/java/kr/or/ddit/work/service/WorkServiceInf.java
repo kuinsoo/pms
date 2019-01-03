@@ -139,6 +139,17 @@ public interface WorkServiceInf {
 	 * @return
 	 */
 	WorkVo selectWorkMap(Map<String,String>workMap);
+
+	
+	/**
+	* Method : workAllSchedule
+	* 작성자 : bhuanchanwoo
+	* 변경이력 :
+	* @param workVo
+	* @return
+	* Method 설명 : 프로젝트 & 해당 구성원에게 할당된 업무 리스트 출력
+	*/
+	List<WorkVo> myWorkList(WorkVo workVo);
 	
 	/**
 	 * Method : workMemberTotalCnt
@@ -158,6 +169,9 @@ public interface WorkServiceInf {
 	* Method 설명 : 알림을 위한 업무 페이지 리스트 조회
 	*/
 	List<WorkVo> getWorkPageList(PageVo pageVo);
+
+
+
 
 
 }
