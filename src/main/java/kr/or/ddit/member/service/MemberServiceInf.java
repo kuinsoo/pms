@@ -2,6 +2,7 @@
 package kr.or.ddit.member.service;
 
 import kr.or.ddit.attachment.model.AttachmentVo;
+import kr.or.ddit.authority.model.AuthorityVo;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberListVo;
 import kr.or.ddit.member.model.PMemberVo;
@@ -20,6 +21,8 @@ public interface MemberServiceInf {
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 로그인 / 회원가입 / 마이페이지 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
+	
+
 	/**
 	 * Method : seletUser
 	 * 작성자 : 나진실
@@ -282,6 +285,8 @@ public interface MemberServiceInf {
 	 */
 	int setTeamLeader(Map<String, String> mapPMember, ProjectVo projectVo);
 
+	
+	
 	/**
 	 * Invite team int. 작성자 : Mr. KKu 프로젝트 초대 수락시 팀에 포함시킨다.
 	 *
@@ -389,4 +394,5 @@ public interface MemberServiceInf {
 	 * @return the int
 	 */
 	int updateBookmark(PMemberVo pMemberVo);
+
 }

@@ -833,6 +833,7 @@
 		$("#sendMessageForm").submit();
 	});
 	
+	// input 값에 아이디 넣기 
 	if ('${msg_person}' != '')
 		$("#sendMessageInput").val('${msg_person}');
 </script>
