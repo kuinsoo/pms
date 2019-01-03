@@ -30,6 +30,7 @@ import kr.or.ddit.commons.util.KISA_SHA256;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.todo.model.ToDoVo;
@@ -65,6 +66,9 @@ public class MemberDetailController {
 	
 	@Autowired
 	private PostServiceInf postService;
+	
+	@Autowired
+	private MessageServiceInf messageService;
 	
 	
 
@@ -105,8 +109,10 @@ public class MemberDetailController {
 		model.addAttribute("selectProjectCnt",selectProjectCnt);
 		model.addAttribute("selectTodoCnt",selectTodoCnt);
 		
-		/* 알림 임규승 2019-01-02 */
+		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 
 		return "myPage/myPage";
@@ -246,6 +252,11 @@ public class MemberDetailController {
 		/* 업무 카드 출력 */
 		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
 		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		return "/main/subMain";
 	}
 	
@@ -270,6 +281,11 @@ public class MemberDetailController {
 
 		/* 업무 카드 출력 */
 		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
 		return "/main/subMain";
 	}
@@ -455,6 +471,12 @@ public class MemberDetailController {
 			AttachmentVo attVo = attachmentService.selectAtt(att_id);
 			attVo.setAtt_path("a");
 			model.addAttribute("attVo", attVo);
+			
+			/* 알림기능 - IKS */
+			model.addAttribute("pageCnt", postService.totalPostCnt());
+			model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+			model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+			
 			return "attachment/download";
 		}
 	
@@ -508,6 +530,11 @@ public class MemberDetailController {
 				
 			int updateUser = memberservice.updateUser(memberVo);
 			model.addAttribute("memberVo",memberVo);
+			
+			/* 알림기능 - IKS */
+			model.addAttribute("pageCnt", postService.totalPostCnt());
+			model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+			model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 			
 			return "redirect:/myPage?member_mail=" + memberVo.getMember_mail();
 		}

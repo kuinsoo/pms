@@ -8,6 +8,7 @@ import kr.or.ddit.meeting.service.MeetingServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.model.PMemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
+import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.project.model.ProjectVo;
 import kr.or.ddit.project.service.ProjectServiceInf;
@@ -63,6 +64,9 @@ public class ProjectController {
 	
 	@Autowired
 	private PostServiceInf postService;
+	
+	@Autowired
+	private MessageServiceInf messageService;
 
 
 	/**
@@ -210,8 +214,10 @@ public class ProjectController {
 		cookProject_title.setMaxAge(6); 
 		response.addCookie(cookProject_title);
 		
-		/* 공지사항 알림 */
+		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
 		return "main/subMain";
 	}
