@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import kr.or.ddit.friendslist.model.FriendListVo;
 import kr.or.ddit.friendslist.service.FriendsListServiceInf;
@@ -359,7 +360,9 @@ public class MessageController {
 	}
 	
 	@RequestMapping(value="/sendYouMessageUpdate" , method= RequestMethod.POST)
-	public String sendYouMessageUpdate(@RequestParam("msg_person")String msg_person) {
+	public String sendYouMessageUpdate(@RequestParam("msg_person")String msg_person, RedirectAttributes redirectAttributes) {
+
+		redirectAttributes.addAttribute("msg_person", msg_person);
 		return "redirect:message#tabs2-1?msg_person="+msg_person;
 	}
 	

@@ -228,10 +228,10 @@
 			window.location = "#open1";
 		});
 	});
-/* 
+
 	function getFriendsListGo() {
 		getMessageReceived(1);
-	}; */
+	}; 
 
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	function getMessageReceived(page) {
@@ -239,10 +239,7 @@
 		$.ajax({
 				type : "GET",
 				url : "/messageReceivedAjax",
-				data : {
-					"page" : page,
-					"pageSize" : pageSize
-				},
+				data : {"page" : page,"pageSize" : pageSize},
 				success : function(data) {
 
 					var html = "";
@@ -251,12 +248,11 @@
 							html += "<tr class = 'msgClick1' id = 'read'>";
 						else if (mm.msg_type == "Y")
 							html += "<tr class = 'msgClick1'>";
-
-						html += "	<td>" + mm.rnum + "</td>";
-						html += "	<td>" + mm.msg_id + "</td>";
-						html += "	<td>" + mm.msg_content + "</td>";
-						html += "	<td>" + mm.msg_smember + "</td>";
-						html += "	<td>" + mm.msg_time + "</td>";
+							html += "	<td>" + mm.rnum + "</td>";
+							html += "	<td>" + mm.msg_id + "</td>";
+							html += "	<td>" + mm.msg_content + "</td>";
+							html += "	<td>" + mm.msg_smember + "</td>";
+							html += "	<td>" + mm.msg_time + "</td>";
 						if (mm.msg_type == 'Y') {
 							html += "<td>" + '읽지않음' + "</td>";
 						} else {
@@ -271,16 +267,11 @@
 						$("#msgReceiveList").html(html);
 						var i = 1;
 						var paging = "";
-						paging += "<li><a href='javascript:getMessageReceived("
-								+ i
-								+ ");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						paging += "<li><a href='javascript:getMessageReceived("+ i+ ");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 						for (var i = 1; i <= data.pageCnt; i++) {
-							paging += "<li><a href='javascript:getMessageReceived("
-									+ i + ");'>" + i + "</a></li>";
+							paging += "<li><a href='javascript:getMessageReceived("+ i + ");'>" + i + "</a></li>";
 						}
-						paging += "<li><a href='javascript:getMessageReceived("
-								+ data.pageCnt
-								+ ");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+						paging += "<li><a href='javascript:getMessageReceived("+ data.pageCnt+ ");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 						$(".pagination").html(paging);
 					},
 					fail : function(xhr) {
@@ -346,16 +337,11 @@
 
 						var i = 1;
 						var paging = "";
-						paging += "<li><a href='javascript:getMessageSend("
-								+ i
-								+ ");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+						paging += "<li><a href='javascript:getMessageSend("+ i+ ");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
 						for (var i = 1; i <= data.pageCnt; i++) {
-							paging += "<li><a href='javascript:getMessageSend("
-									+ i + ");'>" + i + "</a></li>";
+							paging += "<li><a href='javascript:getMessageSend("+ i + ");'>" + i + "</a></li>";
 						}
-						paging += "<li><a href='javascript:getMessageSend("
-								+ data.pageCnt
-								+ ");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+						paging += "<li><a href='javascript:getMessageSend("+ data.pageCnt+ ");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
 						$(".pagination2").html(paging);
 					},
 					fail : function(xhr) {
@@ -842,10 +828,13 @@
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 	$("#sendMessage").click(function() {
-		var onePeople = $("#reInput1").val();
+		var onePeople = $("#reInput1").val(); //보낸사람의 값을 onePeople변수에 담아줬다
 		$("#sendPerson").val(onePeople);
 		$("#sendMessageForm").submit();
 	});
+	
+	if ('${msg_person}' != '')
+		$("#sendMessageInput").val('${param.msg_person}');
 </script>
 
 <script>
@@ -963,13 +952,9 @@
 	//마이페이지 하단 탭 메뉴
 	$("#tabs2").tabs();
 
-	if ('${param.msg_person}' != '')
-		$("#sendMessageInput").val('${param.msg_person}');
+	
 </script>
 
-<%-- 테스트 --%>
-
-${param.msg_person}
 
 </body>
 </html>

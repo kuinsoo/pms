@@ -30,6 +30,19 @@ public interface MemberServiceInf {
 	 */
 	MemberVo selectUser(String member_mail);
 
+	
+
+	/**
+	 * Method : totalEndProjectCntSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 참여했던 프로젝트 전체 개수 가져오기 
+	 */
+	int totalEndProjectCntSearch(PageVo pageVo);
+	
+	
 	/**
 	 * Method : insertUser 작성자 : pc07 변경이력 :
 	 *
@@ -64,6 +77,17 @@ public interface MemberServiceInf {
 	 * Method 설명 : 마이페이지 프로젝트 파일  project_id 포함 
 	 */
 	List<AttachmentVo> myFileListProjectId(PageVo pageVo);
+	
+	/**
+	 * Method : totalProjectCntSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 참여중인 프로젝트 검색 개수 가져오기 
+	 */
+	int totalProjectCntSearch(PageVo pageVo);
+	
 	
 	/**
 	 * Method : selectfindPass 작성자 : pc07 변경이력 :
@@ -208,6 +232,36 @@ public interface MemberServiceInf {
 	 */
 	int updateUserwithDrawal(MemberVo memberVo);
 	
+	/**
+	 * Method : selectProjectCntSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 즐겨찾기한 검색 개수 가져오기 
+	 */
+	int selectProjectCntSearch(PageVo pageVo);
+	
+	/**
+	 * Method : totalmyFileListCntSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 파일 부분 전체 검색 전체값
+	 */
+	int totalmyFileListCntSearch(PageVo pageVo);
+	
+	
+	/**
+	 * Method : selectTodoCntSearch
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param pageVo
+	 * @return
+	 * Method 설명 : 나의 일감 검색 개수 
+	 */
+	int selectTodoCntSearch(PageVo pageVo);
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
