@@ -512,6 +512,12 @@
         $('#cmt'+cmt_id).show();
     }
 
+    function updateCmtShow(cmt_id) {
+        $('#cmtContent'+cmt_id).show();
+        $('.cmtContentC').hide();
+        $('#cmt'+cmt_id).hide();
+    }
+
     function updateCmtAjax(cmt_id, work_id, project_id, cmt_content) {
         var cmtSave = $('#cmtSave'+cmt_id).val();
         $.ajax({
@@ -519,9 +525,10 @@
             url: "/updateCmt",
             data: {"cmt_id": cmt_id, "work_id":work_id, "project_id": project_id, "cmt_content": cmtSave},
             success: function (data) {
-                $('#commentListNewDiv'+work_id).html("");
-                $('#commentListNewDiv'+work_id).html(data);
+                $('#cmtContent'+cmt_id).val(data.cmt_content);
                 $('.commentInput').val("");
+                updateCmtShow(cmt_id);
+
             }
         });
     }
