@@ -43,7 +43,7 @@ public class MessageController {
 	private FriendsListServiceInf friendservice;
 	
 	@Autowired
-	private MessageServiceInf messageService;
+	private MessageServiceInf messageservice;
 	
 	@Autowired
 	private PostServiceInf postService;
@@ -73,7 +73,7 @@ public class MessageController {
 		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
-		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageservice.totalMsgReceived(memberVo.getMember_mail()));
 		
 		
 		return "message/message";
