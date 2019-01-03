@@ -361,7 +361,6 @@ public class MessageController {
 	
 	@RequestMapping(value="/sendYouMessageUpdate" , method= RequestMethod.POST)
 	public String sendYouMessageUpdate(@RequestParam("msg_person")String msg_person, RedirectAttributes redirectAttributes) {
-
 		redirectAttributes.addAttribute("msg_person", msg_person);
 		return "redirect:message#tabs2-1?msg_person="+msg_person;
 	}

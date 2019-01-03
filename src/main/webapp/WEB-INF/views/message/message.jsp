@@ -81,7 +81,7 @@
 						<!-- 팝업 시작 부분 -->
 						<div class="white_content2" id="open2">
 							<div>
-								<a href="#close"><i class="icon-close icons"></i></a>
+								<a href="#close" onclick="getFriendsListGo();"><i class="icon-close icons"></i></a>
 								<div class="sentNoteContainer">
 									<div class="recipientFacing">
 										<span>보낸사람</span> 
