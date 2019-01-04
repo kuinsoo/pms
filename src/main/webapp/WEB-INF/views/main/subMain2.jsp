@@ -113,7 +113,6 @@
             <%-- 참여자 목록 --%>
             <%@ include file="/WEB-INF/views/main/participants.jsp" %>
         </div>
-
     </div>
 </section>
 
@@ -454,7 +453,24 @@
     }; */
 
 
+    /* work cart  현재 미사용 중  */
+    function createWork() {
+        var param = $('form[name=workfrm1]').serialize();
 
+        $.ajax({
+            method: "POST",
+            url: "/createWork",
+            enctype: 'multipart/form-data',
+            data: param,
+            success: function (data) {
+                $('#submain_work').html("");
+                $('#submain_work').html(data);
+                updateCard('0', '0', 0, '${projectVo.project_id}');
+            },
+            error: function (data) {
+            }
+        });
+    }
     <%-- 댓글 삽입 --%>
     function insertCmt(work_id, cmt_content) {
         var cmt_contenta = $('#' + cmt_content).val();

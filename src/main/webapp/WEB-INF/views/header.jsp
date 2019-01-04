@@ -209,10 +209,12 @@
 	                                <i class="icon-badge icons"></i>
 	                                <a href="/evaluation">능력 및 평가</a>
 	                            </li>
-	                            <li>
-	                                <i class="icon-settings icons"></i>
-	                                <a href="/admin">관리자 모드</a>
-	                            </li>
+	                            <c:if test="${memberVo.member_mail == 'admin@admin.com'}">
+		                            <li>
+		                                <i class="icon-settings icons"></i>
+		                                <a href="/admin">관리자 모드</a>
+		                            </li>
+	                            </c:if>
 	                            <li>
 	                                <i class="icon-power icons"></i>
 	                                <label onclick="logout();">로그아웃</label>
@@ -223,6 +225,9 @@
                 </div>
             </div>
         </div>
+        <form id="subMainForm" action="/subMain" method="post">
+            <input type="hidden" name="project_id" value="${projectVo.project_id}">
+        </form>
     </header>
 	<script>
 	// 폴링방법 
@@ -294,6 +299,8 @@
 		$('#myPageLocation').on('click', function () {
 			location.href="/myPage";
 		});
+
+
     </script>
 
    <!--  <script type="text/javascript">
