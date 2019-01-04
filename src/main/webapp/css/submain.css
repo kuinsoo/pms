@@ -220,13 +220,13 @@ ul.subMaintab li.current > a{color:#fff;}
 
 .issueSelectPage{width:100%;overflow:hidden;clear:both;height:95%;padding-top:20px;}
 .issueSelectPageLeft{float:left;width:400px;}
-.issueSelectPageLeft > form > textarea{width:100%;font-size:20px;height:300px;outline:none;padding:20px;margin-top:10px;}
-.issueSelectPageRight{float:left;width:376px;margin-left:10px;}
+.issueSelectPageLeft > form > textarea{width:370px;font-size:20px;height:300px;outline:none;padding:20px;float:left;}
+.issueSelectPageRight{float:left;width:550px;}
 .issueSelectPageRight > h2{text-align:left;padding:15px;float:left;}
-.issueSelectPageRight > form > textarea{width:100%;font-size:20px;height:630px;outline:none;padding:20px;}
+.issueSelectPageRight > form > textarea{width:100%;font-size:20px;height:70px;outline:none;padding:20px;}
 .issueCreateBtn {
 	width:90px;height:40px;background-color:#4286f4;color:#fff;border:none;font-size:17px;
-	cursor:pointer;outline:none;margin-top:10px;float:right;
+	cursor:pointer;outline:none;margin:0 auto;margin-top:10px;
 }
 .insueUpdateBtn {
 	width:90px;height:40px;background-color:#4286f4;color:#fff;border:none;font-size:17px;
@@ -234,7 +234,7 @@ ul.subMaintab li.current > a{color:#fff;}
 }
 .issueProfile{width:150px;height:150px;margin:0 auto;}
 .issueProfile > img{width:150px;height:150px;border-radius:100%;}
-.issues{float:left;width:405px;height:200px;}
+.issues{float:left;width:400px;height:200px;}
 .issues > .issuesLeft{float:left;margin-top:10px;margin-left:10px;}
 .issues > .issuesRight{float:left;margin-left:20px;margin-top:10px;width:300px;}
 .issues > .issuesLeft > ul > li{text-align:left;padding:10px 0px 10px 0px;font-size:20px;}

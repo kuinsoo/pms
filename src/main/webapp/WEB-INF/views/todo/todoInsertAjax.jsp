@@ -61,8 +61,7 @@
 									<input type="button" value="삭제" class="insueUpdateBtn" onclick="deleteIssue${todo.todo_work}(${todo.todo_id});"/>  
 								</c:otherwise>
 							</c:choose>
-						</div>
-						<form style="text-align: left;" name="insertIssueForm${todo.todo_id}">
+						<form name="insertIssueForm${todo.todo_id}">
 							<label>Title</label><input type="text" id="input_issue_title${todo.todo_id}" name="issue_title"><br>
 							<label>Level</label>
 							<select class="sel_issueLevel" id="input_issue_level${todo.todo_id}" name="issue_level">
@@ -100,7 +99,7 @@
 							<input type="hidden" id="work_project${todo.todo_id}" name="work_project" value="">
 						</form>
 						<br><hr><br>
-						<div>
+						<!--<div>-->
 							<table>
 								<thead>
 									<tr>
@@ -124,6 +123,7 @@
 									<!-- issueHelperHtmlAjax.jsp -->
 								</tbody>
 							</table>
+						<!--</div>-->
 						</div>
 					</div>
 				</div>
