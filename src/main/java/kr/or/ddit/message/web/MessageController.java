@@ -418,7 +418,7 @@ public class MessageController {
 	 * Method 설명 : 쪽지 보내기 
 	 */
 	@RequestMapping(value= "/insertMessageSend" , method= RequestMethod.POST)
-	public String insertMessageSend(@SessionAttribute("memberVo") MemberVo memberVo,
+	public void insertMessageSend(@SessionAttribute("memberVo") MemberVo memberVo,
 				HttpServletRequest request ,MessageVo msgVo, Model model) {
 		
 		String msg_rmember = request.getParameter("textValue");
@@ -436,7 +436,6 @@ public class MessageController {
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		
-		return "message/message";
 	}
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
