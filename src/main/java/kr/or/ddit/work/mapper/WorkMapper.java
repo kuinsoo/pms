@@ -158,4 +158,14 @@ public interface WorkMapper {
 	* Method 설명 : 프로젝트 & 해당 구성원에게 할당된 업무 리스트 출력
 	*/
 	List<WorkVo> myWorkList(WorkVo workVo);
+
+	/**
+	 * Method : getWorkPageList
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param project_id
+	 * @return
+	 * Method 설명 : subMain  메인 차트를 위한 카운트
+	 */
+	WorkVo workMainChart(String project_id);
 }

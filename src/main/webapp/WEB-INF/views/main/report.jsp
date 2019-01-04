@@ -14,23 +14,15 @@
             <ul>
                 <li>
                     <i class="icon-pie-chart icons"></i>
-                    <span>요청 12건</span>
+                    <span>업무 ${workMainChart.workCnt}건</span>
                 </li>
                 <li>
                     <i class="icon-pie-chart icons"></i>
-                    <span>진행 19건</span>
+                    <span>할일 ${workMainChart.todoCnt}건</span>
                 </li>
                 <li>
                     <i class="icon-pie-chart icons"></i>
-                    <span>피드백 3건</span>
-                </li>
-                <li>
-                    <i class="icon-pie-chart icons"></i>
-                    <span>완료 5건</span>
-                </li>
-                <li>
-                    <i class="icon-pie-chart icons"></i>
-                    <span>보류 2건</span>
+                    <span>이슈 ${workMainChart.issueCnt}건</span>
                 </li>
             </ul>
         </div>

@@ -328,10 +328,17 @@
 	</div>
 
 	<table>
+		<colgroup width="13%" />
+		<colgroup width="14%" />
+		<colgroup width="15%" />
+		<colgroup width="20%" />
+		<colgroup width="20%" />
+		<colgroup width="9%" />
+		<colgroup width="9%" />
 		<thead>
 		<tr>
 			<th>완료</th>
-			<th>TODO</th>
+			<th>제목</th>
 			<th>담당자</th>
 			<th>시작</th>
 			<th>마감</th>
