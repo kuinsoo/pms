@@ -50,54 +50,77 @@
 							</form>
 						</div>
 						<div class="issueSelectPageRight">
-							<h2>발생이슈</h2>
-							<c:choose>
-								<c:when test="${todo.todo_issue == null}">
-									<input type="button" value="등록" class="issueCreateBtn" onclick="insertIssue${todo.todo_work}(${todo.todo_id});"/>
-								</c:when>
-								<c:otherwise>
-									<input type="button" value="수정" class="insueUpdateBtn" onclick="updateIssue${todo.todo_work}(${todo.todo_id});"/>  
-									<input type="button" value="등록" class="issueCreateBtn" onclick="insertIssue${todo.todo_work}(${todo.todo_id});"/>
-									<input type="button" value="삭제" class="insueUpdateBtn" onclick="deleteIssue${todo.todo_work}(${todo.todo_id});"/>  
-								</c:otherwise>
-							</c:choose>
-						<form name="insertIssueForm${todo.todo_id}">
-							<label>Title</label><input type="text" id="input_issue_title${todo.todo_id}" name="issue_title"><br>
-							<label>Level</label>
-							<select class="sel_issueLevel" id="input_issue_level${todo.todo_id}" name="issue_level">
-								<option value="1">level 1</option>
-								<option value="2">level 2</option>
-								<option value="3">level 3</option>
-								<option value="4">level 4</option>
-								<option value="5">level 5</option>
-							</select><br>
-							<label>담당자</label><input type="text" name="issue_member" value="${todo.todo_pmember}" readonly><br>
-							<label>발생일시</label><input type="datetime-local" id="non_issue_sdate${todo.todo_id}" name="non_issue_sdate${todo.todo_id}" value=""><br>
-							<label>이슈내용</label><br>
-							<textarea id="input_issue_content${todo.todo_id}" name="issue_content" placeholder="내용을 입력해주세요."></textarea><br>
-							<br><hr><br>
-							<c:choose>
-								<c:when test="${todo.todo_issue == null}"></c:when>
-								<c:otherwise>
-									<label>해결자</label>
-									<select class="sel_issue_helper" id="issue_helper">
-										<c:forEach items="${issueMemberList}" var="member">
-											<option>${member.member_name}(${member.pmember_member})</option>
-										</c:forEach>
-									</select><br>
-									<label>해결일시</label><input type="datetime-local" id="non_issue_edate${todo.todo_id}" name="non_issue_edate${todo.todo_id}" value=""><br>
-									<label>해결방법</label><br>
-									<textarea placeholder="내용을 입력해주세요." name="issue_solution"></textarea>
-									<input type="button" value="해결등록" class="insueUpdateBtn" onclick="helperUpdate${todo.todo_work}(${todo.todo_id});"/>
-								</c:otherwise>
-							</c:choose>
-							<input type="hidden" id="issue_id${todo.todo_id}" name="issue_id" value="">
-							<input type="hidden" name="issue_work" value="${todo.todo_work}">
-							<input type="hidden" id="todo_id${todo.todo_id}" name="todo_id" value="${todo.todo_id}">
-							<input type="hidden" id="issue_sdate${todo.todo_id}" name="issue_sdate" value="">
-							<input type="hidden" id="issue_edate${todo.todo_id}" name="issue_edate" value="">
-							<input type="hidden" id="work_project${todo.todo_id}" name="work_project" value="">
-						</form>
+							<form name="insertIssueForm${todo.todo_id}">
+								<input type="hidden" id="issue_id${todo.todo_id}" name="issue_id" value="">
+								<input type="hidden" name="issue_work" value="${todo.todo_work}">
+								<input type="hidden" id="todo_id${todo.todo_id}" name="todo_id" value="${todo.todo_id}">
+								<input type="hidden" id="issue_sdate${todo.todo_id}" name="issue_sdate" value="">
+								<input type="hidden" id="issue_edate${todo.todo_id}" name="issue_edate" value="">
+								<input type="hidden" id="work_project${todo.todo_id}" name="work_project" value="">
+								<table class="occurIssueDiv">
+									<tbody>
+										<tr>
+											<td colspan="2"><h2>발생이슈</h2></td>
+										</tr>
+										<tr>
+											<td>TITLE</td>
+											<td><input type="text" id="input_issue_title${todo.todo_id}" name="issue_title"></td>
+										</tr>
+										<tr>
+											<td>LEVEL</td>
+											<td>
+												<select class="sel_issueLevel" id="input_issue_level${todo.todo_id}" name="issue_level">
+													<option value="1">level 1</option>
+													<option value="2">level 2</option>
+													<option value="3">level 3</option>
+													<option value="4">level 4</option>
+													<option value="5">level 5</option>
+												</select>
+											</td>
+										</tr>
+										<tr>
+											<td>담당자</td>
+											<td><input type="text" name="issue_member" value="${todo.todo_pmember}" readonly></td>
+										</tr>
+										<tr>
+											<td>발생일시</td>
+											<td><input type="datetime-local" id="non_issue_sdate${todo.todo_id}" name="non_issue_sdate${todo.todo_id}" value=""></td>
+										</tr>
+										<tr>
+											<td>이슈내용</td>
+											<td>
+												<textarea id="input_issue_content${todo.todo_id}" name="issue_content" placeholder="내용을 입력해주세요."></textarea>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+								<c:choose>
+									<c:when test="${todo.todo_issue == null}">
+										<input type="button" value="등록" class="issueCreateBtn" onclick="insertIssue${todo.todo_work}(${todo.todo_id});"/>
+									</c:when>
+									<c:otherwise>
+										<input type="button" value="수정" class="insueUpdateBtn" onclick="updateIssue${todo.todo_work}(${todo.todo_id});"/>  
+										<input type="button" value="등록" class="issueCreateBtn" onclick="insertIssue${todo.todo_work}(${todo.todo_id});"/>
+										<input type="button" value="삭제" class="insueUpdateBtn" onclick="deleteIssue${todo.todo_work}(${todo.todo_id});"/>  
+									</c:otherwise>
+								</c:choose>
+								<c:choose>
+									<c:when test="${todo.todo_issue == null}"></c:when>
+									<c:otherwise>
+										<label>해결자</label>
+										<select class="sel_issue_helper" id="issue_helper">
+											<c:forEach items="${issueMemberList}" var="member">
+												<option>${member.member_name}(${member.pmember_member})</option>
+											</c:forEach>
+										</select><br>
+										<label>해결일시</label><input type="datetime-local" id="non_issue_edate${todo.todo_id}" name="non_issue_edate${todo.todo_id}" value=""><br>
+										<label>해결방법</label><br>
+										<textarea placeholder="내용을 입력해주세요." name="issue_solution"></textarea>
+										<input type="button" value="해결등록" class="insueUpdateBtn" onclick="helperUpdate${todo.todo_work}(${todo.todo_id});"/>
+									</c:otherwise>
+								</c:choose>
+							</form>
+						
 						<br><hr><br>
 						<!--<div>-->
 							<table>

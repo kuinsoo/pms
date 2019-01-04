@@ -222,8 +222,6 @@ ul.subMaintab li.current > a{color:#fff;}
 .issueSelectPageLeft{float:left;width:400px;}
 .issueSelectPageLeft > form > textarea{width:370px;font-size:20px;height:300px;outline:none;padding:20px;float:left;}
 .issueSelectPageRight{float:left;width:550px;}
-.issueSelectPageRight > h2{text-align:left;padding:15px;float:left;}
-.issueSelectPageRight > form > textarea{width:100%;font-size:20px;height:70px;outline:none;padding:20px;}
 .issueCreateBtn {
 	width:90px;height:40px;background-color:#4286f4;color:#fff;border:none;font-size:17px;
 	cursor:pointer;outline:none;margin:0 auto;margin-top:10px;
@@ -416,6 +414,13 @@ ul.subMaintab li.current > a{color:#fff;}
 }
 .todoSearchBtnEnd{width:50px;height:30px;cursor:pointer;font-size:19px;}
 .todoSelectSearchEnd{outline:none;border:none;border-bottom:1px solid #333;}
+
+/* 이슈 수정 팝업 - 2019-01-04 임규승 */
+.occurIssueDiv {
+	width:100%;border:1px solid #f00;border-collapse:collapse;text-align:left;
+}
+.occurIssueDiv > tbody > tr{border-bottom:1px solid #333;}
+.occurIssueDiv > tbody > tr > td{padding:10px;}
 
 /* FOOTER */
 .currentFooter{width:100%;height:100px;background-color:#fff;border-top:1px solid #dee3eb;clear:left;}
