@@ -207,4 +207,16 @@ public class WorkService implements WorkServiceInf{
 	}
 
 
+	/**
+	 * Method : getWorkPageList
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param project_id
+	 * @return
+	 * Method 설명 : subMain  메인 차트를 위한 카운트
+	 */
+	@Override
+	public WorkVo workMainChart(String project_id) {
+		return workMapper.workMainChart(project_id);
+	}
 }

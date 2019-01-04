@@ -47,6 +47,11 @@ public class WorkVo {
 	private String member_mail; 	// 작성자
 	private String member_profile;  // 작성자 프로필사진
 
+	/* subMain Main Chart 를 위한 카운트 */
+	private int workCnt;
+	private int todoCnt;
+	private int issueCnt;
+
 	
 	/* 기본생성자 */
 	public WorkVo() {}
@@ -189,6 +194,32 @@ public class WorkVo {
 	}
 	public String getFormat_work_edate() {
 		return work_edate != null ? sdf.format(work_edate) : null;
+	}
+
+
+	/* SubMain main chart 를 위한 Getter setter */
+	public int getWorkCnt() {
+		return workCnt;
+	}
+
+	public void setWorkCnt(int workCnt) {
+		this.workCnt = workCnt;
+	}
+
+	public int getTodoCnt() {
+		return todoCnt;
+	}
+
+	public void setTodoCnt(int todoCnt) {
+		this.todoCnt = todoCnt;
+	}
+
+	public int getIssueCnt() {
+		return issueCnt;
+	}
+
+	public void setIssueCnt(int issueCnt) {
+		this.issueCnt = issueCnt;
 	}
 
 	/* toString */

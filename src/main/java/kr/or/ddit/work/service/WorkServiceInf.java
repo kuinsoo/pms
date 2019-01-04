@@ -171,6 +171,17 @@ public interface WorkServiceInf {
 	List<WorkVo> getWorkPageList(PageVo pageVo);
 
 
+	/**
+	 * Method : getWorkPageList
+	 * 작성자 : Mr.KKu
+	 * 변경이력 :
+	 * @param project_id
+	 * @return
+	 * Method 설명 : subMain  메인 차트를 위한 카운트
+	 */
+	WorkVo workMainChart(String project_id);
+
+
 
 
 
