@@ -20,16 +20,14 @@
 				<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 쪽지 보내기  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 				<div id="tabs2-1">
 					<div class="facingSend">
-						<form action="/insertMessageSend" method="post">
+						<form name ="sendMessageFormName" method="post">
 							<div class="facingSendTitle">
-								<input type="text" class="recipient" id="sendMessageInput"
-									   name="textValue" placeholder="받는사람을 입력해주세요" /> <select
-									name="selectBox" onChange="getSelectValue(this.form);"
-									class="recipientSelect">
-								<option>친구등록 리스트</option>
-								<c:forEach items="${selctMyFriend }" var="mf">
-									<option>${mf.friend_member}</option>
-								</c:forEach>
+								<input type="text" class="recipient" id="sendMessageInput" name="textValue" placeholder="받는사람을 입력해주세요" /> 
+								<select name="selectBox" onChange="getSelectValue(this.form);" class="recipientSelect">
+									<option>친구등록 리스트</option>
+									<c:forEach items="${selctMyFriend }" var="mf">
+										<option>${mf.friend_member}</option>
+									</c:forEach>
 							</select>
 								<!-- option으로 선택한 갑이 input에 넣어진다 -->
 								<script>
@@ -38,10 +36,10 @@
 									}
 								</script>
 							</div>
-							<textarea class="facingContent" name="textArea"></textarea>
+							<textarea class="facingContent"  id="textAreaMessage" name="textArea"></textarea>
 							<div class="facingBtn">
 								<input type="hidden" name="msg_smember" /> 
-								<input type="submit" class="facingSendBtn" value="보내기" /> 
+								<input type="submit" class="facingSendBtn" onclick= "getMessageSendYou()" value="보내기" /> 
 								<input type="button" class="facingSendReset" value="취소" />
 							</div>
 						</form>
@@ -233,6 +231,25 @@
 		getMessageReceived(1);
 	}; 
 
+	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// 쪽지 보내기 
+	
+	function getMessageSendYou(){
+		var param = $('form[name=sendMessageFormName]').serialize();
+		
+		$.ajax({
+			type: "POST",
+			url : "/insertMessageSend",
+			data : param,
+			success : function(data){
+				console.log(data);
+				
+			}
+		});
+	}
+	
+	
+	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	function getMessageReceived(page) {
 		var pageSize = 10;
