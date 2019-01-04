@@ -103,7 +103,7 @@ public class LoginController {
 //		request.setCharacterEncoding("utf-8");
 	/*<!--  변찬우(수정 2018.12.09):  리스판스 추가 for node page -->*/
 	@RequestMapping(value = "/loginProcess", method = {RequestMethod.POST, RequestMethod.GET})
-	public String loginProcess(HttpServletRequest request, HttpServletResponse response, Model model, @SessionAttribute("memberVo") MemberVo memberVo) throws UnsupportedEncodingException {
+	public String loginProcess(HttpServletRequest request, HttpServletResponse response, Model model, MemberVo memberVo) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
 		String member_mail = request.getParameter("member_mail").toLowerCase();
 		String member_pass = request.getParameter("member_pass").toLowerCase(); // 대소문자를 안가린다.
@@ -235,7 +235,7 @@ public class LoginController {
 	 * @return Method  설명 : 비밀번호 찾기
 	 */
 	@RequestMapping(value = "/findPass", method = RequestMethod.POST)
-	public String findPass(HttpServletRequest request, @SessionAttribute("memberVo") MemberVo memberVo, Model model, String to, String subject, String content) {
+	public String findPass(HttpServletRequest request, MemberVo memberVo, Model model, String to, String subject, String content) {
 		// 임의값 받아오는거 
 		String member_pass = "";
 		String member_name = request.getParameter("member_name");
