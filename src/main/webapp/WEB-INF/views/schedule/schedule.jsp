@@ -2,9 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ include file="/WEB-INF/views/header.jsp" %>
-<link href='../fullcalendar/fullcalendar.min.css' rel='stylesheet' />
 <link rel='stylesheet' href='../fullcalendar/fullcalendar.css?ver=1' />
-<link href='../fullcalendar/fullcalendar.print.css' rel='stylesheet' media='print' />
 <style type="text/css">
 .containerDiv {
 	width:1400px;padding:20px;margin:0 auto;margin-top:20px;height:auto;border:1px solid #dee3eb;
@@ -81,7 +79,7 @@
 	</div>
 </footer>
 <script src='../lib/moment.min.js?ver=1'></script>
-<script src='../lib/jqeury.min.js'></script>
+<script src='../lib/jquery.min.js'></script>
 <script src='../fullcalendar/fullcalendar.js?ver=1'></script>
 <script src='../fullcalendar/locale-all.js?ver=1'></script>
 <script type="text/javascript" src="js/classie.js"></script>

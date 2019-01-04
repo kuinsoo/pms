@@ -80,7 +80,7 @@
 								<c:when test="${todo.todo_issue == null}"></c:when>
 								<c:otherwise>
 									<label>해결자</label>
-									<select class="sel_issue_helper" name="issue_helper">
+									<select class="sel_issue_helper" id="issue_helper">
 										<c:forEach items="${issueMemberList}" var="member">
 											<option>${member.member_name}(${member.pmember_member})</option>
 										</c:forEach>

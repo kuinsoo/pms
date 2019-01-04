@@ -53,6 +53,8 @@ public class ScheduleController {
 		
 		ScheduleVo scheduleVo = new ScheduleVo(sid, pid);
 		
+		System.out.println("scheduleVo : " + scheduleVo);
+		
 		Map<String, Object> allScheduleList = scheduleService.scheduleList(scheduleVo);
 		
 		model.addAttribute("allScheduleList", allScheduleList);
