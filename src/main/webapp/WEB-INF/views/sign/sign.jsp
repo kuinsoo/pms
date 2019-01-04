@@ -90,8 +90,6 @@
 		
 		/*
 		if(!/^[a-zA-Z0-9]{10,15}$/.test(password)){
-
-출처: http://hee-kkk.tistory.com/22 [개발, 개발 누가 말했나]
 		*/
 		function onkeyup_event2(){
 			if(!/^[a-zA-Z0-9]{6,10}$/.test($("#password").val())){

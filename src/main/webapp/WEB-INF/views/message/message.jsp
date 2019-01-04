@@ -22,7 +22,7 @@
 					<div class="facingSend">
 						<form name ="sendMessageFormName" method="post">
 							<div class="facingSendTitle">
-								<input type="text" class="recipient" id="sendMessageInput" name="textValue" placeholder="받는사람을 입력해주세요" /> 
+								<input type="text" class="recipient" id="sendMessageInput" name="textValue" placeholder="받는사람을 입력해주세요" required/> 
 								<select name="selectBox" onChange="getSelectValue(this.form);" class="recipientSelect">
 									<option>친구등록 리스트</option>
 									<c:forEach items="${selctMyFriend }" var="mf">
@@ -36,12 +36,13 @@
 									}
 								</script>
 							</div>
-							<textarea class="facingContent"  id="textAreaMessage" name="textArea"></textarea>
+							<textarea class="facingContent"  onkeyup="onkeyup_event();" id="textAreaMessage" name="textArea" required></textarea>
 							<div class="facingBtn">
 								<input type="hidden" name="msg_smember" /> 
-								<input type="submit" class="facingSendBtn" onclick= "getMessageSendYou()" value="보내기" /> 
+								<input type="submit" class="facingSendBtn" id ="sendForYouBtn" onclick= "getMessageSendYou()" value="보내기" /> 
 								<input type="button" class="facingSendReset" value="취소" />
 							</div>
+							<!-- 	<span id="sendError"> 쪽지 내용을 입력해 주세요.. </span> -->
 						</form>
 					</div>
 				</div>
@@ -198,7 +199,8 @@
 </style>
 <script type="text/javascript">
 	$(document).ready(function() {
-
+		
+		$("#sendError").hide();
 		// 		if('${param.msg_person}'!='')
 		// 			$("#sendMessageInput").val('${param.msg_person}');
 
@@ -226,75 +228,80 @@
 			window.location = "#open1";
 		});
 	});
-
-	function getFriendsListGo() {
-		getMessageReceived(1);
-	}; 
+	
+/* 		function onkeyup_event(){
+			if($("#textAreaMessage").val()==""){
+				$("#sendError").show();
+				$("#sendForYouBtn").prop("disabled", true);
+			}else{
+				$("#sendError").hide();
+				$("#sendForYouBtn").prop("disabled", false);
+			}
+		} */
+		
+		function getFriendsListGo() {
+			getMessageReceived(1);
+		}; 
 
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	// 쪽지 보내기 
-	
 	function getMessageSendYou(){
 		var param = $('form[name=sendMessageFormName]').serialize();
-		
 		$.ajax({
 			type: "POST",
 			url : "/insertMessageSend",
 			data : param,
 			success : function(data){
 				console.log(data);
-				
+			
 			}
 		});
 	}
-	
-	
-	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	function getMessageReceived(page) {
 		var pageSize = 10;
 		$.ajax({
-				type : "GET",
-				url : "/messageReceivedAjax",
-				data : {"page" : page,"pageSize" : pageSize},
-				success : function(data) {
+			type : "GET",
+			url : "/messageReceivedAjax",
+			data : {"page" : page,"pageSize" : pageSize},
+			success : function(data) {
 
-					var html = "";
-					$.each(data.msgReceiveList, function(idx, mm) {
-						if (mm.msg_type == "N")
-							html += "<tr class = 'msgClick1' id = 'read'>";
-						else if (mm.msg_type == "Y")
-							html += "<tr class = 'msgClick1'>";
-							html += "	<td>" + mm.rnum + "</td>";
-							html += "	<td>" + mm.msg_id + "</td>";
-							html += "	<td>" + mm.msg_content + "</td>";
-							html += "	<td>" + mm.msg_smember + "</td>";
-							html += "	<td>" + mm.msg_time + "</td>";
-						if (mm.msg_type == 'Y') {
-							html += "<td>" + '읽지않음' + "</td>";
-						} else {
-							html += "<td>" + '읽음' + "</td>";
-						}
-						html += "</tr>";
-					});
-
-						console.log(data.msgReceiveList);
-
-						$("#msgReceiveList").html("");
-						$("#msgReceiveList").html(html);
-						var i = 1;
-						var paging = "";
-						paging += "<li><a href='javascript:getMessageReceived("+ i+ ");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
-						for (var i = 1; i <= data.pageCnt; i++) {
-							paging += "<li><a href='javascript:getMessageReceived("+ i + ");'>" + i + "</a></li>";
-						}
-						paging += "<li><a href='javascript:getMessageReceived("+ data.pageCnt+ ");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
-						$(".pagination").html(paging);
-					},
-					fail : function(xhr) {
-						console.log(xhr);
+				var html = "";
+				$.each(data.msgReceiveList, function(idx, mm) {
+					if (mm.msg_type == "N")
+						html += "<tr class = 'msgClick1' id = 'read'>";
+					else if (mm.msg_type == "Y")
+						html += "<tr class = 'msgClick1'>";
+						html += "	<td>" + mm.rnum + "</td>";
+						html += "	<td>" + mm.msg_id + "</td>";
+						html += "	<td>" + mm.msg_content + "</td>";
+						html += "	<td>" + mm.msg_smember + "</td>";
+						html += "	<td>" + mm.msg_time + "</td>";
+					if (mm.msg_type == 'Y') {
+						html += "<td>" + '읽지않음' + "</td>";
+					} else {
+						html += "<td>" + '읽음' + "</td>";
 					}
+					html += "</tr>";
 				});
+
+					console.log(data.msgReceiveList);
+
+					$("#msgReceiveList").html("");
+					$("#msgReceiveList").html(html);
+					var i = 1;
+					var paging = "";
+					paging += "<li><a href='javascript:getMessageReceived("+ i+ ");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for (var i = 1; i <= data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getMessageReceived("+ i + ");'>" + i + "</a></li>";
+					}
+					paging += "<li><a href='javascript:getMessageReceived("+ data.pageCnt+ ");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".pagination").html(paging);
+				},
+				fail : function(xhr) {
+					console.log(xhr);
+				}
+			});
 	}
 
 	function updateMessageReceivedAjax(msg_id) {
@@ -327,44 +334,44 @@
 
 	function getMessageSend(page) {
 		var pageSize = 10;
-			$.ajax({
-				type : "GET",
-				url : "/messageSendAjax",
-				data : {
-					"page" : page,
-					"pageSize" : pageSize
-				},
-				success : function(data) {
+		$.ajax({
+			type : "GET",
+			url : "/messageSendAjax",
+			data : {
+				"page" : page,
+				"pageSize" : pageSize
+			},
+			success : function(data) {
 
-					console.log(data.msgSendList);
-					var html = "";
-					$.each(data.msgSendList, function(idx, mm) {
-						html += "<tr class= msgClick2>";
-						html += "	<td>" + mm.rnum + "</td>";
-						html += "	<td>" + mm.msgmember_msg + "</td>";
-						html += "	<td>" + mm.msg_content + "</td>";
-						html += "	<td>" + mm.msg_rmember + "</td>";
-						html += "	<td>" + mm.msg_rdate + "</td>";
-						html += "</tr>";
-					});
-					console.log(data.msgSendList);
-
-						$("#msgSendList").html("");
-						$("#msgSendList").html(html);
-
-						var i = 1;
-						var paging = "";
-						paging += "<li><a href='javascript:getMessageSend("+ i+ ");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
-						for (var i = 1; i <= data.pageCnt; i++) {
-							paging += "<li><a href='javascript:getMessageSend("+ i + ");'>" + i + "</a></li>";
-						}
-						paging += "<li><a href='javascript:getMessageSend("+ data.pageCnt+ ");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
-						$(".pagination2").html(paging);
-					},
-					fail : function(xhr) {
-						console.log(xhr);
-					}
+				console.log(data.msgSendList);
+				var html = "";
+				$.each(data.msgSendList, function(idx, mm) {
+					html += "<tr class= msgClick2>";
+					html += "	<td>" + mm.rnum + "</td>";
+					html += "	<td>" + mm.msgmember_msg + "</td>";
+					html += "	<td>" + mm.msg_content + "</td>";
+					html += "	<td>" + mm.msg_rmember + "</td>";
+					html += "	<td>" + mm.msg_rdate + "</td>";
+					html += "</tr>";
 				});
+				console.log(data.msgSendList);
+
+					$("#msgSendList").html("");
+					$("#msgSendList").html(html);
+
+					var i = 1;
+					var paging = "";
+					paging += "<li><a href='javascript:getMessageSend("+ i+ ");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
+					for (var i = 1; i <= data.pageCnt; i++) {
+						paging += "<li><a href='javascript:getMessageSend("+ i + ");'>" + i + "</a></li>";
+					}
+					paging += "<li><a href='javascript:getMessageSend("+ data.pageCnt+ ");'aria-label='Next'><span aria-hidden='true'>&raquo;</span>";
+					$(".pagination2").html(paging);
+				},
+				fail : function(xhr) {
+					console.log(xhr);
+				}
+			});
 	}
 
 	function updateMessageSendAjax(msgmember_msg) {
@@ -853,7 +860,8 @@
 	// input 값에 아이디 넣기 
 	if ('${msg_person}' != '')
 		$("#sendMessageInput").val('${msg_person}');
-</script>
+
+	</script>
 
 <script>
 	// DIM POPUP - 팀원초대
@@ -972,7 +980,11 @@
 
 	
 </script>
-
+<!-- <style>
+	#sendError{
+		color: red;
+	}
+</style> -->
 
 </body>
 </html>
