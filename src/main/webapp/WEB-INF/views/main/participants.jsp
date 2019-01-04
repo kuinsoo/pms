@@ -31,7 +31,7 @@
             <c:if test="${projectMember.pmember_position eq '2'}">
                 <li>
                     <c:if test="${i.index eq 1}">
-                    <span class="projectPositionName">참여자</span>
+                    	<span class="projectPositionName">참여자</span>
                     </c:if>
                     <div class="chatList">
                         <img src="${projectMember.member_profile}">

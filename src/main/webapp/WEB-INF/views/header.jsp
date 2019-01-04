@@ -209,10 +209,12 @@
 	                                <i class="icon-badge icons"></i>
 	                                <a href="/evaluation">능력 및 평가</a>
 	                            </li>
-	                            <li>
-	                                <i class="icon-settings icons"></i>
-	                                <a href="/admin">관리자 모드</a>
-	                            </li>
+	                            <c:if test="${memberVo.member_mail == 'admin@admin.com'}">
+		                            <li>
+		                                <i class="icon-settings icons"></i>
+		                                <a href="/admin">관리자 모드</a>
+		                            </li>
+	                            </c:if>
 	                            <li>
 	                                <i class="icon-power icons"></i>
 	                                <label onclick="logout();">로그아웃</label>
