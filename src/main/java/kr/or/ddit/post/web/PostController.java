@@ -128,7 +128,7 @@ public class PostController {
 	* Method 설명 : 공지사항 게시글 상세조회
 	*/
 	@RequestMapping(value="/noticeView", method= {RequestMethod.POST, RequestMethod.GET})
-	public String noticeViews(String post_id, Model model, MemberVo memberVo) {
+	public String noticeViews(String post_id, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		
 		PostVo postVo = postService.selectAdmin(post_id);
 		model.addAttribute("postVo", postVo);
@@ -212,7 +212,7 @@ public class PostController {
 	* Method 설명 : 가이드 게시글 상세조회
 	*/
 	@RequestMapping(value="/guideView", method= {RequestMethod.POST, RequestMethod.GET})
-	public String guideViews(String post_id, Model model, MemberVo memberVo) {
+	public String guideViews(String post_id, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		
 		PostVo postVo = postService.selectAdminGuide(post_id);
 		model.addAttribute("postVo", postVo);

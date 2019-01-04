@@ -65,7 +65,7 @@ public class AttachmentController {
 	 * @return the string
 	 */
 	@RequestMapping(method = RequestMethod.GET, value = "/files")
-	public String provideUploadInfo(Model model, MemberVo memberVo) {
+	public String provideUploadInfo(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		File rootFolder = new File(Application.UPLOAD_DIR);
 
 		List<String> fileNames = Arrays.stream(rootFolder.listFiles())
@@ -175,7 +175,7 @@ public class AttachmentController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/multi_upload", method = RequestMethod.POST)
-	public String multipleSave(@RequestParam("file") MultipartFile[] files,@RequestParam("work_id")String work_id, Model model, MemberVo memberVo) {
+	public String multipleSave(@RequestParam("file") MultipartFile[] files,@RequestParam("work_id")String work_id, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		String fileName = null;
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		AttachmentVo attVo = new AttachmentVo();

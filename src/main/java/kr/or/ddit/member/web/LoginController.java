@@ -141,7 +141,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/callback", method = RequestMethod.GET)
-	public String callback(@RequestParam String code, @RequestParam String state, HttpSession session, Model model, MemberVo memberVo) throws Exception {
+	public String callback(@RequestParam String code, @RequestParam String state, HttpSession session, Model model, @SessionAttribute("memberVo") MemberVo memberVo) throws Exception {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
 
 		JsonParser json = new JsonParser();
@@ -198,7 +198,7 @@ public class LoginController {
 	 * @return Method  설명 : 아이디 찾기
 	 */
 	@RequestMapping(value = "/findEmail", method = RequestMethod.POST)
-	public String findEmail(HttpServletRequest request, MemberVo memberVo, String to, String subject, String content) {
+	public String findEmail(HttpServletRequest request, @SessionAttribute("memberVo") MemberVo memberVo, String to, String subject, String content) {
 
 		String member_name = request.getParameter("member_name");
 		// 자신의 진짜 메일 
@@ -291,7 +291,7 @@ public class LoginController {
 	 * @return Method  설명 : sign.jsp에서 회원가입 버튼을 눌렀을때
 	 */
 	@RequestMapping(value = "/signProcess", method = RequestMethod.POST)
-	public String signProcess(@RequestParam("member_mail") String member_mail, AuthorityVo authVo, MemberVo memberVo, HttpServletRequest request) {
+	public String signProcess(@RequestParam("member_mail") String member_mail, AuthorityVo authVo, @SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
 		
 		String member_pass = request.getParameter("member_pass");
 		

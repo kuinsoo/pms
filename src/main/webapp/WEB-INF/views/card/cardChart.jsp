@@ -16,10 +16,9 @@
         <c:forEach items="${wcList}" var="wcVo" >
             <c:if test="${wcVo.wc_group eq '1'}">
                 <div class="portlet">
+                    <div style="width: ${wcVo.work_progress}%; background: #8bcd24; font-family: D2Coding; font-weight: bold" >　${wcVo.work_progress}%</div>
                     <div class="portlet-header" >${wcVo.work_title}</div>
-                    <div class="portlet-content">
-                            ${wcVo.work_content}
-                    </div>
+                    <div class="portlet-content">${wcVo.work_content}</div>
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
@@ -39,10 +38,9 @@
         <c:forEach items="${wcList}" var="wcVo" >
             <c:if test="${wcVo.wc_group eq '2'}">
                 <div class="portlet">
+                    <div style="width: ${wcVo.work_progress}%; background: #8bcd24; font-family: D2Coding; font-weight: bold" >　${wcVo.work_progress}%</div>
                     <div class="portlet-header">${wcVo.work_title}</div>
-                    <div class="portlet-content">
-                    	${wcVo.work_content}
-                    </div>
+                    <div class="portlet-content">${wcVo.work_content}</div>
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
@@ -62,10 +60,9 @@
         <c:forEach items="${wcList}" var="wcVo" >
             <c:if test="${wcVo.wc_group eq '3'}">
                 <div class="portlet">
+                    <div style="width: ${wcVo.work_progress}%; background: #8bcd24; font-family: D2Coding; font-weight: bold" >　${wcVo.work_progress}%</div>
                     <div class="portlet-header">${wcVo.work_title}</div>
-                    <div class="portlet-content">
-                            ${wcVo.work_content}
-                    </div>
+                    <div class="portlet-content">${wcVo.work_content}</div>
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
@@ -85,10 +82,9 @@
         <c:forEach items="${wcList}" var="wcVo" >
             <c:if test="${wcVo.wc_group eq '4'}">
                 <div class="portlet">
+                    <div style="width: ${wcVo.work_progress}%; background: #8bcd24; font-family: D2Coding; font-weight: bold" >　${wcVo.work_progress}%</div>
                     <div class="portlet-header">${wcVo.work_title}</div>
-                    <div class="portlet-content">
-                            ${wcVo.work_content}
-                    </div>
+                    <div class="portlet-content">${wcVo.work_content}</div>
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
@@ -108,10 +104,9 @@
         <c:forEach items="${wcList}" var="wcVo" >
             <c:if test="${wcVo.wc_group eq '5'}">
                 <div class="portlet">
+                    <div style="width: ${wcVo.work_progress}%; background: #8bcd24; font-family: D2Coding; font-weight: bold" >　${wcVo.work_progress}%</div>
                     <div class="portlet-header">${wcVo.work_title}</div>
-                    <div class="portlet-content">
-                            ${wcVo.work_content}
-                    </div>
+                    <div class="portlet-content">${wcVo.work_content}</div>
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
                     <label class="kku-hide kku-group" >${wcVo.wc_group}</label>
                     <label class="kku-hide kku-index" >${wcVo.wc_index}</label>
