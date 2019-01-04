@@ -3,11 +3,8 @@
 
 <div class="projectWriter">
     <div id="tabss">
-        <ul>
-            <li><a href="#tabss-1">업무</a></li>
-            <li><a href="#tabss-2">글</a></li>
-            <li><a href="#tabss-3">일정</a></li>
-            <li><a href="#tabss-4">할일</a></li>
+        <ul style="background-color:#007fff;padding-bottom:1px;">
+            <li><a href="#tabss-1" style="font-size:19px;">CURRENT 업무 등록</a></li>
         </ul>
         <!-- tap1 업무 -->
         <div id="tabss-1">
@@ -60,6 +57,7 @@
             </form>
         </div>
         <%--tap1 끝 --%>
+        <!--
         <div id="tabss-2">
             <textarea class="tabssTextArea" placeholder="글을 작성하세요"></textarea>
             <input type="submit" class="tabssTextAreaSubmit" value="올리기"/>
@@ -94,5 +92,6 @@
             </div>
             <input type="button" class="tabssTextAreaSubmit" value="올리기"/>
         </div>
+        -->
     </div>
 </div>
