@@ -1120,7 +1120,9 @@ header {
 }
 
 .currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard > .projectCardTitle {
-    background-color: #746fcc;
+    background-image:url("../images/projectBgIcon.png");
+    background-repeat:no-repeat;
+    background-size:cover;
     width: 300px;
     height: 180px;
     line-height: 180px;
@@ -1435,6 +1437,20 @@ header {
 .sentNoteDeleteBtns{border:none;width:100px;height:40px;background-color:#007fff;color:#fff;font-size:20px;margin-top:20px;cursor:pointer;margin-left:20px;}
 .sentNoteCloseBtn{border:none;width:100px;height:40px;background-color:#007fff;color:#fff !important; font-size:20px;margin-top:20px;cursor:pointer;margin-lefT:20px;line-height:40px;text-align:center;}
 
+/* 친구 */
+.paginationMember{display:flex;justify-content:center;}
+.paginationMember > li {float:left;padding:0px 10px 0px 10px;}
+.paginationFriends{display:flex;justify-content:center;}
+.paginationFriends > li {float:left;padding:0px 10px 0px 10px;}
+.paginationMySendFriends{display:flex;justify-content:center;margin-top:10px;}
+.paginationMySendFriends > li {float:left;padding:0px 10px 0px 10px;}
+.paginationYouGiveFriends{display:flex;justify-content:center;margin-top:10px;}
+.paginationYouGiveFriends > li {float:left;padding:0px 10px 0px 10px;}
+
+.friendListFriday {
+	background-color:#007fff;color:#fff;border:none;width:70px;height:30px;margin-left:10px;
+	font-size:17px;
+}
 
 
 /* 휴지통 */

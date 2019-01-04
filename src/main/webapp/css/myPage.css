@@ -196,7 +196,7 @@
 .myPageBottomContainer > #tabs2 > #tabs2-5{display:flex;justify-content:center;align-items:center;}
 .tabs2-5center{width:400px;height:300px;margin:0 auto;text-align:center;margin-top:100px;}
 .myPageBottomContainer > #tabs2 > #tabs2-5 > .tabs2-5center > p{font-size:20px;display:block;text-align:center;margin-top:20px;}
-.myPageBottomContainer > #tabs2 > #tabs2-5 > .tabs2-5center > .goodbyeBtn {
+.goodbyeBtn {
 	width:100px;height:40px;background-color:#007fff;color:#fff;border:none;outline:none;font-size:17px;margin:0 auto;margin-top:20px;display:block;cursor:pointer;
 }
 

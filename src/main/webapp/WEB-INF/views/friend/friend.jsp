@@ -22,7 +22,7 @@
 										<input type="hidden" name="page" id= "friendListPage" value='1'/>
 										<input type="hidden" name="pageSize" value='10' />
 										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getAllMemberSearch();"/>
-										<button onclick="getAllMember(1);">목록으로</button>
+										<button onclick="getAllMember(1);" class="friendListFriday">목록으로</button>
 								</form>
 									
 									<table class="friendCreateTable">
@@ -48,7 +48,7 @@
 										<input type="hidden" name="page" id="myFriendsListPage" value='1'/>
 										<input type="hidden" name="pageSize" value='10' />
 										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getSearchFriendProject();"/>
-										<button onclick="getMyFriends(1);">목록으로</button>
+										<button onclick="getMyFriends(1);" class="friendListFriday">목록으로</button>
 										
 								</form>
 								<table class="friendCreateTable">
@@ -83,7 +83,7 @@
 										<input type="hidden" name="page" id ="MySendFriendListPage"  value='1'/>
 										<input type="hidden" name="pageSize" value='10' />
 										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getMySendFriendListSearch();"/>
-										<button onclick="getMySendFriendList(1);">목록으로</button>
+										<button onclick="getMySendFriendList(1);" class="friendListFriday">목록으로</button>
 								</form>
 									<table class="friendCreateTable">
 										<thead>
@@ -111,7 +111,7 @@
 										<input type="hidden" name="page" id="giveSearchPage" value='1'/>
 										<input type="hidden" name="pageSize" value='10' />
 										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getYouGiveFriendListSearch();"/>
-										<button onclick="getYouGiveFriendList(1);">목록으로</button>
+										<button onclick="getYouGiveFriendList(1);" class="friendListFriday">목록으로</button>
 								</form>
 								<table class="friendCreateTable">
 									<thead>

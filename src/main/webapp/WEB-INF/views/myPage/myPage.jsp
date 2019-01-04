@@ -535,7 +535,7 @@
 						html += "<tr>";
 						html += "	<td>"+ mt.rnum +"</td>";
 						html += "	<td>"+ mt.project_title +"</td>";
-						html += "	<td>"+ mt.project_content +"</td>";
+						html += "	<td>"+ mt.todo_content +"</td>";
 						if(mt.todo_complet==('N')){
 							html += "	<td>"+ '미완료' +"</td>";
 						}else{
@@ -881,7 +881,7 @@
 							<h2>회원 탈퇴 </h2>
 								<p> 회원 확인을 위하여 비밀번호를 입력해주세요. </p>
 							<form action= "/userwithDrawal" method="post">
-								<input id ="member_pass" id = "member_pass" name ="member_pass" placeholder ="비밀번호를 입력해주세요.." type="password" />
+								<input id ="member_pass" id = "member_pass" name ="member_pass" placeholder ="비밀번호를 입력해주세요.." type="password" style="font-family:'Malgun Gothic';"/>
 								<input type="button" class= "goodbyeBtn" value= "확인"/>
 							</form>
 								<span id = "passError"> 비밀번호가 일치하지 않습니다. </span>
