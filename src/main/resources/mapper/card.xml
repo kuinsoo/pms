@@ -14,6 +14,7 @@ where W.work_id = WM.WORK_ID
   and PM.PMEMBER_MEMBER = M.MEMBER_MAIL
   and WC.WC_WORK = W.WORK_ID
   and W.WORK_PROJECT=  #{pmember_project}
+  order  by WC.WC_INDEX desc
     </select>
 
 <!-- 업무 카드 이동 후 업데이트 -->

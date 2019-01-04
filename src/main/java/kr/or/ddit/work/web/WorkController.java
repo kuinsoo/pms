@@ -72,7 +72,7 @@ public class WorkController {
     private MessageServiceInf messageService;
 
     @RequestMapping(value = "/ajaxCreateWork", method = RequestMethod.POST)
-    public String ajaxCreateWork(Model model, WorkVo workVo, @RequestParam("project_id") String project_id,
+    public void ajaxCreateWork(Model model, WorkVo workVo, @RequestParam("project_id") String project_id,
                                  @SessionAttribute("memberVo") MemberVo memberVo,
                                  @RequestParam("file") MultipartFile[] files) {
 
@@ -83,26 +83,14 @@ public class WorkController {
             workVo.setWork_project(project_id);
             if (workVo.getWork_public() == null)
                 workVo.setWork_public("N");
-
-            cardService.createCard(mapWM, workVo, files);
+            if (files == null && files.length < 0) {
+                cardService.createCard(mapWM, workVo, files);
+            } else {
+                cardService.createCard(mapWM, workVo);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        Map<String, String> mapWork = new HashMap<>();
-        mapWork.put("member_mail", memberVo.getMember_mail());
-        mapWork.put("project_id", project_id);
-
-        model.addAttribute("workList", workService.selectWorks(project_id));
-        model.addAttribute("cmtList", commentsService.cmtList(project_id));
-
-        /* 알림기능 - IKS */
-        model.addAttribute("pageCnt", postService.totalPostCnt());
-        model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
-        model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
-
-
-        return "main/ajaxWorkList";
     }
 
     @RequestMapping(value = "/createWork", method = RequestMethod.POST)
@@ -166,7 +154,7 @@ public class WorkController {
         model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
         model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 
-        return "main/subMain";
+            return "main/subMain";
     }
 
 
