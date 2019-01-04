@@ -141,7 +141,8 @@
 				// alert(index)
 				// alert(index)
 
-				// alert(ui.item.prev().index());
+				//alert(ui.item.prev().index());
+				// alert(ui.item.next().index());
 				// alert(ui.item.prev().text()) //전값
 				// alert(ui.item.text()) //현재값
 				// alert(ui.item.next().text()) //다음값
