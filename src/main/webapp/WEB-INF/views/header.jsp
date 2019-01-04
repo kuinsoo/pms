@@ -111,7 +111,7 @@
 
             <!-- CURRENT LOGO -->
             <div class="currentLogo" id="currentMain">
-                <img src="https://placehold.it/200x45">
+                <img src="../images/currentLogo.gif">
             </div>
 
             <!-- CURRENT ALL SEARCH -->
