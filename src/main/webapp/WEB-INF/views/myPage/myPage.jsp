@@ -815,15 +815,9 @@
 								</div>
 								<table>
 									<colgroup width="10%" />
-<<<<<<< HEAD
 									<colgroup width="20%" />
-									<colgroup width="60%" />
-									<colgroup width="30%" />
-=======
 									<colgroup width="50%" />
 									<colgroup width="20%" />
-									<colgroup width="20%" />
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms
 									<thead>
 										<tr class="projectTodoList">
 											<th><span>번호</span></th>
@@ -886,8 +880,10 @@
 							<div class="tabs2-5center">
 							<h2>회원 탈퇴 </h2>
 								<p> 회원 확인을 위하여 비밀번호를 입력해주세요. </p>
-								<input id ="member_pass" id = "member_pass" placeholder ="비밀번호를 입력해주세요.." type="password" />
+							<form action= "/userwithDrawal" method="post">
+								<input id ="member_pass" id = "member_pass" name ="member_pass" placeholder ="비밀번호를 입력해주세요.." type="password" />
 								<input type="button" class= "goodbyeBtn" value= "확인"/>
+							</form>	
 								<span id = "passError"> 비밀번호가 일치하지 않습니다. </span>
 							</div>
 						</div>
@@ -1141,9 +1137,6 @@ $(document).ready(function() {
 	$("#member_pass").keyup(function() {
 		if($("#member_pass").val() != "${memberVo.member_pass}"){
 			$("#passError").show();
-			
-			
-			
 			$('.goodbyeBtn').prop('disabled', true);
 		} else{
 			$("#passError").hide();
