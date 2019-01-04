@@ -30,6 +30,6 @@ public interface CardServiceInf {
 
 	int updateCard(CardVo cardVo);
 
-	int deleteCard(int cardNo);
+	int deleteCard(String work_id);
 
 }

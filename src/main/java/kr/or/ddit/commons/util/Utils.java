@@ -2,6 +2,8 @@ package kr.or.ddit.commons.util;
 
 import kr.or.ddit.Application;
 import kr.or.ddit.attachment.model.AttachmentVo;
+import kr.or.ddit.attachment.service.AttachmentServiceInf;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
@@ -17,6 +19,10 @@ import java.io.FileInputStream;
  * @Version :
  */
 public class Utils {
+
+	@Autowired
+	private static AttachmentServiceInf attachmentService;
+
 	public static String extractExtension(MultipartFile file) {
 		String fileName  = file.getOriginalFilename();
 		int index = fileName.lastIndexOf(".");
@@ -98,7 +104,6 @@ public class Utils {
 	public static AttachmentVo multiFiles(MultipartFile[] files) {
 		//System.out.println("filse Size = " + files.length);
 		AttachmentVo attVo = new AttachmentVo();
-		if (files != null && files.length > 0) {
 			for (int i = 0; i < files.length; i++) {
 				try {
 					if (true == files[i].isEmpty()) {
@@ -110,12 +115,11 @@ public class Utils {
 					String extension = path.substring(path.lastIndexOf(".") + 1, path.length());
 					attVo.setAtt_extension(extension);
 					attVo.setAtt_file(files[i].getBytes());
+					attachmentService.insertAtt(attVo);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		}
-
 		return attVo;
 	}
 }

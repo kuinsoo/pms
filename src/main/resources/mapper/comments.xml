@@ -46,4 +46,8 @@
     <delete id="deleteCmt" parameterType="String">
         delete from COMMENTS where CMT_ID = #{cmt_id}
     </delete>
+
+    <delete id="deleteWorkCmt" parameterType="String">
+        delete from COMMENTS where CMT_WORK = #{work_id}
+    </delete>
 </mapper>

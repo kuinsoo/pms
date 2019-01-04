@@ -15,4 +15,8 @@
         values (SEQ_ATTACHMENT.nextval, SEQ_WORK.currval, #{att_name}, #{att_extension}, 'NoPath', #{att_file})
     </insert>
 
+    <delete id="deleteAtt" parameterType="String">
+        delete from ATTACHMENT where ATT_WORK = #{work_id}
+    </delete>
+
 </mapper>

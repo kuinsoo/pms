@@ -76,6 +76,16 @@ public interface CommentsServiceInf {
 	 */
 	int deleteCmt(String cmt_id);
 
+	/**
+	 * Delete cmt int.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 댓글 삭제 (업무에 대한)
+	 *
+	 * @param work_id the work_id id
+	 * @return the int
+	 */
+	int deleteWorkCmt(String work_id);
+
 
 
 }

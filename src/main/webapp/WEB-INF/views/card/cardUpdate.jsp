@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<div class="white_content_card" id="openCardUpdate">
+<div class="white_content_card" id="openCardUpdate${work.work_id}">
 	<div>
-		<a href="#close"><i class="icon-close icons"></i></a>
+		<a href="#close${work.work_id}"><i class="icon-close icons"></i></a>
 		<div class="cardCreateInputField">
 			<input type="text" value="업무제목" /><br>
 			<input type="datetime-local"> - <input type="datetime-local"><br><br>
@@ -22,8 +22,24 @@
 			<input type="file" /> <input type="file" />
 		</div>
 		<div class="btnPopupCenterCardUpdate">
-			<input type="button" value="수정" class="cardInfoUpdate" />
-			<input type="button" value="삭제" class="cardInfoDelete" />
+			<input type="button" value="수정" class="cardInfoUpdate" id="updateWork"/>
+			<input type="button" value="삭제" class="cardInfoDelete" onclick="deleteWork('${work.work_id}')"  />
 		</div>
 	</div>
 </div>
+
+<script>
+    function deleteWork(work_id){
+        $.ajax({
+            type: "get",
+            url : "/deleteWork",
+            data: "work_id="+work_id,
+            success : function (data) {
+                $('#subMainForm').submit();
+            },
+            error : function (data) {
+
+            }
+        });
+    };
+</script>

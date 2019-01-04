@@ -59,6 +59,17 @@ public interface WorkServiceInf {
 	* Method 설명 : 업무 삭제
 	*/
 	int deleteWork(String work_id);
+	/**
+	* Method : deleteWork
+	* 작성자 : Mr.kku
+	* 변경이력 :
+	* @param work_id
+	* @return
+	* Method 설명 : 업무 삭제
+	*/
+	int deleteWorkMember(String work_id);
+
+
 	
 	/**
 	* Method : updateWork

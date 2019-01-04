@@ -25,6 +25,6 @@ public interface CardMapper {
 
 	int updateCard(CardVo cardVo);
 
-	int deleteCard(int cardNo);
+	int deleteCard(String work_id);
 
 }

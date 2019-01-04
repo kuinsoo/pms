@@ -97,7 +97,6 @@ public class WorkController {
     public String createWork(Model model, WorkVo workVo, @RequestParam("project_id") String project_id,
                              @SessionAttribute("memberVo") MemberVo memberVo,
                              @RequestParam("file") MultipartFile[] files) {
-
         try {
             Map<String, String> mapWM = new HashMap<>();
             mapWM.put("pmember_member", memberVo.getMember_mail());
@@ -105,7 +104,7 @@ public class WorkController {
             workVo.setWork_project(project_id);
             if (workVo.getWork_public() == null)
                 workVo.setWork_public("N");
-            if (files == null && files.length < 0) {
+            if (files != null && files.length > 0) {
                 cardService.createCard(mapWM, workVo, files);
             } else {
                 cardService.createCard(mapWM, workVo);
@@ -221,5 +220,11 @@ public class WorkController {
         List<WorkVo> myWorkList = workService.myWorkList(workVo);
 
         return myWorkList;
+    }
+
+    @RequestMapping(value = "/deleteWork", method = RequestMethod.GET)
+    @ResponseBody
+    public void deleteWork(@RequestParam("work_id")String work_id) {
+        workService.deleteWork(work_id);
     }
 }

@@ -126,9 +126,6 @@
 					 #{work_sdate}, #{work_eedate},0, 'N','',#{work_public},'#4286f4',sysdate)
 	</insert>
 
-	<delete id="deleteWork" parameterType="String">
-		DELETE FROM WORK WHERE WORK_ID = #{work_id}
-	</delete>
 
 	<update id="updateWork" parameterType="workVo">
 		UPDATE WORK
@@ -212,4 +209,13 @@
 			from PROJECT P
 			where PROJECT_ID = #{project_id}
 	</select>
+
+
+	<delete id="deleteWork" parameterType="String">
+		DELETE FROM WORK WHERE WORK_ID = #{work_id}
+	</delete>
+
+	<delete id="deleteWorkMember" parameterType="String">
+		delete from WORK_MEMBER where WORK_ID = #{work_id}
+	</delete>
 </mapper>
