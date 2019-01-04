@@ -47,4 +47,19 @@ public class AttachmentService implements AttachmentServiceInf {
 	public AttachmentVo selectAtt(String att_id) {
 		return attachmentMapper.selectAtt(att_id);
 	}
+
+
+
+	/**
+	 * Select att attachment vo.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 첨부파일 삭제
+	 *
+	 * @param work_id the att id
+	 * @return the attachment vo
+	 */
+	@Override
+	public int deleteAtt(String work_id) {
+		return attachmentMapper.deleteAtt(work_id);
+	}
 }

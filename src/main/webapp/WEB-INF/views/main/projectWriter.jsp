@@ -52,7 +52,7 @@
                         <input type="file" name="file" class="projectCreateFileInput" />
                     </div>
                     <div class="workSubmit">
-                        <input type="button" class="tabssTextAreaSubmit" value="올리기" id="workCreate"  />
+                        <input type="button" class="tabssTextAreaSubmit" value="올리기" id="workCreate" />
                     </div>
                 </div>
             </form>

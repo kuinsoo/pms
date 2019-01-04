@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<div class="white_content_card" id="openCardUpdate">
+<div class="white_content_card" id="openCardUpdate${work.work_id}">
 	<div>
-		<a href="#close"><i class="icon-close icons"></i></a>
+		<a href="#close${work.work_id}"><i class="icon-close icons"></i></a>
 		<form action="/createWork" method="post" id="workForm1" name="workfrm1" enctype="multipart/form-data" >
             <div class="workContainerInput" style="margin-top:40px;">
                 <input type="text" name="work_title" placeholder="업무제목을 입력해주세요" class="workTitle"/>
@@ -48,9 +48,25 @@
                 </div>
                 <div class="workSubmit">
                     <input type="button" class="tabssTextAreaSubmit" value="수정" id="workPopUpdate" style="float:left;" />
-                    <input type="button" class="tabssTextAreaSubmit" value="삭제" id="workPopDelete"  />
+                    <input type="button" class="tabssTextAreaSubmit" value="삭제" id="workPopDelete"  onclick="deleteWork('${work.work_id}')" />
                 </div>
             </div>
         </form>
 	</div>
 </div>
+
+<script>
+    function deleteWork(work_id){
+        $.ajax({
+            type: "get",
+            url : "/deleteWork",
+            data: "work_id="+work_id,
+            success : function (data) {
+                $('#subMainForm').submit();
+            },
+            error : function (data) {
+
+            }
+        });
+    };
+</script>

@@ -33,4 +33,15 @@ public interface AttachmentServiceInf {
 	 * @return the attachment vo
 	 */
 	AttachmentVo selectAtt(String att_id);
+
+
+	/**
+	 * Select att attachment vo.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 첨부파일 삭제
+	 *
+	 * @param work_id the att id
+	 * @return the attachment vo
+	 */
+	int deleteAtt (String work_id);
 }

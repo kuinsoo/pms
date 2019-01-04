@@ -42,7 +42,7 @@ where W.work_id = WM.WORK_ID
 
 
 
-    <delete id="deleteCard" parameterType="Float">
-        delete from card where CARD_INDEX = #{card_index}
+    <delete id="deleteCard" parameterType="String">
+        delete from work_card where WC_WORK = #{work_id}
     </delete>
 </mapper>

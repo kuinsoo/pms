@@ -1,5 +1,8 @@
 package kr.or.ddit.work.service;
 
+import kr.or.ddit.attachment.service.AttachmentServiceInf;
+import kr.or.ddit.card.service.CardServiceInf;
+import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.schedule.model.ScheduleVo;
 import kr.or.ddit.todo.model.ToDoVo;
 import kr.or.ddit.todo.service.ToDoServiceInf;
@@ -32,6 +35,17 @@ public class WorkService implements WorkServiceInf{
 
 	@Autowired
 	private ToDoServiceInf todoService;
+
+	@Autowired
+	private CardServiceInf cardService;
+
+	@Autowired
+	private AttachmentServiceInf attachmentService;
+
+	@Autowired
+    private CommentsServiceInf commentsService;
+
+
 	/**
 	* Method : workAllSchedule
 	* 작성자 : jerry
@@ -83,7 +97,17 @@ public class WorkService implements WorkServiceInf{
 	*/
 	@Override
 	public int deleteWork(String work_id) {
+        attachmentService.deleteAtt(work_id);
+        commentsService.deleteWorkCmt(work_id);
+        cardService.deleteCard(work_id);
+        workMapper.deleteWorkMember(work_id);
 		return workMapper.deleteWork(work_id);
+	}
+
+
+	@Override
+	public int deleteWorkMember(String work_id) {
+		return workMapper.deleteWorkMember(work_id);
 	}
 
 	/**
