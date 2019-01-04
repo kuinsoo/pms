@@ -103,7 +103,7 @@ public class ToDoController {
 	 * @return Method  설명 : to-do list 조회
 	 */
 	@RequestMapping(value="/todoSelect", method= {RequestMethod.POST, RequestMethod.GET})
-	public String ajaxSelectTodo(HttpServletRequest request, PageVo pageVo, Model model, MemberVo memberVo) {
+	public String ajaxSelectTodo(HttpServletRequest request, PageVo pageVo, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		String work_id = request.getParameter("work_id");
 		
 		WorkVo workVo = new WorkVo();
@@ -144,8 +144,8 @@ public class ToDoController {
 	 * @param model      the model
 	 * @return Method  설명 : to-do list 페이징처리
 	 */
-	@RequestMapping(value="todoPagination", method= {RequestMethod.POST, RequestMethod.GET})
-	public String ajaxPaginationTodo(@RequestParam("project_id")String project_id, @RequestParam("work_id")String work_id, PageVo pageVo, Model model, MemberVo memberVo) {
+	@RequestMapping(value="/todoPagination", method= {RequestMethod.POST, RequestMethod.GET})
+	public String ajaxPaginationTodo(@RequestParam("project_id")String project_id, @RequestParam("work_id")String work_id, PageVo pageVo, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		int todoCnt = todoService.todoCnt(work_id);
 		
 		model.addAttribute("todoCnt", (int)Math.ceil((double)todoCnt / pageVo.getPageSize()));
