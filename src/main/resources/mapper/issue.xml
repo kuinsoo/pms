@@ -22,7 +22,9 @@
 			</when>
 			<otherwise>
 				FROM	issue sue
-				WHERE	sue.issue_member = #{sid}
+				WHERE	sue.issue_member = (SELECT	member_name
+											FROM	member
+											WHERE	member_mail = #{sid})
 			</otherwise>
 		</choose>
 	</select>
@@ -135,7 +137,7 @@
 	<!-- 이슈 해결(도움) 등록 -->
 	<update id="helperUpdate" parameterType="issueVo">
 		UPDATE	issue
-		SET		issue_helper = #{issue_helper},
+		SET		issue_helper = #{member_name},
 				issue_edate = #{issue_edate},
 				issue_solution = #{issue_solution}
 		WHERE	issue_id = #{issue_id}

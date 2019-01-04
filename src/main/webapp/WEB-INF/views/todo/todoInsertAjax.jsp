@@ -61,6 +61,8 @@
 							</c:choose>
 						</div>
 						<form style="text-align: left;" name="insertIssueForm${todo.todo_id}">
+							<input type="hidden" name="member_name" id="member_name${todo.todo_id}" value="">
+							<input type="hidden" name="pmember_member" id="pmember_member${todo.todo_id}" value="">
 							<label>Title</label><input type="text" id="input_issue_title${todo.todo_id}" name="issue_title"><br>
 							<label>Level</label>
 							<select class="sel_issueLevel" id="input_issue_level${todo.todo_id}" name="issue_level">
@@ -79,7 +81,7 @@
 								<c:when test="${todo.todo_issue == null}"></c:when>
 								<c:otherwise>
 									<label>해결자</label>
-									<select class="sel_issue_helper" name="issue_helper">
+									<select class="sel_issue_helper" id="issue_helper">
 										<c:forEach items="${issueMemberList}" var="member">
 											<option>${member.member_name}(${member.pmember_member})</option>
 										</c:forEach>

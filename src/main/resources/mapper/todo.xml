@@ -22,7 +22,7 @@
 			</when>
 			<otherwise>
 				FROM	todo td
-				WHERE	todo_pmember = #{sid}
+				WHERE	todo_member = #{sid}
 			</otherwise>
 		</choose>
 	</select>

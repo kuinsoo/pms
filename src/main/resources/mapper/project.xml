@@ -18,11 +18,11 @@
 
 
 	<select id="selectAllProject" resultType="projectVo">
-        select * from PROJECT order by PROJECT_ID desc
+        SELECT * FROM project ORDER BY project_id DESC
     </select>
 
     <select id="selectProject" resultType="projectVo" parameterType="String">
-        select * from PROJECT where PROJECT_ID = #{project_id}
+        SELECT * FROM project WHERE project_id = #{project_id}
     </select>
 
 	<select id="bookMarkProjects" resultMap="pMemberResultMap" parameterType="String">
