@@ -65,7 +65,7 @@ public class CommentsController {
 	@RequestMapping(value = "/deleteCmt", method = RequestMethod.GET)
 	public String ajaxInsertCmt(Model model, @RequestParam("project_id")String project_id,
 								@RequestParam("cmt_id")String cmt_id,
-								@RequestParam("work_id")String work_id, MemberVo memberVo){
+								@RequestParam("work_id")String work_id, @SessionAttribute("memberVo") MemberVo memberVo){
 		commentsService.deleteCmt(cmt_id);
 
 		Map<String,String> cmtMap = new HashMap<>();

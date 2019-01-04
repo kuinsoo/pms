@@ -103,7 +103,7 @@ public class LoginController {
 //		request.setCharacterEncoding("utf-8");
 	/*<!--  변찬우(수정 2018.12.09):  리스판스 추가 for node page -->*/
 	@RequestMapping(value = "/loginProcess", method = {RequestMethod.POST, RequestMethod.GET})
-	public String loginProcess(HttpServletRequest request, HttpServletResponse response, Model model, MemberVo memberVo) throws UnsupportedEncodingException {
+	public String loginProcess(HttpServletRequest request, HttpServletResponse response, Model model, @SessionAttribute("memberVo") MemberVo memberVo) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
 		String member_mail = request.getParameter("member_mail").toLowerCase();
 		String member_pass = request.getParameter("member_pass").toLowerCase(); // 대소문자를 안가린다.
@@ -141,7 +141,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/callback", method = RequestMethod.GET)
-	public String callback(@RequestParam String code, @RequestParam String state, HttpSession session, Model model, MemberVo memberVo) throws Exception {
+	public String callback(@RequestParam String code, @RequestParam String state, HttpSession session, Model model, @SessionAttribute("memberVo") MemberVo memberVo) throws Exception {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
 
 		JsonParser json = new JsonParser();
@@ -198,7 +198,7 @@ public class LoginController {
 	 * @return Method  설명 : 아이디 찾기
 	 */
 	@RequestMapping(value = "/findEmail", method = RequestMethod.POST)
-	public String findEmail(HttpServletRequest request, MemberVo memberVo, String to, String subject, String content) {
+	public String findEmail(HttpServletRequest request, @SessionAttribute("memberVo") MemberVo memberVo, String to, String subject, String content) {
 
 		String member_name = request.getParameter("member_name");
 		// 자신의 진짜 메일 
@@ -235,7 +235,7 @@ public class LoginController {
 	 * @return Method  설명 : 비밀번호 찾기
 	 */
 	@RequestMapping(value = "/findPass", method = RequestMethod.POST)
-	public String findPass(HttpServletRequest request, MemberVo memberVo, Model model, String to, String subject, String content) {
+	public String findPass(HttpServletRequest request, @SessionAttribute("memberVo") MemberVo memberVo, Model model, String to, String subject, String content) {
 		// 임의값 받아오는거 
 		String member_pass = "";
 		String member_name = request.getParameter("member_name");
@@ -291,7 +291,7 @@ public class LoginController {
 	 * @return Method  설명 : sign.jsp에서 회원가입 버튼을 눌렀을때
 	 */
 	@RequestMapping(value = "/signProcess", method = RequestMethod.POST)
-	public String signProcess(@RequestParam("member_mail") String member_mail, AuthorityVo authVo, MemberVo memberVo, HttpServletRequest request) {
+	public String signProcess(@RequestParam("member_mail") String member_mail, AuthorityVo authVo, @SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
 		
 		String member_pass = request.getParameter("member_pass");
 		

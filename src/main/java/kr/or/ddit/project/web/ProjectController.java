@@ -77,7 +77,7 @@ public class ProjectController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/createProject",method = RequestMethod.GET)
-	public String createProjectView(Model model, MemberVo memberVo) {
+	public String createProjectView(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		
 		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
@@ -118,7 +118,7 @@ public class ProjectController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/ajaxUpdateProject", method = RequestMethod.POST)
-	public String updateProject(ProjectVo projectVo, Model model, MemberVo memberVo) {
+	public String updateProject(ProjectVo projectVo, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 
 		projectService.updateProject(projectVo);
 		
@@ -138,7 +138,7 @@ public class ProjectController {
 	 * @return the string
 	 */
 	@RequestMapping(value = "/projectList" ,method = RequestMethod.GET)
-	public String projectList(Model model, MemberVo memberVo) {
+	public String projectList(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		model.addAttribute("projectList",projectService.selectAllProject());
 		
 		/* 알림기능 - IKS */

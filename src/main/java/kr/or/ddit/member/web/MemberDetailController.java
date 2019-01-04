@@ -134,7 +134,7 @@ public class MemberDetailController {
 
 	@ResponseBody
 	@RequestMapping(value= "/myPageProjectAjax", method= RequestMethod.GET)
-	public Map<String, Object> myPageProjectAjax(Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo ,
+	public Map<String, Object> myPageProjectAjax(Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo,
 							ProjectVo projectVo, HttpServletRequest request) {
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
