@@ -409,7 +409,11 @@ ul.subMaintab li.current > a{color:#fff;}
 	position:absolute;z-index:5;top:40px;right:10px;box-shadow:0px 0px 1px #000;
 	line-height:50px;
 }
-
+.projectTeams > ul > li:nth-child(2):hover > .projectTeamHover {
+	display:block;width:320px;height:50px;background-color:#fff;border:1px solid #dee3eb;
+	position:absolute;z-index:5;top:40px;right:10px;box-shadow:0px 0px 1px #000;
+	line-height:50px;
+}
 .projectTeams > ul > li:nth-child(3):hover > .projectTeamHover {
 	display:block;width:320px;height:50px;background-color:#fff;border:1px solid #dee3eb;
 	position:absolute;z-index:5;top:20px;right:10px;box-shadow:0px 0px 1px #000;
@@ -446,11 +450,6 @@ ul.subMaintab li.current > a{color:#fff;}
 	line-height:50px;
 }
 .projectTeams > ul > li:nth-child(10):hover > .projectTeamHover {
-	display:block;width:320px;height:50px;background-color:#fff;border:1px solid #dee3eb;
-	position:absolute;z-index:5;top:20px;right:10px;box-shadow:0px 0px 1px #000;
-	line-height:50px;
-}
-.projectTeams > ul > li:last-child:hover > .projectTeamHover {
 	display:block;width:320px;height:50px;background-color:#fff;border:1px solid #dee3eb;
 	position:absolute;z-index:5;top:20px;right:10px;box-shadow:0px 0px 1px #000;
 	line-height:50px;
