@@ -46,9 +46,10 @@
                         <input type="checkbox" name="work_public" value="Y" class="workVisibilityCheck"/>
                         <span>WORK_PUBLIC</span>
                     </div>
-                    <div>
-                        <input type="file" name="file" />
-                        <input type="file" name="file" />
+                    <div class="workVisibility" style="height:85px;">
+                    	<h3>첨부파일 등록</h3>
+                        <input type="file" name="file" class="projectCreateFileInput" />
+                        <input type="file" name="file" class="projectCreateFileInput" />
                     </div>
                     <div class="workSubmit">
                         <input type="button" class="tabssTextAreaSubmit" value="올리기" id="workCreate"  />
