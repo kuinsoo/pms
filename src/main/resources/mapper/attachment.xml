@@ -12,7 +12,7 @@
 
     <insert id="insertAtt" parameterType="attVo">
         insert into attachment (ATT_ID, ATT_WORK, ATT_NAME, ATT_EXTENSION, ATT_PATH, ATT_FILE)
-        values (SEQ_ATTACHMENT.nextval, SEQ_WORK.currval, #{att_name}, #{att_extension}, '', #{att_file})
+        values (SEQ_ATTACHMENT.nextval, SEQ_WORK.currval, #{att_name}, #{att_extension}, 'NoPath', #{att_file})
     </insert>
 
 </mapper>

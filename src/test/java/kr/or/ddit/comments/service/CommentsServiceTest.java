@@ -1,6 +1,5 @@
 package kr.or.ddit.comments.service;
 
-import kr.or.ddit.comments.model.CommentsVo;
 import kr.or.ddit.commons.ResetSQL;
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,18 +20,7 @@ import static org.junit.Assert.*;
  */
 public class CommentsServiceTest extends ResetSQL {
 
-	@Autowired
-	private CommentsServiceInf commentsService;
 
-	@Test
-	public void cmtList() {
-		/*** Given ***/
-		String project_id = "8";
-		/*** When ***/
-		List<CommentsVo> commentsVos = commentsService.cmtList(project_id);
-		/*** Then ***/
-		Assert.assertEquals(6,commentsVos.size());
-	}
 
 	@Test
 	public void insertCmt() {

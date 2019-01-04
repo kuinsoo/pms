@@ -22,7 +22,8 @@
 
     // 서버에 실제 저장된 파일명
 
-    String filename = attVo.getAtt_path().substring(attVo.getAtt_path().indexOf("/"),attVo.getAtt_path().length());
+    /*String filename = attVo.getAtt_path().substring(attVo.getAtt_path().indexOf("/"),attVo.getAtt_path().length());*/
+    String filename = attVo.getAtt_name();
 
     // 실제 내보낼 파일명
     String orgfilename = attVo.getAtt_name();

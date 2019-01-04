@@ -129,7 +129,7 @@
 			cancel: ".portlet-toggle",
 			placeholder: "portlet-placeholder ui-corner-all",
 			stop      : function(event, ui){
-				var prev = isNaN(parseFloat(ui.item.prev().children(".kku-index").text()))  ?  9999999 : parseInt(ui.item.prev().children(".kku-index").text());
+				var prev = isNaN(parseFloat(ui.item.prev().children(".kku-index").text()))  ?  9999 : parseInt(ui.item.prev().children(".kku-index").text());
 				var next = isNaN(parseFloat(ui.item.next().children(".kku-index").text())) ? 0 : parseInt(ui.item.next().children(".kku-index").text());
 				var index = prev - ((prev - next) / 2);
 				var no = parseInt(ui.item.children(".kku-no").text());

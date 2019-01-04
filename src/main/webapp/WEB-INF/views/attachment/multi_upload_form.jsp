@@ -17,6 +17,6 @@
 	<br /><br /><input type="submit" value="Upload" />
 </form>
 
-<a href="/download?att_id=17"> 파일다운로드</a>
+<a href="/download?att_id=21"> 파일다운로드</a>
 </body>
 </html>
