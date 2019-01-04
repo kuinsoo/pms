@@ -328,6 +328,13 @@
 	</div>
 
 	<table>
+		<colgroup width="5%" />
+		<colgroup width="10%" />
+		<colgroup width="10%" />
+		<colgroup width="30%" />
+		<colgroup width="30%" />
+		<colgroup width="10%" />
+		<colgroup width="5%" />
 		<thead>
 		<tr>
 			<th>완료</th>

@@ -1,9 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<style>
-.issueCreateInputFieldRightContainer{
-	overflow: scroll;
-}
-</style>
 <script>
 $(document).ready(function(){
 	//to-do 등록시 시작일자는 현재시간으로 기본값(default) 설정  ==문의: jerry==
@@ -141,12 +136,12 @@ function enterKey${work.work_id}(e){
 			</div>
 			<div class="issueCreateInputFieldRightContainer">
 				<form id="popupSearchForm${work.work_id}" name="popupSearchForm${work.work_id}">
-					<select name="sel_popupSearch${work.work_id}" id="sel_popupSearch${work.work_id}">
+					<select name="sel_popupSearch${work.work_id}" id="sel_popupSearch${work.work_id}" class="todoSelectSearchEnd">
 						<option value="member_name">이름</option>
 						<option value="pmember_member">이메일</option>
 					</select>
-					<input type="text" name="memberSearch${work.work_id}" id="memberSearch${work.work_id}" onkeypress="return enterKey${work.work_id}(event)">
-					<input type="button" value="검색" onclick="popupSearchMember${work.work_id}('${work.work_id}');">
+					<input type="text" name="memberSearch${work.work_id}" id="memberSearch${work.work_id}" onkeypress="return enterKey${work.work_id}(event)" class="todoNameSearchInputEnd">
+					<i class="icon-magnifier icons" onclick="popupSearchMember${work.work_id}('${work.work_id}');" class="todoSearchBtnEnd"></i>
 				</form>
 				<table>
 					<colgroup width="20%" />
