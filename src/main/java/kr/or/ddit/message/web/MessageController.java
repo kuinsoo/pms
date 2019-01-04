@@ -423,7 +423,7 @@ public class MessageController {
 		
 		String msg_rmember = request.getParameter("textValue");
 		String msg_content = request.getParameter("textArea");
-		
+	
 		msgVo.setMsg_id(msgVo.getMsg_id());
 		msgVo.setMsg_content(msg_content);
 		msgVo.setMsg_smember(memberVo.getMember_mail());

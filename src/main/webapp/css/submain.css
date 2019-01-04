@@ -219,22 +219,20 @@ ul.subMaintab li.current > a{color:#fff;}
 .white_content3 > div > .mainCloseBtns > i{font-size:20px;}
 
 .issueSelectPage{width:100%;overflow:hidden;clear:both;height:95%;padding-top:20px;}
-.issueSelectPageLeft{float:left;width:566px;}
-.issueSelectPageLeft > form > textarea{width:100%;font-size:20px;height:300px;outline:none;padding:20px;margin-top:10px;}
-.issueSelectPageRight{float:left;width:376px;margin-left:10px;}
-.issueSelectPageRight > h2{text-align:left;padding:15px;float:left;}
-.issueSelectPageRight > form > textarea{width:100%;font-size:20px;height:630px;outline:none;padding:20px;}
+.issueSelectPageLeft{float:left;width:400px;}
+.issueSelectPageLeft > form > textarea{width:370px;font-size:20px;height:300px;outline:none;padding:20px;float:left;}
+.issueSelectPageRight{float:left;width:550px;}
 .issueCreateBtn {
 	width:90px;height:40px;background-color:#4286f4;color:#fff;border:none;font-size:17px;
-	cursor:pointer;outline:none;margin-top:10px;float:right;
+	cursor:pointer;outline:none;margin:0 auto;margin-top:10px;
 }
 .insueUpdateBtn {
 	width:90px;height:40px;background-color:#4286f4;color:#fff;border:none;font-size:17px;
 	cursor:pointer;outline:none;margin-top:10px;float:right;margin-right:10px;
 }
-.issueProfile{width:150px;float:left;height:150px;}
-.issueProfile > img{width:150px;height:150px;border-radius:100%;margin-top:25px;}
-.issues{float:left;width:405px;height:200px;}
+.issueProfile{width:150px;height:150px;margin:0 auto;}
+.issueProfile > img{width:150px;height:150px;border-radius:100%;}
+.issues{float:left;width:400px;height:200px;}
 .issues > .issuesLeft{float:left;margin-top:10px;margin-left:10px;}
 .issues > .issuesRight{float:left;margin-left:20px;margin-top:10px;width:300px;}
 .issues > .issuesLeft > ul > li{text-align:left;padding:10px 0px 10px 0px;font-size:20px;}
@@ -416,6 +414,13 @@ ul.subMaintab li.current > a{color:#fff;}
 }
 .todoSearchBtnEnd{width:50px;height:30px;cursor:pointer;font-size:19px;}
 .todoSelectSearchEnd{outline:none;border:none;border-bottom:1px solid #333;}
+
+/* 이슈 수정 팝업 - 2019-01-04 임규승 */
+.occurIssueDiv {
+	width:100%;border:1px solid #f00;border-collapse:collapse;text-align:left;
+}
+.occurIssueDiv > tbody > tr{border-bottom:1px solid #333;}
+.occurIssueDiv > tbody > tr > td{padding:10px;}
 
 /* FOOTER */
 .currentFooter{width:100%;height:100px;background-color:#fff;border-top:1px solid #dee3eb;clear:left;}

@@ -202,7 +202,7 @@ public class IssueController {
 	*/
 	@RequestMapping(value="/helperUpdate", method= {RequestMethod.POST, RequestMethod.GET})
 	public String helperUpdate(IssueVo issueVo, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
-		
+		System.out.println("issueVo : " + issueVo);
 		List<IssueVo> helperList = new ArrayList<IssueVo>();
 		try {
 			int result = issueService.helperUpdate(issueVo);
