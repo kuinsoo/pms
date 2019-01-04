@@ -100,7 +100,7 @@
                       where B.project_id = A.pmember_project 
 	                   AND  PMEMBER_MEMBER = #{member_mail}
                             AND    PMEMBER_POSITION = '1'
-                        AND   project_eedate is not null
+                        AND   project_edate is not null
 	                   UNION
 	                   SELECT  (SELECT PROJECT_TITLE FROM PROJECT WHERE PROJECT_ID = PMEMBER_PROJECT)
 	                       , (SELECT B.PMEMBER_MEMBER FROM PROJECT_MEMBER B WHERE B.PMEMBER_PROJECT = A.PMEMBER_PROJECT AND B.PMEMBER_POSITION = 1)
@@ -109,7 +109,7 @@
                       where B.project_id = A.pmember_project 
 	                   AND  A.PMEMBER_MEMBER = #{member_mail}
 	                     AND    A.PMEMBER_POSITION = '2'
-                          AND    B.project_eedate is not null)a) b 
+                          AND    B.project_edate is not null)a) b 
                   		<if test="searchEndText!=null and searchEndText!=''">where project_title like '%'||#{searchEndText}||'%'</if> )c
  				 where rnum between ${page}*${pageSize}-(${pageSize}-1) 
 	   and ${page}*${pageSize}
@@ -205,7 +205,7 @@
 	</select>
 
 
-		<!--  즐겨찾기한 프로젝트  -->
+	<!--  즐겨찾기한 프로젝트  -->
 	<select id = "mybookmarkselect" resultType="projectVo" parameterType="pageVo">
 		
 		 SELECT c.rnum, c.*
@@ -243,9 +243,11 @@
 			     select a.*
 			         from
                          (select todo_content
-                                , todo_complet
-                           from   todo
-                           where todo_member = #{member_mail})a) b 
+							    , todo_complet
+							    , project_title
+							from   todo inner join work 
+							on     todo_work = work_id inner join project on work_project = project_id
+							where todo_member = #{member_mail} )a) b 
              <if test="searchTodoText != null and searchTodoText != ''">where todo_content like '%'||#{searchTodoText}||'%'</if> )c
 		 where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
 	</select>

@@ -185,42 +185,32 @@
 	
 	<!-- 전체사용자 리스트 단, 내 친구는 안나와야함.+ 페이징 처리  -->
 	<select id ="totalMemberSearch" resultType="memberVo" parameterType="pageVo">
-		 
-		 SELECT c.rnum, c.*
+		
+		SELECT c.rnum, c.*
 			FROM (
 			 select rownum rnum, b.* from(
 			     select a.*
 			         from
-			             (SELECT  member_mail,
-			                      member_name
-			              FROM    member
+			             (
+                          SELECT  
+                                 member_mail,
+			                      member_name,
+                                  'S' as friend_accept
+			              FROM    member INNER JOIN AUTHORITY ON MEMBER_MAIL = AUTH_MEMBER
 			              WHERE   member_mail NOT IN (SELECT  friend_member
 			                                        FROM    FRIENDSLIST
 			                                        WHERE   friend_myemail = #{member_mail}
-			                                        AND     friend_accept = 'Y')
+			                                        AND     friend_accept IN ('N','Y'))
 			              AND     member_withdrawal = 'N'
-			              AND     member_mail NOT IN #{member_mail}
+                          AND     AUTH_ASSORT = '2'
+			              AND     member_mail NOT IN  #{member_mail}
 			              ORDER BY member_mail desc)a) b
 	    <if test="searchTextFriendList!=null and searchTextFriendList!=''">where member_mail like '%'||#{searchTextFriendList}||'%'</if> ) c
 	   	WHERE  rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
-		
-					 
-		 <!-- select * from(
-  			 select rownum rnum ,a.*
-           		 from
-                	 (SELECT  member_mail,
-                              member_name
-                      FROM    member
-                      WHERE   member_mail NOT IN (SELECT  friend_member
-                                               	  FROM    FRIENDSLIST
-                                                  WHERE   friend_myemail = #{member_mail}
-                                                  AND     friend_accept = 'Y')
-                      AND     member_withdrawal = 'N'
-                      AND     member_mail NOT IN #{member_mail}
-                      ORDER BY member_mail desc)a) 
-            where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize}
-		<if test="searchTextFriendList!=null and searchTextFriendList!=''">and member_mail like '%'||#{searchTextFriendList}||'%'</if> -->
+	
 	</select>
+	
+	
 	
 	<select id ="memberListN" resultType="friendVo">
 		  SELECT  member_mail,
@@ -324,6 +314,12 @@
 		set friend_accept = 'Y'
 		where friend_code = #{friend_code}
 	</update>
+
+	<!-- <update id="updateSfriendN" parameterType="String">
+		update  FRIENDSLIST
+		set friend_accept = 'N'
+		where friend_code = #{friend_code}
+	</update> -->
 	
 	<!-- 내가 받은 요청에서 수락버튼을 누르면 상대방은 insert -->
     <insert  id="insertFriendY" parameterType="friendVo"> 
@@ -333,7 +329,7 @@
 	<!-- 내가 받은요청에서 거절 버튼을 클릭했을때  -->
 	<update id="updateRefuseFriend" parameterType="String">
 		update  FRIENDSLIST
-		set friend_accept = 'X'
+		set friend_accept = 'N'
 		where friend_code = #{friend_code}
 	</update>
 	

@@ -361,11 +361,12 @@ public class MemberDetailController {
 	
 	@ResponseBody
 	@RequestMapping(value ="/myTodoProjectListAjax", method = RequestMethod.GET)
-	public Map<String, Object> myTodoProjectListAjax (Model model , PageVo pageVo,
+	public Map<String, Object> myTodoProjectListAjax (Model model , PageVo pageVo, ToDoVo todoVo, ProjectVo projectVo,
 			@SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
 		
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
+		todoVo.setProject_title(projectVo.getProject_title());
 		
 		List<ToDoVo> projectTodoList = memberservice.myTodoselect(pageVo);
 		
@@ -603,11 +604,13 @@ public class MemberDetailController {
 		 * @return
 		 * Method 설명 : 마이페이지 회원 탈퇴시 비밀번호 확인 부분
 		 */
-		@RequestMapping(value="/userwithDrawal")
-		public String userwithDrawal( @SessionAttribute("memberVo") MemberVo memberVo) {
+		@RequestMapping(value="/userwithDrawal", method=RequestMethod.POST)
+		public String userwithDrawal( @SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
 			
+		/*	String member_pass = request.getParameter("member_pass");
+			member_pass.equals(KISA_SHA256.encrypt(memberVo.getMember_pass()));
+			*/
 			memberservice.updateUserwithDrawal(memberVo);
-			
 			return "redirect:/";
 			
 		}

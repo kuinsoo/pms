@@ -45,8 +45,6 @@ function insertTodo${work.work_id}(work_id) {
 	      console.log("todo.jsp : insertTodo() - error");
 	   }
 	});
-
-
 }
 
 /* popup member list Ajax */

@@ -60,7 +60,7 @@ public class ToDoController {
 	 * @param model   the model
 	 * @return Method  설명 : to-do list 등록(Ajax적용)
 	 */
-	@RequestMapping(value="/todoInsert", method= {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value="/todoInsert", method= {RequestMethod.POST})
 	public String ajaxInsertTodo(ToDoVo todoVo, HttpServletRequest request, PageVo pageVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		WorkVo workVo = new WorkVo();
 		workVo.setWork_project(request.getParameter("work_project"));
@@ -102,7 +102,7 @@ public class ToDoController {
 	 * @param model   the model
 	 * @return Method  설명 : to-do list 조회
 	 */
-	@RequestMapping(value="/todoSelect", method= {RequestMethod.POST, RequestMethod.GET})
+	@RequestMapping(value="/todoSelect", method= {RequestMethod.POST})
 	public String ajaxSelectTodo(HttpServletRequest request, PageVo pageVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		String work_id = request.getParameter("work_id");
 		
@@ -220,7 +220,6 @@ public class ToDoController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	/**

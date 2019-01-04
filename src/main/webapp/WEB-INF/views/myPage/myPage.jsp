@@ -534,7 +534,8 @@
 						console.log(data.projectTodoList);
 						html += "<tr>";
 						html += "	<td>"+ mt.rnum +"</td>";
-						html += "	<td>"+ mt.todo_content +"</td>";
+						html += "	<td>"+ mt.project_title +"</td>";
+						html += "	<td>"+ mt.project_content +"</td>";
 						if(mt.todo_complet==('N')){
 							html += "	<td>"+ '미완료' +"</td>";
 						}else{
@@ -814,12 +815,13 @@
 								</div>
 								<table>
 									<colgroup width="10%" />
-									<colgroup width="50%" />
 									<colgroup width="20%" />
+									<colgroup width="50%" />
 									<colgroup width="20%" />
 									<thead>
 										<tr class="projectTodoList">
 											<th><span>번호</span></th>
+											<th><span>프로젝트 명 </span></th>
 											<th><span>나의 일감 보관</span></th>
 											<th><span>완료 여부</span></th>
 										</tr>
@@ -878,8 +880,10 @@
 							<div class="tabs2-5center">
 							<h2>회원 탈퇴 </h2>
 								<p> 회원 확인을 위하여 비밀번호를 입력해주세요. </p>
-								<input id ="member_pass" id = "member_pass" placeholder ="비밀번호를 입력해주세요.." type="password" />
+							<form action= "/userwithDrawal" method="post">
+								<input id ="member_pass" id = "member_pass" name ="member_pass" placeholder ="비밀번호를 입력해주세요.." type="password" />
 								<input type="button" class= "goodbyeBtn" value= "확인"/>
+							</form>
 								<span id = "passError"> 비밀번호가 일치하지 않습니다. </span>
 							</div>
 						</div>
@@ -1133,9 +1137,6 @@ $(document).ready(function() {
 	$("#member_pass").keyup(function() {
 		if($("#member_pass").val() != "${memberVo.member_pass}"){
 			$("#passError").show();
-			
-			
-			
 			$('.goodbyeBtn').prop('disabled', true);
 		} else{
 			$("#passError").hide();

@@ -291,7 +291,7 @@ public class LoginController {
 	 * @return Method  설명 : sign.jsp에서 회원가입 버튼을 눌렀을때
 	 */
 	@RequestMapping(value = "/signProcess", method = RequestMethod.POST)
-	public String signProcess(@RequestParam("member_mail") String member_mail, AuthorityVo authVo, @SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
+	public String signProcess(@RequestParam("member_mail") String member_mail, AuthorityVo authVo, MemberVo memberVo, HttpServletRequest request) {
 		
 		String member_pass = request.getParameter("member_pass");
 		

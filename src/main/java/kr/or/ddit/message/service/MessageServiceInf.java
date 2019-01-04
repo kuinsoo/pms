@@ -20,7 +20,17 @@ import kr.or.ddit.util.model.PageVo;
  */
 public interface MessageServiceInf {
 
-
+	/**
+	 * Method : updateSfriendN
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param friend_code
+	 * @return
+	 * Method 설명 : 친구 추가 버튼을 클릭했을때 임의로 넣어준 S --> N 으로 바꾸기 ..
+	 */
+	//int updateSfriendN(String friend_code);
+	
+	
 	/**
 	 * Method : totalFriendSizeCheckSearch
 	 * 작성자 : pc07

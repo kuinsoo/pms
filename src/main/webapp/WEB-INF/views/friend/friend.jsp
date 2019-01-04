@@ -424,13 +424,14 @@
 				data : {"page" : page, "pageSize":pageSize},
 				success: function(data){
 				
+				console.log(data);
 					var html = "";
 					$.each(data.myMemberList,function(idx,mm){
 						html += "<tr>";
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.member_mail +"</td>";
 						html += "	<td>"+ mm.member_name +"</td>";
-						html += "	<td>"+ "<input type='button' id ='myMemberListBtn' onclick ='getyouGiveNoAjax(\""+mm.member_mail+"\")'; value='친구 등록'/>"+"</td>";
+						html += "	<td>"+ "<input type='button' id ='myMemberListBtn' onclick ='getyouGiveNoAjax(\""+mm.member_mail+"\",\""+ mm.friend_accept +"\")'; value='친구 등록'/>"+"</td>";						
 						html += "</tr>";
 					});
 					
@@ -453,13 +454,15 @@
 		}
 		
 		// 친구 추가 버튼을 클릭할때  
-		function getyouGiveNoAjax(member_mail){
-			//$("#myMemberListBtn").attr("value","요청보냄");
+		function getyouGiveNoAjax(member_mail,friend_accept){
+			
+			console.log(member_mail);
+			console.log(friend_accept);
 			var pageSize = 10;
 			$.ajax({
 				type: "GET",
 				url : "/youGiveNoAjax",
-				data : "member_mail="+ member_mail,
+				data : "member_mail="+member_mail+"&friend_accept="+friend_accept,
 				success: function(data){
 					getAllMember(1);
 					getMySendFriendList(1);
@@ -467,13 +470,14 @@
 			});
 		}
 		
-		// 전체 사용자 검색 부분 
+		
 			//<input type="hidden" name="page" value='1'/>
 
 			//$('form[name=searchTextFriendList]') 하위 input name=page의 값을 함수 파라미터로 설정 
 			//var page = $('form[name=searchTextFriendList]').
 			//var pageSize = 10;
-		
+			
+		// 전체 사용자 검색 부분 
 		function getAllMemberSearch(page){
 			
 			$("#friendListPage").attr("value",page);
@@ -490,7 +494,7 @@
 						html += "	<td>"+ mm.rnum +"</td>";
 						html += "	<td>"+ mm.member_mail +"</td>";
 						html += "	<td>"+ mm.member_name +"</td>";
-						html += "	<td>"+ "<input type='button' id ='myMemberListBtn' onclick ='getyouGiveNoAjax(\""+mm.member_mail+"\")'; value='친구 등록'/>"+"</td>";
+						html += "	<td>"+ "<input type='button' id ='myMemberListBtn' onclick ='getyouGiveNoAjax(\""+mm.member_mail+"\","+ mm.friend_accept +")'; value='친구 등록'/>"+"</td>";
 						html += "</tr>";
 					});
 					
@@ -560,6 +564,7 @@
 				data : "friend_code="+friend_code,
 				success: function(data){
 					getMySendFriendList(1);
+					getAllMember(1);
 				}
 			});
 		}

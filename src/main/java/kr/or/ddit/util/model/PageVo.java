@@ -9,17 +9,23 @@ public class PageVo {
 	private int pageSize;
 	private String member_mail;
 	private String project_id;
+	private String friend_accept;
 	
 	public String getProject_id() {
 		return project_id;
 	}
 
-
 	public void setProject_id(String project_id) {
 		this.project_id = project_id;
 	}
+	
+	public String getFriend_accept() {
+		return friend_accept;
+	}
 
-
+	public void setFriend_accept(String friend_accept) {
+		this.friend_accept = friend_accept;
+	}
 
 	// 검색부분 
 	private String searchText;
@@ -37,11 +43,11 @@ public class PageVo {
 	@Override
 	public String toString() {
 		return "PageVo [page=" + page + ", pageSize=" + pageSize + ", member_mail=" + member_mail + ", project_id="
-				+ project_id + ", searchText=" + searchText + ", searchBookText=" + searchBookText + ", searchTodoText="
-				+ searchTodoText + ", searchEndText=" + searchEndText + ", searchTextFriend=" + searchTextFriend
-				+ ", searchTextFriendList=" + searchTextFriendList + ", searchTextMySendFriendList="
-				+ searchTextMySendFriendList + ", searchTextYouGiveFriendList=" + searchTextYouGiveFriendList
-				+ ", searchFileList=" + searchFileList + "]";
+				+ project_id + ", friend_accept=" + friend_accept + ", searchText=" + searchText + ", searchBookText="
+				+ searchBookText + ", searchTodoText=" + searchTodoText + ", searchEndText=" + searchEndText
+				+ ", searchTextFriend=" + searchTextFriend + ", searchTextFriendList=" + searchTextFriendList
+				+ ", searchTextMySendFriendList=" + searchTextMySendFriendList + ", searchTextYouGiveFriendList="
+				+ searchTextYouGiveFriendList + ", searchFileList=" + searchFileList + "]";
 	}
 
 

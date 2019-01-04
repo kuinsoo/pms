@@ -166,9 +166,12 @@ public class MessageController {
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		friendVo.setFriend_myemail(memberVo.getMember_mail());
+		pageVo.setFriend_accept(friendVo.getFriend_accept());
 		
 		String member_mail = request.getParameter("member_mail");
+		System.out.println("넘어오는지 확이 ㄴ하는  ```~~~~ ");
 		friendVo.setFriend_member(member_mail);
+		
 		messageService.insertFriendN(friendVo);
 
 		List<MemberVo> myMemberList = messageService.totalMemberSearch(pageVo);
