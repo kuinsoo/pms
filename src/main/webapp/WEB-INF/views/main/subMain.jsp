@@ -43,6 +43,7 @@
                 
                 <div id="subMaintab3" class="tabcontent">
                     <%-- 간트 차드 --%>
+                    <%@ include file="/WEB-INF/views/work/ajaxWorkChart.jsp"%>
                     
                 </div>
 

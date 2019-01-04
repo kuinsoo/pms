@@ -35,8 +35,10 @@
 									<div class="issuesRight">
 										<ul>
 											<li><input type="text" id="todo_pmember${todo.todo_id}" value="${todo.todo_pmember}" readonly/></li>
-											<li><select style="display:none" id="pmember_member" name="pmember_member"></select></li>
-											<li><input type="text" value="${todo.format_todo_sdate}" readonly/></li>
+											<li>
+												<select style="display:none" id="pmember_member" name="pmember_member"></select>
+												<input type="text" value="${todo.format_todo_sdate}" readonly/>
+											</li>
 											<li><input type="text" id="todo_eedate${todo.todo_id}" value="${todo.format_todo_eedate}" readonly/></li>
 											<li><input type="text" value="${todo.todo_complet}" readonly/></li>
 										</ul>

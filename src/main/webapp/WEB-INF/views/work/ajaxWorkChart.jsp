@@ -9,13 +9,13 @@
          pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div id="container${work.work_id}"></div>
+<div id="container${projectVo.project_id}"></div>
 
 <script>
-        Highcharts.ganttChart('container${work.work_id}', {
+        Highcharts.ganttChart('container${projectVo.project_id}', {
 
             title: {
-                text: 'Current Gantt Chart'
+                text: 'Current Work Gantt Chart'
             },
 
             subtitle: {
@@ -30,9 +30,7 @@
             yAxis: {
                 categories: [
                     <c:forEach items="${workCharts}" var="workChart" varStatus="i" >
-                        <c:if test="${workChart.todo_work eq work.work_id}" >
                              '${workChart.todo_id}',
-                        </c:if>
                     </c:forEach>
                 ]
             },
@@ -42,20 +40,17 @@
             },
 
             series: [{
-                name: 'Project ${projectVo.project_id}',
+                name:  '${projectVo.project_title}',
                 data:[
                     <c:forEach items="${workCharts}" var="workChart" varStatus="i">
-                       <c:choose>
-                        <c:when test="${workChart.todo_work eq work.work_id}" >
                             {
                                 start: Date.UTC(parseInt('${workChart.format_todo_sdate}'.substr(0,4)), parseInt('${workChart.format_todo_sdate}'.substr(5,2)), parseInt('${workChart.format_todo_sdate}'.substr(8,2))),
                                 end: Date.UTC(parseInt('${workChart.format_todo_eedate}'.substr(0,4)), parseInt('${workChart.format_todo_eedate}'.substr(5,2)), parseInt('${workChart.format_todo_eedate}'.substr(8,2))),
                                 y: ${i.index},
                                 assignee: '${workChart.todo_pmember}'
                             },
-                        </c:when>
-                    </c:choose>
-                    </c:forEach>],
+                    </c:forEach>
+                ],
                 dataLabels: [{
                     enabled: true,
                     format: '<div style="width: 20px; height: 20px; overflow: hidden; border-radius: 50%; margin-left: -25px">' +

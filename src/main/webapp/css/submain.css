@@ -219,7 +219,7 @@ ul.subMaintab li.current > a{color:#fff;}
 .white_content3 > div > .mainCloseBtns > i{font-size:20px;}
 
 .issueSelectPage{width:100%;overflow:hidden;clear:both;height:95%;padding-top:20px;}
-.issueSelectPageLeft{float:left;width:566px;}
+.issueSelectPageLeft{float:left;width:400px;}
 .issueSelectPageLeft > form > textarea{width:100%;font-size:20px;height:300px;outline:none;padding:20px;margin-top:10px;}
 .issueSelectPageRight{float:left;width:376px;margin-left:10px;}
 .issueSelectPageRight > h2{text-align:left;padding:15px;float:left;}
@@ -232,8 +232,8 @@ ul.subMaintab li.current > a{color:#fff;}
 	width:90px;height:40px;background-color:#4286f4;color:#fff;border:none;font-size:17px;
 	cursor:pointer;outline:none;margin-top:10px;float:right;margin-right:10px;
 }
-.issueProfile{width:150px;float:left;height:150px;}
-.issueProfile > img{width:150px;height:150px;border-radius:100%;margin-top:25px;}
+.issueProfile{width:150px;height:150px;margin:0 auto;}
+.issueProfile > img{width:150px;height:150px;border-radius:100%;}
 .issues{float:left;width:405px;height:200px;}
 .issues > .issuesLeft{float:left;margin-top:10px;margin-left:10px;}
 .issues > .issuesRight{float:left;margin-left:20px;margin-top:10px;width:300px;}

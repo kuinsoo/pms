@@ -183,7 +183,7 @@ public class WorkController {
 
 	@RequestMapping(value = "/ajaxWorkChart", method=RequestMethod.POST)
 	public String ajaxWorkChart(Model model, @RequestParam("project_id")String project_id,
-								@RequestParam("work_id")String work_id, MemberVo memberVo) {
+								@RequestParam("work_id")String work_id, @SessionAttribute("memberVo") MemberVo memberVo) {
 		Map<String, String> mtMap = new HashMap<>();
 		mtMap.put("project_id", project_id);
 		mtMap.put("work_id", work_id);

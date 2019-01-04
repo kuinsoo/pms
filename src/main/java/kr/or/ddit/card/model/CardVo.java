@@ -20,6 +20,7 @@ public class CardVo {
 	private String wc_group;
 	private String work_title;
 	private String work_content;
+	private String work_progress;
 	private String pmember_member;
 	private String pmember_project;
 	private String member_name;
@@ -109,5 +110,13 @@ public class CardVo {
 
 	public void setMember_name(String member_name) {
 		this.member_name = member_name;
+	}
+
+	public String getWork_progress() {
+		return work_progress;
+	}
+
+	public void setWork_progress(String work_progress) {
+		this.work_progress = work_progress;
 	}
 }
