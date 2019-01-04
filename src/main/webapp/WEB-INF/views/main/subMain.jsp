@@ -348,10 +348,10 @@
     var myChart = new Chart(ctx, {
         type: 'pie',
         data: {
-            labels: ["요청", "진행", "피드백", "완료", "보류"],
+            labels: ["업무", "할일", "이슈"],
             datasets: [{
                 label: '',
-                data: [12, 19, 3, 5, 2],
+                data: ['${workMainChart.workCnt}', '${workMainChart.todoCnt}', '${workMainChart.issueCnt}'],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',

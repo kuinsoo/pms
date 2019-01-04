@@ -178,5 +178,21 @@
 			where 	pm.pmember_project = #{work_project}
 			and 		pm.pmember_member = #{member_mail}
 	</select>
-	
+
+	<select id="workMainChart" resultType="workVo" parameterType="String">
+			select
+				(select count(*)
+				from work, PROJECT
+				where WORK_PROJECT = PROJECT_ID
+				and PROJECT_ID = P.PROJECT_ID) workCnt,
+				(select count(*) from work, TODO
+				where work_id = TODO_WORK
+				and WORK_PROJECT = P.PROJECT_ID) todoCnt,
+				(select count(ISSUE_ID) from work,ISSUE, TODO
+				where work_id = TODO_WORK
+				and TODO_ISSUE = ISSUE_ID
+				and WORK_PROJECT = P.PROJECT_ID) issueCnt
+			from PROJECT P
+			where PROJECT_ID = #{project_id}
+	</select>
 </mapper>

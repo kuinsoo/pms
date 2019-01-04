@@ -1,6 +1,5 @@
 package kr.or.ddit.project.web;
 
-import kr.or.ddit.attachment.service.AttachmentServiceInf;
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.meeting.model.MeetingVo;
@@ -18,7 +17,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -210,6 +212,7 @@ public class ProjectController {
 
 		/* 업무 출력 */
 		model.addAttribute("workList",workService.selectWorks(project_id));
+		model.addAttribute("workMainChart",workService.workMainChart(project_id));
 
 		/* 업무에 달린 댓글 출력 */
 		model.addAttribute("cmtList", commentsService.cmtList(project_id));
