@@ -535,7 +535,7 @@
 						html += "<tr>";
 						html += "	<td>"+ mt.rnum +"</td>";
 						html += "	<td>"+ mt.project_title +"</td>";
-						html += "	<td>"+ mt.project_content +"</td>";
+						html += "	<td>"+ mt.todo_content +"</td>";
 						if(mt.todo_complet==('N')){
 							html += "	<td>"+ '미완료' +"</td>";
 						}else{
