@@ -163,7 +163,7 @@ public class IssueController {
 	* Method 설명 : 이슈 list 조회
 	*/
 	@RequestMapping(value="/issueSelectList", method= {RequestMethod.POST, RequestMethod.GET})
-	public String issueSelectList(@RequestParam("todo_id")String todo_id, Model model, MemberVo memberVo) {
+	public String issueSelectList(@RequestParam("todo_id")String todo_id, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		List<IssueVo> issueList = issueService.issueSelectList(todo_id);
 		
 		model.addAttribute("issueList", issueList);
@@ -201,7 +201,7 @@ public class IssueController {
 	* Method 설명 : 이슈 도움 등록
 	*/
 	@RequestMapping(value="/helperUpdate", method= {RequestMethod.POST, RequestMethod.GET})
-	public String helperUpdate(IssueVo issueVo, Model model, MemberVo memberVo) {
+	public String helperUpdate(IssueVo issueVo, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		
 		List<IssueVo> helperList = new ArrayList<IssueVo>();
 		try {
@@ -233,7 +233,7 @@ public class IssueController {
 	* Method 설명 : 이슈 도움 조회
 	*/
 	@RequestMapping(value="/issueHelperList", method= {RequestMethod.POST, RequestMethod.GET})
-	public String issueHelperList(@RequestParam("todo_id")String todo_id, Model model, MemberVo memberVo) {
+	public String issueHelperList(@RequestParam("todo_id")String todo_id, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		List<IssueVo> helperList = issueService.helperSelectList(todo_id);
 		
 		model.addAttribute("helperList", helperList);
