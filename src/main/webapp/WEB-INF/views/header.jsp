@@ -223,6 +223,9 @@
                 </div>
             </div>
         </div>
+        <form id="subMainForm" action="/subMain" method="post">
+            <input type="hidden" name="project_id" value="${projectVo.project_id}">
+        </form>
     </header>
 	<script>
 	// 폴링방법 
@@ -294,6 +297,8 @@
 		$('#myPageLocation').on('click', function () {
 			location.href="/myPage";
 		});
+
+
     </script>
 
    <!--  <script type="text/javascript">

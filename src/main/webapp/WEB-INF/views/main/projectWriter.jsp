@@ -8,7 +8,7 @@
         </ul>
         <!-- tap1 업무 -->
         <div id="tabss-1">
-            <form action="/createWork" method="post" name="workfrm1" enctype="multipart/form-data" >
+            <form action="/createWork" method="post" id="workForm1" name="workfrm1" enctype="multipart/form-data" >
                 <div class="workContainerInput">
                     <input type="text" name="work_title" placeholder="업무제목을 입력해주세요" class="workTitle"/>
 
@@ -51,7 +51,7 @@
                         <input type="file" name="file" />
                     </div>
                     <div class="workSubmit">
-                        <input type="submit" class="tabssTextAreaSubmit" value="올리기" <%-- onclick="createWork();" --%> />
+                        <input type="button" class="tabssTextAreaSubmit" value="올리기" id="workCreate"  />
                     </div>
                 </div>
             </form>
@@ -95,3 +95,24 @@
         -->
     </div>
 </div>
+
+<script>
+    /* work cart  현재 미사용 중  */
+    $('#workCreate').click(function () {
+        var idx = $(this).parent().parent().index();
+        var frm = document.getElementById('workForm1');
+        frm.method = 'POST';
+        frm.enctype = 'multipart/form-data';
+        var fileData = new FormData(frm);
+        $.ajax({
+            method: "POST",
+            url: "/createWork",
+            data: fileData,
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false}).done(function (response) {
+            $('#subMainForm').submit();
+        });
+    });
+</script>
