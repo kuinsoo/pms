@@ -420,7 +420,7 @@ ul.subMaintab li.current > a{color:#fff;}
 .todoSelectSearchEnd{outline:none;border:none;border-bottom:1px solid #333;}
 
 /* 이슈 수정 팝업 - 2019-01-04 임규승 */
-.occurIssueDivContainer{width:500px;float:left;}
+.occurIssueDivContainer{width:500px;float:left;margin-bottom:15px;}
 .occurIssueDiv {
 	width:500px;border:1px solid #333;border-collapse:collapse;text-align:left;font-size:17px;
 }
@@ -428,6 +428,14 @@ ul.subMaintab li.current > a{color:#fff;}
 .occurIssueDiv > tbody > tr:first-child > td{background-color:#007fff;color:#fff;}
 .occurIssueDiv > tbody > tr > td{padding:10px;}
 .occurIssueDiv > tbody > tr > td > textarea{width:100%;padding:10px;font-size:17px;}
+
+.occurIssueTable{width:100%;font-size:17px;border-collapse:collapse;}
+.occurIssueTable > thead > tr {
+	border-bottom:1px solid #333;border-top:1px solid #333;
+}
+.occurIssueTable > thead > tr > th{text-align:center;padding:10px;}
+.occurIssueTable > tbody > tr > td{text-align:center;padding:10px;}
+.occurIssueTable > tbody > tr{border-bottom:1px solid #333;} 
 
 .solutionIssueContainer{width:450px;float:left;}
 .solutionIssue {
@@ -444,6 +452,14 @@ ul.subMaintab li.current > a{color:#fff;}
 	width:90px;height:40px;background-color:#4286f4;color:#fff;border:none;font-size:17px;
 	cursor:pointer;outline:none;margin-top:10px;float:right;	
 }
+
+.solutionTable{width:100%;font-size:17px;border-collapse:collapse;margin-top:20px;}
+.solutionTable > thead > tr {
+	border-bottom:1px solid #333;border-top:1px solid #333;
+}
+.solutionTable > thead > tr > th{text-align:center;padding:10px;}
+.solutionTable > tbody > tr > td{text-align:center;padding:10px;}
+.solutionTable > tbody > tr{border-bottom:1px solid #333;} 
 
 /* FOOTER */
 .currentFooter{width:100%;height:100px;background-color:#fff;border-top:1px solid #dee3eb;clear:left;}

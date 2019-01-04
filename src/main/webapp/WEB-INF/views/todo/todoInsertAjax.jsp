@@ -140,7 +140,14 @@
 									<input type="button" value="해결등록" class="solutionCreateBtn" onclick="helperUpdate${todo.todo_work}(${todo.todo_id});"/>
 								</div>
 							</form>
-							<table>
+							
+							<table class="occurIssueTable">
+								<colgroup width="15%" />
+								<colgroup width="10%" />
+								<colgroup width="15%" />
+								<colgroup width="15%" />
+								<colgroup width="20%" />
+								<colgroup width="25%" />
 								<thead>
 									<tr>
 										<th>선택</th>
@@ -154,11 +161,15 @@
 								<tbody id="issueSelectHtmlAjax${todo.todo_id}">
 									<!-- issueSelectHtmlAjax.jsp -->
 								</tbody>
-								<tr>
-									<th>해결자</th>
-									<th>해결일시</th>
-									<th>해결방법</th>
-								</tr>
+							</table>
+							<table class="solutionTable">
+								<thead>
+									<tr>
+										<th>해결자</th>
+										<th>해결일시</th>
+										<th>해결방법</th>
+									</tr>
+								</thead>
 								<tbody id="issueHelperHtmlAjax${todo.todo_id}">
 									<!-- issueHelperHtmlAjax.jsp -->
 								</tbody>
