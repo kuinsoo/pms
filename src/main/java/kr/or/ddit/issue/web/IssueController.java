@@ -131,7 +131,7 @@ public class IssueController {
 	* Method 설명 : 이슈 등록 / TODO_ISSUE 컬럼 값 추가 / 이슈 list 조회
 	*/
 	@RequestMapping(value="/issueInsert", method= {RequestMethod.POST, RequestMethod.GET})
-	public String issueInsert(IssueVo issueVo, Model model, MemberVo memberVo) {
+	public String issueInsert(IssueVo issueVo, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		try {
 			int result = issueService.issueInsert(issueVo);
 			if(result != 0) {
