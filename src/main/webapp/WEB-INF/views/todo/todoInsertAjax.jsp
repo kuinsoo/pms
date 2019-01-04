@@ -51,6 +51,8 @@
 						</div>
 						<div class="issueSelectPageRight">
 							<form name="insertIssueForm${todo.todo_id}">
+								<input type="hidden" id="member_name${todo.todo_id}" name="member_name" value="">
+								<input type="hidden" id="pmember_member${todo.todo_id}" name="pmember_name" value="">
 								<input type="hidden" id="issue_id${todo.todo_id}" name="issue_id" value="">
 								<input type="hidden" name="issue_work" value="${todo.todo_work}">
 								<input type="hidden" id="todo_id${todo.todo_id}" name="todo_id" value="${todo.todo_id}">
