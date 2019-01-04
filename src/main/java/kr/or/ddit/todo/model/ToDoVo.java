@@ -36,6 +36,16 @@ public class ToDoVo {
 	private String todo_color;			//	할일 색깔
 	private String todo_issue;			//	할일이슈번호(fk)
 	
+	private String project_title;
+	
+	public String getProject_title() {
+		return project_title;
+	}
+
+	public void setProject_title(String project_title) {
+		this.project_title = project_title;
+	}
+
 	/* 기능단위 */
 	private String member_name;			//	참여자 이름
 	private String todo_member;			//	참여자 이메일
@@ -200,31 +210,15 @@ public class ToDoVo {
 		return sdf.format(todo_edate);
 	}
 
-	/* toString */
 	@Override
 	public String toString() {
-		return "ToDoVo{" +
-				"rnum=" + rnum +
-				", todo_id='" + todo_id + '\'' +
-				", todo_work='" + todo_work + '\'' +
-				", todo_pmember='" + todo_pmember + '\'' +
-				", todo_content='" + todo_content + '\'' +
-				", todo_sdate=" + todo_sdate +
-				", format_todo_sdate='" + format_todo_sdate + '\'' +
-				", todo_edate=" + todo_edate +
-				", format_todo_edate='" + format_todo_edate + '\'' +
-				", todo_eedate=" + todo_eedate +
-				", format_todo_eedate='" + format_todo_eedate + '\'' +
-				", todo_complet='" + todo_complet + '\'' +
-				", todo_color='" + todo_color + '\'' +
-				", todo_issue='" + todo_issue + '\'' +
-				", member_name='" + member_name + '\'' +
-				", todo_member='" + todo_member + '\'' +
-				", pmember_member='" + pmember_member + '\'' +
-				", member_profile='" + member_profile + '\'' +
-				", issue_id='" + issue_id + '\'' +
-				", work_project='" + work_project + '\'' +
-				", sdf=" + sdf +
-				'}';
+		return "ToDoVo [rnum=" + rnum + ", todo_id=" + todo_id + ", todo_work=" + todo_work + ", todo_pmember="
+				+ todo_pmember + ", todo_content=" + todo_content + ", todo_sdate=" + todo_sdate
+				+ ", format_todo_sdate=" + format_todo_sdate + ", todo_edate=" + todo_edate + ", format_todo_edate="
+				+ format_todo_edate + ", todo_eedate=" + todo_eedate + ", format_todo_eedate=" + format_todo_eedate
+				+ ", todo_complet=" + todo_complet + ", todo_color=" + todo_color + ", todo_issue=" + todo_issue
+				+ ", project_title=" + project_title + ", member_name=" + member_name + ", todo_member=" + todo_member
+				+ ", member_profile=" + member_profile + ", issue_id=" + issue_id + ", work_project=" + work_project
+				+ ", pmember_member=" + pmember_member + ", sdf=" + sdf + "]";
 	}
 }

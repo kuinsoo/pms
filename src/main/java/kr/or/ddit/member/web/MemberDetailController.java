@@ -361,11 +361,12 @@ public class MemberDetailController {
 	
 	@ResponseBody
 	@RequestMapping(value ="/myTodoProjectListAjax", method = RequestMethod.GET)
-	public Map<String, Object> myTodoProjectListAjax (Model model , PageVo pageVo,
+	public Map<String, Object> myTodoProjectListAjax (Model model , PageVo pageVo, ToDoVo todoVo, ProjectVo projectVo,
 			@SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
 		
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
+		todoVo.setProject_title(projectVo.getProject_title());
 		
 		List<ToDoVo> projectTodoList = memberservice.myTodoselect(pageVo);
 		

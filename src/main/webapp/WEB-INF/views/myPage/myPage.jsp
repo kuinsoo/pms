@@ -534,6 +534,7 @@
 						console.log(data.projectTodoList);
 						html += "<tr>";
 						html += "	<td>"+ mt.rnum +"</td>";
+						html += "	<td>"+ mt.project_title +"</td>";
 						html += "	<td>"+ mt.todo_content +"</td>";
 						if(mt.todo_complet==('N')){
 							html += "	<td>"+ '미완료' +"</td>";
@@ -814,14 +815,14 @@
 								</div>
 								<table>
 									<colgroup width="10%" />
+									<colgroup width="20%" />
 									<colgroup width="60%" />
-									<colgroup width="30%" />
 									<colgroup width="30%" />
 									<thead>
 										<tr class = "projectTodoList">
 											<th><span>번호</span></th>
-											<th><span>나의 일감 보관</span></th>
 											<th><span>프로젝트 명 </span></th>
+											<th><span>나의 일감 보관</span></th>
 											<th><span>완료 여부</span></th>
 										</tr>
 									</thead>

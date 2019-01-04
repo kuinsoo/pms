@@ -13,21 +13,27 @@ public class MemberVo extends PMemberListVo{
 	private String member_tel;
 	private String member_profile;
 	private String member_withdrawal;
+	private String friend_accept;
+	
 
 	private ToDoVo todoVo;
 
+	
+	
+	public String getFriend_accept() {
+		return friend_accept;
+	}
+
+	public void setFriend_accept(String friend_accept) {
+		this.friend_accept = friend_accept;
+	}
+
 	@Override
 	public String toString() {
-		return "MemberVo{" +
-				"rnum=" + rnum +
-				", member_mail='" + member_mail + '\'' +
-				", member_name='" + member_name + '\'' +
-				", member_pass='" + member_pass + '\'' +
-				", member_tel='" + member_tel + '\'' +
-				", member_profile='" + member_profile + '\'' +
-				", member_withdrawal='" + member_withdrawal + '\'' +
-				", todoVo=" + todoVo +
-				'}';
+		return "MemberVo [rnum=" + rnum + ", member_mail=" + member_mail + ", member_name=" + member_name
+				+ ", member_pass=" + member_pass + ", member_tel=" + member_tel + ", member_profile=" + member_profile
+				+ ", member_withdrawal=" + member_withdrawal + ", friend_accept=" + friend_accept + ", todoVo=" + todoVo
+				+ "]";
 	}
 
 	public int getRnum() {

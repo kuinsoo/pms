@@ -215,6 +215,12 @@ public class MessageService implements MessageServiceInf{
 	public int totalFriendsSearch(PageVo pageVo) {
 		return messageMapper.totalFriendsSearch(pageVo);
 	}
+
+
+	/*@Override
+	public int updateSfriendN(String friend_code) {
+		return messageMapper.updateSfriendN(friend_code);
+	}*/
 }
 
 
