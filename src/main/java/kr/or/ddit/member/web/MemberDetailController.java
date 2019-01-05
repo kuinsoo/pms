@@ -364,7 +364,7 @@ public class MemberDetailController {
 	public Map<String, Object> myTodoProjectListAjax (Model model , PageVo pageVo, ToDoVo todoVo, ProjectVo projectVo,
 			@SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
 		
-		
+		todoVo.setProject_id(projectVo.getProject_id());
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		todoVo.setProject_title(projectVo.getProject_title());
 		
@@ -381,10 +381,12 @@ public class MemberDetailController {
 	
 	@ResponseBody
 	@RequestMapping(value ="/searchTodoProjectAjax", method = RequestMethod.POST)
-	public Map<String, Object> searchTodoProjectAjax (Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo 
-			, HttpServletRequest request){
+	public Map<String, Object> searchTodoProjectAjax (Model model , PageVo pageVo, ToDoVo todoVo, ProjectVo projectVo,
+			@SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request){
 		
+		todoVo.setProject_id(projectVo.getProject_id());
 		pageVo.setMember_mail(memberVo.getMember_mail());
+		todoVo.setProject_title(projectVo.getProject_title());
 		
 		// 검색 부분 
 		if (pageVo.getSearchTodoText() == null) {
