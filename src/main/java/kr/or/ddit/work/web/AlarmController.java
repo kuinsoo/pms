@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import kr.or.ddit.issue.model.IssueVo;
+import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.message.model.MessageVo;
 import kr.or.ddit.message.service.MessageServiceInf;
@@ -45,6 +47,9 @@ public class AlarmController {
 
 	@Autowired
 	private MessageServiceInf messageService;
+	
+	@Autowired
+	private IssueServiceInf issueService;
 	
 	/**
 	* Method : ajaxMessageAlarm
@@ -128,6 +133,33 @@ public class AlarmController {
 		return "alarm/ajaxNoticeAlarm";
 	}
 	
+	/**
+	* Method : ajaxIssueAlarm
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 이슈 알림 조회
+	*/
+	@RequestMapping(value="/ajaxIssueAlarm", method=RequestMethod.GET)
+	public String ajaxIssueAlarm(Model model, PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo){		
+
+		pageVo.setMember_mail(memberVo.getMember_mail());
+
+		List<IssueVo> issueMemberList = issueService.getIssuePageList(pageVo);
+		
+		Map<String, Object> issueMap = new HashMap<>();
+		int issueMemberTotalCnt = issueService.issueMemberTotalCnt(memberVo.getMember_mail());
+		
+		issueMap.put("issueMemberList", issueMemberList);
+		issueMap.put("issueMemberTotalCnt", (int)Math.ceil((double)issueMemberTotalCnt/pageVo.getPageSize()));
+		
+		model.addAttribute("issueMap", issueMap);
+		model.addAttribute("issueMemberTotalCnt", issueMemberTotalCnt);
+		
+		return "alarm/ajaxIssueAlarm";
+	}
+	
 	@RequestMapping(value="/alarmNotice", method=RequestMethod.GET)
 	@ResponseBody
 	public int alarmNotice(Model model) {
@@ -154,4 +186,15 @@ public class AlarmController {
 		
 		return totalMsgReceived;
 	}
+	
+	@RequestMapping(value="/alarmIssue", method=RequestMethod.GET)
+	@ResponseBody
+	public int alarmIssue(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
+		
+		int issueMemberTotalCnt = issueService.issueMemberTotalCnt(memberVo.getMember_mail());
+		
+		return issueMemberTotalCnt;
+	}
+	
+	
 }

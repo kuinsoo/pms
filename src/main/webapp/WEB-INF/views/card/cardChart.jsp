@@ -16,7 +16,14 @@
         <c:forEach items="${wcList}" var="wcVo" >
             <c:if test="${wcVo.wc_group eq '1'}">
                 <div class="portlet">
-                    <div style="width: ${wcVo.work_progress}%; background: #8bcd24; font-family: D2Coding; font-weight: bold" >　${wcVo.work_progress}%</div>
+                	<c:choose>
+						<c:when test="${wcVo.work_progress == 0}">
+							<div style="width:${wcVo.work_progress}%;background:#8bcd24;font-family:D2Coding;font-weight:bold;display:none;">${wcVo.work_progress}%</div>								
+						</c:when>
+						<c:otherwise>
+							<div style="width:${wcVo.work_progress}%;background:#8bcd24;font-family:D2Coding;font-weight:bold;">${wcVo.work_progress}%</div>
+						</c:otherwise>
+					</c:choose>
                     <div class="portlet-header" >${wcVo.work_title}</div>
                     <div class="portlet-content">${wcVo.work_content}</div>
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
@@ -38,7 +45,14 @@
         <c:forEach items="${wcList}" var="wcVo" >
             <c:if test="${wcVo.wc_group eq '2'}">
                 <div class="portlet">
-                    <div style="width: ${wcVo.work_progress}%; background: #8bcd24; font-family: D2Coding; font-weight: bold" >　${wcVo.work_progress}%</div>
+                    <c:choose>
+						<c:when test="${wcVo.work_progress == 0}">
+							<div style="width:${wcVo.work_progress}%;background:#8bcd24;font-family:D2Coding;font-weight:bold;display:none;">${wcVo.work_progress}%</div>								
+						</c:when>
+						<c:otherwise>
+							<div style="width:${wcVo.work_progress}%;background:#8bcd24;font-family:D2Coding;font-weight:bold;">${wcVo.work_progress}%</div>
+						</c:otherwise>
+					</c:choose>
                     <div class="portlet-header">${wcVo.work_title}</div>
                     <div class="portlet-content">${wcVo.work_content}</div>
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
@@ -60,7 +74,14 @@
         <c:forEach items="${wcList}" var="wcVo" >
             <c:if test="${wcVo.wc_group eq '3'}">
                 <div class="portlet">
-                    <div style="width: ${wcVo.work_progress}%; background: #8bcd24; font-family: D2Coding; font-weight: bold" >　${wcVo.work_progress}%</div>
+                    <c:choose>
+						<c:when test="${wcVo.work_progress == 0}">
+							<div style="width:${wcVo.work_progress}%;background:#8bcd24;font-family:D2Coding;font-weight:bold;display:none;">${wcVo.work_progress}%</div>								
+						</c:when>
+						<c:otherwise>
+							<div style="width:${wcVo.work_progress}%;background:#8bcd24;font-family:D2Coding;font-weight:bold;">${wcVo.work_progress}%</div>
+						</c:otherwise>
+					</c:choose>
                     <div class="portlet-header">${wcVo.work_title}</div>
                     <div class="portlet-content">${wcVo.work_content}</div>
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
@@ -82,7 +103,14 @@
         <c:forEach items="${wcList}" var="wcVo" >
             <c:if test="${wcVo.wc_group eq '4'}">
                 <div class="portlet">
-                    <div style="width: ${wcVo.work_progress}%; background: #8bcd24; font-family: D2Coding; font-weight: bold" >　${wcVo.work_progress}%</div>
+                    <c:choose>
+						<c:when test="${wcVo.work_progress == 0}">
+							<div style="width:${wcVo.work_progress}%;background:#8bcd24;font-family:D2Coding;font-weight:bold;display:none;">${wcVo.work_progress}%</div>								
+						</c:when>
+						<c:otherwise>
+							<div style="width:${wcVo.work_progress}%;background:#8bcd24;font-family:D2Coding;font-weight:bold;">${wcVo.work_progress}%</div>
+						</c:otherwise>
+					</c:choose>
                     <div class="portlet-header">${wcVo.work_title}</div>
                     <div class="portlet-content">${wcVo.work_content}</div>
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>
@@ -104,7 +132,14 @@
         <c:forEach items="${wcList}" var="wcVo" >
             <c:if test="${wcVo.wc_group eq '5'}">
                 <div class="portlet">
-                    <div style="width: ${wcVo.work_progress}%; background: #8bcd24; font-family: D2Coding; font-weight: bold" >　${wcVo.work_progress}%</div>
+                    <c:choose>
+						<c:when test="${wcVo.work_progress == 0}">
+							<div style="width:${wcVo.work_progress}%;background:#8bcd24;font-family:D2Coding;font-weight:bold;display:none;">${wcVo.work_progress}%</div>								
+						</c:when>
+						<c:otherwise>
+							<div style="width:${wcVo.work_progress}%;background:#8bcd24;font-family:D2Coding;font-weight:bold;">${wcVo.work_progress}%</div>
+						</c:otherwise>
+					</c:choose>
                     <div class="portlet-header">${wcVo.work_title}</div>
                     <div class="portlet-content">${wcVo.work_content}</div>
                     <label class="kku-hide kku-no" >${wcVo.wc_id}</label>

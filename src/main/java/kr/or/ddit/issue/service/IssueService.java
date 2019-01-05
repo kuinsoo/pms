@@ -215,5 +215,31 @@ public class IssueService implements IssueServiceInf{
 	public List<IssueVo> pjtAllIssueHistory(String sid) {
 		return issueMapper.pjtAllIssueHistory(sid);
 	}
+
+	/**
+	 * Method : getIssuePageList
+	 * 작성자 : iks
+	 * 변경이력 :
+	 * @param map
+	 * @return
+	 * Method 설명 : 알림을 위한 이슈 페이지 리스트 조회
+	 */
+	@Override
+	public List<IssueVo> getIssuePageList(PageVo pageVo) {
+		return issueMapper.getIssuePageList(pageVo);
+	}
+
+	/**
+	 * Method : issueMemberTotalCnt
+	 * 작성자 : iks
+	 * 변경이력 :
+	 * @param map
+	 * @return
+	 * Method 설명 : 본인이 등록한 업무에 대한 이슈 총 갯수
+	 */
+	@Override
+	public int issueMemberTotalCnt(String member_mail) {
+		return issueMapper.issueMemberTotalCnt(member_mail);
+	}
 	
 }

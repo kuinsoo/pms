@@ -941,7 +941,7 @@
 							<h2>회원 탈퇴 </h2>
 								<p> 회원 확인을 위하여 비밀번호를 입력해주세요. </p>
 								<input id = "passwordEnd" onkeyup="onkeyup_eventEND();" placeholder ="비밀번호를 입력해주세요.." type="password" style="font-family:'Malgun Gothic';"/>
-								<input type="button" class= "goodbyeBtn" value= "확인"/>
+								<input type="button" class="goodbyeBtn" value= "확인"/>
 								<span id = "passError"> 비밀번호가 일치하지 않습니다. </span>
 							</div>
 						</div>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import kr.or.ddit.friendslist.model.FriendListVo;
+import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.member.service.MemberServiceInf;
 import kr.or.ddit.message.model.MessageVo;
@@ -39,6 +40,9 @@ public class MainController {
 	@Autowired
 	private MessageServiceInf messageService;
 	
+	@Autowired
+	private IssueServiceInf issueService;
+	
 
 	/**
 	 * Main string.
@@ -63,6 +67,7 @@ public class MainController {
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		
 		return "main/main";
 	}

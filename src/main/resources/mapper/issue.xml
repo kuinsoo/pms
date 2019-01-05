@@ -170,4 +170,44 @@
 		WHERE	issue_id = #{issue_id}
 	</delete>
 	
+	<!-- 로그인한 회원이 작성한 업무에 대해 이슈 발생 알림(페이징 추가) 2019-01-05 임규승 -->
+	<select id="getIssuePageList" resultType="issueVo" parameterType="map">
+		SELECT  *
+		FROM    (
+		        select  rownum rnum,
+		                a.*
+		        from    (
+		                select  a.*
+		                from    (
+		                        SELECT  ROWNUM labelrn,
+		                                A.*
+		                        FROM    (
+		                                SELECT  ISSUE_TITLE
+		                                FROM    ISSUE A, WORK B, WORK_MEMBER C, PROJECT_MEMBER D, MEMBER E
+		                                WHERE   A.ISSUE_WORK        = B.WORK_ID
+		                                AND     B.WORK_ID			= C.WORK_ID
+		                                AND     C.PMEMBER_ID		= D.PMEMBER_ID
+		                                AND     D.PMEMBER_MEMBER	= E.MEMBER_MAIL
+		                                AND     E.MEMBER_MAIL		= #{member_mail}
+		                                ) A
+		                        ) a
+		                order by labelrn desc
+		                ) a
+		        ) B
+		WHERE   rnum BETWEEN #{page} * #{pageSize} - (#{pageSize} - 1) AND #{page} * #{pageSize}
+		ORDER BY rnum
+	</select>
+	
+	<!-- 로그인한 회원이 작성한 업무에 대해 이슈 발생한 총 갯수 2019-01-05 임규승 -->
+	<select id="issueMemberTotalCnt" resultType="int" parameterType="String">
+		SELECT  COUNT(*)
+        FROM    ISSUE A, WORK B, WORK_MEMBER C, PROJECT_MEMBER D, MEMBER E
+        WHERE   A.ISSUE_WORK        = B.WORK_ID
+        AND     B.WORK_ID			= C.WORK_ID
+        AND     C.PMEMBER_ID		= D.PMEMBER_ID
+        AND     D.PMEMBER_MEMBER	= E.MEMBER_MAIL
+        AND     E.MEMBER_MAIL		= #{member_mail}
+	</select>
+	
+	
 </mapper>

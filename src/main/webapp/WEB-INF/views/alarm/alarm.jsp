@@ -13,8 +13,9 @@
 	            <li><a href="#tabs-4">공지 알림</a></li>
 	        </ul>
 	        <div id="tabs-1">
-	            <i class="icon-bell icons"></i>
-	            <p>새 프로젝트 및 새 글이 등록되었을 때,<br>Push 메시지로 알려드려요!</p>
+	            <ul id="issueMemberList">
+	            	<%-- ajaxIssueAlarm jsp --%>
+	            </ul>
 	        </div>
 	        <div id="tabs-2">
 	            <ul id="workMemberList">
@@ -38,10 +39,60 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 $(document).ready(function(){
+	issueMemberList();
 	messageMemberList();
 	workMemberList();
 	noticeMemberList();
 });
+
+//이슈 알림 - 2019-01-04 임규승
+function issueMemberList(){
+	
+	var listCntIssue = ${issueMemberTotalCnt};
+	
+	 $.ajax({
+		  type: "GET",
+		  url: "/ajaxIssueAlarm",
+		  data: {"page" : 1, "pageSize" : 10},
+		  success: function (data){
+			  $("#issueMemberList").html();
+			  $("#issueMemberList").html(data);
+		  }
+	   });
+	
+	(function issuePoll(){
+		$.ajax({
+		    type: "GET",
+		    url: "/alarmIssue",
+		    // data: {"page" : 1, "pageSize" : 10},
+		    success: function (issueMemberTotalCnt) {
+		       
+		       if(listCntIssue < issueMemberTotalCnt){
+		    	   
+		    	   $.ajax({
+		    		  type: "GET",
+		    		  url: "/ajaxIssueAlarm",
+		    		  data: {"page" : 1, "pageSize" : 10},
+		    		  success: function (data){
+		    			  $("#issueMemberList").html();
+		    			  $("#issueMemberList").html(data);
+		    		  }
+		    	   });
+		    	   
+		    	   alert("이슈가 발생하였습니다!");
+		       }
+		       listCntIssue = issueMemberTotalCnt;
+		    },
+		    error: function (data) {
+			    // location.href = "/";
+				// alert("error");
+			},
+		    timeout: 3000,
+		    complete: setTimeout(function(){ issuePoll(); }, 6000)
+		 })
+	})();
+	
+};
 
 // 쪽지 알림 - 2019-01-02 임규승
 function messageMemberList(){
