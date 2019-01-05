@@ -17,6 +17,7 @@ import java.util.Date;
 @Alias("pMemberListVo")
 public class PMemberListVo {
 
+	private String member_mail;
 	private String member_name;
 	private String member_profile;
 	private String pmember_member;
@@ -36,6 +37,28 @@ public class PMemberListVo {
 
 	public PMemberListVo() {
 	}
+
+	
+	@Override
+	public String toString() {
+		return "PMemberListVo [member_mail=" + member_mail + ", member_name=" + member_name + ", member_profile="
+				+ member_profile + ", pmember_member=" + pmember_member + ", pmemberCount=" + pmemberCount
+				+ ", pmember_position=" + pmember_position + ", project_title=" + project_title + ", project_overview="
+				+ project_overview + ", pmember_bookmark=" + pmember_bookmark + ", project_id=" + project_id
+				+ ", project_sdate=" + project_sdate + ", project_eedate=" + project_eedate + ", project_edate="
+				+ project_edate + "]";
+	}
+
+
+	public String getMember_mail() {
+		return member_mail;
+	}
+
+
+	public void setMember_mail(String member_mail) {
+		this.member_mail = member_mail;
+	}
+
 
 	public PMemberListVo(String member_name, String member_profile, String pmember_member, String pmemberCount, String pmember_position, String project_title, String project_overview, String pmember_bookmark, String project_id, Date project_sdate, Date project_eedate, Date project_edate) {
 		this.member_name = member_name;

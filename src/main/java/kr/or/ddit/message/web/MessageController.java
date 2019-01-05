@@ -62,16 +62,21 @@ public class MessageController {
 	 * Method 설명 : header에서 message jsp로 보내기위함  
 	 */
 	@RequestMapping(value= "/message")
-	public String message(@SessionAttribute("memberVo") MemberVo memberVo, Model model, FriendListVo friendVo , MessageVo msgVo) {
+	public String message(@SessionAttribute("memberVo") MemberVo memberVo,
+			 HttpServletRequest request ,Model model, FriendListVo friendVo , MessageVo msgVo) {
 	
+		String messageMember_mail = request.getParameter("member_mail");
 		List<FriendListVo> selctMyFriend = friendservice.selectMyFriends(memberVo.getMember_mail());
 		model.addAttribute("selctMyFriend",selctMyFriend);
 		model.addAttribute("pageCnt", postService.totalPostCnt());
+		
+		model.addAttribute("messageMember_mail", messageMember_mail);
 		
 		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		
 		
 		
 		return "message/message";
@@ -616,7 +621,11 @@ public class MessageController {
 	
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	@RequestMapping(value="/friendView")
-	public String friendView(Model model,@SessionAttribute("memberVo") MemberVo memberVo) {
+	public String friendView(Model model,@SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
+		
+		String memberFriendSearch = request.getParameter("member_mail");
+		model.addAttribute("memberFriendSearch",memberFriendSearch);
+		
 		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
@@ -624,7 +633,7 @@ public class MessageController {
 		return "friend/friend";
 	}
 	
-	
+
 
 }
 

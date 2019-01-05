@@ -364,7 +364,7 @@ public class MemberDetailController {
 	public Map<String, Object> myTodoProjectListAjax (Model model , PageVo pageVo, ToDoVo todoVo, ProjectVo projectVo,
 			@SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
 		
-		
+		todoVo.setProject_id(projectVo.getProject_id());
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		todoVo.setProject_title(projectVo.getProject_title());
 		
@@ -381,10 +381,12 @@ public class MemberDetailController {
 	
 	@ResponseBody
 	@RequestMapping(value ="/searchTodoProjectAjax", method = RequestMethod.POST)
-	public Map<String, Object> searchTodoProjectAjax (Model model , PageVo pageVo , @SessionAttribute("memberVo") MemberVo memberVo 
-			, HttpServletRequest request){
+	public Map<String, Object> searchTodoProjectAjax (Model model , PageVo pageVo, ToDoVo todoVo, ProjectVo projectVo,
+			@SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request){
 		
+		todoVo.setProject_id(projectVo.getProject_id());
 		pageVo.setMember_mail(memberVo.getMember_mail());
+		todoVo.setProject_title(projectVo.getProject_title());
 		
 		// 검색 부분 
 		if (pageVo.getSearchTodoText() == null) {
@@ -618,39 +620,9 @@ public class MemberDetailController {
 		 * @return
 		 * Method 설명 : 마이페이지 회원 탈퇴시 비밀번호 확인 부분
 		 */
-		@RequestMapping(value="/userwithDrawal", method=RequestMethod.POST)
+		@RequestMapping(value="/userwithDrawal", method=RequestMethod.GET)
 		public String userwithDrawal( @SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
-			
 			memberservice.updateUserwithDrawal(memberVo);
 			return "redirect:/";
-			
 		}
-
-		
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

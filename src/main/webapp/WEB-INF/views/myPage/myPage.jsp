@@ -57,6 +57,28 @@
 				$("#frm2").submit();
 			});
 			
+	        //#############################################################################################		
+	        //#############################################################################################		
+	        //#############################################################################################		
+	        //#############################################################################################		
+			// 나의일감 클릭 
+			$("#projectTodoList").on("click",".todoClick", function(){
+				console.log("todoClick");
+				
+				var project_id = $(this).children()[1].innerHTML;
+				var todo_id = $(this).children()[2].innerHTML;
+				console.log(todo_id);
+				console.log(project_id);
+				
+				location.href="/subMain?myPagetodo_id="+todo_id+"&myProject_id="+project_id;
+				
+			});
+
+	        //#############################################################################################		
+	        //#############################################################################################		
+	        //#############################################################################################		
+	        //#############################################################################################		
+			
 			$(".passNot").hide();
 			$(".phoneBtns").hide();
 			$(".saveBtn").hide();
@@ -592,8 +614,10 @@
 					var html = "";
 					$.each(data.projectTodoList, function(idx,mt){
 						console.log(data.projectTodoList);
-						html += "<tr>";
+						html += "<tr class = 'todoClick'>";
 						html += "	<td>"+ mt.rnum +"</td>";
+						html += "	<td>"+ mt.project_id +"</td>";
+						html += "	<td>"+ mt.todo_id +"</td>";
 						html += "	<td>"+ mt.project_title +"</td>";
 						html += "	<td>"+ mt.todo_content +"</td>";
 						if(mt.todo_complet==('N')){
@@ -631,8 +655,10 @@
 					success : function(data){
 						var html = "";
 						$.each(data.projectTodoList, function(idx,mt){
-							html += "<tr>";
 							html += "	<td>"+ mt.rnum +"</td>";
+							html += "	<td>"+ mt.project_id +"</td>";
+							html += "	<td>"+ mt.todo_id +"</td>";
+							html += "	<td>"+ mt.project_title +"</td>";
 							html += "	<td>"+ mt.todo_content +"</td>";
 							if(mt.todo_complet==('N')){
 								html += "	<td>"+ '미완료' +"</td>";
@@ -874,13 +900,17 @@
 								<button onclick="getmyTodoProjectList(1);" class="getMyPageList">목록으로</button>
 								</div>
 								<table>
+									<colgroup width="5%" />
+									<colgroup width="10%" />
 									<colgroup width="10%" />
 									<colgroup width="20%" />
-									<colgroup width="50%" />
-									<colgroup width="20%" />
+									<colgroup width="40%" />
+									<colgroup width="10%" />
 									<thead>
-										<tr class="projectTodoList">
+										<tr class="todoClick">
 											<th><span>번호</span></th>
+											<th><span>프로젝트 번호 </span></th>
+											<th><span>일감 번호 </span></th>
 											<th><span>프로젝트 명 </span></th>
 											<th><span>나의 일감 보관</span></th>
 											<th><span>완료 여부</span></th>

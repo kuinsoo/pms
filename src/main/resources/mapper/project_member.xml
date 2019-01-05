@@ -142,7 +142,7 @@ and PROJECT_DELETE = 'N'
 
 	<!-- 프로젝트 참여자 리스트 -->
 	<select id="projectMemberList" resultMap="pMemberResultMap" parameterType="String">
-		select PMEMBER_MEMBER, MEMBER_NAME, MEMBER_PROFILE, PMEMBER_POSITION
+		select PMEMBER_MEMBER, MEMBER_MAIL , MEMBER_NAME, MEMBER_PROFILE, PMEMBER_POSITION
 		from PROJECT_MEMBER inner join MEMBER on (PMEMBER_MEMBER = MEMBER_MAIL)
 		and PMEMBER_PROJECT = #{project_id}
 		order by pmember_position asc

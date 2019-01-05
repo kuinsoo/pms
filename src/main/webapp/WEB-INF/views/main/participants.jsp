@@ -21,7 +21,7 @@
 	                    	<i class="icon-paper-plane icons"></i>
 	                    	<span>쪽지 보내기</span>
                     	</a>
-                    	<a href="/message#tabs2-4">
+                    	<a href="/friendView">
 	                    	<i class="icon-user-follow icons"></i>
 	                    	<span>친구 리스트</span>
                     	</a>
@@ -42,11 +42,11 @@
 	                    	<i class="icon-badge icons"></i>
 	                    	<span>능력 및 평가</span>
                     	</a>
-                    	<a href="/message">
+                    	 <a href="/message?member_mail=${projectMember.member_mail}">
 	                    	<i class="icon-paper-plane icons"></i>
 	                    	<span>쪽지 보내기</span>
-                    	</a>
-                    	<a href="/message#tabs2-4">
+                    	</a> 
+                    	<a href="/friendView?member_mail=${projectMember.member_mail}">
 	                    	<i class="icon-user-follow icons"></i>
 	                    	<span>친구 리스트</span>
                     	</a>

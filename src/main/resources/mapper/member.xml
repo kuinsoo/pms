@@ -243,6 +243,8 @@
 			     select a.*
 			         from
                          (select todo_content
+                         		, project_id
+                                , todo_id
 							    , todo_complet
 							    , project_title
 							from   todo inner join work 
