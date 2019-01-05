@@ -618,39 +618,9 @@ public class MemberDetailController {
 		 * @return
 		 * Method 설명 : 마이페이지 회원 탈퇴시 비밀번호 확인 부분
 		 */
-		@RequestMapping(value="/userwithDrawal", method=RequestMethod.POST)
+		@RequestMapping(value="/userwithDrawal", method=RequestMethod.GET)
 		public String userwithDrawal( @SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
-			
 			memberservice.updateUserwithDrawal(memberVo);
 			return "redirect:/";
-			
 		}
-
-		
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

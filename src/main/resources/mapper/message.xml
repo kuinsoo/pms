@@ -149,34 +149,9 @@
 		and    friend_member like '%'||#{searchTextFriend}||'%'
 	</select>
 	
-	<!-- 전체 사용자 total 검색 부분 -->
-	<select id="totalMemberListSearch" resultType="int" parameterType="pageVo">
 	
-		SELECT  count(*)
-		FROM    member
-		WHERE   member_mail NOT IN (SELECT  friend_member
-		                             FROM    FRIENDSLIST
-		                            WHERE   friend_myemail = #{member_mail}
-		                            AND     friend_accept = 'Y')
-		AND     member_withdrawal = 'N'
-		AND     member_mail NOT IN #{member_mail}
-		AND     member_mail like '%'||#{searchTextFriendList}||'%'
-	
-	</select>
-	
-	<!-- 전체 사용자 total -->
-	<select id="totalMember" resultType="int" parameterType="String">
-		SELECT  count(*)
-		FROM    member 
-		WHERE   member_mail NOT IN 
-		            (SELECT friend_member
-		                    FROM    FRIENDSLIST
-		                    WHERE   friend_myemail = #{member_mail}
-		                    AND     friend_accept = 'Y')  
-		                    AND     member_withdrawal = 'N'
-		AND     member_mail NOT IN #{member_mail}
-	</select>
-	
+
+
 	<!-- 나의 친구리스트에서 친구 삭제하기  -->
 	<delete id="deleteMyfriend" parameterType="String">
 		delete from FRIENDSLIST 
@@ -210,7 +185,33 @@
 	
 	</select>
 	
+	<!-- 전체 사용자 total -->
+	<select id="totalMember" resultType="int" parameterType="String">
+		SELECT  count(*)
+		FROM    member INNER JOIN AUTHORITY ON MEMBER_MAIL = AUTH_MEMBER
+		WHERE   member_mail NOT IN (SELECT  friend_member
+		                        FROM    FRIENDSLIST
+		                        WHERE   friend_myemail = #{member_mail}
+		                        AND     friend_accept IN ('N','Y'))
+		AND     member_withdrawal = 'N'
+		AND     AUTH_ASSORT = '2'
+		AND     member_mail NOT IN #{member_mail}
+		ORDER BY member_mail desc
+	</select>
 	
+	<!-- 전체 사용자 total 검색 부분 -->
+	<select id="totalMemberListSearch" resultType="int" parameterType="pageVo">
+		SELECT  count(*)
+		FROM    member INNER JOIN AUTHORITY ON MEMBER_MAIL = AUTH_MEMBER
+		WHERE   member_mail NOT IN (SELECT  friend_member
+		                            FROM    FRIENDSLIST
+		                            WHERE   friend_myemail = #{member_mail}
+		                            AND     friend_accept IN ('N','Y'))
+		AND     member_withdrawal = 'N'
+		AND     AUTH_ASSORT = '2'
+		AND     member_mail NOT IN #{member_mail}
+		AND     member_mail like '%'||#{searchTextFriendList}||'%'
+	</select>
 	
 	<select id ="memberListN" resultType="friendVo">
 		  SELECT  member_mail,
