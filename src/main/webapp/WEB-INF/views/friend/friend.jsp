@@ -18,7 +18,7 @@
 						 	<div class="friendLeft">
 						      <h2>친구찾기</h2>
 								<form name ="searchTextFriendList" method="POST" onsubmit="return false;">
-										<input type="text" id="searchTextFriendList" name="searchTextFriendList" class="friendSearchInput" placeholder="찾으시는 분의 이메일을 입력해주세요" />
+										<input type="text" id="searchTextFriendList" name="searchTextFriendList" value="${memberFriendSearch}" class="friendSearchInput" placeholder="찾으시는 분의 이메일을 입력해주세요" />
 										<input type="hidden" name="page" id= "friendListPage" value='1'/>
 										<input type="hidden" name="pageSize" value='10' />
 										<input type="button" value="검색" class="friendSearchBtn" onclick="javascript:getAllMemberSearch();"/>
