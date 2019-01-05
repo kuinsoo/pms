@@ -22,11 +22,16 @@
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			
+			// 회원 탈퇴부분 - 비밀번호 에러 메시지 숨기기
+			$("#passError").hide();
+
 			getMyPageList(1);
 			getmybookMarkProjectList(1);
 			getmyTodoProjectList(1);
 			getMyEndPageList(1);
 			getmyProjectFileList(1);
+			
 			
 			// 참여중인 프로젝트 클릭
 			$("#projectList").on("click", ".projectClick" ,function(){
@@ -194,6 +199,61 @@
 		});
 			
 	}	
+		
+		// 회원 탈퇴 부분 
+		function onkeyup_eventEND(){
+			$.ajax({
+				type: "GET",
+				url : "/myPageMemberENDSHA256Ajax",
+				data : "passwordEnd="+ $("#passwordEnd").val(),
+				success : function(data){
+					memberEnd = data.kisa256;
+					 console.log(memberEnd);
+					 console.log(data.kisa256);
+					 
+					 memberEndPassWard();
+				}
+		});
+			
+	}	
+	
+	// @@@@@@@@@@@@@@@@@@@ 회원탈퇴 비밀번호 확인 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
+		//blur()이벤트 사용
+		var memberEnd; 
+		function memberEndPassWard(){
+			if(memberEnd === '${memberVo.member_pass}' ){
+				$("#passError").hide();
+				$('.goodbyeBtn').prop('disabled', false);
+
+				$(".goodbyeBtn").click(function(){
+					if(window.confirm("정말 탈퇴 하시겠습니까??")) {
+						location.href="/userwithDrawal";
+					}
+				});
+			}else{
+				$("#passError").show();
+				$('.goodbyeBtn').prop('disabled', true);
+			}
+		}
+		
+	/* 			$("#member_pass").keyup(function() {
+				if($("#member_pass").val() != "${memberVo.member_pass}"){
+					$("#passError").show();
+					$('.goodbyeBtn').prop('disabled', true);
+				} else{
+					$("#passError").hide();
+					$('.goodbyeBtn').prop('disabled', false);
+
+					$(".goodbyeBtn").click(function(){
+						if(window.confirm("정말 탈퇴 하시겠습니까??")) {
+							location.href="/userwithDrawal";
+						}
+					});
+				}
+			}); */
+			
+		
 		
 		// 휴대번호 인증 부분 이벤트
 		function onkeyup_event(){
@@ -880,10 +940,8 @@
 							<div class="tabs2-5center">
 							<h2>회원 탈퇴 </h2>
 								<p> 회원 확인을 위하여 비밀번호를 입력해주세요. </p>
-							<form action= "/userwithDrawal" method="post">
-								<input id ="member_pass" id = "member_pass" name ="member_pass" placeholder ="비밀번호를 입력해주세요.." type="password" style="font-family:'Malgun Gothic';"/>
+								<input id = "passwordEnd" onkeyup="onkeyup_eventEND();" placeholder ="비밀번호를 입력해주세요.." type="password" style="font-family:'Malgun Gothic';"/>
 								<input type="button" class= "goodbyeBtn" value= "확인"/>
-							</form>
 								<span id = "passError"> 비밀번호가 일치하지 않습니다. </span>
 							</div>
 						</div>
@@ -1128,29 +1186,7 @@ var myChart2 = new Chart(ctx2, {
 });
 
 
-// @@@@@@@@@@@@@@@@@@@ 회원탈퇴 비밀번호 확인 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-$(document).ready(function() {
-	$("#passError").hide();
-	//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
-	//blur()이벤트 사용
-	$("#member_pass").keyup(function() {
-		if($("#member_pass").val() != "${memberVo.member_pass}"){
-			$("#passError").show();
-			$('.goodbyeBtn').prop('disabled', true);
-		} else{
-			$("#passError").hide();
-			$('.goodbyeBtn').prop('disabled', false);
-
-			$(".goodbyeBtn").click(function(){
-				if(window.confirm("정말 탈퇴 하시겠습니까??")) {
-					location.href="/userwithDrawal";
-				}
-			});
-		}
-	});
-	
-});
 
 </script>
 </body>

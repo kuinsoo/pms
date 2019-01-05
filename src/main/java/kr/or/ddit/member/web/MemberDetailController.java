@@ -555,6 +555,20 @@ public class MemberDetailController {
 			return passMap;
 		}
 		
+		@ResponseBody
+		@RequestMapping(value="/myPageMemberENDSHA256Ajax", method=RequestMethod.GET)
+		public Map<String , String> myPageMemberENDSHA256Ajax(HttpServletRequest request,Model model) {
+			
+			String passwordEnd = request.getParameter("passwordEnd").toLowerCase();
+			
+			String kisa256 = KISA_SHA256.encrypt(passwordEnd);
+			
+			Map<String, String> passMap = new HashMap<>();
+			passMap.put("kisa256", kisa256);
+			
+			return passMap;
+		}
+		
 		/**
 		 * Method : myPageAjax
 		 * 작성자 : 나진실
@@ -607,9 +621,6 @@ public class MemberDetailController {
 		@RequestMapping(value="/userwithDrawal", method=RequestMethod.POST)
 		public String userwithDrawal( @SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request) {
 			
-		/*	String member_pass = request.getParameter("member_pass");
-			member_pass.equals(KISA_SHA256.encrypt(memberVo.getMember_pass()));
-			*/
 			memberservice.updateUserwithDrawal(memberVo);
 			return "redirect:/";
 			
