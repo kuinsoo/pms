@@ -67,10 +67,12 @@
 				
 				var project_id = $(this).children()[1].innerHTML;
 				var todo_id = $(this).children()[2].innerHTML;
+				var project_title = $(this).children()[2].innerHTML;
 				console.log(todo_id);
 				console.log(project_id);
+				console.log(project_title);
 				
-				location.href="/subMain?myPagetodo_id="+todo_id+"&myProject_id="+project_id;
+				location.href="/subMain?todo_id="+todo_id+"&project_id="+project_id+"&project_title="+project_title;
 				
 			});
 

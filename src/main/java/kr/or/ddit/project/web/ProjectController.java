@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -199,9 +200,9 @@ public class ProjectController {
 	 *
 	 * @throws UnsupportedEncodingException the unsupported encoding exception
 	 */
-	@RequestMapping(value = "/subMain", method = RequestMethod.POST)
+	@RequestMapping(value = "/subMain", method = {RequestMethod.GET, RequestMethod.POST})
 	public String subMain(Model model, @RequestParam("project_id")String project_id, MeetingVo meetingVo,
-						  @SessionAttribute("memberVo")MemberVo memberVo, HttpServletResponse response) throws UnsupportedEncodingException {
+						  @SessionAttribute("memberVo")MemberVo memberVo, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
 
 		ProjectVo projectVo =  projectService.selectProject(project_id);
 		/* 프로젝트 객체  */
@@ -220,6 +221,17 @@ public class ProjectController {
 		/* 업무 카드 출력 */
 		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
 
+		/* 나진실 : 마이페이지 부분 값 넘겨주기 위함 */
+		
+		String myTodo_id = request.getParameter("todo_id");
+		String myProject_id = request.getParameter("project_id");
+		String myProject_title = request.getParameter("project_title");
+		
+		model.addAttribute("todo_id", myTodo_id);
+		model.addAttribute("project_id", myProject_id);
+		model.addAttribute("project_title", myProject_title);
+		
+		
 		/* 첨부파일 목록 */
 
 
