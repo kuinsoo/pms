@@ -19,6 +19,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class ToDoVo {
 	
 	private int rnum;
+	private String work_id;
 	private String project_id;
 	private String todo_id;				//	할일번호(pk)
 	private String todo_work;			//	할일업무번호(fk)
@@ -37,6 +38,15 @@ public class ToDoVo {
 	private String todo_color;			//	할일 색깔
 	private String todo_issue;			//	할일이슈번호(fk)
 	
+	
+	public String getWork_id() {
+		return work_id;
+	}
+
+	public void setWork_id(String work_id) {
+		this.work_id = work_id;
+	}
+
 	private String project_title;
 	
 	
@@ -230,13 +240,14 @@ public class ToDoVo {
 
 	@Override
 	public String toString() {
-		return "ToDoVo [rnum=" + rnum + ", project_id=" + project_id + ", todo_id=" + todo_id + ", todo_work="
-				+ todo_work + ", todo_pmember=" + todo_pmember + ", todo_content=" + todo_content + ", todo_sdate="
-				+ todo_sdate + ", format_todo_sdate=" + format_todo_sdate + ", todo_edate=" + todo_edate
-				+ ", format_todo_edate=" + format_todo_edate + ", todo_eedate=" + todo_eedate + ", format_todo_eedate="
-				+ format_todo_eedate + ", todo_complet=" + todo_complet + ", todo_color=" + todo_color + ", todo_issue="
-				+ todo_issue + ", project_title=" + project_title + ", member_name=" + member_name + ", todo_member="
-				+ todo_member + ", member_profile=" + member_profile + ", issue_id=" + issue_id + ", work_project="
-				+ work_project + ", pmember_member=" + pmember_member + ", sdf=" + sdf + "]";
+		return "ToDoVo [rnum=" + rnum + ", work_id=" + work_id + ", project_id=" + project_id + ", todo_id=" + todo_id
+				+ ", todo_work=" + todo_work + ", todo_pmember=" + todo_pmember + ", todo_content=" + todo_content
+				+ ", todo_sdate=" + todo_sdate + ", format_todo_sdate=" + format_todo_sdate + ", todo_edate="
+				+ todo_edate + ", format_todo_edate=" + format_todo_edate + ", todo_eedate=" + todo_eedate
+				+ ", format_todo_eedate=" + format_todo_eedate + ", todo_complet=" + todo_complet + ", todo_color="
+				+ todo_color + ", todo_issue=" + todo_issue + ", project_title=" + project_title + ", member_name="
+				+ member_name + ", todo_member=" + todo_member + ", member_profile=" + member_profile + ", issue_id="
+				+ issue_id + ", work_project=" + work_project + ", pmember_member=" + pmember_member + ", sdf=" + sdf
+				+ "]";
 	}
 }

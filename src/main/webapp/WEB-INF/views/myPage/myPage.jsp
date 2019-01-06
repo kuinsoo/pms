@@ -62,17 +62,21 @@
 	        //#############################################################################################		
 	        //#############################################################################################		
 			// 나의일감 클릭 
+			
+			
 			$("#projectTodoList").on("click",".todoClick", function(){
 				console.log("todoClick");
 				
 				var project_id = $(this).children()[1].innerHTML;
 				var todo_id = $(this).children()[2].innerHTML;
 				var project_title = $(this).children()[3].innerHTML;
+				var work_id = $(this).children()[3].innerHTML;
 				console.log(todo_id);
 				console.log(project_id);
 				console.log(project_title);
+				console.log(work_id);
 				
-				location.href="/subMain?todo_id="+todo_id+"&project_id="+project_id+"&project_title="+project_title;
+				location.href="/subMain?todo_id="+todo_id+"&project_id="+project_id+"&project_title="+project_title+"&work_id="+work_id+"#myWorkGo";
 				
 			});
 
@@ -620,6 +624,7 @@
 						html += "	<td>"+ mt.rnum +"</td>";
 						html += "	<td>"+ mt.project_id +"</td>";
 						html += "	<td>"+ mt.todo_id +"</td>";
+						html += "	<td>"+ mt.work_id +"</td>";
 						html += "	<td>"+ mt.project_title +"</td>";
 						html += "	<td>"+ mt.todo_content +"</td>";
 						if(mt.todo_complet==('N')){
@@ -660,6 +665,7 @@
 							html += "	<td>"+ mt.rnum +"</td>";
 							html += "	<td>"+ mt.project_id +"</td>";
 							html += "	<td>"+ mt.todo_id +"</td>";
+							html += "	<td>"+ mt.work_id +"</td>";
 							html += "	<td>"+ mt.project_title +"</td>";
 							html += "	<td>"+ mt.todo_content +"</td>";
 							if(mt.todo_complet==('N')){
@@ -747,18 +753,18 @@
 								<li><input type="text" value= "${memberVo.member_name}" name ="member_name" id ="member_name"/></li>
 								<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"  id ="member_tel"/>
 									<input type="button" onclick="telAjax();" value="인증" class="phoneBtns"/>
-								<li><input type="text" id ="telnum" placeholder="인증번호 4자리를 입력해주세요.." onkeyup="onkeyup_event();"/>
+								<li><input type="text" id ="telnum" placeholder="인증번호 4자리를 입력해주세요.." onkeyup="onkeyup_event();" required/>
 									<span class = "inputerror"> 인증번호를 입력해 주세요..</span>
 									<span class= "telerror"> 인증번호가 일치하지 않습니다.</span>
 								</li>
-								<li><input type="password" id = "pass1" onkeyup="onkeyup_event2();"/>
+								<li><input type="password" id = "pass1" onkeyup="onkeyup_event2(); " required/>
 									<span class="passNot"> 비밀번호가 일치하지 않습니다.. </span>
 								</li>
 								<li>
-									<input type="password" id = "pass1input" name = "member_pass"/>
+									<input type="password" id = "pass1input" name = "member_pass"required/>
 								</li>
 								<li>
-									<input type="password" id = "pass2input"  onkeyup="onkeyup_event3();"/>
+									<input type="password" id = "pass2input"  onkeyup="onkeyup_event3();"required/>
 									<span class="error"> 입력하신 비밀번호가 일치하지 않습니다.</span>
 								</li>
 								<li>
@@ -903,6 +909,7 @@
 								</div>
 								<table>
 									<colgroup width="5%" />
+									<colgroup width="5%" />
 									<colgroup width="10%" />
 									<colgroup width="10%" />
 									<colgroup width="20%" />
@@ -912,6 +919,7 @@
 										<tr class="todoClick">
 											<th><span>번호</span></th>
 											<th><span>프로젝트 번호 </span></th>
+											<th><span>할일 번호 </span></th>
 											<th><span>일감 번호 </span></th>
 											<th><span>프로젝트 명 </span></th>
 											<th><span>나의 일감 보관</span></th>

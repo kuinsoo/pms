@@ -5,7 +5,7 @@
 <c:forEach items="${workList}" var="work" varStatus="i">
 	<div class="currentCardList">
 		<h2><i class="icon-speech icons"></i>${work.work_title}</h2>
-		<div class="cardUserInfo">
+		<div class="cardUserInfo"  >
 			<div class="cardUserInfoImg">
 				<img src="${work.member_profile}">
 			</div>
@@ -13,7 +13,7 @@
 				<b>${work.member_mail}</b><br> <%-- 작성자 --%>
 				<span>${work.work_wdate}</span>
 			</div>
-			<div class="updateDeleteIcon">
+			<div class="updateDeleteIcon" id="myWorkGo">
 				<a href="#openCardUpdate${work.work_id}"><i class="icon-wrench icons"></i></a>
 				<%@ include file="/WEB-INF/views/card/cardUpdate.jsp" %>
 				<a href="#opens${work.work_id}" onclick="todoReset(${work.work_id});"><i class="icon-bulb icons"></i></a>

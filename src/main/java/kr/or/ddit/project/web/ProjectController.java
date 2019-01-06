@@ -226,11 +226,14 @@ public class ProjectController {
 		String myTodo_id = request.getParameter("todo_id");
 		String myProject_id = request.getParameter("project_id");
 		String myProject_title = request.getParameter("project_title");
+		String myWork_id = request.getParameter("work_id");
+		String myWork_title = request.getParameter("work_title");
 		
 		model.addAttribute("todo_id", myTodo_id);
 		model.addAttribute("project_id", myProject_id);
 		model.addAttribute("project_title", myProject_title);
-		
+		model.addAttribute("work_id", myWork_id);
+		model.addAttribute("work_title", myWork_title);
 		
 		/* 첨부파일 목록 */
 
