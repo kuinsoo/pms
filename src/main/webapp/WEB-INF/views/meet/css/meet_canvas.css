@@ -144,4 +144,23 @@ hr {
     background-color: rgba(232, 229, 229, 0.17);
     color: rgb(84, 82, 82);
 }
+
+#editor [contenteditable] {
+  color: #666;
+  caret-color: red;
+}
+
+#editor .p:after {
+    content: attr(data-before);
+    color: white;
+    background:gray;
+    cursor: pointer;
+}
+
+#editor .p .special:after {
+ 	content: '';
+  	color: blue;
+}
+
 #saveDoc { display: none; }
+

@@ -96,9 +96,8 @@
   // method for logging in developer console when debug mode is on
   var logMessage = function(text, extraParameters) {
     if (text.indexOf('%c') === -1 && !extraParameters) {
-      console.log(text);
     } else {
-      console.log(text, extraParameters || debugStyle);
+     // console.log(text, extraParameters || debugStyle);
     }
   };
 

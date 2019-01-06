@@ -8,6 +8,23 @@ var member_mail = getCookie('member_mail');
 //editor
 var quill = new Quill('#editor', {
 	theme : 'snow'
+		,
+	 styles: {
+	        'body': {
+	            'font-family': "'Helvetica Neue', Helvetica, Arial, sans-serif",
+	                'font-size': '18px',
+	                'line-height': '20px',
+	        },
+	        'span.test': {
+	            'font-weight': 'bold',   
+	        },
+	        'p.p:after': {
+	            'content': 'attr(data-before)',
+	            'color': 'white',
+	            'background':'gray',
+	            'cursor': 'pointer',
+	        }
+	    }
 });
 
 var today = new Date();
@@ -28,22 +45,18 @@ function saveFormAsTextFile(){
       'date: ' + today + '\n' +
       $('#editor').children().html(); // =content;
 
-    console.log("before a");
     var meetDoc = {
        		"content" : $('#editor').children().html(),
        		"project_id" : params.todayProject_id, 	//프로젝트 id 
        		"roomid" : params.sessionid,	//회의제목 
      };
-     console.log("before meetDoc ajax  : ",JSON.stringify(meetDoc));
      
      // json 만들기  to oracle
      $.ajax({
   	    url : 'https://127.0.0.1:8089/saveDoc',
   	    type : 'post',
   	    data : meetDoc,
-  	    success : function (data) {
-  	    	console.log(JSON.stringify(meetProjObj));
-  	    },
+  	    success : function (data) { },
   	    error : function (err) {
   	    	alert(err.toString());
   	    }
@@ -169,7 +182,6 @@ dataURLFormat.onchange = function() {
     getDataURL();
 };
 
-
 // # 타이머 1초간격으로 수행
 var RemainDate= 30000;//제한시간 설정 60000*30
 tid=setInterval('msg_time()',1000); 
@@ -213,7 +225,6 @@ function overTime() {
   
   	document.all.timer.innerHTML = m;   // div 영역에 보여줌 
   	overT = overT + 1000; // 초과시간 -1초
-    //console.log("나 i : ", overT); //접속 후  null , 시간은 들어옮 
 }
 
 // 타이머 선언
@@ -233,8 +244,21 @@ coEditor.addSyncListener(function(data) {
     connection.send(data);
 });
 
-// 발신(키 입력할때마다)
+//키
 editorInput.addEventListener("keydown", function(event) {
+	$(this).children().find('.p').removeClass() ;
+    if (event.which == 38 || event.which == 40 || event.which == 13 ) { 
+		$(this).children().find('.p').removeClass() ;
+	}else{
+		var index = quill.getSelection().index;
+		var selObj = window.getSelection();   
+		var range = selObj.getRangeAt(0);     
+		rangeAncestor = range.commonAncestorContainer;
+		var editorClassName=member_mail.substring( 0, member_mail.indexOf("@") );
+		rangeAncestor.parentElement.setAttribute('class','p '+editorClassName);
+		$(this).children().find('.'+editorClassName).attr('data-before',  params.userFullName);
+	}
+    
 	var mySubText = $('#editor').children().html();
 	var myTextLength =  mySubText.length;	
 	keyCnt++ ;
@@ -244,6 +268,11 @@ editorInput.addEventListener("keydown", function(event) {
 	});
 });
 
+editorInput.addEventListener("keyup", function(event) {
+	$(this).children().find('.p').removeClass() ;
+});
+
+
 // 내 일감목록 선언
 var coWorkList = new coWorkListLoader();
 
@@ -252,12 +281,7 @@ coWorkList.widgetJsURL = '/webapp/WEB-INF/views/meet/js/coWorkList.js'
     connection.send(data);
 });
 
-
-
-
-
-
-//여기서부턴 RTCMultiConnection
+//RTCMultiConnection
 connection.chunkSize = 16000;
 connection.enableFileSharing = true;
 
@@ -371,13 +395,14 @@ connection.onmessage = function(event) {
 	if(event.data === 'syncDoc'){
 		var mySubText = $('#editor').children().html();
 		var myTextLength =  mySubText.length;	
-		
+		 
 		 connection.send({
 				subTextLength : myTextLength,
 				subText : mySubText
 			});
 		 return;
 	 };
+	 
 	 if(myTextLength !== event.data.subTextLength){
 		 $('#editor').children().html(event.data.subText);
 		 return;
@@ -417,11 +442,9 @@ connection.onmessage = function(event) {
 	 
 	// 일감목록 동기화 
 	if(event.data === 'syncWorkList'){		
-		var mySubWorkList= $('#myWorkList').html();	 //*** 밖으로 빼면 전역과 지역이 혼선발생
+		var mySubWorkList= $('#myWorkList').html();
 		var myWorkListBtnCnt =  workListBtnCnt;	
 		
-		console.log("connection 받는 mySubWorkList : ",mySubWorkList);
-		console.log("connection 받는 myWorkListBtnCnt : ",myWorkListBtnCnt);
 		connection.send({
 			 	subWorkList : mySubWorkList,
 			 	workListBtnCnt : myWorkListBtnCnt
@@ -430,10 +453,7 @@ connection.onmessage = function(event) {
 	 };
 
 	 othersWorkListBtnCnt=event.data.workListBtnCnt;
-	 if(workListBtnCnt <= othersWorkListBtnCnt){	//*** 새로 변수를 선언하면 혼선 예상.. 그냥 초기화 값과 연결된 값을 바로? 비교 
-		 console.log("받은 workListBtnCnt : ",othersWorkListBtnCnt);
-		 console.log("받은 myWorkListBtnCnt : ",workListBtnCnt);
-		 
+	 if(workListBtnCnt <= othersWorkListBtnCnt){	
 		 $('#myWorkList').html(event.data.subWorkList);
 		 return;
 	 }
@@ -578,19 +598,16 @@ document.getElementById('btn-chat-message').onclick = function() {
     		"username" : username,
     		"roomid" : roomid
     }
-    console.log("before ajax  : ",JSON.stringify(meetObj));
     
     // json 만들기 (.. form sunmit은 페이지가 전환되서)
    $.ajax({
 	    url : 'https://127.0.0.1:8089/test',
 	    type : 'post',
 	    data : meetObj,
-	    success : function (data) {
-	    	console.log(JSON.stringify(meetObj));
-	    }/* ,
+	    success : function (data) { } ,
 	    error : function (err) {
-	    	alert(err.toString());
-	    } */
+	    	console.log(err.toString());
+	    } 
 	});
     
     // 메시지 전달 
@@ -775,8 +792,6 @@ designer.appendTo(document.getElementById('widget-container'), function() {
 
 // 내 일감 목록 불러오기
 $('#myWorkListBtn').on('click', function(){	  
-	console.log("project_id",params.todayProject_id);
-	console.log("member_mail",member_mail);
 	
 	  $.ajax({
 		    url : 'https://127.0.0.1:8081/myWorkList',
@@ -786,7 +801,6 @@ $('#myWorkListBtn').on('click', function(){
 		    	"member_mail": member_mail
 		    },
 		    success : function (data) {
-		    	console.log("call~ node js : ", data);
 		    	
 		    	var tableClassName;
 		    	if(data.length==0){
@@ -794,7 +808,6 @@ $('#myWorkListBtn').on('click', function(){
 		    	}else{		    		
 		    		tableClassName="wList"+data[0]["work_id"];
 		    	}
-		    	console.log("tableClassName : ", tableClassName);
 
 		    	$("<span> ' >" + params.userFullName + " ' 님의 일감들 </span> " +
 		    			"<button class='listedWorksClose'> [ 접기 ]</button> ").appendTo("#myWorkList"); // 이것을 테이블에붙임
@@ -808,6 +821,7 @@ $('#myWorkListBtn').on('click', function(){
 				
 				if(data.length==0){
 					$("<tr><td> 아직  배정된 일감이 없습니다~ </td></tr>").appendTo("#"+tableClassName);
+					$("<hr/>").appendTo("#myWorkList");
 				}else{	
 					var works = JSON.stringify(data);
 
@@ -827,13 +841,11 @@ $('#myWorkListBtn').on('click', function(){
 							$('.tr'+(index+1)).css('text-decoration', 'line-through');	
 						}
 						// 마감일이 오늘을 넘겼을 경우  
-						console.log("today : ", today);
-						console.log("예상 마감일 : ", works.format_work_eedate);
 						if(today>works.format_work_eedate){
 							$('.tr'+(index+1)).css('color', 'red');	
 						}
-							
 					});//each끝 
+					$("<hr/>").appendTo("#myWorkList");
 					
 				};
 				
@@ -841,16 +853,11 @@ $('#myWorkListBtn').on('click', function(){
 		  		var mySubWorkList= $('#myWorkList').html();
 		  		workListBtnCnt++;
 		  		myWorkListBtnCnt = workListBtnCnt;
-				//var myWorkListBtnCnt ++;	
-				//othersWorkListBtnCnt=myWorkListBtnCnt+1;
-				console.log("click mySubWorkList : ",mySubWorkList);
-				console.log("click myWorkListBtnCnt : ",myWorkListBtnCnt);
 				
 				connection.send({
 				 	subWorkList : mySubWorkList,
 				 	workListBtnCnt : myWorkListBtnCnt
 				});
-
 				$("#myWorkListBtn").attr("disabled","disabled");
 		    },
 		    error : function (err) {

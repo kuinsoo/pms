@@ -10,10 +10,10 @@
         <div class="currentMainContainerLeft">
             <div id="subMainTabMenu">
                 <ul class="subMaintab">
-                    <li class="current" data-tab="subMaintab1"><a href="#">업무 리포트</a></li>
-                    <li data-tab="subMaintab2"><a href="#">업무 카드</a></li>
-                    <li data-tab="subMaintab3"><a href="#">간트 차트</a></li>
-                    <li data-tab="subMaintab4"><a href="#">회의 리스트</a></li>
+                    <li class="current" data-tab="subMaintab1"><a href="#"  id="smTab1">업무 리포트</a></li>
+                    <li data-tab="subMaintab2"><a href="#" id="smTab2">업무 카드</a></li>
+                    <li data-tab="subMaintab3"><a href="#" id="smTab3">간트 차트</a></li>
+                    <li data-tab="subMaintab4"><a href="#" id="smTab4">회의 리스트</a></li>
                 </ul>
                 <div id="subMaintab1" class="tabcontent current">
                     <%@ include file="/WEB-INF/views/main/report.jsp" %>

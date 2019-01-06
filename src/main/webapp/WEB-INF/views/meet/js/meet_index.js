@@ -10,14 +10,8 @@ var project_id = getCookie('project_id');
 var project_title = getCookie('project_title');
  
 //2. 쿠키에서 가져온 값 
-console.log("cookie values: 1" + member_mail+", "+member_name+", "+project_id+", "+project_title)
-console.log("#1",member_name);	
 $('#txt-user-name').val(member_name);		
-console.log("#2",$('#txt-user-name').val());
-
 $('#txt-projectNum').after('<span>'+ project_title +'</span>');
-
-//console.log("a : ", connection.extra.todayProject_id);     x
 
 // RTCMultiConnection
 var publicRoomIdentifier = 'dashboard';
@@ -60,7 +54,6 @@ function updateListOfRooms(rooms) {
     
     rooms.forEach(function(room, idx) {
     	var userFullName= room.extra.userFullName;
-    	console.log("userFullName : ", userFullName);
         var memNum = 0;
     	room.participants.forEach(function(pid) {
     		memNum +=1;
@@ -90,10 +83,6 @@ function updateListOfRooms(rooms) {
         html2+= '<td  colspan="3"><span class="max-width" title="' + room.extra.todayRoomTitle + '">' + room.extra.todayRoomTitle + '</span></td>';
         html2 += '</tr>';
         	
-        
-
-        console.log("c : ", room.extra.todayProject_id);
-        
         if(project_id==room.extra.todayProject_id){	//***
         	$(tr).html(html);
         	$(tr).attr('class',project_id);
@@ -102,6 +91,7 @@ function updateListOfRooms(rooms) {
         }
 
         $(tr).find('.join-room').click(function() {
+        	$("#txt-user-name-hidden").val(member_name); //쿠키, 전역
             $(tr).find('.join-room').prop('disabled', true);
 
             var roomid = $('.join-room').attr('data-roomid');
@@ -139,7 +129,6 @@ $('#btn-join-hidden-room').click(function() {
     }
 
     var fullName = $('#txt-user-name-hidden').val().toString();
-    console.log("#a",fullName);
     if (!fullName || !fullName.replace(/ /g, '').length) {
         alertBox('Please enter your name.', 'Your Name Is Required');
         return;
@@ -148,7 +137,6 @@ $('#btn-join-hidden-room').click(function() {
     
     // $$ 	
     connection.extra.todayProject_id = project_id;
-    console.log("b : ", connection.extra.todayProject_id)
     // $$ roomTitle = undefined
     var roomTitle = $('#txt-roomTitle-hidden').val().toString();
     connection.extra.todayRoomTitle = roomTitle;
@@ -281,9 +269,8 @@ function confirmBox(message, callback) {
     });
 }
 
-//value 세팅 시기 : 회의 개설하기(팝업 띄우기) 버튼 클릭
+//회의 개설하기(팝업 띄우기) 버튼 클릭
 $("#openPop").on("click", function(){
-	console.log("openPop");
 	$("#txt-user-name").val(member_name); //쿠키, 전역
 });
 
@@ -352,7 +339,6 @@ $('#btn-create-room').click(function() {
 		    		"member_name" : member_name,	//참가자이름 
 		    		"member_mail" : member_mail	//참가자email  
 		    };
-		    console.log("before ajax  : ",JSON.stringify(meetProjObj));
 		    
 		    // json 만들기  to oracle
 		   $.ajax({
@@ -360,28 +346,12 @@ $('#btn-create-room').click(function() {
 			    type : 'post',
 			    data : meetProjObj,
 			    success : function (data) {
-			    	console.log(JSON.stringify(meetProjObj));
+			    	//console.log(JSON.stringify(meetProjObj));
 			    },
 			    error : function (err) {
-			    	console.log("node to oracle issue : 미팅목록");
+			    	//console.log("node to oracle issue : 미팅목록");
 			    }
-			});
-		    
-//		//** 자바 컨트롤러로 접근해서 해당 메서드 실행까지 가능.. 단, 돌아오질 못함 cors 설정이 안 먹는듯..
-//		   $.ajax({
-//			    url : 'https://127.0.0.1:8081/meetingList',
-//			    type : 'post',
-//			    data : {"project_id" : project_id},
-//			    success : function (data) {
-//			    	console.log("call~ node js : ", data);
-//					$('#meetingListAjax').html("");
-//					$('#meetingListAjax').html(data);
-//			    },
-//			    error : function (err) {
-//			    	alert(err.toString());
-//			    } 
-//			});
-		   
+			});	  
 });
 
 $('#chk-room-password').change(function() {
@@ -400,7 +370,6 @@ if (localStorage.getItem('canvas-designer-roomid')) {
     $('#txt-roomid-hidden').val(txtRoomId.value);
 }
 
-
 var userFullName = document.getElementById('txt-user-name');
 
 userFullName.onkeyup = userFullName.onblur = userFullName.oninput = userFullName.onpaste = function() {
@@ -412,7 +381,6 @@ if (localStorage.getItem('canvas-designer-user-full-name')) {
     $('#txt-user-name-hidden').val(userFullName.value);
 }
 
-
 var todayRoomTitle = document.getElementById('txt-roomTitle');
 todayRoomTitle.onkeyup = todayRoomTitle.onblur = todayRoomTitle.oninput = todayRoomTitle.onpaste = function() {
     localStorage.setItem('canvas-designer-roomTitle', todayRoomTitle.value); 
@@ -423,7 +391,6 @@ if (localStorage.getItem('canvas-designer-roomTitle')) {
     $('#txt-roomTitle-hidden').val(todayRoomTitle.value);
 };
 
-
 //$$$
 var todayProject_id = project_id;
 todayProject_id.onkeyup = todayProject_id.onblur = todayProject_id.oninput = todayProject_id.onpaste = function() {
@@ -433,7 +400,6 @@ todayProject_id.onkeyup = todayProject_id.onblur = todayProject_id.oninput = tod
 if (localStorage.getItem('canvas-designer-project_id')) {
 	todayProject_id.value = localStorage.getItem('canvas-designer-project_id');
 };
-
 
 //***
 connection.socketCustomEvent = 'custom-message';
