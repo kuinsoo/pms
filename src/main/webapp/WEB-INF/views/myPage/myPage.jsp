@@ -69,7 +69,7 @@
 				
 				var project_id = $(this).children()[1].innerHTML;
 				var todo_id = $(this).children()[2].innerHTML;
-				var project_title = $(this).children()[3].innerHTML;
+				var project_title = $(this).children()[4].innerHTML;
 				var work_id = $(this).children()[3].innerHTML;
 				console.log(todo_id);
 				console.log(project_id);
@@ -79,7 +79,7 @@
 				location.href="/subMain?todo_id="+todo_id+"&project_id="+project_id+"&project_title="+project_title+"&work_id="+work_id+"#myWorkGo";
 				
 			});
-
+		
 	        //#############################################################################################		
 	        //#############################################################################################		
 	        //#############################################################################################		
@@ -623,8 +623,8 @@
 						html += "<tr class = 'todoClick'>";
 						html += "	<td>"+ mt.rnum +"</td>";
 						html += "	<td>"+ mt.project_id +"</td>";
-						html += "	<td>"+ mt.todo_id +"</td>";
-						html += "	<td>"+ mt.work_id +"</td>";
+						html += "	<td id='todoIdTD' style='display:none;'>"+ mt.todo_id +"</td>";
+						html += "	<td id='workIdTD' style='display:none;'>"+ mt.work_id +"</td>";
 						html += "	<td>"+ mt.project_title +"</td>";
 						html += "	<td>"+ mt.todo_content +"</td>";
 						if(mt.todo_complet==('N')){
@@ -637,6 +637,9 @@
 					console.log(data.projectTodoList);
 					$("#projectTodoList").html("");
 					$("#projectTodoList").html(html);
+					//$("#todoIdTD").hide();
+					//$("#workIdTD").hide();
+			        
 					var i  = 1;
 					var paging ="";
 						paging +="<li><a href='javascript:getmyTodoProjectList("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
@@ -664,8 +667,8 @@
 						$.each(data.projectTodoList, function(idx,mt){
 							html += "	<td>"+ mt.rnum +"</td>";
 							html += "	<td>"+ mt.project_id +"</td>";
-							html += "	<td>"+ mt.todo_id +"</td>";
-							html += "	<td>"+ mt.work_id +"</td>";
+							html += "	<td id ='todoIdTD' style='display:none;'>"+ mt.todo_id +"</td>";
+							html += "	<td id ='workIdTD' style='display:none;'>"+ mt.work_id +"</td>";
 							html += "	<td>"+ mt.project_title +"</td>";
 							html += "	<td>"+ mt.todo_content +"</td>";
 							if(mt.todo_complet==('N')){
@@ -678,6 +681,9 @@
 						console.log(data.projectTodoList);
 						$("#projectTodoList").html("");
 						$("#projectTodoList").html(html);
+						//$("#todoIdTD").hide();
+						//$("#workIdTD").hide();
+				        
 						var i  = 1;
 						var paging ="";
 						paging +="<li><a href='javascript:getSearchTodoProject("+ i +");'aria-label='Previous'><span aria-hidden='true'>&laquo;</span>";
@@ -908,8 +914,6 @@
 								<button onclick="getmyTodoProjectList(1);" class="getMyPageList">목록으로</button>
 								</div>
 								<table>
-									<colgroup width="5%" />
-									<colgroup width="5%" />
 									<colgroup width="10%" />
 									<colgroup width="10%" />
 									<colgroup width="20%" />
@@ -919,8 +923,8 @@
 										<tr class="todoClick">
 											<th><span>번호</span></th>
 											<th><span>프로젝트 번호 </span></th>
-											<th><span>할일 번호 </span></th>
-											<th><span>일감 번호 </span></th>
+											<!-- <th><span>할일 번호 </span></th>
+											<th><span>일감 번호 </span></th> -->
 											<th><span>프로젝트 명 </span></th>
 											<th><span>나의 일감 보관</span></th>
 											<th><span>완료 여부</span></th>
