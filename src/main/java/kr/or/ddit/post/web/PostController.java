@@ -52,12 +52,26 @@ public class PostController {
 	private IssueServiceInf issueService;
 	
 	@RequestMapping(value="/notice")
-	public String noticeView() {
+	public String noticeView(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
+		
 		return "notice/notice";
 	}
 	
 	@RequestMapping(value="/guide")
-	public String guideView() {
+	public String guideView(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
+		
 		return "guide/guide";
 	}
 	
