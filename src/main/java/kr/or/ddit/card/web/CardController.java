@@ -2,6 +2,7 @@ package kr.or.ddit.card.web;
 
 import kr.or.ddit.card.model.CardVo;
 import kr.or.ddit.card.service.CardServiceInf;
+import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
@@ -45,6 +46,9 @@ public class CardController {
 
 	@Autowired
 	private ProjectServiceInf projectService;
+	
+	@Autowired
+	private IssueServiceInf issueService;
 
 	@RequestMapping("/ajaxUpdateCard")
 	public String updateCard(Model model, @RequestParam("wc_id")String wc_id,
@@ -69,6 +73,7 @@ public class CardController {
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		
 		return "card/cardChart";
 	}
