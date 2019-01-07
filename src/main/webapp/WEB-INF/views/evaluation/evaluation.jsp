@@ -10,7 +10,7 @@
 		
 		<div class="myPageContainer">
 			<div class="myPageContainerLeft">
-				<div class="myPageContainerLeftUser">
+				<div class="myPageContainerLeftUseraa">
 					<h2>${memberVo.member_name}님의 프로필</h2>
 					<div class="profileImg">
 						<div id="imgs">

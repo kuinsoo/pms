@@ -11,6 +11,7 @@
 	            <li><a href="#tabs-2">업무 알림</a></li>
 	            <li><a href="#tabs-3">쪽지 알림</a></li>
 	            <li><a href="#tabs-4">공지 알림</a></li>
+	            <li><a href="#tabs-5">친구 알림</a></li>
 	        </ul>
 	        <div id="tabs-1">
 	            <ul id="issueMemberList">
@@ -32,6 +33,11 @@
 	            	<%-- ajaxNoticeAlarm jsp --%>
 	            </ul>
 	        </div>
+	        <div id="tabs-5">
+	            <ul id="friendMemberList">
+	            	<%-- ajaxFriendAlarm jsp --%>
+	            </ul>
+	        </div>
 	    </div>
 	</div>
 </div>
@@ -43,6 +49,7 @@ $(document).ready(function(){
 	messageMemberList();
 	workMemberList();
 	noticeMemberList();
+	friendMemberList();
 });
 
 //이슈 알림 - 2019-01-04 임규승
@@ -97,7 +104,7 @@ function issueMemberList(){
 // 쪽지 알림 - 2019-01-02 임규승
 function messageMemberList(){
 	
-	var listCntMessage = "${totalMsgReceived}";
+	var listCntMessage = ${totalMsgReceived};
 	
 	 $.ajax({
 		  type: "GET",
@@ -236,6 +243,55 @@ function noticeMemberList(){
 			},
 		    timeout: 3000,
 		    complete: setTimeout(function(){ polls(); }, 6000)
+		 })
+	})();
+	
+};
+
+//친구 알림 - 2019-01-07 임규승
+function friendMemberList(){
+	
+	var listCntFriend = ${totalyouGiveFriendList};
+	
+	 $.ajax({
+		  type: "GET",
+		  url: "/ajaxFriendAlarm",
+		  data: {"page" : 1, "pageSize" : 10},
+		  success: function (data){
+			  $("#friendMemberList").html();
+			  $("#friendMemberList").html(data);
+		  }
+	   });
+	
+	(function friendAlarmPoll(){
+		$.ajax({
+		    type: "GET",
+		    url: "/alarmFriend",
+		    // data: {"page" : 1, "pageSize" : 10},
+		    success: function (totalyouGiveFriendList) {
+		       
+		       if(listCntFriend < totalyouGiveFriendList){
+		    	   
+		    	   $.ajax({
+		    		  type: "GET",
+		    		  url: "/ajaxFriendAlarm",
+		    		  data: {"page" : 1, "pageSize" : 10},
+		    		  success: function (data){
+		    			  $("#friendMemberList").html();
+		    			  $("#friendMemberList").html(data);
+		    		  }
+		    	   });
+		    	   
+		    	   alert("친구 요청이 왔습니다!");
+		       }
+		       listCntFriend = totalyouGiveFriendList;
+		    },
+		    error: function (data) {
+			    // location.href = "/";
+				// alert("error");
+			},
+		    timeout: 3000,
+		    complete: setTimeout(function(){ friendAlarmPoll(); }, 6000)
 		 })
 	})();
 	

@@ -182,7 +182,7 @@ public interface MessageServiceInf {
 	int deletemySendFriendList(String friend_code);
 	
 	/**
-	 * Method : totalyouGiveFriendListt
+	 * Method : totalyouGiveFriendList
 	 * 작성자 : pc07
 	 * 변경이력 :
 	 * @param member_mail
