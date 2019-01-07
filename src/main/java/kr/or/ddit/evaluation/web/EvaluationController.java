@@ -3,6 +3,7 @@ package kr.or.ddit.evaluation.web;
 import kr.or.ddit.evaluation.service.EvaluationServiceInf;
 import kr.or.ddit.issue.service.IssueServiceInf;
 
+import kr.or.ddit.member.service.MemberServiceInf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,9 @@ public class EvaluationController {
 	
 	@Autowired
 	private IssueServiceInf issueService;
+
+	@Autowired
+	private MemberServiceInf memberService;
 	
 	/**
 	 * Method : evaluationView
@@ -55,7 +59,7 @@ public class EvaluationController {
 	 * @return Method 설명 : 능력 및 평가 화면단
 	 */
 	@RequestMapping(value= "/evaluation", method=RequestMethod.GET)
-	public String evaluationView(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
+	public String evaluationView(Model model, @SessionAttribute("memberVo")MemberVo memberVo, @RequestParam("userMail")String userMail) {
 		model.addAttribute("memberVo",memberVo);
 		Map<String, String> evalMap = new HashMap<>();
 		evalMap.put("member_mail", memberVo.getMember_mail());
@@ -63,14 +67,23 @@ public class EvaluationController {
 		evalMap.put("project_id", "0");
 		model.addAttribute("evalProjectList", evaluationService.evaluationProjectList(evalMap));
 		model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
+
 		
-		/* 알림기능 - IKS */
-		model.addAttribute("pageCnt", postService.totalPostCnt());
-		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
-		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
-		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
-		
-		
+		return "evaluation/evaluation";
+	}
+
+	@RequestMapping(value= "/evaluationOther", method=RequestMethod.GET)
+	public String evaluationOther(Model model, @RequestParam("userMail")String userMail) {
+		MemberVo memberVo = memberService.selectUser(userMail);
+		model.addAttribute("memberVo",memberVo);
+		Map<String, String> evalMap = new HashMap<>();
+		evalMap.put("member_mail", memberVo.getMember_mail());
+		evalMap.put("member_name", memberVo.getMember_name());
+		evalMap.put("project_id", "0");
+		model.addAttribute("evalProjectList", evaluationService.evaluationProjectList(evalMap));
+		model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
+
+
 		return "evaluation/evaluation";
 	}
 
