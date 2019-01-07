@@ -776,6 +776,10 @@
 								<a href="#" id="fileSelect"></a>
 							</div>
 						</div>
+						<div class="profileImgBtnsUpdate">
+							<input type="button" value="변경" class="test1"/>
+							<input type="submit" value="확인" class="test2"/>
+						</div>
 					</div>
 					<div class="myPageContainerRightUser">
 						<div class="userContentsInfoRight_1">

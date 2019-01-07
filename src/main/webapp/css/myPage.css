@@ -296,7 +296,12 @@
 .evaluationInfoRight_1{width:100%;padding:70px 20px 20px 20px;}
 .evaluationInfoRight_1 > ul > li{font-size:17px;margin:10px 0px 10px 0px;}
 
-
+/* 마이페이지 프로필 사진 하단 추가 css */
+.profileImgBtnsUpdate {
+	width:100%;display:flex;justify-content:center;margin-top:20px;
+}
+.profileImgBtnsUpdate > .test1{width:50px;height:40px;background-color:#746fcc;border:none;color:#fff;font-size:17px;}
+.profileImgBtnsUpdate > .test2{width:50px;height:40px;background-color:#746fcc;border:none;color:#fff;margin-left:10px;font-size:17px;}
 
 
 
