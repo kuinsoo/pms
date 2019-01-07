@@ -257,7 +257,9 @@ public class LoginController {
 				member_pass += possible.charAt((int) Math.floor(Math.random() * possible.length()));
 			}
 			// 임시 비밀번호로 수정
-			memberVo.setMember_pass(member_pass);
+			
+			String kisa = KISA_SHA256.encrypt(member_pass).toLowerCase(); //toLowerCase :  다 소문자로 DB에 입력 
+			memberVo.setMember_pass(kisa);
 			memberService.updatePass(memberVo);
 			message.setText(member_name + " 님의 임시 비밀번호는  [  " + member_pass + "  ]  입니다. 로그인 후 꼭! 비밀번호를 수정해 주세요. ");
 			memberVo.setMember_pass(member_pass);
