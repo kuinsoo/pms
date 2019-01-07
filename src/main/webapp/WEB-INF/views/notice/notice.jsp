@@ -70,10 +70,6 @@
 				<div class="pagination">
 					<ul id="noticePaging"></ul>
 				</div>
-				<div class="noticeSearchDiv">
-					<input type="text" class="noticeSearchInput" />
-					<i class="icon-magnifier icons"></i>
-				</div>
 			</div>
 		</div>
 	</div>
