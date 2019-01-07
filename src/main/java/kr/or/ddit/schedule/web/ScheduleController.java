@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
@@ -46,6 +47,9 @@ public class ScheduleController {
 	@Autowired
 	private ScheduleServiceInf scheduleService;
 	
+	@Autowired
+	private IssueServiceInf issueService;
+	
 	@RequestMapping(value="/allSchedule", method={RequestMethod.POST, RequestMethod.GET})
 	public String allSchedule(@SessionAttribute("memberVo") MemberVo memberVo, HttpServletRequest request, Model model) {
 		String sid = memberVo.getMember_mail();
@@ -65,6 +69,7 @@ public class ScheduleController {
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		
 		return "schedule/schedule";
 	}

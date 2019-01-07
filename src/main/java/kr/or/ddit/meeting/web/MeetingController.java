@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.meeting.model.MeetingVo;
 import kr.or.ddit.meeting.service.MeetingServiceInf;
 import kr.or.ddit.member.model.MemberVo;
@@ -41,6 +42,9 @@ public class MeetingController {
 	@Autowired
 	private MeetingServiceInf meetingService;
 	
+	@Autowired
+	private IssueServiceInf issueService;
+	
 	Logger logger = LoggerFactory.getLogger(QnAController.class);
 	
 	@CrossOrigin
@@ -57,6 +61,7 @@ public class MeetingController {
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 
 		return "main/meetListAjax";
 	}
