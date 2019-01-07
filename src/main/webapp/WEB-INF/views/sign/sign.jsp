@@ -39,6 +39,8 @@
 		.error{color: red;}
 		#telerror{color: red;}
 		#passError{color: red;}
+		#nameError{color:red;}
+		#phoneMypageError{color:red;}
 		/* video background */
 		.videoBgs{width:100%;height:100%;position:absolute;top:0px;left:0px;}
 		.videoBgs > video{width:100%;}
@@ -55,6 +57,8 @@
 		$("#passError").hide();
 		$("#telerror").hide();
 		$(".error").hide();
+		$("#nameError").hide();
+		$("#phoneMypageError").hide();
 
 		//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
 		//blur()이벤트 사용
@@ -88,6 +92,17 @@
 			}
 		}
 		
+		function onkeyup_eventPhoneNum(){
+			if(!/^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/.test($("#tel").val())){
+				$("#phoneMypageError").show();
+				$("#phoneNumSaveBtn").prop('readonly', true);
+				return false;
+			}else {
+				$("#phoneMypageError").hide();
+				$("#phoneNumSaveBtn").prop('readonly', false);
+			}
+		}
+		
 		/*
 		if(!/^[a-zA-Z0-9]{10,15}$/.test(password)){
 		*/
@@ -98,6 +113,14 @@
 				return false;
 			}else {
 				$("#passError").hide();
+			}
+		}
+		function onkeyup_eventName(){
+			if(!/^[가-힣]{2,4}$/.test($("#signMembername").val())){
+				$("#nameError").show();
+				return false;
+			}else {
+				$("#nameError").hide();
 			}
 		}
 	</script>
@@ -118,7 +141,8 @@
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">이름</label>
-					<input type="text" id = "name" name="member_name" value="" class="form-control" autofocus="autofocus" required />
+					<input type="text" id = "signMembername" name="member_name"  onkeyup="onkeyup_eventName();" value="" class="form-control" autofocus="autofocus" required />
+					<span id="nameError"> 한글 이름 2~4자 이내로 입력해주세요. </span>
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">비밀번호</label>
@@ -133,10 +157,11 @@
 				<div class="phoneSignDiv">
 					<div class="form-group label-floating phoneInput">
 						<label class="control-label">휴대폰 번호</label>
-						<input type="text" id ="tel" name="member_tel" class="form-control" required />
+						<input type="text" id ="tel"  onkeyup="onkeyup_eventPhoneNum();"  name="member_tel" class="form-control" required />
+						<span id ="phoneMypageError"> 올바르지않은 핸드폰 번호입니다.. </span>
 					</div>
 					<div class="phoneInputBtn">
-						<button onclick="telAjax();" class="btn btn-primary btn-raised" >인증</button>
+						<button onclick="telAjax();" class="btn btn-primary btn-raised" id="phoneNumSaveBtn" >인증</button>
 					</div>
 				</div>
 				<div class="form-group label-floating certification">
