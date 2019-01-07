@@ -21,11 +21,17 @@
 				<%@ include file="/WEB-INF/views/todo/todo.jsp" %>
 			</div>
 		</div>
+
 		<div class="currentCardContentView">
 			<div class="currentCardContentViewLeft">
 				<textarea readonly>${work.work_content}</textarea>
+			<%-- 업무 첨부파일 리스트 --%>
 				<div class="attachments">
-					<input type="file" />
+					<c:forEach items="${attList}" var="att">
+						<c:if test="${att.att_work eq work.work_id}">
+					<span>${att.att_name}</span>
+						</c:if>
+					</c:forEach>
 				</div>
 			</div>
 			<%-- 할일관련 --%>

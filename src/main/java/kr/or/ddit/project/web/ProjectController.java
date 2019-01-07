@@ -1,5 +1,6 @@
 package kr.or.ddit.project.web;
 
+import kr.or.ddit.attachment.service.AttachmentServiceInf;
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.meeting.model.MeetingVo;
@@ -70,6 +71,9 @@ public class ProjectController {
 	
 	@Autowired
 	private MessageServiceInf messageService;
+
+	@Autowired
+	private AttachmentServiceInf attachmentService;
 
 
 	/**
@@ -220,6 +224,9 @@ public class ProjectController {
 
 		/* 업무 카드 출력 */
 		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
+
+		/* 첨부파일 리스트 출력 */
+		model.addAttribute("attList", attachmentService.selectProjectAtt(project_id));
 
 		/* 나진실 : 마이페이지 부분 값 넘겨주기 위함 */
 		

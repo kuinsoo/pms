@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * kr.or.ddit.attachment.service
  * null.java
@@ -61,5 +63,18 @@ public class AttachmentService implements AttachmentServiceInf {
 	@Override
 	public int deleteAtt(String work_id) {
 		return attachmentMapper.deleteAtt(work_id);
+	}
+
+	/**
+	 * Select project att list.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 프로젝트 내 첨부파일 검색
+	 *
+	 * @param project_id the project id
+	 * @return the list
+	 */
+	@Override
+	public List<AttachmentVo> selectProjectAtt(String project_id) {
+		return attachmentMapper.selectProjectAtt(project_id);
 	}
 }

@@ -43,9 +43,7 @@
 		                SELECT  todo_id,
 		                		todo_content,
 		                        todo_pmember,
-		                        (SELECT	 m.member_profile
-		                         FROM	 member m
-		                         WHERE   member_name = todo_pmember) member_profile,
+		                        member_profile,
 		                        todo_sdate,
 		                        todo_eedate,
 		                        todo_complet,
@@ -54,6 +52,8 @@
 		                        work_project
 		                FROM    todo INNER JOIN work
 		                ON      todo_work = work_id
+		                inner join member
+		                on      todo_member = MEMBER_MAIL
 		                WHERE   work_project = ${workVo.work_project}
                         AND     work_id = ${workVo.work_id}
 		                ORDER BY todo_sdate DESC

@@ -19,4 +19,10 @@
         delete from ATTACHMENT where ATT_WORK = #{work_id}
     </delete>
 
+    <select id="selectProjectAtt" resultType="attVo" parameterType="String">
+        select * from work, attachment
+          where work_id = att_work
+          and work_project =  #{project_id}
+    </select>
+
 </mapper>

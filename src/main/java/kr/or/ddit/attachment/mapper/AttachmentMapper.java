@@ -2,6 +2,8 @@ package kr.or.ddit.attachment.mapper;
 
 import kr.or.ddit.attachment.model.AttachmentVo;
 
+import java.util.List;
+
 /**
  * kr.or.ddit.attachment.mapper
  * null.java
@@ -43,4 +45,14 @@ public interface AttachmentMapper {
 	 * @return the attachment vo
 	 */
 	int deleteAtt (String work_id);
+
+	/**
+	 * Select project att list.
+	 * 작성자 : Mr.KKu
+	 * 내용 : 프로젝트 내 첨부파일 검색
+	 *
+	 * @param project_id the project id
+	 * @return the list
+	 */
+	List<AttachmentVo> selectProjectAtt(String project_id);
 }
