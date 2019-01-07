@@ -136,8 +136,11 @@ public class IssueController {
 	public String issueInsert(IssueVo issueVo, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		try {
 			int result = issueService.issueInsert(issueVo);
-			if(result != 0) {
+			
+			if (result > 0) {
 				issueService.todoIssueUpdate(issueVo);
+			} else if (result == -400) {
+				return "redirect:/issueInsertError";
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -154,6 +157,19 @@ public class IssueController {
 		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		
 		return "issue/issueSelectHtmlAjax";
+	}
+	
+	/**
+	* Method : issueInsertError
+	* 작성자 : jerry
+	* 변경이력 :
+	* @return
+	* Method 설명 : 이슈 발생일이 프로젝트 종료일보다 후일이면 등록되지 않는다.
+	*/
+	@RequestMapping(value="/issueInsertError")
+	@ResponseBody
+	public int issueInsertError() {
+		return 400;
 	}
 	
 	/**
@@ -191,7 +207,8 @@ public class IssueController {
 	@ResponseBody
 	public void issueUpdate(IssueVo issueVo) {
 		try {
-			issueService.issueUpdate(issueVo);
+			int result = issueService.issueUpdate(issueVo);
+			System.out.println("result : " + result);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -280,7 +297,6 @@ public class IssueController {
 	* Method 설명 : 프로젝트의 지난 기간을 percent로 구하는 메서드
 	*/
 	List<Integer> getPercentList(List<ProjectVo> history_myProjectList){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date sdate = null;	//시작일 선언 및 초기화
 		Date edate = null;	//종료일 선언 및 초기화
 		Date current = new Date();	//현재날짜
@@ -324,7 +340,6 @@ public class IssueController {
 	* Method 설명 : 프로젝트의 총 기간과 이슈 발생일자의 위치를 구하는 메서드
 	*/
 	List<Integer> getIssueSdateList(List<IssueVo> pjtAllIssueHistory){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date pjtSdate = null;		//프로젝트 시작일 선언 및 초기화
 		Date pjtEdate = null;		//프로젝트 종료일 선언 및 초기화
 		Date issueSdate = null;		//이슈발생일자

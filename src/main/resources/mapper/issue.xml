@@ -170,6 +170,16 @@
 		WHERE	issue_id = #{issue_id}
 	</delete>
 	
+	<!-- 이슈 등록시 프로젝트의 종료기간을 조회 -->
+	<select id="getProjectEndDate" resultType="issueVo" parameterType="issueVo">
+		SELECT  project_eedate,
+		        project_edate
+		FROM    project
+		WHERE   project_id IN (SELECT  work_project
+		                       FROM    work
+		                       where   work_id = #{issue_work})
+	</select>
+	
 	<!-- 로그인한 회원이 작성한 업무에 대해 이슈 발생 알림(페이징 추가) 2019-01-05 임규승 -->
 	<select id="getIssuePageList" resultType="issueVo" parameterType="map">
 		SELECT  *

@@ -142,8 +142,12 @@ function insertIssue${work.work_id}(todo_id) {
 		url: "/issueInsert",
 		data: param,
 		success: function(data){
-			$('#issueSelectHtmlAjax'+todo_id).html("");
-			$('#issueSelectHtmlAjax'+todo_id).html(data);
+			if(data == 400) {
+				alert('종료된 프로젝트입니다. 확인하고 다시 작업해주세요.');
+			} else {
+				$('#issueSelectHtmlAjax'+todo_id).html("");
+				$('#issueSelectHtmlAjax'+todo_id).html(data);
+			}
 		},
 		error: function(data){
 			console.log("todoList.jsp : insertIssue() - error");
