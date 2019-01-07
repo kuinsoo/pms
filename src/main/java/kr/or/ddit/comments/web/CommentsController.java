@@ -2,6 +2,7 @@ package kr.or.ddit.comments.web;
 
 import kr.or.ddit.comments.model.CommentsVo;
 import kr.or.ddit.comments.service.CommentsServiceInf;
+import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
@@ -37,6 +38,9 @@ public class CommentsController {
 
 	@Autowired
 	private MessageServiceInf messageService;
+	
+	@Autowired
+	private IssueServiceInf issueService;
 
 	@RequestMapping(value = "/ajaxInsertCmt", method = RequestMethod.GET)
 	public String ajaxInsertCmt(Model model, CommentsVo cmtVo, @SessionAttribute("memberVo")MemberVo memberVo,
@@ -58,6 +62,7 @@ public class CommentsController {
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 
 	return "work/ajaxCmtList";
 	}
@@ -79,6 +84,7 @@ public class CommentsController {
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 
 		return "work/ajaxCmtList";
 	}
@@ -94,10 +100,13 @@ public class CommentsController {
 		cmtMap.put("cmt_work", work_id);
 		model.addAttribute("workList",workService.selectWorks(project_id));
 		model.addAttribute("cmtList", commentsService.ajaxCmtList(cmtMap));*/
+		
         /* 알림기능 - IKS */
         model.addAttribute("pageCnt", postService.totalPostCnt());
         model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
         model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+        model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
+        
         return  cmtVo;
 
 

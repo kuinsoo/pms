@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.ddit.chatting.service.ChattingService;
+import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
@@ -42,6 +43,9 @@ public class ChattingController {
 	@Autowired
 	private MessageServiceInf messageService;
 	
+	@Autowired
+	private IssueServiceInf issueService;
+	
 	Logger logger = LoggerFactory.getLogger(QnAController.class);
 	
 	@RequestMapping(value= "/chatListAjax", method= {RequestMethod.GET,RequestMethod.POST}) 
@@ -53,6 +57,7 @@ public class ChattingController {
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 
 		return "main/chatListAjax";
 	}

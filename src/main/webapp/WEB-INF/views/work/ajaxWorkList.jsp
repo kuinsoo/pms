@@ -29,7 +29,7 @@
 				<div class="attachments">
 					<c:forEach items="${attList}" var="att">
 						<c:if test="${att.att_work eq work.work_id}">
-					<span>${att.att_name}</span>
+					<a href="/download?att_id=${att.att_id}"><span>${att.att_name}</span></a>
 						</c:if>
 					</c:forEach>
 				</div>
