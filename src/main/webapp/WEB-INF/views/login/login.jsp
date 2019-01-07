@@ -116,6 +116,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 				<a href="#layerEmail" class="findEmail">이메일 찾기</a>
 				<a href="#layerPassword" class="findPassword">비밀번호 찾기</a>
 			</div>
+			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 			<form action="/findEmail" method="post">
 			<div class="dim-layer">
 				<div class="dimBg"></div>
@@ -142,6 +143,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 			</div>
 			</form>
 			
+			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 			<form action="/findPass" method="post">
 			<div class="dim-layers">
 				<div class="dimBgs"></div>
@@ -163,6 +165,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 				</div>
 			</div>
 		</form>
+			<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
 		</div>			
 	</div>
 
