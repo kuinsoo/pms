@@ -266,6 +266,12 @@ function deleteIssue${work.work_id}(todo_id){
 		data: {"issue_id" : issue_id},
 		success: function(data){
 			getIssueList${work.work_id}(todo_id);
+			$('#input_issue_title'+todo_id).val('');
+			$("#input_issue_level"+todo_id+" option[value='1']").attr('selected', 'selected');
+			var date = new Date();
+			date.setHours(date.getHours() + 9);
+			document.getElementById('non_issue_sdate'+todo_id).value = date.toISOString().slice(0, 16);
+			$('#input_issue_content'+todo_id).val('');
 		},
 		error: function(data){
 			console.log("todoList.jsp : deleteIssue() - error");
