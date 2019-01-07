@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.or.ddit.attachment.service.AttachmentServiceInf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,6 +33,8 @@ import kr.or.ddit.project.service.ProjectServiceInf;
 import kr.or.ddit.todo.service.ToDoServiceInf;
 import kr.or.ddit.work.model.WorkVo;
 import kr.or.ddit.work.service.WorkServiceInf;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * kr.or.ddit.work.web
@@ -75,6 +79,9 @@ public class WorkController {
     @Autowired
 	private IssueServiceInf issueService;
 
+    @Autowired
+    private AttachmentServiceInf attachmentService;
+
     @RequestMapping(value = "/ajaxCreateWork", method = RequestMethod.POST)
     public void ajaxCreateWork(Model model, WorkVo workVo, @RequestParam("project_id") String project_id,
                                  @SessionAttribute("memberVo") MemberVo memberVo,
@@ -100,7 +107,7 @@ public class WorkController {
     @RequestMapping(value = "/createWork", method = RequestMethod.POST)
     public String createWork(Model model, WorkVo workVo, @RequestParam("project_id") String project_id,
                              @SessionAttribute("memberVo") MemberVo memberVo,
-                             @RequestParam("file") MultipartFile[] files) {
+                             @RequestParam("file") MultipartFile[] files, HttpServletRequest request) {
         try {
             Map<String, String> mapWM = new HashMap<>();
             mapWM.put("pmember_member", memberVo.getMember_mail());
@@ -122,7 +129,7 @@ public class WorkController {
         mapWork.put("project_id", project_id);
 
 
-        ProjectVo projectVo = projectService.selectProject(project_id);
+        ProjectVo projectVo =  projectService.selectProject(project_id);
         /* 프로젝트 객체  */
         model.addAttribute("projectVo", projectVo);
 
@@ -130,7 +137,8 @@ public class WorkController {
         model.addAttribute("projectMemberList", memberService.projectMemberList(project_id));
 
         /* 업무 출력 */
-        model.addAttribute("workList", workService.selectWorks(project_id));
+        model.addAttribute("workList",workService.selectWorks(project_id));
+        model.addAttribute("workMainChart",workService.workMainChart(project_id));
 
         /* 업무에 달린 댓글 출력 */
         model.addAttribute("cmtList", commentsService.cmtList(project_id));
@@ -138,19 +146,37 @@ public class WorkController {
         /* 업무 카드 출력 */
         model.addAttribute("wcList", cardService.selectWorkCard(project_id));
 
-        /* 첨부파일 목록 */
+        /* 첨부파일 리스트 출력 */
+        model.addAttribute("attList", attachmentService.selectProjectAtt(project_id));
+
+        /* 업무수정을 위한 값 */
+        model.addAttribute("projectWorkList", workService.selectProjectWork(project_id));
+
+        /* 나진실 : 마이페이지 부분 값 넘겨주기 위함 */
+
+        String myTodo_id = request.getParameter("todo_id");
+        String myProject_id = request.getParameter("project_id");
+        String myProject_title = request.getParameter("project_title");
+        String myWork_id = request.getParameter("work_id");
+        String myWork_title = request.getParameter("work_title");
+
+        model.addAttribute("todo_id", myTodo_id);
+        model.addAttribute("project_id", myProject_id);
+        model.addAttribute("project_title", myProject_title);
+        model.addAttribute("work_id", myWork_id);
+        model.addAttribute("work_title", myWork_title);
 
 
+        /* 차트 목록 */
         Map<String, String> mtMap = new HashMap<>();
         mtMap.put("project_id", project_id);
-        model.addAttribute("workCharts", workService.workChart(mtMap));
-
+        model.addAttribute("workCharts",workService.workChart(mtMap));
 
         /* 변찬우(추가 2018.12.26) 프로젝트 목록 출력 */
-        List<MeetingVo> meetingList = meetingService.meetingList(project_id);
-        model.addAttribute("meetingList", meetingList);
+        List<MeetingVo> meetingList= meetingService.meetingList(project_id);
+        model.addAttribute("meetingList",meetingList );
 
-        model.addAttribute("member_name", memberService.selectUser(project_id));
+        model.addAttribute("member_name",memberService.selectUser(project_id) );
 
         /* 알림기능 - IKS */
         model.addAttribute("pageCnt", postService.totalPostCnt());
@@ -226,6 +252,88 @@ public class WorkController {
         List<WorkVo> myWorkList = workService.myWorkList(workVo);
 
         return myWorkList;
+    }
+
+    @RequestMapping(value = "/updateWork", method = RequestMethod.POST)
+    public String updateWork(Model model, WorkVo workVo, @RequestParam("work_id")String work_id,
+                             @RequestParam("project_id") String project_id,
+                             @SessionAttribute("memberVo") MemberVo memberVo,
+                             @RequestParam("file") MultipartFile[] files, HttpServletRequest request) {
+        WorkVo updateWorkVo = workService.selectWork(work_id);
+        updateWorkVo.setWork_title(workVo.getWork_title());
+        updateWorkVo.setWork_content(workVo.getWork_content());
+        updateWorkVo.setWork_sdate(workVo.getWork_sdate());
+        updateWorkVo.setWork_eedate(workVo.getWork_eedate());
+        updateWorkVo.setWork_type(workVo.getWork_type());
+        updateWorkVo.setWork_importance(workVo.getWork_importance());
+        updateWorkVo.setWork_public(workVo.getWork_public());
+        try {
+            workService.updateWork(updateWorkVo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Map<String, String> mapWork = new HashMap<>();
+        mapWork.put("member_mail", memberVo.getMember_mail());
+        mapWork.put("project_id", project_id);
+
+
+        ProjectVo projectVo =  projectService.selectProject(project_id);
+        /* 프로젝트 객체  */
+        model.addAttribute("projectVo", projectVo);
+
+        /* 프로젝트에 포함된 멤버 정보 */
+        model.addAttribute("projectMemberList", memberService.projectMemberList(project_id));
+
+        /* 업무 출력 */
+        model.addAttribute("workList",workService.selectWorks(project_id));
+        model.addAttribute("workMainChart",workService.workMainChart(project_id));
+
+        /* 업무에 달린 댓글 출력 */
+        model.addAttribute("cmtList", commentsService.cmtList(project_id));
+
+        /* 업무 카드 출력 */
+        model.addAttribute("wcList", cardService.selectWorkCard(project_id));
+
+        /* 첨부파일 리스트 출력 */
+        model.addAttribute("attList", attachmentService.selectProjectAtt(project_id));
+
+        /* 업무수정을 위한 값 */
+        model.addAttribute("projectWorkList", workService.selectProjectWork(project_id));
+
+        /* 나진실 : 마이페이지 부분 값 넘겨주기 위함 */
+
+        String myTodo_id = request.getParameter("todo_id");
+        String myProject_id = request.getParameter("project_id");
+        String myProject_title = request.getParameter("project_title");
+        String myWork_id = request.getParameter("work_id");
+        String myWork_title = request.getParameter("work_title");
+
+        model.addAttribute("todo_id", myTodo_id);
+        model.addAttribute("project_id", myProject_id);
+        model.addAttribute("project_title", myProject_title);
+        model.addAttribute("work_id", myWork_id);
+        model.addAttribute("work_title", myWork_title);
+
+
+        /* 차트 목록 */
+        Map<String, String> mtMap = new HashMap<>();
+        mtMap.put("project_id", project_id);
+        model.addAttribute("workCharts",workService.workChart(mtMap));
+
+        /* 변찬우(추가 2018.12.26) 프로젝트 목록 출력 */
+        List<MeetingVo> meetingList= meetingService.meetingList(project_id);
+        model.addAttribute("meetingList",meetingList );
+
+        model.addAttribute("member_name",memberService.selectUser(project_id) );
+
+        /* 알림기능 - IKS */
+        model.addAttribute("pageCnt", postService.totalPostCnt());
+        model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+        model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+        model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
+
+        return "main/subMain";
     }
 
     @RequestMapping(value = "/deleteWork", method = RequestMethod.GET)

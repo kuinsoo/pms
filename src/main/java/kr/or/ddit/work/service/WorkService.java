@@ -243,4 +243,17 @@ public class WorkService implements WorkServiceInf{
 	public WorkVo workMainChart(String project_id) {
 		return workMapper.workMainChart(project_id);
 	}
+
+	/**
+	 * Select project work list.
+	 * Method : 프로젝트 내 업무들
+	 * 작성자 : Mr.KKu
+	 *
+	 * @param project_id the project id
+	 * @return the list
+	 */
+	@Override
+	public List<WorkVo> selectProjectWork(String project_id) {
+		return workMapper.selectProjectWork(project_id);
+	}
 }

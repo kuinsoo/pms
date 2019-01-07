@@ -238,6 +238,9 @@ public class ProjectController {
 		/* 첨부파일 리스트 출력 */
 		model.addAttribute("attList", attachmentService.selectProjectAtt(project_id));
 
+		/* 업무수정을 위한 값 */
+		model.addAttribute("projectWorkList", workService.selectProjectWork(project_id));
+
 		/* 나진실 : 마이페이지 부분 값 넘겨주기 위함 */
 		
 		String myTodo_id = request.getParameter("todo_id");
@@ -252,7 +255,6 @@ public class ProjectController {
 		model.addAttribute("work_id", myWork_id);
 		model.addAttribute("work_title", myWork_title);
 		
-		/* 첨부파일 목록 */
 
 
 		Map<String, String> mtMap = new HashMap<>();

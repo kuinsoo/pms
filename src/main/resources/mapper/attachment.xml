@@ -25,4 +25,10 @@
           and work_project =  #{project_id}
     </select>
 
+    <update id="updateAttachment" parameterType="String">
+        update ATTACHMENT
+        set ATT_NAME = #{att_name}, ATT_EXTENSION = #{att_extension}, ATT_PATH = #{att_path}, ATT_FILE = #{att_file}
+        where ATT_ID = #{att_id}
+    </update>
+
 </mapper>

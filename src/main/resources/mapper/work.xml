@@ -218,4 +218,8 @@
 	<delete id="deleteWorkMember" parameterType="String">
 		delete from WORK_MEMBER where WORK_ID = #{work_id}
 	</delete>
+
+	<select id="selectProjectWork" parameterType="String" resultType="workVo">
+ 		select * from work where WORK_PROJECT = #{project_id}
+	</select>
 </mapper>
