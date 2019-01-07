@@ -197,7 +197,11 @@ function updateIssue${work.work_id}(todo_id){
 		url: "/issueUpdate",
 		data: param,
 		success: function(data){
-			getIssueList${work.work_id}(todo_id);
+			if(data == 400) {
+				alert('종료된 프로젝트입니다. 확인하고 다시 작업해주세요.');
+			} else {
+				getIssueList${work.work_id}(todo_id);
+			}
 		},
 		error: function(data){
 			console.log("todoList.jsp : updateIssue() - error");

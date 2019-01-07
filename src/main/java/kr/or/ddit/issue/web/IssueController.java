@@ -142,7 +142,7 @@ public class IssueController {
 			if (result > 0) {
 				issueService.todoIssueUpdate(issueVo);
 			} else if (result == -400) {
-				return "redirect:/issueInsertError";
+				return "redirect:/issueError";
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -169,9 +169,9 @@ public class IssueController {
 	* @return
 	* Method 설명 : 이슈 발생일이 프로젝트 종료일보다 후일이면 등록되지 않는다.
 	*/
-	@RequestMapping(value="/issueInsertError")
+	@RequestMapping(value="/issueError")
 	@ResponseBody
-	public int issueInsertError() {
+	public int issueError() {
 		return 400;
 	}
 	
@@ -209,12 +209,18 @@ public class IssueController {
 	*/
 	@RequestMapping(value="/issueUpdate", method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
-	public void issueUpdate(IssueVo issueVo) {
+	public int issueUpdate(IssueVo issueVo) {
+		int result = -1;
 		try {
-			int result = issueService.issueUpdate(issueVo);
-			System.out.println("result : " + result);
+			result = issueService.issueUpdate(issueVo);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		
+		if(result == -400) {
+			return 400;
+		} else {
+			return 1;
 		}
 	}
 	
@@ -227,7 +233,6 @@ public class IssueController {
 	*/
 	@RequestMapping(value="/helperUpdate", method= {RequestMethod.POST, RequestMethod.GET})
 	public String helperUpdate(IssueVo issueVo, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
-		System.out.println("issueVo : " + issueVo);
 		List<IssueVo> helperList = new ArrayList<IssueVo>();
 		try {
 			int result = issueService.helperUpdate(issueVo);
