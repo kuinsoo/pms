@@ -286,8 +286,8 @@ function attrChangeUpdate${work.work_id}(todo_id) {
 	$('#todo_content'+todo_id).removeAttr('readonly');
 	$('#todo_eedate'+todo_id).removeAttr('readonly');
 
-	$('#todoUpdateBtn').hide();
-	$('#todoUpdateSaveBtn').show();
+	$('#todoUpdateBtn'+todo_id).hide();
+	$('#todoUpdateSaveBtn'+todo_id).show();
 
 	$.ajax({
 		method: "POST",
@@ -295,10 +295,10 @@ function attrChangeUpdate${work.work_id}(todo_id) {
 		data: {"project_id" : project_id},
 		success: function(data){
 			$('#todo_pmember'+todo_id).hide();
-			$('#pmember_member').show();
+			$('#pmember_member'+todo_id).show();
 			for(var i = 0; i < data.length; i++){
 				var option = $("<option>"+data[i].member_name+'('+data[i].pmember_member+')'+"</option>");
-				$('#pmember_member').append(option);
+				$('#pmember_member'+todo_id).append(option);
 			}
 		},
 		error: function(data){
@@ -311,7 +311,7 @@ function attrChangeUpdate${work.work_id}(todo_id) {
 function updateTodo${work.work_id}(todo_id, work_id) {
 	var project_id = ${projectVo.project_id};
 
-	var option = $('#pmember_member option:selected').val();
+	var option = $('#pmember_member'+todo_id+' option:selected').val();
 	var optionSplit = option.split("(");
 	var member_name = optionSplit[0];
 	var pmember_member = optionSplit[1];

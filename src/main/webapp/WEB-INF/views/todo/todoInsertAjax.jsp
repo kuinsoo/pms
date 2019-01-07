@@ -36,7 +36,7 @@
 										<ul>
 											<li><input type="text" id="todo_pmember${todo.todo_id}" value="${todo.todo_pmember}" readonly/></li>
 											<li>
-												<select style="display:none" id="pmember_member" name="pmember_member"></select>
+												<select style="display:none" id="pmember_member${todo.todo_id}" name="pmember_member"></select>
 												<input type="text" value="${todo.format_todo_sdate}" readonly/>
 											</li>
 											<li><input type="text" id="todo_eedate${todo.todo_id}" value="${todo.format_todo_eedate}" readonly/></li>
@@ -45,8 +45,8 @@
 									</div>
 								</div>
 								<textarea id="todo_content${todo.todo_id}" readonly>${todo.todo_content}</textarea>
-								<input type="button" id="todoUpdateSaveBtn" style="display:none;" value="저장" class="issueCreateBtn" onclick="updateTodo${todo.todo_work}(${todo.todo_id}, ${todo.todo_work});">
-								<input type="button" id="todoUpdateBtn" value="수정" class="issueUpdateBtnLeft" onclick="attrChangeUpdate${todo.todo_work}(${todo.todo_id});">
+								<input type="button" id="todoUpdateSaveBtn${todo.todo_id}" style="display:none;" value="저장" class="issueCreateBtn" onclick="updateTodo${todo.todo_work}(${todo.todo_id}, ${todo.todo_work});">
+								<input type="button" id="todoUpdateBtn${todo.todo_id}" value="수정" class="issueUpdateBtnLeft" onclick="attrChangeUpdate${todo.todo_work}(${todo.todo_id});">
 							</form>
 						</div>
 						<div class="issueSelectPageRight">
