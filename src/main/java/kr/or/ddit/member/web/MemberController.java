@@ -3,6 +3,7 @@ package kr.or.ddit.member.web;
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.commons.mail.service.EmailServiceInf;
+import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.meeting.model.MeetingVo;
 import kr.or.ddit.meeting.service.MeetingServiceInf;
 import kr.or.ddit.member.model.MemberVo;
@@ -66,6 +67,9 @@ public class MemberController {
 	
 	@Autowired
 	private PostServiceInf postService;
+	
+	@Autowired
+	private IssueServiceInf issueService;
 
 	@RequestMapping(value = "/inviteTeam" ,method = RequestMethod.POST)
 	public String inviteTeam(Model model , @RequestParam("inviteTeam")String[] inviteMails, @RequestParam("project_id")String project_id,
@@ -132,6 +136,7 @@ public class MemberController {
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 
 		return "main/subMain";
 	}

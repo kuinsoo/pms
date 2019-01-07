@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.member.model.MemberVo;
 import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.model.PostVo;
@@ -46,6 +47,9 @@ public class PostController {
 	
 	@Autowired
 	private MessageServiceInf messageService;
+	
+	@Autowired
+	private IssueServiceInf issueService;
 	
 	@RequestMapping(value="/notice")
 	public String noticeView() {
@@ -84,6 +88,7 @@ public class PostController {
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		
 		return "notice/noticeList";
 	}
@@ -115,6 +120,7 @@ public class PostController {
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		
 		return "notice/noticePaging";
 	}
@@ -137,6 +143,7 @@ public class PostController {
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		
 		return "notice/noticeView";
 	}
@@ -168,6 +175,7 @@ public class PostController {
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		
 		return "guide/guideList";
 	}
@@ -199,6 +207,7 @@ public class PostController {
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		
 		return "guide/guidePaging";
 	}
@@ -221,6 +230,7 @@ public class PostController {
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		
 		return "guide/guideView";
 	}
