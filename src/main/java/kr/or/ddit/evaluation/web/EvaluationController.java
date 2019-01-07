@@ -3,6 +3,7 @@ package kr.or.ddit.evaluation.web;
 import kr.or.ddit.evaluation.service.EvaluationServiceInf;
 import kr.or.ddit.issue.service.IssueServiceInf;
 
+import kr.or.ddit.member.service.MemberServiceInf;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,9 @@ public class EvaluationController {
 	
 	@Autowired
 	private IssueServiceInf issueService;
+
+	@Autowired
+	private MemberServiceInf memberService;
 	
 	/**
 	 * Method : evaluationView
@@ -63,6 +67,7 @@ public class EvaluationController {
 		evalMap.put("project_id", "0");
 		model.addAttribute("evalProjectList", evaluationService.evaluationProjectList(evalMap));
 		model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
+
 		
 		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());

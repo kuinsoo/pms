@@ -22,7 +22,7 @@
 					<div class="facingSend">
 						<form name ="sendMessageFormName" method="post">
 							<div class="facingSendTitle">
-								<input type="text" class="recipient" id="sendMessageInput" value ="${messageMember_mail}" name="textValue" placeholder="받는사람을 입력해주세요" required/> 
+								<input type="email" class="recipient" id="sendMessageInput" value ="${messageMember_mail}" name="textValue" placeholder="받는사람을 입력해주세요" required/> 
 								<select name="selectBox" onChange="getSelectValue(this.form);" class="recipientSelect">
 									<option>친구등록 리스트</option>
 									<c:forEach items="${selctMyFriend }" var="mf">
@@ -40,7 +40,7 @@
 							<div class="facingBtn">
 								<input type="hidden" name="msg_smember" /> 
 								<input type="submit" class="facingSendBtn" id ="sendForYouBtn" onclick= "getMessageSendYou()" value="보내기" /> 
-								<input type="button" class="facingSendReset" value="취소" />
+								<input type="button" class="facingSendReset" value="취소" onclick = "reset();" />
 							</div>
 							<!-- 	<span id="sendError"> 쪽지 내용을 입력해 주세요.. </span> -->
 						</form>
