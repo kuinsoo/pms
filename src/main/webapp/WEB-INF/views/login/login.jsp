@@ -34,6 +34,9 @@ div.well input[type="submit"]{width:100%;height:50px}
 .well.box.info{background-color:#F44336;color:white;font-size:15px;text-align:center}
 .findDiv{width:300px;margin:0 auto;margin-top:20px;}
 .findPassword{float:right;}
+#phoneMypageError{color:red;}
+#nameError{color:red;}
+#nameError2{color:red;}
 
 
 /* DIM LAYER POPUP */
@@ -125,11 +128,13 @@ div.well input[type="submit"]{width:100%;height:50px}
 						<div class="pop-conts">
 							<div class="form-group label-floating">
 								<label class="control-label">이름</label>
-								<input type="text"	name="member_name" class="form-control" autofocus="autofocus" required />
+								<input type="text"id="findNameId" onkeyup="onkeyup_eventName();" name="member_name" class="form-control" autofocus="autofocus" required />
+								<span id="nameError"> 한글 이름 2~4자 이내로 입력해주세요. </span>
 							</div>
 							<div class="form-group label-floating">
 								<label class="control-label">휴대번호</label>
-								<input type="tel" name="member_tel" class="form-control" autofocus="autofocus" required />
+								<input type="tel" name="member_tel" id ="tel" onkeyup="onkeyup_eventPhoneNum();"  class="form-control" autofocus="autofocus" required />
+								<span id ="phoneMypageError"> 올바르지않은 핸드폰 번호입니다.. </span>
 							</div>
 							<div class="form-group label-floating">
 								<label class="control-label">이메일</label>
@@ -151,8 +156,9 @@ div.well input[type="submit"]{width:100%;height:50px}
 					<div class="pop-containers">
 						<div class="pop-contss">
 							<div class="form-group label-floating">
-								<label class="control-label">이름</label>
-								<input type="text"	name="member_name" class="form-control" autofocus="autofocus" required />
+								<label class="control-label" >이름</label>
+								<input type="text" id="findName2Id" onkeyup="onkeyup_eventName2();"	name="member_name" class="form-control" autofocus="autofocus" required />
+								<span id="nameError2"> 한글 이름 2~4자 이내로 입력해주세요. </span>
 							</div>
 							<div class="form-group label-floating">
 								<label class="control-label">이메일(ID)</label>
@@ -180,12 +186,39 @@ div.well input[type="submit"]{width:100%;height:50px}
 
 $(document).ready(function(){
 	$("#passError").hide();
+	$("#phoneMypageError").hide();
+	$("#nameError").hide();
+	$("#nameError2").hide();
 	
 	$(document).keydown(function(event){
 		$(".error").hide();			
 	});
 });
 
+function onkeyup_eventPhoneNum(){
+	if(!/^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/.test($("#tel").val())){
+		$("#phoneMypageError").show();
+		return false;
+	}else {
+		$("#phoneMypageError").hide();
+	}
+}
+function onkeyup_eventName(){
+	if(!/^[가-힣]{2,4}$/.test($("#findNameId").val())){
+		$("#nameError").show();
+		return false;
+	}else {
+		$("#nameError").hide();
+	}
+}
+function onkeyup_eventName2(){
+	if(!/^[가-힣]{2,4}$/.test($("#findName2Id").val())){
+		$("#nameError2").show();
+		return false;
+	}else {
+		$("#nameError2").hide();
+	}
+}
 
 </script>
 <script type="text/javascript">

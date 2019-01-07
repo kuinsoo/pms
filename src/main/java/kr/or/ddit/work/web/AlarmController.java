@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import kr.or.ddit.friendslist.model.FriendListVo;
 import kr.or.ddit.issue.model.IssueVo;
 import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.member.model.MemberVo;
@@ -76,6 +77,33 @@ public class AlarmController {
 		model.addAttribute("totalMsgReceived", totalMsgReceived);
 		
 		return "alarm/ajaxMessageAlarm";
+	}
+	
+	/**
+	* Method : ajaxFriendAlarm
+	* 작성자 : iks
+	* 변경이력 :
+	* @param map
+	* @return
+	* Method 설명 : 친구 알림 조회
+	*/
+	@RequestMapping(value="/ajaxFriendAlarm", method=RequestMethod.GET)
+	public String ajaxFriendAlarm(Model model, PageVo pageVo, @SessionAttribute("memberVo") MemberVo memberVo){
+		
+		pageVo.setMember_mail(memberVo.getMember_mail());
+		
+		List<FriendListVo> friendMemberList = messageService.youGiveFriendList(pageVo);
+		
+		Map<String, Object> friendMap = new HashMap<>();
+		int totalyouGiveFriendList = messageService.totalyouGiveFriendList(memberVo.getMember_mail());
+		
+		friendMap.put("friendMemberList", friendMemberList);
+		friendMap.put("totalMsgReceived", (int)Math.ceil((double)totalyouGiveFriendList/pageVo.getPageSize()));
+		
+		model.addAttribute("friendMap", friendMap);
+		model.addAttribute("totalyouGiveFriendList", totalyouGiveFriendList);
+		
+		return "alarm/ajaxFriendAlarm";
 	}
 	
 	/**
@@ -194,6 +222,15 @@ public class AlarmController {
 		int issueMemberTotalCnt = issueService.issueMemberTotalCnt(memberVo.getMember_mail());
 		
 		return issueMemberTotalCnt;
+	}
+	
+	@RequestMapping(value="/alarmFriend", method=RequestMethod.GET)
+	@ResponseBody
+	public int alarmFriend(Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
+		
+		int totalyouGiveFriendList = messageService.totalyouGiveFriendList(memberVo.getMember_mail());
+		
+		return totalyouGiveFriendList;
 	}
 	
 	
