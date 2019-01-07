@@ -97,7 +97,7 @@ public class IssueService implements IssueServiceInf{
 	*/
 	@Override
 	public int issueInsert(IssueVo issueVo) {
-		long chk = dateCompare(issueVo);
+		long chk = dateCompareIssue(issueVo);
 		
 		if (chk >= 0) {
 			return issueMapper.issueInsert(issueVo);
@@ -155,7 +155,7 @@ public class IssueService implements IssueServiceInf{
 	*/
 	@Override
 	public int issueUpdate(IssueVo issueVo) {
-		long chk = dateCompare(issueVo);
+		long chk = dateCompareIssue(issueVo);
 		
 		if(chk >= 0) {
 			return issueMapper.issueUpdate(issueVo);
@@ -274,9 +274,9 @@ public class IssueService implements IssueServiceInf{
 	* 변경이력 :
 	* @param issueVo
 	* @return
-	* Method 설명 : 이슈 발생일이 프로젝트 종료일보다 후일이면 등록되지 않는다.
+	* Method 설명 : 이슈 발생일 및 수정일이 프로젝트 종료일보다 후일이면 등록되지 않는다.
 	*/
-	public long dateCompare(IssueVo issueVo) {
+	public long dateCompareIssue(IssueVo issueVo) {
 		IssueVo projectDateValue = getProjectEndDate(issueVo);
 		Date project_edate = null;
 		

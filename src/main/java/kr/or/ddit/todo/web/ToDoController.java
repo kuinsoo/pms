@@ -62,13 +62,18 @@ public class ToDoController {
 	 */
 	@RequestMapping(value="/todoInsert", method= {RequestMethod.POST})
 	public String ajaxInsertTodo(ToDoVo todoVo, HttpServletRequest request, PageVo pageVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
+		System.out.println("todoVo : " + todoVo);
+		
 		WorkVo workVo = new WorkVo();
 		workVo.setWork_project(request.getParameter("work_project"));
 		workVo.setWork_id(request.getParameter("todo_work"));
 
 		/* to-do insert */
 		try {
-			todoService.todoInsert(todoVo);
+			int result = todoService.todoInsert(todoVo);
+			if(result == -400) {
+				return "redirect:/todoError";
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -94,6 +99,19 @@ public class ToDoController {
 		return "todo/todoInsertAjax";
 	}
 
+	/**
+	* Method : todoError
+	* 작성자 : jerry
+	* 변경이력 :
+	* @return
+	* Method 설명 : TODO 등록일이 프로젝트 종료일보다 후일이면 등록되지 않는다.
+	*/
+	@RequestMapping(value="/todoError")
+	@ResponseBody
+	public int todoError() {
+		return 400;
+	}
+	
 	/**
 	 * Method : ajaxSelectTodo
 	 * 작성자 : jerry
@@ -305,11 +323,18 @@ public class ToDoController {
 	*/
 	@RequestMapping(value="/todoUpdate", method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
-	public void todoUpdate(ToDoVo todoVo) {
+	public int todoUpdate(ToDoVo todoVo) {
+		int result = -1;
 		try {
-			todoService.todoUpdate(todoVo);
+			result = todoService.todoUpdate(todoVo);
 		} catch(Exception e) {
 			e.printStackTrace();
+		}
+		
+		if(result == -400) {
+			return 400;
+		} else {
+			return 1;
 		}
 	}
 	

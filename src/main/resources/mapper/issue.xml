@@ -170,7 +170,7 @@
 		WHERE	issue_id = #{issue_id}
 	</delete>
 	
-	<!-- 이슈 등록시 프로젝트의 종료기간을 조회 -->
+	<!-- 이슈 등록시 프로젝트의 종료일 조회 -->
 	<select id="getProjectEndDate" resultType="issueVo" parameterType="issueVo">
 		SELECT  project_eedate,
 		        project_edate

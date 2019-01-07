@@ -143,7 +143,7 @@ function insertIssue${work.work_id}(todo_id) {
 		data: param,
 		success: function(data){
 			if(data == 400) {
-				alert('종료된 프로젝트입니다. 확인하고 다시 작업해주세요.');
+				alert('발생 일시가 알맞지 않거나 종료된 프로젝트입니다. 확인하여 주세요.');
 			} else {
 				$('#issueSelectHtmlAjax'+todo_id).html("");
 				$('#issueSelectHtmlAjax'+todo_id).html(data);
@@ -198,7 +198,7 @@ function updateIssue${work.work_id}(todo_id){
 		data: param,
 		success: function(data){
 			if(data == 400) {
-				alert('종료된 프로젝트입니다. 확인하고 다시 작업해주세요.');
+				alert('발생 일시가 알맞지 않거나 종료된 프로젝트입니다. 확인하여 주세요.');
 			} else {
 				getIssueList${work.work_id}(todo_id);
 			}
@@ -325,9 +325,13 @@ function updateTodo${work.work_id}(todo_id, work_id) {
 		url: "/todoUpdate",
 		data: {"todo_id" : todo_id, "member_name" : member_name, "pmember_member" : pmember_member, "todo_eedate" : todo_eedate, "todo_content" : todo_content},
 		success: function(data){
-			window.location.href = '#close';
-			getToDoList${work.work_id}(1, project_id, work_id);
-			initialization${work.work_id}(todo_id);
+			if(data == 400) {
+				alert('시작일시와 마감일시가 알맞지 않거나 종료된 프로젝트입니다. 확인하여 주세요.');
+			} else {
+				window.location.href = '#close';
+				getToDoList${work.work_id}(1, project_id, work_id);
+				initialization${work.work_id}(todo_id);
+			}
 		},
 		error: function(data){
 			console.log("todoList.jsp : updateTodo() - error");

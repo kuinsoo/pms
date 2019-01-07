@@ -28,22 +28,26 @@ function insertTodo${work.work_id}(work_id) {
     var param = $('#todoInsert${work.work_id}').serialize();
     
 	$.ajax({
-	   method: "POST",
-	   url: "/todoInsert",
-	   data: param,
-	   success: function(data) {
-	      window.location.href = '#close';
-	      $('#todoInsertHtmlAjax${work.work_id}').html("");
-	      $('#todoInsertHtmlAjax${work.work_id}').html(data);
-	      
-	      getToDoPagination${work.work_id}(1, project_id, work_id);
-		  
-	      <%-- workChart 동시 업데이트수행 (구인수) --%>
-		  workChart(work_id);
-	   },
-	   error:function(data) {
-	      console.log("todo.jsp : insertTodo() - error");
-	   }
+		method: "POST",
+		url: "/todoInsert",
+		data: param,
+		success: function(data) {
+	 		if(data == 400) {
+	 			alert('시작일시와 마감일시가 알맞지 않거나 종료된 프로젝트입니다. 확인하여 주세요.');
+	 		} else {
+				window.location.href = '#close';
+				$('#todoInsertHtmlAjax${work.work_id}').html("");
+				$('#todoInsertHtmlAjax${work.work_id}').html(data);
+				
+				getToDoPagination${work.work_id}(1, project_id, work_id);
+				
+				<%-- workChart 동시 업데이트수행 (구인수) --%>
+				workChart(work_id);
+	 		}
+		},
+		error:function(data) {
+			console.log("todo.jsp : insertTodo() - error");
+		}
 	});
 }
 

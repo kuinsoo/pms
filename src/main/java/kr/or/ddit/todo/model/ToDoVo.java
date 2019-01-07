@@ -38,42 +38,6 @@ public class ToDoVo {
 	private String todo_color;			//	할일 색깔
 	private String todo_issue;			//	할일이슈번호(fk)
 	
-	
-	public String getWork_id() {
-		return work_id;
-	}
-
-	public void setWork_id(String work_id) {
-		this.work_id = work_id;
-	}
-
-	private String project_title;
-	
-	
-	public String getProject_id() {
-		return project_id;
-	}
-
-	public void setProject_id(String project_id) {
-		this.project_id = project_id;
-	}
-
-	public SimpleDateFormat getSdf() {
-		return sdf;
-	}
-
-	public void setSdf(SimpleDateFormat sdf) {
-		this.sdf = sdf;
-	}
-
-	public String getProject_title() {
-		return project_title;
-	}
-
-	public void setProject_title(String project_title) {
-		this.project_title = project_title;
-	}
-
 	/* 기능단위 */
 	private String member_name;			//	참여자 이름
 	private String todo_member;			//	참여자 이메일
@@ -81,16 +45,28 @@ public class ToDoVo {
 	private String issue_id;			//	이슈아이디
 	private String work_project;		//	참여중인 프로젝트 ID
 	private String pmember_member;		//	참여자 이메일
+	private String project_title;
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	private Date project_eedate;		//	프로젝트 예상 종료일
+	private String format_project_eedate; //프로젝트 예상 종료일(String)
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
+	private Date project_edate;			//	프로젝트 종료일
+	private String format_project_edate;  //프로젝트 종료일(String)
 	
 	/* 기본생성자 */
 	public ToDoVo() {}
 
 	/* 생성자 */
-	public ToDoVo(String todo_id, String todo_work, String todo_pmember, String todo_content, Date todo_sdate,
-			String format_todo_sdate, Date todo_edate, String format_todo_edate, Date todo_eedate,
-			String format_todo_eedate, String todo_complet, String todo_color, int rnum, String todo_issue, 
-			String member_name, String todo_member, String member_profile, String issue_id, String work_project, String pmember_member) {
+	public ToDoVo(int rnum, String work_id, String project_id, String todo_id, String todo_work, String todo_pmember,
+			String todo_content, Date todo_sdate, String format_todo_sdate, Date todo_edate, String format_todo_edate,
+			Date todo_eedate, String format_todo_eedate, String todo_complet, String todo_color, String todo_issue,
+			String member_name, String todo_member, String member_profile, String issue_id, String work_project,
+			String pmember_member, String project_title, Date project_eedate, String format_project_eedate,
+			Date project_edate, String format_project_edate, SimpleDateFormat sdf) {
 		super();
+		this.rnum = rnum;
+		this.work_id = work_id;
+		this.project_id = project_id;
 		this.todo_id = todo_id;
 		this.todo_work = todo_work;
 		this.todo_pmember = todo_pmember;
@@ -103,7 +79,6 @@ public class ToDoVo {
 		this.format_todo_eedate = format_todo_eedate;
 		this.todo_complet = todo_complet;
 		this.todo_color = todo_color;
-		this.rnum = rnum;
 		this.todo_issue = todo_issue;
 		this.member_name = member_name;
 		this.todo_member = todo_member;
@@ -111,6 +86,12 @@ public class ToDoVo {
 		this.issue_id = issue_id;
 		this.work_project = work_project;
 		this.pmember_member = pmember_member;
+		this.project_title = project_title;
+		this.project_eedate = project_eedate;
+		this.format_project_eedate = format_project_eedate;
+		this.project_edate = project_edate;
+		this.format_project_edate = format_project_edate;
+		this.sdf = sdf;
 	}
 
 	/* getter & setter */
@@ -119,6 +100,18 @@ public class ToDoVo {
 	}
 	public void setRnum(int rnum) {
 		this.rnum = rnum;
+	}
+	public String getWork_id() {
+		return work_id;
+	}
+	public void setWork_id(String work_id) {
+		this.work_id = work_id;
+	}
+	public String getProject_id() {
+		return project_id;
+	}
+	public void setProject_id(String project_id) {
+		this.project_id = project_id;
 	}
 	public String getTodo_id() {
 		return todo_id;
@@ -174,7 +167,7 @@ public class ToDoVo {
 	public void setTodo_color(String todo_color) {
 		this.todo_color = todo_color;
 	}
-	 public String getTodo_issue() {
+	public String getTodo_issue() {
 		return todo_issue;
 	}
 	public void setTodo_issue(String todo_issue) {
@@ -216,6 +209,24 @@ public class ToDoVo {
 	public void setPmember_member(String pmember_member) {
 		this.pmember_member = pmember_member;
 	}
+	public String getProject_title() {
+		return project_title;
+	}
+	public void setProject_title(String project_title) {
+		this.project_title = project_title;
+	}
+	public Date getProject_eedate() {
+		return project_eedate;
+	}
+	public void setProject_eedate(Date project_eedate) {
+		this.project_eedate = project_eedate;
+	}
+	public Date getProject_edate() {
+		return project_edate;
+	}
+	public void setProject_edate(Date project_edate) {
+		this.project_edate = project_edate;
+	}
 
 	/* 형변환 getter */
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -237,7 +248,20 @@ public class ToDoVo {
 		}
 		return sdf.format(todo_edate);
 	}
+	public String getFormat_project_eedate() {
+		if(project_eedate == null) {
+			return "";
+		}
+		return sdf.format(project_eedate);
+	}
+	public String getFormat_project_edate() {
+		if(project_edate == null) {
+			return "";
+		}
+		return sdf.format(project_edate);
+	}
 
+	/* toString */
 	@Override
 	public String toString() {
 		return "ToDoVo [rnum=" + rnum + ", work_id=" + work_id + ", project_id=" + project_id + ", todo_id=" + todo_id
@@ -245,9 +269,12 @@ public class ToDoVo {
 				+ ", todo_sdate=" + todo_sdate + ", format_todo_sdate=" + format_todo_sdate + ", todo_edate="
 				+ todo_edate + ", format_todo_edate=" + format_todo_edate + ", todo_eedate=" + todo_eedate
 				+ ", format_todo_eedate=" + format_todo_eedate + ", todo_complet=" + todo_complet + ", todo_color="
-				+ todo_color + ", todo_issue=" + todo_issue + ", project_title=" + project_title + ", member_name="
-				+ member_name + ", todo_member=" + todo_member + ", member_profile=" + member_profile + ", issue_id="
-				+ issue_id + ", work_project=" + work_project + ", pmember_member=" + pmember_member + ", sdf=" + sdf
+				+ todo_color + ", todo_issue=" + todo_issue + ", member_name=" + member_name + ", todo_member="
+				+ todo_member + ", member_profile=" + member_profile + ", issue_id=" + issue_id + ", work_project="
+				+ work_project + ", pmember_member=" + pmember_member + ", project_title=" + project_title
+				+ ", project_eedate=" + project_eedate + ", format_project_eedate=" + format_project_eedate
+				+ ", project_edate=" + project_edate + ", format_project_edate=" + format_project_edate + ", sdf=" + sdf
 				+ "]";
 	}
+
 }

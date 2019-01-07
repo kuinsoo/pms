@@ -1,6 +1,5 @@
 package kr.or.ddit.issue.web;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -141,7 +139,7 @@ public class IssueController {
 			
 			if (result > 0) {
 				issueService.todoIssueUpdate(issueVo);
-			} else if (result == -400) {
+			} else if(result == -400) {
 				return "redirect:/issueError";
 			}
 		}catch(Exception e) {
