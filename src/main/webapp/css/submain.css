@@ -28,7 +28,7 @@ iframe{border: 1px solid #dee3eb; width:100%; height:100%}
 .projectList > .projectListTitles > i{vertical-align:middle;margin-right:10px;}
 .projectList > .projectListTitles > span{vertical-align:middle;}
 .projectList > .charts{padding:20px;width:100%;}
-.projectList > .charts > .chartsNumber{font-size:20px;margin-bottom:20px;margin-left:90px;}
+.projectList > .charts > .chartsNumber{font-size:20px;display:flex;justify-content:center;}
 .projectList > .charts > .chartsNumber > ul{margin-top:25px;}
 .projectList > .charts > .chartsNumber > ul > li{padding:10px;margin-left:10px;float:left;cursor:pointer;}
 .projectList > .charts > .chartsNumber > ul > li > i{vertical-align:middle;}
