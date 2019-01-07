@@ -18,10 +18,19 @@
 		.passNot{
 			color: red;
 		}
+		#nameError{
+			color:red;
+		}
+		#phoneMypageError{
+			color:red;
+		}
 	
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
+			$("#nameError").hide();
+			$("#phoneMypageError").hide();
+			
 			
 			// 회원 탈퇴부분 - 비밀번호 에러 메시지 숨기기
 			$("#passError").hide();
@@ -56,6 +65,8 @@
 				console.log(project_id);
 				$("#frm2").submit();
 			});
+			
+		
 			
 	        //#############################################################################################		
 	        //#############################################################################################		
@@ -185,7 +196,31 @@
 			});
 		});
 		
+		
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 프로필 사진 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		
+			
+		function onkeyup_eventName(){
+			if(!/^[가-힣]{2,4}$/.test($(".myPageMemberNameLeg").val())){
+				$("#nameError").show();
+				return false;
+			}else {
+				$("#nameError").hide();
+			}
+		}
+			
+		function onkeyup_eventPhoneNum(){
+			if(!/^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/.test($(".myPageMemberPhoneLeg").val())){
+				$("#phoneMypageError").show();
+				$('.saveBtn').prop('disabled', true);
+				$('.phoneBtns').prop('disabled', true);
+				return false;
+			}else {
+				$("#phoneMypageError").hide();
+				$('.saveBtn').prop('disabled', false);
+				$('.phoneBtns').prop('disabled', false);
+			}
+		}
 		
 		// 핸드폰 번호 입력 후 인증 버튼
 		function telAjax(){
@@ -736,9 +771,14 @@
 									</c:otherwise>
 								</c:choose>
 							</div>
+							
 							<div class="profileUploadImg">
 								<a href="#" id="fileSelect"></a>
 							</div>
+						</div>
+						<div class="profileImgBtnsUpdate">
+							<input type="button" value="변경" class="test1"/>
+							<input type="submit" value="확인" class="test2"/>
 						</div>
 					</div>
 					<div class="myPageContainerRightUser">
@@ -756,9 +796,16 @@
 						<div class="userContentsInfoRight_2">
 							<ul>
 								<li><input type="text" value= "${memberVo.member_mail}" disabled="disabled" id = "member_mail"  name = "member_mail"/></li>
-								<li><input type="text" value= "${memberVo.member_name}" name ="member_name" id ="member_name"/></li>
-								<li><input type="text"  value= "${memberVo.member_tel}" name ="member_tel"  id ="member_tel"/>
+								<li>
+									<input type="text" onkeyup="onkeyup_eventName();" value= "${memberVo.member_name}" name ="member_name" class="myPageMemberNameLeg" id ="member_name"/>
+									<span id="nameError"> 한글 이름 2~4자 이내로 입력해주세요. </span>
+								</li>
+								<li>
+									<input type="text"  value= "${memberVo.member_tel}" name ="member_tel" onkeyup="onkeyup_eventPhoneNum();" class= "myPageMemberPhoneLeg" id ="member_tel"/>
 									<input type="button" onclick="telAjax();" value="인증" class="phoneBtns"/>
+								</li>
+									<span id = "phoneMypageError"> 올바르지않은 핸드폰 번호입니다.. </span>
+
 								<li><input type="text" id ="telnum" placeholder="인증번호 4자리를 입력해주세요.." onkeyup="onkeyup_event();" required/>
 									<span class = "inputerror"> 인증번호를 입력해 주세요..</span>
 									<span class= "telerror"> 인증번호가 일치하지 않습니다.</span>
