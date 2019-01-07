@@ -771,6 +771,7 @@
 									</c:otherwise>
 								</c:choose>
 							</div>
+							
 							<div class="profileUploadImg">
 								<a href="#" id="fileSelect"></a>
 							</div>
