@@ -507,7 +507,7 @@ public class MemberDetailController {
 	 */
 	@RequestMapping(value="/myPageUpdate", method=RequestMethod.POST)
 	public String memberDetailUpdate(Model model, @SessionAttribute("memberVo") MemberVo memberVo,
-		@RequestPart("member_profile")MultipartFile part, HttpServletRequest request) {
+		 HttpServletRequest request) {
 		
 			String member_name = request.getParameter("member_name");
 			String member_tel = request.getParameter("member_tel");
@@ -524,7 +524,7 @@ public class MemberDetailController {
 			String kisa = KISA_SHA256.encrypt(member_pass).toLowerCase();
 			memberVo.setMember_pass(kisa);
 			
-			
+	/*		
 			try {
 				if(part.getSize()>0) {
 					String path = request.getServletContext().getRealPath("/images");
@@ -538,7 +538,7 @@ public class MemberDetailController {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			}*/
 				
 			int updateUser = memberservice.updateUser(memberVo);
 			model.addAttribute("memberVo",memberVo);
@@ -551,6 +551,57 @@ public class MemberDetailController {
 			
 			return "redirect:/myPage?member_mail=" + memberVo.getMember_mail();
 		}
+	
+	@RequestMapping(value="/myPageUpdateFile", method=RequestMethod.POST)
+	public String myPageUpdateFile(Model model, @SessionAttribute("memberVo") MemberVo memberVo,
+			@RequestPart("member_profile")MultipartFile part, HttpServletRequest request) {
+		
+	/*	String member_name = request.getParameter("member_name");
+		String member_tel = request.getParameter("member_tel");
+		String member_pass = request.getParameter("member_pass");
+		
+		memberVo.setMember_name(member_name);
+		memberVo.setMember_tel(member_tel);
+		
+//			// 암호화로 비교한다. 입력된값이랑 
+//			if(memberVo.getMember_pass().equals(KISA_SHA256.encrypt(member_pass))) {
+//				model.addAttribute("memberVo",memberVo);
+//			}
+		
+		String kisa = KISA_SHA256.encrypt(member_pass).toLowerCase();
+		memberVo.setMember_pass(kisa);*/
+		
+		
+		try {
+			if(part.getSize()>0) {
+				String path = request.getServletContext().getRealPath("/images");
+				String fileName = part.getOriginalFilename();
+				part.transferTo(new File(path + File.separator + fileName));
+				
+				System.out.println("path " + path);
+				// profile
+				memberVo.setMember_profile("/images/"+fileName);
+			}
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("프로필 사진 들어오나 확인 ");
+		int updateUser = memberservice.updateUser(memberVo);
+		model.addAttribute("memberVo",memberVo);
+		
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
+		
+		return "redirect:/myPage?member_mail=" + memberVo.getMember_mail();
+	}
+	
+	
 	
 		@ResponseBody
 		@RequestMapping(value="/myPageSHA256Ajax", method=RequestMethod.GET)

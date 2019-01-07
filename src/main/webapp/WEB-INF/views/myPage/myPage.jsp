@@ -95,8 +95,8 @@
 	        //#############################################################################################		
 	        //#############################################################################################		
 	        //#############################################################################################		
-			
-			$(".passNot").hide();
+			$(".test2").hide();
+	        $(".passNot").hide();
 			$(".phoneBtns").hide();
 			$(".saveBtn").hide();
 			$("#pass1").hide();				
@@ -104,7 +104,8 @@
 			$("#inpupass2").hide();				
 			$("#inpupass3").hide();				
 			$("#pass2input").hide();				
-			$("#pass1input").hide();				
+			$("#pass1input").hide();			
+			$(".cancelBtn").hide();
 			$("#telnum").hide();				
 			$("#telnumLi").hide();		
 			$('#member_name').prop('readonly', true);
@@ -114,9 +115,16 @@
 			$(".telerror").hide();
 			$(".inputerror").hide();
 			
+			$(".test1").click(function(){
+				$(".profileUploadImg").show();
+				$(".test2").show();
+				$(".test1").hide();
+			});
+			
 			$(".updateBtn").click(function(){	
 				$(".errorpass").hide();
-				$(".profileUploadImg").show();
+				$(".cancelBtn").show();
+				//$(".profileUploadImg").show();
 				$(".phoneBtns").show();
 				$(".saveBtn").show();
 				$("#pass1").show();				
@@ -138,7 +146,6 @@
 				$('.saveBtn').prop('disabled', true);
 				$(".inputerror").show();
 			});
-			
 			
 			var certificationNumber;
 			
@@ -171,7 +178,11 @@
 			} */
 			
 			$('.saveBtn').prop('disabled', false);
-			//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 파 일 부 분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+			
+			
+		
+		    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+		    //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 프로필 사진 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 			
 			$("#fileElem").change(function(){
 				console.log("fileChange");
@@ -195,10 +206,7 @@
 			    
 			});
 		});
-		
-		
-		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 프로필 사진 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-		
+
 			
 		function onkeyup_eventName(){
 			if(!/^[가-힣]{2,4}$/.test($(".myPageMemberNameLeg").val())){
@@ -259,9 +267,8 @@
 					 
 					 kisaaa();
 				}
-		});
-			
-	}	
+			});
+		}	
 		
 		// 회원 탈퇴 부분 
 		function onkeyup_eventEND(){
@@ -276,9 +283,8 @@
 					 
 					 memberEndPassWard();
 				}
-		});
-			
-	}	
+			});
+		}	
 	
 	// @@@@@@@@@@@@@@@@@@@ 회원탈퇴 비밀번호 확인 부분 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 		//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
@@ -370,7 +376,6 @@
 			
 		$("#projectSearchPage").attr("value",page);	
 		var param = $('form[name=searchProject]').serialize();
-			
 			$.ajax({
 				type: "POST",
 				url : "/searchProjectAjax",
@@ -745,19 +750,19 @@
 	<input type = "hidden" id = "project_title2" name = "project_title"/>
 	<input type = "hidden" id = "project_id2" name = "project_id"/>
 </form>
+
 	<!-- CURRENT SECTION(MAIN) -->	
 	<section class="currentMain">
 		<div class="currentMainContainer">
 			<div class="myPageContainerTitle">
 				<h2>사용자 기본 정보</h2>
 			</div>
-				
 			<div class="myPageContainer">
 				<!-- 마이페이지 사용자 정보 수정 부분  -->
-				<form action="/myPageUpdate" method="post" enctype="multipart/form-data">
-				<div class="myPageContainerLeft">
-					<div class="myPageContainerLeftUser">
-						<h2>${memberVo.member_name}님의 프로필</h2>
+			<div class="myPageContainerLeft">
+				<div class="myPageContainerLeftUser">
+				  <h2>${memberVo.member_name}님의 프로필</h2>
+				   <form id = "profileFileUpload" action="/myPageUpdateFile" enctype="multipart/form-data" method= "post">
 						<div class="profileImg">
 							<div id="fileList" style="background-image:url('${memberVo.member_profile}');background-repeat:no-repeat;background-position:50% 50%;background-size:cover;">
 								<c:choose>
@@ -780,8 +785,10 @@
 							<input type="button" value="변경" class="test1"/>
 							<input type="submit" value="확인" class="test2"/>
 						</div>
-					</div>
-					<div class="myPageContainerRightUser">
+					</form>	
+				</div>
+				<div class="myPageContainerRightUser">
+					<form action="/myPageUpdate" method="post" >
 						<div class="userContentsInfoRight_1">
 							<ul id="test">
 								<li>사용자 이메일</li>
@@ -823,12 +830,13 @@
 								<li>
 									<input type="button" value="변경" class = "updateBtn"/>
 									<input type="submit" value="확인" class = "saveBtn"/>
+									<input type="button" value="취소" class = "cancelBtn" onclick = "window.location.href='/myPage'"/>
 								</li>
 							</ul>
-						</div>
+						</form>				
 					</div>
 				</div>
-			</form>				
+			</div>
 				<div class="myPageContainerRight">
 					<div class="myPageContainerRightLeftChart">
 						<canvas id="myChart" width="349" height="560"></canvas>
@@ -1181,7 +1189,7 @@ fileSelect.addEventListener("click", function (e) {
   if (fileElem) {
     fileElem.click();
   }
-  e.preventDefault(); // prevent navigation to "#"
+  e.preventDefault(); // prevent navigation to "#"`
 }, false);
 
 function handleFiles(files) {
@@ -1275,7 +1283,6 @@ var myChart2 = new Chart(ctx2, {
         }
     }
 });
-
 
 
 

@@ -6,8 +6,8 @@
 
 .myPageContainerLeft {width:700px;height:560px;border-right:1px solid #dee3eb;float:left;border-bottom:1px solid #dee3eb;}
 .myPageContainerLeft > .myPageContainerLeftUser{width:250px;height:560px;border-right:1px solid #dee3eb;float:left;}
-.myPageContainerLeft > .myPageContainerLeftUser > h2{margin:20px 0px 0px 20px;font-weight:normal;font-size:18px;}
-.myPageContainerLeft > .myPageContainerLeftUser > .profileImg {width:150px;height:150px;margin-top:20px;position:relative;border-radius:100%;margin-left:50px;}
+.myPageContainerLeft > .myPageContainerLeftUser > form > h2{margin:20px 0px 0px 20px;font-weight:normal;font-size:18px;}
+.myPageContainerLeft > .myPageContainerLeftUser > form > .profileImg {width:150px;height:150px;margin-top:20px;position:relative;border-radius:100%;margin-left:50px;}
 .myPageContainerLeft > .myPageContainerLeftUser > .userContentsInfoLeft_1{padding:20px;font-size:17px;}
 .myPageContainerLeft > .myPageContainerLeftUser > .userContentsInfoLeft_1 > ul > li:first-chlid{margin-top:20px;}
 .myPageContainerLeft > .myPageContainerLeftUser > .userContentsInfoLeft_1 > ul > li:nth-child(3){margin-top:20px;}
@@ -24,29 +24,32 @@
 .profileImg > .profileUploadImg > #fileSelect{display:block;width:70px;height:70px;}
 
 .myPageContainerLeft > .myPageContainerRightUser{width:449px;height:560px;float:left;}
-.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_1{width:130px;margin-top:60px;float:left;}
+.myPageContainerLeft > .myPageContainerRightUser > form > .userContentsInfoRight_1{width:130px;margin-top:60px;float:left;}
 .userContentsInfoRight_1 > ul > li{font-size:18px;margin:20px 0px 20px 10px;}
-.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2{width:299px;margin-top:70px;float:left;}
-.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 >  ul > li > input[type="text"] {
+.myPageContainerLeft > .myPageContainerRightUser > form > .userContentsInfoRight_2{width:299px;margin-top:70px;float:left;}
+.myPageContainerLeft > .myPageContainerRightUser > form > .userContentsInfoRight_2 >  ul > li > input[type="text"] {
 	width:100%;border:none;background-color:transparent;border-bottom:1px solid #dee3eb;height:20px;outline:none;
 	font-size:18px;margin:10px 0px 10px 0px
 }
-.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 > ul > li > input[type="password"] {
+.myPageContainerLeft > .myPageContainerRightUser > form > .userContentsInfoRight_2 > ul > li > input[type="password"] {
 	width:100%;border:none;background-color:transparent;border-bottom:1px solid #dee3eb;height:20px;outline:none;
 	font-size:18px;margin:10px 0px 10px 0px; font-family: 'Malgun Gothic';
 }
-.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 > ul > li > input[type="text"]:hover,
-.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 > ul > li > input[type="text"]:focus {
+.myPageContainerLeft > .myPageContainerRightUser > form > .userContentsInfoRight_2 > ul > li > input[type="text"]:hover,
+.myPageContainerLeft > .myPageContainerRightUser > form > .userContentsInfoRight_2 > ul > li > input[type="text"]:focus {
 	border-bottom:1px solid #000;
 }
-.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 >  ul > li > input[type="password"]:hover,
-.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 >  ul > li > input[type="password"]:focus {
+.myPageContainerLeft > .myPageContainerRightUser > form > .userContentsInfoRight_2 >  ul > li > input[type="password"]:hover,
+.myPageContainerLeft > .myPageContainerRightUser > form > .userContentsInfoRight_2 >  ul > li > input[type="password"]:focus {
 	border-bottom:1px solid #000;
 }
-.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 >  ul > li > input[type="submit"] {
+.myPageContainerLeft > .myPageContainerRightUser > form > .userContentsInfoRight_2 >  ul > li > input[type="submit"] {
 	width:70px;height:40px;background-color:#746fcc;color:#fff;border:none;font-size:18px;cursor:pointer;outline:none;margin-top:10px;
 }
-.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 >  ul > li > .updateBtn {
+.myPageContainerLeft > .myPageContainerRightUser > form > .userContentsInfoRight_2 >  ul > li > .updateBtn {
+	width:70px;height:40px;background-color:#746fcc;color:#fff;border:none;font-size:18px;cursor:pointer;outline:none;margin-top:10px;
+}
+.myPageContainerLeft > .myPageContainerRightUser > form > .userContentsInfoRight_2 >  ul > li > .cancelBtn {
 	width:70px;height:40px;background-color:#746fcc;color:#fff;border:none;font-size:18px;cursor:pointer;outline:none;margin-top:10px;
 }
 
@@ -57,8 +60,8 @@
 .myPageBottomContainerLeft{float:left;width:700px;height:560px;}
 .myPageBottomContainerRight{float:left;width:700px;height:560px;}
 
-.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 > ul > li:nth-child(3){display:flex;justify-content:center;align-items:center;}
-.myPageContainerLeft > .myPageContainerRightUser > .userContentsInfoRight_2 > ul > li:nth-child(3) > .phoneBtns {
+.myPageContainerLeft > .myPageContainerRightUser > form > .userContentsInfoRight_2 > ul > li:nth-child(3){display:flex;justify-content:center;align-items:center;}
+.phoneBtns {
 	width:100px;height:30px;font-size:17px;margin-top:-9px;border:none;background-color:#746fcc;color:#fff;outline:none;cursor:pointer;
 }
 .profileUploadImg{display: none;}
