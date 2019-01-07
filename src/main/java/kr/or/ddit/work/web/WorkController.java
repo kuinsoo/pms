@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
+import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.meeting.model.MeetingVo;
 import kr.or.ddit.meeting.service.MeetingServiceInf;
 import kr.or.ddit.member.model.MemberVo;
@@ -70,6 +71,9 @@ public class WorkController {
 
     @Autowired
     private MessageServiceInf messageService;
+    
+    @Autowired
+	private IssueServiceInf issueService;
 
     @RequestMapping(value = "/ajaxCreateWork", method = RequestMethod.POST)
     public void ajaxCreateWork(Model model, WorkVo workVo, @RequestParam("project_id") String project_id,
@@ -152,6 +156,7 @@ public class WorkController {
         model.addAttribute("pageCnt", postService.totalPostCnt());
         model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
         model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+        model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 
             return "main/subMain";
     }
@@ -179,6 +184,7 @@ public class WorkController {
         model.addAttribute("pageCnt", postService.totalPostCnt());
         model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
         model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+        model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 
         return "work/ajaxWorkChart";
     }
