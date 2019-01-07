@@ -838,7 +838,7 @@ NOTE: use percentage font sizes or else old IE chokes
 
 .fc-toolbar .fc-state-active,
 .fc-toolbar .ui-state-active {
-  z-index: 4; }
+  z-index: 2; }
 
 .fc-toolbar button:focus {
   z-index: 5; }
