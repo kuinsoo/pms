@@ -93,18 +93,13 @@
 
         <div class="currentMainContainerRight">
             <div class="currentSubMainTitle">
-                <i class="icon-star icons"></i>
-                <span>${projectVo.project_title}</span>
-                <!--
-                <i class="icon-share icons dialog__triggerss"></i>
-                <div class="dialogss">
-                    <ul>
-                        <li>프로젝트 설정</li>
-                        <li>알림(푸쉬) 설정</li>
-                        <li>프로젝트 숨기기</li>
-                    </ul>
-                </div>
-                -->
+            	<div class="currentSubMainTitleProjectTitle">
+	                <i class="icon-star icons"></i>
+	                <span>${projectVo.project_title}</span>
+            	</div>
+	            <div class="backbackbackhahaha">
+	            	<i class="icon-arrow-left icons"></i>
+	            </div>
             </div>
             <div class="projectTeamsTop">
                 <!-- (변찬우) for node // 외부에서 접근해서 인증 허용 해줘야 함..  -->
