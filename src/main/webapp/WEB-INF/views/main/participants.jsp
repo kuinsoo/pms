@@ -13,7 +13,7 @@
 						<span class="projectUserNameList">${projectMember.member_name}</span>
 					</div>
 					<div class="projectTeamHover">
-						<a href="/evaluationOther?userMail=${projectMember.member_mail}&project_id=${projectVo.project_id}">
+                        <a href="/evaluationOther?userMail=${projectMember.member_mail}&project_id=${projectVo.project_id}">
 							<i class="icon-badge icons"></i>
 							<span>능력 및 평가</span>
 						</a>
@@ -40,7 +40,6 @@
 						<span class="projectUserNameList">${projectMember.member_name}</span>
 					</div>
 					<div class="projectTeamHover">
-
 						<a href="/evaluationOther?userMail=${projectMember.member_mail}&project_id=${projectVo.project_id}">
 							<i class="icon-badge icons"></i>
 							<span>능력 및 평가</span>

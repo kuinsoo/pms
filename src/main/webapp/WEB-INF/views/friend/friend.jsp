@@ -10,7 +10,7 @@
 					</h2>
 				</div>
 				<div class="backBtnDivZz" style="float:left;width:70px;height:70px;background-color:#fff;border:1px solid #dee3eb;line-height:70px;font-size:20px;margin-left:10px;cursor:pointer;text-align:center;">
-					<i class="icon-arrow-left icons"></i>
+					<i class="icon-arrow-left icons" id="locationBack_frd"></i>
 				</div>
 			</div>
 			<div class="facingContainer">
@@ -846,6 +846,10 @@ $("#tabs").tabs();
 
 //마이페이지 하단 탭 메뉴
 $("#tabs2").tabs();
+
+$('#locationBack_frd').on('click', function () {
+	history.back();;
+});
 </script>
 </body>
 </html>

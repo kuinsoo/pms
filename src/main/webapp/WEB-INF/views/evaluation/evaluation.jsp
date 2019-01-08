@@ -9,7 +9,7 @@
 				<h2>업무수행능력</h2>
 			</div>
 			<div class="backBtnDivZz" style="float:left;width:60px;height:60px;background-color:#fff;border:1px solid #dee3eb;line-height:60px;font-size:20px;margin-left:10px;cursor:pointer;">
-				<i class="icon-arrow-left icons"></i>
+				<i class="icon-arrow-left icons" id="locationBack_eva"></i>
 			</div>
 		</div>
 		
@@ -256,6 +256,9 @@
 	});
 
 
+	$('#locationBack_eva').on("click", function () {
+       history.back();
+    });
 </script>
 </body>
 </html>
