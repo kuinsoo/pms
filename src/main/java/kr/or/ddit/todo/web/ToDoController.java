@@ -324,6 +324,7 @@ public class ToDoController {
 	@RequestMapping(value="/todoUpdate", method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
 	public int todoUpdate(ToDoVo todoVo) {
+		System.out.println("todoVo : " + todoVo);
 		int result = -1;
 		try {
 			result = todoService.todoUpdate(todoVo);

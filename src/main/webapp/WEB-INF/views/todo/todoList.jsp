@@ -322,6 +322,8 @@ function updateTodo${work.work_id}(todo_id, work_id) {
 	var member_name = optionSplit[0];
 	var pmember_member = optionSplit[1];
 	pmember_member = pmember_member.replace(")", "");
+	var todo_sdate = $('#todo_sdate'+todo_id).val();
+	todo_sdate = todo_sdate.replace("T", " ");
 	var todo_eedate = $('#todo_eedate'+todo_id).val();
 	todo_eedate = todo_eedate.replace("T", " ");
 	var todo_content = $('#todo_content'+todo_id).val();
@@ -329,7 +331,7 @@ function updateTodo${work.work_id}(todo_id, work_id) {
 	$.ajax({
 		method: "POST",
 		url: "/todoUpdate",
-		data: {"todo_id" : todo_id, "member_name" : member_name, "pmember_member" : pmember_member, "todo_eedate" : todo_eedate, "todo_content" : todo_content},
+		data: {"work_project" : project_id, "todo_id" : todo_id, "member_name" : member_name, "pmember_member" : pmember_member, "todo_sdate" : todo_sdate, "todo_eedate" : todo_eedate, "todo_content" : todo_content},
 		success: function(data){
 			if(data == 400) {
 				alert('시작일시와 마감일시가 알맞지 않거나 종료된 프로젝트입니다. 확인하여 주세요.');
@@ -349,7 +351,7 @@ function updateTodo${work.work_id}(todo_id, work_id) {
 <!-- to-do list 조회 -->
 <div class="currentCardContentViewRight">
 	<p>현재진행상황</p>
-	<div class="w3-light-grey" >
+	<div class="w3-light-grey">
 		<div id="myBar${work.work_id}" class="w3-container w3-green" style="width:${work.work_progress}%" >${work.work_progress}%</div>
 	</div>
 
