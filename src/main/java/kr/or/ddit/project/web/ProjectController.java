@@ -134,6 +134,7 @@ public class ProjectController {
 	@RequestMapping(value = "/ajaxUpdateProject", method = RequestMethod.POST)
 	public String updateProject(ProjectVo projectVo, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 
+
 		projectService.updateProject(projectVo);
 		
 		/* 알림기능 - IKS */

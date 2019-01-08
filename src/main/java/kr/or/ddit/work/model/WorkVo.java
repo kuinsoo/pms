@@ -27,13 +27,13 @@ public class WorkVo {
 	private String work_content;		//	업무내용
 	private String work_type;			//	업무유형
 	private int work_importance;		//	업무중요도
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
 	private Date   work_sdate;			//	업무시작일자
 	private String format_work_sdate;	//	업무시작일자(String)
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
 	private Date   work_eedate;			//	업무예상마감일자
 	private String format_work_eedate;	//	업무예상마감일자(String)
-	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm:ss")
+	@DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
 	private Date   work_edate;			//	업무마감일자
 	private String format_work_edate;	//	업무마감일자(String)
 	private int    work_progress;		//	업무진척도

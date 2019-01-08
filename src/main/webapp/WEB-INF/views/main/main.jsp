@@ -66,9 +66,9 @@
 
 												<div class="projectStartEndDiv">
 													<span class="projectStart">프로젝트 시작일</span>
-													<input type="date" name="project_sdate" class="projectStartInput" />
+													<input type="date" name="project_sdate" class="projectStartInput" required />
 													<span class="projectEnd">프로젝트 마감일</span>
-													<input type="date" name="project_eedate" class="projectEndInput" />
+													<input type="date" name="project_eedate" class="projectEndInput" required />
 												</div>
 												<div class="layerPopUpBtnss">
 													<input type="submit" value="만들기" class="createProjectSubmit">
@@ -327,6 +327,7 @@
 			success: function(data) {
 				$('.inviteProject').html("");
 				$('.inviteProject').html(data);
+				ajaxMainProjectList();
 			}
 		});
 	}

@@ -41,15 +41,15 @@
                             <form method="Post" name="ajaxUpdateProject" action="/ajaxUpdateProject">
                                 <div class="projectUDContent">
                                     <span>프로젝트명</span>
-                                    <input type="text" class="projectUDTitleInput" name="project_title" value="${pMemberListVo.project_title}" />
+                                    <input type="text" class="projectUDTitleInput" name="project_title" value="${pMemberListVo.project_title}" required />
                                     <span class="projectSpan">프로젝트 개요</span>
-                                    <textarea class="projectContentInput" name="project_overview">${pMemberListVo.project_overview}</textarea>
+                                    <textarea class="projectContentInput" name="project_overview" required >${pMemberListVo.project_overview}</textarea>
                                 </div>
                                 <div class="projectStartEndDivp">
                                     <span class="projectStartp">프로젝트 시작일</span>
-                                    <input type="date" name="project_sdate" class="projectStartInputp" value="<fmt:formatDate value='${pMemberListVo.project_sdate}' pattern='yyyy-MM-dd'/>"  />
+                                    <input type="date" name="project_sdate" class="projectStartInputp" value="<fmt:formatDate value='${pMemberListVo.project_sdate}' pattern='yyyy-MM-dd'/>" required />
                                     <span class="projectEndp">프로젝트 마감일</span>
-                                    <input type="date" name="project_eedate" class="projectEndInputp" value="<fmt:formatDate value='${pMemberListVo.project_eedate}' pattern='yyyy-MM-dd'/>" />
+                                    <input type="date" name="project_eedate" class="projectEndInputp" value="<fmt:formatDate value='${pMemberListVo.project_eedate}' pattern='yyyy-MM-dd'/>" required />
                                     <input type="hidden" name="project_id" value="${pMemberListVo.project_id}" />
                                 </div>
                                 <div class="layerPopUpBtnss">
