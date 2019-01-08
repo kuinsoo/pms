@@ -78,7 +78,7 @@
                 <div id="subMaintab5" class="tabcontent">
                 	<div class="naverMapGo">
                 		<div id="map" style="width:900px !important;height:500px;"></div>
-                		<input type="text" id="address" placeholder="검색할 주소" />
+                		<input type="text" id="address" placeholder="검색할 주소 작성후 Enter!" />
                 		<script>
                 		// 네이버 지도 임규승 2019-01-08
                 		var map = new naver.maps.Map("map", {
