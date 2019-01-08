@@ -37,7 +37,7 @@ public class ToDoVo {
 	private String todo_complet;		//	할일완료여부
 	private String todo_color;			//	할일 색깔
 	private String todo_issue;			//	할일이슈번호(fk)
-	
+
 	/* 기능단위 */
 	private String member_name;			//	참여자 이름
 	private String todo_member;			//	참여자 이메일
@@ -52,7 +52,7 @@ public class ToDoVo {
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm")
 	private Date project_edate;			//	프로젝트 종료일
 	private String format_project_edate;  //프로젝트 종료일(String)
-	
+
 	/* 기본생성자 */
 	public ToDoVo() {}
 

@@ -25,7 +25,10 @@ public class AttachmentVo {
 	private byte[] att_file;
 	private int rnum;
 
-	
+	/* 업무 첨부파일 출력 */
+	private String work_project;
+
+
 	public String getProject_title() {
 		return project_title;
 	}
@@ -112,5 +115,13 @@ public class AttachmentVo {
 
 	public void setAtt_file(byte[] att_file) {
 		this.att_file = att_file;
+	}
+
+	public String getWork_project() {
+		return work_project;
+	}
+
+	public void setWork_project(String work_project) {
+		this.work_project = work_project;
 	}
 }
