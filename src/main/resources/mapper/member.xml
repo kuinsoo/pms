@@ -276,16 +276,16 @@
   
 	</select>
 
-	<select id="myFileListCnt" resultType="int"
-		parameterType="String">
+	<select id="myFileListCnt" resultType="int" parameterType="String">
 		select count(*)
-		from attachment, member
-		where member_mail
-		= #{member_mail}
+		from   attachment inner join work on att_work = work_id  
+		      inner join  project on work_project = project_id
+		      inner join  project_member on project_id = pmember_project
+		      inner join  member on pmember_member = member_mail
+		where  member_mail =  #{member_mail}
 	</select>
 
-	<select id="totalmyFileListCntSearch" resultType="int"
-		parameterType="pageVo">
+	<select id="totalmyFileListCntSearch" resultType="int" parameterType="pageVo">
 		select count(*)
 		from attachment, member
 		where member_mail = #{member_mail}
