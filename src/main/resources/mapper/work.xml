@@ -123,7 +123,7 @@
 	<insert id="createWork" parameterType="workVo">
 		insert into work 
 		values(SEQ_WORK.NEXTVAL, #{work_project}, #{work_title}, #{work_content}, #{work_type}, ${work_importance},
-					 #{work_sdate}, #{work_eedate},0, 'N','',#{work_public},'#4286f4',sysdate)
+					 #{work_sdate}, #{work_eedate},0, 'N',#{work_eedate},#{work_public},'#4286f4',sysdate)
 	</insert>
 
 
