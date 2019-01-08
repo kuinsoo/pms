@@ -183,7 +183,7 @@ dataURLFormat.onchange = function() {
 };
 
 // # 타이머 1초간격으로 수행
-var RemainDate= 30000;//제한시간 설정 60000*30
+var RemainDate= 60000*30;
 tid=setInterval('msg_time()',1000); 
 var overT =0;
 var memT=0;// 시간 초과 후, 나중에 들어온 사람 's 팝업 예외처리 
