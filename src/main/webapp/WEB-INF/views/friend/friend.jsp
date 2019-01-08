@@ -848,7 +848,7 @@ $("#tabs").tabs();
 $("#tabs2").tabs();
 
 $('#locationBack_frd').on('click', function () {
-	history.back();;
+	location.href = "/main"
 });
 </script>
 </body>

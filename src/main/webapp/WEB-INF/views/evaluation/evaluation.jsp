@@ -257,7 +257,7 @@
 
 
 	$('#locationBack_eva').on("click", function () {
-       history.back();
+		location.href = "/main"
     });
 </script>
 </body>

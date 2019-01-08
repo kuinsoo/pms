@@ -983,7 +983,7 @@
 	$("#tabs2").tabs();
 
 	$('#locationBack_msg').on('click', function () {
-		history.back();;
+		location.href = "/main"
 	});
 	
 </script>
