@@ -143,6 +143,7 @@
 						
 						        infoWindow.setContent([
 						                '<div style="padding:10px;min-width:200px;line-height:150%;">',
+						                '<h3>CURRENT 3조 최종프로젝트</h3>',
 						                '<h3 style="margin-top:5px;">검색 주소 : '+ response.result.userquery +'</h3><br />',
 						                addrType +' '+ item.address +'<br />',
 						                '</div>'
