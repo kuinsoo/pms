@@ -279,8 +279,8 @@
 				}, 
 			timeout: 3000,
 	    	complete: setTimeout(function(){ pollsfriend(); }, 6000)
-			})
-		})();	 
+			 })
+		})();
 	}
 	</script>
     <script>
