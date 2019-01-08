@@ -131,7 +131,7 @@ function enterKey${work.work_id}(e){
 							<li><input type="text" name="todo_pmember" id="todo_pmember${work.work_id}" placeholder="담당자를 입력하세요." /></li>
 							<li><textarea name="todo_content" placeholder="내용을 입력하세요."></textarea></li>
 							<li><input type="datetime-local" name="non_todo_sdate${work.work_id}" id="non_todo_sdate${work.work_id}" value=""/></li>
-							<li><input type="datetime-local" name="non_todo_eedate${work.work_id}" id="non_todo_eedate${work.work_id}" value=""/></li>
+							<li><input type="datetime-local" name="non_todo_eedate${work.work_id}" id="non_todo_eedate${work.work_id}" required="required"/></li>
 						</ul>
 					</form>
 				</div>

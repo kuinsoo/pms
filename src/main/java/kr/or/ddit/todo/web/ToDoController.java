@@ -62,15 +62,18 @@ public class ToDoController {
 	 */
 	@RequestMapping(value="/todoInsert", method= {RequestMethod.POST})
 	public String ajaxInsertTodo(ToDoVo todoVo, HttpServletRequest request, PageVo pageVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
-		System.out.println("todoVo : " + todoVo);
-		
 		WorkVo workVo = new WorkVo();
 		workVo.setWork_project(request.getParameter("work_project"));
 		workVo.setWork_id(request.getParameter("todo_work"));
 
 		/* to-do insert */
+		if(todoVo.getTodo_eedate() == null) {
+			return "redirect:/todoError";
+		}
+		
 		try {
 			int result = todoService.todoInsert(todoVo);
+			System.out.println("result : " + result);
 			if(result == -400) {
 				return "redirect:/todoError";
 			}
@@ -324,7 +327,6 @@ public class ToDoController {
 	@RequestMapping(value="/todoUpdate", method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
 	public int todoUpdate(ToDoVo todoVo) {
-		System.out.println("todoVo : " + todoVo);
 		int result = -1;
 		try {
 			result = todoService.todoUpdate(todoVo);
