@@ -17,17 +17,19 @@
 	                    	<i class="icon-badge icons"></i>
 	                    	<span>능력 및 평가</span>
                     	</a>
-                    	<a href="/message">
-	                    	<i class="icon-paper-plane icons"></i>
-	                    	<span>쪽지 보내기</span>
-                    	</a>
-                    	<a href="/friendView">
-	                    	<i class="icon-user-follow icons"></i>
-	                    	<span>친구 리스트</span>
-                    	</a>
+	                    <c:if test="${projectMember.member_mail != memberVo.member_mail}">
+	                    	<a href="/message">
+		                    	<i class="icon-paper-plane icons"></i>
+		                    	<span>쪽지 보내기</span>
+	                    	</a>
+	                    	<a href="/friendView">
+		                    	<i class="icon-user-follow icons"></i>
+		                    	<span>친구 리스트</span>
+	                    	</a>
+	                    </c:if>
                     </div>
                 </li>
-            </c:if>
+          	</c:if>
             <c:if test="${projectMember.pmember_position eq '2'}">
                 <li>
                     <c:if test="${i.index eq 1}">
@@ -38,6 +40,7 @@
                         <span class="projectUserNameList">${projectMember.member_name}</span>
                     </div>
                     <div class="projectTeamHover">
+                   	<c:if test="${projectMember.member_mail != memberVo.member_mail}">
                     	<a href="/evaluationOther?userMail=${projectMember.member_mail}&project_id=${projectVo.project_id}">
 	                    	<i class="icon-badge icons"></i>
 	                    	<span>능력 및 평가</span>
@@ -45,12 +48,13 @@
                     	 <a href="/message?member_mail=${projectMember.member_mail}">
 	                    	<i class="icon-paper-plane icons"></i>
 	                    	<span>쪽지 보내기</span>
-                    	</a> 
-                    	<a href="/friendView?member_mail=${projectMember.member_mail}">
+	                   	</a>
+	                   	<a href="/friendView?member_mail=${projectMember.member_mail}">
 	                    	<i class="icon-user-follow icons"></i>
 	                    	<span>친구 리스트</span>
-                    	</a>
-                    </div>
+	                   	</a>
+                    </c:if>
+	               </div>
                 </li>
             </c:if>
         </c:forEach>
