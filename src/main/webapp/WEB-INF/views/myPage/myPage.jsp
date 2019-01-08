@@ -24,13 +24,16 @@
 		#phoneMypageError{
 			color:red;
 		}
+		.passwordChecClass{
+			color:red;
+		}
 	
 	</style>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$("#nameError").hide();
 			$("#phoneMypageError").hide();
-			
+			$(".passwordChecClass").hide();
 			
 			// 회원 탈퇴부분 - 비밀번호 에러 메시지 숨기기
 			$("#passError").hide();
@@ -322,7 +325,14 @@
 				}
 			}); */
 			
-		
+			function onkeyup_eventPassCheck(){
+				if(!/^[a-zA-Z0-9]{6,10}$/.test($("#pass1input").val())){
+					$(".passwordChecClass").show();
+					return false;
+				}else {
+					$(".passwordChecClass").hide();
+				}
+			}
 		
 		// 휴대번호 인증 부분 이벤트
 		function onkeyup_event(){
@@ -755,13 +765,13 @@
 	<section class="currentMain">
 		<div class="currentMainContainer">
 			<div class="myPageContainerTitle">
-				<h2>사용자 기본 정보</h2>
+				 <h2>${memberVo.member_name}님의 프로필</h2>
 			</div>
 			<div class="myPageContainer">
 				<!-- 마이페이지 사용자 정보 수정 부분  -->
 			<div class="myPageContainerLeft">
 				<div class="myPageContainerLeftUser">
-				  <h2>${memberVo.member_name}님의 프로필</h2>
+				 
 				   <form id = "profileFileUpload" action="/myPageUpdateFile" enctype="multipart/form-data" method= "post">
 						<div class="profileImg">
 							<div id="fileList" style="background-image:url('${memberVo.member_profile}');background-repeat:no-repeat;background-position:50% 50%;background-size:cover;">
@@ -821,7 +831,8 @@
 									<span class="passNot"> 비밀번호가 일치하지 않습니다.. </span>
 								</li>
 								<li>
-									<input type="password" id = "pass1input" name = "member_pass"required/>
+									<input type="password" id = "pass1input" onkeyup="onkeyup_eventPassCheck();" name = "member_pass"required/>
+									<span class="passwordChecClass"> 비밀번호는 6-10 자리의 숫자로 입력해주세요.  </span>
 								</li>
 								<li>
 									<input type="password" id = "pass2input"  onkeyup="onkeyup_event3();"required/>
