@@ -28,7 +28,7 @@
     <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
 	<script type="text/javascript" src="/js/annyang.js"></script>
 	<script type="text/javascript" src="/js/current_vui.js"></script>
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=nPljd7ns8PGll8DWsmSl"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=nPljd7ns8PGll8DWsmSl&submodules=panorama"></script>
 
 </head>
 

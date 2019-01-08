@@ -77,7 +77,47 @@
                 </div>
                 <div id="subMaintab5" class="tabcontent">
                 	<div class="naverMapGo">
-                		<div id="map" style="width:100%;height:500px;"></div>
+                		<div id="pano" style="width:100%;height:500px;"></div>
+                		<script>
+                		// 네이버 지도 임규승 2019-01-08
+                		var pano = null;
+
+						function initPanorama() {
+						    pano = new naver.maps.Panorama("pano", {
+						        position: new naver.maps.LatLng(36.3248045, 127.4198779),
+						        pov: {
+						            pan: 0,
+						            tilt: 19,
+						            fov: 100
+						        },
+						        aroundControl: true,
+						        aroundControlOptions: {
+						            position: naver.maps.Position.TOP_RIGHT
+						        }
+						    });
+						}
+						
+						naver.maps.onJSContentLoaded = initPanorama;
+						
+						$("#around").on("click", function(e) {
+						    e.preventDefault();
+						
+						    var el = $(this),
+						        aroundControlEnabled = pano.getOptions("aroundControl");
+						
+						    if (aroundControlEnabled) {
+						        pano.setOptions({
+						            aroundControl: false
+						        });
+						        el.val("AroundControl 켜기").removeClass("control-on");
+						    } else {
+						        pano.setOptions({
+						            aroundControl: true
+						        });
+						        el.val("AroundControl 끄기").addClass("control-on");
+						    }
+						});
+						</script>
                 	</div>
                 </div>
             </div>
@@ -573,14 +613,6 @@
     $('#locationBack').on('click', function () {
        history.back();
     });
-    
-// 네이버 지도 임규승 2019-01-08
-var mapOptions = {
-    center: new naver.maps.LatLng(37.3595704, 127.105399),
-    zoom: 10
-};
-
-var map = new naver.maps.Map('map', mapOptions);
 </script>
 </body>
 </html>
