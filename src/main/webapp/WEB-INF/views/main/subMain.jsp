@@ -77,7 +77,7 @@
                 </div>
                 <div id="subMaintab5" class="tabcontent">
                 	<div class="naverMapGo">
-                		<div id="pano" style="width:100%;height:500px;"></div>
+                		<div id="pano" style="width:900px !important;height:500px;"></div>
                 		<script>
                 		// 네이버 지도 임규승 2019-01-08
                 		var pano = null;
