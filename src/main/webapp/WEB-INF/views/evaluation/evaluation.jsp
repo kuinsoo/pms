@@ -32,8 +32,10 @@
 					<div class="evaluationInfoRight_1">
 						<ul>
 							<li>프로젝트 참여 수 : ${evalProjectList.size()}</li>
-							<li>프로젝트 업무 수행능력 : 인텔리제이</li>
-							<li>프로젝트 이슈 처리능력 : 인텔리제이</li>
+							<li>총 업무 수 : ${evalChart.workCnt}</li>
+							<li>총 일감 수 : ${evalChart.todoCnt}</li>
+							<li>처리한 일감 수 : ${evalChart.myTodoCnt}</li>
+
 						</ul>
 					</div>
 				</div>
@@ -46,7 +48,7 @@
 						<%-- chart1 --%>
 					</div>
 					<span>프로젝트</span>
-					<select id="evalProjectList" class="myChartSelect1" onchange="changeSelectEval();" >
+					<select id="evalProjectList" class="myChartSelect1" onchange="changeSelectEval('${memberVo.member_mail}');" >
 						<c:forEach items="${evalProjectList}" var="evalProject">
 							<option value="${evalProject.project_id}">${evalProject.project_title}</option>
 						</c:forEach>
@@ -62,7 +64,7 @@
 		</div>
 		<div class="myPageBottomContainer abilityContainer">
 			<div id="evalDetail">
-				<%-- evalDetail ajaxEvaluation.jsp --%>
+				<%@ include file="ajaxEvaluation.jsp"%>
 			</div>
 		</div>
 	</div>
@@ -205,15 +207,14 @@
 	});
 
 	/* ajaxEvaluation.jsp */
-	function changeSelectEval() {
-
+	function changeSelectEval(userMail) {
 		var project_id = $('#evalProjectList').val();
 
 		$.ajax({
 			type: "post",
 			url: "/ajaxEvaluationChartA",
 			//data: JSON.stringify(data),
-			data: "project_id=" + project_id,
+			data: "project_id=" + project_id + "&userMail="+userMail,
 			success: function (dt) {
 				$('#evalChartA').html("");
 				$('#evalChartA').html(dt);
@@ -224,7 +225,7 @@
 			type: "post",
 			url: "/ajaxEvaluationChartB",
 			//data: JSON.stringify(data),
-			data: "project_id=" + project_id,
+			data: "project_id=" + project_id+ "&userMail="+userMail,
 			success: function (dt) {
 				$('#evalChartB').html("");
 				$('#evalChartB').html(dt);
@@ -233,7 +234,7 @@
 		$.ajax({
 			type: "GET",
 			url : "/ajaxEvaluation",
-			data: "project_id=" + project_id,
+			data: "project_id=" + project_id+ "&userMail="+userMail,
 			success : function (data) {
 				$('#evalDetail').html("");
 				$('#evalDetail').html(data);
@@ -246,7 +247,7 @@
 	};
 
 	$(document).ready(function () {
-		changeSelectEval();
+		changeSelectEval('${memberVo.member_mail}');
 	});
 
 

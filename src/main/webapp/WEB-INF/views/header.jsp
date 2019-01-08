@@ -130,12 +130,16 @@
             <div class="headerRightContent">
             	<!-- 팀원 초대 -->
             	<c:if test="${projectVo.project_id >= 0 }">
+                <c:forEach items="${projectMemberList}" var="projectMember" varStatus="i">
+                <c:if test="${projectMember.pmember_position eq '1'}">
                 <a href="#projectCreatePopUps" class="projectCreatePopUps">
                     <div class="teamInvite">
                         <i class="icon-plus icons"></i>
                         <p>팀원초대</p>
                     </div>
                 </a>
+                </c:if>
+                </c:forEach>
                 <div class="dim-layers">
                     <div class="dimBgs"></div>
                     <div id="projectCreatePopUps" class="pop-layers">
@@ -207,7 +211,7 @@
 	                            </li>
 	                            <li>
 	                                <i class="icon-badge icons"></i>
-	                                <a href="/evaluation">능력 및 평가</a>
+	                                <a href="/evaluation?project_id=${projectVo.project_id}">능력 및 평가</a>
 	                            </li>
 	                            <c:if test="${memberVo.member_mail == 'admin@admin.com'}">
 		                            <li>

@@ -98,7 +98,7 @@
 	                <span>${projectVo.project_title}</span>
             	</div>
 	            <div class="backbackbackhahaha">
-	            	<i class="icon-arrow-left icons"></i>
+	            	<i class="icon-arrow-left icons" id="locationBack"></i>
 	            </div>
             </div>
             <div class="projectTeamsTop">
@@ -567,7 +567,9 @@
         document.getElementById('non_todo_sdate'+work_id).value = date.toISOString().slice(0, 16);
     }
 
-
+    $('#locationBack').on('click', function () {
+       history.back();
+    });
 </script>
 </body>
 </html>

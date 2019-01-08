@@ -17,13 +17,13 @@
         data: {
             labels:
                 [
-                    '','업무', '이슈',''
+                    '','일감', '이슈',''
                 ],
             datasets: [{
 
                 label: '${memberVo.member_name} 님의 CURRENT',
                 data: [0,
-                    '${evalChart.workCnt}', '${evalChart.issueCnt}'
+                    '${evalChart.myTodoCnt}', '${evalChart.myIssueCnt}'
                     , 0
                 ],
                 backgroundColor: [
