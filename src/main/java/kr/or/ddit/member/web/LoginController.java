@@ -198,7 +198,7 @@ public class LoginController {
 	 * @return Method  설명 : 아이디 찾기
 	 */
 	@RequestMapping(value = "/findEmail", method = RequestMethod.POST)
-	public String findEmail(HttpServletRequest request, @SessionAttribute("memberVo") MemberVo memberVo, String to, String subject, String content) {
+	public String findEmail(HttpServletRequest request, MemberVo memberVo, String to, String subject, String content) {
 
 		String member_name = request.getParameter("member_name");
 		// 자신의 진짜 메일 
