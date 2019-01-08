@@ -75,7 +75,7 @@ public class ProjectController {
 
 	@Autowired
 	private AttachmentServiceInf attachmentService;
-	
+
 	@Autowired
 	private IssueServiceInf issueService;
 
@@ -94,7 +94,7 @@ public class ProjectController {
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));
-		
+
 		return "project/createProject";
 	}
 
@@ -121,7 +121,7 @@ public class ProjectController {
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));
-		
+
 		return "redirect:/main";
 	}
 
@@ -204,7 +204,7 @@ public class ProjectController {
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));
-		
+
 		return "project/ajaxMainProjectList";
 	}
 
@@ -248,19 +248,19 @@ public class ProjectController {
 		model.addAttribute("projectWorkList", workService.selectProjectWork(project_id));
 
 		/* 나진실 : 마이페이지 부분 값 넘겨주기 위함 */
-		
+
 		String myTodo_id = request.getParameter("todo_id");
 		String myProject_id = request.getParameter("project_id");
 		String myProject_title = request.getParameter("project_title");
 		String myWork_id = request.getParameter("work_id");
 		String myWork_title = request.getParameter("work_title");
-		
+
 		model.addAttribute("todo_id", myTodo_id);
 		model.addAttribute("project_id", myProject_id);
 		model.addAttribute("project_title", myProject_title);
 		model.addAttribute("work_id", myWork_id);
 		model.addAttribute("work_title", myWork_title);
-		
+
 
 
 		Map<String, String> mtMap = new HashMap<>();
@@ -328,7 +328,7 @@ public class ProjectController {
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));
-		
+
 		return "project/ajaxInviteProject";
 	}
 
@@ -357,7 +357,7 @@ public class ProjectController {
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));
-		
+
 		return "project/ajaxMainProjectList";
 	}
 
@@ -381,7 +381,7 @@ public class ProjectController {
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));
-		
+
 		return "project/ajaxMainProjectList";
 	}
 
@@ -404,7 +404,7 @@ public class ProjectController {
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));
-		
+
 		return "project/ajaxMainProjectList";
 	}
 }

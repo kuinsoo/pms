@@ -133,7 +133,8 @@
             	<!-- 팀원 초대 -->
             	<c:if test="${projectVo.project_id >= 0 }">
                 <c:forEach items="${projectMemberList}" var="projectMember" varStatus="i">
-                <c:if test="${projectMember.pmember_position eq '1'}">
+                 <c:if test="${projectMember.member_mail eq memberVo.member_mail}">
+                    <c:if test="${projectMember.pmember_position eq '1'}">
                 <a href="#projectCreatePopUps" class="projectCreatePopUps">
                     <div class="teamInvite">
                         <i class="icon-plus icons"></i>
@@ -141,6 +142,7 @@
                     </div>
                 </a>
                 </c:if>
+                 </c:if>
                 </c:forEach>
                 <div class="dim-layers">
                     <div class="dimBgs"></div>
