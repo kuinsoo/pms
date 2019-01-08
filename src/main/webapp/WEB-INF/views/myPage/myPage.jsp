@@ -228,7 +228,7 @@
 		}
 			
 		function onkeyup_eventPhoneNum(){
-			if(!/^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/.test($(".myPageMemberPhoneLeg").val())){
+			if(!/^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/.test($(".myPageMemberPhoneLeg").val())){
 				$("#phoneMypageError").show();
 				$('.saveBtn').prop('disabled', true);
 				$('.phoneBtns').prop('disabled', true);
@@ -833,7 +833,7 @@
 									<input type="text"  value= "${memberVo.member_tel}" name ="member_tel" onkeyup="onkeyup_eventPhoneNum();" class= "myPageMemberPhoneLeg" id ="member_tel"/>
 									<input type="button" onclick="telAjax();" value="인증" class="phoneBtns"/>
 								</li>
-									<span id = "phoneMypageError"> 올바르지않은 핸드폰 번호입니다.. </span>
+									<span id = "phoneMypageError"> 올바르지않은 핸드폰 번호입니다.. (-) 없이 입력해 주세요. </span>
 
 								<li><input type="text" id ="telnum" placeholder="인증번호 4자리를 입력해주세요.." onkeyup="onkeyup_event();" required/>
 									<span class = "inputerror"> 인증번호를 입력해 주세요..</span>

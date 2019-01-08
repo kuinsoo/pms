@@ -135,7 +135,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 							<div class="form-group label-floating">
 								<label class="control-label">휴대번호</label>
 								<input type="tel" name="member_tel" id ="tel" onkeyup="onkeyup_eventPhoneNum();"  class="form-control" autofocus="autofocus" required />
-								<span id ="phoneMypageError"> 올바르지않은 핸드폰 번호입니다.. </span>
+								<span id ="phoneMypageError"> 올바르지않은 핸드폰 번호입니다.. (-) 없이 입력해 주세요. </span>
 							</div>
 							<div class="form-group label-floating">
 								<label class="control-label">이메일</label>
@@ -197,7 +197,7 @@ $(document).ready(function(){
 });
 
 function onkeyup_eventPhoneNum(){
-	if(!/^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/.test($("#tel").val())){
+	if(!/^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/.test($("#tel").val())){
 		$("#phoneMypageError").show();
 		return false;
 	}else {
