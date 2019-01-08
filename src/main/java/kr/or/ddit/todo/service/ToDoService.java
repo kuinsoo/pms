@@ -1,5 +1,6 @@
 package kr.or.ddit.todo.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,13 @@ public class ToDoService implements ToDoServiceInf{
 	*/
 	@Override
 	public int todoInsert(ToDoVo todoVo) {
-		return todoMapper.todoInsert(todoVo);
+		long chk = dateCompareTodo(todoVo);
+		
+		if (chk >= 0) {
+			return todoMapper.todoInsert(todoVo);
+		} else {
+			return -400;
+		}
 	}
 	
 	/**
@@ -64,7 +71,6 @@ public class ToDoService implements ToDoServiceInf{
 	*/
 	@Override
 	public Map<String, Object> workToDoSelect(Map todoMap) {
-		
 		List<ToDoVo> getToDoList = todoMapper.workToDoSelect(todoMap);
 		
 		Map<String, Object> getToDoMap = new HashMap<String, Object>();
@@ -149,9 +155,27 @@ public class ToDoService implements ToDoServiceInf{
 	*/
 	@Override
 	public int todoUpdate(ToDoVo todoVo) {
-		return todoMapper.todoUpdate(todoVo);
+		long chk = dateCompareTodo(todoVo);
+		
+		if(chk >= 0) {
+			return todoMapper.todoUpdate(todoVo);
+		}
+		return -400;
 	}
 
+	/**
+	* Method : getProjectEndDateTodo
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todoVo
+	* @return
+	* Method 설명 : TODO 등록시 프로젝트 종료일 조회
+	*/
+	@Override
+	public ToDoVo getProjectEndDateTodo(ToDoVo todoVo) {
+		return todoMapper.getProjectEndDateTodo(todoVo);
+	}
+	
 	/**
 	 * Method : todoUpdate
 	 * 작성자 : Mr.KKu
@@ -203,4 +227,28 @@ public class ToDoService implements ToDoServiceInf{
 	public List<ToDoVo> selectCntTodoComplete(String work_id) {
 		return todoMapper.selectCntTodoComplete(work_id);
 	}
+
+	/**
+	* Method : dateCompareTodo
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todoVo
+	* @return
+	* Method 설명 : TODO 등록일 및 수정일이 프로젝트 종료일보다 후일이면 등록되지 않는다.
+	*/
+	public long dateCompareTodo(ToDoVo todoVo) {
+		ToDoVo projectDateValue = getProjectEndDateTodo(todoVo);
+		Date project_edate = null;
+		
+		if(projectDateValue.getProject_edate() != null) {
+			project_edate = projectDateValue.getProject_edate();
+		} else {
+			project_edate = projectDateValue.getProject_eedate();
+		}
+		
+		long chk = project_edate.getTime() - todoVo.getTodo_sdate().getTime();
+		
+		return chk;
+	}
+	
 }

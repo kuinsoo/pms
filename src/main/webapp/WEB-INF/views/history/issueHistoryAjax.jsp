@@ -19,7 +19,7 @@
 
 <%-- 이슈발생일자 위치 --%>
 <c:forEach items="${myProjectList.issueSdateList}" var="issueSdate" varStatus="status">
-	$("#pin${myProjectList.pjtAllIssueHistory[status.index].rnum}").css("left", '${issueSdate}%');
+	$("#pin${myProjectList.pjtAllIssueHistory[status.index].rnum}").css("left", '${issueSdate-1}%');
 </c:forEach>
 </script>
 <style>
@@ -31,7 +31,6 @@
 	<span>${history.project_title}</span>
 	<div id="myProgress">
 		<div class="issuePin" id="issuePin">
-			<!-- issueAllCountHtmlAjax.jsp -->
 			<c:forEach items="${myProjectList.pjtAllIssueHistory}" var="issueCnt">
 				<c:choose>
 					<c:when test="${history.project_id eq issueCnt.project_id}">

@@ -108,6 +108,16 @@ public interface ToDoServiceInf {
 	int todoUpdate(ToDoVo todoVo);
 
 	/**
+	* Method : getProjectEndDateTodo
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param todoVo
+	* @return
+	* Method 설명 : TODO 등록시 프로젝트 종료일 조회
+	*/
+	ToDoVo getProjectEndDateTodo(ToDoVo todoVo);
+	
+	/**
 	 * Method : todoUpdate
 	 * 작성자 : Mr.KKu
 	 * 변경이력 :

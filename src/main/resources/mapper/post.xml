@@ -105,7 +105,7 @@
 	        select POST.* 
 	        from POST 
 	        where BOARD_ID = #{board_id}
-	        order by POST_ID desc
+	        order by to_number(substr(POST_ID, 7)) desc
 	        ) a
 	    )
 	where   
@@ -115,7 +115,7 @@
 	
 	start with POST_HIERARCHY is null 
 	connect by prior POST_ID = POST_HIERARCHY
-	order siblings by POST_ID desc
+	order siblings by to_number(substr(POST_ID, 7)) desc
     </select>   
     
     
@@ -135,7 +135,7 @@
 	            select POST.* 
 	            from POST 
 	            where BOARD_ID = #{board_id}
-	            order by POST_ID desc
+	            order by to_number(substr(POST_ID, 7)) desc
 	            ) a
 	        ) b
 	    where POST_TITLE like '%'||#{searchText}||'%'
@@ -147,7 +147,7 @@
 	
 	start with POST_HIERARCHY is null 
 	connect by prior POST_ID = POST_HIERARCHY
-	order siblings by POST_ID desc
+	order siblings by to_number(substr(POST_ID, 7)) desc
     </select>    
     
     

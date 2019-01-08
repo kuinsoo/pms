@@ -1,5 +1,6 @@
 package kr.or.ddit.issue.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -96,7 +97,13 @@ public class IssueService implements IssueServiceInf{
 	*/
 	@Override
 	public int issueInsert(IssueVo issueVo) {
-		return issueMapper.issueInsert(issueVo);
+		long chk = dateCompareIssue(issueVo);
+		
+		if (chk >= 0) {
+			return issueMapper.issueInsert(issueVo);
+		} else {
+			return -400;
+		}
 	}
 
 	/**
@@ -148,7 +155,13 @@ public class IssueService implements IssueServiceInf{
 	*/
 	@Override
 	public int issueUpdate(IssueVo issueVo) {
-		return issueMapper.issueUpdate(issueVo);
+		long chk = dateCompareIssue(issueVo);
+		
+		if(chk >= 0) {
+			return issueMapper.issueUpdate(issueVo);
+		} else {
+			return -400;
+		}
 	}
 
 	/**
@@ -217,6 +230,19 @@ public class IssueService implements IssueServiceInf{
 	}
 
 	/**
+	* Method : getProjectEndDate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 이슈 등록시 해당 프로젝트의 종료기간을 조회
+	*/
+	@Override
+	public IssueVo getProjectEndDate(IssueVo issueVo) {
+		return issueMapper.getProjectEndDate(issueVo);
+	}
+	
+	/**
 	 * Method : getIssuePageList
 	 * 작성자 : iks
 	 * 변경이력 :
@@ -240,6 +266,33 @@ public class IssueService implements IssueServiceInf{
 	@Override
 	public int issueMemberTotalCnt(String member_mail) {
 		return issueMapper.issueMemberTotalCnt(member_mail);
+	}
+
+	/**
+	* Method : dateCompare
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 이슈 발생일 및 수정일이 프로젝트 종료일보다 후일이면 등록되지 않는다.
+	*/
+	public long dateCompareIssue(IssueVo issueVo) {
+		IssueVo projectDateValue = getProjectEndDate(issueVo);
+		Date project_edate = null;
+		
+		/**
+		 * issueVo에 담겨있는 issue_work 값으로 해당 프로젝트의 종료일(혹은 예상종료일)을
+		 * 조회한 후 각각의 알맞은 변수명에 초기화해준다.
+		 */
+		if (projectDateValue.getProject_edate() != null) {
+			project_edate = projectDateValue.getProject_edate();
+		} else {
+			project_edate =projectDateValue.getProject_eedate();
+		}
+		
+		long chk = project_edate.getTime() - issueVo.getIssue_sdate().getTime();
+		
+		return chk;
 	}
 	
 }

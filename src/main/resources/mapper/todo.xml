@@ -113,6 +113,13 @@
 		WHERE   todo_id = #{todo_id}
 	</update>
 
+	<!-- to-do 등록시 프로젝트의 종료일 조회 -->
+	<select id="getProjectEndDateTodo" resultType="todoVo" parameterType="todoVo">
+		SELECT	project_eedate,
+				project_edate
+		FROM	project
+		WHERE	project_id = #{work_project}
+	</select>
 
 	<!-- todolist count 개수 필요 -->
 	<select id="todoComplete" resultType="int" parameterType="Map">
@@ -139,4 +146,5 @@
 		where TODO_WORK = #{work_id}
 		and TODO_COMPLET = 'Y'
 	</select>
+	
 </mapper>

@@ -149,6 +149,16 @@ public interface IssueMapper {
 	List<IssueVo> pjtAllIssueHistory(String sid);
 	
 	/**
+	* Method : getProjectEndDate
+	* 작성자 : jerry
+	* 변경이력 :
+	* @param issueVo
+	* @return
+	* Method 설명 : 이슈 등록시 해당 프로젝트의 종료기간을 조회
+	*/
+	IssueVo getProjectEndDate(IssueVo issueVo);
+	
+	/**
 	 * Method : getIssuePageList
 	 * 작성자 : iks
 	 * 변경이력 :

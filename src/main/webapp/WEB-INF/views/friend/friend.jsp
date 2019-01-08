@@ -409,6 +409,7 @@
 				url : "/myFriendsDelete",
 				data : "friend_code="+friend_code,
 				success: function(data){
+					getAllMember(1);
 					getMyFriends(1);
 				}
 			});

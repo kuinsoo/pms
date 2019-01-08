@@ -1,6 +1,5 @@
 package kr.or.ddit.issue.web;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -12,7 +11,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -138,8 +136,11 @@ public class IssueController {
 	public String issueInsert(IssueVo issueVo, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
 		try {
 			int result = issueService.issueInsert(issueVo);
-			if(result != 0) {
+			
+			if (result > 0) {
 				issueService.todoIssueUpdate(issueVo);
+			} else if(result == -400) {
+				return "redirect:/issueError";
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -157,6 +158,19 @@ public class IssueController {
 		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));
 		
 		return "issue/issueSelectHtmlAjax";
+	}
+	
+	/**
+	* Method : issueInsertError
+	* 작성자 : jerry
+	* 변경이력 :
+	* @return
+	* Method 설명 : 이슈 발생일이 프로젝트 종료일보다 후일이면 등록되지 않는다.
+	*/
+	@RequestMapping(value="/issueError")
+	@ResponseBody
+	public int issueError() {
+		return 400;
 	}
 	
 	/**
@@ -193,11 +207,18 @@ public class IssueController {
 	*/
 	@RequestMapping(value="/issueUpdate", method= {RequestMethod.POST, RequestMethod.GET})
 	@ResponseBody
-	public void issueUpdate(IssueVo issueVo) {
+	public int issueUpdate(IssueVo issueVo) {
+		int result = -1;
 		try {
-			issueService.issueUpdate(issueVo);
+			result = issueService.issueUpdate(issueVo);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		
+		if(result == -400) {
+			return 400;
+		} else {
+			return 1;
 		}
 	}
 	
@@ -210,7 +231,6 @@ public class IssueController {
 	*/
 	@RequestMapping(value="/helperUpdate", method= {RequestMethod.POST, RequestMethod.GET})
 	public String helperUpdate(IssueVo issueVo, Model model, @SessionAttribute("memberVo") MemberVo memberVo) {
-		System.out.println("issueVo : " + issueVo);
 		List<IssueVo> helperList = new ArrayList<IssueVo>();
 		try {
 			int result = issueService.helperUpdate(issueVo);
@@ -286,7 +306,6 @@ public class IssueController {
 	* Method 설명 : 프로젝트의 지난 기간을 percent로 구하는 메서드
 	*/
 	List<Integer> getPercentList(List<ProjectVo> history_myProjectList){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date sdate = null;	//시작일 선언 및 초기화
 		Date edate = null;	//종료일 선언 및 초기화
 		Date current = new Date();	//현재날짜
@@ -330,7 +349,6 @@ public class IssueController {
 	* Method 설명 : 프로젝트의 총 기간과 이슈 발생일자의 위치를 구하는 메서드
 	*/
 	List<Integer> getIssueSdateList(List<IssueVo> pjtAllIssueHistory){
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date pjtSdate = null;		//프로젝트 시작일 선언 및 초기화
 		Date pjtEdate = null;		//프로젝트 종료일 선언 및 초기화
 		Date issueSdate = null;		//이슈발생일자

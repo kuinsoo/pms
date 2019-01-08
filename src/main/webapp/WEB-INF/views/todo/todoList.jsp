@@ -142,8 +142,12 @@ function insertIssue${work.work_id}(todo_id) {
 		url: "/issueInsert",
 		data: param,
 		success: function(data){
-			$('#issueSelectHtmlAjax'+todo_id).html("");
-			$('#issueSelectHtmlAjax'+todo_id).html(data);
+			if(data == 400) {
+				alert('발생 일시가 알맞지 않거나 종료된 프로젝트입니다. 확인하여 주세요.');
+			} else {
+				$('#issueSelectHtmlAjax'+todo_id).html("");
+				$('#issueSelectHtmlAjax'+todo_id).html(data);
+			}
 		},
 		error: function(data){
 			console.log("todoList.jsp : insertIssue() - error");
@@ -193,7 +197,11 @@ function updateIssue${work.work_id}(todo_id){
 		url: "/issueUpdate",
 		data: param,
 		success: function(data){
-			getIssueList${work.work_id}(todo_id);
+			if(data == 400) {
+				alert('발생 일시가 알맞지 않거나 종료된 프로젝트입니다. 확인하여 주세요.');
+			} else {
+				getIssueList${work.work_id}(todo_id);
+			}
 		},
 		error: function(data){
 			console.log("todoList.jsp : updateIssue() - error");
@@ -258,6 +266,12 @@ function deleteIssue${work.work_id}(todo_id){
 		data: {"issue_id" : issue_id},
 		success: function(data){
 			getIssueList${work.work_id}(todo_id);
+			$('#input_issue_title'+todo_id).val('');
+			$("#input_issue_level"+todo_id+" option[value='1']").attr('selected', 'selected');
+			var date = new Date();
+			date.setHours(date.getHours() + 9);
+			document.getElementById('non_issue_sdate'+todo_id).value = date.toISOString().slice(0, 16);
+			$('#input_issue_content'+todo_id).val('');
 		},
 		error: function(data){
 			console.log("todoList.jsp : deleteIssue() - error");
@@ -278,8 +292,8 @@ function attrChangeUpdate${work.work_id}(todo_id) {
 	$('#todo_content'+todo_id).removeAttr('readonly');
 	$('#todo_eedate'+todo_id).removeAttr('readonly');
 
-	$('#todoUpdateBtn').hide();
-	$('#todoUpdateSaveBtn').show();
+	$('#todoUpdateBtn'+todo_id).hide();
+	$('#todoUpdateSaveBtn'+todo_id).show();
 
 	$.ajax({
 		method: "POST",
@@ -287,10 +301,10 @@ function attrChangeUpdate${work.work_id}(todo_id) {
 		data: {"project_id" : project_id},
 		success: function(data){
 			$('#todo_pmember'+todo_id).hide();
-			$('#pmember_member').show();
+			$('#pmember_member'+todo_id).show();
 			for(var i = 0; i < data.length; i++){
 				var option = $("<option>"+data[i].member_name+'('+data[i].pmember_member+')'+"</option>");
-				$('#pmember_member').append(option);
+				$('#pmember_member'+todo_id).append(option);
 			}
 		},
 		error: function(data){
@@ -303,7 +317,7 @@ function attrChangeUpdate${work.work_id}(todo_id) {
 function updateTodo${work.work_id}(todo_id, work_id) {
 	var project_id = ${projectVo.project_id};
 
-	var option = $('#pmember_member option:selected').val();
+	var option = $('#pmember_member'+todo_id+' option:selected').val();
 	var optionSplit = option.split("(");
 	var member_name = optionSplit[0];
 	var pmember_member = optionSplit[1];
@@ -317,9 +331,13 @@ function updateTodo${work.work_id}(todo_id, work_id) {
 		url: "/todoUpdate",
 		data: {"todo_id" : todo_id, "member_name" : member_name, "pmember_member" : pmember_member, "todo_eedate" : todo_eedate, "todo_content" : todo_content},
 		success: function(data){
-			window.location.href = '#close';
-			getToDoList${work.work_id}(1, project_id, work_id);
-			initialization${work.work_id}(todo_id);
+			if(data == 400) {
+				alert('시작일시와 마감일시가 알맞지 않거나 종료된 프로젝트입니다. 확인하여 주세요.');
+			} else {
+				window.location.href = '#close';
+				getToDoList${work.work_id}(1, project_id, work_id);
+				initialization${work.work_id}(todo_id);
+			}
 		},
 		error: function(data){
 			console.log("todoList.jsp : updateTodo() - error");

@@ -184,7 +184,7 @@
 	<select id="totalEndProjectCnt" resultType="int"
 		parameterType="String">
 		select count(*) from project
-		where project_eedate is not null
+		where project_edate is not null
 	</select>
 
 	<!-- 참여했던 프로젝트 전체 *검색 개수 -->
