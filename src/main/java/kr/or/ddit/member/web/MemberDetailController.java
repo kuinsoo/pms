@@ -182,8 +182,6 @@ public class MemberDetailController {
 		if (pageVo.getSearchText() == null) {
 			pageVo.setSearchText("");
 		}
-		//System.out.println(pageVo.getSearchText() + "의 값은? ????");
-		//System.out.println("Controller에서 값이 들어오나 확인중 ");
 		
 		List<ProjectVo> projectList = memberservice.myprojectselect(pageVo);
 		Map<String, Object> projectMap = new HashMap<>();
@@ -583,7 +581,6 @@ public class MemberDetailController {
 				String fileName = part.getOriginalFilename();
 				part.transferTo(new File(path + File.separator + fileName));
 				
-				System.out.println("path " + path);
 				// profile
 				memberVo.setMember_profile("/images/"+fileName);
 			}
@@ -593,7 +590,6 @@ public class MemberDetailController {
 			e.printStackTrace();
 		}
 		
-		System.out.println("프로필 사진 들어오나 확인 ");
 		int updateUser = memberservice.updateUser(memberVo);
 		model.addAttribute("memberVo",memberVo);
 		

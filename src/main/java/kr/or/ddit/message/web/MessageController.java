@@ -153,12 +153,15 @@ public class MessageController {
 		return myFriendMap;
 	}
 	
+	// 전체 사용자 
+	
 	@ResponseBody
 	@RequestMapping(value="/AllMemberListAjax", method= RequestMethod.GET)
 	public Map<String, Object>AllMemberListAjax (@SessionAttribute("memberVo") MemberVo memberVo , PageVo pageVo){
 		
 		pageVo.setMember_mail(memberVo.getMember_mail());
 		List<MemberVo> myMemberList = messageService.totalMemberSearch(pageVo);
+		
 		int pageCnt = messageService.totalMember(memberVo.getMember_mail());
 		
 		Map<String, Object> myMemberMap = new HashMap<>();
@@ -180,7 +183,6 @@ public class MessageController {
 		pageVo.setFriend_accept(friendVo.getFriend_accept());
 		
 		String member_mail = request.getParameter("member_mail");
-		System.out.println("넘어오는지 확이 ㄴ하는  ```~~~~ ");
 		friendVo.setFriend_member(member_mail);
 		
 		messageService.insertFriendN(friendVo);

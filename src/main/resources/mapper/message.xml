@@ -65,8 +65,6 @@
 						and    A.msg_id = #{msg_id})a)
 	</select>
 	
-	
-	
 	<!-- 쪽지 보내기  -->
 	<insert id="insertMessageSend" parameterType="msgVo">
 		insert all
