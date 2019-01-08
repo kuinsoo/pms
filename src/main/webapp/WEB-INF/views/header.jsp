@@ -211,7 +211,7 @@
 	                            </li>
 	                            <li>
 	                                <i class="icon-badge icons"></i>
-	                                <a href="/evaluation">능력 및 평가</a>
+	                                <a href="/evaluation?project_id=${projectVo.project_id}">능력 및 평가</a>
 	                            </li>
 	                            <c:if test="${memberVo.member_mail == 'admin@admin.com'}">
 		                            <li>
