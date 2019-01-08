@@ -96,7 +96,7 @@ function savePost(){
 							<td class="tdColor">비밀글 여부</td>
 							<td colspan="4">
 								<span id="cecret">[비밀글로 작성(클릭)]</span>
-								<input type="text" id="post_pass" name="post_pass" style="display:none;" placeholder="비밀번호를 입력하세요" class="secretGoGoYeah" />
+								<input type="password" id="post_pass" name="post_pass" style="display:none;" placeholder="비밀번호를 입력하세요" class="secretGoGoYeah" />
 							</td>
 						</tr>
 						<tr>
