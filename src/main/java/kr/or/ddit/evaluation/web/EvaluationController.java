@@ -16,6 +16,7 @@ import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.work.service.WorkServiceInf;
 
+import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,17 +69,34 @@ public class EvaluationController {
 		model.addAttribute("evalProjectList", evaluationService.evaluationProjectList(evalMap));
 		model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
 
-		
-		/* 알림기능 - IKS */
+	/*
+		*//* 알림기능 - IKS *//*
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
-		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));
-		
+		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));*/
+
 		
 		return "evaluation/evaluation";
 	}
+
+	@RequestMapping(value= "/evaluationOther", method=RequestMethod.GET)
+	public String evaluationOther(Model model, @RequestParam("userMail")String userMail) {
+		MemberVo memberVo = memberService.selectfindPass(userMail);
+		model.addAttribute("memberVo",memberVo);
+		Map<String, String> evalMap = new HashMap<>();
+		evalMap.put("member_mail", memberVo.getMember_mail());
+		evalMap.put("member_name", memberVo.getMember_name());
+		evalMap.put("project_id", "0");
+		model.addAttribute("evalProjectList", evaluationService.evaluationProjectList(evalMap));
+		model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
+
+
+		return "evaluation/evaluation";
+	}
+
+
 
     @RequestMapping(value= "/ajaxEvaluationChartA", method=RequestMethod.POST)
     public String ajaxEvaluationChartA(Model model, @SessionAttribute("memberVo") MemberVo memberVo,
