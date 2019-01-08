@@ -31,11 +31,17 @@ public class EvaluationVo {
 	private String 	work_title;
 	private String 	work_content;
 
+	private String todo_content;
+	private String todo_member;
+
+
 	private int issueCnt;
 	private int workCnt;
 	private int memberCnt;
 	private int myWorkCnt;
 	private int myIssueCnt;
+	private int myTodoCnt;
+	private int todoCnt;
 
 	public EvaluationVo() {
 	}
@@ -150,5 +156,37 @@ public class EvaluationVo {
 
 	public void setMyIssueCnt(int myIssueCnt) {
 		this.myIssueCnt = myIssueCnt;
+	}
+
+	public String getTodo_content() {
+		return todo_content;
+	}
+
+	public void setTodo_content(String todo_content) {
+		this.todo_content = todo_content;
+	}
+
+	public String getTodo_member() {
+		return todo_member;
+	}
+
+	public void setTodo_member(String todo_member) {
+		this.todo_member = todo_member;
+	}
+
+	public int getMyTodoCnt() {
+		return myTodoCnt;
+	}
+
+	public void setMyTodoCnt(int myTodoCnt) {
+		this.myTodoCnt = myTodoCnt;
+	}
+
+	public int getTodoCnt() {
+		return todoCnt;
+	}
+
+	public void setTodoCnt(int todoCnt) {
+		this.todoCnt = todoCnt;
 	}
 }

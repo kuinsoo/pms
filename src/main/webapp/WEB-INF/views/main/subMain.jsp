@@ -570,8 +570,10 @@
         document.getElementById('non_todo_sdate'+work_id).value = date.toISOString().slice(0, 16);
     }
 
+    $('#locationBack').on('click', function () {
+       history.back();
+    });
     
-
 // 네이버 지도 임규승 2019-01-08
 var mapOptions = {
     center: new naver.maps.LatLng(37.3595704, 127.105399),

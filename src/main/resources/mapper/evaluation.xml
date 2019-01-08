@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.or.ddit.evaluation.mapper.EvaluationMapper">
-    <select id="evaluationView" parameterType="Map" resultType="evalVo">
+ <!--   <select id="evaluationView" parameterType="Map" resultType="evalVo">
         SELECT P.PROJECT_TITLE, P.PROJECT_ID, P.PROJECT_OVERVIEW, P.PROJECT_SDATE, P.PROJECT_EEDATE , P.PROJECT_EDATE
                 ,PM.PMEMBER_ID , WORK.WORK_TITLE , WORK.WORK_CONTENT
         FROM MEMBER M INNER JOIN PROJECT_MEMBER PM ON (M.MEMBER_MAIL = PM.PMEMBER_MEMBER)
@@ -17,6 +17,15 @@
         WHERE PM.PMEMBER_MEMBER = #{member_mail}
           AND P.PROJECT_ID LIKE #{project_id}
         ORDER BY TO_NUMBER(PM.PMEMBER_ID)
+    </select>-->
+
+    <select id="evaluationView" parameterType="Map" resultType="evalVo">
+            select PROJECT_TITLE, project_id, PROJECT_OVERVIEW ,PROJECT_SDATE, PROJECT_EEDATE, WORK_TITLE,TODO_CONTENT, todo_Member
+            from PROJECT, work, TODO
+            where project_id = WORK_PROJECT
+            and WORK_ID = TODO_WORK
+              and todo_member = #{member_mail}
+            and PROJECT_ID = #{project_id}
     </select>
 
     <select id="evaluationProjectList" parameterType="String" resultType="evalVo">
@@ -66,8 +75,19 @@
                   and PROJECT_ID = WORK_PROJECT
                   and WORK_ID = ISSUE_WORK
                   and MEMBER_MAIL = #{member_mail}
-                  and ISSUE_HELPER = #{member_mail}
-                  and PM6.PMEMBER_PROJECT = PM2.PMEMBER_PROJECT)as myIssueCnt
+                  and ISSUE_HELPER = #{member_name}
+                  and PM6.PMEMBER_PROJECT = PM2.PMEMBER_PROJECT)as myIssueCnt,
+          /* 내 일감 수 */
+                (select count(*) from project, work, TODO
+                  where PROJECT_ID = WORK_PROJECT
+                  and work_id = TODO_WORK
+                  and todo_member = #{member_mail}
+                  and PROJECT_ID = PM2.PMEMBER_PROJECT) as myTodoCnt,
+     /* 총 일감 수 */
+                (select count(*) from project, work, TODO
+                  where PROJECT_ID = WORK_PROJECT
+                  and work_id = TODO_WORK
+                  and PROJECT_ID = PM2.PMEMBER_PROJECT) as todoCnt
         from MEMBER, PROJECT_MEMBER PM2, PROJECT P
         where MEMBER_MAIL = PMEMBER_MEMBER
           and PMEMBER_PROJECT = P.PROJECT_ID

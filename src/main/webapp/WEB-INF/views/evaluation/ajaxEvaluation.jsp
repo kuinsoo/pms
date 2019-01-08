@@ -17,7 +17,7 @@
 </div>
 <div class="abilityRight">
     <ul>
-        <c:forEach items="${evalView}" var="evalVo" begin="1" end="1">
+        <c:forEach items="${evalView}" var="evalVo" begin="0" end="0">
             <li><input type="text" value="${evalVo.project_title}" readonly /></li>
             <li>
                 <textarea readonly>${evalVo.project_overview}</textarea>
@@ -29,7 +29,7 @@
                     <c:forEach items="${evalView}" var="evalVo" varStatus="i">
                         <h3>${evalVo.work_title}</h3>
                         <div>
-                            <p>${evalVo.work_content}</p>
+                            <p>${evalVo.todo_content}</p>
                         </div>
                     </c:forEach>
                 </div>

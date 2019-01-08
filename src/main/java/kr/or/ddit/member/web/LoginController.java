@@ -141,7 +141,7 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/callback", method = RequestMethod.GET)
-	public String callback(@RequestParam String code, @RequestParam String state, HttpSession session, Model model, @SessionAttribute("memberVo") MemberVo memberVo) throws Exception {
+	public String callback(@RequestParam String code, @RequestParam String state, HttpSession session, Model model, MemberVo memberVo) throws Exception {
 		/* 네아로 인증이 성공적으로 완료되면 code 파라미터가 전달되며 이를 통해 access token을 발급 */
 
 		JsonParser json = new JsonParser();
@@ -165,6 +165,7 @@ public class LoginController {
 		}
 	}
 
+	
 
 
 

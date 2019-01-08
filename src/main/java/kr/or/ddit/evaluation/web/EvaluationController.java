@@ -16,6 +16,7 @@ import kr.or.ddit.message.service.MessageServiceInf;
 import kr.or.ddit.post.service.PostServiceInf;
 import kr.or.ddit.work.service.WorkServiceInf;
 
+import java.lang.reflect.Member;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,31 +60,49 @@ public class EvaluationController {
 	 * @return Method 설명 : 능력 및 평가 화면단
 	 */
 	@RequestMapping(value= "/evaluation", method=RequestMethod.GET)
-	public String evaluationView(Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
+	public String evaluationView(Model model, @SessionAttribute("memberVo")MemberVo memberVo, @RequestParam("project_id")String project_id) {
 		model.addAttribute("memberVo",memberVo);
 		Map<String, String> evalMap = new HashMap<>();
 		evalMap.put("member_mail", memberVo.getMember_mail());
 		evalMap.put("member_name", memberVo.getMember_name());
-		evalMap.put("project_id", "0");
+		evalMap.put("project_id", project_id);
 		model.addAttribute("evalProjectList", evaluationService.evaluationProjectList(evalMap));
 		model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
 
-		
-		/* 알림기능 - IKS */
+	/*
+		*//* 알림기능 - IKS *//*
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
-		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));
-		
+		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));*/
+
 		
 		return "evaluation/evaluation";
 	}
 
+	@RequestMapping(value= "/evaluationOther", method=RequestMethod.GET)
+	public String evaluationOther(Model model, @RequestParam("userMail")String userMail, @RequestParam("project_id")String project_id) {
+		MemberVo memberVo = memberService.selectfindPass(userMail);
+		model.addAttribute("memberVo",memberVo);
+		Map<String, String> evalMap = new HashMap<>();
+		evalMap.put("member_mail", memberVo.getMember_mail());
+		evalMap.put("member_name", memberVo.getMember_name());
+		evalMap.put("project_id", project_id);
+		model.addAttribute("evalProjectList", evaluationService.evaluationProjectList(evalMap));
+		model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
+
+
+		return "evaluation/evaluation";
+	}
+
+
+
     @RequestMapping(value= "/ajaxEvaluationChartA", method=RequestMethod.POST)
-    public String ajaxEvaluationChartA(Model model, @SessionAttribute("memberVo") MemberVo memberVo,
+    public String ajaxEvaluationChartA(Model model, @RequestParam("userMail")String userMail,
                                  @RequestParam("project_id")String project_id) {
 								  //@RequestBody String project_id) {
+        MemberVo memberVo = memberService.selectfindPass(userMail);
         Map<String, String> evalMap = new HashMap<>();
         evalMap.put("member_mail", memberVo.getMember_mail());
         evalMap.put("member_name", memberVo.getMember_name());
@@ -101,8 +120,9 @@ public class EvaluationController {
     }
 
 	@RequestMapping(value= "/ajaxEvaluationChartB", method=RequestMethod.POST)
-	public String ajaxEvaluationChartB(Model model, @SessionAttribute("memberVo") MemberVo memberVo,
+	public String ajaxEvaluationChartB(Model model,@RequestParam("userMail")String userMail,
 								  @RequestParam("project_id")String project_id) {
+        MemberVo memberVo = memberService.selectfindPass(userMail);
 		//@RequestBody String project_id) {
 		Map<String, String> evalMap = new HashMap<>();
 		evalMap.put("member_mail", memberVo.getMember_mail());
@@ -121,9 +141,9 @@ public class EvaluationController {
 	}
 
 	@RequestMapping(value= "/ajaxEvaluation", method=RequestMethod.GET)
-	public String ajaxEvaluation(Model model, @SessionAttribute("memberVo") MemberVo memberVo,
+	public String ajaxEvaluation(Model model, @RequestParam("userMail")String userMail,
 								 @RequestParam("project_id")String project_id) {
-
+        MemberVo memberVo = memberService.selectfindPass(userMail);
 		model.addAttribute("memberVo",memberVo);
 		Map<String, String> evalMap = new HashMap<>();
 		evalMap.put("member_mail", memberVo.getMember_mail());
