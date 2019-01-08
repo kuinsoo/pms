@@ -14,7 +14,6 @@
                     <li data-tab="subMaintab2"><a href="#" id="smTab2">업무 카드</a></li>
                     <li data-tab="subMaintab3"><a href="#" id="smTab3">간트 차트</a></li>
                     <li data-tab="subMaintab4"><a href="#" id="smTab4">회의 리스트</a></li>
-                    <li data-tab="subMaintab5"><a href="#" id="smTab4">실시간 채팅</a></li>
                 </ul>
                 <div id="subMaintab1" class="tabcontent current">
                     <%@ include file="/WEB-INF/views/main/report.jsp" %>
@@ -74,12 +73,6 @@
                             </table>
                         </div>
                     </div>
-                </div>
-                <div id="subMaintab5" class="tabcontent">
-                	<div class="liveChat">
-                		<iframe src="https://uchat.ch/current"></iframe>
-                		<div class="liveChatLogo"></div>
-                	</div>
                 </div>
             </div>
 
