@@ -305,8 +305,6 @@ public class LoginController {
 		if (memberService.selectUser(member_mail) == null) {
 			
 			authVo.setAuth_member(memberVo.getMember_mail());
-			System.out.println("aaaaaaaaaaaasdmember_mail" + member_mail);
-			System.out.println("aaaaaaaaaaaawawauthVo" + authVo);
 			
 			//memberService.insertUser(memberVo);
 			authorityService.insertUserMember(authVo, memberVo);
