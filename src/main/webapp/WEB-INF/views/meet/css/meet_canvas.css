@@ -47,7 +47,7 @@ input[disabled], button[disabled] {
 }
 
 #other-videos video {
-    width: 29%;
+    width:30%;
     margin: 5px;
     border: 1px solid black;
     padding: 1px;

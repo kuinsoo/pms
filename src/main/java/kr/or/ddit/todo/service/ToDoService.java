@@ -52,8 +52,10 @@ public class ToDoService implements ToDoServiceInf{
 	*/
 	@Override
 	public int todoInsert(ToDoVo todoVo) {
+//		long chk[] = dateCompareTodo(todoVo);
 		long chk = dateCompareTodo(todoVo);
 		
+//		if (chk[0] >= 0 || chk[1] >= 0) {
 		if (chk >= 0) {
 			return todoMapper.todoInsert(todoVo);
 		} else {
@@ -155,8 +157,10 @@ public class ToDoService implements ToDoServiceInf{
 	*/
 	@Override
 	public int todoUpdate(ToDoVo todoVo) {
+//		long chk[] = dateCompareTodo(todoVo);
 		long chk = dateCompareTodo(todoVo);
 		
+//		if(chk[0] >= 0 || chk[1] >= 0) {
 		if(chk >= 0) {
 			return todoMapper.todoUpdate(todoVo);
 		}
@@ -239,6 +243,8 @@ public class ToDoService implements ToDoServiceInf{
 	public long dateCompareTodo(ToDoVo todoVo) {
 		ToDoVo projectDateValue = getProjectEndDateTodo(todoVo);
 		Date project_edate = null;
+		Date todo_edate = null;
+//		long chk[] = new long[2];
 		
 		if(projectDateValue.getProject_edate() != null) {
 			project_edate = projectDateValue.getProject_edate();
@@ -246,9 +252,19 @@ public class ToDoService implements ToDoServiceInf{
 			project_edate = projectDateValue.getProject_eedate();
 		}
 		
-		long chk = project_edate.getTime() - todoVo.getTodo_sdate().getTime();
+		if(todoVo.getTodo_edate() != null) {
+			todo_edate = todoVo.getTodo_edate();
+		} else {
+			todo_edate = todoVo.getTodo_eedate();
+		}
 		
-		return chk;
+		long chk_sdate = project_edate.getTime() - todoVo.getTodo_sdate().getTime();
+		//long chk_edate = project_edate.getTime() - todo_edate.getTime();
+		
+//		chk[0] = chk_sdate;
+//		chk[1] = chk_edate;
+		
+		return chk_sdate;
 	}
 	
 }
