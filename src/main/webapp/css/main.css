@@ -48,7 +48,7 @@ header {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 */
     border-bottom: 1px solid #ccc;
     position: fixed;
-    z-index: 3;
+    z-index:101;
 }
 .colorRed{color:#f00;}
 .headerContainer {
@@ -230,7 +230,7 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 100;
+    z-index: 101;
 }
 
 .dim-layers .dimBgs {
@@ -1003,7 +1003,7 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 100;
+    z-index: 101;
 }
 
 .dim-layer .dimBg {
