@@ -73,7 +73,6 @@ public class ToDoController {
 		
 		try {
 			int result = todoService.todoInsert(todoVo);
-			System.out.println("result : " + result);
 			if(result == -400) {
 				return "redirect:/todoError";
 			}
