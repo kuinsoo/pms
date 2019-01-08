@@ -112,8 +112,9 @@ div.well input[type="submit"]{width:100%;height:50px}
 				<a href="/signView" class="btn btn-primary btn-raised signBtn">회원가입</a>
 			</form>
 			
-			<div id="naver_id_login" style="text-align:center"><a href="${url}">
-			<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
+			<div id="naver_id_login" style="text-align:center">
+				<a href="${url}"><img src="../images/naverLogin.png"/></a>
+			</div>
 			
 			<div class="findDiv">
 				<a href="#layerEmail" class="findEmail">이메일 찾기</a>
