@@ -14,7 +14,7 @@
                     <li data-tab="subMaintab2"><a href="#" id="smTab2">업무 카드</a></li>
                     <li data-tab="subMaintab3"><a href="#" id="smTab3">간트 차트</a></li>
                     <li data-tab="subMaintab4"><a href="#" id="smTab4">회의 리스트</a></li>
-                    <li data-tab="subMaintab5"><a href="#" id="smTab4">실시간 채팅</a></li>
+                    <li data-tab="subMaintab5"><a href="#" id="smTab5">장소 검색</a></li>
                 </ul>
                 <div id="subMaintab1" class="tabcontent current">
                     <%@ include file="/WEB-INF/views/main/report.jsp" %>
@@ -76,9 +76,8 @@
                     </div>
                 </div>
                 <div id="subMaintab5" class="tabcontent">
-                	<div class="liveChat">
-                		<iframe src="https://uchat.ch/current"></iframe>
-                		<div class="liveChatLogo"></div>
+                	<div class="naverMapGo">
+                		<div id="map" style="width:100%;height:500px;"></div>
                 	</div>
                 </div>
             </div>
@@ -104,9 +103,6 @@
 	                <i class="icon-star icons"></i>
 	                <span>${projectVo.project_title}</span>
             	</div>
-	            <div class="backbackbackhahaha">
-	            	<i class="icon-arrow-left icons"></i>
-	            </div>
             </div>
             <div class="projectTeamsTop">
                 <!-- (변찬우) for node // 외부에서 접근해서 인증 허용 해줘야 함..  -->
@@ -574,7 +570,15 @@
         document.getElementById('non_todo_sdate'+work_id).value = date.toISOString().slice(0, 16);
     }
 
+    
 
+// 네이버 지도 임규승 2019-01-08
+var mapOptions = {
+    center: new naver.maps.LatLng(37.3595704, 127.105399),
+    zoom: 10
+};
+
+var map = new naver.maps.Map('map', mapOptions);
 </script>
 </body>
 </html>

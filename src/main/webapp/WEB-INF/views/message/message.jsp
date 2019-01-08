@@ -4,10 +4,15 @@
 <!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
 	<div class="currentMainContainer">
-		<div class="facingTitle">
-			<h2>
-				<i class="icon-paper-plane icons"></i>쪽지
-			</h2>
+		<div class="facingTitle" style="background-color:transparent;border:none;">
+			<div class="facingTitleWhrwlDiv" style="width:1120px;height:70px;background-color:#fff;border:1px solid #dee3eb;float:left;">
+				<h2 style="display:block;margin-top:20px;margin-left:20px;">
+					<i class="icon-paper-plane icons" style="display:block;float:left;margin-right:10px;"></i>쪽지
+				</h2>
+			</div>
+			<div class="backBtnDivZz" style="float:left;width:70px;height:70px;background-color:#fff;border:1px solid #dee3eb;line-height:70px;font-size:20px;margin-left:10px;cursor:pointer;text-align:center;">
+				<i class="icon-arrow-left icons"></i>
+			</div>
 		</div>
 		<div class="facingContainer">
 			<div id="tabs2">
