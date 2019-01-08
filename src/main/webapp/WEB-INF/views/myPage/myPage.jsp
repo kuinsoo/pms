@@ -214,9 +214,16 @@
 		function onkeyup_eventName(){
 			if(!/^[가-힣]{2,4}$/.test($(".myPageMemberNameLeg").val())){
 				$("#nameError").show();
+				//$('#telnum').removeAttr('required');
 				return false;
 			}else {
 				$("#nameError").hide();
+				$('#telnum').removeAttr('required');
+				$('#pass1').removeAttr('required');
+				$('#pass1input').removeAttr('required');
+				$('#pass2input').removeAttr('required');
+				$('.saveBtn').prop('disabled', false);
+
 			}
 		}
 			
@@ -228,6 +235,9 @@
 				return false;
 			}else {
 				$("#phoneMypageError").hide();
+				$('#pass1').removeAttr('required');
+				$('#pass1input').removeAttr('required');
+				$('#pass2input').removeAttr('required');
 				$('.saveBtn').prop('disabled', false);
 				$('.phoneBtns').prop('disabled', false);
 			}
@@ -330,7 +340,9 @@
 					$(".passwordChecClass").show();
 					return false;
 				}else {
+					$('#telnum').removeAttr('required');
 					$(".passwordChecClass").hide();
+					$('.saveBtn').prop('disabled', false);
 				}
 			}
 		
