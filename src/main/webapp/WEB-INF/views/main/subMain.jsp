@@ -103,7 +103,7 @@
             </div>
             <div class="projectTeamsTop">
                 <!-- (변찬우) for node // 외부에서 접근해서 인증 허용 해줘야 함..  -->
-                <iframe src="https://192.168.203.24:8443/"></iframe>
+                <iframe src="https://192.168.203.67:8443/"></iframe>
             </div>
             <%-- 참여자 목록 --%>
             <%@ include file="/WEB-INF/views/main/participants.jsp" %>
