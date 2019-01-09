@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/views/header.jsp"%>
 <!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
-	<div class="currentMainContainer">
+	<div class="currentMainContainer" style="margin-top:50px;">
 		<div class="facingTitle" style="background-color:transparent;border:none;">
 			<div class="facingTitleWhrwlDiv" style="width:520px;height:70px;background-color:#fff;border:1px solid #dee3eb;float:left;border-radius:20px 0px 0px 20px;">
 				<h2 style="display:block;margin-top:20px;margin-left:20px;">
@@ -200,6 +200,7 @@
 	#read {
 		background-color: #fcfcfc;
 		color: #ccc;
+		cursor:pointer;
 	}
 </style>
 <script type="text/javascript">

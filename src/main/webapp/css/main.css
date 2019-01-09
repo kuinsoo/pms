@@ -1403,8 +1403,8 @@ header {
 .receivedNoteContainer > form > table > thead > tr > th > input[type="checkbox"]{width:20px;height:20px;}
 .receivedNoteContainer > form > table > tbody > tr > td > input[type="checkbox"]{width:20px;height:20px;}
 .receivedNoteContainer > form > table > thead > tr{border-top:3px solid #333;border-bottom:1px solid #333;}
-.receivedNoteContainer > form > table > thead > tr > th{padding:10px 0px 10px 0px;font-size:17px;letter-spacing:-2px;}
-.receivedNoteContainer > form > table > tbody > tr > td{padding:10px 0px 10px 0px;font-size:17px;text-align:center;border-bottom:1px solid #333;letter-spacing:-2px;}
+.receivedNoteContainer > form > table > thead > tr > th{padding:10px 0px 10px 0px;font-size:17px;letter-spacing:-1px;}
+.receivedNoteContainer > form > table > tbody > tr > td{padding:10px 0px 10px 0px;font-size:17px;text-align:center;border-bottom:1px solid #333;letter-spacing:-1px;}
 .receivePaging{width:100%;text-align:center;margin-top:20px;}
 .receivePaging > li{display:inline-block;padding:0px 10px 0px 10px;font-size:18px;cursor:pointer;}
 .white_content2 {
@@ -1429,8 +1429,8 @@ header {
 .sentNoteContainer > form > table > thead > tr > th > input[type="checkbox"]{width:20px;height:20px;}
 .sentNoteContainer > form > table > tbody > tr > td > input[type="checkbox"]{width:20px;height:20px;}
 .sentNoteContainer > form > table > thead > tr{border-top:3px solid #333;border-bottom:1px solid #333;}
-.sentNoteContainer > form > table > thead > tr > th{padding:10px 0px 10px 0px;font-size:17px;letter-spacing:-2px;}
-.sentNoteContainer > form > table > tbody > tr > td{padding:10px 0px 10px 0px;font-size:17px;text-align:center;border-bottom:1px solid #333;letter-spacing:-2px;}
+.sentNoteContainer > form > table > thead > tr > th{padding:10px 0px 10px 0px;font-size:17px;letter-spacing:-1px;}
+.sentNoteContainer > form > table > tbody > tr > td{padding:10px 0px 10px 0px;font-size:17px;text-align:center;border-bottom:1px solid #333;letter-spacing:-1px;}
 
 .recipientFacing{width:100%;}
 .recipientFacing > span{font-size:20px;}
@@ -1491,6 +1491,9 @@ header {
 .trashCanContainer > form > table > thead > tr > th{padding:10px 0px 10px 0px;font-size:20px;}
 .trashCanContainer > form > table > tbody > tr > td{padding:10px 0px 10px 0px;font-size:20px;text-align:center;border-bottom:1px solid #333;}
 .recoveryBtn{border:none;width:100px;height:40px;background-color:#007fff;color:#fff;font-size:20px;margin-top:20px;cursor:pointer;font-size:20px;}
+
+/* 쪽지 추가 */
+.msgClick2{cursor:pointer;}
 
 /* FOOTER */
 .currentFooter {
