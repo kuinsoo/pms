@@ -1,3 +1,4 @@
+
 if (annyang) {
 	var historyBack = function(){
 		window.history.back();
@@ -96,7 +97,17 @@ if (annyang) {
 	annyang.addCommands(commands);
 	
 	annyang.setLanguage('ko');
-	annyang.start();
+	
+	$(".icon-microphone").toggle(
+	    function(){
+	    	$(this).css({"color": "red"});
+	    	annyang.start();		    	
+	    },
+	    function(){
+	    	$(this).css({"color": "black"});
+	    	annyang.pause();
+	    }
+	  );
 	
 	annyang.addCallback('resultMatch', function() {
 		$(".facingContent").on("focus", function(){

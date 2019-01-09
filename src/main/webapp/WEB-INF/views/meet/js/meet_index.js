@@ -342,7 +342,15 @@ $('#btn-create-room').click(function() {
 		    
 		    // json 만들기  to oracle
 		   $.ajax({
+<<<<<<< HEAD
+			    url : 'https://192.168.203.24:8089/meetProjObj',
+=======
+<<<<<<< HEAD
+			    url : 'https://192.168.203.67:8089/meetProjObj',
+=======
 			    url : 'https://172.30.1.26:8089/meetProjObj',
+>>>>>>> branch 'master' of https://github.com/kuinsoo/pms.git
+>>>>>>> branch 'master' of https://github.com/kuinsoo/pms.git
 			    type : 'post',
 			    data : meetProjObj,
 			    success : function (data) {

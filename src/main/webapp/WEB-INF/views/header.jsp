@@ -182,12 +182,12 @@
                     </div>
                 </div>
 			</c:if>
-                
+
 				<div class="updateHeader" style="float:right;">
 						<a href="/friendView"  class="facing">
 							<i class="icon-user icons" id="friendSendIcon"></i>
 							<div class="friendCounterDiv">
-								<span class = "friendCounterSpan"></span>
+								<span class="friendCounterSpan"></span>
 							</div>
 						</a>
 						<a href="/message" class="facing">
@@ -230,6 +230,9 @@
 	                        </ul>
 	                    </div>
 	                </div>
+                </div>
+                <div class="microMC">
+                	<i class="icon-microphone icon"></i>
                 </div>
             </div>
         </div>

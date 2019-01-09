@@ -24,7 +24,11 @@
     "multistreamsmixer": "latest",
     "oracledb": "^3.0.1",
     "recordrtc": "latest",
+<<<<<<< HEAD
+    "rtcmulticonnection": "^3.6.5",
+=======
     "rtcmulticonnection": "^3.6.4",
+>>>>>>> branch 'master' of https://github.com/kuinsoo/pms.git
     "rtcmulticonnection-server": "latest",
     "socket.io": "^2.2.0",
     "webpack": "^4.28.3",
