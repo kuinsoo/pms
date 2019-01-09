@@ -53,15 +53,7 @@ function saveFormAsTextFile(){
      
      // json 만들기  to oracle
      $.ajax({
-<<<<<<< HEAD
   	    url : 'https://192.168.203.24:8089/saveDoc',
-=======
-<<<<<<< HEAD
-  	    url : 'https://192.168.203.67:8089/saveDoc',
-=======
-  	    url : 'https://172.30.1.26:8089/saveDoc',
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms.git
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms.git
   	    type : 'post',
   	    data : meetDoc,
   	    success : function (data) { },
@@ -609,15 +601,7 @@ document.getElementById('btn-chat-message').onclick = function() {
     
     // json 만들기 (.. form sunmit은 페이지가 전환되서)
    $.ajax({
-<<<<<<< HEAD
 	    url : 'https://192.168.203.24:8089/test',
-=======
-<<<<<<< HEAD
-	    url : 'https://192.168.203.67:8089/test',
-=======
-	    url : 'https://172.30.1.26:8089/test',
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms.git
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms.git
 	    type : 'post',
 	    data : meetObj,
 	    success : function (data) { } ,
@@ -810,15 +794,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
 $('#myWorkListBtn').on('click', function(){	  
 	
 	  $.ajax({
-<<<<<<< HEAD
 		    url : 'https://192.168.203.24:8081/myWorkList',
-=======
-<<<<<<< HEAD
-		    url : 'https://192.168.203.67:8081/myWorkList',
-=======
-		    url : 'https://172.30.1.26:8081/myWorkList',
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms.git
->>>>>>> branch 'master' of https://github.com/kuinsoo/pms.git
 		    type : 'POST',
 		    data : {
 		    	"project_id" : params.todayProject_id,
