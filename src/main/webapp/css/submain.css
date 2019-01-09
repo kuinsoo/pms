@@ -156,7 +156,7 @@ ul.subMaintab li.current > a{color:#fff;}
 .updateDeleteIcon > .icon-bulb{margin-right:10px;}
 .updateDeleteIcon > a > i{font-size:25px;cursor:pointer;float:right;color:#000;margin-right:10px;}
 .currentCardContentView{width:100%;height:500px;}
-.currentCardContentViewLeft{float:left;width:40%;height:100%;padding:20px;}
+.currentCardContentViewLeft{float:left;width:40%;padding:20px;}
 .currentCardContentViewLeft > textarea{outline:none;width:100%;height:90%;margin-top:10px;border:none;font-size:17px;margin-left:20px;line-height:30px;}
 .currentCardContentViewRight{float:left;width:60%;height:100%;padding:20px;}
 .currentCardContentViewRight > table{border-collapse:collapse;width:100%;text-align:center;}
@@ -514,7 +514,10 @@ ul.subMaintab li.current > a{color:#fff;}
 .projectCreateFileInput{margin-top:20px;font-size:17px;}
 
 /* 첨부파일 목록 */
-.attachments{width:100%;height:50px;}
+.attachments{width:100%;height:100px;padding:20px;}
+.attachments > h3 {display:block;border-top:1px solid #dee3eb;padding-top:10px;}
+.attachments > h3 > i{vertical-align:middle;padding-right:10px;}
+.attachments > a{text-decoration:underline;color:blue;font-size:20px;letter-spacing:-1px;}
 
 /* 지도 검색 2019-11-25 임규승 */
 .naverMapGo {
