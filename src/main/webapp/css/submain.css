@@ -204,7 +204,7 @@ ul.subMaintab li.current > a{color:#fff;}
 .white_content3 {
 	position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0, 0, 0, 0.8);opacity:0;
 	-webkit-transition: opacity 400ms ease-in;-moz-transition: opacity 400ms ease-in;
-	transition: opacity 400ms ease-in;pointer-events:none;z-index:4;
+	transition: opacity 400ms ease-in;pointer-events:none;z-index:101;
 }
 .white_content3:target{opacity:1;pointer-events:auto;}
 .white_content3 > div {
@@ -249,7 +249,7 @@ ul.subMaintab li.current > a{color:#fff;}
 .white_contents {
 	position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0, 0, 0, 0.8);opacity:0;
 	-webkit-transition: opacity 400ms ease-in;-moz-transition: opacity 400ms ease-in;
-	transition: opacity 400ms ease-in;pointer-events:none;z-index:4;
+	transition: opacity 400ms ease-in;pointer-events:none;z-index:101;
 }
 .white_contents:target{opacity:1;pointer-events:auto;}
 .white_contents > div {
@@ -319,7 +319,7 @@ ul.subMaintab li.current > a{color:#fff;}
 .white_content_card {
 	position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0, 0, 0, 0.8);opacity:0;
 	-webkit-transition: opacity 400ms ease-in;-moz-transition: opacity 400ms ease-in;
-	transition: opacity 400ms ease-in;pointer-events:none;z-index:4;
+	transition: opacity 400ms ease-in;pointer-events:none;z-index:101;
 }
 .white_content_card:target{opacity:1;pointer-events:auto;}
 .white_content_card > div {
@@ -519,6 +519,12 @@ ul.subMaintab li.current > a{color:#fff;}
 /* 지도 검색 2019-11-25 임규승 */
 .naverMapGo {
 	width:900px;height:500px;background-color:#fff;border:1px solid #dee3db;margin-top:10px;
+	position:relative;
+}
+#address {
+	display:block;background-color:#fff;position:absolute;top:20px;left:20px;z-index:50;
+	width:200px;height:40px;font-size:17px;text-indent:10px;box-shadow:0px 0px 10px #333;
+	outline:none;border:none;
 }
 
 /* FOOTER */

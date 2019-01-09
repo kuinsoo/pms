@@ -1,0 +1,12 @@
+#설치 cmd
+> cd /각자의 설치경로/pms/src/main
+> npm init -y
+> npm install webpack webpack-cli —save
+> npm install express —save
+> npm install body-parser —save
+> npm install oracledb
+> npm install rtcmulticonnection —production
+
+#실행
+> cd /각자의 설치경로/pms/src/main
+> npm run express —watch

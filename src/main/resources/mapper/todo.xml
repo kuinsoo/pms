@@ -146,5 +146,5 @@
 		where TODO_WORK = #{work_id}
 		and TODO_COMPLET = 'Y'
 	</select>
-	
+
 </mapper>
