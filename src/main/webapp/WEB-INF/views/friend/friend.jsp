@@ -3,7 +3,7 @@
 	<!-- CURRENT SECTION(MAIN) -->
 	<section class="currentMain">
 		<div class="currentMainContainer">
-			<div class="facingTitle" style="background-color:transparent;border:none;">
+			<div class="friendTitle" style="width:1200px;background-color:transparent;border:none;">
 				<div class="facingTitleWhrwlDiv" style="width:1120px;height:70px;background-color:#fff;border:1px solid #dee3eb;float:left;">
 					<h2 style="display:block;margin-top:20px;margin-left:20px;">
 						<i class="icon-user icons" style="display:block;float:left;margin-right:10px;"></i>친구
@@ -13,7 +13,7 @@
 					<i class="icon-arrow-left icons" id="locationBack_frd"></i>
 				</div>
 			</div>
-			<div class="facingContainer">
+			<div class="friendContainers" style="width:1200px;">
 				<div id="tabs2">
 					<ul>
 						<li><a href="#tabs2-4">친구리스트</a></li>
