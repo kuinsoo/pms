@@ -48,7 +48,10 @@
 	border:none;font-size:17px;width:100%;outline:none;
 }
 .textareaTd > textarea{width:100%;height:300px;font-size:17px;border:none;outline:none;}
-.secretGoGoYeah{width:100%;margin-top:10px;border:none;font-size:18px;border-bottom:1px solid #333;outline:none;}
+.secretGoGoYeah {
+	width:100%;margin-top:10px;border:none;font-size:18px;border-bottom:1px solid #333;outline:none;
+	font-family:'Malgun Gothic';
+}
 </style>
 <script>
 $(document).ready(function(){	
