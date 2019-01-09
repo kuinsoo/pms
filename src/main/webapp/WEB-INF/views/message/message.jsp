@@ -29,7 +29,7 @@
 							<div class="facingSendTitle">
 								<input type="email" class="recipient" id="sendMessageInput" value ="${messageMember_mail}" name="textValue" placeholder="받는사람을 입력해주세요" required/> 
 								<select name="selectBox" onChange="getSelectValue(this.form);" class="recipientSelect">
-									<option>친구등록 리스트</option>
+									<option> 나의 친구 리스트 </option>
 									<c:forEach items="${selctMyFriend }" var="mf">
 										<option>${mf.friend_member}</option>
 									</c:forEach>
