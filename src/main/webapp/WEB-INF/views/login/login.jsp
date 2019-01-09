@@ -90,7 +90,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 				<h3 id="msg">${msg}</h3>
 				<br>
 				<div class="form-group label-floating">
-					<label class="control-label">이메일</label>
+					<label class="control-label">아이디(이메일)</label>
 					<c:choose>
 						<c:when test="${member_mail!=email}">
 							<input type="email"	name="member_mail" id="email" value="${member_mail}" class="form-control" autofocus="autofocus" required />
@@ -162,7 +162,7 @@ div.well input[type="submit"]{width:100%;height:50px}
 								<span id="nameError2"> 한글 이름 2~4자 이내로 입력해주세요. </span>
 							</div>
 							<div class="form-group label-floating">
-								<label class="control-label">이메일(ID)</label>
+								<label class="control-label"> current에 가입하셨던 아이디(email) </label>
 								<input type="email"	name="member_mail" class="form-control" autofocus="autofocus" required />
 							</div>
 							<button type="submit" class="btn btn-primary btn-raised findEmailBtn">비밀번호 찾기</button>								
