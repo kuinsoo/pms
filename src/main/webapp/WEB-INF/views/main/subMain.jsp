@@ -204,10 +204,13 @@
 	                <i class="icon-star icons"></i>
 	                <span>${projectVo.project_title}</span>
             	</div>
+	            <div class="backbackbackhahaha">
+	            	<i class="icon-arrow-left icons" id="locationBack"></i>
+	            </div>
             </div>
             <div class="projectTeamsTop">
                 <!-- (변찬우) for node // 외부에서 접근해서 인증 허용 해줘야 함..  -->
-                <iframe src="https://172.30.1.26:8443/"></iframe>
+                <iframe src="https://192.168.203.67:8443/"></iframe>
             </div>
             <%-- 참여자 목록 --%>
             <%@ include file="/WEB-INF/views/main/participants.jsp" %>

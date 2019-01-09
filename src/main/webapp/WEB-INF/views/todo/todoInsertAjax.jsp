@@ -109,10 +109,10 @@
 									</c:choose>
 								</div>
 								<div class="solutionIssueContainer">
-									<table class="solutionIssue">
-										<c:choose>
-											<c:when test="${todo.todo_issue == null}"></c:when>
-											<c:otherwise>
+									<c:choose>
+										<c:when test="${todo.todo_issue == null}"></c:when>
+										<c:otherwise>
+											<table class="solutionIssue">
 												<tr>
 													<td colspan="2">이슈에 대한 해결</td>
 												</tr>
@@ -136,10 +136,10 @@
 														<textarea placeholder="내용을 입력해주세요." name="issue_solution"></textarea>
 													</td>
 												</tr>
-											</c:otherwise>
-										</c:choose>
-									</table>								
-									<input type="button" value="해결등록" class="solutionCreateBtn" onclick="helperUpdate${todo.todo_work}(${todo.todo_id});"/>
+											</table>								
+											<input type="button" value="해결등록" class="solutionCreateBtn" onclick="helperUpdate${todo.todo_work}(${todo.todo_id});"/>
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</form>
 							
