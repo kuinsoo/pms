@@ -2,9 +2,7 @@
 .currentMain > .currentMainContainer > .currentMainContainerLeft{width:900px;float:left;margin-top:10px;margin-bottom:10px;overflow:hidden;}
 .currentMain > .currentMainContainer > .currentMainContainerRight{margin-left:10px;width:380px;float:left;margin-top:10px;}
 .currentSubMainTitle{width:487px;height:70px;font-size:25px;line-height:70px;position:fixed;float:left;}
-.currentSubMainTitleProjectTitle{width:407px;height:70px;border:1px solid #dee3db;background-color:#fff;float:left;}
-.backbackbackhahaha{background-color:#fff;border:1px solid #dee3eb;width:70px;height:70px;float:left;margin-left:10px;text-align:center;}
-.backbackbackhahaha > i{cursor:pointer;vertical-align:middle;}
+.currentSubMainTitleProjectTitle{width:487px;height:70px;border:1px solid #dee3db;background-color:#fff;float:left;}
 .currentSubMainTitle > .currentSubMainTitleProjectTitle > i.icon-star{vertical-align:middle;margin-left:30px;}
 .currentSubMainTitle > .currentSubMainTitleProjectTitle > span{vertical-align:middle;margin-left:15px;}
 iframe{border: 1px solid #dee3eb; width:100%; height:100%}
@@ -77,7 +75,10 @@ iframe{border: 1px solid #dee3eb; width:100%; height:100%}
 #planList > .column:last-child{margin-left:10px;}
 .portlet-placeholder{border:1px dotted black;height:150px;}
 .portlet-header{width:100%;height:50px;font-size:20px;text-indent:10px;line-height:50px;cursor:pointer;}
-.portlet-content{width:100%;font-size:17px;padding:10px;background-color:#eee;word-break:break-all;border:1px solid #ccc;}
+.portlet-content {
+	width:100%;height:70px;font-size:17px;padding:10px;background-color:#eee;word-break:break-all;border:1px solid #ccc;overflow:hidden;
+	text-overflow:ellipsis;
+}
 .projectWriter{width:900px;background-color:#fff;border:1px solid #dee3eb;float:left;margin-top:10px;}
 
 /* 서브메인 전체 탭 메뉴 */
@@ -158,7 +159,7 @@ ul.subMaintab li.current > a{color:#fff;}
 .updateDeleteIcon > .icon-bulb{margin-right:10px;}
 .updateDeleteIcon > a > i{font-size:25px;cursor:pointer;float:right;color:#000;margin-right:10px;}
 .currentCardContentView{width:100%;height:500px;}
-.currentCardContentViewLeft{float:left;width:40%;height:100%;padding:20px;}
+.currentCardContentViewLeft{float:left;width:40%;padding:20px;}
 .currentCardContentViewLeft > textarea{outline:none;width:100%;height:90%;margin-top:10px;border:none;font-size:17px;margin-left:20px;line-height:30px;}
 .currentCardContentViewRight{float:left;width:60%;height:100%;padding:20px;}
 .currentCardContentViewRight > table{border-collapse:collapse;width:100%;text-align:center;}
@@ -206,7 +207,7 @@ ul.subMaintab li.current > a{color:#fff;}
 .white_content3 {
 	position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0, 0, 0, 0.8);opacity:0;
 	-webkit-transition: opacity 400ms ease-in;-moz-transition: opacity 400ms ease-in;
-	transition: opacity 400ms ease-in;pointer-events:none;z-index:4;
+	transition: opacity 400ms ease-in;pointer-events:none;z-index:101;
 }
 .white_content3:target{opacity:1;pointer-events:auto;}
 .white_content3 > div {
@@ -251,7 +252,7 @@ ul.subMaintab li.current > a{color:#fff;}
 .white_contents {
 	position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0, 0, 0, 0.8);opacity:0;
 	-webkit-transition: opacity 400ms ease-in;-moz-transition: opacity 400ms ease-in;
-	transition: opacity 400ms ease-in;pointer-events:none;z-index:4;
+	transition: opacity 400ms ease-in;pointer-events:none;z-index:101;
 }
 .white_contents:target{opacity:1;pointer-events:auto;}
 .white_contents > div {
@@ -321,7 +322,7 @@ ul.subMaintab li.current > a{color:#fff;}
 .white_content_card {
 	position:fixed;top:0;right:0;bottom:0;left:0;background:rgba(0, 0, 0, 0.8);opacity:0;
 	-webkit-transition: opacity 400ms ease-in;-moz-transition: opacity 400ms ease-in;
-	transition: opacity 400ms ease-in;pointer-events:none;z-index:4;
+	transition: opacity 400ms ease-in;pointer-events:none;z-index:101;
 }
 .white_content_card:target{opacity:1;pointer-events:auto;}
 .white_content_card > div {
@@ -516,15 +517,20 @@ ul.subMaintab li.current > a{color:#fff;}
 .projectCreateFileInput{margin-top:20px;font-size:17px;}
 
 /* 첨부파일 목록 */
-.attachments{width:100%;height:50px;}
+.attachments{width:100%;height:100px;padding:20px;}
+.attachments > h3 {display:block;border-top:1px solid #dee3eb;padding-top:10px;}
+.attachments > h3 > i{vertical-align:middle;padding-right:10px;}
+.attachments > a{text-decoration:underline;color:blue;font-size:20px;letter-spacing:-1px;}
 
-/* 실시간 채팅 2019-11-25 임규승 */
-.liveChat {
-	width:900px;margin-top:10px;height:500px;background-color:#fff;border:1px solid #dee3eb;
+/* 지도 검색 2019-11-25 임규승 */
+.naverMapGo {
+	width:900px;height:500px;background-color:#fff;border:1px solid #dee3db;margin-top:10px;
 	position:relative;
 }
-.liveChatLogo {
-	width:36px;height:36px;background-color:#f4f4f4;z-index:10;position:absolute;top:2px;left:2px;
+#address {
+	display:block;background-color:#fff;position:absolute;top:20px;left:20px;z-index:50;
+	width:200px;height:40px;font-size:17px;text-indent:10px;box-shadow:0px 0px 10px #333;
+	outline:none;border:none;
 }
 
 /* FOOTER */

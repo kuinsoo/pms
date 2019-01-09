@@ -4,8 +4,13 @@
 <!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
 	<div class="currentMainContainer">
-		<div class="myPageContainerTitle">
-			<h2>업무수행능력</h2>
+		<div class="myPageContainerTitle" style="background-color:transparent;border:none;">
+			<div class="myPageContainerTitleHTwo" style="width:1330px;height:60px;background-color:#fff;border:1px solid #dee3eb;float:left;">
+				<h2>업무수행능력</h2>
+			</div>
+			<div class="backBtnDivZz" style="float:left;width:60px;height:60px;background-color:#fff;border:1px solid #dee3eb;line-height:60px;font-size:20px;margin-left:10px;cursor:pointer;">
+				<i class="icon-arrow-left icons" id="locationBack_eva"></i>
+			</div>
 		</div>
 		
 		<div class="myPageContainer">
@@ -251,6 +256,9 @@
 	});
 
 
+	$('#locationBack_eva').on("click", function () {
+		location.href = "/main"
+    });
 </script>
 </body>
 </html>

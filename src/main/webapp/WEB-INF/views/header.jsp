@@ -28,6 +28,8 @@
     <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
 	<script type="text/javascript" src="/js/annyang.js"></script>
 	<script type="text/javascript" src="/js/current_vui.js"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=nPljd7ns8PGll8DWsmSl&submodules=geocoder"></script>
+	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=nPljd7ns8PGll8DWsmSl&submodules=panorama"></script>
 
 </head>
 
@@ -131,7 +133,8 @@
             	<!-- 팀원 초대 -->
             	<c:if test="${projectVo.project_id >= 0 }">
                 <c:forEach items="${projectMemberList}" var="projectMember" varStatus="i">
-                <c:if test="${projectMember.pmember_position eq '1'}">
+                 <c:if test="${projectMember.member_mail eq memberVo.member_mail}">
+                    <c:if test="${projectMember.pmember_position eq '1'}">
                 <a href="#projectCreatePopUps" class="projectCreatePopUps">
                     <div class="teamInvite">
                         <i class="icon-plus icons"></i>
@@ -139,6 +142,7 @@
                     </div>
                 </a>
                 </c:if>
+                 </c:if>
                 </c:forEach>
                 <div class="dim-layers">
                     <div class="dimBgs"></div>
@@ -178,12 +182,12 @@
                     </div>
                 </div>
 			</c:if>
-                
+
 				<div class="updateHeader" style="float:right;">
 						<a href="/friendView"  class="facing">
 							<i class="icon-user icons" id="friendSendIcon"></i>
 							<div class="friendCounterDiv">
-								<span class = "friendCounterSpan"></span>
+								<span class="friendCounterSpan"></span>
 							</div>
 						</a>
 						<a href="/message" class="facing">
@@ -226,6 +230,9 @@
 	                        </ul>
 	                    </div>
 	                </div>
+                </div>
+                <div class="microMC">
+                	<i class="icon-microphone icon"></i>
                 </div>
             </div>
         </div>

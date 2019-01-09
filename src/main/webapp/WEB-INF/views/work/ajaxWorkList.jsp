@@ -25,11 +25,16 @@
 		<div class="currentCardContentView">
 			<div class="currentCardContentViewLeft">
 				<textarea readonly>${work.work_content}</textarea>
-			<%-- 업무 첨부파일 리스트 --%>
+				<%-- 업무 첨부파일 리스트 --%>
 				<div class="attachments">
+					<h3><i class="icon-folder icons"></i>첨부파일</h3>
 					<c:forEach items="${attList}" var="att">
 						<c:if test="${att.att_work eq work.work_id}">
-					<a href="/download?att_id=${att.att_id}"><span>${att.att_id}번 : ${att.att_name}</span></a>
+							<br>
+							<a href="/download?att_id=${att.att_id}">
+								<span>${att.att_id}번 : ${att.att_name}</span>
+							</a>
+							<br>
 						</c:if>
 					</c:forEach>
 				</div>

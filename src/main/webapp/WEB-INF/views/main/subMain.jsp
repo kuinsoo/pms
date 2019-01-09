@@ -14,6 +14,7 @@
                     <li data-tab="subMaintab2"><a href="#" id="smTab2">업무 카드</a></li>
                     <li data-tab="subMaintab3"><a href="#" id="smTab3">간트 차트</a></li>
                     <li data-tab="subMaintab4"><a href="#" id="smTab4">회의 리스트</a></li>
+                    <li data-tab="subMaintab5"><a href="#" id="smTab5">장소 검색</a></li>
                 </ul>
                 <div id="subMaintab1" class="tabcontent current">
                     <%@ include file="/WEB-INF/views/main/report.jsp" %>
@@ -73,6 +74,112 @@
                             </table>
                         </div>
                     </div>
+                </div>
+                <div id="subMaintab5" class="tabcontent">
+                	<div class="naverMapGo">
+                		<div id="map" style="width:898px !important;height:498px;"></div>
+                		<input type="text" id="address" placeholder="검색할 주소 작성후 Enter!" />
+                		<script>
+                		// 네이버 지도 임규승 2019-01-08
+                		var map = new naver.maps.Map("map", {
+						    center: new naver.maps.LatLng(36.3248045, 127.4198779),
+						    zoom: 10,
+						    mapTypeControl: true
+						});
+						
+						var infoWindow = new naver.maps.InfoWindow({
+						    anchorSkew: true
+						});
+						
+						map.setCursor('pointer');
+						
+						// search by tm128 coordinate
+						function searchCoordinateToAddress(latlng) {
+						    var tm128 = naver.maps.TransCoord.fromLatLngToTM128(latlng);
+						
+						    infoWindow.close();
+						
+						    naver.maps.Service.reverseGeocode({
+						        location: tm128,
+						        coordType: naver.maps.Service.CoordType.TM128
+						    }, function(status, response) {
+						        if (status === naver.maps.Service.Status.ERROR) {
+						            return alert('잘못된 주소 입니다!');
+						        }
+						
+						        var items = response.result.items,
+						            htmlAddresses = [];
+						
+						        for (var i=0, ii=items.length, item, addrType; i<ii; i++) {
+						            item = items[i];
+						            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]';
+						
+						            htmlAddresses.push((i+1) +'. '+ addrType +' '+ item.address);
+						        }
+						
+						        infoWindow.setContent([
+						                '<div style="padding:10px;min-width:200px;line-height:150%;">',
+						                '<h3 style="margin-top:5px;">검색 좌표</h3><br />',
+						                htmlAddresses.join('<br />'),
+						                '</div>'
+						            ].join('\n'));
+						
+						        infoWindow.open(map, latlng);
+						    });
+						}
+						
+						// result by latlng coordinate
+						function searchAddressToCoordinate(address) {
+						    naver.maps.Service.geocode({
+						        address: address
+						    }, function(status, response) {
+						        if (status === naver.maps.Service.Status.ERROR) {
+						            return alert('잘못된 주소 입니다!');
+						        }
+						
+						        var item = response.result.items[0],
+						            addrType = item.isRoadAddress ? '[도로명 주소]' : '[지번 주소]',
+						            point = new naver.maps.Point(item.point.x, item.point.y);
+						
+						        infoWindow.setContent([
+						                '<div style="padding:10px;min-width:200px;line-height:150%;">',
+						                '<h3>CURRENT 3조 최종프로젝트</h3>',
+						                '<h3 style="margin-top:5px;">검색 주소 : '+ response.result.userquery +'</h3><br />',
+						                addrType +' '+ item.address +'<br />',
+						                '</div>'
+						            ].join('\n'));
+						
+						
+						        map.setCenter(point);
+						        infoWindow.open(map, point);
+						    });
+						}
+						
+						function initGeocoder() {
+						    map.addListener('click', function(e) {
+						        searchCoordinateToAddress(e.coord);
+						    });
+						
+						    $('#address').on('keydown', function(e) {
+						        var keyCode = e.which;
+						
+						        if (keyCode === 13) { // Enter Key
+						            searchAddressToCoordinate($('#address').val());
+						        }
+						    });
+						
+						    $('#submit').on('click', function(e) {
+						        e.preventDefault();
+						
+						        searchAddressToCoordinate($('#address').val());
+						    });
+						
+						    // searchAddressToCoordinate('대전 중구 중앙로 76');
+						}
+						
+						naver.maps.onJSContentLoaded = initGeocoder;
+						</script>
+                	</div>
                 </div>
             </div>
 
