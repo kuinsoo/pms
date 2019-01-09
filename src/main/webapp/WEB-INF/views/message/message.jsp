@@ -4,7 +4,7 @@
 <!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
 	<div class="currentMainContainer" style="margin-top:50px;">
-		<div class="facingTitle" style="background-color:transparent;border:none;">
+		<div class="facingTitle">
 			<div class="facingTitleWhrwlDiv">
 				<h2 style="display:block;margin-top:20px;margin-left:20px;">
 					<i class="icon-paper-plane icons" style="display:block;float:left;margin-right:10px;"></i>쪽지
