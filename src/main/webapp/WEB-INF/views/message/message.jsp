@@ -5,25 +5,25 @@
 <section class="currentMain">
 	<div class="currentMainContainer">
 		<div class="facingTitle" style="background-color:transparent;border:none;">
-			<div class="facingTitleWhrwlDiv" style="width:1120px;height:70px;background-color:#fff;border:1px solid #dee3eb;float:left;">
+			<div class="facingTitleWhrwlDiv" style="width:520px;height:70px;background-color:#fff;border:1px solid #dee3eb;float:left;border-radius:20px 0px 0px 20px;">
 				<h2 style="display:block;margin-top:20px;margin-left:20px;">
 					<i class="icon-paper-plane icons" style="display:block;float:left;margin-right:10px;"></i>쪽지
 				</h2>
 			</div>
-			<div class="backBtnDivZz" style="float:left;width:70px;height:70px;background-color:#fff;border:1px solid #dee3eb;line-height:70px;font-size:20px;margin-left:10px;cursor:pointer;text-align:center;">
+			<div class="backBtnDivZz" style="float:left;width:70px;height:70px;background-color:#fff;border:1px solid #dee3eb;line-height:70px;font-size:20px;margin-left:10px;cursor:pointer;text-align:center;border-radius:0px 20px 20px 0px;">
 				<i class="icon-arrow-left icons" id="locationBack_msg"></i>
 			</div>
 		</div>
 		<div class="facingContainer">
-			<div id="tabs2">
-				<ul>
-					<li><a href="#tabs2-1">쪽지 보내기</a></li>
-					<li><a href="#tabs2-2">받은쪽지</a></li>
-					<li><a href="#tabs2-3">보낸쪽지</a></li>
+			<div id="tabs2" style="background-color:transparent;">
+				<ul style="border-radius:20px 20px 0px 0px;">
+					<li style="border-radius:15px 0px 0px 0px;"><a href="#tabs2-1" style="outline:none;">쪽지 보내기</a></li>
+					<li><a href="#tabs2-2" style="outline:none;">받은쪽지</a></li>
+					<li><a href="#tabs2-3" style="outline:none;">보낸쪽지</a></li>
 				</ul>
 
 				<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 쪽지 보내기  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
-				<div id="tabs2-1">
+				<div id="tabs2-1" style="border-radius:20px 20px 0px 0px;">
 					<div class="facingSend">
 						<form name ="sendMessageFormName" method="post">
 							<div class="facingSendTitle">
