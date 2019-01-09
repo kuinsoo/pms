@@ -64,7 +64,7 @@
 								<colgroup width="30%" />
 								<colgroup width="15%" />
 								<colgroup width="20%" />
-								<colgroup width="10%" />
+								<colgroup width="20%" />
 								<thead>
 								<tr class="msgClick1">
 									<th>번호</th>
