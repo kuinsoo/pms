@@ -247,6 +247,9 @@
 
 		message();
 		friend();
+
+		
+		
 	});
 	
 	function message(){
