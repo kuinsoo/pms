@@ -48,8 +48,7 @@
         and PROJECT_ID = WORK_PROJECT
         and WORK_ID = ISSUE_WORK
         and MEMBER_MAIL = #{member_mail}
-          and PM2.PMEMBER_PROJECT = PM1.PMEMBER_PROJECT
-        and ISSUE_HELPER = #{member_mail} ) issueCnt ,
+        and PM2.PMEMBER_PROJECT = PM1.PMEMBER_PROJECT ) issueCnt ,
         /* 총 업무 수 */
                (select count(*) as cnt from member,  PROJECT_MEMBER PM3, PROJECT, WORK
                 where MEMBER_MAIL = PMEMBER_MEMBER
@@ -83,7 +82,7 @@
                   and work_id = TODO_WORK
                   and todo_member = #{member_mail}
                   and PROJECT_ID = PM2.PMEMBER_PROJECT) as myTodoCnt,
-     /* 총 일감 수 */
+        /* 총 일감 수 */
                 (select count(*) from project, work, TODO
                   where PROJECT_ID = WORK_PROJECT
                   and work_id = TODO_WORK
