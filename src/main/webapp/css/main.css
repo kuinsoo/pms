@@ -177,7 +177,7 @@ header {
 }
 
 .headerContainer > .headerRightContent {
-    width:340px;
+    width:390px;
     height: 45px;
     margin-top: 5px;
     float: right;
@@ -1494,6 +1494,13 @@ header {
 
 /* 쪽지 추가 */
 .msgClick2{cursor:pointer;}
+
+/* 찬우형 요청으로 마이크로풘을 추가 yo */
+.microMC {
+	width:40px;height:40px;float:right;margin-top:5px;display:flex;justify-content:center;
+	align-items:center;
+}
+.microMC > i {font-size:25px;cursor:pointer;}
 
 /* FOOTER */
 .currentFooter {
