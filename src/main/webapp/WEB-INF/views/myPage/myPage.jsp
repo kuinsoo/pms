@@ -18,6 +18,9 @@
 		.passNot{
 			color: red;
 		}
+		.pleaseName{
+			color: red;
+		}
 		#nameError{
 			color:red;
 		}
@@ -117,6 +120,7 @@
 			$(".error").hide();
 			$(".telerror").hide();
 			$(".inputerror").hide();
+			$(".pleaseName").hide();
 			
 			$(".test1").click(function(){
 				$(".profileUploadImg").show();
@@ -124,7 +128,10 @@
 				$(".test1").hide();
 			});
 			
+		
+			
 			$(".updateBtn").click(function(){	
+				$(".pleaseName").hide();
 				$(".errorpass").hide();
 				$(".cancelBtn").show();
 				//$(".profileUploadImg").show();
@@ -215,16 +222,22 @@
 			if(!/^[가-힣]{2,4}$/.test($(".myPageMemberNameLeg").val())){
 				$("#nameError").show();
 				//$('#telnum').removeAttr('required');
-				return false;
+			
 			}else {
 				$("#nameError").hide();
+				$(".pleaseName").show();
 				$('#telnum').removeAttr('required');
-				$('#pass1').removeAttr('required');
+				//$('#pass1').removeAttr('required');
 				$('#pass1input').removeAttr('required');
 				$('#pass2input').removeAttr('required');
-				$('.saveBtn').prop('disabled', false);
-
+				$('.saveBtn').prop('disabled', false);				
 			}
+			
+		  /*  $(".saveBtn").click(function(){
+			   if($("#pass1").val()==''){
+					$("#pass1").val("${memberVo.member_pass}");
+			   }
+		   });  */
 		}
 			
 		function onkeyup_eventPhoneNum(){
@@ -259,13 +272,16 @@
 		var kisa;
 		function kisaaa(){
 			if( kisa === '${memberVo.member_pass}'){ 
-				$('.saveBtn').prop('disabled', true);
+				$('.saveBtn').prop('disabled', false);
+				$(".pleaseName").hide();
 				$(".passNot").hide();
 			}else{
 				$('.saveBtn').prop('disabled', true);
 				$(".passNot").show();
 			}				
 		}
+		
+		//$("#pass1").val("${kisa}");
 		
 		
 		function onkeyup_event2(){
@@ -334,6 +350,8 @@
 					});
 				}
 			}); */
+			
+			
 			
 			function onkeyup_eventPassCheck(){
 				if(!/^[a-zA-Z0-9]{6,10}$/.test($("#pass1input").val())){
@@ -839,8 +857,9 @@
 									<span class = "inputerror"> 인증번호를 입력해 주세요..</span>
 									<span class= "telerror"> 인증번호가 일치하지 않습니다.</span>
 								</li>
-								<li><input type="password" id = "pass1" onkeyup="onkeyup_event2(); " required/>
+								<li><input type="password" id = "pass1" name = "passwardPass" onkeyup="onkeyup_event2();" required/>
 									<span class="passNot"> 비밀번호가 일치하지 않습니다.. </span>
+									<span class="pleaseName"> 이름을 변경하시려면 비밀번호 입력이 필요합니다.</span>
 								</li>
 								<li>
 									<input type="password" id = "pass1input" onkeyup="onkeyup_eventPassCheck();" name = "member_pass"required/>
