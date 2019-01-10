@@ -259,8 +259,8 @@
 #accordion > div{padding:15px;font-size:18px;}
 
 /* 친구 리스트 */
-.friendLeft{width:590px;height:100%;float:left;padding:20px;border-right:1px solid #dee3eb;}
-.friendRight{width:590px;height:100%;float:left;padding:20px;}
+.friendLeft{width:530px;height:100%;float:left;padding:20px;border-right:1px solid #dee3eb;}
+.friendRight{width:530px;height:100%;float:left;padding:20px;}
 .friendSearchInput {
 	width:300px;height:30px;outline:none;border:none;border-bottom:1px solid #dee3eb;
 	font-size:17px;
@@ -315,7 +315,12 @@
 .profileImgBtnsUpdate > .test1{width:50px;height:40px;background-color:#746fcc;border:none;color:#fff;font-size:17px;}
 .profileImgBtnsUpdate > .test2{width:50px;height:40px;background-color:#746fcc;border:none;color:#fff;margin-left:10px;font-size:17px;}
 
+/* 쪽지 수정 - 임규승 2019-01-10 */
+.facingTitleWhrwlDiv {
+	width:520px;height:70px;background-color:#fff;border:1px solid #dee3eb;float:left;
+}
 
-
-
-
+/* 친구 수정 - 임규승 2019-01-10 */
+.friendContainers {
+	width:1200px;margin:0 auto;overflow:hidden;background-color:#fff;border:1px solid #dee3eb;margin-top:10px;
+}
