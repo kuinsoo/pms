@@ -1375,8 +1375,15 @@ header {
 	width:600px;background-color:#fff;border:1px solid #dee3eb;
 	margin:0 auto;margin-top:10px;border-radius:20px;
 }
+.friendContainer {
+	width:1070px;background-color:#fff;border:1px solid #dee3eb;
+	margin:0 auto;margin-top:10px;border-radius:20px;overflow:hidden;margin-bottom:10px;
+}
 .facingTitle {
-	width:600px;height:70px;background-color:#fff;border:1px solid #dee3eb;
+	width:600px;height:70px;margin:0 auto;margin-top:20px;
+}
+.friendTitle {
+	width:1200px;height:70px;background-color:#fff;border:1px solid #dee3eb;
 	margin:0 auto;margin-top:20px;
 }
 .facingTitle > h2{line-height:70px;margin-left:20px;}

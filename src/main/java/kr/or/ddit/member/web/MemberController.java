@@ -1,5 +1,6 @@
 package kr.or.ddit.member.web;
 
+import kr.or.ddit.attachment.service.AttachmentServiceInf;
 import kr.or.ddit.card.service.CardServiceInf;
 import kr.or.ddit.comments.service.CommentsServiceInf;
 import kr.or.ddit.commons.mail.service.EmailServiceInf;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
@@ -71,9 +73,12 @@ public class MemberController {
 	@Autowired
 	private IssueServiceInf issueService;
 
+	@Autowired
+	private AttachmentServiceInf attachmentService;
+
 	@RequestMapping(value = "/inviteTeam" ,method = RequestMethod.POST)
 	public String inviteTeam(Model model , @RequestParam("inviteTeam")String[] inviteMails, @RequestParam("project_id")String project_id,
-							 @SessionAttribute("memberVo")MemberVo memberVo) {
+							 @SessionAttribute("memberVo")MemberVo memberVo, HttpServletRequest request) {
 		String subject = "Current Project 초대 알람 입니다.";
 		String content = "프로젝트 주소 : https://127.0.0.1:8081/?teamId="+ project_id ;//+ "https://imgur.com/a/GUN203X"
 		InviteProjectVo inviteProjectVo = new InviteProjectVo();
@@ -107,8 +112,9 @@ public class MemberController {
 		}catch (Exception e){
 			e.printStackTrace();
 		}
-		ProjectVo projectVo = projectService.selectProject(project_id);
-		 /* 프로젝트 객체  */
+
+		ProjectVo projectVo =  projectService.selectProject(project_id);
+		/* 프로젝트 객체  */
 		model.addAttribute("projectVo", projectVo);
 
 		/* 프로젝트에 포함된 멤버 정보 */
@@ -116,6 +122,7 @@ public class MemberController {
 
 		/* 업무 출력 */
 		model.addAttribute("workList",workService.selectWorks(project_id));
+		model.addAttribute("workMainChart",workService.workMainChart(project_id));
 
 		/* 업무에 달린 댓글 출력 */
 		model.addAttribute("cmtList", commentsService.cmtList(project_id));
@@ -123,9 +130,32 @@ public class MemberController {
 		/* 업무 카드 출력 */
 		model.addAttribute("wcList", cardService.selectWorkCard(project_id));
 
+		/* 첨부파일 리스트 출력 */
+		model.addAttribute("attList", attachmentService.selectProjectAtt(project_id));
+
+		/* 업무수정을 위한 값 */
+		model.addAttribute("projectWorkList", workService.selectProjectWork(project_id));
+
+		/* 나진실 : 마이페이지 부분 값 넘겨주기 위함 */
+
+		String myTodo_id = request.getParameter("todo_id");
+		String myProject_id = request.getParameter("project_id");
+		String myProject_title = request.getParameter("project_title");
+		String myWork_id = request.getParameter("work_id");
+		String myWork_title = request.getParameter("work_title");
+
+		model.addAttribute("todo_id", myTodo_id);
+		model.addAttribute("project_id", myProject_id);
+		model.addAttribute("project_title", myProject_title);
+		model.addAttribute("work_id", myWork_id);
+		model.addAttribute("work_title", myWork_title);
+
+
+
 		Map<String, String> mtMap = new HashMap<>();
 		mtMap.put("project_id", project_id);
 		model.addAttribute("workCharts",workService.workChart(mtMap));
+
 		/* 변찬우(추가 2018.12.26) 프로젝트 목록 출력 */
 		List<MeetingVo> meetingList= meetingService.meetingList(project_id);
 		model.addAttribute("meetingList",meetingList );

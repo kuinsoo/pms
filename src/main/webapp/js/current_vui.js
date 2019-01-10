@@ -1,4 +1,7 @@
 
+
+	$(document).ready(function(){
+
 if (annyang) {
 	var historyBack = function(){
 		window.history.back();
@@ -70,6 +73,9 @@ if (annyang) {
 	var subMaintab4 = function(){
 		$( '#smTab4').trigger( "click" );
 	};
+	var subMaintab5 = function(){
+		$( '#smTab5').trigger( "click" );
+	};
 	
 	var commands = {
 		'뒤로': historyBack,
@@ -91,23 +97,32 @@ if (annyang) {
 		'업무 리포트': subMaintab1,
 		'업무 카드': subMaintab2,
 		'간트 차트': subMaintab3,
-		'회의 리스트': subMaintab4
+		'회의 리스트': subMaintab4,
+		'회의': subMaintab4,
+		'회이': subMaintab4,
+		'장소 검색': subMaintab5
 	 };
 	annyang.debug();  
 	annyang.addCommands(commands);
 	
 	annyang.setLanguage('ko');
+
 	
-	$(".icon-microphone").toggle(
-	    function(){
-	    	$(this).css({"color": "red"});
-	    	annyang.start();		    	
-	    },
-	    function(){
-	    	$(this).css({"color": "black"});
-	    	annyang.pause();
-	    }
-	  );
+	var type = "y";
+		$(".icon-microphone").click(function(){
+			console.log("hi");
+
+			if(type=="y"){
+				$(this).css({"color": "red"});
+				annyang.start();		
+				type = "n";
+			}else if(type=="n"){
+				$(this).css({"color": "black"});
+				annyang.abort();		
+				type = "y";
+			}
+	
+		});	
 	
 	annyang.addCallback('resultMatch', function() {
 		$(".facingContent").on("focus", function(){
@@ -121,3 +136,5 @@ if (annyang) {
 		});
 	});
 } 
+
+})
