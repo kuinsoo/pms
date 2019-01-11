@@ -221,7 +221,7 @@
 		function onkeyup_eventName(){
 			if(!/^[가-힣]{2,4}$/.test($(".myPageMemberNameLeg").val())){
 				$("#nameError").show();
-				//$('#telnum').removeAttr('required');
+				$('#telnum').removeAttr('required');
 			
 			}else {
 				$("#nameError").hide();
