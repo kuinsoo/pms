@@ -303,7 +303,7 @@ public class LoginController {
 		memberVo.setMember_pass(kisa);
 
 		//*********************************************************************
-	/*	String member_tel = request.getParameter("member_tel");
+	    /*	String member_tel = request.getParameter("member_tel");
 		if(memberVo.getMember_tel() == member_tel) {
 			memberService.selectfindTel(member_tel);
 			model.addAttribute("member_tel","false");
@@ -315,14 +315,21 @@ public class LoginController {
 		// 값이 다르면..
 		// 인터페이스에 들어가고 그 후 service 
 		if (memberService.selectUser(member_mail) == null) {
-			
 			authVo.setAuth_member(memberVo.getMember_mail());
-			
+				String member_tel = request.getParameter("member_tel");
+				if(member_tel == memberVo.getMember_tel()) {
+					model.addAttribute("member_tel","false");
+				}
 			//memberService.insertUser(memberVo);
 			authorityService.insertUserMember(authVo, memberVo);
 			return "/login/login";
 			// 값이 같으면
 		} else {
+			String member_tel = request.getParameter("member_tel");
+//			if(member_tel == memberVo.getMember_tel()) {
+//				memberService.selectfindTel(member_tel);
+//				model.addAttribute("member_tel","false");
+//			}
 			return "/sign/sign";
 		}
 	}

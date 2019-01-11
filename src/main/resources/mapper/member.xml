@@ -69,19 +69,23 @@
 				 select rownum rnum, b.* from(
 				     select a.*
 				         from
-				             (SELECT (SELECT PROJECT_TITLE  FROM PROJECT  WHERE PROJECT_ID = PMEMBER_PROJECT) as project_title
+				          (SELECT (SELECT PROJECT_TITLE  FROM PROJECT  WHERE PROJECT_ID = PMEMBER_PROJECT) as project_title
 		                       , PMEMBER_MEMBER as pmember_member
 		                      , PMEMBER_PROJECT as project_id
-		                   FROM   PROJECT_MEMBER
-		                   WHERE  PMEMBER_MEMBER = #{member_mail}
+		                   FROM   PROJECT_MEMBER inner join project on project_id = pmember_project
+		                   WHERE  PMEMBER_MEMBER =  #{member_mail}
 		                     AND    PMEMBER_POSITION = '1'
+                              AND   project_edate is null
+                               AND   project_delete = 'N'
 		                   UNION
 		                   SELECT  (SELECT PROJECT_TITLE FROM PROJECT WHERE PROJECT_ID = PMEMBER_PROJECT)
-		                       , (SELECT B.PMEMBER_MEMBER FROM PROJECT_MEMBER B WHERE B.PMEMBER_PROJECT = A.PMEMBER_PROJECT AND B.PMEMBER_POSITION = 1)
-		                     , PMEMBER_PROJECT
-		                   FROM   PROJECT_MEMBER A
-		                   WHERE  A.PMEMBER_MEMBER = #{member_mail}
-		                     AND    A.PMEMBER_POSITION = '2')a) b 
+		                        ,  (SELECT B.PMEMBER_MEMBER FROM PROJECT_MEMBER B WHERE B.PMEMBER_PROJECT = A.PMEMBER_PROJECT AND B.PMEMBER_POSITION = 1)
+		                        , PMEMBER_PROJECT
+		                   FROM   PROJECT_MEMBER A inner join project on project_id = pmember_project
+		                   WHERE  A.PMEMBER_MEMBER =  #{member_mail}
+		                     AND    A.PMEMBER_POSITION = '2'
+                             AND   project_edate is null
+                              AND  project_delete = 'N')a) b 
 	     <if test="searchText!=null and searchText!=''">where project_title like '%'||#{searchText}||'%'</if> )c
 	 	where rnum between ${page}*${pageSize}-(${pageSize}-1) 
 	 and ${page}*${pageSize}
@@ -120,9 +124,11 @@
 	<select id="totalProjectCnt" resultType="int"
 		parameterType="String">
 		select count(*)
-		from project_member
-		where pmember_member =
-		#{member_mail}
+		from project_member A inner join project B
+		ON B.project_id = A.pmember_project
+		where A.pmember_member = #{member_mail}
+		AND   project_edate is null
+		AND  project_delete = 'N'
 
 	</select>
 
@@ -130,11 +136,11 @@
 	<select id="totalProjectCntSearch" resultType="int"
 		parameterType="pageVo">
 		select count(*)
-		from project_member A inner join project
-		B
+		from project_member A inner join project B
 		ON B.project_id = A.pmember_project
-		where A.pmember_member =
-		#{member_mail}
+		where A.pmember_member = #{member_mail}
+		AND   project_edate is null
+		AND  project_delete = 'N'
 		and project_title like '%'||#{searchText}||'%'
 	</select>
 
@@ -272,7 +278,7 @@
 	                                      inner join  project_member on project_id = pmember_project
 	                                      inner join  member on pmember_member = member_mail
 	                               where  member_mail =  #{member_mail})a) b 
-		                <if test="searchFileList != null and searchFileList != ''">where att_name like '%'||#{searchFileList}||'%'</if> )c
+		                <if test="searchFileList != null and searchFileList != ''">where project_title like '%'||#{searchFileList}||'%'</if> )c
 		 where rnum between ${page}*${pageSize}-(${pageSize}-1) AND ${page}*${pageSize} 
   
 	</select>

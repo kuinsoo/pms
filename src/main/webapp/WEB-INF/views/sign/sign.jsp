@@ -171,9 +171,9 @@
 						<label class="control-label">휴대폰 번호</label>
 						<input type="text" id ="tel"  onkeyup="onkeyup_eventPhoneNum();"  name="member_tel" class="form-control" required />
 						<span id ="phoneMypageError">올바르지 않습니다..(-) 없이 입력해 주세요.  </span>
-							<c:if test="${member_tel == 'false'}">
+							<%-- <c:if test="${member_tel == 'false'}">
 								<span id ="memberTelNot"> 사용자가 있는 핸드폰 번호입니다. </span>
-							</c:if>
+							</c:if> --%>
 					</div>
 					<div class="phoneInputBtn">
 						<button onclick="telAjax();" class="btn btn-primary btn-raised" id="phoneNumSaveBtn" >인증</button>
