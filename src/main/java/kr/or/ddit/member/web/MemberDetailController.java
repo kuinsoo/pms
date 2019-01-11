@@ -95,6 +95,8 @@ public class MemberDetailController {
 	    List<ProjectVo> selectProjectMember =  memberservice.selectProjectMember(memberVo.getMember_mail());
 	    model.addAttribute("selectProjectMember",selectProjectMember);
 
+	    System.out.println(memberVo.getMember_pass());
+	
 		// 참여중인 프로젝트 갯수
 		int totalProjectCnt = memberservice.totalProjectCnt(member_mail);
 
@@ -515,32 +517,25 @@ public class MemberDetailController {
 			String member_tel = request.getParameter("member_tel");
 			String member_pass = request.getParameter("member_pass");
 			
+			System.out.println("memberPass" + member_pass);
+			
 			memberVo.setMember_name(member_name);
 			memberVo.setMember_tel(member_tel);
 			
+				
 //			// 암호화로 비교한다. 입력된값이랑 
 //			if(memberVo.getMember_pass().equals(KISA_SHA256.encrypt(member_pass))) {
 //				model.addAttribute("memberVo",memberVo);
 //			}
 			
-			String kisa = KISA_SHA256.encrypt(member_pass).toLowerCase();
-			memberVo.setMember_pass(kisa);
+			//String passwardPass = request.getParameter("passwardPass");
+			//System.out.println("passwardPass" + passwardPass);
 			
-	/*		
-			try {
-				if(part.getSize()>0) {
-					String path = request.getServletContext().getRealPath("/images");
-					String fileName = part.getOriginalFilename();
-					part.transferTo(new File(path + File.separator + fileName));
-								
-					// profile
-					memberVo.setMember_profile("/images/"+fileName);
-				}
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}*/
+			if(member_pass != "") {
+				String kisa = KISA_SHA256.encrypt(member_pass).toLowerCase();
+				memberVo.setMember_pass(kisa);
+				model.addAttribute("kisa",kisa);
+			}
 				
 			int updateUser = memberservice.updateUser(memberVo);
 			model.addAttribute("memberVo",memberVo);
@@ -615,6 +610,8 @@ public class MemberDetailController {
 			
 			Map<String, String> passMap = new HashMap<>();
 			passMap.put("kisa256", kisa256);
+			
+			System.out.println("현재 비밀번호 " +  kisa256);
 			
 			return passMap;
 		}

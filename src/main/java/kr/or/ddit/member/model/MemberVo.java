@@ -15,10 +15,8 @@ public class MemberVo extends PMemberListVo{
 	private String member_withdrawal;
 	private String friend_accept;
 	
-
 	private ToDoVo todoVo;
 
-	
 	
 	public String getFriend_accept() {
 		return friend_accept;
