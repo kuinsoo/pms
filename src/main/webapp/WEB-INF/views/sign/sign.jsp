@@ -53,7 +53,9 @@
 	//숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
 	var certificationNumber;
 
+
 	$(document).ready(function() {
+		$("#memberTelNot").hide();
 		$("#passError").hide();
 		$("#telerror").hide();
 		$(".error").hide();
@@ -92,12 +94,22 @@
 			}
 		}
 		
+		/*
+		// 핸드폰 번호 확인을 위해서 
+			if("${memberVo.member_tel}"== $("#tel")){
+						$("#memberTelNot").show();
+					}
+		*/
 		function onkeyup_eventPhoneNum(){
 			if(!/^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/.test($("#tel").val())){
 				$("#phoneMypageError").show();
 				$("#phoneNumSaveBtn").prop('readonly', true);
+				
+				
 				return false;
+			
 			}else {
+				$("#phoneMypageError").hide();
 				$("#phoneMypageError").hide();
 				$("#phoneNumSaveBtn").prop('readonly', false);
 			}
@@ -159,6 +171,9 @@
 						<label class="control-label">휴대폰 번호</label>
 						<input type="text" id ="tel"  onkeyup="onkeyup_eventPhoneNum();"  name="member_tel" class="form-control" required />
 						<span id ="phoneMypageError">올바르지 않습니다..(-) 없이 입력해 주세요.  </span>
+							<c:if test="${member_tel == 'false'}">
+								<span id ="memberTelNot"> 사용자가 있는 핸드폰 번호입니다. </span>
+							</c:if>
 					</div>
 					<div class="phoneInputBtn">
 						<button onclick="telAjax();" class="btn btn-primary btn-raised" id="phoneNumSaveBtn" >인증</button>

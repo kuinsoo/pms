@@ -40,7 +40,6 @@
 			
 			// 회원 탈퇴부분 - 비밀번호 에러 메시지 숨기기
 			$("#passError").hide();
-
 			getMyPageList(1);
 			getmybookMarkProjectList(1);
 			getmyTodoProjectList(1);
@@ -53,9 +52,8 @@
 				console.log("projectClick");
 				var project_title = $(this).children()[1].innerHTML;
 				var project_id = $(this).children()[2].innerHTML;
-				$("#project_title").val(project_title);
-				$("#project_id").val(project_id);
-				  $("#frm").submit();
+				
+				location.href="/subMain?project_id="+project_id+"&project_title="+project_title;
 			});
 			
 			// 즐겨찾기 클릭 
@@ -65,11 +63,13 @@
 				var project_title = $(this).children()[1].innerHTML;
 				var project_id = $(this).children()[2].innerHTML;
 				
-				$("#project_title2").val(project_title);
+			/* 	$("#project_title2").val(project_title);
 				$("#project_id2").val(project_id);
-				console.log(project_title);
+ */				console.log(project_title);
 				console.log(project_id);
-				$("#frm2").submit();
+				
+				location.href="/subMain?project_id="+project_id+"&project_title="+project_title;
+				//$("#frm2").submit();
 			});
 			
 		
@@ -216,7 +216,6 @@
 			    
 			});
 		});
-
 			
 		function onkeyup_eventName(){
 			if(!/^[가-힣]{2,4}$/.test($(".myPageMemberNameLeg").val())){
@@ -268,7 +267,6 @@
 				}
 			});
 		}
-
 		var kisa;
 		function kisaaa(){
 			if( kisa === '${memberVo.member_pass}'){ 
@@ -323,7 +321,6 @@
 			if(memberEnd === '${memberVo.member_pass}' ){
 				$("#passError").hide();
 				$('.goodbyeBtn').prop('disabled', false);
-
 				$(".goodbyeBtn").click(function(){
 					if(window.confirm("정말 탈퇴 하시겠습니까??")) {
 						location.href="/userwithDrawal";
@@ -342,7 +339,6 @@
 				} else{
 					$("#passError").hide();
 					$('.goodbyeBtn').prop('disabled', false);
-
 					$(".goodbyeBtn").click(function(){
 						if(window.confirm("정말 탈퇴 하시겠습니까??")) {
 							location.href="/userwithDrawal";
@@ -654,7 +650,6 @@
 		function getFileSearchProject(page){
 		
 		$("#projectsearchFileListPage").attr("value",page);	
-
 		var param = $('form[name=searchFileList]').serialize();
 			$.ajax({
 				type: "POST",
@@ -669,7 +664,7 @@
 						html += "	<td>"+ mm.att_id +"</td>";
 						html += "	<td>"+ mm.project_title +"</td>";
 						html += "	<td>"+ mm.att_name +"</td>";
-						html += "	<td>"+ "<input type='button' value='파일 다운로드' class='fileDownLoads' />"+"</td>";
+						html += "	<td>"+ "<input type='button' onclick ='getmyProjectFileAttachId("+mm.att_id+");' value='파일 다운로드' class='fileDownLoads' />"+"</td>";
 						html += "</tr>";
 					});
 					$("#myFileList").html("");
@@ -780,16 +775,15 @@
 			}
 	</script>
 
-
+<!-- 
 <form  id = "frm" action="/projectClickDetail" method = "get">
 	<input type = "hidden" id = "project_title" name = "project_title"/>
 	<input type = "hidden" id = "project_id" name = "project_id"/>
 </form>
-
 <form  id = "frm2" action="/projectBookClickDetail" method = "get">
 	<input type = "hidden" id = "project_title2" name = "project_title"/>
 	<input type = "hidden" id = "project_id2" name = "project_id"/>
-</form>
+</form> -->
 
 	<!-- CURRENT SECTION(MAIN) -->	
 	<section class="currentMain">
@@ -1115,14 +1109,11 @@ $('.projectCreatePopUps').click(function(){
 function layer_popups(els){
     var $els = $(els);        //레이어의 id를 $el 변수에 저장
     var isDims = $els.prev().hasClass('dimBgs');   //dimmed 레이어를 감지하기 위한 boolean 변수
-
     isDims ? $('.dim-layers').fadeIn() : $els.fadeIn();
-
     var $elWidths = ~~($els.outerWidth()),
         $elHeights = ~~($els.outerHeight()),
         docWidths = $(document).width(),
         docHeights = $(document).height();
-
     // 화면의 중앙에 레이어를 띄운다.
     if ($elHeights < docHeights || $elWidths < docWidths) {
         $els.css({
@@ -1132,28 +1123,23 @@ function layer_popups(els){
     } else {
         $els.css({top: 0, left: 0});
     }
-
     $els.find('a.btn-layerCloses').click(function(){
         isDims ? $('.dim-layers').fadeOut() : $els.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
         return false;
     });
-
     $('.layer .dimBgs').click(function(){
         $('.dim-layers').fadeOut();
         return false;
     });
 }
-
 var menuLeft = document.getElementById('cbp-spmenu-s1'),
 	 showLeftPush = document.getElementById('showLeftPush'),
 	 body = document.body;
-
 $("#showLeftPush").click(function(){
 	classie.toggle( this, 'active' );
 	classie.toggle( body, 'cbp-spmenu-push-toright' );
 	classie.toggle( menuLeft, 'cbp-spmenu-open' );
 });
-
 function dialog(){
 	var dialogBox = $('.dialog'),
 		 dialogTrigger = $('.dialog__trigger'),
@@ -1164,15 +1150,12 @@ function dialog(){
 			 dialogBox.toggleClass('dialog--active');
 			 e.stopPropagation()
 		 });
-
 		 $(".dialog").click(function(){
 			 dialogBox.toggleClass('dialog--active');
 		 });
-
 		 $(".dialog__triggers").click(function(){
 			 dialogBox.removeClass('dialog--active');
 		 });
-
 		 // Close the dialog - press escape key // key#27
 		 $(document).keyup(function(e){
 			 if(e.keyCode === 27){
@@ -1194,15 +1177,12 @@ function dialogs(){
 			 dialogBoxs.toggleClass('dialog--actives');
 			 e.stopPropagation()
 		 });
-
 		 $(".dialogs").click(function(){
 			 dialogBoxs.toggleClass('dialog--actives');
 		 });
-
 		 $(".dialog__trigger").click(function(){
 			 dialogBoxs.removeClass('dialog--actives');
 		 });
-
 		 // Close the dialog - press escape key // key#27
 		 $(document).keyup(function(e){
 			 if(e.keyCode === 27){
@@ -1214,26 +1194,20 @@ function dialogs(){
 $(function(){
 	dialogs();
 });
-
 // 알람 탭 메뉴
 $("#tabs").tabs();
-
 // 마이페이지 하단 탭 메뉴
 $("#tabs2").tabs();
-
 window.URL = window.URL || window.webkitURL;
-
 var fileSelect = document.getElementById("fileSelect"),
     fileElem = document.getElementById("fileElem"),
     fileList = document.getElementById("fileList");
-
 fileSelect.addEventListener("click", function (e) {
   if (fileElem) {
     fileElem.click();
   }
   e.preventDefault(); // prevent navigation to "#"`
 }, false);
-
 function handleFiles(files) {
   if (!files.length) {
     fileList.innerHTML = "";
@@ -1243,17 +1217,16 @@ function handleFiles(files) {
     fileList.appendChild(list);
     for (var i = 0; i < files.length; i++) {
             
-      var img = document.createElement("img");
-      img.src = window.URL.createObjectURL(files[i]);
-      img.height = 150;
-      img.onload = function() {
+      var img = document.createElement("img");
+      img.src = window.URL.createObjectURL(files[i]);
+      img.height = 150;
+      img.onload = function() {
         window.URL.revokeObjectURL(this.src);
-      }
-      list.appendChild(img);
-    }
-  }
+      }
+      list.appendChild(img);
+    }
+  }
 }
-
 var ctx = document.getElementById("myChart").getContext('2d');
 var myChart = new Chart(ctx, {
     type: 'line',
@@ -1289,7 +1262,6 @@ var myChart = new Chart(ctx, {
         }
     }
 });
-
 var ctx2 = document.getElementById("myChart2").getContext('2d');
 var myChart2 = new Chart(ctx2, {
     type: 'horizontalBar',
@@ -1325,9 +1297,6 @@ var myChart2 = new Chart(ctx2, {
         }
     }
 });
-
-
-
 </script>
 </body>
 </html>

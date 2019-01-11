@@ -36,6 +36,18 @@ public interface MemberMapper {
 	 */
 	MemberVo selectUser(String member_mail);
 
+	
+
+	/**
+	 * Method : selectfindTel
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param memberVo
+	 * @return
+	 * Method 설명 : 전화번호로 사용자 찾기 
+	 */
+	MemberVo selectfindTel(String member_tel);
+	
 	/**
 	 * Method : insertUser
 	 * 작성자 : 나진실

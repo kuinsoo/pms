@@ -243,7 +243,6 @@
 				}
 			});
 		}
-
 		function updateMessageReceivedAjax(msg_id){
 			$.ajax({
 				type:"GET",
@@ -351,7 +350,6 @@
 						html += "	<td>"+ "<input type='button' onclick ='deleteMyFriends("+mm.friend_code+");' value='친구삭제'/>"+"</td>";
 						html += "</tr>";
 					});
-
 					$("#myFriendList").html("");
 					$("#myFriendList").html(html);
 					var i  = 1;
@@ -368,7 +366,6 @@
 				}
 			});
 		}
-
 			
 			function getSearchFriendProject(page){
 				$("#myFriendsListPage").attr("value",page);
@@ -416,8 +413,10 @@
 				url : "/myFriendsDelete",
 				data : "friend_code="+friend_code,
 				success: function(data){
-					getAllMember(1);
 					getMyFriends(1);
+					getAllMember(1);
+					getMySendFriendList(1);
+					getYouGiveFriendList(1);
 				}
 			});
 		}
@@ -472,15 +471,16 @@
 				url : "/youGiveNoAjax",
 				data : "member_mail="+member_mail+"&friend_accept="+friend_accept,
 				success: function(data){
+					getMyFriends(1);
 					getAllMember(1);
 					getMySendFriendList(1);
+					getYouGiveFriendList(1);
 				}
 			});
 		}
 		
 		
 			//<input type="hidden" name="page" value='1'/>
-
 			//$('form[name=searchTextFriendList]') 하위 input name=page의 값을 함수 파라미터로 설정 
 			//var page = $('form[name=searchTextFriendList]').
 			//var pageSize = 10;
@@ -571,8 +571,10 @@
 				url : "/deletemySendFriendAjax",
 				data : "friend_code="+friend_code,
 				success: function(data){
-					getMySendFriendList(1);
+					getMyFriends(1);
 					getAllMember(1);
+					getMySendFriendList(1);
+					getYouGiveFriendList(1);
 				}
 			});
 		}
@@ -665,8 +667,10 @@
 				url : "/youGiveYesAjax",
 				data : "friend_myemail="+friend_myemail+"&friend_code="+friend_code,
 				success: function(data){
-					getYouGiveFriendList(1);
 					getMyFriends(1);
+					getAllMember(1);
+					getMySendFriendList(1);
+					getYouGiveFriendList(1);
 				}
 			});
 		}		
@@ -680,8 +684,10 @@
 				url : "/youGiveXXXAjax",
 				data : "friend_code="+friend_code,
 				success: function(data){
-					getYouGiveFriendList(1);
-				}
+					getMyFriends(1);
+					getAllMember(1);
+					getMySendFriendList(1);
+					getYouGiveFriendList(1);				}
 			});
 		}		
 		
@@ -726,7 +732,6 @@
 		}
 		
 		//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
 </script>
 
 <script>
@@ -738,14 +743,11 @@ $('.projectCreatePopUps').click(function(){
 function layer_popups(els){
     var $els = $(els);        //레이어의 id를 $el 변수에 저장
     var isDims = $els.prev().hasClass('dimBgs');   //dimmed 레이어를 감지하기 위한 boolean 변수
-
     isDims ? $('.dim-layers').fadeIn() : $els.fadeIn();
-
     var $elWidths = ~~($els.outerWidth()),
         $elHeights = ~~($els.outerHeight()),
         docWidths = $(document).width(),
         docHeights = $(document).height();
-
     // 화면의 중앙에 레이어를 띄운다.
     if ($elHeights < docHeights || $elWidths < docWidths) {
         $els.css({
@@ -755,28 +757,23 @@ function layer_popups(els){
     } else {
         $els.css({top: 0, left: 0});
     }
-
     $els.find('a.btn-layerCloses').click(function(){
         isDims ? $('.dim-layers').fadeOut() : $els.fadeOut(); // 닫기 버튼을 클릭하면 레이어가 닫힌다.
         return false;
     });
-
     $('.layer .dimBgs').click(function(){
         $('.dim-layers').fadeOut();
         return false;
     });
 }
-
 var menuLeft = document.getElementById('cbp-spmenu-s1'),
 	 showLeftPush = document.getElementById('showLeftPush'),
 	 body = document.body;
-
 $("#showLeftPush").click(function(){
 	classie.toggle( this, 'active' );
 	classie.toggle( body, 'cbp-spmenu-push-toright' );
 	classie.toggle( menuLeft, 'cbp-spmenu-open' );
 });
-
 function dialog(){
 	var dialogBox = $('.dialog'),
 		 dialogTrigger = $('.dialog__trigger'),
@@ -787,15 +784,12 @@ function dialog(){
 			 dialogBox.toggleClass('dialog--active');
 			 e.stopPropagation()
 		 });
-
 		 $(".dialog").click(function(){
 			 dialogBox.toggleClass('dialog--active');
 		 });
-
 		 $(".dialog__triggers").click(function(){
 			 dialogBox.removeClass('dialog--active');
 		 });
-
 		 // Close the dialog - press escape key // key#27
 		 $(document).keyup(function(e){
 			 if(e.keyCode === 27){
@@ -803,12 +797,10 @@ function dialog(){
 			 }
 		 });
 };
-
 // Run function when the document has loaded
 $(function(){
 	dialog();
 });
-
 function dialogs(){
 	var dialogBoxs = $('.dialogs'),
 		 dialogTriggers = $('.dialog__triggers'),
@@ -819,15 +811,12 @@ function dialogs(){
 			 dialogBoxs.toggleClass('dialog--actives');
 			 e.stopPropagation()
 		 });
-
 		 $(".dialogs").click(function(){
 			 dialogBoxs.toggleClass('dialog--actives');
 		 });
-
 		 $(".dialog__trigger").click(function(){
 			 dialogBoxs.removeClass('dialog--actives');
 		 });
-
 		 // Close the dialog - press escape key // key#27
 		 $(document).keyup(function(e){
 			 if(e.keyCode === 27){
@@ -835,18 +824,14 @@ function dialogs(){
 			 }
 		 });
 };
-
 // Run function when the document has loaded
 $(function(){
 	dialogs();
 });
-
 // 알람 탭 메뉴
 $("#tabs").tabs();
-
 //마이페이지 하단 탭 메뉴
 $("#tabs2").tabs();
-
 $('#locationBack_frd').on('click', function () {
 	location.href = "/main"
 });
