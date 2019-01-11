@@ -41,6 +41,7 @@
 		#passError{color: red;}
 		#nameError{color:red;}
 		#phoneMypageError{color:red;}
+		#Emailerror{color:red;}
 		/* video background */
 		.videoBgs{width:100%;height:100%;position:absolute;top:0px;left:0px;}
 		.videoBgs > video{width:100%;}
@@ -55,13 +56,13 @@
 
 
 	$(document).ready(function() {
-		
 		$("#memberTelNot").hide();
 		$("#passError").hide();
 		$("#telerror").hide();
 		$(".error").hide();
 		$("#nameError").hide();
 		$("#phoneMypageError").hide();
+		$("#Emailerror").hide();
 
 		//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
 		//blur()이벤트 사용
@@ -94,6 +95,16 @@
 				$("#telerror").show();
 			}
 		}
+		
+		/* 이메일 정규식을 위함 /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/; */
+		function onkeyup_eventEmail(){
+			if(!/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test($("#email").val())){
+				$("#Emailerror").show();
+			}else{
+				$("#Emailerror").hide();
+			}
+		}
+		
 		
 		/*
 		// 핸드폰 번호 확인을 위해서 
@@ -150,7 +161,8 @@
 				<br>
 				<div class="form-group label-floating">
 					<label class="control-label">이메일</label>
-					<input type="email"	id ="email" name="member_mail" value="" class="form-control" autofocus="autofocus" required />
+					<input type="email"	id ="email" name="member_mail" onkeyup="onkeyup_eventEmail();"  class="form-control" autofocus="autofocus" required />
+					<span id="Emailerror"> 이메일 형식에 맞지않습니다..다시 입력해주세요. </span>
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">이름</label>
