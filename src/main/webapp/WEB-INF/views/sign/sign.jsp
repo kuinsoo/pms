@@ -55,6 +55,7 @@
 
 
 	$(document).ready(function() {
+		
 		$("#memberTelNot").hide();
 		$("#passError").hide();
 		$("#telerror").hide();

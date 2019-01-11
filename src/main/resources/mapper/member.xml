@@ -13,6 +13,13 @@
 		from member
 		where member_mail = #{member_mail}
 	</select>
+	
+	<select id="selectfindTel" resultType="memberVo"
+		parameterType="String">
+		select *
+		from member
+		where member_tel = #{member_tel}
+	</select>
 
 	<!-- 회원가입 -->
 	<insert id="insertUser" parameterType="memberVo">
