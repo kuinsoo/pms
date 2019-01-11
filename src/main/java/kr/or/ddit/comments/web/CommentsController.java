@@ -57,6 +57,7 @@ public class CommentsController {
 		commentsService.insertCmt(cmtVo);
 		model.addAttribute("workList",workService.selectWorks(project_id));
 		model.addAttribute("cmtList", commentsService.ajaxCmtList(cmtMap));
+		model.addAttribute("memberVo",memberVo);
 
 		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
@@ -97,12 +98,14 @@ public class CommentsController {
 								CommentsVo cmtVo,
 								@RequestParam("work_id")String work_id, @SessionAttribute("memberVo")MemberVo memberVo){
 		commentsService.updateCmt(cmtVo);
-/*		Map<String,String> cmtMap = new HashMap<>();
+
+		Map<String,String> cmtMap = new HashMap<>();
 		cmtMap.put("work_project", project_id);
 		cmtMap.put("cmt_work", work_id);
+
 		model.addAttribute("workList",workService.selectWorks(project_id));
-		model.addAttribute("cmtList", commentsService.ajaxCmtList(cmtMap));*/
-		
+		model.addAttribute("cmtList", commentsService.ajaxCmtList(cmtMap));
+
         /* 알림기능 - IKS */
         model.addAttribute("pageCnt", postService.totalPostCnt());
         model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));

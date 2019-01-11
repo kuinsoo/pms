@@ -7,7 +7,7 @@
 
     <!-- 댓글 출력 -->
     <select id="cmtList" parameterType="String" resultType="cmtVo">
-        select  MEMBER_PROFILE, MEMBER_NAME, CMT_CONTENT, CMT_DATE, CMT_WORK,CMT_ID
+        select  MEMBER_PROFILE, MEMBER_NAME, CMT_MEMBER, CMT_CONTENT, CMT_DATE, CMT_WORK,CMT_ID
         from COMMENTS C INNER JOIN  WORK W on (C.CMT_WORK = W.WORK_ID)
                 inner join WORK_MEMBER WM on (W.WORK_ID = WM.WORK_ID)
                 inner join PROJECT_MEMBER PM on (WM.PMEMBER_ID = PM.PMEMBER_ID)
@@ -18,7 +18,7 @@
 
 
     <select id="ajaxCmtList" parameterType="Map" resultType="cmtVo">
-        select  MEMBER_PROFILE, MEMBER_NAME, CMT_CONTENT, CMT_DATE, CMT_WORK,CMT_ID
+        select  MEMBER_PROFILE, MEMBER_NAME, CMT_MEMBER, CMT_CONTENT, CMT_DATE, CMT_WORK,CMT_ID
         from COMMENTS C INNER JOIN  WORK W on (C.CMT_WORK = W.WORK_ID)
                 inner join WORK_MEMBER WM on (W.WORK_ID = WM.WORK_ID)
                 inner join PROJECT_MEMBER PM on (WM.PMEMBER_ID = PM.PMEMBER_ID)

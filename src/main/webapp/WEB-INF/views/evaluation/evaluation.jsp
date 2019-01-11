@@ -249,6 +249,20 @@
 
 			}
 		});
+
+		$.ajax({
+			type: "GET",
+			url : "/ajaxTable",
+			data: "project_id=" + project_id+ "&userMail="+userMail,
+			success : function (data) {
+				$('.evaluationInfoRight_1').html("");
+				$('.evaluationInfoRight_1').html(data);
+			},
+			error : function (data) {
+				alert("error Eval")
+
+			}
+		});
 	};
 
 	$(document).ready(function () {
