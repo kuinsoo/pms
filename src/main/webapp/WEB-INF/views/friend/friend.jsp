@@ -670,7 +670,7 @@
 					getMyFriends(1);
 					getAllMember(1);
 					getMySendFriendList(1);
-					getYouGiveFriendList(1);
+					//getYouGiveFriendList(1);
 				}
 			});
 		}		
@@ -687,7 +687,8 @@
 					getMyFriends(1);
 					getAllMember(1);
 					getMySendFriendList(1);
-					getYouGiveFriendList(1);				}
+					getYouGiveFriendList(1);				
+				}
 			});
 		}		
 		
