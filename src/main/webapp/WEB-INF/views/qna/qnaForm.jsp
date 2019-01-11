@@ -53,30 +53,6 @@
 	font-family:'Malgun Gothic';
 }
 </style>
-<script>
-$(document).ready(function(){	
-	$('#cecret').on('click',function(){
-		$('#post_pass').css("display","block");
-	});
-});
-
-function savePost(){
-	var hanBangFormValue=$('form[name=formValue]').serialize();
-	
-	$.ajax({
-		method: "POST",
-		url: "/newPost",
-		data: hanBangFormValue,
-		success: function (data) {
-			$(body).append(data);
-			$(location).attr('href','/qnaList');
-		},
-		error: function (data) {
-			console.log("list-error : " + data);
-		}
-	});
-}
-</script>
 <!-- CURRENT SECTION(MAIN) -->
 <section class="currentMain">
 	<div class="currentMainContainer">
@@ -99,8 +75,9 @@ function savePost(){
 						<tr>
 							<td class="tdColor">비밀글 여부</td>
 							<td colspan="4">
-								<span id="cecret">[비밀글로 작성(클릭)]</span>
-								<input type="password" id="post_pass" name="post_pass" style="display:none;" placeholder="비밀번호를 입력하세요" class="secretGoGoYeah" />
+								<span id="cecret" >[ 선택 ] : </span> 
+								<span id="select" > 공개 </span> 
+								<input type="hidden" id="post_pass" name="post_pass" placeholder="비밀번호를 입력하세요" class="secretGoGoYeah" />
 							</td>
 						</tr>
 						<tr>
@@ -130,6 +107,43 @@ function savePost(){
 <script type="text/javascript" src="../js/classie.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.js"></script>
 <script>
+
+//비밀글 버튼 처리
+$(document).ready(function(){
+	var type = "y";
+	$("#cecret").click(function(){
+		if(type=="y"){
+			$("#select").css({"color": "red"});
+	    	$("#select").html("<span>비공개</span>");
+	    	$("#post_pass").val("select");
+			type = "n";
+		}else if(type=="n"){
+			$("#select").css({"color": "black"});
+	    	$("#select").html("<span>공개</span>");
+	    	$("#post_pass").val("");
+	    	type = "y";
+		}
+	});	
+});
+
+//저장
+function savePost(){
+	var hanBangFormValue=$('form[name=formValue]').serialize();
+	
+	$.ajax({
+		method: "POST",
+		url: "/newPost",
+		data: hanBangFormValue,
+		success: function (data) {
+			$(body).append(data);
+			$(location).attr('href','/qnaList');
+		},
+		error: function (data) {
+			console.log("list-error : " + data);
+		}
+	});
+}
+
 //DIM POPUP
 $('.projectCreatePopUp').click(function(){
 	var $href = $(this).attr('href');

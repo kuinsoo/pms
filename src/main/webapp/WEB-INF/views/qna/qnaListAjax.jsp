@@ -18,13 +18,14 @@
 			 	
 			 	<%--비밀글이면서 관라자가 아닌 경우 : 링크 생성 --%>
 		 		<c:when test="${postVo.post_public == 'n' && memberVo.member_mail != 'admin@admin.com'}">
-			 		<span>${postVo.title}</span>
+			 		<a href='#' class='alert'> ${postVo.title} </a>
 			 	</c:when>
 			 	
 			 	<%--비밀글이 아닌경우 --%>
 			 	<c:when test="${postVo.post_public == 'y'}">
 			 		<a href='/qnaDetail?post_id=${postVo.post_id}'> ${postVo.title} </a>
 			 	</c:when>
+
 			</c:choose>
 			 
 			<c:if test="${postVo.post_public=='n'}"> [비밀 글] </c:if>
@@ -37,4 +38,10 @@
 	</td>
 </tr>
 </c:forEach>
+
+<script>
+$(".alert").on("click", function(){
+	alert("비밀글은 본인만 확인할 수 있습니다 ");
+});
+</script>
 				

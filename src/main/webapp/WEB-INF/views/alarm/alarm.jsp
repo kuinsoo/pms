@@ -45,11 +45,11 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 $(document).ready(function(){
-	issueMemberList();
+/* 	issueMemberList();
 	messageMemberList();
 	workMemberList();
 	noticeMemberList();
-	friendMemberList();
+	friendMemberList(); */
 });
 
 //이슈 알림 - 2019-01-04 임규승
