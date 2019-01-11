@@ -19,7 +19,7 @@
 		insert into
 		member
 		values
-		(#{member_mail},#{member_name},#{member_pass},#{member_tel},'/images/basic.png','N')
+		(#{member_mail},#{member_name},#{member_pass},#{member_tel},'/images/basic.jpg','N')
 	</insert>
 	
 	<!-- 관리자는 임의로 만들기 때문에 필요없다. 권한부여 // 1 : 관리자 <insert id="insertUserAdmin" 

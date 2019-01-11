@@ -416,8 +416,10 @@
 				url : "/myFriendsDelete",
 				data : "friend_code="+friend_code,
 				success: function(data){
-					getAllMember(1);
 					getMyFriends(1);
+					getAllMember(1);
+					getMySendFriendList(1);
+					getYouGiveFriendList(1);
 				}
 			});
 		}
@@ -472,8 +474,10 @@
 				url : "/youGiveNoAjax",
 				data : "member_mail="+member_mail+"&friend_accept="+friend_accept,
 				success: function(data){
+					getMyFriends(1);
 					getAllMember(1);
 					getMySendFriendList(1);
+					getYouGiveFriendList(1);
 				}
 			});
 		}
@@ -571,8 +575,10 @@
 				url : "/deletemySendFriendAjax",
 				data : "friend_code="+friend_code,
 				success: function(data){
-					getMySendFriendList(1);
+					getMyFriends(1);
 					getAllMember(1);
+					getMySendFriendList(1);
+					getYouGiveFriendList(1);
 				}
 			});
 		}
@@ -665,8 +671,10 @@
 				url : "/youGiveYesAjax",
 				data : "friend_myemail="+friend_myemail+"&friend_code="+friend_code,
 				success: function(data){
-					getYouGiveFriendList(1);
 					getMyFriends(1);
+					getAllMember(1);
+					getMySendFriendList(1);
+					getYouGiveFriendList(1);
 				}
 			});
 		}		
@@ -680,8 +688,10 @@
 				url : "/youGiveXXXAjax",
 				data : "friend_code="+friend_code,
 				success: function(data){
-					getYouGiveFriendList(1);
-				}
+					getMyFriends(1);
+					getAllMember(1);
+					getMySendFriendList(1);
+					getYouGiveFriendList(1);				}
 			});
 		}		
 		

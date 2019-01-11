@@ -53,9 +53,9 @@
 				console.log("projectClick");
 				var project_title = $(this).children()[1].innerHTML;
 				var project_id = $(this).children()[2].innerHTML;
-				$("#project_title").val(project_title);
-				$("#project_id").val(project_id);
-				  $("#frm").submit();
+				
+				location.href="/subMain?project_id="+project_id+"&project_title="+project_title;
+
 			});
 			
 			// 즐겨찾기 클릭 
@@ -65,11 +65,14 @@
 				var project_title = $(this).children()[1].innerHTML;
 				var project_id = $(this).children()[2].innerHTML;
 				
-				$("#project_title2").val(project_title);
+			/* 	$("#project_title2").val(project_title);
 				$("#project_id2").val(project_id);
-				console.log(project_title);
+ */				console.log(project_title);
 				console.log(project_id);
-				$("#frm2").submit();
+				
+				location.href="/subMain?project_id="+project_id+"&project_title="+project_title;
+
+				//$("#frm2").submit();
 			});
 			
 		
@@ -669,7 +672,7 @@
 						html += "	<td>"+ mm.att_id +"</td>";
 						html += "	<td>"+ mm.project_title +"</td>";
 						html += "	<td>"+ mm.att_name +"</td>";
-						html += "	<td>"+ "<input type='button' value='파일 다운로드' class='fileDownLoads' />"+"</td>";
+						html += "	<td>"+ "<input type='button' onclick ='getmyProjectFileAttachId("+mm.att_id+");' value='파일 다운로드' class='fileDownLoads' />"+"</td>";
 						html += "</tr>";
 					});
 					$("#myFileList").html("");
@@ -780,7 +783,7 @@
 			}
 	</script>
 
-
+<!-- 
 <form  id = "frm" action="/projectClickDetail" method = "get">
 	<input type = "hidden" id = "project_title" name = "project_title"/>
 	<input type = "hidden" id = "project_id" name = "project_id"/>
@@ -789,7 +792,7 @@
 <form  id = "frm2" action="/projectBookClickDetail" method = "get">
 	<input type = "hidden" id = "project_title2" name = "project_title"/>
 	<input type = "hidden" id = "project_id2" name = "project_id"/>
-</form>
+</form> -->
 
 	<!-- CURRENT SECTION(MAIN) -->	
 	<section class="currentMain">
