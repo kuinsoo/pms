@@ -149,7 +149,7 @@ public class EvaluationController {
 		evalMap.put("member_mail", memberVo.getMember_mail());
 		evalMap.put("project_id", project_id);
 		model.addAttribute("evalView", evaluationService.evaluationView(evalMap));
-		
+
 		/* 알림기능 - IKS */
 		model.addAttribute("pageCnt", postService.totalPostCnt());
 		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
@@ -159,4 +159,28 @@ public class EvaluationController {
 
 		return "evaluation/ajaxEvaluation";
 	}
+
+	@RequestMapping(value= "/ajaxTable", method=RequestMethod.GET)
+	public String ajaxTable(Model model, @RequestParam("userMail")String userMail,
+								 @RequestParam("project_id")String project_id) {
+		MemberVo memberVo = memberService.selectfindPass(userMail);
+		model.addAttribute("memberVo",memberVo);
+		Map<String, String> evalMap = new HashMap<>();
+		evalMap.put("member_mail", memberVo.getMember_mail());
+		evalMap.put("member_name", memberVo.getMember_name());
+		evalMap.put("project_id", project_id);
+		model.addAttribute("evalView", evaluationService.evaluationView(evalMap));
+		model.addAttribute("evalProjectList", evaluationService.evaluationProjectList(evalMap));
+		model.addAttribute("evalChart", evaluationService.evaluationChart(evalMap));
+
+		/* 알림기능 - IKS */
+		model.addAttribute("pageCnt", postService.totalPostCnt());
+		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
+		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
+		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));
+
+		return "evaluation/ajaxTable";
+	}
+
 }

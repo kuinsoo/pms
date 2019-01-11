@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <c:forEach items="${workList}" var="work" varStatus="i">
 	<div class="currentCardList">
@@ -77,9 +78,11 @@
 										<img src="${cmt.member_profile}">
 									</div>
 									<div class="cardContentCommentUserName">
-										<b>${cmt.member_name}</b><span class="times">${cmt.cmt_date}</span>
+										<b>${cmt.member_name}</b><span class="times"><fmt:formatDate value="${cmt.cmt_date}" pattern="yyyy-MM-dd"/> </span>
+										<c:if test="${cmt.cmt_member eq memberVo.member_mail}">
 										<input type="button" value="수정" class="commentUpdateBtn" onclick="updateCmt('${cmt.cmt_id}', '${work.work_id}');" />
 										<input type="button" value="삭제" class="commentDeleteBtn" onclick="deleteCmt('${cmt.cmt_id}', '${work.work_id}');" />
+										</c:if>
 										<br>
 										<span id="cmtContent${cmt.cmt_id}">${cmt.cmt_content}</span>
 											<div class="cmtContentC"  id="cmt${cmt.cmt_id}" >
