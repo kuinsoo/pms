@@ -52,13 +52,6 @@ public class ChattingController {
 	public String meetingListView(@RequestParam("meeting_id")String meeting_id, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
 		
 		model.addAttribute("chatList", chattingService.chattingList(meeting_id));
-		
-		/* 알림기능 - IKS */
-		model.addAttribute("pageCnt", postService.totalPostCnt());
-		model.addAttribute("workMemberTotalCnt", workService.workMemberTotalCnt(memberVo.getMember_mail()));
-		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
-		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
-		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));
 
 		return "main/chatListAjax";
 	}

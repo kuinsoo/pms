@@ -40,6 +40,7 @@
 			
 			// 회원 탈퇴부분 - 비밀번호 에러 메시지 숨기기
 			$("#passError").hide();
+
 			getMyPageList(1);
 			getmybookMarkProjectList(1);
 			getmyTodoProjectList(1);

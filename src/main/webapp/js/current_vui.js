@@ -109,20 +109,20 @@ if (annyang) {
 
 	
 	var type = "y";
-		$(".icon-microphone").click(function(){
-			console.log("hi");
 
-			if(type=="y"){
-				$(this).css({"color": "red"});
-				annyang.start();		
-				type = "n";
-			}else if(type=="n"){
-				$(this).css({"color": "black"});
-				annyang.abort();		
-				type = "y";
-			}
-	
-		});	
+	$(".icon-microphone").click(function(){
+		console.log("hi");
+
+		if(type=="y"){
+			$(this).css({"color": "red"});
+			annyang.start();		
+			type = "n";
+		}else if(type=="n"){
+			$(this).css({"color": "black"});
+			annyang.abort();		
+			type = "y";
+		}
+	});	
 	
 	annyang.addCallback('resultMatch', function() {
 		$(".facingContent").on("focus", function(){
