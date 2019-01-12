@@ -313,6 +313,7 @@ public class LoginController {
 			return "/login/login";
 			// 값이 같으면
 		} else {
+			model.addAttribute("msg","Y");
 			return "/sign/sign";
 		}
 	}

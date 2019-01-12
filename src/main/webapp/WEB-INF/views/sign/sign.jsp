@@ -63,6 +63,11 @@
 		$("#nameError").hide();
 		$("#phoneMypageError").hide();
 		$("#Emailerror").hide();
+		
+		var msg = '${msg}';
+		if(msg=='Y'){
+			alert(" 회원 가입이 불가능한 회원입니다.");
+		}
 
 		//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
 		//blur()이벤트 사용
