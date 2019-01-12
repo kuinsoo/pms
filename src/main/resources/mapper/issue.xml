@@ -121,7 +121,7 @@
 		FROM    issue sue INNER JOIN todo td
 		ON      sue.todo_id = td.todo_id
 		WHERE   td.todo_id = #{todo_id}
-		ORDER BY sue.issue_sdate
+		ORDER BY sue.issue_sdate, sue.issue_level DESC
 	</select>
 	
 	<!-- 이슈 수정 -->
@@ -149,12 +149,14 @@
 				sue.todo_id,
 				sue.issue_work,
 		        sue.issue_helper,
+		        sue.issue_sdate,
+		        sue.issue_level,
 		        sue.issue_edate,
 		        sue.issue_solution
 		FROM    issue sue INNER JOIN todo td
 		ON      sue.todo_id = td.todo_id
 		WHERE   td.todo_id = #{todo_id}
-		ORDER BY sue.issue_edate DESC	
+		ORDER BY sue.issue_sdate, sue.issue_level DESC	
 	</select>
 	
 	<!-- 이슈 삭제시 제약조건 해제를 위한 UPDATE  -->
