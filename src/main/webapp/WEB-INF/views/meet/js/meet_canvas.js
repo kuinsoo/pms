@@ -53,7 +53,7 @@ function saveFormAsTextFile(){
      
      // json 만들기  to oracle
      $.ajax({
-  	    url : 'https://119.203.240.166:8089/saveDoc',
+  	    url : 'https://192.168.0.5:8089/saveDoc',
   	    type : 'post',
   	    data : meetDoc,
   	    success : function (data) { },
@@ -601,7 +601,7 @@ document.getElementById('btn-chat-message').onclick = function() {
     
     // json 만들기 (.. form sunmit은 페이지가 전환되서)
    $.ajax({
-	    url : 'https://119.203.240.166:8089/test',
+	    url : 'https://192.168.0.5:8089/test',
 	    type : 'post',
 	    data : meetObj,
 	    success : function (data) { } ,
@@ -794,7 +794,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
 $('#myWorkListBtn').on('click', function(){	  
 	
 	  $.ajax({
-		    url : 'https://119.203.240.166:8081/myWorkList',
+		    url : 'https://192.168.0.5:8081/myWorkList',
 		    type : 'POST',
 		    data : {
 		    	"project_id" : params.todayProject_id,
