@@ -328,7 +328,7 @@
 	<!-- 내가 받은요청에서 거절 버튼을 클릭했을때  -->
 	<update id="updateRefuseFriend" parameterType="String">
 		update  FRIENDSLIST
-		set friend_accept = 'N'
+		set friend_accept = 'S'
 		where friend_code = #{friend_code}
 	</update>
 	

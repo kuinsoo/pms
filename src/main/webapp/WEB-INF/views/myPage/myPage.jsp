@@ -1007,9 +1007,9 @@
 								</div>
 								<table>
 									<colgroup width="10%" />
-									<colgroup width="10%" />
-									<colgroup width="20%" />
-									<colgroup width="40%" />
+									<colgroup width="15%" />
+									<colgroup width="30%" />
+									<colgroup width="30%" />
 									<colgroup width="10%" />
 									<thead>
 										<tr class="todoClick">
@@ -1018,7 +1018,7 @@
 											<!-- <th><span>할일 번호 </span></th>
 											<th><span>일감 번호 </span></th> -->
 											<th><span>프로젝트 명 </span></th>
-											<th><span>나의 일감 보관</span></th>
+											<th><span>나의 일감</span></th>
 											<th><span>완료 여부</span></th>
 										</tr>
 									</thead>
