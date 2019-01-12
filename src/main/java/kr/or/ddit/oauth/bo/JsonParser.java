@@ -24,6 +24,11 @@ public class JsonParser {
 		map.put("member_name", jsonObject.get("name"));
 		map.put("member_pass", "");
 		map.put("member_tel", "");
+		
+		// DB에 저장은 하는데 그 사진은 안나온다..??
+		// 뭘까 
+		
+		map.put("member_profile", jsonObject.get("profile_image"));
 
 		memberVo.setMember_name(map.get("member_name").toString());
 		memberVo.setMember_mail(map.get("member_mail").toString()); 

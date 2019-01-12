@@ -399,5 +399,10 @@ public class MemberService implements MemberServiceInf {
 		return memberMapper.totalmyFileListCntSearch(pageVo);
 	}
 
+	@Override
+	public MemberVo selectfindTel(String member_tel) {
+		return memberMapper.selectfindTel(member_tel);
+	}
+
 	
 }

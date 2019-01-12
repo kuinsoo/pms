@@ -81,7 +81,7 @@ public class LoginController {
 	public String index(HttpServletRequest request, Model model, HttpSession session) {
 
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
-
+		
 		session.setAttribute("url", naverAuthUrl);
 		return "login/login";
 	}
@@ -294,24 +294,26 @@ public class LoginController {
 	 * @return Method  설명 : sign.jsp에서 회원가입 버튼을 눌렀을때
 	 */
 	@RequestMapping(value = "/signProcess", method = RequestMethod.POST)
-	public String signProcess(@RequestParam("member_mail") String member_mail, AuthorityVo authVo, MemberVo memberVo, HttpServletRequest request) {
+	public String signProcess(@RequestParam("member_mail") String member_mail, Model model, AuthorityVo authVo, MemberVo memberVo, HttpServletRequest request) {
 		
 		String member_pass = request.getParameter("member_pass");
 		
 		String kisa = KISA_SHA256.encrypt(member_pass).toLowerCase(); //toLowerCase :  다 소문자로 DB에 입력 
 		
 		memberVo.setMember_pass(kisa);
-		// 값이 다르면..
+		
+		String member_tel = request.getParameter("member_tel");
+		
 		// 인터페이스에 들어가고 그 후 service 
-		if (memberService.selectUser(member_mail) == null) {
-			
+		if (memberService.selectUser(member_mail) == null && memberService.selectfindTel(member_tel) == null) {
 			authVo.setAuth_member(memberVo.getMember_mail());
-			
 			//memberService.insertUser(memberVo);
 			authorityService.insertUserMember(authVo, memberVo);
+			
 			return "/login/login";
 			// 값이 같으면
 		} else {
+			model.addAttribute("msg","Y");
 			return "/sign/sign";
 		}
 	}

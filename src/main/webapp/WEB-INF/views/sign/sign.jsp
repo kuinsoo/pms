@@ -41,6 +41,7 @@
 		#passError{color: red;}
 		#nameError{color:red;}
 		#phoneMypageError{color:red;}
+		#Emailerror{color:red;}
 		/* video background */
 		.videoBgs{width:100%;height:100%;position:absolute;top:0px;left:0px;}
 		.videoBgs > video{width:100%;}
@@ -53,12 +54,20 @@
 	//숫자와 문자 포함 형태의 6~12자리 이내의 암호 정규식
 	var certificationNumber;
 
+
 	$(document).ready(function() {
+		$("#memberTelNot").hide();
 		$("#passError").hide();
 		$("#telerror").hide();
 		$(".error").hide();
 		$("#nameError").hide();
 		$("#phoneMypageError").hide();
+		$("#Emailerror").hide();
+		
+		var msg = '${msg}';
+		if(msg=='Y'){
+			alert(" 회원 가입이 불가능한 회원입니다.");
+		}
 
 		//커서의 위치가 다른곳을 선택했을 때의 이벤트 발생
 		//blur()이벤트 사용
@@ -92,12 +101,32 @@
 			}
 		}
 		
+		/* 이메일 정규식을 위함 /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/; */
+		function onkeyup_eventEmail(){
+			if(!/^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i.test($("#email").val())){
+				$("#Emailerror").show();
+			}else{
+				$("#Emailerror").hide();
+			}
+		}
+		
+		
+		/*
+		// 핸드폰 번호 확인을 위해서 
+			if("${memberVo.member_tel}"== $("#tel")){
+						$("#memberTelNot").show();
+					}
+		*/
 		function onkeyup_eventPhoneNum(){
 			if(!/^01([0|1|6|7|8|9]?)?([0-9]{3,4})?([0-9]{4})$/.test($("#tel").val())){
 				$("#phoneMypageError").show();
 				$("#phoneNumSaveBtn").prop('readonly', true);
+				
+				
 				return false;
+			
 			}else {
+				$("#phoneMypageError").hide();
 				$("#phoneMypageError").hide();
 				$("#phoneNumSaveBtn").prop('readonly', false);
 			}
@@ -137,7 +166,8 @@
 				<br>
 				<div class="form-group label-floating">
 					<label class="control-label">이메일</label>
-					<input type="email"	id ="email" name="member_mail" value="" class="form-control" autofocus="autofocus" required />
+					<input type="email"	id ="email" name="member_mail" onkeyup="onkeyup_eventEmail();"  class="form-control" autofocus="autofocus" required />
+					<span id="Emailerror"> 이메일 형식에 맞지않습니다..다시 입력해주세요. </span>
 				</div>
 				<div class="form-group label-floating">
 					<label class="control-label">이름</label>
@@ -159,6 +189,9 @@
 						<label class="control-label">휴대폰 번호</label>
 						<input type="text" id ="tel"  onkeyup="onkeyup_eventPhoneNum();"  name="member_tel" class="form-control" required />
 						<span id ="phoneMypageError">올바르지 않습니다..(-) 없이 입력해 주세요.  </span>
+							<%-- <c:if test="${member_tel == 'false'}">
+								<span id ="memberTelNot"> 사용자가 있는 핸드폰 번호입니다. </span>
+							</c:if> --%>
 					</div>
 					<div class="phoneInputBtn">
 						<button onclick="telAjax();" class="btn btn-primary btn-raised" id="phoneNumSaveBtn" >인증</button>

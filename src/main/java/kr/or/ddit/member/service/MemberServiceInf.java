@@ -22,6 +22,7 @@ public interface MemberServiceInf {
 	//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 로그인 / 회원가입 / 마이페이지 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
 	
+	
 
 	/**
 	 * Method : seletUser
@@ -70,6 +71,15 @@ public interface MemberServiceInf {
 	 */
 	MemberVo selectfindId(MemberVo memberVo);
 
+	/**
+	 * Method : selectfindTel
+	 * 작성자 : pc07
+	 * 변경이력 :
+	 * @param memberVo
+	 * @return
+	 * Method 설명 : 전화번호로 사용자 찾기 
+	 */
+	MemberVo selectfindTel(String member_tel);
 	/**
 	 * Method : myFileListProjectId
 	 * 작성자 : pc07
