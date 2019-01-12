@@ -60,7 +60,7 @@ $(document).ready(function(){
 	});	
 	
 	$("#qnaReply").click(function(){
-		$(location).attr('href','qnaReply/?board_id=${postVo.board_id}&post_hierarchy=${postVo.post_id}');
+		$(location).attr('href','qnaReply/?board_id=${postVo.board_id}&post_hierarchy=${postVo.post_id}&ori_post_writer=${postVo.post_writer}');
 	});
 	
 });

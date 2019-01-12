@@ -107,12 +107,8 @@ if (annyang) {
 	
 	annyang.setLanguage('ko');
 
-	
 	var type = "y";
-
 	$(".icon-microphone").click(function(){
-		console.log("hi");
-
 		if(type=="y"){
 			$(this).css({"color": "red"});
 			annyang.start();		

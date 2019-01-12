@@ -70,16 +70,20 @@
 							<td class="tdColor">제목</td>
 							<td><input type="text" name="post_title" placeholder="제목을 입력하세요" class="qnaCreateInputTitle"></td>
 							<td class="tdColor">질의 작성자</td>
-							<td>${memberVo.member_name}</td>
+							<td>${memberVo.member_name} 
+								<input type="hidden" name="ori_post_writer" value="${ori_post_writer}" class="qnaCreateInputTitle">
+							</td>
 						</tr>
+						<c:if test="${memberVo.member_name!='admin'}">
 						<tr>
 							<td class="tdColor">비밀글 여부</td>
 							<td colspan="4">
-								<span id="cecret" >[ 선택 ] : </span> 
+								<span id="cecret" style="display:inline-block; border-color:black; border-radius: 8px; text-align:center;  background: #007fff; padding: 5px; width: 50px; height: 30px; color:white; margin-right:5px;"> 선택 </span> 
 								<span id="select" > 공개 </span> 
 								<input type="hidden" id="post_pass" name="post_pass" placeholder="비밀번호를 입력하세요" class="secretGoGoYeah" />
 							</td>
 						</tr>
+						</c:if>
 						<tr>
 							<td colspan="4" class="textareaTd">
 								<textarea name="post_content" placeholder="내용을 입력하세요"></textarea>

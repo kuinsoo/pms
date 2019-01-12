@@ -43,6 +43,7 @@
 	border-bottom:1px solid #000;cursor:pointer;
 }
 #newPost{width:70px;height:40px;background-color:#007fff;color:#fff;font-size:17px;border:none;cursor:pointer;float:right;}
+#go2qnaList{width:70px;height:40px;background-color:#007fff;color:#fff;font-size:17px;border:none;cursor:pointer;float:left; line-height: 40px; text-align: center;}
 </style>
 <script>
 $(document).ready(function(){
@@ -58,7 +59,7 @@ $(document).ready(function(){
  	$("#searching").click(function(){
 		getQnaListAjax(1,board_id);
 		getQnaPagingAjax(1,board_id);
-		$('#searching').after("<a href='/qnaList'>[-> 목록가기]</a> ");
+		$('#newPost').after("<div><a href='/qnaList' id='go2qnaList'>목록</a></div> ");
 	}); 
 	
 });

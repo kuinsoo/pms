@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.or.ddit.issue.service.IssueServiceInf;
 import kr.or.ddit.member.model.MemberVo;
@@ -269,7 +270,7 @@ public class QnAController {
 	* Method 설명 : 새 질문 글 저장
 	*/
 	@RequestMapping(value= "/newPost", method={RequestMethod.GET, RequestMethod.POST})
-	public String qnaIndert(PostVo postVo, @SessionAttribute("memberVo")MemberVo memberVo, Model model) {
+	public String qnaIndert(PostVo postVo, @SessionAttribute("memberVo")MemberVo memberVo, Model model,@RequestParam("ori_post_writer")String ori_post_writer) {
 		
 		postService.insertQnaPost(postVo);
 		
@@ -279,6 +280,7 @@ public class QnAController {
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));
+		model.addAttribute("ori_post_writer", ori_post_writer);
 		
 		return "qna/alert";	
 	}
@@ -290,10 +292,10 @@ public class QnAController {
 	 * 작성자 : 변찬우 
 	 * 변경이력 :
 	 *
-	 * @return Method 설명 : Q&A  답글  
+	 * @return Method 설명 : Q&A  답글    
 	 */
 	@RequestMapping(value= "/qnaReply")
-	public String qnaReplyView(PostVo postVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo) {
+	public String qnaReplyView(PostVo postVo, Model model, @SessionAttribute("memberVo")MemberVo memberVo,@RequestParam("ori_post_writer")String ori_post_writer) {
 
 		model.addAttribute("postVo", postVo);
 		//파라미터로 받은, 아직 등록되지않은 변수를 저장하기위해 (글 내용 -> 답글)
@@ -304,6 +306,7 @@ public class QnAController {
 		model.addAttribute("totalMsgReceived", messageService.totalMsgReceived(memberVo.getMember_mail()));
 		model.addAttribute("issueMemberTotalCnt", issueService.issueMemberTotalCnt(memberVo.getMember_mail()));
 		model.addAttribute("totalyouGiveFriendList", messageService.totalyouGiveFriendList(memberVo.getMember_mail()));
+		model.addAttribute("ori_post_writer", ori_post_writer);
 		
 		return "qna/qnaForm";
 	}
