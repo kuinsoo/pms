@@ -342,7 +342,7 @@ $('#btn-create-room').click(function() {
 		    
 		    // json 만들기  to oracle
 		   $.ajax({
-			    url : 'https://192.168.203.24:8089/meetProjObj',
+			    url : 'https://119.203.240.166:8089/meetProjObj',
 			    type : 'post',
 			    data : meetProjObj,
 			    success : function (data) {
