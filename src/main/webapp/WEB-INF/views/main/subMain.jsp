@@ -565,6 +565,7 @@
                 $('#commentListNewDiv'+work_id).html("");
                 $('#commentListNewDiv'+work_id).html(data);
                 $('.commentInput').val("");
+                $('.cmtContentC').hide();
             },
             error: function (data) {
             }
@@ -582,6 +583,7 @@
                 $('#commentListNewDiv'+work_id).html("");
                 $('#commentListNewDiv'+work_id).html(data);
                 $('.commentInput').val("");
+                $('.cmtContentC').hide();
 
             }
         });
