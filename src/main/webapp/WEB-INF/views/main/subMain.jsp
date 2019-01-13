@@ -207,7 +207,7 @@
             </div>
             <div class="projectTeamsTop">
                 <!-- (변찬우) for node // 외부에서 접근해서 인증 허용 해줘야 함..  -->
-                <iframe src="https://currenet.iptime.org:8443"></iframe>
+                <iframe src="https://current.iptime.org:8443"></iframe>
             </div>
             <%-- 참여자 목록 --%>
             <%@ include file="/WEB-INF/views/main/participants.jsp" %>
@@ -565,6 +565,7 @@
                 $('#commentListNewDiv'+work_id).html("");
                 $('#commentListNewDiv'+work_id).html(data);
                 $('.commentInput').val("");
+                $('.cmtContentC').hide();
             },
             error: function (data) {
             }
@@ -582,6 +583,7 @@
                 $('#commentListNewDiv'+work_id).html("");
                 $('#commentListNewDiv'+work_id).html(data);
                 $('.commentInput').val("");
+                $('.cmtContentC').hide();
 
             }
         });
