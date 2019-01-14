@@ -45,11 +45,23 @@
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script>
 $(document).ready(function(){
-/* 	issueMemberList();
-	messageMemberList();
-	workMemberList();
-	noticeMemberList();
-	friendMemberList(); */
+
+});
+
+var type = "y";
+$(".icon-bell").click(function(){
+	if(type=="y"){
+		$(this).css({"color": "red"});
+		issueMemberList();
+		messageMemberList();
+		workMemberList();
+		noticeMemberList();
+		friendMemberList();
+		type = "n";
+	}else if(type=="n"){
+		$(this).css({"color": "black"});		
+		type = "y";
+	}
 });
 
 //이슈 알림 - 2019-01-04 임규승
