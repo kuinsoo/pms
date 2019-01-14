@@ -95,16 +95,17 @@
     <select id="qnaPostList" resultType="postVo" parameterType="postPageVo">
 	select 
 	    lpad('┗　', (level-1)*4,'　')||POST_TITLE title, 
-	    POST_CONTENT, 
+	    POST_CONTENT, member_name,
 	    POST_DATE, 
-	    POST_ID, POST_PUBLIC,POST_WRITER,
+	    POST_ID, POST_PUBLIC,POST_WRITER, 
 	    level
 	from(
 	    select rownum rnum, a.* 
 	    from(
-	        select POST.* 
-	        from POST 
+	        select POST.*, member_name 
+	        from POST , member
 	        where BOARD_ID = #{board_id}
+            and post_writer = member_mail
 	        order by to_number(substr(POST_ID, 7)) desc
 	        ) a
 	    )

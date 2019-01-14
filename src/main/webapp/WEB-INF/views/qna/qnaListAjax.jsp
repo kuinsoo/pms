@@ -31,7 +31,7 @@
 			<c:if test="${postVo.post_public=='n'}"> [비밀 글] </c:if>
 	</td>
 	<td>
-		${postVo.post_writer}
+		${postVo.member_name}
 	</td>
 	<td>			
 		<fmt:formatDate value="${postVo.post_date}" pattern="yyyy-MM-dd" />
