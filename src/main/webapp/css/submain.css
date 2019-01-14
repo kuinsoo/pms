@@ -243,12 +243,11 @@ ul.subMaintab li.current > a{color:#fff;}
 .issueProfile > img{width:150px;height:150px;border-radius:100%;}
 .issues{float:left;width:400px;height:200px;}
 .issues > .issuesLeft{float:left;margin-top:10px;margin-left:10px;}
+.issues > .issuesLeft > table{border-collapse:collapse;font-size:17px;}
+.issues > .issuesLeft > table > tbody > tr > td {padding:7px 0px 7px 0px;}
+.issues > .issuesRight > table{border-collapse:collapse;font-size:17px;}
+.issues > .issuesRight > table > tbody > tr > td {padding:5px 0px 5px 0px;}
 .issues > .issuesRight{float:left;margin-left:20px;margin-top:10px;width:300px;}
-.issues > .issuesLeft > ul > li{text-align:left;padding:10px 0px 10px 0px;font-size:20px;}
-.issues > .issuesRight > ul > li{text-align:left;padding:10px 0px 10px 0px;font-size:20px;}
-.issues > .issuesRight > ul > li > input[type="text"] {
-	border:none;border-bottom:1px solid #333;outline:none;font-size:20px;width:270px;
-}
 
 /* 이슈 등록 팝업 */
 .white_contents {

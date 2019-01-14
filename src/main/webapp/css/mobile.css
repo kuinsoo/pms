@@ -51,4 +51,25 @@
 	.currentFooter{padding:10px;}
 	.footerContent{width:100%;}
 	.footerContent > p{text-align:center;}
+	
+	/* 서브메인 */
+	.currentMain > .currentMainContainer{width:100%;padding:10px;}
+	.currentMainContainerRight{display:none;}
+	.currentMainContainerLeft{width:100%;}
+	.currentMain > .currentMainContainer > .currentMainContainerLeft{width:100%;}
+	#subMainTabMenu{width:100%;}
+	.projectWriter{width:100%;}
+	.currentCardList{width:100%;}
+	.currentCardList > .currentCardListTitle > h2{width:100%;}
+	.workStartEnd {
+		margin-left:20px;
+		clear:both;float:left;letter-spacing:-1px;font-size:17px;
+	}
+	.cardUserInfo{clear:both;}
+	.currentCardContentViewLeft > textarea{margin-left:0px;width:100%;}
+	.currentCardContentView{width:100%;height:100%;}
+	.currentCardContentViewLeft{width:100%;}
+	.currentCardContentViewRight{width:100%;clear:both;}
+	.commentInput{width:320px;margin-bottom:20px;}
+	.cardContentCommentUserName > i{float:right;}
 }

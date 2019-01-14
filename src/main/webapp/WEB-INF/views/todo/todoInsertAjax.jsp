@@ -27,19 +27,52 @@
 								</div>
 								<div class="issues">
 									<div class="issuesLeft">
-										<ul>
-											<li>담당자</li>
-											<li>시작</li>
-											<li>예상마감</li>
-											<li>마감</li>
-										</ul>
+										<table>
+											<tr>
+												<td>담당자</td>
+											</tr>
+											<tr>
+												<td>시작</td>
+											</tr>
+											<tr>
+												<td>예상마감</td>
+											</tr>
+											<tr>
+												<td>마감</td>
+											</tr>
+										</table>
 									</div>
 									<div class="issuesRight">
+										<table>
+											<tr>
+												<td id="todo_pmember${todo.todo_id}"><input type="text" id="todo_pmember${todo.todo_id}" value="${todo.todo_pmember}" readonly/></td>
+											</tr>
+											<tr>
+												<td>
+													<select style="display:none" id="pmember_member${todo.todo_id}" name="pmember_member"></select>
+													<input type="text" id="todo_sdate${todo.todo_id}" value="${todo.format_todo_sdate}" readonly />
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="text" id="todo_eedate${todo.todo_id}" value="${todo.format_todo_eedate}" readonly/>
+												</td>
+											</tr>
+											<c:choose>
+												<c:when test="${todo.todo_complet == 'Y'}">
+													<tr><td><input type="text" value="완료" readonly/></td></tr>
+												</c:when>
+												<c:when test="${todo.todo_complet == 'N'}">
+													<tr><td><input type="text" value="진행중" readonly/></td></tr>
+												</c:when>
+											</c:choose>
+										</table>
+										<!--
 										<ul>
 											<li><input type="text" id="todo_pmember${todo.todo_id}" value="${todo.todo_pmember}" readonly/></li>
 											<li>
 												<select style="display:none" id="pmember_member${todo.todo_id}" name="pmember_member"></select>
-												<input type="text" id="todo_sdate${todo.todo_id}" value="${todo.format_todo_sdate}" readonly/>
+												<input type="text" id="todo_sdate${todo.todo_id}" value="${todo.format_todo_sdate}" readonly />
 											</li>
 											<li><input type="text" id="todo_eedate${todo.todo_id}" value="${todo.format_todo_eedate}" readonly/></li>
 											<c:choose>
@@ -51,6 +84,7 @@
 												</c:when>
 											</c:choose>
 										</ul>
+										-->
 									</div>
 								</div>
 								<textarea id="todo_content${todo.todo_id}" readonly>${todo.todo_content}</textarea>
