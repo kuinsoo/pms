@@ -126,16 +126,17 @@
 	    POST_TITLE title, 
 	    POST_CONTENT, 
 	    POST_DATE, 
-	    POST_ID, POST_PUBLIC,POST_WRITER,
+	    POST_ID, POST_PUBLIC,POST_WRITER, member_name,
 	    level
 	from(
 	    select rownum rnum, b.* 
 	    from(
 	        select a.* 
 	        from(
-	            select POST.* 
-	            from POST 
+	            select POST.* , member_name 
+	            from POST  , member
 	            where BOARD_ID = #{board_id}
+            	and post_writer = member_mail
 	            order by to_number(substr(POST_ID, 7)) desc
 	            ) a
 	        ) b
