@@ -34,7 +34,7 @@
 				<when test = "post_pass == null or post_pass == '' "> 'y', </when> 
 				<otherwise>'n', </otherwise> 
 			</choose>    
-			#{post_pass},
+			'y',
 			<choose>
 				<when test = "post_hierarchy == null or post_hierarchy == '' "> 'QApost'||seq_POST_ID.nextval ,</when> 
 				<otherwise>#{post_hierarchy} ,</otherwise> 
