@@ -36,7 +36,10 @@ function getList(page) {
 	var sid = '${memberVo.member_mail}';
 	var cnt = ${projectCnt};
 	var pageSize = 5;
-	
+	console.log('sid : ' + sid);
+	console.log('cnt : ' + cnt);
+	console.log('page : ' + page);
+	console.log('pageSize : ' + pageSize);
 	$.ajax({
 		url: '/issueHistoryAjax',
 		type: 'POST',
