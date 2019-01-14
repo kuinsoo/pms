@@ -8,7 +8,7 @@
 		<div class="currentCardListTitle">
 			<h2><i class="icon-speech icons"></i>${work.work_title}</h2>
 			<div class="workStartEnd">
-				<span>업무 시작일 2019-01-14 18:30</span> ~ <span>업무 마감일 2019-01-30 12:00</span>
+				<span>업무 시작일 <fmt:formatDate value="${work.work_sdate }" pattern="yyyy-MM-dd"/></span> ~ <span>업무 마감일  <fmt:formatDate value="${work.work_eedate }" pattern="yyyy-MM-dd"/></span>
 			</div>
 		</div>
 		<div class="cardUserInfo">
