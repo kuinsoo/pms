@@ -14,11 +14,11 @@ var options = {
 		key: fs.readFileSync('./keys/key.pem'),
 		cert: fs.readFileSync('./keys/cert.pem')
 };
-var port=8089;	// ..만약 EADDRINUSE 에러가 뜬다면 = 이미 쓰고있다는 뜻
+var PORTs=8089;	// ..만약 EADDRINUSE 에러가 뜬다면 = 이미 쓰고있다는 뜻
 var app = express();
 app.use(express.urlencoded());
-https.createServer(options, app).listen(port, function(){  
-	console.log("Https server에 귀기울이고 있다 " + port);
+https.createServer(options, app).listen(PORTs, function(){  
+	console.log("Https server에 귀기울이고 있다 " + PORTs);
 });
 
 //데이터베이스 및 오라클 선언  

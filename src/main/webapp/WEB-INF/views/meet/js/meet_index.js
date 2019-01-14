@@ -17,7 +17,7 @@ $('#txt-projectNum').after('<span>'+ project_title +'</span>');
 var publicRoomIdentifier = 'dashboard';
 var connection = new RTCMultiConnection();
 
-connection.socketURL = '/';
+connection.socketURL = 'current.iptime.org:8443/';
 
 /// make this room public
 connection.publicRoomIdentifier = publicRoomIdentifier;
@@ -342,7 +342,7 @@ $('#btn-create-room').click(function() {
 		    
 		    // json 만들기  to oracle
 		   $.ajax({
-			    url : 'https://192.168.0.5:8089/meetProjObj',
+			    url : 'https://current.iptime.org:8089/meetProjObj',
 			    type : 'post',
 			    data : meetProjObj,
 			    success : function (data) {

@@ -14,7 +14,7 @@
                     <li data-tab="subMaintab2"><a href="#" id="smTab2">업무 카드</a></li>
                     <li data-tab="subMaintab3"><a href="#" id="smTab3">간트 차트</a></li>
                     <li data-tab="subMaintab4"><a href="#" id="smTab4">회의 리스트</a></li>
-                    <li data-tab="subMaintab5"><a href="#" id="smTab5">장소 검색</a></li>
+                    <!--<li data-tab="subMaintab5"><a href="#" id="smTab5">장소 검색</a></li>-->
                 </ul>
                 <div id="subMaintab1" class="tabcontent current">
                     <%@ include file="/WEB-INF/views/main/report.jsp" %>
@@ -75,6 +75,7 @@
                         </div>
                     </div>
                 </div>
+                <!--
                 <div id="subMaintab5" class="tabcontent">
                 	<div class="naverMapGo">
                 		<div id="map" style="width:898px !important;height:498px;"></div>
@@ -181,6 +182,7 @@
 						</script>
                 	</div>
                 </div>
+                -->
             </div>
 
             <%-- 등록  --%>
@@ -207,7 +209,7 @@
             </div>
             <div class="projectTeamsTop">
                 <!-- (변찬우) for node // 외부에서 접근해서 인증 허용 해줘야 함..  -->
-                <iframe src="https://119.203.240.166:8443/"></iframe>
+                <iframe src="https://current.iptime.org:8443"></iframe>
             </div>
             <%-- 참여자 목록 --%>
             <%@ include file="/WEB-INF/views/main/participants.jsp" %>
@@ -565,6 +567,7 @@
                 $('#commentListNewDiv'+work_id).html("");
                 $('#commentListNewDiv'+work_id).html(data);
                 $('.commentInput').val("");
+                $('.cmtContentC').hide();
             },
             error: function (data) {
             }
@@ -582,6 +585,7 @@
                 $('#commentListNewDiv'+work_id).html("");
                 $('#commentListNewDiv'+work_id).html(data);
                 $('.commentInput').val("");
+                $('.cmtContentC').hide();
 
             }
         });

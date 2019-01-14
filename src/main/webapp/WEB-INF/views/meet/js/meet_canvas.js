@@ -53,7 +53,7 @@ function saveFormAsTextFile(){
      
      // json 만들기  to oracle
      $.ajax({
-  	    url : 'https://192.168.0.5:8089/saveDoc',
+  	    url : 'https://current.iptime.org:8089/saveDoc',
   	    type : 'post',
   	    data : meetDoc,
   	    success : function (data) { },
@@ -183,7 +183,7 @@ dataURLFormat.onchange = function() {
 };
 
 // # 타이머 1초간격으로 수행
-var RemainDate= 2000*30;
+var RemainDate= 60000*30;
 tid=setInterval('msg_time()',1000); 
 var overT =0;
 var memT=0;// 시간 초과 후, 나중에 들어온 사람 's 팝업 예외처리 
@@ -238,6 +238,7 @@ syncTimer.addSyncListener(function(data) {
 // 에디터 선언
 var coEditor = new coEditorWrite();
 var editorInput = document.querySelector('#editor');
+$('h6').append(" 회의록 : "+params.sessionid+"_"+today+" ]");
 
 coEditor.widgetJsURL = '/webapp/WEB-INF/views/meet/js/coEditor.js'	
 coEditor.addSyncListener(function(data) {
@@ -601,7 +602,7 @@ document.getElementById('btn-chat-message').onclick = function() {
     
     // json 만들기 (.. form sunmit은 페이지가 전환되서)
    $.ajax({
-	    url : 'https://192.168.0.5:8089/test',
+	    url : 'https://current.iptime.org:8089/test',
 	    type : 'post',
 	    data : meetObj,
 	    success : function (data) { } ,
@@ -794,7 +795,7 @@ designer.appendTo(document.getElementById('widget-container'), function() {
 $('#myWorkListBtn').on('click', function(){	  
 	
 	  $.ajax({
-		    url : 'https://192.168.0.5:8081/myWorkList',
+		    url : 'https://current.iptime.org:8081/myWorkList',
 		    type : 'POST',
 		    data : {
 		    	"project_id" : params.todayProject_id,

@@ -95,8 +95,9 @@ function savePost(){
 						<tr>
 							<td class="tdColor">비밀글 여부</td>
 							<td colspan="4">
-								<span id="cecret">[비밀글로 작성(클릭)]</span>
-								<input type="password" id="post_pass" name="post_pass" style="display:none;" placeholder="비밀번호를 입력하세요" class="secretGoGoYeah" />
+								<span id="cecret" style="display:inline-block; border-color:black; border-radius: 8px; text-align:center;  background: #007fff; padding: 5px; width: 50px; height: 30px; color:white; margin-right:5px;">선택 </span> 
+								<span id="select" > 공개 </span> 
+								<input type="hidden" id="post_pass" name="post_pass" placeholder="비밀번호를 입력하세요" class="secretGoGoYeah" />
 							</td>
 						</tr>
 						<tr>
@@ -126,6 +127,25 @@ function savePost(){
 <script type="text/javascript" src="../js/classie.js"></script>
 <script type="text/javascript" src="../js/jquery-ui.js"></script>
 <script>
+
+//비밀글 버튼 처리
+$(document).ready(function(){
+	var type = "y";
+	$("#cecret").click(function(){
+		if(type=="y"){
+			$("#select").css({"color": "red"});
+	    	$("#select").html("<span>비공개</span>");
+	    	$("#post_pass").val("select");
+			type = "n";
+		}else if(type=="n"){
+			$("#select").css({"color": "black"});
+	    	$("#select").html("<span>공개</span>");
+	    	$("#post_pass").val("");
+	    	type = "y";
+		}
+	});	
+});
+
 //DIM POPUP
 $('.projectCreatePopUp').click(function(){
 	var $href = $(this).attr('href');

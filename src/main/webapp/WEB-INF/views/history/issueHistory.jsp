@@ -93,7 +93,7 @@ $(window).on('beforeunload', function() {
 .issuePin {
 	width: 100%;
 	height: 15px;
-	background-color: #FFFFFF;
+	background-color: #F2F4F7;
 }
 
 .pin{

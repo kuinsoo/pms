@@ -3,6 +3,7 @@
 
 <c:forEach items="${todoListMap.todoList}" var="todo">
 	<tr>
+		<!-- 완료 컬럼 -->
 		<td>
 			<c:choose>
 				<c:when test="${todo.todo_complet == 'Y'}">
@@ -13,6 +14,7 @@
 				</c:when>
 			</c:choose>
 		</td>
+		<!-- 제목 컬럼 -->
 		<td><a href="#open${todo.todo_id}" class="issueTitlePopup" onclick="initialization${todo.todo_work}(${todo.todo_id});">${todo.todo_content}</a>
 			<div class="white_content3" id="open${todo.todo_id}">
 				<div>
@@ -40,7 +42,14 @@
 												<input type="text" id="todo_sdate${todo.todo_id}" value="${todo.format_todo_sdate}" readonly/>
 											</li>
 											<li><input type="text" id="todo_eedate${todo.todo_id}" value="${todo.format_todo_eedate}" readonly/></li>
-											<li><input type="text" value="${todo.todo_complet}" readonly/></li>
+											<c:choose>
+												<c:when test="${todo.todo_complet == 'Y'}">
+													<li><input type="text" value="완료" readonly/></li>
+												</c:when>
+												<c:when test="${todo.todo_complet == 'N'}">
+													<li><input type="text" value="진행중" readonly/></li>
+												</c:when>
+											</c:choose>
 										</ul>
 									</div>
 								</div>
@@ -109,10 +118,10 @@
 									</c:choose>
 								</div>
 								<div class="solutionIssueContainer">
-									<table class="solutionIssue">
-										<c:choose>
-											<c:when test="${todo.todo_issue == null}"></c:when>
-											<c:otherwise>
+									<c:choose>
+										<c:when test="${todo.todo_issue == null}"></c:when>
+										<c:otherwise>
+											<table class="solutionIssue">
 												<tr>
 													<td colspan="2">이슈에 대한 해결</td>
 												</tr>
@@ -136,10 +145,10 @@
 														<textarea placeholder="내용을 입력해주세요." name="issue_solution"></textarea>
 													</td>
 												</tr>
-											</c:otherwise>
-										</c:choose>
-									</table>								
-									<input type="button" value="해결등록" class="solutionCreateBtn" onclick="helperUpdate${todo.todo_work}(${todo.todo_id});"/>
+											</table>								
+											<input type="button" value="해결등록" class="solutionCreateBtn" onclick="helperUpdate${todo.todo_work}(${todo.todo_id});"/>
+										</c:otherwise>
+									</c:choose>
 								</div>
 							</form>
 							
@@ -181,11 +190,15 @@
 				</div>
 			</div>
 		</td>
+		<!-- 담당자 컬럼 -->
 		<td>${todo.todo_pmember}</td>
+		<!-- 시작 컬럼 -->
 		<td>${todo.format_todo_sdate}</td>
+		<!-- 마감 컬럼 -->
 		<td>${todo.format_todo_eedate}</td>
+		<!-- 이슈 컬럼 -->
 		<td>${todo.todo_issue}</td>
-		<td></td>
+		<!-- 삭제 컬럼 -->
 		<c:choose>
 			<c:when test="${todo.todo_complet == 'N' && todo.todo_issue == null}">
 				<td id="minusBtn${todo.todo_id}"><i class='fas fa-minus' style='color: red; cursor: pointer;' id='todoDelete${todo.todo_id}' onclick="goTodoDelete${todo.todo_work}(${todo.todo_id}, ${todo.todo_work});"></i></td>

@@ -1,5 +1,5 @@
 {
-  "socketURL": "wss://192.168.0.5:8443/",
+  "socketURL": "wss://current.iptime.org:8443/",
   "dirPath": "",
   "homePage": "/webapp/WEB-INF/views/meet/index.html",
   "socketMessageEvent": "RTCMultiConnection-Message",
