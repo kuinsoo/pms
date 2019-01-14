@@ -27,12 +27,11 @@
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/myPage.css">
     <link rel="stylesheet" href="/css/submain.css">
+    <link rel="stylesheet" href="/css/mobile.css">
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.highcharts.com/gantt/highcharts-gantt.js"></script>
 	<script type="text/javascript" src="/js/annyang.js"></script>
 	<script type="text/javascript" src="/js/current_vui.js"></script>
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=nPljd7ns8PGll8DWsmSl&submodules=geocoder"></script>
-	<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=nPljd7ns8PGll8DWsmSl&submodules=panorama"></script>
 
 </head>
 

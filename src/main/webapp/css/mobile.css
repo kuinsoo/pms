@@ -1,0 +1,75 @@
+@media screen and (max-width:550px) {
+	header{width:100%;min-width:100%;}
+	.headerContainer{width:100%;}
+	.headerContainer > .headerRightContent{width:260px;}
+	.swiper-container > .swiper-wrapper > .swiper-slide {
+		background-image:url('../images/main1.png');
+		background-repeat:no-repeat;background-size:100%;
+		background-position:50% 50%;
+	}
+	.currentMain > .currentMainContainer > .currentMainProjectCreate {
+		display:block;
+		width:525px;
+		padding:20px;
+	}
+	.currentMain > .currentMainContainer > .currentMainProjectCreate > h1 {
+		width:100%;
+		text-align:center;
+		padding:20px 0px 0px 0px;
+	}
+	.currentMain > .currentMainContainer > .currentMainProjectCreate > .projectCreateULS {
+		width:100%;
+		padding:20px;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+	}
+	.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li:first-child > a > .projectCard {
+		position:relative;top:0px;left:0px;
+	}
+	.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li {
+		margin:0 auto;
+		text-align:center;
+	}
+	.currentMain > .currentMainContainer > .currentMainProjectCreate > .bookmarkProject {
+		width:100%;
+		display:flex;
+		justify-content:center;
+		align-items:center;
+		flex-direction:column;
+	}
+	.currentMain > .currentMainContainer > .currentMainProjectCreate > ul > li > .projectCard {
+		margin-top:10px;
+	}
+	.dim-layer .pop-layer {
+		width:500px;
+	}
+	.currentMain > .currentMainContainer > .currentMainProjectCreates {
+		clear:both;
+		width:525px;
+	}
+	.currentFooter{padding:10px;}
+	.footerContent{width:100%;}
+	.footerContent > p{text-align:center;}
+	
+	/* 서브메인 */
+	.currentMain > .currentMainContainer{width:100%;padding:10px;}
+	.currentMainContainerRight{display:none;}
+	.currentMainContainerLeft{width:100%;}
+	.currentMain > .currentMainContainer > .currentMainContainerLeft{width:100%;}
+	#subMainTabMenu{width:100%;}
+	.projectWriter{width:100%;}
+	.currentCardList{width:100%;}
+	.currentCardList > .currentCardListTitle > h2{width:100%;}
+	.workStartEnd {
+		margin-left:20px;
+		clear:both;float:left;letter-spacing:-1px;font-size:17px;
+	}
+	.cardUserInfo{clear:both;}
+	.currentCardContentViewLeft > textarea{margin-left:0px;width:100%;}
+	.currentCardContentView{width:100%;height:100%;}
+	.currentCardContentViewLeft{width:100%;}
+	.currentCardContentViewRight{width:100%;clear:both;}
+	.commentInput{width:320px;margin-bottom:20px;}
+	.cardContentCommentUserName > i{float:right;}
+}

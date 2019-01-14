@@ -34,7 +34,7 @@
 				<when test = "post_pass == null or post_pass == '' "> 'y', </when> 
 				<otherwise>'n', </otherwise> 
 			</choose>    
-			#{post_pass},
+			'y',
 			<choose>
 				<when test = "post_hierarchy == null or post_hierarchy == '' "> 'QApost'||seq_POST_ID.nextval ,</when> 
 				<otherwise>#{post_hierarchy} ,</otherwise> 
@@ -95,16 +95,17 @@
     <select id="qnaPostList" resultType="postVo" parameterType="postPageVo">
 	select 
 	    lpad('┗　', (level-1)*4,'　')||POST_TITLE title, 
-	    POST_CONTENT, 
+	    POST_CONTENT, member_name,
 	    POST_DATE, 
-	    POST_ID, POST_PUBLIC,POST_WRITER,
+	    POST_ID, POST_PUBLIC,POST_WRITER, 
 	    level
 	from(
 	    select rownum rnum, a.* 
 	    from(
-	        select POST.* 
-	        from POST 
+	        select POST.*, member_name 
+	        from POST , member
 	        where BOARD_ID = #{board_id}
+            and post_writer = member_mail
 	        order by to_number(substr(POST_ID, 7)) desc
 	        ) a
 	    )
@@ -125,16 +126,17 @@
 	    POST_TITLE title, 
 	    POST_CONTENT, 
 	    POST_DATE, 
-	    POST_ID, POST_PUBLIC,POST_WRITER,
+	    POST_ID, POST_PUBLIC,POST_WRITER, member_name,
 	    level
 	from(
 	    select rownum rnum, b.* 
 	    from(
 	        select a.* 
 	        from(
-	            select POST.* 
-	            from POST 
+	            select POST.* , member_name 
+	            from POST  , member
 	            where BOARD_ID = #{board_id}
+            	and post_writer = member_mail
 	            order by to_number(substr(POST_ID, 7)) desc
 	            ) a
 	        ) b
