@@ -786,7 +786,7 @@
 	<input type = "hidden" id = "project_id2" name = "project_id"/>
 </form> -->
 
-	<!-- CURRENT SECTION(MAIN) -->	
+	<!-- CURRENT SECTION(MAIN) -->
 	<section class="currentMain">
 		<div class="currentMainContainer">
 			<div class="myPageContainerTitle">
