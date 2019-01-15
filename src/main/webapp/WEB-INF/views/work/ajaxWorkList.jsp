@@ -81,6 +81,9 @@
 								<div class="cardContentCommentUser">
 									<div class="cardContentCommentUserImg">
 										<img src="${cmt.member_profile}">
+										<div class="cardContentCommentUserImgHover">
+											<img src="${cmt.member_profile}">
+										</div>
 									</div>
 									<div class="cardContentCommentUserName">
 										<b>${cmt.member_name}</b><span class="times"><fmt:formatDate value="${cmt.cmt_date}" pattern="yyyy-MM-dd"/> </span>
