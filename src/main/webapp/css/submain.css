@@ -205,7 +205,7 @@ ul.subMaintab li.current > a{color:#fff;}
 	box-shadow:0px 0px 5px #000;
 }
 .cardContentCommentUserImg:hover > .cardContentCommentUserImgHover{display:block;}
-.cardContentCommentUserImgHover > img {width:100%;border-radius:100%;z-index:2;}
+.cardContentCommentUserImgHover > img {width:200px;height:200px;border-radius:100%;z-index:2;}
 .cardContentCommentUser > .cardContentCommentUserName{float:left;padding-top:1px;margin-left:15px;font-size:20px;}
 .cardContentCommentUser > .cardContentCommentUserName > .times{margin-left:15px;color:#333;font-size:18px;}
 .commentInput {
