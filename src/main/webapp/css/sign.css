@@ -6,8 +6,5 @@ html, body {
 }
 
 .wraps {
-	background: url(http://placehold.it/1920x1200);
-	background-size: cover;
-	background-position: 50% 50%;
-	background-repeat: no-repeat;
+	background-color:#000;
 }

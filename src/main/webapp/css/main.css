@@ -557,7 +557,7 @@ header {
 }
 .messageCounterDiv > span {
 	padding-top:1px;
-	display:block;font-size:15px;vertical-align:middle;color:#fff;font-weight:bold;text-align:center;
+	display:block;font-size:19px;vertical-align:middle;color:#fff;font-weight:bold;text-align:center;
 }
 .friendCounterDiv {
 	position:absolute;right:0px;bottom:7px;z-index:5;width:20px;height:20px;
@@ -565,7 +565,7 @@ header {
 }
 .friendCounterDiv > span {
 	padding-top:1px;
-	display:block;font-size:15px;vertical-align:middle;color:#fff;font-weight:bold;text-align:center;
+	display:block;font-size:19px;vertical-align:middle;color:#fff;font-weight:bold;text-align:center;
 }
 
 .dialog__trigger, .dialog__action {
