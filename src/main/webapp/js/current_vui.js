@@ -34,6 +34,9 @@ if (annyang) {
 	var homePage = function(){
 		$(location).attr('href','/main');
 	};
+	var favorites = function(){
+		$(location).attr('href','/favorites');
+	};
 	var mainFriends = function(){
 		$('#friendSendIcon').trigger( "click" ); 
 	};
@@ -82,6 +85,7 @@ if (annyang) {
 		'앞으로': historyForward,
 	    '메인': homePage,
 	    '메뉴': showLeftPush,
+	    '즐겨찾기': favorites,
 	    '전체 일정': allSchedule,
 	    '공지사항': notice,
 	    '가이드': guide,
