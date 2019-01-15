@@ -45,6 +45,7 @@ public class WorkVo {
 	private String work_wdate;		// 작성일
 
 	private String member_mail; 	// 작성자
+	private String member_name; 	// 작성자
 	private String member_profile;  // 작성자 프로필사진
 
 	/* subMain Main Chart 를 위한 카운트 */
@@ -246,7 +247,12 @@ public class WorkVo {
 	}
 
 
+	public String getMember_name() {
+		return member_name;
+	}
 
-
+	public void setMember_name(String member_name) {
+		this.member_name = member_name;
+	}
 }
 

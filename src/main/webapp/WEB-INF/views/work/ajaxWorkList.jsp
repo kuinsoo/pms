@@ -16,7 +16,7 @@
 				<img src="${work.member_profile}">
 			</div>
 			<div class="cardUserInfoName">
-				<b>${work.member_mail}</b><br> <%-- 작성자 --%>
+				<b>${work.member_name}</b><br> <%-- 작성자 --%>
 				<span>${work.work_wdate}</span>
 			</div>
 			<div class="updateDeleteIcon" id="myWorkGo">
