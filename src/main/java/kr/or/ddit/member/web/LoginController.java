@@ -151,16 +151,23 @@ public class LoginController {
 
 		String apiResult = naverLoginBO.getUserProfile(oauthToken);
 		memberVo = json.changeJson(apiResult); // vo에 userEmail, userGender, userNaver 저장
+
 		String member_mail = memberVo.getMember_mail();
+
+//		memberVo.setMember_tel("00000000000");
+//		memberVo.setMember_pass("bcb15f821479b4d5772bd0ca866c0ad5f926e358072659cc80d39c9d9802a");
+//		memberVo.setMember_profile("/images/basic.jpg");
 
 		// 값이 다르면..
 		if (memberService.selectUser(member_mail) == null) {
+			memberVo.setMember_tel("00000000000");
+			memberVo.setMember_pass("bcb15f821479b4d5772bd0ca866c0ad5f926e358072659cc80d39c9d9802a");
 			memberService.insertUser(memberVo);
 			// 이부분 수정함 PL님이랑 상의할것.
 			return "login/login";
 			// 값이 같으면
 		} else {
-			model.addAttribute("memberVo", memberVo);
+			model.addAttribute("memberVo",  memberService.selectUser(member_mail));
 			return "main/main";
 		}
 	}

@@ -47,7 +47,7 @@
                                 start: Date.UTC(parseInt('${workChart.format_todo_sdate}'.substr(0,4)), parseInt('${workChart.format_todo_sdate}'.substr(5,2)), parseInt('${workChart.format_todo_sdate}'.substr(8,2))),
                                 end: Date.UTC(parseInt('${workChart.format_todo_eedate}'.substr(0,4)), parseInt('${workChart.format_todo_eedate}'.substr(5,2)), parseInt('${workChart.format_todo_eedate}'.substr(8,2))),
                                 y: ${i.index},
-                                assignee: '${workChart.todo_pmember}'
+                                assignee: '${workChart.member_profile}'.substring('${workChart.member_profile}'.lastIndexOf('/'), '${workChart.member_profile}'.lastIndexOf('.'))
                             },
                     </c:forEach>
                 ],
