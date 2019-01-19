@@ -4,6 +4,6 @@
 module.exports = {
 		user          : "current1",
 		password      : "java",
-		connectString : "119.203.240.166/orcl",
+		connectString : "119.204.94.101/orcl",
 		externalAuth : false
 };

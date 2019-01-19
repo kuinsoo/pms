@@ -39,6 +39,8 @@
 							<div class="fa-map-pin-hover">
 								이슈 제목 : ${issueCnt.issue_title}<br>
 								이슈 발생일 : ${issueCnt.format_issue_sdate}<br>
+								이슈 담당자 : ${issueCnt.issue_member}<br>
+								이슈 내용 : ${issueCnt.issue_content}
 							</div>
 						</div>
 					</c:when>

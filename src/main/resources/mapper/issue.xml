@@ -69,7 +69,9 @@
 		                project_edate,
 		                issue_id,
 		                issue_title,
-		                issue_sdate
+		                issue_sdate,
+		                issue_member,
+		                issue_content
 		        FROM    project INNER JOIN project_member
 		        ON      project_id = pmember_project INNER JOIN work
 		        ON      project_id = work_project INNER JOIN issue

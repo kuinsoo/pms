@@ -67,10 +67,10 @@
                 <i class="icon-bulb icons"></i>
                 <p><a href="/issueHistory">이슈 히스토리</a></p>
             </li>
-            <li>
+            <!--li>
                 <i class="icon-list"></i>
                 <p><a href="/vote">투표</a></p>
-            </li>
+            </li-->
             </c:if>
         </ul>
         <ul class="boardMenu">
