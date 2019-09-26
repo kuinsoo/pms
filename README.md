@@ -1,7 +1,7 @@
 # pms
 
 Team : Current /   ddit.or.kr.203
-        PL : Mr.KKu
+        PL : 구인수
         TA : 변찬우
         UA : 임규승
         DA : 김지태
